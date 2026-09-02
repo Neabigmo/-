@@ -63,7 +63,8 @@ def validate_fixed_candidate(q,N,u,W,ridge=1e-11,dps=220,max_outer=8,
         if len(W)>96:W=W[-96:]
         if (lb and li==len(lambda_levels)-1) or (sb and si==len(S_levels)-1):
             if not expanded:
-                return dict(status='COHERENT_DOMAIN_BOUNDARY_UNRESOLVED',m2=qp.m2_dual,qp=qp,joint=joint,
+                qp2,joint2,c2=tail_lower_bound(q,N,u,W,ridge=ridge,dps=dps)
+                return dict(status='COHERENT_DOMAIN_BOUNDARY_UNRESOLVED',m2=qp2.m2_dual,qp=qp2,joint=joint2,
                             oracle=oracle,witnesses=W,history=hist)
     qp,joint,c=tail_lower_bound(q,N,u,W,ridge=ridge,dps=dps)
     return dict(status='COHERENT_CONTINUUM_OUTER_LIMIT',m2=qp.m2_dual,qp=qp,joint=joint,
