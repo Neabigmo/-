@@ -1,0 +1,10 @@
+PASS MP Hermite recurrence vs longdouble
+PASS normalized feature Gram PSD/diag audit
+PASS dual Gram QP and halfspace feasibility projection
+PASS MP density vs longdouble moderate-point agreement
+PASS near-one lambda grid
+PASS stable finite-tail dual solve/recovery smoke
+STAGE27T_SELFTEST_OK
+PASS python -m py_compile python/*.py
+No Stage27T production campaign was run locally.
+No Stage28 or OU-coherent multi-q campaign is included or started.
