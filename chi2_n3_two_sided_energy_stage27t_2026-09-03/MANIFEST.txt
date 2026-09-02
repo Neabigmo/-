@@ -1,0 +1,79 @@
+Stage27T text-source transfer manifest
+======================================
+
+Repository package root:
+  chi2_n3_two_sided_energy_stage27t_2026-09-03/
+
+TEXT FILES INCLUDED IN THIS TRANSFER
+------------------------------------
+LOCAL_VERIFICATION.txt
+MANIFEST.txt
+PROJECT_WORKLOG_APPEND_TEMPLATE.md
+README.md
+RUN_ME.md
+THEORY_NOTE.md
+requirements.txt
+run_stage27t_remote.sh
+python/audit_stage27t_results.py
+python/joint_tail_core.py
+python/mp_features.py
+python/normalized_kkt_stage25.py
+python/normalized_kkt_stage26.py
+python/reduced_core.py
+python/run_stage27t.py
+python/selftest_stage27t.py
+python/stable_primal_tail.py
+python/update_worklog_stage27t.py
+python/zero_branch.py
+python/zero_tail_audit.py
+
+OMITTED BINARY PACKAGE FILES
+----------------------------
+The executable/source package itself contains no binary files; all 20 package
+files above are UTF-8 text and are included.
+
+The following previously-created convenience archives are NOT uploaded to
+GitHub because binary Git-blob upload was blocked by the available connector:
+  /mnt/data/chi2_n3_two_sided_energy_stage27t_2026-09-03.zip
+  /mnt/data/Stage27T_calculation_package_2026-09-03.zip
+These ZIPs are delivery wrappers only; they are not required if the text tree
+above is cloned intact.
+
+REQUIRED EXTERNAL INPUTS (NOT PART OF THE STAGE27T SOURCE PACKAGE)
+-----------------------------------------------------------------
+1. Stage27R robust PSD-repair result tree supplied via --stage27r-dir.
+   The locator searches recursively. The following binary NPZ artifacts must
+   be present somewhere under that directory:
+
+   q0p05_N80_ridge1em11.npz
+   q0p05_N96_ridge1em11.npz
+   q0p1_N64_ridge1em11.npz
+   q0p08_N80_ridge1em11.npz
+   q0p064_N100_ridge1em11.npz
+   q0p05_N128_ridge1em11.npz
+   q0p04_N160_ridge1em11.npz
+   q0p1_N80_ridge1em11.npz
+
+   Each NPZ is expected to contain at least:
+     witnesses, alpha (or usable fallback), slack (or usable fallback), u
+
+2. Stage27S continuum result tree supplied via --stage27s-dir.
+   The locator searches recursively. It must contain:
+
+   stage27s_continuum.csv
+
+   That CSV must contain rows/labels:
+     A, B, C1, C2, C3, C4, C5, D
+   and the fields needed by run_stage27t.py, in particular m2 and status.
+
+3. Python environment:
+   Install requirements.txt before running selftest or production.
+
+IMPORTANT
+---------
+This Git repository transfer contains the full Stage27T TEXT SOURCE PACKAGE,
+but it is NOT self-contained with respect to the external Stage27R NPZ result
+artifacts or the Stage27S result CSV. Do not run Stage27T unless those inputs
+are available and passed explicitly as described in RUN_ME.md.
+
+Stage28 and OU-coherent multi-q are intentionally not included or launched.
