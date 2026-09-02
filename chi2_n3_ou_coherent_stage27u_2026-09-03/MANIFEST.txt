@@ -5,8 +5,8 @@ PACKAGE ROOT
 ------------
 chi2_n3_ou_coherent_stage27u_2026-09-03/
 
-UTF-8 TEXT FILES IN THE PACKAGE
--------------------------------
+UTF-8 TEXT FILES IN THE AUTHORITATIVE TRANSFER
+----------------------------------------------
 README.md
 RUN_ME.md
 THEORY_NOTE.md
@@ -33,7 +33,7 @@ python/normalized_kkt_stage26.py
 REQUIRED EXTERNAL BINARY INPUTS — STAGE27R
 ------------------------------------------
 Pass the Stage27R result tree with --stage27r-dir / STAGE27R_DIR.
-The locator searches recursively and requires exactly these robust high-q witness artifacts:
+The locator searches recursively and requires these robust high-q witness artifacts:
 
 q0p1_N64_ridge1em11.npz
 q0p1_N80_ridge1em11.npz
@@ -47,35 +47,28 @@ Required:
 
 stage27s_continuum.csv
 
-It must contain labels C1 and D with eta_lambda / eta_s (when available these are added to the
-high-q seed witness pool).
+It must contain labels C1 and D. Saved eta_lambda / eta_s are added to the high-q seed witness pool when available.
 
 OPTIONAL BUT RECOMMENDED STAGE27S INPUT
 ---------------------------------------
 stage27s_exchange_history.csv
 
-If present, the saved C1/D continuum worst points are added to the witness seed pool.
+If present, saved C1/D continuum worst points are added to the witness seed pool.
 The package still runs if this file is absent.
 
 OPTIONAL PRIOR-CANDIDATE INPUTS
 -------------------------------
 Stage15 and Stage16 result roots may be supplied with --stage15-dir / --stage16-dir.
-These are NOT required for execution. `candidate_loader.py` is deliberately conservative:
+These are NOT required for execution. candidate_loader.py is deliberately conservative:
 only explicit normalized-u candidates with recoverable q metadata are accepted. Ambiguous
 old arrays are skipped rather than reinterpreted.
 
-BINARY DELIVERY FILE
---------------------
-The convenience archive
-
-chi2_n3_ou_coherent_stage27u_2026-09-03.zip
-
-contains exactly this source tree. Its local SHA256 is:
-
-28fef28c23573ca9f82952eabfe60b61a9d8c49a6ff758248fbef97139d31d3e
-
-The ZIP is a delivery wrapper only; cloning the UTF-8 tree is sufficient if the external
-Stage27R and Stage27S inputs above are available.
+BINARY ZIP TRANSFER STATUS
+--------------------------
+A local convenience ZIP was built, but the GitHub binary-blob transfer could not be verified
+against the final rebuilt archive: the returned Git blob SHA did not match the local
+`git hash-object` value after the last fixes. Therefore no ZIP is considered authoritative
+or attached to this transfer branch. Clone the UTF-8 source tree on the dedicated branch.
 
 NOT INCLUDED / NOT AUTO-RUN
 ---------------------------
