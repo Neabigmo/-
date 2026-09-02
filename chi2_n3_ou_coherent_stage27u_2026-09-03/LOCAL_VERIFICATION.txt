@@ -1,0 +1,15 @@
+Stage27U local package verification
+===================================
+
+PASS: python -m py_compile python/*.py
+PASS: STAGE27U_SELFTEST_OK
+PASS: direct-high vs low-complete/high-lift random nonzero regression through N=80
+      max observed relative error approximately 7.4e-15
+PASS: analytic coherent outer gradient finite-difference spot check on small systems
+      observed relative discrepancy approximately 1e-10
+PASS: minimal production-path smoke (synthetic witness inputs, N=32 only)
+      completed with COHERENT_OUTER_MINIMAX_UNRESOLVED and no false certificate
+PASS: clean-directory selftest after adding normalized_kkt_stage26.py
+
+No production Stage27U campaign was run locally.
+No Stage28 or automatic follow-on campaign was run.
