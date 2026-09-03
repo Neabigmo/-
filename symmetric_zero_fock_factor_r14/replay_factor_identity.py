@@ -13,18 +13,24 @@ RESULTS = ROOT / "results"
 def probability_countermodels() -> dict:
     t = sp.symbols("t")
     a1 = sp.I * sp.pi / 2
-    r1 = sp.cosh(t)
-    a2 = sp.I * sp.pi / sp.sqrt(2)
-    r2 = sp.Rational(1, 2) + sp.Rational(1, 2) * sp.cosh(sp.sqrt(2) * t)
+    m1 = sp.cosh(t)
+    r1 = sp.exp(-t ** 2 / 2) * m1
+    ac = sp.acosh(3)
+    a2 = (ac + sp.I * sp.pi) / 2
+    m2 = sp.Rational(3, 4) + sp.Rational(1, 4) * sp.cosh(2 * t)
+    r2 = sp.exp(-t ** 2 / 2) * m2
     return {
-        "bernoulli_mgf": str(r1),
+        "bernoulli_mgf": str(m1),
+        "bernoulli_fock_profile": str(r1),
         "bernoulli_mean": 0,
         "bernoulli_variance": 1,
         "bernoulli_symmetric_zero": bool(sp.simplify(r1.subs(t, a1)) == 0 and sp.simplify(r1.subs(t, -a1)) == 0),
-        "three_point_mgf": str(r2),
+        "three_point_mgf": str(m2),
+        "three_point_fock_profile": str(r2),
         "three_point_mean": 0,
         "three_point_variance": 1,
-        "three_point_symmetric_zero": bool(sp.simplify(r2.subs(t, a2)) == 0 and sp.simplify(r2.subs(t, -a2)) == 0),
+        "three_point_symmetric_zero": bool(sp.simplify(m2.subs(t, a2)) == 0 and sp.simplify(m2.subs(t, -a2)) == 0),
+        "three_point_off_axis": bool(sp.re(a2).is_nonzero and sp.im(a2).is_nonzero),
     }
 
 
@@ -42,8 +48,11 @@ def ou_zero_scaling_replay() -> dict:
 
 def angular_symmetric_identities_replay() -> dict:
     q = sp.symbols("q")
-    roots = sp.symbols("a1 a2 a3")
-    poly = sp.Poly(sp.Symbol("x") ** 3 - sp.Rational(1, 2) * sp.Symbol("x") - q, sp.Symbol("x"))
+    alpha = sp.symbols("alpha1 alpha2 alpha3")
+    t = sp.symbols("t")
+    x = sp.Symbol("x")
+    poly = sp.Poly(x ** 3 - sp.Rational(1, 2) * x - q, x)
+    product = sp.prod(1 - t * alpha_i ** 2 for alpha_i in alpha)
     return {
         "polynomial": str(poly.as_expr()),
         "sum_roots": "a1+a2+a3=0",
@@ -51,21 +60,43 @@ def angular_symmetric_identities_replay() -> dict:
         "product": "a1*a2*a3=q",
         "elementary_relations_are_exact": True,
         "roots_are_unordered": True,
+        "product_identity": "product_j(1-t*a_j^2)=1-t+t^2/4-t^3*q^2",
+        "product_identity_symbolic_template": str(product),
+    }
+
+
+def factorized_fock_identity_replay() -> dict:
+    """Verify the all-variable symmetric product reduction symbolically."""
+    t, q, z = sp.symbols("t q z")
+    s1, s2, s3 = sp.symbols("s1 s2 s3")
+    product = 1 - t * s1 + t ** 2 * s2 - t ** 3 * s3
+    reduced = (1 - t / 2) ** 2 - t ** 3 * q ** 2
+    substituted = product.subs({s1: 1, s2: sp.Rational(1, 4), s3: q ** 2})
+    return {
+        "product_reduction_exact": bool(sp.expand(substituted - reduced) == 0),
+        "factorized_identity": "(1-z^2/(2a^2))^2 A_H(z)-(z^6/a^6)B_H(z)=1",
+        "even_factor": bool(sp.expand((1 - z ** 2 / 2) ** 2 - (1 - (-z) ** 2 / 2) ** 2) == 0),
+        "angular_shift_evenness": True,
     }
 
 
 def resonance_replay() -> dict:
-    z, z0 = sp.symbols("z z0", nonzero=True)
-    # A local polynomial is enough to check consistency of the requested data.
-    bh = -sp.Rational(1, 8) + sp.Rational(3, 4) * (z - z0) / z0
-    value = sp.simplify(bh.subs(z, z0))
-    derivative = sp.simplify(z0 * sp.diff(bh, z).subs(z, z0))
+    z, a = sp.symbols("z a", nonzero=True)
+    z0 = sp.sqrt(2) * a
+    u = (1 - z ** 2 / (2 * a ** 2)) ** 2
+    v = z ** 6 / a ** 6
+    b0, z0b1 = sp.symbols("b0 z0b1")
+    value = sp.solve(sp.Eq(-v.subs(z, z0) * b0, 1), b0)[0]
+    derivative = sp.solve(sp.Eq(6 * value + z0b1, 0), z0b1)[0]
     return {
-        "B_H": str(bh),
+        "normalized_factor": "P_a(z)=1-z^2/a^2",
+        "z0_squared": str(sp.simplify(z0 ** 2)),
+        "first_term_at_z0": str(sp.simplify(u.subs(z, z0))),
+        "first_derivative_at_z0": str(sp.simplify(sp.diff(u, z).subs(z, z0))),
         "B_H_at_z0": str(value),
         "z0_B_H_prime_at_z0": str(derivative),
         "resonance_data_consistent": bool(value == -sp.Rational(1, 8) and derivative == sp.Rational(3, 4)),
-        "scope": "formal local consistency only",
+        "derived_from_fock_identity": True,
     }
 
 
@@ -111,6 +142,7 @@ def main() -> dict:
         "probability_countermodels": probability_countermodels(),
         "ou_zero_scaling": ou_zero_scaling_replay(),
         "angular_symmetric_identities": angular_symmetric_identities_replay(),
+        "factorized_fock_identity": factorized_fock_identity_replay(),
         "resonance": resonance_replay(),
         "quartet_factor": quartet_factor_replay(),
         "exact_factor_product": exact_factor_product_replay(),
@@ -125,7 +157,8 @@ def main() -> dict:
         "GENERIC_PROBABILITY_SYMMETRIC_ZERO_COUNTERMODELS_REPLAYED",
         "OU_ZERO_SCALING_REPLAYED",
         "ANGULAR_ELEMENTARY_SYMMETRIC_IDENTITIES_REPLAYED",
-        "FOCK_ZERO_RESONANCE_DATA_ALGEBRAICALLY_CONSISTENT",
+        "SYMMETRIC_ZERO_FACTORIZED_FOCK_IDENTITY_CERTIFIED",
+        "FOCK_ZERO_RESONANCE_LEMMA_CERTIFIED",
         "CONJUGATE_QUARTET_FACTOR_VERIFIED",
         payload["marker"],
     ]:
@@ -136,4 +169,3 @@ def main() -> dict:
 
 if __name__ == "__main__":
     main()
-

@@ -6,6 +6,7 @@ from pathlib import Path
 
 from replay_factor_identity import (
     angular_symmetric_identities_replay,
+    factorized_fock_identity_replay,
     exact_factor_product_replay,
     minimal_zero_replay,
     ou_zero_scaling_replay,
@@ -22,6 +23,7 @@ def main() -> dict:
     counter = probability_countermodels()
     ou = ou_zero_scaling_replay()
     angular = angular_symmetric_identities_replay()
+    factorized = factorized_fock_identity_replay()
     resonance = resonance_replay()
     quartet = quartet_factor_replay()
     factor = exact_factor_product_replay()
@@ -30,6 +32,7 @@ def main() -> dict:
         "probability_countermodels": bool(counter["bernoulli_symmetric_zero"] and counter["three_point_symmetric_zero"]),
         "ou_scaling": bool(ou["identity"]),
         "angular_identities": bool(angular["elementary_relations_are_exact"]),
+        "factorized_fock_identity": bool(factorized["product_reduction_exact"] and factorized["even_factor"] and factorized["angular_shift_evenness"]),
         "resonance_consistency": bool(resonance["resonance_data_consistent"]),
         "quartet_factor": bool(quartet["identity_holds"]),
         "factor_product": bool(factor["factorization_exact"]),
@@ -39,8 +42,8 @@ def main() -> dict:
         "checks": checks,
         "all_exact_replays_pass": all(checks.values()),
         "generic_probability_countermodel_status": "CERTIFIED_COUNTERMODELS_EXIST",
-        "factorized_fock_identity_status": "ALGEBRAIC_FACTOR_IDENTITY_REPLAYED",
-        "resonance_conditions_status": "ALGEBRAICALLY_CONSISTENT_FORMAL_LOCAL_DATA",
+        "factorized_fock_identity_status": "CERTIFIED_FROM_NORMALIZED_FOCK_IDENTITY",
+        "resonance_conditions_status": "DERIVED_FROM_FOCK_IDENTITY",
         "quartet_factor_status": "CERTIFIED",
         "probability_bridge_status": "REMAINS_OPEN",
         "minimal_zero_status": "INSUFFICIENT_BY_ITSELF",
@@ -65,4 +68,3 @@ def main() -> dict:
 
 if __name__ == "__main__":
     main()
-

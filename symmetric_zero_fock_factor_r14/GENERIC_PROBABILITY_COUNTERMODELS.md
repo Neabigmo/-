@@ -1,19 +1,23 @@
 # Generic probability countermodels
 
 Two exact symmetric probability laws already have nonzero symmetric complex
-MGF zeros.
+zeros.  For the Fock profile `R(z)=exp(-z^2/2)M(z)`, the zeros are unchanged.
 
-1. For (X=pm1) with equal probabilities,
+1. For `X=pm1` with equal probabilities,
 
 ```text
-R(t) = cosh(t),   R(i*pi/2) = R(-i*pi/2) = 0.
+M(t) = cosh(t),
+R(t) = exp(-t^2/2) cosh(t),
+R(i*pi/2) = R(-i*pi/2) = 0.
 ```
 
-2. For (P(X=0)=1/2) and (P(X=pm sqrt(2))=1/4),
+2. For `P(X=0)=3/4` and `P(X=pm2)=1/8`,
 
 ```text
-R(t) = 1/2 + 1/2 cosh(sqrt(2)*t),
-R(i*pi/sqrt(2)) = R(-i*pi/sqrt(2)) = 0.
+M(t) = 3/4 + 1/4 cosh(2t),
+R(t) = exp(-t^2/2) M(t),
+a = (arcosh(3)+i*pi)/2,
+M(a) = M(-a) = 0,  Re(a) != 0,  Im(a) != 0.
 ```
 
 Both laws have mean zero and variance one.  Therefore positivity of a
@@ -22,4 +26,3 @@ cannot exclude a symmetric nonzero complex pair.
 
 These are exact countermodels to a generic probability shortcut; they are
 not countermodels to the full three-variable Fock identity.
-

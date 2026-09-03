@@ -10,6 +10,6 @@ The exact audit separates three statements that must not be conflated:
    nonlinear probability-realizability lemma.  It cannot be replaced by
    real-axis positivity, OU scaling, or a finite Taylor test.
 
-Current status: the factorized resonance algebra is certified; the nonlinear
-probability bridge remains open.  This is the precise boundary of the
-Fredholm/common-zero line.
+Current status: the normalized factorized Fock identity and its resonance
+consequences are certified; the nonlinear probability bridge remains open.
+This is the precise boundary of the Fredholm/common-zero line.

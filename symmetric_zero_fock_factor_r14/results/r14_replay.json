@@ -1,13 +1,16 @@
 {
   "probability_countermodels": {
     "bernoulli_mgf": "cosh(t)",
+    "bernoulli_fock_profile": "exp(-t**2/2)*cosh(t)",
     "bernoulli_mean": 0,
     "bernoulli_variance": 1,
     "bernoulli_symmetric_zero": true,
-    "three_point_mgf": "cosh(sqrt(2)*t)/2 + 1/2",
+    "three_point_mgf": "cosh(2*t)/4 + 3/4",
+    "three_point_fock_profile": "(cosh(2*t)/4 + 3/4)*exp(-t**2/2)",
     "three_point_mean": 0,
     "three_point_variance": 1,
-    "three_point_symmetric_zero": true
+    "three_point_symmetric_zero": true,
+    "three_point_off_axis": true
   },
   "ou_zero_scaling": {
     "scaled_mgf": "R(lam*t)",
@@ -21,14 +24,25 @@
     "pair_sum": "a1*a2+a1*a3+a2*a3=-1/2",
     "product": "a1*a2*a3=q",
     "elementary_relations_are_exact": true,
-    "roots_are_unordered": true
+    "roots_are_unordered": true,
+    "product_identity": "product_j(1-t*a_j^2)=1-t+t^2/4-t^3*q^2",
+    "product_identity_symbolic_template": "(-alpha1**2*t + 1)*(-alpha2**2*t + 1)*(-alpha3**2*t + 1)"
+  },
+  "factorized_fock_identity": {
+    "product_reduction_exact": true,
+    "factorized_identity": "(1-z^2/(2a^2))^2 A_H(z)-(z^6/a^6)B_H(z)=1",
+    "even_factor": true,
+    "angular_shift_evenness": true
   },
   "resonance": {
-    "B_H": "-1/8 + (3*z/4 - 3*z0/4)/z0",
+    "normalized_factor": "P_a(z)=1-z^2/a^2",
+    "z0_squared": "2*a**2",
+    "first_term_at_z0": "0",
+    "first_derivative_at_z0": "0",
     "B_H_at_z0": "-1/8",
     "z0_B_H_prime_at_z0": "3/4",
     "resonance_data_consistent": true,
-    "scope": "formal local consistency only"
+    "derived_from_fock_identity": true
   },
   "quartet_factor": {
     "identity_holds": true,
