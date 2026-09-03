@@ -1,0 +1,25 @@
+{
+  "actual_stage7_kernel_status": "ACTUAL_STAGE7_KERNEL_IDENTIFIED_IN_R11",
+  "even_block": "L_R^ee: X_rho -> X_rho, X_rho=z^4 A^+_(rho^2)",
+  "odd_to_even_block": "L_R^eo: Y_rho -> X_rho, Y_rho=z^3 A^+_(rho^2)",
+  "odd_principal_symbol": "C_R(z)=(R(-z/2)^2-R(z/2)^2)/2=z*Ctilde_R(z^2)",
+  "common_zero_criterion": "D_R(zeta)=C_R(zeta)=0 iff R(zeta/2)=R(-zeta/2)=0 for zeta != 0",
+  "principal_cokernel_compensation": "If Ctilde(w_alpha) != 0 at every Dtilde zero, finite Hermite interpolation fills every principal jet defect.",
+  "principal_compensation_status": "PRINCIPAL_EVEN_DEFECT_COMPENSATED_BY_ODD_BLOCK",
+  "exact_defect_map": "Delta_rho: Y_rho -> coker(L_R^ee) remains unresolved after compact perturbations.",
+  "ou_covariance": "T(R_lambda)=1, D_(R_lambda)(z)=D_R(lambda z), C_(R_lambda)(z)=C_R(lambda z); log-dilation tangent lies in the exact kernel.",
+  "ou_coherence_contradiction": false,
+  "checks": {
+    "parity_symbol_identities": true,
+    "gaussian_D1_C0": true,
+    "stage7_parity_replay": true,
+    "odd_principal_symbol": true,
+    "normalized_X_Y_domains": true,
+    "simple_double_jet_compensation": true,
+    "ou_scaling_covariance": true
+  },
+  "all_exact_replays_pass": true,
+  "decision": "PARITY_SYMBOL_CERTIFIED_EXACT_DEFECT_MAP_REMAINS",
+  "single_remaining_gap": "Prove or disprove surjectivity of the exact finite-dimensional defect map Delta_rho after the compact perturbations; principal jet compensation alone is insufficient.",
+  "marker": "R12_PARITY_FREDHOLM_OU_AUDIT_COMPLETED"
+}
