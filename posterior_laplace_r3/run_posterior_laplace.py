@@ -5,7 +5,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from common import result_dir
+from common import require, result_dir
 
 ROOT = Path(__file__).resolve().parent
 
@@ -17,9 +17,9 @@ def run(name):
 
 def main():
     rows = [run(Path("derive_posterior_triple.py")), run(Path("derive_conditional_q_moments.py")), run(Path("certify_moment_countermodel.py")), run(Path("derive_semigroup_bridge.py")), run(Path("audit_critical_kernel.py"))]
-    assert all(row["returncode"] == 0 for row in rows), rows
+    require(all(row["returncode"] == 0 for row in rows), f"derivation failed: {rows}")
     audit = run(Path("audit_results.py"))
-    assert audit["returncode"] == 0, audit
+    require(audit["returncode"] == 0, f"audit failed: {audit}")
     final = json.loads((result_dir() / "critical_kernel_audit.json").read_text(encoding="utf-8"))["status"]
     out = {"status": "EXECUTED", "scripts": rows, "audit": audit, "stage28_started": False, "large_compute_started": False, "final_outcome": final}
     path = result_dir() / "posterior_laplace_run_summary.json"

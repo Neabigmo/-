@@ -5,7 +5,7 @@ from pathlib import Path
 
 import sympy as sp
 
-from common import result_dir
+from common import require, result_dir
 
 
 def main():
@@ -15,24 +15,25 @@ def main():
     xbar = sum(xs) / 3
     q = sp.expand(sum((x - xbar)**2 for x in xs))
     decomposition = sp.expand(sum((y - x)**2 for x in xs) - (3*(y-xbar)**2 + q))
-    assert decomposition == 0
+    require(decomposition == 0, "quadratic decomposition failed")
 
     # Integrating the centered Gaussian factor gives the exact constant.
     constant = sp.simplify((2*sp.pi*t)**(-sp.Rational(3, 2)) * sp.sqrt(2*sp.pi*t/3))
-    assert sp.simplify(constant - 1/(2*sp.pi*t*sp.sqrt(3))) == 0
+    require(sp.simplify(constant - 1/(2*sp.pi*t*sp.sqrt(3))) == 0, "product kernel constant failed")
 
     s = sp.symbols("s", nonnegative=True)
     a = t/(1+t)
     laplace_ratio = sp.simplify((1 + 1/t) / (1 + 1/t + 2*s))
     target_laplace = sp.simplify(1/(1+2*a*s))
-    assert sp.simplify(laplace_ratio - target_laplace) == 0
+    require(sp.simplify(laplace_ratio - target_laplace) == 0, "conditional Laplace normalization failed")
 
     out = {
         "status": "EXACT_POSTERIOR_TRIPLE_LAPLACE_IDENTITY",
         "product_kernel_constant": "1/(2*pi*t*sqrt(3))",
         "quadratic_decomposition_residual": str(decomposition),
         "hierarchical_identity": "E_nu[L_t,Y(s)] = E_mu3[e^(-sQ)e^(-Q/(2t))]/E_mu3[e^(-Q/(2t))]",
-        "chi2_target_laplace": "1/(1+2*a_t*s)",
+        "chi2_target_laplace": "1/(1+2*a_t*s) (conditional on the target Q law)",
+        "chi2_target_laplace_status": "CONDITIONAL_ON_Q_LAW",
         "laplace_normalization_residual": str(sp.simplify(laplace_ratio-target_laplace)),
     }
     path = result_dir() / "posterior_triple.json"

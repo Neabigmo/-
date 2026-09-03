@@ -5,7 +5,7 @@ from pathlib import Path
 
 import sympy as sp
 
-from common import result_dir
+from common import require, result_dir
 
 
 def main():
@@ -16,13 +16,13 @@ def main():
     vals = [sp.Integer(0), vm, vp]
     moments = {k: sp.simplify(sum(p*v**k for p, v in zip(probs, vals))) for k in range(1, 5)}
     expected_v = {1: sp.Integer(1), 2: sp.Rational(3, 2), 3: sp.Rational(27, 8), 4: sp.Rational(81, 8)}
-    assert moments == expected_v, moments
+    require(moments == expected_v, f"V moments failed: {moments}")
     q_moments = {k: sp.simplify(sp.Rational(3, 4)*(sp.Rational(8, 3))**k*moments[k]) for k in range(1, 5)}
     target_q = {k: sp.Integer(2)**k*sp.factorial(k) for k in range(1, 5)}
-    assert q_moments == target_q, q_moments
+    require(q_moments == target_q, f"Q moments failed: {q_moments}")
     p_q_zero = sp.simplify(sp.Rational(1, 9) + sp.Rational(8, 9)*sp.Rational(1, 4))
-    assert p_q_zero == sp.Rational(1, 3)
-    assert sp.simplify(moments[2] - moments[1]**2) == sp.Rational(1, 2)
+    require(p_q_zero == sp.Rational(1, 3), "P(Q=0) failed")
+    require(sp.simplify(moments[2] - moments[1]**2) == sp.Rational(1, 2), "Var(V) failed")
     out = {
         "status": "EXACT_MOMENT_RELAXATION_COUNTERMODEL",
         "V_values": [str(v) for v in vals],

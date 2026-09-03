@@ -3,6 +3,7 @@
   "product_kernel_constant": "1/(2*pi*t*sqrt(3))",
   "quadratic_decomposition_residual": "0",
   "hierarchical_identity": "E_nu[L_t,Y(s)] = E_mu3[e^(-sQ)e^(-Q/(2t))]/E_mu3[e^(-Q/(2t))]",
-  "chi2_target_laplace": "1/(1+2*a_t*s)",
+  "chi2_target_laplace": "1/(1+2*a_t*s) (conditional on the target Q law)",
+  "chi2_target_laplace_status": "CONDITIONAL_ON_Q_LAW",
   "laplace_normalization_residual": "0"
 }

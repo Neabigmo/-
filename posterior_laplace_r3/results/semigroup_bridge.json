@@ -3,6 +3,7 @@
   "bridge": "L_t,y(s)=(v/t)*P_{r/3}(p_v^3)(y)/p_t(y)^3",
   "parameters": "u=1/(2s), v=tu/(t+u)=t/(1+2st), r=t-v, v+r=t",
   "prefactor_residual": "0",
+  "complete_gaussian_integral_checks": 8,
   "integrated_ratio": "(v/t)*(F_v/F_t)=1/(1+2*a_t*s)",
   "Gaussian_K": "(t**2 + t*u + t + u)/(t*u + t + u)",
   "Gaussian_K_y_independent": true,

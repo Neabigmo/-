@@ -4,6 +4,12 @@ import os
 from pathlib import Path
 
 
+def require(condition, message):
+    """Raise a real runtime error; correctness checks survive python -O."""
+    if not condition:
+        raise RuntimeError(message)
+
+
 def result_dir() -> Path:
     path = Path(os.environ.get("LAPLACE_RESULTS_DIR", Path(__file__).resolve().parent / "results"))
     path.mkdir(parents=True, exist_ok=True)

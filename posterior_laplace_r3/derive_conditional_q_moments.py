@@ -5,7 +5,7 @@ from pathlib import Path
 
 import sympy as sp
 
-from common import result_dir
+from common import require, result_dir
 
 
 def expectation(poly, xs, moments):
@@ -32,7 +32,7 @@ def main():
         4: sp.Rational(16, 27)*(24*v**2*m4 - 16*v*m3**2 + 20*v*m6 - 32*m3*m5 + 19*m4**2 + m8),
     }
     residuals = {str(k): str(sp.simplify(actual[k]-expected[k])) for k in range(1, 5)}
-    assert all(value == "0" for value in residuals.values()), residuals
+    require(all(value == "0" for value in residuals.values()), f"conditional moments failed: {residuals}")
 
     # The target chi-square moments after integrating nu are exact.
     a = sp.symbols("a", nonnegative=True)

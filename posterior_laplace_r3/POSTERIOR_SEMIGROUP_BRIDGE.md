@@ -1,7 +1,10 @@
 # Posterior semigroup bridge
 
 Set `u=1/(2s)`, `v=tu/(t+u)`, and `r=t-v`.  Exact Gaussian product and
-change-of-variable algebra give
+change-of-variable algebra give.  The implementation independently checks
+the complete Gaussian product integrals for all eight signed triples at an
+exact parameter point by direct symbolic integration and completing the
+square; it does not certify the target law itself.
 
 `L_{t,y}(s)=(v/t) P_{r/3}(p_v^3)(y)/p_t(y)^3`.
 

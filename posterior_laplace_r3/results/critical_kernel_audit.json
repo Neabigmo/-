@@ -4,9 +4,11 @@
   "v": 1,
   "r": 1,
   "y": 0,
-  "exact_K": "(1/2)*exp(-3/4)+(3/2)*exp(-17/12)",
+  "exact_K": "1/2 + 3*exp(-2/3)/2",
+  "exact_numerator": "(exp(17/12) + 3*exp(3/4))*exp(-13/6)/(16*pi**(3/2))",
+  "exact_smoothed_denominator_at_y": "exp(-1/4)/(2*sqrt(pi))",
   "gaussian_equality_value": "3/2",
-  "strict_exact_comparison": "K < 5/4 < 3/2",
+  "strict_exact_comparison": "K < 3/2",
   "tested_mechanism": "universal Gaussian-equality lower bound K_{v,r}f >= K_Gaussian",
   "warning": "This refutes only the tested one-sided kernel inequality; it is not a counterexample to the original characterization."
 }

@@ -11,5 +11,6 @@ moment-relaxation countermodel, and the posterior semigroup bridge.
 
 The only kernel mechanism tested is the natural Gaussian-equality lower bound
 `K >= K_Gaussian`.  A single exact heat-smoothed symmetric two-point prior
-violates that bound, so the mechanism is stopped immediately.  This is not a
-counterexample to the original characterization.
+violates that bound: direct expansion gives
+`K=1/2+(3/2)exp(-2/3)<3/2`.  The mechanism is stopped immediately.  This is
+not a counterexample to the original characterization.
