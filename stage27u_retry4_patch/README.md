@@ -1,17 +1,26 @@
-# Stage27U retry4A — single-witness dual-prune overlay
+# Stage27U retry4A — auditable single-witness dual pruning
 
-Use this only after the retry3 overlay branch. It does **not** replace or relax NNQP.
-It handles only the specific case where the full NNQP reports `success=False`, but a
-single explicit witness already proves the current evaluation point has a very large
-positive lower margin.
+This is a small overlay on top of the retry3 branch. It does **not** alter the NNQP
+solver, ridge, Fock completion, OU lift, Gram construction, continuum exchange, or
+final candidate replay.
 
-For one coordinate `alpha=t e_j`,
+When the full NNQP returns `success=False`, retry4A asks a narrower question: does one
+explicit witness already prove that this evaluation point is far above the minimax
+boundary? For one coordinate `alpha=t e_j`,
 
 `m_tail^2 >= min(c_j,0)^2 / (C_jj eps^2)`.
 
-Retry4 independently recomputes the selected witness with mpmath and only prunes when
-`prefix_energy + one_witness_lb - A >= 25`. If that test fails, the original numerical
-failure remains a failure.
+Runtime acceptance is deliberately strict:
+
+- float arithmetic only ranks candidate witnesses;
+- the selected witness is recomputed at 220 dps and at least 300 dps;
+- the two bounds must agree to relative error <= `1e-10`;
+- the smaller bound is shrunk by `1e-12`;
+- only a resulting pointwise margin >= `+25` is pruned;
+- otherwise the original `NNQP invalid success=False` remains a numerical failure.
+
+Every prune is saved in `stage27u_retry4_dual_prune.csv`. The independent retry4 audit
+replays each one at >=360 dps and then runs the full retry3 + retry2 audits.
 
 Recommended remote sequence:
 
@@ -26,8 +35,9 @@ export STAGE27S_DIR=/path/to/stage27s
 bash stage27u_retry4_patch/run_retry4_remote.sh
 ```
 
-Success of the retry4 independent audit is marked by
-`STAGE27U_RETRY4_DUAL_PRUNE_AUDIT_OK`.
+Successful independent audit marker:
 
-Even a completely clean retry4 run is not a theorem certificate. In particular, a
-negative/boundary-unresolved N=32 result remains unresolved and must be studied next.
+`STAGE27U_RETRY4_DUAL_PRUNE_AUDIT_OK`
+
+A clean retry4 run is still not a theorem certificate. In particular, the negative /
+boundary-unresolved N=32 result remains the key scientific obstruction. No Stage28.
