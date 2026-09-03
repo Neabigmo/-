@@ -1,0 +1,16 @@
+Stage27U retry4 read-only triage
+Date: 2026-09-03
+
+Purpose: decide whether to repair the large NNQP or focus directly on the N32 boundary.
+Inputs: existing retry3 result directory only.
+No campaign rerun. No result mutation. No NNQP modification. No Stage28.
+
+Outputs:
+  stage27u_retry4_triage.csv
+  stage27u_retry4_triage_summary.json
+
+Audit:
+  reruns restricted-dual calculations at higher precision/top-k.
+
+Scientific limitation:
+  pointwise saved-final-candidate evidence only; not a global minimax certificate.
