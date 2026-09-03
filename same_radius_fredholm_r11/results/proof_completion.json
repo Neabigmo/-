@@ -1,0 +1,27 @@
+{
+  "all_degree_Aijk": {
+    "relations": {
+      "omega_cubed_minus_one": true,
+      "cube_root_sum": true,
+      "parity_rule": "all Fourier exponents have parity i+j+k",
+      "even_formula": "a_*^n 2^(-n) sum_{p+q+r=n/2} binomials * omega^phase",
+      "pointwise_bound": "|A_ijk| <= a_*^n"
+    },
+    "all_degree_symbolic_proof": true
+  },
+  "same_radius_compactness": {
+    "factor_three_cancellation": true,
+    "dominant_ratio_product": "product[t=0..b-1] 2(a+t+1)/(2(a+t)+1)",
+    "dominant_log_step": "log(1+x)<=x",
+    "fixed_shift_compactness": "bounded shift composed with diagonal tending to zero",
+    "nondominant_compactness": "fixed m finite rank; m-tail controlled by sqrt(m) q^m",
+    "same_radius_statement": "L_R - M_(D_R) is compact on W_rho^even under the all-degree kernel hypothesis",
+    "symbolic_sanity": true
+  },
+  "fredholm_index": "ind(L_R^even)=-N_rho after w=z^2 and compact perturbation",
+  "even_zero_pair_rule": "+/-zeta becomes one w=zeta^2 zero with unchanged multiplicity",
+  "stage7_consequence": "non-Gaussian entire R with a finite D_R zero implies negative even index, not rigidity",
+  "precise_remaining_gap": "Import and identify the actual all-degree normalized Stage7 operator kernel; then carry the displayed estimates into a full operator-domain proof.",
+  "decision": "ACTUAL_KERNEL_CERTIFIED_SAME_RADIUS_COMPACTNESS_GAP",
+  "marker": "R11_ALL_DEGREE_PROOF_HARDENING_COMPLETED"
+}

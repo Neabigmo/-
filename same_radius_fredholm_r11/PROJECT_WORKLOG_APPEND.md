@@ -12,3 +12,13 @@
 - Remaining gap: actual all-degree Stage-7 kernel import and the complete
   same-radius operator-norm compactness proof; no rigidity claim made.
 
+## Proof-hardening iteration
+
+- Added the all-degree Fourier constant-term derivation and the explicit
+  dominant/nondominant compactness proof schema; finite degree-8 checks remain
+  regression tests only.
+- Added a proof-completion audit for the cube-root identities, factor-three
+  cancellation, fixed-shift compactness, and the `w=z^2` index reduction.
+- `py_compile` passed; `pytest` is 6 passed; the conservative decision is
+  unchanged because the actual Stage7 operator-domain identification is still
+  not present in this repository.
