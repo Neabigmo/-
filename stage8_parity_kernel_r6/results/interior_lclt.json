@@ -1,0 +1,13 @@
+{
+  "det_constraint_plane_matrix": "(p1 + p2 + p3)/(p1*p2*p3)",
+  "normalization_symbolic": "1/sqrt(p1 + p2 + p3)",
+  "normalization_on_p_simplex": "1",
+  "normalization_sample": "1",
+  "parity_sublattice_density": "1/4",
+  "epsilon": "1/12",
+  "raw_deviation_exponent": "7/12",
+  "standardized_deviation_exponent": "1/12",
+  "log_stirling_remainder_exponent": "-1/4",
+  "normalization_exact": true,
+  "marker": "INTERIOR_HELLINGER_LCLT_NORMALIZATION_CERTIFIED"
+}

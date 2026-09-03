@@ -1,0 +1,7 @@
+{
+  "identity_residual": "0",
+  "gaussian_replay_residual": "0",
+  "factorization_exact": true,
+  "strict_positive_condition": "all E_j > abs(O_j)",
+  "marker": "PARITY_HADAMARD_FACTORIZATION_CERTIFIED"
+}

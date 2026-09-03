@@ -1,0 +1,42 @@
+{
+  "mehler_series_residual_through_degree_3": "0",
+  "gaussian_phi": "14",
+  "gaussian_factorized_phi": "14",
+  "gaussian_positive_replay_residual": "0",
+  "rho_mode_multiplier": "rho**m",
+  "double_scaling_location": "not certified from the present interface",
+  "r5_low_mode_rows": [
+    {
+      "d": 3,
+      "coefficient": "kappa3**2*mean_p3_sq*rho**6/4",
+      "replay_residual": "0",
+      "positive_under": "rho>0, kappa_d!=0, mean[p_d^2]>0",
+      "positive_symbolically": true
+    },
+    {
+      "d": 5,
+      "coefficient": "kappa5**2*mean_p5_sq*rho**10/576",
+      "replay_residual": "0",
+      "positive_under": "rho>0, kappa_d!=0, mean[p_d^2]>0",
+      "positive_symbolically": true
+    },
+    {
+      "d": 7,
+      "coefficient": "kappa7**2*mean_p7_sq*rho**14/518400",
+      "replay_residual": "0",
+      "positive_under": "rho>0, kappa_d!=0, mean[p_d^2]>0",
+      "positive_symbolically": true
+    },
+    {
+      "d": 9,
+      "coefficient": "kappa9**2*mean_p9_sq*rho**18/1625702400",
+      "replay_residual": "0",
+      "positive_under": "rho>0, kappa_d!=0, mean[p_d^2]>0",
+      "positive_symbolically": true
+    }
+  ],
+  "r5_replay_all_exact": true,
+  "sign_transfer_outcome": "BACKWARD_HEAT_SIGN_TRANSFER_FAILS",
+  "sign_transfer_reason": "Stage-8 parity profiles are not yet uniformly identified with paired backward-heat amplitudes; normalization, location/sign map, and l2 tail tightness remain hypotheses.",
+  "marker": "BACKWARD_HEAT_SIGN_TRANSFER_REQUIRES_EXTRA_IDENTIFICATION"
+}

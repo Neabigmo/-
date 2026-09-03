@@ -1,0 +1,34 @@
+{
+  "checks": {
+    "parity_algebra.json": {
+      "exists": true,
+      "marker_matches": true,
+      "finite": true,
+      "residual_zero": true,
+      "factorization_exact": true
+    },
+    "interior_lclt.json": {
+      "exists": true,
+      "marker_matches": true,
+      "finite": true,
+      "normalization_exact": true,
+      "simplex_normalization": true,
+      "scale_consistent": true
+    },
+    "backward_heat_matching.json": {
+      "exists": true,
+      "marker_matches": true,
+      "finite": true,
+      "mehler_residual_zero": true,
+      "gaussian_residual_zero": true,
+      "gaussian_factorization_value": true,
+      "r5_replay_exact": true,
+      "r5_factors_present": true,
+      "gap_declared": true
+    }
+  },
+  "passed": true,
+  "decision": "B: BACKWARD_HEAT_SIGN_TRANSFER_FAILS_AT_CURRENT_INTERFACE",
+  "precise_gap": "Need a uniform double-scaling identification from Stage-8 local parity profiles to paired backward-heat amplitudes, including sign/location normalization and l2 tail tightness.",
+  "marker": "R6_AUDIT_COMPLETED"
+}
