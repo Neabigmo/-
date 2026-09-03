@@ -1,0 +1,82 @@
+{
+  "status": "MISSING_INFORMATION_GAP_REMAINS",
+  "decision": "B",
+  "bivariate_tilted_mixture": "EXACT_BIVARIATE_TILTED_MIXTURE_VERIFIED",
+  "rotation_transport": "EXACT_ROTATION_TRANSPORT_LEMMA",
+  "scalar_missing_information": "EXACT_POSTERIOR_ANGLE_FISHER_VERIFIED",
+  "bivariate_relative_fisher": "EXACT_BIVARIATE_RELATIVE_FISHER_IDENTITY_RECORDED",
+  "closure_obstruction": {
+    "epsilon": "1/5",
+    "v_j": [
+      "11/10",
+      "4/5",
+      "4/5"
+    ],
+    "V_a": "1",
+    "V_b": "4/5",
+    "A_squared": "0",
+    "C_squared": "1/5",
+    "J_j": [
+      "10/11",
+      "5/4",
+      "5/4"
+    ],
+    "component_Cramer_Rao_equalities": true,
+    "Stam_sum_equality": true,
+    "Poincare_value": "1/360",
+    "Poincare_upper_bound_at_z1": "1/180",
+    "gap": "Named scalar budgets hold while C_squared remains 1/5 > 0.",
+    "scope_warning": "Logical witness only; not a target-law counterexample."
+  },
+  "fisher_closure": false,
+  "remaining_gap": "MI is exact, but product structure plus Cramer-Rao/Stam gives lower/equality directions, not the missing upper bound that would force H(x)=0.",
+  "next_authorized_route": "Stage8 critical Hellinger/parity continuum normal form plus Stage19 backward-heat positivity",
+  "stage8_bridge": [
+    {
+      "d": 3,
+      "harmonics": [
+        3
+      ],
+      "mean_p_d_squared": "1/12",
+      "leading_H_coefficient": "1/48",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
+    },
+    {
+      "d": 5,
+      "harmonics": [
+        3
+      ],
+      "mean_p_d_squared": "25/432",
+      "leading_H_coefficient": "25/248832",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
+    },
+    {
+      "d": 7,
+      "harmonics": [
+        3
+      ],
+      "mean_p_d_squared": "49/1728",
+      "leading_H_coefficient": "49/895795200",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
+    },
+    {
+      "d": 9,
+      "harmonics": [
+        3,
+        9
+      ],
+      "mean_p_d_squared": "7057/559872",
+      "leading_H_coefficient": "7057/910185254092800",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
+    }
+  ],
+  "no_nonfinite_fields": true
+}

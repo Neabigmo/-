@@ -1,0 +1,12 @@
+{
+  "status": "EXACT_ROTATION_TRANSPORT_LEMMA",
+  "frame_derivatives": [
+    "d_theta L_theta=T_theta",
+    "d_theta T_theta=-L_theta"
+  ],
+  "weak_identity": "d_theta int f(x)q_theta(x)dx = int f'(x)q_theta(x)m_theta(x)dx",
+  "continuity_equation": "partial_theta q_theta + partial_x(q_theta*m_theta)=0",
+  "joint_continuity_equation": "partial_theta g_theta + div(g_theta*(T,-L))=0",
+  "tilted_angular_score": "C_z(theta)=E_z[T_theta | Theta=theta]",
+  "derivation_scope": "weak compactly-supported tests; no pointwise density differentiation"
+}

@@ -1,0 +1,29 @@
+{
+  "status": "EXACT_BIVARIATE_TILTED_MIXTURE_VERIFIED",
+  "geometry": {
+    "sum_a2": "1",
+    "sum_b2": "1",
+    "sum_ab": "0",
+    "pointwise_norm": [
+      "2/3",
+      "2/3",
+      "2/3"
+    ],
+    "a_derivative_is_b": [
+      "0",
+      "0",
+      "0"
+    ],
+    "b_derivative_is_minus_a": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "Q3_pair_identity": "Q3=L_Theta^2+T_Theta^2",
+  "uniform_pair_law": "(L_Theta,T_Theta) ~ N((0,0), I2), conditional on target Q3 law",
+  "uniform_pair_mgf": "exp(s**2/2)*exp(t**2/2)",
+  "tilted_pair_mgf": "exp(s**2/2)*exp(t**2/2)*exp(s*z)",
+  "tilted_pair_law": "N((z,0), I2)",
+  "scope": "The pair law is conditional on the original target angular identity."
+}
