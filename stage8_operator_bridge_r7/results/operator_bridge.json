@@ -1,0 +1,36 @@
+{
+  "hermite_addition": {
+    "degree": 5,
+    "residual_on_sphere": "0",
+    "exact_on_sum_a2_eq_1": true
+  },
+  "coherent_projection": {
+    "degree": 4,
+    "normalization_residual": "0",
+    "normalization_exact_on_sphere": true,
+    "parity_character_count": 4
+  },
+  "gram_countermodel": {
+    "gram_eigenvalues": [
+      "3/2",
+      "1/2"
+    ],
+    "gram_psd": true,
+    "mixed": "-1/2",
+    "diagonal_energy": "1",
+    "cs_bound_residual": "-3/4",
+    "tensor_mixed": "-1/2",
+    "tensor_sign_negative": true,
+    "countermodel_scope": "operator-only; no Fock equation or target law"
+  },
+  "global_r5_bridge": {
+    "log_derivative_residual": "0",
+    "random_angle_projection": "standard Gaussian by rotational invariance",
+    "hermite_expansion_scope": "L2(dgamma), subject to density regularity",
+    "posterior_angle_identity": "2*pi*pi_x = r_theta",
+    "exact": true
+  },
+  "all_exact_replays": true,
+  "decision": "R6_POINTWISE_SIGN_INTERFACE_INVALID",
+  "marker": "R7_OPERATOR_BRIDGE_AUDIT_COMPLETED"
+}
