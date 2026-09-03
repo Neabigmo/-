@@ -1,0 +1,52 @@
+Stage27U retry3 strict gradient-audit overlay
+============================================
+
+BASE PACKAGE
+------------
+chi2_n3_ou_coherent_stage27u_retry2_2026-09-03/
+Expected unchanged Git subtree:
+01839464c21055eb4d756ba607a783c6044f4537
+
+PATCH FILES
+-----------
+.gitattributes
+README.md
+PATCH_MANIFEST.txt
+gradient_audit_retry3.py
+run_stage27u_retry3.py
+audit_retry3.py
+selftest_retry3.py
+run_retry3_remote.sh
+
+STRICT GATES — NOT RELAXED
+--------------------------
+- N=64 remains mandatory.
+- At least 2 CHECKED_STABLE_ACTIVE_SET points per N remains mandatory.
+- Each stable point requires at least 2 valid +/- FD directions.
+- Every used direction requires successful evaluations, unchanged objective branch,
+  and unchanged NNQP active set.
+- qp.success=False never counts as stable.
+- Gradient relative error threshold remains < 2e-3.
+- Additionally, every N must contain at least one stable NONTRIVIAL TAIL point:
+  active_count > 0 OR abs(tail_lb) > 1e-8.
+- If only prefix/near-zero stable points are found, they are downgraded to
+  CHECKED_PREFIX_ONLY_NO_ACTIVE_TAIL so the unchanged base preflight stops.
+
+UNCHANGED CORE
+--------------
+No patch is made to Fock completion, OU lift, master/direct kernels, witness Gram,
+NNQP equations, fixed ridge=1e-11, KKT/complementarity criteria, outer objective,
+continuum validation, candidate replay, or scientific decision rules.
+
+No Stage28. No theorem/global certificate claim.
+
+RUN ORDER
+---------
+1. python chi2_n3_ou_coherent_stage27u_retry2_2026-09-03/verify_package.py
+2. python chi2_n3_ou_coherent_stage27u_retry2_2026-09-03/python/selftest_stage27u.py
+3. python stage27u_retry3_patch/selftest_retry3.py
+4. python stage27u_retry3_patch/run_stage27u_retry3.py --stage27r-dir ... --stage27s-dir ... --outdir ...
+5. python stage27u_retry3_patch/audit_retry3.py --result-dir ...
+
+Final retry3 numerical-audit marker:
+STAGE27U_RETRY3_NUMERIC_AUDIT_OK
