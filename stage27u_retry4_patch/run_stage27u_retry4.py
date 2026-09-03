@@ -14,6 +14,8 @@ sys.path.insert(0, str(PKG_PY))
 sys.path.insert(0, str(PATCH3))
 sys.path.insert(0, str(PATCH4))
 
+# Install retry4 before importing preflight/support/campaign so every imported
+# local_search binding resolves to the retry4 wrapper.
 import outer_minimax as om
 from dual_prune_retry4 import install_retry4, write_prune_csv
 install_retry4(om)
@@ -36,6 +38,7 @@ def _outdir_from_argv():
             return Path(sys.argv[i+1])
         if a.startswith('--outdir='):
             return Path(a.split('=',1)[1])
+    # Base parser has its own retry2 default, so force an explicit retry4 default.
     sys.argv.extend(['--outdir', default])
     return Path(default)
 
