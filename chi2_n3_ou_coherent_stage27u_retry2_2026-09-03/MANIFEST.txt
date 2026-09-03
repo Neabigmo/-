@@ -1,0 +1,89 @@
+Stage27U retry2 transfer manifest
+=================================
+
+PACKAGE ROOT
+------------
+chi2_n3_ou_coherent_stage27u_retry2_2026-09-03/
+
+UTF-8 SOURCE / CONFIG / DOCUMENT FILES
+-------------------------------------
+.gitattributes
+verify_package.py
+PACKAGE_INTEGRITY.json
+README.md
+RUN_ME.md
+THEORY_NOTE.md
+MANIFEST.txt
+PROJECT_WORKLOG_APPEND_TEMPLATE.md
+LOCAL_VERIFICATION.txt
+requirements.txt
+run_stage27u_remote.sh
+python/coherence_lift.py
+python/master_kernel.py
+python/candidate_loader.py
+python/nnqp_core.py
+python/continuum_validation.py
+python/outer_minimax.py
+python/run_stage27u.py
+python/run_stage27u_support.py
+python/run_stage27u_finalize.py
+python/run_stage27u_campaign.py
+python/run_stage27u_preflight.py
+python/audit_stage27u_results.py
+python/selftest_stage27u.py
+python/reduced_core.py
+python/zero_branch.py
+python/joint_tail_core.py
+python/normalized_kkt_stage25.py
+python/normalized_kkt_stage26.py
+
+REQUIRED EXTERNAL BINARY INPUTS — STAGE27R
+------------------------------------------
+Recursive lookup under STAGE27R_DIR requires:
+
+q0p1_N64_ridge1em11.npz
+q0p1_N80_ridge1em11.npz
+
+Only their robust high-q witness arrays are required.
+
+REQUIRED EXTERNAL TEXT INPUT — STAGE27S
+---------------------------------------
+stage27s_continuum.csv
+
+Recommended if available:
+stage27s_exchange_history.csv
+
+OPTIONAL PRIOR CANDIDATE INPUTS
+-------------------------------
+STAGE15_DIR and STAGE16_DIR may be supplied. Ambiguous old candidate arrays are skipped rather than guessed.
+
+RETRY1 RESULT INPUT
+-------------------
+Retry1 results are NOT required to run retry2. They are diagnostic context only.
+
+NOT INCLUDED / NOT AUTO-RUN
+---------------------------
+Stage28
+N*q^alpha scans
+independent small-q Stage27T primal continuation
+campaigns beyond N=80
+
+NUMERICAL SUCCESS MARKERS
+-------------------------
+Selftest: STAGE27U_RETRY2_SELFTEST_OK
+Independent result audit: STAGE27U_RETRY2_NUMERIC_AUDIT_OK
+
+These are numerical software/audit markers, not theorem certificates.
+
+TRANSFER / INTEGRITY
+--------------------
+The authoritative transfer is the complete Git tree. No ZIP or base64 decode is required.
+After clone, run:
+
+python verify_package.py
+
+Expected marker:
+STAGE27U_RETRY2_PACKAGE_VERIFY_OK files=28
+
+PACKAGE_INTEGRITY.json contains SHA256 values for every package file except itself.
+.gitattributes forces LF line endings for .py/.sh/.md/.txt/.json files.

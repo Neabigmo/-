@@ -1,0 +1,22 @@
+Stage27U retry2 local verification
+=================================
+
+1. python -m py_compile python/*.py
+   PASS
+
+2. python python/selftest_stage27u.py
+   STAGE27U_RETRY2_SELFTEST_OK
+
+3. Interior/active-set-stable analytic-gradient smoke:
+   synthetic N=32 production path max gradient relative FD error ~5.03e-10.
+
+4. Four-N preflight gradient audit with synthetic witnesses:
+   stable checks by N = {32:5, 48:5, 64:5, 80:5}
+   max relative FD error ~3.51e-08.
+
+5. Minimal synthetic N=32 production-path smoke:
+   completed with failures=0, no +/-Inf scientific CSV entries, and finite final margin.
+
+6. A deliberately tiny four-N production smoke was started only to test orchestration.  It reached the full four-N gradient preflight and completed N=32, then exceeded the local smoke timeout while entering higher-N continuum work.  This is NOT a production result and is not used as a scientific claim.
+
+No Stage28 or large research campaign was run locally.
