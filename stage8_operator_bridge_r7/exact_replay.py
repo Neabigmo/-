@@ -29,17 +29,18 @@ def hermite_addition_replay() -> dict:
 
 def coherent_replay() -> dict:
     n = 4
-    a1, a2, a3 = sp.symbols("a1 a2 a3")
-    norm_sum = sp.Integer(0)
-    for i in range(n + 1):
-        for j in range(n - i + 1):
-            k = n - i - j
-            norm_sum += n**n * a1 ** (2 * i) * a2 ** (2 * j) * a3 ** (2 * k) / (sp.factorial(i) * sp.factorial(j) * sp.factorial(k))
     # Work with squared variables to make the multinomial identity exact.
     x1, x2, x3 = sp.symbols("x1 x2 x3")
     squared_sum = sum(n**n * x1**i * x2**j * x3**k / (sp.factorial(i) * sp.factorial(j) * sp.factorial(k)) for i in range(n + 1) for j in range(n - i + 1) for k in [n - i - j])
     squared_residual = sp.expand(squared_sum.subs(x3, 1 - x1 - x2) - n**n / sp.factorial(n))
-    return {"degree": n, "normalization_residual": str(squared_residual), "normalization_exact_on_sphere": squared_residual == 0, "parity_character_count": 4}
+    parity_characters = ((1, 1, 1), (1, -1, -1), (-1, 1, -1), (-1, -1, 1))
+    return {
+        "degree": n,
+        "normalization_residual": str(squared_residual),
+        "normalization_exact_on_sphere": bool(squared_residual == 0),
+        "parity_character_count": len(parity_characters),
+        "parity_characters": parity_characters,
+    }
 
 
 def gram_and_countermodel() -> dict:
@@ -61,13 +62,20 @@ def global_bridge_replay() -> dict:
     x = sp.symbols("x")
     r = sp.Function("r")(x)
     bridge_residual = sp.simplify(r * (sp.diff(sp.log(r), x)) ** 2 - sp.diff(r, x) ** 2 / r)
-    return {"log_derivative_residual": str(bridge_residual), "random_angle_projection": "standard Gaussian by rotational invariance", "hermite_expansion_scope": "L2(dgamma), subject to density regularity", "posterior_angle_identity": "2*pi*pi_x = r_theta", "exact": bridge_residual == 0}
+    return {
+        "log_derivative_residual": str(bridge_residual),
+        "algebraic_identity_exact": bool(bridge_residual == 0),
+        "random_angle_projection": "standard Gaussian by rotational invariance (analytic input, not replayed here)",
+        "hermite_expansion_scope": "L2(dgamma), subject to density regularity (analytic input, not replayed here)",
+        "posterior_angle_identity": "2*pi*pi_x = r_theta (analytic input, not replayed here)",
+        "status": "algebraic identity checked; probabilistic/analytic bridge assumptions remain open",
+    }
 
 
 def main() -> None:
     RESULTS.mkdir(exist_ok=True)
     payload = {"hermite_addition": hermite_addition_replay(), "coherent_projection": coherent_replay(), "gram_countermodel": gram_and_countermodel(), "global_r5_bridge": global_bridge_replay()}
-    payload["all_exact_replays"] = bool(payload["hermite_addition"]["exact_on_sum_a2_eq_1"] and payload["coherent_projection"]["normalization_exact_on_sphere"] and payload["global_r5_bridge"]["exact"])
+    payload["all_exact_replays"] = bool(payload["hermite_addition"]["exact_on_sum_a2_eq_1"] and payload["coherent_projection"]["normalization_exact_on_sphere"] and payload["global_r5_bridge"]["algebraic_identity_exact"])
     payload["decision"] = "R6_POINTWISE_SIGN_INTERFACE_INVALID"
     payload["marker"] = "R7_OPERATOR_BRIDGE_AUDIT_COMPLETED" if payload["all_exact_replays"] and payload["gram_countermodel"]["gram_psd"] and payload["gram_countermodel"]["tensor_sign_negative"] else "R7_AUDIT_FAILED"
     (RESULTS / "operator_bridge.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")

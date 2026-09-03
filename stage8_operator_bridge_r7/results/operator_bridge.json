@@ -8,7 +8,29 @@
     "degree": 4,
     "normalization_residual": "0",
     "normalization_exact_on_sphere": true,
-    "parity_character_count": 4
+    "parity_character_count": 4,
+    "parity_characters": [
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        1
+      ]
+    ]
   },
   "gram_countermodel": {
     "gram_eigenvalues": [
@@ -25,10 +47,11 @@
   },
   "global_r5_bridge": {
     "log_derivative_residual": "0",
-    "random_angle_projection": "standard Gaussian by rotational invariance",
-    "hermite_expansion_scope": "L2(dgamma), subject to density regularity",
-    "posterior_angle_identity": "2*pi*pi_x = r_theta",
-    "exact": true
+    "algebraic_identity_exact": true,
+    "random_angle_projection": "standard Gaussian by rotational invariance (analytic input, not replayed here)",
+    "hermite_expansion_scope": "L2(dgamma), subject to density regularity (analytic input, not replayed here)",
+    "posterior_angle_identity": "2*pi*pi_x = r_theta (analytic input, not replayed here)",
+    "status": "algebraic identity checked; probabilistic/analytic bridge assumptions remain open"
   },
   "all_exact_replays": true,
   "decision": "R6_POINTWISE_SIGN_INTERFACE_INVALID",

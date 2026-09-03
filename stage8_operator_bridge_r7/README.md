@@ -7,7 +7,9 @@ It replays:
 - Hermite addition and the number-projected coherent-state identity;
 - positivity of the Hermite Gram operator and its sharp automatic
   Cauchy–Schwarz bound for the Stage-8 mixed matrix element;
-- the global R5 posterior-angle/Hermite expansion bridge;
+- the algebraic log-derivative identity used by the global R5
+  posterior-angle/Hermite bridge (the analytic/probabilistic inputs are
+  recorded as assumptions, not claimed as proved by this replay);
 - a finite exact PSD countermodel showing that positivity alone does not
   determine the sign of an off-diagonal matrix element.
 
