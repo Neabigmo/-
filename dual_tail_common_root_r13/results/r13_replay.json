@@ -1,0 +1,79 @@
+{
+  "lower_triangular": {
+    "size": 7,
+    "diagonal": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    "exact_diagonal_one": true,
+    "lower_triangular": true,
+    "symbol": "3*x**3 - x**2 + 2*x + 1"
+  },
+  "tail_locality": {
+    "finite_model_bound_holds": true,
+    "normalized_tail_tends_to_zero_in_model": true,
+    "sufficient_condition": "sup_{q>=i}|K^*phi_q| <= eta_i b_i with eta_i -> 0",
+    "r11_compactness_implies_this": false
+  },
+  "tail_normalization": {
+    "selected": [
+      {
+        "base": 0,
+        "index": 0,
+        "b_base": "1/3",
+        "ratio": "1"
+      },
+      {
+        "base": 1,
+        "index": 2,
+        "b_base": "1/5",
+        "ratio": "1"
+      },
+      {
+        "base": 3,
+        "index": 4,
+        "b_base": "1/10",
+        "ratio": "1"
+      },
+      {
+        "base": 5,
+        "index": 6,
+        "b_base": "1/20",
+        "ratio": "1"
+      }
+    ],
+    "all_selected_ratio_at_least_half": true,
+    "selection_is_strictly_increasing": true,
+    "normalized_limit_object": "psi^(k)_m=phi_{i_k+m}/b_{i_k}, ||psi^(k)||_infinity<=1, |psi^(k)_0|>=1/2"
+  },
+  "finite_support_dual": {
+    "last_support_index": 3,
+    "terminal_equation": "-2",
+    "finite_support_nonzero_contradiction": true,
+    "reason": "At the largest support index p, all forward terms except d_0 psi_p vanish."
+  },
+  "spectral_common_root": {
+    "common_case_gcd": "2*lambda - 1",
+    "common_case_has_root": true,
+    "disjoint_case_gcd": "1",
+    "disjoint_case_has_no_common_root": true,
+    "spectral_mapping_step": "D(S)psi=C(S)psi=0 implies D(lambda)=C(lambda)=0 for lambda in spectrum(S|V)",
+    "disk_bound_step": "spectrum of a contraction on ell_infinity lies in the closed unit disk"
+  },
+  "gaussian": {
+    "R": "1",
+    "D_R": "1",
+    "C_R": "0",
+    "no_principal_defect": true
+  },
+  "dual_annihilator_characterization": "Delta_rho non-surjective iff a nonzero bounded dual functional annihilates both L_e and B_o, subject to the Fredholm finite-dimensional quotient.",
+  "conditional_common_root_theorem": "If the normalized dual tails satisfy the required K^* tail-locality and both recurrences pass to the limit, then a nonzero dual defect forces a common D/C spectral root.",
+  "decision": "TAIL_LOCALITY_GAP",
+  "single_remaining_gap": "R11 compactness bookkeeping does not by itself prove the relative tail-local remainder estimate needed after division by b_i.",
+  "marker": "R13_DUAL_TAIL_COMMON_ROOT_REPLAY_COMPLETED"
+}
