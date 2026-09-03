@@ -4,6 +4,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import sympy as sp
+
 from exact_kernel_bound import central_binomial_replay, normalized_multinomial_bound, wiener_tail_replay
 from replay_normalization import fixed_band_replay, normalization_replay
 from replay_wiener_range import division_replay
@@ -22,7 +24,8 @@ def main() -> None:
     tail = wiener_tail_replay()
     simple = division_replay(multiplicity=1)
     double = division_replay(multiplicity=2)
-    exact_ok = normalization["residual"] == "0" and fixed["all_limits_exact"] and central["all_bounds_hold"] and multinomial["all_multinomial_terms_le_a_star_n"] and simple["division_exact"] and double["division_exact"]
+    tail_ok = tail["tail_decreases_in_replay"] and sp.sympify(tail["rows"][-1]["two_high_bound"]) < 1
+    exact_ok = normalization["residual"] == "0" and normalization["shift_residuals_all_zero"] and fixed["all_limits_exact"] and central["all_bounds_hold"] and multinomial["all_multinomial_terms_le_a_star_n"] and tail_ok and simple["division_exact"] and double["division_exact"]
     payload = {
         "exact_replays_pass": bool(exact_ok),
         "positive_radius_input_status": "ENTIRE_OR_FINITE_WIENER_NORM_REQUIRED; NOT_ARBITRARY_L2",
@@ -48,4 +51,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

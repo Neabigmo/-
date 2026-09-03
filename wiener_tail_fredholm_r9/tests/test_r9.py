@@ -13,7 +13,9 @@ from replay_wiener_range import division_replay
 
 
 def test_normalization_and_fixed_band():
-    assert normalization_replay()["residual"] == "0"
+    normalization = normalization_replay()
+    assert normalization["residual"] == "0"
+    assert normalization["shift_residuals_all_zero"]
     assert fixed_band_replay()["all_limits_exact"]
 
 

@@ -15,8 +15,16 @@ def normalization_replay() -> dict:
     b = sp.symbols("b0:5")
     z = sp.symbols("z")
     hermite_series = sum(b[n] * z**n / sp.sqrt(sp.factorial(n)) for n in range(5))
-    ordinary = sum((b[n] / sp.sqrt(sp.factorial(n))) * z**n for n in range(5))
-    return {"residual": str(sp.expand(hermite_series - ordinary)), "coefficient_relation": "r_n=b_n/sqrt(n!)", "shift_factor_m": "sqrt(n!/(n-m)!)"}
+    # Reconstruct ordinary coefficients by coefficient extraction via
+    # derivatives, rather than copying the defining summand.
+    extracted = [sp.simplify(sp.diff(hermite_series, z, n).subs(z, 0) / sp.factorial(n)) for n in range(5)]
+    ordinary = sum(extracted[n] * z**n for n in range(5))
+    shift_residuals = []
+    for n in range(1, 5):
+        basis = z**n / sp.sqrt(sp.factorial(n))
+        expected = sp.sqrt(sp.factorial(n) / sp.factorial(n - 1)) * z**(n - 1) / sp.sqrt(sp.factorial(n - 1))
+        shift_residuals.append(sp.simplify(sp.diff(basis, z) - expected))
+    return {"residual": str(sp.expand(hermite_series - ordinary)), "coefficient_relation": "r_n=b_n/sqrt(n!)", "shift_factor_m": "sqrt(n!/(n-m)!)", "shift_residuals": [str(v) for v in shift_residuals], "shift_residuals_all_zero": all(v == 0 for v in shift_residuals)}
 
 
 def fixed_band_replay() -> dict:
@@ -40,4 +48,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

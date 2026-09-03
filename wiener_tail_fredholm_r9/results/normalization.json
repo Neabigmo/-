@@ -2,7 +2,14 @@
   "normalization": {
     "residual": "0",
     "coefficient_relation": "r_n=b_n/sqrt(n!)",
-    "shift_factor_m": "sqrt(n!/(n-m)!)"
+    "shift_factor_m": "sqrt(n!/(n-m)!)",
+    "shift_residuals": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "shift_residuals_all_zero": true
   },
   "fixed_band": {
     "rows": [
