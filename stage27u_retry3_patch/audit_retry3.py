@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import math
 import sys
 from pathlib import Path
 
@@ -28,7 +27,8 @@ def retry3_gradient_audit(result_dir: Path):
 
     required = {
         "N", "status", "grad_fd_error", "checked_directions",
-        "scientific_valid", "qp_success",
+        "scientific_valid", "qp_success", "tail_regime_signal",
+        "active_count", "tail_lb",
     }
     missing = required - set(g.columns)
     if missing:
@@ -54,6 +54,12 @@ def retry3_gradient_audit(result_dir: Path):
         if float(err.max()) >= 2e-3:
             raise AssertionError((N, "gradient error threshold violated", float(err.max())))
 
+        tail_signal = _truthy(gn.tail_regime_signal)
+        active = pd.to_numeric(gn.active_count, errors="coerce").fillna(0) > 0
+        tail_lb = pd.to_numeric(gn.tail_lb, errors="coerce").fillna(0).abs() > 1e-8
+        if not bool((tail_signal & (active | tail_lb)).any()):
+            raise AssertionError((N, "no stable nontrivial-tail gradient check"))
+
     # Diagnostic exception/rejection rows are allowed in preflight, but they
     # can never count toward stable coverage. No +/-Inf is allowed anywhere.
     for c in g.columns:
@@ -78,7 +84,6 @@ def main():
     ap.add_argument("--result-dir", required=True)
     a = ap.parse_args()
     result_dir = Path(a.result_dir)
-
     retry3_gradient_audit(result_dir)
     run_retry2_audit(result_dir)
     print("STAGE27U_RETRY3_NUMERIC_AUDIT_OK")
