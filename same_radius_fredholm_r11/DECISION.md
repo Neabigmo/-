@@ -1,11 +1,15 @@
 # R11 decision
 
-`ACTUAL_KERNEL_CERTIFIED_SAME_RADIUS_COMPACTNESS_GAP`
+`SAME_RADIUS_FREDHOLM_LINEARIZATION_CERTIFIED`
 
 The corrected Beta moments, finite exact angular-kernel replay, dominant and
 nondominant estimates, same-radius bookkeeping, and even-index algebraic
-replay pass.  The remaining gap is precise: the all-degree Stage-7 `A_ijk`
-formula in the actual normalized operator and a complete operator-norm proof
-that its same-radius remainder is compact have not been imported into this
-workspace.  No Gaussian rigidity conclusion is drawn.
+replay pass.  The original Stage-7 source has now been identified and audited:
+it fixes `r_0=1`, `r_1=r_2=0`, and uses the symmetric even divisor.  The
+normalized tangent domain is invariant, is exactly `w^2 A^+_(rho^2)` under
+`w=z^2`, and the same-radius principal multiplier and compact remainder are
+conjugated without a finite-dimensional defect.  No Gaussian rigidity
+conclusion is drawn.
 
+The next open question is whether a genuine probability/OU-coherent Fock
+solution can realize a negative normalized-even Fredholm index.

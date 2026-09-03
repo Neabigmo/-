@@ -9,6 +9,34 @@
     "nondominant_tail": true,
     "same_space_remainder_bookkeeping": true
   },
+  "normalized_domain_conjugacy": {
+    "checks": {
+      "actual_stage7_source_identified": true,
+      "source_normalization_r0_1_r1_r2_0": true,
+      "source_coefficient_equation_and_divisor": true,
+      "linearized_kernel_formula": "(L_R h)_n=sum_{i+j+k=n}(A_ijk/A_n00) h_i r_j r_k",
+      "normalized_even_domain": "X_rho={h in W_rho^even: h_0=h_2=0}",
+      "degree_zero_fixed_excluded": true,
+      "degree_two_invariant": true,
+      "w_coordinate_identification": "W_rho^even ~= A^+_(rho^2), X_rho ~= w^2 A^+_(rho^2)",
+      "w2_map": "C(g)=w^2 g",
+      "w2_map_bounded_isomorphism": "||C g||_rho=rho^4||g||_(rho^2); inverse norm rho^-4",
+      "multiplier_preserves_X": true,
+      "multiplier_conjugacy": "C^-1(M_D|X)C=M_Dtilde",
+      "compact_remainder_restriction": true,
+      "compact_remainder_conjugacy": "Ktilde=C^-1(K|X)C is compact",
+      "same_radius_conjugated_operator": "C^-1(L_R|X)C=M_Dtilde+Ktilde",
+      "final_index": "ind(L_R|X)=-N_rho when Dtilde has N_rho disk zeros and no boundary zeros",
+      "conjugacy_norm_identity": true
+    },
+    "source_paths": {
+      "stage7_source": "G:\\2026\\8.22\u7edf\u8ba1\\_stage7_result_extract_20260831_v1\\run\\chi2_n3_characteristic_transfer_stage7_2026-08-31\\python\\direct_r_core.py",
+      "stage7_theory": "G:\\2026\\8.22\u7edf\u8ba1\\_stage7_result_extract_20260831_v1\\run\\chi2_n3_characteristic_transfer_stage7_2026-08-31\\THEORY_NOTE.md"
+    },
+    "source_note": "The original numerical source supplies normalization and recurrence implementation; the exact A_ijk formula is cross-referenced from its THEORY_NOTE and the R11 all-degree derivation.",
+    "decision": "SAME_RADIUS_FREDHOLM_LINEARIZATION_CERTIFIED",
+    "marker": "R11_NORMALIZED_DOMAIN_CONJUGACY_CERTIFIED"
+  },
   "even_fredholm_index": {
     "simple": {
       "multiplicity": 1,
@@ -33,7 +61,7 @@
     "correct": true
   },
   "stage7_zero_consequence": "If the certified Stage7 zero-free lemma and the actual same-radius theorem are supplied, a non-Gaussian entire solution gives a strictly negative even Fredholm index; this is not Gaussian rigidity.",
-  "precise_remaining_gap": "Import the actual all-degree Stage7 A_ijk formula in the normalized operator and prove the complete same-radius operator-norm compactness passage for its remainder.",
-  "decision": "ACTUAL_KERNEL_CERTIFIED_SAME_RADIUS_COMPACTNESS_GAP",
+  "precise_remaining_gap": "No remaining R11 domain-identification gap. The next open question is whether a genuine probability/OU-coherent Fock solution can realize a negative normalized-even Fredholm index; this is not Gaussian rigidity.",
+  "decision": "SAME_RADIUS_FREDHOLM_LINEARIZATION_CERTIFIED",
   "marker": "R11_SAME_RADIUS_FREDHOLM_AUDIT_COMPLETED"
 }

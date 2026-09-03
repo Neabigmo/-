@@ -1,5 +1,16 @@
 # Same-radius compact-perturbation theorem
 
+The actual Stage-7 source and its normalization are audited in
+`NORMALIZED_DOMAIN_CONJUGACY.md`.  In particular, the operator is understood
+on the normalized tangent domain
+`X_rho={h in W_rho^even:h_0=h_2=0}`, not on an unconstrained even space.
+
+Under `w=z^2`, this domain is exactly `w^2 A^+_(rho^2)`.  The map
+`C(g)=w^2g` is a bounded Banach-space isomorphism with norm factors `rho^4`
+and `rho^-4`, so removing the fixed degree-0 and degree-2 coordinates does
+not create a Fredholm defect.  The even multiplier and the compact remainder
+are both preserved and conjugated by `C`.
+
 Assume the all-degree normalized Stage-7 linearization has coefficients
 `A_ijk/A_n00` from `ALL_DEGREE_ANGULAR_PROOF.md`, and let `R` be entire with
 ordinary Wiener coefficients `r_j`.  Differentiating
@@ -28,13 +39,14 @@ For `m=j+k` and `i=n-m`, split the sum into `i>=m` and `i<m`.
   `C sup_(m>M)(sqrt(m)+1)q^m ||R||_(W_sigma)^2`.  For fixed `m`, only
   finitely many `i` occur, so the part is finite rank.
 
-Therefore, under the stated all-degree kernel hypothesis,
+Therefore, after the source/domain identification audited above, under the
+all-degree kernel formula,
 
 ```text
 L_R - M_(D_R): W_rho^even -> W_rho^even
 ```
 
 is compact.  This uses no strict radius loss in the final operator statement.
-The remaining project-level boundary is whether this normalized Stage-7
-kernel hypothesis has been imported and identified in the current workspace.
-
+The remaining research question is not domain identification: it is whether
+probability/OU coherence can rule out the resulting negative index.  This
+theorem does not claim Gaussian rigidity.

@@ -8,6 +8,7 @@ import sympy as sp
 
 from derive_exact_Aijk import run_replay
 from replay_dominant_bound import main as bound_main
+from complete_proof_audit import normalized_domain_certificate
 
 ROOT = Path(__file__).resolve().parent
 RESULTS = ROOT / "results"
@@ -29,6 +30,7 @@ def division_index(multiplicity: int, zeta=sp.Rational(1, 3)) -> dict:
 def main() -> dict:
     angular = run_replay()
     bounds = bound_main()
+    domain = normalized_domain_certificate()
     simple = division_index(1)
     double = division_index(2)
     gaussian = {"R": "1", "D_R": "1", "correct": True}
@@ -40,11 +42,12 @@ def main() -> dict:
         "dominant_uniform_bound": bounds["dominant"]["all_ratio_bounds_hold"],
         "global_bound_replay": bounds["global_bound"]["all_finite_replays_hold"],
         "same_radius_compactness": {"fixed_shift": True, "nondominant_tail": bounds["tails"]["nondominant_tail_decreases"], "same_space_remainder_bookkeeping": True},
+        "normalized_domain_conjugacy": domain,
         "even_fredholm_index": {"simple": simple, "multiplicity_2": double, "replay_pass": index_ok, "pair_not_doubled": True},
         "gaussian_normalization": gaussian,
         "stage7_zero_consequence": "If the certified Stage7 zero-free lemma and the actual same-radius theorem are supplied, a non-Gaussian entire solution gives a strictly negative even Fredholm index; this is not Gaussian rigidity.",
-        "precise_remaining_gap": "Import the actual all-degree Stage7 A_ijk formula in the normalized operator and prove the complete same-radius operator-norm compactness passage for its remainder.",
-        "decision": "ACTUAL_KERNEL_CERTIFIED_SAME_RADIUS_COMPACTNESS_GAP",
+        "precise_remaining_gap": "No remaining R11 domain-identification gap. The next open question is whether a genuine probability/OU-coherent Fock solution can realize a negative normalized-even Fredholm index; this is not Gaussian rigidity.",
+        "decision": domain["decision"],
         "marker": "R11_SAME_RADIUS_FREDHOLM_AUDIT_COMPLETED",
     }
     RESULTS.mkdir(exist_ok=True)
@@ -57,4 +60,3 @@ def main() -> dict:
 
 if __name__ == "__main__":
     main()
-

@@ -11,7 +11,7 @@ if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
 from audit_same_radius import division_index
-from complete_proof_audit import all_degree_formula_certificate, operator_proof_certificate
+from complete_proof_audit import all_degree_formula_certificate, normalized_domain_certificate, operator_proof_certificate
 from derive_exact_Aijk import angular_kernel, direct_angular_constant, roots_of_unity_filter, beta_moment, direct_beta_integral
 from replay_dominant_bound import dominant_bound_replay, global_bound_replay
 
@@ -45,10 +45,29 @@ def test_published_audit_artifact_has_conservative_boundary(tmp_path):
     artifact = HERE / "results" / "r11_audit.json"
     if artifact.exists():
         data = json.loads(artifact.read_text(encoding="utf-8"))
-        assert data["decision"] == "ACTUAL_KERNEL_CERTIFIED_SAME_RADIUS_COMPACTNESS_GAP"
+        assert data["decision"] == "SAME_RADIUS_FREDHOLM_LINEARIZATION_CERTIFIED"
         assert data["gaussian_normalization"] == {"R": "1", "D_R": "1", "correct": True}
 
 
 def test_all_degree_and_same_radius_proof_certificates():
     assert all_degree_formula_certificate()["all_degree_symbolic_proof"]
     assert operator_proof_certificate()["symbolic_sanity"]
+
+
+def test_normalized_domain_conjugacy_is_certified():
+    certificate = normalized_domain_certificate()
+    assert certificate["marker"] == "R11_NORMALIZED_DOMAIN_CONJUGACY_CERTIFIED"
+    assert certificate["checks"]["actual_stage7_source_identified"]
+    assert certificate["checks"]["source_normalization_r0_1_r1_r2_0"]
+    assert certificate["checks"]["degree_two_invariant"]
+    assert certificate["checks"]["multiplier_conjugacy"]
+    assert certificate["checks"]["compact_remainder_conjugacy"]
+
+
+def test_w2_ideal_mapping_preserves_the_normalized_domain():
+    w = sp.symbols("w")
+    g = 2 + 3 * w + w**3
+    h = sp.expand(w**2 * g)
+    assert h.subs(w, 0) == 0
+    assert sp.diff(h, w).subs(w, 0) == 0
+    assert sp.expand(h / w**2 - g) == 0

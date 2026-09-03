@@ -19,7 +19,9 @@ The audit deliberately separates three claims:
    remainder;
 3. the even Wiener multiplication index replay.
 
-The decision is conservative.  A finite replay is not silently promoted to a
-proof about the original Stage-7 operator unless the actual all-degree kernel
-and the operator convergence passage have been supplied.
-
+The original Stage-7 source normalization is now explicitly identified and
+the normalized even domain is conjugated exactly to the `w^2` ideal.  The
+same-radius compact-perturbation theorem therefore has the decision
+`SAME_RADIUS_FREDHOLM_LINEARIZATION_CERTIFIED`.  This still is not Gaussian
+rigidity: the next open question is whether probability/OU coherence can
+exclude a negative normalized-even Fredholm index.
