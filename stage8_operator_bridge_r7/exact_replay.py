@@ -55,7 +55,7 @@ def gram_and_countermodel() -> dict:
     psi3 = sp.kronecker_product(e1, e0, e0)
     vac3 = sp.kronecker_product(e0, e0, e0)
     mixed3 = (psi3.T * G3 * vac3)[0]
-    return {"gram_eigenvalues": [str(v) for v in eigenvalues], "gram_psd": bool(all(bool(v > 0) for v in eigenvalues)), "mixed": str(mixed), "diagonal_energy": str(energy), "cs_bound_residual": str(bound_residual), "tensor_mixed": str(mixed3), "tensor_sign_negative": bool(mixed3 < 0), "countermodel_scope": "operator-only; no Fock equation or target law"}
+    return {"gram_eigenvalues": [str(v) for v in eigenvalues], "gram_psd": bool(all(bool(v >= 0) for v in eigenvalues)), "mixed": str(mixed), "diagonal_energy": str(energy), "cs_bound_residual": str(bound_residual), "tensor_mixed": str(mixed3), "tensor_sign_negative": bool(mixed3 < 0), "countermodel_scope": "operator-only; no Fock equation or target law"}
 
 
 def global_bridge_replay() -> dict:
@@ -84,6 +84,8 @@ def main() -> None:
     print("COHERENT_NORMALIZATION_RESIDUAL", payload["coherent_projection"]["normalization_residual"])
     print("GRAM_COUNTERMODEL_MIXED", payload["gram_countermodel"]["mixed"])
     print("R7_DECISION", payload["decision"])
+    if payload["marker"] != "R7_OPERATOR_BRIDGE_AUDIT_COMPLETED":
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
