@@ -55,7 +55,7 @@ def main() -> None:
         and all(value == "0" for value in fredholm["range_defect_residuals"])
     )
     payload = {
-        "exact_replays_pass": bool(exact_ok and fixed_ok),
+        "exact_replays_pass": bool(exact_ok and fixed_ok and fredholm_ok),
         "probability_to_analytic_scale": "CONDITIONAL_ON_POSITIVE_RADIUS_HERMITE_MEMBERSHIP",
         "radius_gap_compactness": "CERTIFIED_CONDITIONALLY_ON_H_R_TO_H_r_AND_HELLINGER_BOUND",
         "endpoint_toeplitz": "REPLAYED_FIXED_BAND_AND_CANDIDATE_SYMBOL; FULL_NORMALIZATION_REMAINS",
