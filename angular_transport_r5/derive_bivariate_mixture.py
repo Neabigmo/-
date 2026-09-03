@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import sympy as sp
 
-from common import require, write_json
+try:
+    from .common import require, write_json
+except ImportError:
+    from common import require, write_json
 
 theta, s, t, z = sp.symbols("theta s t z", real=True)
 rho = sp.sqrt(sp.Rational(2, 3))
@@ -32,6 +35,9 @@ def exact_pair_identity() -> dict[str, object]:
     checks = geometry_checks()
     q3 = sp.expand(sum((a[j] * s + b[j] * t) ** 2 for j in range(3)))
     require(sp.trigsimp(q3 - s**2 - t**2) == 0, "Q3 pair norm failed")
+    base_log_mgf = (s**2 + t**2) / 2
+    tilted_log_mgf = sp.expand(((s + z) ** 2 + t**2) / 2 - z**2 / 2)
+    require(sp.expand(tilted_log_mgf - (z * s + base_log_mgf)) == 0, "tilted MGF shift failed")
     return {
         "status": "EXACT_BIVARIATE_TILTED_MIXTURE_VERIFIED",
         "geometry": checks,
@@ -39,6 +45,7 @@ def exact_pair_identity() -> dict[str, object]:
         "uniform_pair_law": "(L_Theta,T_Theta) ~ N((0,0), I2), conditional on target Q3 law",
         "uniform_pair_mgf": sp.exp((s**2 + t**2) / 2),
         "tilted_pair_mgf": sp.exp(z * s + (s**2 + t**2) / 2),
+        "symbolic_residuals": {"Q3_pair": 0, "tilted_log_mgf": 0},
         "tilted_pair_law": "N((z,0), I2)",
         "scope": "The pair law is conditional on the original target angular identity.",
     }

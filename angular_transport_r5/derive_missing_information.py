@@ -4,13 +4,19 @@ from __future__ import annotations
 
 import sympy as sp
 
-from common import require, write_json
+try:
+    from .common import require, write_json
+except ImportError:
+    from common import require, write_json
 
 x, z, score, H = sp.symbols("x z score H", real=True)
 
 def scalar_identity() -> dict[str, object]:
     centered = sp.expand((score + z) ** 2 - ((score + x) ** 2 + (z - x) ** 2 + 2 * (score + x) * (z - x)))
     require(centered == 0, "score square decomposition failed")
+    y = sp.symbols("y", real=True)
+    gaussian_second_moment = sp.integrate(y**2 * sp.exp(-y**2 / 2) / sp.sqrt(2 * sp.pi), (y, -sp.oo, sp.oo))
+    require(gaussian_second_moment == 1, "Gaussian mixture Fisher baseline failed")
     return {
         "status": "EXACT_POSTERIOR_ANGLE_FISHER_VERIFIED",
         "posterior_density": "pi_x(theta)=q_theta(x)/(2*pi*phi(x))",
@@ -22,6 +28,7 @@ def scalar_identity() -> dict[str, object]:
         "mixture_density": "int q_{theta,z}(x)dtheta/(2*pi)=phi(x-z)",
         "MI_identity": "E_{Theta~w_z} J_theta(z)-1 = int phi(x-z) H(x) dx",
         "strict_positive_kernel_consequence": "equality at one z implies H=0",
+        "symbolic_residuals": {"score_square": 0, "gaussian_second_moment_minus_one": 0},
     }
 
 def bivariate_identity() -> dict[str, object]:

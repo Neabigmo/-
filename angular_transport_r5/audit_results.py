@@ -4,12 +4,16 @@ from __future__ import annotations
 
 import json
 
-from audit_fisher_closure_final import run_audit
-from common import RESULTS, no_nonfinite, require
+try:
+    from .audit_fisher_closure_final import build_audit
+    from .common import RESULTS, no_nonfinite, require
+except ImportError:
+    from audit_fisher_closure_final import build_audit
+    from common import RESULTS, no_nonfinite, require
 
 def main() -> None:
-    fresh = run_audit()
     published = json.loads((RESULTS / "audit_results.json").read_text(encoding="utf-8"))
+    fresh = build_audit()
     require(published == fresh, "R5 audit artifact does not match fresh replay")
     require(published["decision"] == "B", "unexpected R5 decision")
     require(published["fisher_closure"] is False, "closure must remain insufficient")

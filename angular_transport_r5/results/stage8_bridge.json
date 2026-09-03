@@ -6,10 +6,10 @@
       "harmonics": [
         3
       ],
-      "mean_p_d_squared": "1/12",
-      "leading_H_coefficient": "1/48",
-      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
-      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "mean_unscaled_p_d_squared": "9/32",
+      "leading_H_coefficient": "9/128",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*pbar_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(pbar_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
       "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
     },
     {
@@ -17,10 +17,10 @@
       "harmonics": [
         3
       ],
-      "mean_p_d_squared": "25/432",
-      "leading_H_coefficient": "25/248832",
-      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
-      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "mean_unscaled_p_d_squared": "225/512",
+      "leading_H_coefficient": "25/32768",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*pbar_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(pbar_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
       "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
     },
     {
@@ -28,10 +28,10 @@
       "harmonics": [
         3
       ],
-      "mean_p_d_squared": "49/1728",
-      "leading_H_coefficient": "49/895795200",
-      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
-      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "mean_unscaled_p_d_squared": "3969/8192",
+      "leading_H_coefficient": "49/52428800",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*pbar_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(pbar_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
       "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
     },
     {
@@ -40,10 +40,10 @@
         3,
         9
       ],
-      "mean_p_d_squared": "7057/559872",
-      "leading_H_coefficient": "7057/910185254092800",
-      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
-      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+      "mean_unscaled_p_d_squared": "63513/131072",
+      "leading_H_coefficient": "7057/23676007219200",
+      "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*pbar_d(theta)*H_d(x)/d!+higher order",
+      "missing_information_leading": "rho^(2d)*kappa_d^2*mean(pbar_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
       "scope": "OU-smoothed first-order bridge; not a global rigidity theorem."
     }
   ]

@@ -2,11 +2,18 @@
 
 from __future__ import annotations
 
-from common import jsonable, no_nonfinite, require, write_json
-from derive_bivariate_mixture import exact_pair_identity
-from derive_missing_information import bivariate_identity, scalar_identity
-from derive_rotation_transport import weak_form_certificate
-from derive_stage8_bridge import bridge_data
+try:
+    from .common import jsonable, no_nonfinite, require, write_json
+    from .derive_bivariate_mixture import exact_pair_identity
+    from .derive_missing_information import bivariate_identity, scalar_identity
+    from .derive_rotation_transport import weak_form_certificate
+    from .derive_stage8_bridge import bridge_data
+except ImportError:
+    from common import jsonable, no_nonfinite, require, write_json
+    from derive_bivariate_mixture import exact_pair_identity
+    from derive_missing_information import bivariate_identity, scalar_identity
+    from derive_rotation_transport import weak_form_certificate
+    from derive_stage8_bridge import bridge_data
 
 def closure_obstruction() -> dict[str, object]:
     # Logical witness for inequality directions only; not one common target-law K.
@@ -22,7 +29,7 @@ def closure_obstruction() -> dict[str, object]:
         "scope_warning": "Logical witness only; not a target-law counterexample.",
     }
 
-def run_audit() -> dict[str, object]:
+def build_audit() -> dict[str, object]:
     payload = {
         "status": "MISSING_INFORMATION_GAP_REMAINS",
         "decision": "B",
@@ -39,6 +46,10 @@ def run_audit() -> dict[str, object]:
     }
     normalized = jsonable(payload)
     require(no_nonfinite(normalized), "non-finite audit field")
+    return normalized
+
+def run_audit() -> dict[str, object]:
+    normalized = build_audit()
     write_json("audit_results.json", normalized)
     return normalized
 

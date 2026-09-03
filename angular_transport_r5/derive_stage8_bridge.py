@@ -4,16 +4,20 @@ from __future__ import annotations
 
 import sympy as sp
 
-from common import require, write_json
+try:
+    from .common import require, write_json
+except ImportError:
+    from common import require, write_json
 
 def bridge_data(degree: int) -> dict[str, object]:
     require(degree >= 3 and degree % 2 == 1, "degree must be odd and >=3")
-    rho = sp.sqrt(sp.Rational(2, 3))
+    # Here pbar_d=sum cos(theta+phase)^d is deliberately unscaled.  The
+    # geometric factor rho^d is carried once, in the OU expansion below.
     coeffs = [
         {
             "m": m,
             "cos_coefficient": sp.simplify(
-                3 * rho**degree * sp.Rational(2 ** (1 - degree))
+                3 * sp.Rational(2 ** (1 - degree))
                 * sp.binomial(degree, (degree - m) // 2)
             ),
         }
@@ -24,10 +28,10 @@ def bridge_data(degree: int) -> dict[str, object]:
     return {
         "d": degree,
         "harmonics": [item["m"] for item in coeffs],
-        "mean_p_d_squared": mean_p2,
+        "mean_unscaled_p_d_squared": mean_p2,
         "leading_H_coefficient": leading_H,
-        "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*p_d(theta)*H_d(x)/d!+higher order",
-        "missing_information_leading": "rho^(2d)*kappa_d^2*mean(p_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
+        "formal_expansion": "2*pi*pi_x(theta)=1+rho^d*kappa_d*pbar_d(theta)*H_d(x)/d!+higher order",
+        "missing_information_leading": "rho^(2d)*kappa_d^2*mean(pbar_d^2)*H_(d-1)(x)^2/((d-1)!)^2+higher order",
         "scope": "OU-smoothed first-order bridge; not a global rigidity theorem.",
     }
 

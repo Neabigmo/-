@@ -9,7 +9,11 @@
     "score_decomposition": "E_pi[(s_theta+z)^2]=H(x)+(x-z)^2",
     "mixture_density": "int q_{theta,z}(x)dtheta/(2*pi)=phi(x-z)",
     "MI_identity": "E_{Theta~w_z} J_theta(z)-1 = int phi(x-z) H(x) dx",
-    "strict_positive_kernel_consequence": "equality at one z implies H=0"
+    "strict_positive_kernel_consequence": "equality at one z implies H=0",
+    "symbolic_residuals": {
+      "score_square": 0,
+      "gaussian_second_moment_minus_one": 0
+    }
   },
   "bivariate": {
     "status": "EXACT_BIVARIATE_RELATIVE_FISHER_IDENTITY_RECORDED",
