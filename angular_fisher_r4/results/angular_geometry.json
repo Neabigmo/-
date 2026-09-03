@@ -1,0 +1,92 @@
+{
+  "status": "EXACT_D3_GEOMETRY_VERIFIED",
+  "geometry": {
+    "sum_a": "0",
+    "sum_b": "0",
+    "sum_a2": "1",
+    "sum_b2": "1",
+    "sum_ab": "0",
+    "pointwise_a2_plus_b2": [
+      "2/3",
+      "2/3",
+      "2/3"
+    ]
+  },
+  "fourier_checks": [
+    {
+      "d": 3,
+      "surviving_harmonics": [
+        3
+      ],
+      "coefficients": [
+        {
+          "m": 3,
+          "cos_coefficient": "sqrt(6)/6"
+        }
+      ],
+      "formula_verified": true
+    },
+    {
+      "d": 5,
+      "surviving_harmonics": [
+        3
+      ],
+      "coefficients": [
+        {
+          "m": 3,
+          "cos_coefficient": "5*sqrt(6)/36"
+        }
+      ],
+      "formula_verified": true
+    },
+    {
+      "d": 7,
+      "surviving_harmonics": [
+        3
+      ],
+      "coefficients": [
+        {
+          "m": 3,
+          "cos_coefficient": "7*sqrt(6)/72"
+        }
+      ],
+      "formula_verified": true
+    },
+    {
+      "d": 9,
+      "surviving_harmonics": [
+        3,
+        9
+      ],
+      "coefficients": [
+        {
+          "m": 3,
+          "cos_coefficient": "7*sqrt(6)/108"
+        },
+        {
+          "m": 9,
+          "cos_coefficient": "sqrt(6)/1296"
+        }
+      ],
+      "formula_verified": true
+    },
+    {
+      "d": 11,
+      "surviving_harmonics": [
+        3,
+        9
+      ],
+      "coefficients": [
+        {
+          "m": 3,
+          "cos_coefficient": "55*sqrt(6)/1296"
+        },
+        {
+          "m": 9,
+          "cos_coefficient": "11*sqrt(6)/7776"
+        }
+      ],
+      "formula_verified": true
+    }
+  ]
+}

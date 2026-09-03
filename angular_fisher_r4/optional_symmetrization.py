@@ -1,0 +1,25 @@
+"""Diagnostic-only symmetrization and Parseval identities."""
+
+from __future__ import annotations
+
+from common import write_json
+
+
+def main() -> None:
+    write_json(
+        "optional_symmetrization.json",
+        {
+            "status": "EXACT_SYMMETRIZATION_PARSEVAL_IDENTITIES_RECORDED",
+            "Y_definition": "Y=(X-X')/sqrt(2)",
+            "characteristic_identity": "Psi_Y(r,theta)=abs(Psi_X(r/sqrt(2),theta))^2",
+            "parseval": "average_theta |H_X-1|^2 = sum_{k != 0} |h_k(r)|^2 when average_theta H_X=1",
+            "first_odd_mode": "log H_X has leading (i^d*kappa_d*r^d/d!)*p_d(theta)",
+            "scope": "diagnostic only; no new rigidity implication is claimed",
+        },
+    )
+    print("EXACT_SYMMETRIZATION_PARSEVAL_IDENTITIES_RECORDED")
+
+
+if __name__ == "__main__":
+    main()
+

@@ -1,0 +1,84 @@
+{
+  "budget": {
+    "status": "EXACT_POLAR_FISHER_IDENTITIES_VERIFIED",
+    "normalization": "E_z[1]=1",
+    "mean_identity": "E_z[A_z]=0",
+    "radial_identity": "E_z[A_z^2 + sum_j a_j^2*v(z*a_j)] = 1",
+    "angular_identity": "E_z[C_z^2 + sum_j b_j^2*v(z*a_j)] = 1",
+    "polar_budget": "E_z[A_z^2+C_z^2+sum_j(a_j^2+b_j^2)*v(z*a_j)] = 2",
+    "geometry_used": {
+      "sum_a": "0",
+      "sum_b": "0",
+      "sum_a2": "1",
+      "sum_b2": "1",
+      "sum_ab": "0",
+      "pointwise_a2_plus_b2": [
+        "2/3",
+        "2/3",
+        "2/3"
+      ]
+    },
+    "theta_logw_derivative": "C_z*z",
+    "theta_logw_second_derivative": "z*(-A_z + V_b*z - z)",
+    "angular_ibp_certificate": "0=E_z[(partial_theta log w)^2+partial_theta^2 log w] gives z^2 E_z[C^2+V_b]=z^2",
+    "radial_certificate": "law of total variance for the tilted N(z,1) mixture",
+    "interpretation": {
+      "mean": "total mean decomposition",
+      "radial": "law of total variance",
+      "angular": "circle Fisher identity",
+      "sum": "polar Fisher budget"
+    }
+  },
+  "gap_witness": {
+    "kind": "logical_inequality_gap_witness",
+    "theta": 0,
+    "epsilon": "1/5",
+    "v_j": [
+      "11/10",
+      "4/5",
+      "4/5"
+    ],
+    "A_squared": 0,
+    "C_squared": "1/5",
+    "V_a": "1",
+    "V_b": "4/5",
+    "radial_budget": "A^2+V_a=1",
+    "angular_budget": "C^2+V_b=1",
+    "J_j": [
+      "10/11",
+      "5/4",
+      "5/4"
+    ],
+    "Cramer_Rao_equalities": [
+      "J_j*v_j=1",
+      "J_j*v_j=1",
+      "J_j*v_j=1"
+    ],
+    "Stam_sum_fisher": "J_L=1/V_a=1",
+    "Poincare_H": "1/360",
+    "Poincare_upper_bound_at_z1": "1/180",
+    "C_squared_nonzero": true,
+    "scope_warning": "This witness proves only that these scalar nonnegative inequalities do not algebraically force C_z=0; it is not a target-law counterexample."
+  },
+  "gaussian_replay": {
+    "status": "EXACT_GAUSSIAN_REPLAY_VERIFIED",
+    "checks": {
+      "K": "t^2/2",
+      "log_w": "0",
+      "w_z": 1,
+      "A_z": 0,
+      "C_z": 0,
+      "v": 1,
+      "radial_budget": 1,
+      "angular_budget": 1
+    },
+    "scope": "exact replay only; it validates the identities at the Gaussian point"
+  },
+  "non_gaussian_sanity": {
+    "status": "NON_GAUSSIAN_POSITIVITY_SANITY_VERIFIED",
+    "distribution": "centered Rademacher, K(t)=log(cosh(t))",
+    "theta": 0,
+    "w_z_at_z1": "cosh(sqrt(6)*sin(theta + pi/6)/3)*cosh(sqrt(6)*cos(theta)/3)*cosh(sqrt(6)*cos(theta + pi/3)/3)",
+    "scope_warning": "positivity only; average_theta w_z=1 is not assumed or claimed"
+  }
+}

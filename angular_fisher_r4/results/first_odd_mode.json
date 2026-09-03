@@ -1,0 +1,92 @@
+{
+  "status": "EXACT_FIRST_ODD_MODE_FORMULAS_VERIFIED",
+  "cases": [
+    {
+      "d": 3,
+      "surviving_harmonics": [
+        3
+      ],
+      "cos3_coefficient": "sqrt(6)/6",
+      "cos3_formula": "3*(2/3)^(d/2)*2^(1-d)*binomial(d,(d-3)/2)",
+      "c_d": "1/24",
+      "c_d_positive_witness": "1/24 > 0",
+      "H_leading_constant": "1/864",
+      "log_w_leading": "kappa_d*z^d*p_d(theta)/d!",
+      "A_leading": "kappa_d*z^(d-1)*p_d(theta)/(d-1)!",
+      "C_leading": "kappa_d*z^(d-1)*p_d'(theta)/d!",
+      "fisher_leading": "c_d*kappa_d^2*z^(2*d-2)",
+      "hellinger_leading": "H_d*kappa_d^2*z^(2*d)",
+      "target_identity_lower_even_cumulants": "coefficient comparison forces kappa_m=0 for 4<=m<2d when all lower odd cumulants vanish"
+    },
+    {
+      "d": 5,
+      "surviving_harmonics": [
+        3
+      ],
+      "cos3_coefficient": "5*sqrt(6)/36",
+      "cos3_formula": "3*(2/3)^(d/2)*2^(1-d)*binomial(d,(d-3)/2)",
+      "c_d": "17/124416",
+      "c_d_positive_witness": "17/124416 > 0",
+      "H_leading_constant": "1/497664",
+      "log_w_leading": "kappa_d*z^d*p_d(theta)/d!",
+      "A_leading": "kappa_d*z^(d-1)*p_d(theta)/(d-1)!",
+      "C_leading": "kappa_d*z^(d-1)*p_d'(theta)/d!",
+      "fisher_leading": "c_d*kappa_d^2*z^(2*d-2)",
+      "hellinger_leading": "H_d*kappa_d^2*z^(2*d)",
+      "target_identity_lower_even_cumulants": "coefficient comparison forces kappa_m=0 for 4<=m<2d when all lower odd cumulants vanish"
+    },
+    {
+      "d": 7,
+      "surviving_harmonics": [
+        3
+      ],
+      "cos3_coefficient": "7*sqrt(6)/72",
+      "cos3_formula": "3*(2/3)^(d/2)*2^(1-d)*binomial(d,(d-3)/2)",
+      "c_d": "29/447897600",
+      "c_d_positive_witness": "29/447897600 > 0",
+      "H_leading_constant": "1/1791590400",
+      "log_w_leading": "kappa_d*z^d*p_d(theta)/d!",
+      "A_leading": "kappa_d*z^(d-1)*p_d(theta)/(d-1)!",
+      "C_leading": "kappa_d*z^(d-1)*p_d'(theta)/d!",
+      "fisher_leading": "c_d*kappa_d^2*z^(2*d-2)",
+      "hellinger_leading": "H_d*kappa_d^2*z^(2*d)",
+      "target_identity_lower_even_cumulants": "coefficient comparison forces kappa_m=0 for 4<=m<2d when all lower odd cumulants vanish"
+    },
+    {
+      "d": 9,
+      "surviving_harmonics": [
+        3,
+        9
+      ],
+      "cos3_coefficient": "7*sqrt(6)/108",
+      "cos3_formula": "3*(2/3)^(d/2)*2^(1-d)*binomial(d,(d-3)/2)",
+      "c_d": "1307/151697542348800",
+      "c_d_positive_witness": "1307/151697542348800 > 0",
+      "H_leading_constant": "7057/147450011163033600",
+      "log_w_leading": "kappa_d*z^d*p_d(theta)/d!",
+      "A_leading": "kappa_d*z^(d-1)*p_d(theta)/(d-1)!",
+      "C_leading": "kappa_d*z^(d-1)*p_d'(theta)/d!",
+      "fisher_leading": "c_d*kappa_d^2*z^(2*d-2)",
+      "hellinger_leading": "H_d*kappa_d^2*z^(2*d)",
+      "target_identity_lower_even_cumulants": "coefficient comparison forces kappa_m=0 for 4<=m<2d when all lower odd cumulants vanish"
+    },
+    {
+      "d": 11,
+      "surviving_harmonics": [
+        3,
+        9
+      ],
+      "cos3_coefficient": "55*sqrt(6)/1296",
+      "cos3_formula": "3*(2/3)^(d/2)*2^(1-d)*binomial(d,(d-3)/2)",
+      "c_d": "58601/132705010046730240000",
+      "c_d_positive_witness": "58601/132705010046730240000 > 0",
+      "H_leading_constant": "901/530820040186920960000",
+      "log_w_leading": "kappa_d*z^d*p_d(theta)/d!",
+      "A_leading": "kappa_d*z^(d-1)*p_d(theta)/(d-1)!",
+      "C_leading": "kappa_d*z^(d-1)*p_d'(theta)/d!",
+      "fisher_leading": "c_d*kappa_d^2*z^(2*d-2)",
+      "hellinger_leading": "H_d*kappa_d^2*z^(2*d)",
+      "target_identity_lower_even_cumulants": "coefficient comparison forces kappa_m=0 for 4<=m<2d when all lower odd cumulants vanish"
+    }
+  ]
+}

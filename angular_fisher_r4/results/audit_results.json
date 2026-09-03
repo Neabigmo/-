@@ -1,0 +1,49 @@
+{
+  "status": "FISHER_CLOSURE_INSUFFICIENT",
+  "decision": "B",
+  "exact_geometry": true,
+  "tilted_mixture_budget": true,
+  "general_first_odd_mode": true,
+  "parseval_diagnostic": true,
+  "fisher_closure": false,
+  "gap_witness": {
+    "kind": "logical_inequality_gap_witness",
+    "theta": 0,
+    "epsilon": "1/5",
+    "v_j": [
+      "11/10",
+      "4/5",
+      "4/5"
+    ],
+    "A_squared": 0,
+    "C_squared": "1/5",
+    "V_a": "1",
+    "V_b": "4/5",
+    "radial_budget": "A^2+V_a=1",
+    "angular_budget": "C^2+V_b=1",
+    "J_j": [
+      "10/11",
+      "5/4",
+      "5/4"
+    ],
+    "Cramer_Rao_equalities": [
+      "J_j*v_j=1",
+      "J_j*v_j=1",
+      "J_j*v_j=1"
+    ],
+    "Stam_sum_fisher": "J_L=1/V_a=1",
+    "Poincare_H": "1/360",
+    "Poincare_upper_bound_at_z1": "1/180",
+    "C_squared_nonzero": true,
+    "scope_warning": "This witness proves only that these scalar nonnegative inequalities do not algebraically force C_z=0; it is not a target-law counterexample."
+  },
+  "remaining_gap": "No available implication from Cramer-Rao + Stam + D3 Poincare + the polar budget forces E_z[C_z^2]=0. A missing cross-theta equality/transport inequality is required.",
+  "recommended_next_route": "Stage8 critical Hellinger/parity continuum normal form with backward-heat positivity",
+  "no_nonfinite_fields": true,
+  "files_generated": [
+    "angular_geometry.json",
+    "first_odd_mode.json",
+    "fisher_budget.json",
+    "optional_symmetrization.json"
+  ]
+}
