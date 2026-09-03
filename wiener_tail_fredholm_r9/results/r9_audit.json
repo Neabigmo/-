@@ -1,0 +1,13 @@
+{
+  "exact_replays_pass": true,
+  "positive_radius_input_status": "ENTIRE_OR_FINITE_WIENER_NORM_REQUIRED; NOT_ARBITRARY_L2",
+  "normalization_conjugation_status": "B_NORMALIZATION_NOT_TOEPLITZ; FACTORIAL_SHIFT_EXPLICIT",
+  "uniform_normalized_kernel_status": "BENCHMARK_BOUND_REPLAYED; ACTUAL_STAGE7_A_IJK_FORMULA_NOT_IMPORTED",
+  "wiener_compactness_status": "RADIUS_LOSS_TAIL_REPLAYED_FOR_W_R_TO_W_r",
+  "stage7_symbol_status": "FIXED_BAND_LIMIT_REPLAYED; M_UNIFORM_LIMIT_UNRESOLVED",
+  "single_radius_range_status": "SIMPLE_AND_MULTIPLE_ZERO_DIVISION_REPLAYED; ACTUAL_STAGE7_IDENTIFICATION_UNRESOLVED",
+  "exact_remaining_gap": "Derive the actual Stage7 kernel in ordinary coefficients and prove the uniform low-pair tail before identifying D_R as the single-radius principal multiplier.",
+  "gaussian_symbol_replay": "D_R(z)=[R(z/2)^2+R(-z/2)^2]/2; Gaussian R gives exp(-z^2/4)",
+  "decision": "NORMALIZATION_REPAIRED_BUT_SYMBOL_LIMIT_NOT_UNIFORM",
+  "marker": "R9_WIENER_TAIL_FREDHOLM_AUDIT_COMPLETED"
+}

@@ -1,0 +1,161 @@
+{
+  "central_binomial": {
+    "a_star": "sqrt(6)/3",
+    "c": "sqrt(2)/2",
+    "rows": [
+      {
+        "n": 2,
+        "central_ratio": "1/2",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 4,
+        "central_ratio": "3/8",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 6,
+        "central_ratio": "5/16",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 8,
+        "central_ratio": "35/128",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 10,
+        "central_ratio": "63/256",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 12,
+        "central_ratio": "231/1024",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 14,
+        "central_ratio": "429/2048",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 16,
+        "central_ratio": "6435/32768",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 18,
+        "central_ratio": "12155/65536",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 20,
+        "central_ratio": "46189/262144",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 22,
+        "central_ratio": "88179/524288",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 24,
+        "central_ratio": "676039/4194304",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 26,
+        "central_ratio": "1300075/8388608",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 28,
+        "central_ratio": "5014575/33554432",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 30,
+        "central_ratio": "9694845/67108864",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 32,
+        "central_ratio": "300540195/2147483648",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 34,
+        "central_ratio": "583401555/4294967296",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 36,
+        "central_ratio": "2268783825/17179869184",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 38,
+        "central_ratio": "4418157975/34359738368",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      },
+      {
+        "n": 40,
+        "central_ratio": "34461632205/274877906944",
+        "central_lower_holds": true,
+        "requested_lower_holds": true
+      }
+    ],
+    "all_bounds_hold": true
+  },
+  "multinomial": {
+    "degree": 8,
+    "all_multinomial_terms_le_a_star_n": true,
+    "term_count": 45
+  },
+  "wiener_tail": {
+    "eta": "1/2",
+    "rows": [
+      {
+        "N": 2,
+        "two_high_bound": "sqrt(5)/16",
+        "three_high_bound": "sqrt(7)/64"
+      },
+      {
+        "N": 4,
+        "two_high_bound": "3/256",
+        "three_high_bound": "sqrt(13)/4096"
+      },
+      {
+        "N": 8,
+        "two_high_bound": "sqrt(17)/65536",
+        "three_high_bound": "5/16777216"
+      },
+      {
+        "N": 12,
+        "two_high_bound": "5/16777216",
+        "three_high_bound": "sqrt(37)/68719476736"
+      }
+    ],
+    "tail_decreases_in_replay": true
+  },
+  "marker": "R9_NORMALIZED_KERNEL_BOUND_REPLAYED"
+}

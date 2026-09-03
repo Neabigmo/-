@@ -1,0 +1,34 @@
+{
+  "simple_zero": {
+    "zeta": "1/3",
+    "multiplicity": 1,
+    "good_remainder": "0",
+    "range_functionals_on_good_remainder": [
+      "0"
+    ],
+    "outside_remainder": "26/9",
+    "defect_functionals_on_outside_remainder": [
+      "26/9"
+    ],
+    "division_exact": true,
+    "outside_has_nonzero_defect": true
+  },
+  "double_zero": {
+    "zeta": "1/3",
+    "multiplicity": 2,
+    "good_remainder": "0",
+    "range_functionals_on_good_remainder": [
+      "0",
+      "0"
+    ],
+    "outside_remainder": "14*z/3 + 4/3",
+    "defect_functionals_on_outside_remainder": [
+      "26/9",
+      "14/3"
+    ],
+    "division_exact": true,
+    "outside_has_nonzero_defect": true
+  },
+  "radius_condition": "abs(zeta)<r",
+  "marker": "R9_SINGLE_RADIUS_RANGE_REPLAYED"
+}
