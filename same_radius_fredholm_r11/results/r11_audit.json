@@ -1,0 +1,39 @@
+{
+  "r10_beta_correction": true,
+  "exact_Aijk_status": true,
+  "roots_of_unity_status": true,
+  "dominant_uniform_bound": true,
+  "global_bound_replay": true,
+  "same_radius_compactness": {
+    "fixed_shift": true,
+    "nondominant_tail": true,
+    "same_space_remainder_bookkeeping": true
+  },
+  "even_fredholm_index": {
+    "simple": {
+      "multiplicity": 1,
+      "division_exact": true,
+      "good_defects_zero": true,
+      "outside_defect_nonzero": true,
+      "index": -1
+    },
+    "multiplicity_2": {
+      "multiplicity": 2,
+      "division_exact": true,
+      "good_defects_zero": true,
+      "outside_defect_nonzero": true,
+      "index": -2
+    },
+    "replay_pass": true,
+    "pair_not_doubled": true
+  },
+  "gaussian_normalization": {
+    "R": "1",
+    "D_R": "1",
+    "correct": true
+  },
+  "stage7_zero_consequence": "If the certified Stage7 zero-free lemma and the actual same-radius theorem are supplied, a non-Gaussian entire solution gives a strictly negative even Fredholm index; this is not Gaussian rigidity.",
+  "precise_remaining_gap": "Import the actual all-degree Stage7 A_ijk formula in the normalized operator and prove the complete same-radius operator-norm compactness passage for its remainder.",
+  "decision": "ACTUAL_KERNEL_CERTIFIED_SAME_RADIUS_COMPACTNESS_GAP",
+  "marker": "R11_SAME_RADIUS_FREDHOLM_AUDIT_COMPLETED"
+}
