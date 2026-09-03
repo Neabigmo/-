@@ -1,0 +1,15 @@
+{
+  "status": "EXACT",
+  "escort_ibp": "E[f_x] = -3 E[rho*f]",
+  "target_moments": {
+    "E_rho": 0,
+    "E_rho2": "1/(3*tau)",
+    "E_c": "-1/tau"
+  },
+  "B_over_F": "E[c^2]-E[rho^4]",
+  "F2_over_F": "2/tau^2",
+  "B_over_F_target": "2/(3*tau**2)",
+  "variance_defect": "Var(c)=E[rho^4]-3*E[rho^2]^2",
+  "equality_case": "Var(c)=0 => c constant => log(p) quadratic => Gaussian",
+  "symbolic_consistency_checks": true
+}

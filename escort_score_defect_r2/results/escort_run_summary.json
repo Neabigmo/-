@@ -1,0 +1,38 @@
+{
+  "status": "EXECUTED",
+  "scripts": [
+    {
+      "script": "derive_escort_lemma.py",
+      "returncode": 0,
+      "stdout": "ESCORT_CURVATURE_LEMMA_IDENTITIES_VERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\escort_score_defect_r2\\results\\escort_lemma.json",
+      "stderr": ""
+    },
+    {
+      "script": "derive_third_order_defect.py",
+      "returncode": 0,
+      "stdout": "THIRD_ORDER_CANDIDATE_1_CERTIFIED_CANDIDATE_2_UNVERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\escort_score_defect_r2\\results\\third_order_defect.json",
+      "stderr": ""
+    },
+    {
+      "script": "search_degree6_sos.py",
+      "returncode": 0,
+      "stdout": "DEGREE6_SOS_SEARCH_BOUNDED_AND_LEFT_OPEN G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\escort_score_defect_r2\\results\\degree6_sos_search.json",
+      "stderr": ""
+    },
+    {
+      "script": "optional_mixture_counterexample.py",
+      "returncode": 0,
+      "stdout": "OPTIONAL_MIXTURE_SEARCH_NOT_RUN G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\escort_score_defect_r2\\results\\mixture_search.json",
+      "stderr": ""
+    }
+  ],
+  "audit": {
+    "script": "audit_results.py",
+    "returncode": 0,
+    "stdout": "ESCORT_DEFECT_RESULTS_AUDIT_OK G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\escort_score_defect_r2\\results\\audit_results.json",
+    "stderr": ""
+  },
+  "stage28_started": false,
+  "large_campaign_started": false,
+  "final_outcome": "LOCAL_IDENTITIES_INSUFFICIENT_FOR_CANDIDATE_2"
+}

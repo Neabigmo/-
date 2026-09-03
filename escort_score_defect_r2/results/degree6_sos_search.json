@@ -1,0 +1,8 @@
+{
+  "status": "OPEN",
+  "degree": 6,
+  "candidate": "nonnegative closure for escort-score defect",
+  "sos_found": false,
+  "reason": "no SOS certificate was asserted without a specified Gram basis",
+  "next_step": "choose a finite weighted monomial basis and solve exact rational Gram equations"
+}

@@ -1,0 +1,6 @@
+{
+  "status": "NOT_RUN_BY_DESIGN",
+  "family": "at most three Gaussian components",
+  "reason": "candidate 2 was not promoted to a density claim; bounded exact identities were audited first",
+  "actual_density_counterexample_certified": false
+}
