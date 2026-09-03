@@ -1,0 +1,47 @@
+{
+  "angular_power_sums": {
+    "0": "3",
+    "1": "0",
+    "2": "1",
+    "3": "3*c",
+    "4": "1/2",
+    "5": "5*c/2",
+    "6": "3*c**2 + 1/4"
+  },
+  "angular_averages": {
+    "mean_c": "0",
+    "mean_c2": "1/108",
+    "mean_p3_sq": "1/12",
+    "mean_p6": "5/18"
+  },
+  "bell_order_2": "K2*d**2",
+  "bell_order_4": "d**4*(6*K2**2 + K4)/2",
+  "bell_order_6": "5*d**6*(54*K2**3 + 27*K2*K4 + 3*K3**2 + K6)/18",
+  "expected_order_identities": {
+    "2": "K2*d**2",
+    "4": "d**4*(3*K2**2 + K4/2)",
+    "6": "d**6*(15*K2**3 + 15*K2*K4/2 + 5*K3**2/6 + 5*K6/18)"
+  },
+  "posterior_variance_order6": "54*V**3 - 162*V**2*d + 27*V*V2*d**2 + 162*V*d**2 + 3*V1**2*d**2 - 27*V2*d**3 + V4*d**4 - 54*d**3",
+  "posterior_variance_order6_expected": "3*V1**2*d**2 + 27*V2*d**2*(V - d) + V4*d**4 + 54*(V - d)**3",
+  "gaussian_benchmark": {
+    "Fq": "1",
+    "K2": "0",
+    "V": "d"
+  },
+  "countermodels": {
+    "bernoulli_L": "exp(-t/2)*cosh(y)",
+    "three_point_L": "exp(-sqrt(3)*t/2 - sqrt(3)*y)/6 + exp(-sqrt(3)*t/2 + sqrt(3)*y)/6 + 2/3"
+  },
+  "common_shift_identity": "E_{N(0,q/3),theta} prod_j F_q(X+d*z*alpha_j)=1",
+  "decision": "B",
+  "decision_marker": "NEW_ODD_SQUARE_IDENTITY_CERTIFIED_CLOSURE_REMAINS",
+  "coercivity_closed": false,
+  "exact_identity_status": true,
+  "core_symbolic_checks": {
+    "hubbard_straatonovich": true,
+    "q_t_normalization": true,
+    "common_shift_prefactor": true,
+    "stein_density": true
+  }
+}
