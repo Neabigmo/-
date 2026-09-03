@@ -12,32 +12,27 @@
     {
       "script": "derive_posterior_triple.py",
       "returncode": 0,
-      "stdout": "EXACT_POSTERIOR_TRIPLE_LAPLACE_VERIFIED C:\\Users\\yangy\\AppData\\Local\\Temp\\posterior_laplace_audit_wiasgks3\\posterior_triple.json",
-      "stderr": ""
+      "ok": true
     },
     {
       "script": "derive_conditional_q_moments.py",
       "returncode": 0,
-      "stdout": "EXACT_CONDITIONAL_Q_MOMENTS_VERIFIED C:\\Users\\yangy\\AppData\\Local\\Temp\\posterior_laplace_audit_wiasgks3\\conditional_q_moments.json",
-      "stderr": ""
+      "ok": true
     },
     {
       "script": "certify_moment_countermodel.py",
       "returncode": 0,
-      "stdout": "EXACT_MOMENT_RELAXATION_COUNTERMODEL_VERIFIED C:\\Users\\yangy\\AppData\\Local\\Temp\\posterior_laplace_audit_wiasgks3\\moment_countermodel.json",
-      "stderr": ""
+      "ok": true
     },
     {
       "script": "derive_semigroup_bridge.py",
       "returncode": 0,
-      "stdout": "EXACT_POSTERIOR_SEMIGROUP_BRIDGE_VERIFIED C:\\Users\\yangy\\AppData\\Local\\Temp\\posterior_laplace_audit_wiasgks3\\semigroup_bridge.json",
-      "stderr": ""
+      "ok": true
     },
     {
       "script": "audit_critical_kernel.py",
       "returncode": 0,
-      "stdout": "EXACT_CRITICAL_KERNEL_COUNTEREXAMPLE_VERIFIED C:\\Users\\yangy\\AppData\\Local\\Temp\\posterior_laplace_audit_wiasgks3\\critical_kernel_audit.json",
-      "stderr": ""
+      "ok": true
     }
   ],
   "nan_inf_free": true

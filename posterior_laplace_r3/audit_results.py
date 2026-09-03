@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import math
 import os
 import subprocess
 import sys
@@ -63,7 +62,7 @@ def validate_artifacts(data):
     bridge = data["semigroup_bridge.json"]
     if bridge.get("status") != "EXACT_POSTERIOR_SEMIGROUP_BRIDGE":
         raise RuntimeError("semigroup bridge status mismatch")
-    if bridge.get("prefactor_residual") != "0" or bridge.get("complete_gaussian_integral_checks") != 8 or bridge.get("Gaussian_K_y_independent") is not True:
+    if bridge.get("prefactor_residual") != "0" or bridge.get("complete_gaussian_integral_checks") != 24 or bridge.get("Gaussian_K_y_independent") is not True:
         raise RuntimeError("semigroup bridge exact checks mismatch")
 
     kernel = data["critical_kernel_audit.json"]
@@ -88,8 +87,12 @@ def regenerate_and_load():
         ]
         rows = []
         for script in scripts:
+            command = [sys.executable]
+            if sys.flags.optimize:
+                command.append("-O")
+            command.append(str(ROOT / script))
             proc = subprocess.run(
-                [sys.executable, str(ROOT / script)],
+                command,
                 cwd=ROOT,
                 env=env,
                 capture_output=True,
@@ -98,17 +101,21 @@ def regenerate_and_load():
                 errors="replace",
                 check=False,
             )
-            rows.append({"script": script, "returncode": proc.returncode, "stdout": proc.stdout.strip(), "stderr": proc.stderr.strip()})
+            rows.append({"script": script, "returncode": proc.returncode, "ok": proc.returncode == 0})
             if proc.returncode != 0:
                 raise RuntimeError(f"fresh regeneration failed: {rows}")
         data = {p.name: json.loads(p.read_text(encoding="utf-8")) for p in Path(tmp).glob("*.json")}
         validate_artifacts(data)
-        return rows
+        return rows, data
 
 
 def main():
     out_dir = result_dir()
-    rows = regenerate_and_load()
+    published = {p.name: json.loads(p.read_text(encoding="utf-8")) for p in out_dir.glob("*.json") if p.name not in {"audit_results.json", "posterior_laplace_run_summary.json"}}
+    validate_artifacts(published)
+    rows, regenerated = regenerate_and_load()
+    if published != regenerated:
+        raise RuntimeError("published artifacts differ from fresh regeneration")
     out = {
         "status": "AUDIT_OK",
         "required_files": REQUIRED,

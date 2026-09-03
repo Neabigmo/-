@@ -21,24 +21,29 @@ def main():
     v0, r0, y0 = sp.Integer(1), sp.Integer(1), sp.Integer(0)
     w0 = r0 / 3
     checks = []
-    for a0 in (-sp.Integer(1), sp.Integer(1)):
-        for b0 in (-sp.Integer(1), sp.Integer(1)):
-            for c0 in (-sp.Integer(1), sp.Integer(1)):
-                integrand = ((2*sp.pi*v0)**(-sp.Rational(3, 2))
-                             * (2*sp.pi*w0)**(-sp.Rational(1, 2))
-                             * sp.exp(-((x-a0)**2 + (x-b0)**2 + (x-c0)**2)/(2*v0)
-                                      - (y0-x)**2/(2*w0)))
-                direct = sp.expand_func(sp.integrate(integrand, (x, -sp.oo, sp.oo)))
-                precision = sp.Rational(3, 1)/v0 + 1/w0
-                linear = (a0+b0+c0)/v0 + y0/w0
-                constant = (a0*a0+b0*b0+c0*c0)/v0 + y0*y0/w0
-                completed = ((2*sp.pi*v0)**(-sp.Rational(3, 2))
-                             * (2*sp.pi*w0)**(-sp.Rational(1, 2))
-                             * sp.sqrt(2*sp.pi/precision)
-                             * sp.exp(-sp.Rational(1, 2) * (constant - linear**2/precision)))
-                checks.append(sp.simplify(direct - completed))
+    test_points = [(sp.Integer(1), sp.Integer(1), sp.Integer(0)),
+                   (sp.Integer(2), sp.Integer(1), sp.Integer(1)),
+                   (sp.Integer(1), sp.Integer(2), -sp.Integer(1))]
+    for v_test, r_test, y_test in test_points:
+        w_test = r_test / 3
+        for a0 in (-sp.Integer(1), sp.Integer(1)):
+            for b0 in (-sp.Integer(1), sp.Integer(1)):
+                for c0 in (-sp.Integer(1), sp.Integer(1)):
+                    integrand = ((2*sp.pi*v_test)**(-sp.Rational(3, 2))
+                                 * (2*sp.pi*w_test)**(-sp.Rational(1, 2))
+                                 * sp.exp(-((x-a0)**2 + (x-b0)**2 + (x-c0)**2)/(2*v_test)
+                                          - (y_test-x)**2/(2*w_test)))
+                    direct = sp.expand_func(sp.integrate(integrand, (x, -sp.oo, sp.oo)))
+                    precision = sp.Rational(3, 1)/v_test + 1/w_test
+                    linear = (a0+b0+c0)/v_test + y_test/w_test
+                    constant = (a0*a0+b0*b0+c0*c0)/v_test + y_test*y_test/w_test
+                    completed = ((2*sp.pi*v_test)**(-sp.Rational(3, 2))
+                                 * (2*sp.pi*w_test)**(-sp.Rational(1, 2))
+                                 * sp.sqrt(2*sp.pi/precision)
+                                 * sp.exp(-sp.Rational(1, 2) * (constant - linear**2/precision)))
+                    checks.append(sp.simplify(direct - completed))
     require(all(value == 0 for value in checks), f"Gaussian integral checks failed: {checks}")
-    prefactor_residual = "0"
+    prefactor_residual = str(sp.simplify(sum(checks)))
 
     sigma2 = 1 + v
     gaussian_K = sp.simplify((sigma2+r)/sigma2)
@@ -54,6 +59,7 @@ def main():
         "parameters": "u=1/(2s), v=tu/(t+u)=t/(1+2st), r=t-v, v+r=t",
         "prefactor_residual": str(prefactor_residual),
         "complete_gaussian_integral_checks": len(checks),
+        "complete_gaussian_integral_test_points": [[str(a), str(b), str(c)] for a, b, c in test_points],
         "integrated_ratio": "(v/t)*(F_v/F_t)=1/(1+2*a_t*s)",
         "Gaussian_K": str(gaussian_K),
         "Gaussian_K_y_independent": True,
