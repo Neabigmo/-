@@ -1,0 +1,16 @@
+{
+  "status": "EXACT_CONDITIONAL_Q_MOMENTS",
+  "conditional_moment_residuals": {
+    "1": "0",
+    "2": "0",
+    "3": "0",
+    "4": "0"
+  },
+  "target_Q_moments": {
+    "1": "2*a",
+    "2": "8*a**2",
+    "3": "48*a**3",
+    "4": "384*a**4"
+  },
+  "central_moment_convention": "m1=0, mk=E[(X-E[X|Y])^k|Y]"
+}

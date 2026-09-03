@@ -1,0 +1,20 @@
+{
+  "status": "AUDIT_OK",
+  "required_files": [
+    "posterior_triple.json",
+    "conditional_q_moments.json",
+    "moment_countermodel.json",
+    "semigroup_bridge.json",
+    "critical_kernel_audit.json"
+  ],
+  "result_files": [
+    "conditional_q_moments.json",
+    "critical_kernel_audit.json",
+    "moment_countermodel.json",
+    "posterior_laplace_run_summary.json",
+    "posterior_triple.json",
+    "semigroup_bridge.json"
+  ],
+  "nan_inf_free": true,
+  "derived_from_results": true
+}
