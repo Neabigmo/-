@@ -1,0 +1,52 @@
+{
+  "probability_countermodels": {
+    "bernoulli_mgf": "cosh(t)",
+    "bernoulli_mean": 0,
+    "bernoulli_variance": 1,
+    "bernoulli_symmetric_zero": true,
+    "three_point_mgf": "cosh(sqrt(2)*t)/2 + 1/2",
+    "three_point_mean": 0,
+    "three_point_variance": 1,
+    "three_point_symmetric_zero": true
+  },
+  "ou_zero_scaling": {
+    "scaled_mgf": "R(lam*t)",
+    "mapped_zero": "a -> a/lam",
+    "identity": true,
+    "message": "OU dilation transports a symmetric pair but does not remove it."
+  },
+  "angular_symmetric_identities": {
+    "polynomial": "-q + x**3 - x/2",
+    "sum_roots": "a1+a2+a3=0",
+    "pair_sum": "a1*a2+a1*a3+a2*a3=-1/2",
+    "product": "a1*a2*a3=q",
+    "elementary_relations_are_exact": true,
+    "roots_are_unordered": true
+  },
+  "resonance": {
+    "B_H": "-1/8 + (3*z/4 - 3*z0/4)/z0",
+    "B_H_at_z0": "-1/8",
+    "z0_B_H_prime_at_z0": "3/4",
+    "resonance_data_consistent": true,
+    "scope": "formal local consistency only"
+  },
+  "quartet_factor": {
+    "identity_holds": true,
+    "quartet_factor": "x**4 + 2*x**2*y**2 - 2*x**2*z**2 + y**4 + 2*y**2*z**2 + z**4",
+    "even_real_factor": true
+  },
+  "exact_factor_product": {
+    "product": "-a**2*z**2 + a**2*conjugate(a)**2 + z**4 - z**2*conjugate(a)**2",
+    "symmetric_pair_factor": "(z^2-a^2)",
+    "factorization_exact": true
+  },
+  "minimal_zero": {
+    "example": "cosh(t)",
+    "zero_modulus": "pi/2",
+    "nonreal_zero": true,
+    "modulus_alone_does_not_give_probability_bridge": true
+  },
+  "decision": "FOCK_ZERO_RESONANCE_LEMMA_CERTIFIED_PROBABILITY_BRIDGE_REMAINS",
+  "remaining_gap": "A nonlinear probability/Fock realizability lemma excluding the complex resonance.",
+  "marker": "R14_SYMMETRIC_ZERO_FOCK_FACTOR_AUDIT_COMPLETED"
+}
