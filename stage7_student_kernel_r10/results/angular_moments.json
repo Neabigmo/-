@@ -1,0 +1,112 @@
+{
+  "rows": [
+    {
+      "n": 4,
+      "degree": 0,
+      "beta": "1",
+      "direct": "1",
+      "residual": "0"
+    },
+    {
+      "n": 4,
+      "degree": 1,
+      "beta": "0",
+      "direct": "0",
+      "residual": "0"
+    },
+    {
+      "n": 4,
+      "degree": 2,
+      "beta": "1/3",
+      "direct": "1/3",
+      "residual": "0"
+    },
+    {
+      "n": 4,
+      "degree": 3,
+      "beta": "0",
+      "direct": "0",
+      "residual": "0"
+    },
+    {
+      "n": 4,
+      "degree": 4,
+      "beta": "1",
+      "direct": "1",
+      "residual": "0"
+    },
+    {
+      "n": 6,
+      "degree": 0,
+      "beta": "1",
+      "direct": "1",
+      "residual": "0"
+    },
+    {
+      "n": 6,
+      "degree": 1,
+      "beta": "0",
+      "direct": "0",
+      "residual": "0"
+    },
+    {
+      "n": 6,
+      "degree": 2,
+      "beta": "1/5",
+      "direct": "1/5",
+      "residual": "0"
+    },
+    {
+      "n": 6,
+      "degree": 3,
+      "beta": "0",
+      "direct": "0",
+      "residual": "0"
+    },
+    {
+      "n": 6,
+      "degree": 4,
+      "beta": "1/5",
+      "direct": "1/5",
+      "residual": "0"
+    },
+    {
+      "n": 8,
+      "degree": 0,
+      "beta": "1",
+      "direct": "1",
+      "residual": "0"
+    },
+    {
+      "n": 8,
+      "degree": 1,
+      "beta": "0",
+      "direct": "0",
+      "residual": "0"
+    },
+    {
+      "n": 8,
+      "degree": 2,
+      "beta": "1/7",
+      "direct": "1/7",
+      "residual": "0"
+    },
+    {
+      "n": 8,
+      "degree": 3,
+      "beta": "0",
+      "direct": "0",
+      "residual": "0"
+    },
+    {
+      "n": 8,
+      "degree": 4,
+      "beta": "3/35",
+      "direct": "3/35",
+      "residual": "0"
+    }
+  ],
+  "all_residuals_zero": true,
+  "second_moment_formula": "1/(n-1)",
+  "marker": "R10_EXACT_STUDENT_BETA_MOMENTS_REPLAYED"
+}

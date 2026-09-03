@@ -1,0 +1,8 @@
+{
+  "gaussian_mgf": "exp(z**2/2)",
+  "fock_R": "1",
+  "D_R": "1",
+  "R_residual": "0",
+  "D_residual": "0",
+  "marker": "R10_GAUSSIAN_FOCK_NORMALIZATION_CORRECTED"
+}

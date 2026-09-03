@@ -1,0 +1,13 @@
+{
+  "exact_replays_pass": true,
+  "gaussian_normalization": "R=1,D_R=1",
+  "angular_moment_status": "STUDENT_BETA_EXACT_AND_DIRECT_INTEGRAL_MATCHED",
+  "kernel_status": "DIRECT_SYMBOLIC_INTEGRAL_MATCHED",
+  "fixed_band_status": "LIMITS_AND_FIRST_1_OVER_N_REPLAYED",
+  "global_bound_status": "BENCHMARK_ONLY_ACTUAL_STAGE7_FORMULA_NOT_IMPORTED",
+  "wiener_tail_status": "RADIUS_LOSS_FACTOR_REPLAYED",
+  "stage7_symbol_status": "CANDIDATE_D_R_IDENTIFIED_BUT_UNIFORM_OPERATOR_LIMIT_UNRESOLVED",
+  "decision": "STUDENT_KERNEL_CERTIFIED_OPERATOR_GAP_REMAINS",
+  "marker": "R10_STAGE7_STUDENT_KERNEL_AUDIT_COMPLETED",
+  "precise_remaining_gap": "Import the actual Stage7 A_ijk in ordinary coefficients and prove the uniform low-pair tail/operator-norm passage after fixed-band n->infinity."
+}
