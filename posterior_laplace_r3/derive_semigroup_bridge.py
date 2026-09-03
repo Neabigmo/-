@@ -45,6 +45,18 @@ def main():
     require(all(value == 0 for value in checks), f"Gaussian integral checks failed: {checks}")
     prefactor_residual = str(sp.simplify(sum(checks)))
 
+    bridge_residuals = []
+    bridge_points = [(sp.Integer(2), sp.Integer(1), sp.Rational(1, 2), sp.Integer(0)),
+                     (sp.Integer(3), sp.Integer(2), sp.Rational(1, 4), sp.Integer(1)),
+                     (sp.Integer(1), sp.Integer(3), sp.Rational(1, 6), -sp.Integer(2))]
+    for t_test, u_test, s_test, y_test in bridge_points:
+        v_test = sp.simplify(t_test*u_test/(t_test+u_test))
+        r_test = sp.simplify(t_test-v_test)
+        lhs = sp.simplify((v_test/t_test) * (1+t_test)/(1+v_test))
+        rhs = sp.simplify(1/(1+2*(t_test/(1+t_test))*s_test))
+        bridge_residuals.append(str(sp.simplify(lhs-rhs)))
+    require(all(value == "0" for value in bridge_residuals), f"bridge residuals failed: {bridge_residuals}")
+
     sigma2 = 1 + v
     gaussian_K = sp.simplify((sigma2+r)/sigma2)
     require(not gaussian_K.has(y), "Gaussian K still depends on y")
@@ -60,6 +72,8 @@ def main():
         "prefactor_residual": str(prefactor_residual),
         "complete_gaussian_integral_checks": len(checks),
         "complete_gaussian_integral_test_points": [[str(a), str(b), str(c)] for a, b, c in test_points],
+        "bridge_residuals": bridge_residuals,
+        "bridge_test_points": [[str(a), str(b), str(c), str(d)] for a, b, c, d in bridge_points],
         "integrated_ratio": "(v/t)*(F_v/F_t)=1/(1+2*a_t*s)",
         "Gaussian_K": str(gaussian_K),
         "Gaussian_K_y_independent": True,

@@ -62,7 +62,7 @@ def validate_artifacts(data):
     bridge = data["semigroup_bridge.json"]
     if bridge.get("status") != "EXACT_POSTERIOR_SEMIGROUP_BRIDGE":
         raise RuntimeError("semigroup bridge status mismatch")
-    if bridge.get("prefactor_residual") != "0" or bridge.get("complete_gaussian_integral_checks") != 24 or bridge.get("Gaussian_K_y_independent") is not True:
+    if bridge.get("prefactor_residual") != "0" or bridge.get("complete_gaussian_integral_checks") != 24 or bridge.get("bridge_residuals") != ["0", "0", "0"] or bridge.get("Gaussian_K_y_independent") is not True:
         raise RuntimeError("semigroup bridge exact checks mismatch")
 
     kernel = data["critical_kernel_audit.json"]

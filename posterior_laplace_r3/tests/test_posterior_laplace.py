@@ -69,3 +69,12 @@ def test_critical_kernel_matches_independent_quadrature():
     expected = mp.mpf(1)/2 + mp.mpf(3)/2 * mp.exp(-mp.mpf(2)/3)
     if abs(measured - expected) > mp.mpf("1e-35"):
         raise AssertionError((measured, expected))
+    with tempfile.TemporaryDirectory() as tmp:
+        env = os.environ.copy()
+        env["LAPLACE_RESULTS_DIR"] = tmp
+        proc = subprocess.run([sys.executable, str(ROOT / "audit_critical_kernel.py")], cwd=ROOT, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
+        if proc.returncode != 0:
+            raise AssertionError(proc.stderr)
+        artifact = json.loads((Path(tmp) / "critical_kernel_audit.json").read_text(encoding="utf-8"))
+        if artifact.get("exact_K") != "1/2 + 3*exp(-2/3)/2":
+            raise AssertionError(artifact)

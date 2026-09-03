@@ -5,9 +5,11 @@ Laplace-transform route.  It does not run Stage28, NNQP, Groebner/resultant
 jobs, or a parameter campaign.
 
 Run `python run_posterior_laplace.py`, then `python -m pytest -q tests`.
-The pipeline verifies the Gaussian product identity, the full chi-square
-Laplace identity, conditional Q moments through order four, the formal
-moment-relaxation countermodel, and the posterior semigroup bridge.
+The pipeline verifies the Gaussian product identity, the Laplace identity
+conditional on the assumed target `Q~chi^2_2` law, conditional Q moments
+through order four, the formal moment-relaxation countermodel, and the
+posterior semigroup bridge.  It does not prove that target law from the
+posterior construction.
 
 The only kernel mechanism tested is the natural Gaussian-equality lower bound
 `K >= K_Gaussian`.  A single exact heat-smoothed symmetric two-point prior

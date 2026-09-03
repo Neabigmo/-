@@ -4,38 +4,38 @@
     {
       "script": "derive_posterior_triple.py",
       "returncode": 0,
-      "stdout": "EXACT_POSTERIOR_TRIPLE_LAPLACE_VERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\posterior_laplace_r3\\results\\posterior_triple.json",
+      "stdout_marker": "EXACT_POSTERIOR_TRIPLE_LAPLACE_VERIFIED",
       "stderr": ""
     },
     {
       "script": "derive_conditional_q_moments.py",
       "returncode": 0,
-      "stdout": "EXACT_CONDITIONAL_Q_MOMENTS_VERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\posterior_laplace_r3\\results\\conditional_q_moments.json",
+      "stdout_marker": "EXACT_CONDITIONAL_Q_MOMENTS_VERIFIED",
       "stderr": ""
     },
     {
       "script": "certify_moment_countermodel.py",
       "returncode": 0,
-      "stdout": "EXACT_MOMENT_RELAXATION_COUNTERMODEL_VERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\posterior_laplace_r3\\results\\moment_countermodel.json",
+      "stdout_marker": "EXACT_MOMENT_RELAXATION_COUNTERMODEL_VERIFIED",
       "stderr": ""
     },
     {
       "script": "derive_semigroup_bridge.py",
       "returncode": 0,
-      "stdout": "EXACT_POSTERIOR_SEMIGROUP_BRIDGE_VERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\posterior_laplace_r3\\results\\semigroup_bridge.json",
+      "stdout_marker": "EXACT_POSTERIOR_SEMIGROUP_BRIDGE_VERIFIED",
       "stderr": ""
     },
     {
       "script": "audit_critical_kernel.py",
       "returncode": 0,
-      "stdout": "EXACT_CRITICAL_KERNEL_COUNTEREXAMPLE_VERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\posterior_laplace_r3\\results\\critical_kernel_audit.json",
+      "stdout_marker": "EXACT_CRITICAL_KERNEL_COUNTEREXAMPLE_VERIFIED",
       "stderr": ""
     }
   ],
   "audit": {
     "script": "audit_results.py",
     "returncode": 0,
-    "stdout": "POSTERIOR_LAPLACE_RESULTS_AUDIT_OK G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\posterior_laplace_r3\\results\\audit_results.json",
+    "stdout_marker": "POSTERIOR_LAPLACE_RESULTS_AUDIT_OK",
     "stderr": ""
   },
   "stage28_started": false,
