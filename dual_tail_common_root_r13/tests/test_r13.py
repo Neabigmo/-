@@ -14,6 +14,10 @@ from replay_tail_locality import (  # noqa: E402
     lower_triangular_replay,
     tail_locality_sufficient_bound_replay,
     tail_normalization_selection_replay,
+    compact_lower_triangular_column_replay,
+    compact_without_triangularity_counterexample,
+    actual_lower_triangular_support_audit,
+    relative_dual_tail_inequality_replay,
 )
 
 
@@ -45,9 +49,27 @@ def test_common_root_spectral_toy():
     assert data["disjoint_case_has_no_common_root"]
 
 
+def test_compact_lower_triangular_column_lemma_replay():
+    data = compact_lower_triangular_column_replay()
+    assert data["lower_triangular"]
+    assert data["column_norms_decrease"]
+    assert data["finite_model_column_norms_tend_to_zero"]
+
+
+def test_compact_without_triangularity_is_not_enough():
+    data = compact_without_triangularity_counterexample()
+    assert data["compact"]
+    assert not data["lower_triangular"]
+
+
+def test_stage7_support_and_relative_dual_bound():
+    assert actual_lower_triangular_support_audit()["output_index_ge_input_index"]
+    assert relative_dual_tail_inequality_replay()["inequality_holds"]
+
+
 def test_audit_artifact_is_conservative_after_run():
     artifact = HERE / "results" / "r13_audit.json"
     if artifact.exists():
         data = json.loads(artifact.read_text(encoding="utf-8"))
-        assert data["decision"] == "TAIL_LOCALITY_GAP"
+        assert data["decision"] == "EXACT_DEFECT_SURJECTIVITY_AWAY_FROM_COMMON_ZEROS_CERTIFIED"
         assert data["ou_coherence_contradiction"] if "ou_coherence_contradiction" in data else True

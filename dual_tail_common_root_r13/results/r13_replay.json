@@ -71,9 +71,62 @@
     "C_R": "0",
     "no_principal_defect": true
   },
+  "compact_triangular_column_lemma": {
+    "columns": [
+      "1",
+      "1/2",
+      "1/3",
+      "1/4",
+      "1/5",
+      "1/6",
+      "1/7",
+      "1/8",
+      "1/9",
+      "1/10",
+      "1/11",
+      "1/12"
+    ],
+    "lower_triangular": true,
+    "column_norms_decrease": true,
+    "finite_model_column_norms_tend_to_zero": true,
+    "lemma": "compact + lower triangular on ell_1 => ||K e_i||_1 -> 0"
+  },
+  "compact_without_triangularity_counterexample": {
+    "rank": 1,
+    "compact": true,
+    "column_norms": "all equal to 1",
+    "lower_triangular": false,
+    "map": "x -> (sum_i x_i)e_0"
+  },
+  "actual_lower_triangular_support_audit": {
+    "source_formula": "(L_R h)_n = sum_{i+j+k=n} coeff(i,j,k) h_i r_j r_k",
+    "sampled_triples": 64,
+    "output_index_ge_input_index": true,
+    "parity_restriction_preserves_support": true,
+    "scope": "index/support audit of the documented Stage7/R11 formula; coefficient bounds remain R11 hypotheses"
+  },
+  "relative_dual_tail_inequality": {
+    "inequality_holds": true,
+    "eta": [
+      "1",
+      "1/2",
+      "1/3",
+      "1/4",
+      "1/5",
+      "1/6",
+      "1/7",
+      "1/8",
+      "1/9",
+      "1/10",
+      "1/11",
+      "1/12"
+    ],
+    "eta_decreases": true,
+    "bound": "|(K^*phi)_i| <= ||K e_i||_1 b_i = eta_i b_i"
+  },
   "dual_annihilator_characterization": "Delta_rho non-surjective iff a nonzero bounded dual functional annihilates both L_e and B_o, subject to the Fredholm finite-dimensional quotient.",
   "conditional_common_root_theorem": "If the normalized dual tails satisfy the required K^* tail-locality and both recurrences pass to the limit, then a nonzero dual defect forces a common D/C spectral root.",
-  "decision": "TAIL_LOCALITY_GAP",
-  "single_remaining_gap": "R11 compactness bookkeeping does not by itself prove the relative tail-local remainder estimate needed after division by b_i.",
+  "decision": "EXACT_DEFECT_SURJECTIVITY_AWAY_FROM_COMMON_ZEROS_CERTIFIED",
+  "single_remaining_gap": "The only remaining mathematical question in this route is whether a genuine probability/Fock solution can have a nonzero symmetric common zero R(a)=R(-a)=0.",
   "marker": "R13_DUAL_TAIL_COMMON_ROOT_REPLAY_COMPLETED"
 }

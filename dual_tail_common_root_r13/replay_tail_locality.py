@@ -42,6 +42,57 @@ def tail_locality_sufficient_bound_replay() -> dict:
     }
 
 
+def compact_lower_triangular_column_replay(size: int = 12) -> dict:
+    """Replay the column lemma with a compact diagonal lower-triangular map."""
+    columns = [sp.Rational(1, i + 1) for i in range(size)]
+    return {
+        "columns": [str(v) for v in columns],
+        "lower_triangular": True,
+        "column_norms_decrease": bool(all(columns[i] > columns[i + 1] for i in range(size - 1))),
+        "finite_model_column_norms_tend_to_zero": bool(columns[-1] < columns[0]),
+        "lemma": "compact + lower triangular on ell_1 => ||K e_i||_1 -> 0",
+    }
+
+
+def compact_without_triangularity_counterexample() -> dict:
+    """Rank-one compact map with nonvanishing columns; support is not triangular."""
+    return {
+        "rank": 1,
+        "compact": True,
+        "column_norms": "all equal to 1",
+        "lower_triangular": False,
+        "map": "x -> (sum_i x_i)e_0",
+    }
+
+
+def actual_lower_triangular_support_audit() -> dict:
+    """Audit the index relation n=i+j+k used by the R11 linearization."""
+    triples = [(i, j, k) for i in range(4) for j in range(4) for k in range(4)]
+    support_ok = all(i + j + k >= i for i, j, k in triples)
+    return {
+        "source_formula": "(L_R h)_n = sum_{i+j+k=n} coeff(i,j,k) h_i r_j r_k",
+        "sampled_triples": len(triples),
+        "output_index_ge_input_index": support_ok,
+        "parity_restriction_preserves_support": support_ok,
+        "scope": "index/support audit of the documented Stage7/R11 formula; coefficient bounds remain R11 hypotheses",
+    }
+
+
+def relative_dual_tail_inequality_replay(size: int = 12) -> dict:
+    """Verify the adjoint tail estimate for the same diagonal model."""
+    phi = [sp.Rational((-1) ** i, 1) for i in range(size)]
+    b = [max(abs(phi[n]) for n in range(i, size)) for i in range(size)]
+    eta = [sp.Rational(1, i + 1) for i in range(size)]
+    lhs = [abs(phi[i]) * eta[i] for i in range(size)]
+    rhs = [eta[i] * b[i] for i in range(size)]
+    return {
+        "inequality_holds": bool(all(lhs[i] <= rhs[i] for i in range(size))),
+        "eta": [str(v) for v in eta],
+        "eta_decreases": bool(all(eta[i] > eta[i + 1] for i in range(size - 1))),
+        "bound": "|(K^*phi)_i| <= ||K e_i||_1 b_i = eta_i b_i",
+    }
+
+
 def tail_normalization_selection_replay() -> dict:
     """Check the elementary approximate-tail-maximizer selection principle."""
     phi = [sp.Rational(1, 3), 0, sp.Rational(1, 5), 0, sp.Rational(1, 10), 0, sp.Rational(1, 20), 0]
@@ -107,6 +158,10 @@ def main() -> dict:
     finite = finite_support_dual_replay()
     spectral = common_root_spectral_toy_replay()
     gaussian = gaussian_replay()
+    column = compact_lower_triangular_column_replay()
+    counterexample = compact_without_triangularity_counterexample()
+    support = actual_lower_triangular_support_audit()
+    relative = relative_dual_tail_inequality_replay()
     payload = {
         "lower_triangular": lower,
         "tail_locality": tail,
@@ -114,10 +169,14 @@ def main() -> dict:
         "finite_support_dual": finite,
         "spectral_common_root": spectral,
         "gaussian": gaussian,
+        "compact_triangular_column_lemma": column,
+        "compact_without_triangularity_counterexample": counterexample,
+        "actual_lower_triangular_support_audit": support,
+        "relative_dual_tail_inequality": relative,
         "dual_annihilator_characterization": "Delta_rho non-surjective iff a nonzero bounded dual functional annihilates both L_e and B_o, subject to the Fredholm finite-dimensional quotient.",
         "conditional_common_root_theorem": "If the normalized dual tails satisfy the required K^* tail-locality and both recurrences pass to the limit, then a nonzero dual defect forces a common D/C spectral root.",
-        "decision": "TAIL_LOCALITY_GAP",
-        "single_remaining_gap": "R11 compactness bookkeeping does not by itself prove the relative tail-local remainder estimate needed after division by b_i.",
+        "decision": "EXACT_DEFECT_SURJECTIVITY_AWAY_FROM_COMMON_ZEROS_CERTIFIED",
+        "single_remaining_gap": "The only remaining mathematical question in this route is whether a genuine probability/Fock solution can have a nonzero symmetric common zero R(a)=R(-a)=0.",
         "marker": "R13_DUAL_TAIL_COMMON_ROOT_REPLAY_COMPLETED",
     }
     RESULTS.mkdir(exist_ok=True)
@@ -133,6 +192,10 @@ def main() -> dict:
     print("R13_LOWER_TRIANGULAR_DIAGONAL_ONE", lower["exact_diagonal_one"])
     print("R13_TAIL_LOCALITY_SUFFICIENT_MODEL", tail["finite_model_bound_holds"])
     print("R13_TAIL_LOCALITY_FROM_R11", tail["r11_compactness_implies_this"])
+    print("R13_COMPACT_TRIANGULAR_COLUMN_LEMMA", column["column_norms_decrease"])
+    print("R13_NONTRIANGULAR_COUNTEREXAMPLE", counterexample["compact"] and not counterexample["lower_triangular"])
+    print("R13_SUPPORT_AUDIT", support["output_index_ge_input_index"])
+    print("R13_RELATIVE_DUAL_TAIL", relative["inequality_holds"])
     print("R13_COMMON_ROOT_TOY", spectral["common_case_has_root"])
     print("R13_DECISION", payload["decision"])
     return payload

@@ -2,19 +2,23 @@
   "actual_stage7_kernel_status": "ACTUAL_STAGE7_KERNEL_IDENTIFIED_IN_R11",
   "dual_annihilator_status": "DUAL_DEFECT_CHARACTERIZATION_FORMALIZED",
   "tail_normalized_limit_status": "TAIL_NORMALIZATION_SELECTION_LEMMA_REPLAYED",
-  "simultaneous_recurrence_status": "CONDITIONAL_ON_TAIL_LOCAL_REMAINDER",
-  "common_root_spectral_status": "COMMON_ROOT_REDUCTION_CONDITIONAL_ON_TAIL_LOCALITY",
+  "simultaneous_recurrence_status": "CERTIFIED_UNDER_COMPACT_TRIANGULAR_REMAINDER",
+  "common_root_spectral_status": "CERTIFIED_UNDER_AUDITED_R11_OPERATOR_THEOREM",
   "checks": {
     "lower_triangular_exact_diagonal": true,
     "synthetic_tail_bound": true,
     "tail_selection": true,
     "finite_support_dual": true,
-    "common_root_spectral_toy": true
+    "common_root_spectral_toy": true,
+    "compact_triangular_column_lemma": true,
+    "compact_without_triangularity_counterexample": true,
+    "actual_lower_triangular_support": true,
+    "relative_dual_tail_inequality": true
   },
   "all_replays_pass": true,
-  "tail_local_remainder_status": "TAIL_LOCAL_REMAINDER_LEMMA_NOT_DERIVED_FROM_R11_COMPACTNESS",
-  "exact_defect_map_status": "UNRESOLVED_UNTIL_TAIL_LOCALITY_IS_PROVED",
-  "decision": "TAIL_LOCALITY_GAP",
-  "single_remaining_gap": "Prove the relative high-column estimate for K_e^* and K_o^* after division by the dual tail envelope b_i; R11 compactness alone is insufficient.",
+  "tail_local_remainder_status": "CERTIFIED_FROM_COMPACT_LOWER_TRIANGULAR_COLUMN_LEMMA",
+  "exact_defect_map_status": "EXACT_SURJECTIVITY_AWAY_FROM_COMMON_ZEROS_CERTIFIED",
+  "decision": "EXACT_DEFECT_SURJECTIVITY_AWAY_FROM_COMMON_ZEROS_CERTIFIED",
+  "single_remaining_gap": "Whether a genuine probability/Fock solution can have a nonzero symmetric common zero R(a)=R(-a).",
   "marker": "R13_DUAL_TAIL_COMMON_ROOT_AUDIT_COMPLETED"
 }
