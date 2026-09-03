@@ -6,19 +6,21 @@ Base branch expected:
 
 Purpose:
   Diagnose and remove NNQP success=False failures that occur only in strongly
-  positive regions, without changing the NNQP solver or weakening any final audit.
+  positive regions, without changing the NNQP solver or weakening final replay.
 
 Mathematical rule:
   For f(alpha)=alpha^T C alpha+2 c^T alpha, alpha>=0, choose alpha=t e_j.
   If c_j<0, t=-c_j/C_jj and
       m_tail^2 >= c_j^2/(C_jj eps^2).
-  This is a feasible-dual lower bound and needs no KKT convergence.
+  This is the value of an explicit feasible dual vector and needs no KKT convergence.
 
 Retry4 interception rule:
   - only intercept FloatingPointError messages beginning with "NNQP invalid";
-  - identify promising one-witness coordinates from the existing normalized QP;
-  - independently replay up to 4 witnesses with mpmath at >=260 dps;
-  - certify prune only if E + one_witness_lb - A >= +25;
+  - use the existing float QP only to rank promising witness coordinates;
+  - independently replay up to 4 witnesses at 220 dps and >=300 dps;
+  - require relative agreement <=1e-10;
+  - take min(two MP bounds)*(1-1e-12) as the runtime conservative tail LB;
+  - prune only if prefix_energy + conservative_one_witness_lb - A >= +25;
   - otherwise re-raise the original NNQP failure unchanged.
 
 Search behavior:
@@ -29,12 +31,18 @@ Search behavior:
 
 Audit:
   stage27u_retry4_dual_prune.csv records every unique pointwise prune.
-  audit_retry4.py independently replays each row at >=300 dps, then runs the
+  audit_retry4.py independently replays every row at >=360 dps, then runs the
   complete retry3 audit, which itself runs the retry2 artifact-replay audit.
 
 Unchanged:
-  Fock completion, OU coherence, Mehler Gram, fixed ridge, NNQP solver, continuum
-  exchange, final candidate validation, N=32/48/64/80 coverage, gradient threshold.
+  Fock completion, OU coherence, Mehler Gram, fixed ridge, NNQP solver,
+  continuum exchange, final candidate replay, N=32/48/64/80 coverage,
+  gradient threshold, active-tail gradient requirement.
 
-This is numerical workflow repair only. It is not a theorem certificate.
-No Stage28.
+Decision rule after retry4A:
+  - if failures drop to 0 (or nearly all are pruned and remaining failures are few),
+    keep this short auditable route and study the unresolved N=32 boundary case;
+  - if many NNQP failures remain unprunable, stop patching and build a genuine
+    independent QP fallback/certifier for those residual cases.
+
+Numerical workflow repair only. Not a theorem certificate. No Stage28.
