@@ -1,0 +1,214 @@
+{
+  "laguerre_orthogonality": {
+    "nmax": 5,
+    "gram": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "verified": true
+  },
+  "laguerre_generating_function": {
+    "nmax": 5,
+    "coefficient_checks": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "verified": true
+  },
+  "laguerre_product": {
+    "cases": {
+      "1,1": [
+        "1",
+        "-2",
+        "2"
+      ],
+      "1,2": [
+        "0",
+        "2",
+        "-4",
+        "3"
+      ],
+      "2,2": [
+        "1",
+        "-4",
+        "10",
+        "-12",
+        "6"
+      ]
+    },
+    "verified": true
+  },
+  "tilted_mean_coefficients": {
+    "general": [
+      "0",
+      "-mu3/3",
+      "-(10*mu3 - mu5)/18",
+      "(2*mu3*mu4 - 111*mu3 + 21*mu5 - mu7)/162",
+      "-(16*mu3**3 - 120*mu3*mu4 + 12*mu3*mu6 + 1440*mu3 - 6*mu4*mu5 - 360*mu5 + 36*mu7 - mu9)/1944"
+    ],
+    "target": [
+      0,
+      "-mu3/3",
+      "-5*mu3/9 + mu5/18",
+      "-35*mu3/54 + 7*mu5/54 - mu7/162",
+      "-25*mu3**3/486 - 35*mu3/54 + 7*mu5/36 - mu7/54 + mu9/1944"
+    ],
+    "verified": true,
+    "checks": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "conditional_second_coefficients": {
+    "general": [
+      "1/3",
+      "-(mu4 - 3)/9",
+      "(2*mu3**2 - 12*mu4 + mu6 + 21)/54",
+      "(61*mu3**2 - 4*mu3*mu5 + 2*mu4**2 - 177*mu4 + 25*mu6 - mu8 + 243)/486"
+    ],
+    "target": [
+      "1/3",
+      "0",
+      "mu3**2/6",
+      "2*mu3*(10*mu3 - mu5)/27"
+    ],
+    "verified": true,
+    "general_checks": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "target_checks": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "target_moment_eliminations": {
+    "Q_moments": [
+      "2",
+      "4*mu4/3 + 4",
+      "-56*mu3**2/9 + 32*mu4/3 + 8*mu6/9 + 8/3",
+      "-256*mu3**2/27 - 512*mu3*mu5/27 + 304*mu4**2/27 + 128*mu4/9 + 320*mu6/27 + 16*mu8/27"
+    ],
+    "mu4": "3",
+    "mu6": "7*mu3**2 + 15",
+    "mu8": "-124*mu3**2 + 32*mu3*mu5 + 105",
+    "verified": true
+  },
+  "triangularity": {
+    "records": [
+      {
+        "n": 1,
+        "top_coefficient": "-1/3",
+        "expected": "-1/3",
+        "verified": true
+      },
+      {
+        "n": 2,
+        "top_coefficient": "1/18",
+        "expected": "1/18",
+        "verified": true
+      },
+      {
+        "n": 3,
+        "top_coefficient": "-1/162",
+        "expected": "-1/162",
+        "verified": true
+      },
+      {
+        "n": 4,
+        "top_coefficient": "1/1944",
+        "expected": "1/1944",
+        "verified": true
+      },
+      {
+        "n": 5,
+        "top_coefficient": "-1/29160",
+        "expected": "-1/29160",
+        "verified": true
+      },
+      {
+        "n": 6,
+        "top_coefficient": "1/524880",
+        "expected": "1/524880",
+        "verified": true
+      }
+    ],
+    "verified": true
+  },
+  "fisher_dictionary": {
+    "deduced": "vk + 1/3",
+    "expected": "vk + 1/3",
+    "verified": true
+  },
+  "gaussian_case": {
+    "conditional_mean": 0,
+    "conditional_second_moment": "1/3",
+    "all_odd_laguerre_coefficients": 0,
+    "verified": true
+  },
+  "realizability": {
+    "conditional_variance": "b(T)-m(T)^2 >= 0",
+    "parseval_bound": "sum_n c_n^2 <= 1/3",
+    "finite_closure": false,
+    "cube_root_status": "OU-closure re-expression unless an independent cross-x constraint is extracted"
+  },
+  "decision": "B",
+  "decision_marker": "LAGUERRE_ODD_BRIDGE_CERTIFIED_INFINITE_POSITIVITY_GAP_REMAINS"
+}
