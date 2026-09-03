@@ -5,9 +5,12 @@
   "candidate_1_total_derivative_witness": "-r0*r1**2*tau**3/2 - r0*r1*tau**2 - r0*tau/2 + r1*r2*tau**3 + r2*tau**2",
   "corrected_formula": "tau*delta_prime=-E[U^2]+4E[G^3]+3E[R^2G^2]-3delta",
   "candidate_2": "NOT_VERIFIED",
-  "candidate_2_certificate_search": "total derivative only, degree<=4 jet ansatz",
+  "candidate_2_certificate_search": "total derivative modulo the declared F''' relation; g degree<=4, multiplier degree<=1",
+  "candidate_2_relation_included": true,
   "candidate_2_certificate_found": false,
+  "candidate_2_density_claim": false,
   "candidate_2_exact_residual_terms": 12,
   "target_F3_relation_terms": 12,
+  "candidate_2_scaled_relation_terms": 12,
   "interpretation": "No density counterexample; candidate 2 requires a separate proof or correction."
 }

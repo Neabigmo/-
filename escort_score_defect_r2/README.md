@@ -24,3 +24,9 @@ Then run the tests:
 ```text
 python -m pytest -q tests
 ```
+
+The runner also performs an independent exact Gaussian replay. Tests redirect
+generated artifacts to a temporary directory, so the committed evidence is not
+silently overwritten. Candidate 2 is searched modulo the declared `F'''`
+relation; failure of that bounded certificate is reported as insufficient
+local identities, not as a density counterexample.

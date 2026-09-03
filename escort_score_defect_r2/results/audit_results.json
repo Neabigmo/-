@@ -1,13 +1,14 @@
 {
   "status": "AUDIT_OK",
   "result_files": [
-    "audit_results.json",
     "degree6_sos_search.json",
     "escort_lemma.json",
     "escort_run_summary.json",
+    "gaussian_exact_replay.json",
     "mixture_search.json",
     "third_order_defect.json"
   ],
   "nan_inf_free": true,
-  "candidate_2_density_claim": false
+  "candidate_2_density_claim": false,
+  "derived_from_results": true
 }

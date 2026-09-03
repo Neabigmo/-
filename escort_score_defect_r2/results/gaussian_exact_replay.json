@@ -1,0 +1,11 @@
+{
+  "status": "GAUSSIAN_EXACT_REPLAY",
+  "checks": {
+    "F_equals_C_over_tau": true,
+    "E_rho2": true,
+    "E_c": true,
+    "E_rho4": true,
+    "B_over_F": true,
+    "variance_defect": true
+  }
+}

@@ -11,5 +11,18 @@
   "B_over_F_target": "2/(3*tau**2)",
   "variance_defect": "Var(c)=E[rho^4]-3*E[rho^2]^2",
   "equality_case": "Var(c)=0 => c constant => log(p) quadratic => Gaussian",
+  "symbolic_certificates": {
+    "escort_ibp_residual": "0",
+    "F_prime_total_derivative_residual": "0",
+    "F_second_minus_3B_certificate": "p^2*p4 - 2*p*pxx^2 = D(p^2*p3 - 2*p*px*pxx + 2*px^3/3)",
+    "rho3_escort_ibp_certificate": "E[3*c*rho^2 + 3*rho^4] = 0",
+    "rho3_escort_ibp_certificate_integrand": "3*c*rho**2 + 3*rho**4",
+    "B_decomposition_algebraic_residual": "0"
+  },
+  "target_derivations": {
+    "E_rho2_from_log_F_prime": "-3*E[rho^2] = (log F)' = -1/tau",
+    "E_c_from_escort_ibp": "E[c] = -3*E[rho^2]",
+    "B_over_F_target_from_F_second": "2/(3*tau**2)"
+  },
   "symbolic_consistency_checks": true
 }

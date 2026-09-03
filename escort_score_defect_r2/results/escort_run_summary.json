@@ -8,6 +8,12 @@
       "stderr": ""
     },
     {
+      "script": "replay_gaussian_exact.py",
+      "returncode": 0,
+      "stdout": "GAUSSIAN_EXACT_REPLAY_PASSED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\escort_score_defect_r2\\results\\gaussian_exact_replay.json",
+      "stderr": ""
+    },
+    {
       "script": "derive_third_order_defect.py",
       "returncode": 0,
       "stdout": "THIRD_ORDER_CANDIDATE_1_CERTIFIED_CANDIDATE_2_UNVERIFIED G:\\2026\\8.22统计\\_escort_score_defect_r2_repo\\escort_score_defect_r2\\results\\third_order_defect.json",
@@ -34,5 +40,6 @@
   },
   "stage28_started": false,
   "large_campaign_started": false,
+  "candidate_2_certificate_found": false,
   "final_outcome": "LOCAL_IDENTITIES_INSUFFICIENT_FOR_CANDIDATE_2"
 }
