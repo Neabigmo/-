@@ -1,0 +1,25 @@
+{
+  "exact_replays_pass": true,
+  "probability_to_analytic_scale": "CONDITIONAL_ON_POSITIVE_RADIUS_HERMITE_MEMBERSHIP",
+  "radius_gap_compactness": "CERTIFIED_CONDITIONALLY_ON_H_R_TO_H_r_AND_HELLINGER_BOUND",
+  "endpoint_toeplitz": "REPLAYED_FIXED_BAND_AND_CANDIDATE_SYMBOL; FULL_NORMALIZATION_REMAINS",
+  "fredholm_zero_status": "EXPLICIT_FUNCTIONALS_WITH_RADIUS_CONDITION; RANGE_IDENTIFICATION_REMAINS",
+  "fredholm_defect_replay": {
+    "multiplicity": 2,
+    "range_defect_residuals": [
+      "0",
+      "0"
+    ],
+    "functional_matrix_rank": 2,
+    "radius_condition": "|zeta| < r",
+    "functionals": [
+      "g(zeta)",
+      "g'(zeta)"
+    ]
+  },
+  "characteristic_solvability_defects": "Lambda_zeta_j(nonlinear_high_high_remainder + finite_n_correction)=0",
+  "positivity_status": "POSITIVITY_ACTION_ON_FREDHOLM_DEFECT_UNRESOLVED",
+  "r6_r7_compatibility": "RADIUS_LOSS_IS_NEW_COMPACTNESS_MECHANISM; DOES_NOT_REPAIR_R6_POINTWISE_SIGN_GAP_OR_R7_OPERATOR_COUNTERMODEL",
+  "decision": "RADIUS_GAP_COMPACTNESS_CERTIFIED_FREDHOLM_GAP_REMAINS",
+  "marker": "R8_ANALYTIC_RADIUS_AUDIT_COMPLETED"
+}

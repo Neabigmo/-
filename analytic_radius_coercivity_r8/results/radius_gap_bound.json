@@ -1,0 +1,25 @@
+{
+  "hellinger_cs": {
+    "lhs": "(-sqrt(2)/2 - sqrt(6)/60 + sqrt(3)/3)**2",
+    "rhs": "201/100",
+    "cs_slack": "201/100 - (-20*sqrt(3) + sqrt(6) + 30*sqrt(2))**2/3600",
+    "sum_probability": "1"
+  },
+  "radius_factors": {
+    "monomial_residual": "0",
+    "two_high_norm_factor": "q**(2*N)",
+    "three_high_norm_factor": "q**(3*N)",
+    "compact_inclusion_tail_at_N": "(r**2/R**2)**N",
+    "two_high_claim": "(r/R)^(2N)",
+    "three_high_claim": "(r/R)^(3N)"
+  },
+  "ou_scale": {
+    "residual": "0",
+    "positive_radius_hypothesis": true,
+    "arbitrary_l2_claim": false,
+    "sufficient_condition": "s*rho <= R"
+  },
+  "uniform_in_theta": true,
+  "angle_average_nonexpansive": true,
+  "marker": "R8_RADIUS_GAP_COMPACTNESS_REPLAY_COMPLETED"
+}

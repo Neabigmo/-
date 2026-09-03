@@ -1,0 +1,46 @@
+{
+  "fixed_band": {
+    "rows": [
+      {
+        "m": 0,
+        "limit": "1",
+        "expected": "1",
+        "residual": "0"
+      },
+      {
+        "m": 1,
+        "limit": "-1/2",
+        "expected": "-1/2",
+        "residual": "0"
+      },
+      {
+        "m": 2,
+        "limit": "1/4",
+        "expected": "1/4",
+        "residual": "0"
+      },
+      {
+        "m": 3,
+        "limit": "-1/8",
+        "expected": "-1/8",
+        "residual": "0"
+      },
+      {
+        "m": 4,
+        "limit": "1/16",
+        "expected": "1/16",
+        "residual": "0"
+      }
+    ],
+    "all_fixed_band_limits_exact": true,
+    "order_of_limits_warning": true
+  },
+  "endpoint_symbol": {
+    "symbol": "exp(-z**2/4)",
+    "expected_gaussian_symbol": "exp(-z**2/4)",
+    "residual": "0",
+    "gaussian_symbol_nonzero": true,
+    "D_at_zero": "1"
+  },
+  "marker": "R8_STAGE7_ENDPOINT_SYMBOL_REPLAYED"
+}
