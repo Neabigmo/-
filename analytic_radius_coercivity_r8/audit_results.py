@@ -42,6 +42,7 @@ def main() -> None:
     fredholm = fredholm_defect_replay()
     cs = exact_hellinger_cauchy_schwarz()
     ou = ou_scale_replay()
+    fredholm = fredholm_defect_replay()
     exact_ok = (
         cs["sum_probability"] == "1"
         and radius["monomial_residual"] == "0"
@@ -49,6 +50,10 @@ def main() -> None:
         and endpoint["residual"] == "0"
     )
     fixed_ok = fixed["all_fixed_band_limits_exact"]
+    fredholm_ok = (
+        fredholm["functional_matrix_rank"] == fredholm["multiplicity"]
+        and all(value == "0" for value in fredholm["range_defect_residuals"])
+    )
     payload = {
         "exact_replays_pass": bool(exact_ok and fixed_ok),
         "probability_to_analytic_scale": "CONDITIONAL_ON_POSITIVE_RADIUS_HERMITE_MEMBERSHIP",
@@ -59,15 +64,15 @@ def main() -> None:
         "characteristic_solvability_defects": "Lambda_zeta_j(nonlinear_high_high_remainder + finite_n_correction)=0",
         "positivity_status": "POSITIVITY_ACTION_ON_FREDHOLM_DEFECT_UNRESOLVED",
         "r6_r7_compatibility": "RADIUS_LOSS_IS_NEW_COMPACTNESS_MECHANISM; DOES_NOT_REPAIR_R6_POINTWISE_SIGN_GAP_OR_R7_OPERATOR_COUNTERMODEL",
-        "decision": "RADIUS_GAP_COMPACTNESS_CERTIFIED_FREDHOLM_GAP_REMAINS" if exact_ok and fixed_ok else "FORMULA_CORRECTION_REQUIRED",
-        "marker": "R8_ANALYTIC_RADIUS_AUDIT_COMPLETED" if exact_ok and fixed_ok and fredholm["functional_matrix_rank"] == 2 else "R8_AUDIT_FAILED",
+        "decision": "RADIUS_GAP_COMPACTNESS_CERTIFIED_FREDHOLM_GAP_REMAINS" if exact_ok and fixed_ok and fredholm_ok else "FORMULA_CORRECTION_REQUIRED",
+        "marker": "R8_ANALYTIC_RADIUS_AUDIT_COMPLETED" if exact_ok and fixed_ok and fredholm_ok else "R8_AUDIT_FAILED",
     }
     (RESULTS / "r8_audit.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(payload["marker"])
     print("R8_RADIUS_GAP_COMPACTNESS", payload["radius_gap_compactness"])
     print("R8_FREDHOLM_STATUS", payload["fredholm_zero_status"])
     print("R8_DECISION", payload["decision"])
-    if not exact_ok or not fixed_ok:
+    if not exact_ok or not fixed_ok or not fredholm_ok:
         raise SystemExit(1)
 
 

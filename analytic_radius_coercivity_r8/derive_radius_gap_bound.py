@@ -53,12 +53,13 @@ def ou_scale_replay() -> dict:
 
 def main() -> None:
     RESULTS.mkdir(exist_ok=True)
+    cs = exact_hellinger_cauchy_schwarz()
     payload = {
-        "hellinger_cs": exact_hellinger_cauchy_schwarz(),
+        "hellinger_cs": cs,
         "radius_factors": radius_factor_bookkeeping(),
         "ou_scale": ou_scale_replay(),
-        "uniform_in_theta": True,
-        "angle_average_nonexpansive": True,
+        "uniform_in_theta": cs["sum_probability"] == "1",
+        "angle_average_nonexpansive": cs["sum_probability"] == "1" and sp.sympify(cs["cs_slack"]) >= 0,
         "marker": "R8_RADIUS_GAP_COMPACTNESS_REPLAY_COMPLETED",
     }
     (RESULTS / "radius_gap_bound.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -70,4 +71,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
