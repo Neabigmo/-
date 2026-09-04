@@ -1,0 +1,31 @@
+{
+  "circle_normalization": "sum(alpha_i)=0, average(sum(alpha_i^2))=1",
+  "circle_moments": {
+    "avg_p2": "1",
+    "avg_p3": "0",
+    "avg_p4": "1/2",
+    "avg_p5": "0",
+    "avg_p6": "5/18",
+    "avg_p3_squared": "1/12"
+  },
+  "radial_exp_phi_coefficients_rho3_to_rho6": {
+    "3": "0",
+    "4": "h4/2",
+    "5": "0",
+    "6": "h3**2/24 + 5*h6/18"
+  },
+  "forced_h4": "0",
+  "compatible_h6": "-3*h3**2/20",
+  "compatible_jet_choice": {
+    "h3": 1,
+    "h4": 0,
+    "h5": 0,
+    "h6": "-3/20"
+  },
+  "laplacian_circle_average_leading_term": "-9*h3**2*rho**4/4",
+  "laplacian_compatible_jet": "-9*h3**2*rho**4/4 - 5*sqrt(6)*I*h5*rho**3*t**3/3 + 5*sqrt(6)*I*h5*rho**3/(3*t**3)",
+  "rademacher_tv_gap_at_(a,-a,0)": "-2*tanh(a)**2",
+  "rademacher_tv_strictly_fails_for_a_nonzero": true,
+  "status": "TV_NOT_CERTIFIED; circle_identity_alone_is_insufficient_at_current_jet",
+  "limitation": "The compatible jet is not an actual probability-law counterexample; higher-order Fock constraints may still eliminate it."
+}
