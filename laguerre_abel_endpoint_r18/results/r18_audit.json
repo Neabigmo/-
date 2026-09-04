@@ -1,0 +1,62 @@
+{
+  "abel_transform": {
+    "abel_transform": "H(r)=(1-r)^(-1) integral_0^infty h(t) exp(-t/(1-r)) dt",
+    "consequence": "h(t)>=0 implies H(r)>=0",
+    "domain": "0 <= r < 1",
+    "laguerre_generating_function": "sum_{n>=0} r^n L_n(t)=(1-r)^(-1) exp(-t*r/(1-r))",
+    "logical_direction": "necessary consequence only; H(r)>=0 is not equivalent to h>=0"
+  },
+  "claims": {
+    "abel_formula_exact": true,
+    "c_equals_zero_proved": false,
+    "endpoint_uniform_coercivity_from_abel_kernel": false,
+    "full_D_r_derived": false,
+    "quadratic_form_positive_for_each_fixed_r": true
+  },
+  "data_inventory": {
+    "known_D_coefficients": {
+      "d0": "1/3",
+      "d1": "0",
+      "d2": "3*c1^2/2",
+      "d3": "4*c1*c2"
+    },
+    "known_D_truncation": "3*c1**2*r**2/2 + 4*c1*c2*r**3 + 1/3",
+    "missing": [
+      "all-orders Fock formula for d_n or D(r)",
+      "an identity relating D(r) to the odd sequence c_n beyond d0-d3",
+      "a boundary coercivity theorem forcing c=0"
+    ]
+  },
+  "decision": "B: Abel bridge certified; full D(r) kernel and coercivity remain open",
+  "endpoint_witness": {
+    "coefficient_norm_squared": "2",
+    "coefficients": [
+      "1",
+      "-1"
+    ],
+    "endpoint_ratio": "s**2",
+    "m_of_t": "t",
+    "nonzero_mode": true,
+    "quadratic_form": "2*r**2 - 4*r + 2",
+    "quadratic_form_at_r_1_minus_s": "2*s**2",
+    "uniform_endpoint_coercivity": false
+  },
+  "kernel_checks": {
+    "checked_pairs": 25,
+    "endpoint_polynomial_data": {
+      "K00_at_r0": "1",
+      "K01_at_endpoint": "1 - s",
+      "K01_at_r0": "0",
+      "K11_at_endpoint": "2*s**2 - 2*s + 1",
+      "K11_at_r0": "1"
+    },
+    "finite_kernel_matches_laplace_integral": true
+  },
+  "operator_form": {
+    "conditional_mean_transform": "M(r)=(1-r)^(-1) E[barX exp(-T/(1-r))]",
+    "conditional_second_moment_transform": "D(r)=(1-r)^(-1) E[barX^2 exp(-T/(1-r))]",
+    "kernel": "K_ij(r)=(1-r)^(-1) integral exp(-t/(1-r)) L_i(t)L_j(t)dt",
+    "positive_representation": "Q_r(c)=(1-r)^(-1) integral exp(-t/(1-r)) m(t)^2 dt >= 0",
+    "quadratic_form": "Q_r(c)=sum_{i,j} c_i c_j K_ij(r)"
+  }
+}
