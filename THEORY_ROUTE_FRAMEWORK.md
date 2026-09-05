@@ -2162,7 +2162,63 @@ rigidity 仍 OPEN。
 覆盖 forward-Jacobi norm/beta 包装、Gaussian triangle kernel、Schatten 代数及
 径向矩消零阶数；没有 optimizer、数值 sweep 或远程计算。
 
-## 25. 已探索路线与停止条件
+## 25. R30：Flat-shadow Sign-Compatible Augmented Adjoint Locality
+
+网页端在开始本轮前读取了本框架、工作日志、R29 审计资产和 Git 提交
+`e08d8e6cef8b6c9b313b39241b791b99d0fdfe7c`。本轮仍只讨论 genuine full-exact
+iid law；formal moment vector、Gaussian shadow、有限 multiplier 和 odd-control
+方向只作为恒等式/障碍审计对象，不构成反例。
+
+令 `N=2M+2`，`m_j=E_mu X^j`，`r_j=E_rho X^j`，且
+`d_0=...=d_(N-1)=0`、`d_N=q_M`。定义
+
+`G_n(v)=E_(v^tensor3) Q^n-2^n n!`,
+
+并沿 `v_s=r+s(m-r)` 定义路径平均 Jacobian
+
+`bar J_(n,j)=integral_0^1 partial_(v_j)G_n(v_s) ds`。
+
+则有全阶精确恒等式
+
+`G_n(m)-G_n(r)=sum_(j=0)^(2n) bar J_(n,j)d_j`。
+
+在 genuine exact law 的 `G_n(m)=0` 下，这就是 R30 的路径平均伴随起点。其
+结构性支点为
+
+`bar J_(n,2n)=3(2/3)^n>0`, `bar J_(n,2n-1)=0`，
+
+因此第一行 `n=M+1` 给出
+
+`q_M=-G_(M+1)(r)/(3(2/3)^(M+1))`。
+
+这仍然没有符号：任意有限 multipliers `lambda_n` 只产生精确的
+
+`q_M=-sum_(n=M+1)^K lambda_n G_n(r)-sum_(j=N+1)^(2K)c_j d_j`,
+
+其中 `c_j=sum_n lambda_n bar J_(n,j)` 且归一化 `c_N=1`。等式伴随本身没有
+正性，并且每个新 Q 等式配一个新的最高偶矩支点，同时留下后续奇矩的
+odd-control 方向；所以它只能给出“头部 = shadow defect + odd remainder”，不能
+给出“正的 Jacobi/Hamburger slack + 远端谱尾”。
+
+R30 的真正收窄是 augmented certificate：
+
+`q_M=sum_j eta_j S_j(mu)+sum_n lambda_n G_n(mu)+R_K`,
+
+其中 `eta_j>=0`、`S_j>=0` 是 Hamburger/Jacobi 正性余量，且 `R_K` 的 dual
+vector 只落在 `l>N_K`、`N_K->infinity`，并满足一个 law-independent weighted
+`ell^2` 界。若存在这样的证书，则由统一 square-exponential Hermite growth 得
+`R_K->0`，从而 `q_M>=0`；但本轮没有构造出 `lambda,eta`，因此这只是条件定理。
+
+当前最小 OPEN 改名为 **Sign-Compatible Augmented Adjoint Locality**：同时实现
+等式伴随、非负 Jacobi multipliers、固定/中间 one-body mode cancellation、纯远端
+残差和统一 weighted dual locality。`P_3K` 仍没有 charge-to-augmented-adjoint
+桥；Gaussian rigidity 仍 OPEN。
+
+本轮新增 `flat_shadow_augmented_adjoint_r30/audit_r30.py` 与 README。审计运行
+`R30_AUGMENTED_ADJOINT_IDENTITY PASSED`、`R30_SIGN_COMPATIBLE_LOCALITY REMAINS
+OPEN`、`R30_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远程计算。
+
+## 26. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -2175,7 +2231,7 @@ rigidity 仍 OPEN。
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 26. 每轮协作协议
+## 27. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -2188,10 +2244,10 @@ rigidity 仍 OPEN。
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 27. 当前 checkpoint
+## 28. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28、R29。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28、R29、R30。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -2226,12 +2282,11 @@ rigidity 仍 OPEN。
   明确 scalar/radial channel 的信息边界，运行 `R29_AUDIT_COMPLETED`。真正的
   tail-ejection certificate 仍未证明。
   `P_3K` 仍没有 quantitative bridge。
-- 当前方向：R29 已完成，最小 OPEN 仍为 `Uniform Flat-Shadow One-Body
-  Tail-to-Head Gain`，但现在具体化为 `Flat-Shadow Tail-Ejection Certificate`：
-  证明 negative `q_M` 必须支付远端 Hermite/Jacobi 尾，或构造 genuine
-  full-exact 的反例。后续应直接尝试 one-body `W` 的 adjoint/telescoping
-  relative estimate；不得再从已被 R28 精确抵消的 residual HS/Schur sector
-  堆叠形式。只有关闭 one-step sign 后，才回到 residual Laguerre `<3M` 与
-  R21 cubic amplifier。
+- 当前方向：R30 已完成，最小 OPEN 收窄为 `Sign-Compatible Augmented Adjoint
+  Locality`，下一轮直接检查 Jacobi slack `beta_n=B_n-S_(n-1)^2>=0` 能否为
+  equality-adjoint 的 odd-control 方向提供非负 dual pivot，并同时给出统一
+  weighted tail 界。若失败，应把 R25--R30 的 one-body tail-ejection route
+  记录为严格 no-go，不再做代数换名；只有关闭 one-step sign 后，才回到
+  residual Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

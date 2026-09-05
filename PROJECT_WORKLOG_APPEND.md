@@ -888,3 +888,38 @@
   initial run caught and removed one invalid self-substitution assertion in the
   audit itself; the corrected run exited 0.  No optimizer, numerical sweep, or
   remote computation was used.
+
+# 2026-09-06 — R30 sign-compatible augmented-adjoint locality
+
+- R30 reread the durable framework, worklog, R29 README/audit, and the recorded
+  commit `e08d8e6cef8b6c9b313b39241b791b99d0fdfe7c` before working.  The web-side
+  result stayed inside the genuine full-exact iid class.  Formal moment vectors,
+  Gaussian shadows, finite multipliers, and odd-control directions were used only
+  for exact algebra and obstruction analysis, never as full-exact counterexamples.
+- For `N=2M+2`, `d_0=...=d_(N-1)=0`, and `d_N=q_M`, define
+  `G_n(v)=E_(v^tensor3)Q^n-2^n n!` and the path average
+  `bar J_(n,j)=integral_0^1 partial_(v_j)G_n(r+s(m-r)) ds`.  The exact identity is
+  `G_n(m)-G_n(r)=sum_j bar J_(n,j)d_j`; on a genuine exact law `G_n(m)=0`.
+  The pivots are `bar J_(n,2n)=3(2/3)^n>0` and
+  `bar J_(n,2n-1)=0`, with the first row reproducing
+  `q_M=-G_(M+1)(r)/(3(2/3)^(M+1))`.
+- Finite multipliers yield the exact telescoping skeleton
+  `q_M=-sum lambda_n G_n(r)-sum_(j>N)c_jd_j` after `c_N=1`.  This is not an
+  inequality: equality-only adjoints have no sign, and after the matched prefix
+  each subsequent row leaves an odd-control direction.  Thus the equality route
+  alone cannot eject a negative head defect into a positive remote tail.
+- The sharpened target is an augmented certificate
+  `q_M=P_K+R_K`, where `P_K` is a nonnegative combination of Hamburger/Jacobi
+  slacks and `R_K` starts beyond `N_K->infinity` with a law-independent weighted
+  dual bound.  Under that bound, uniform square-exponential Hermite growth would
+  force `R_K->0` and hence `q_M>=0`; no actual `lambda,eta` construction was found.
+  The minimum OPEN is therefore **Sign-Compatible Augmented Adjoint Locality**.
+  `P_3K` remains disconnected from this locality problem.
+- Added `flat_shadow_augmented_adjoint_r30/audit_r30.py` and README.  The exact
+  SymPy audit covers the path identity for `n=2,3`, structural pivots, the first
+  row, the finite multiplier skeleton, and the post-prefix odd-control dimension.
+  The first run exposed and fixed a missing matched-prefix substitution in the
+  finite skeleton check; the corrected run exited 0 and printed
+  `R30_AUGMENTED_ADJOINT_IDENTITY PASSED`,
+  `R30_SIGN_COMPATIBLE_LOCALITY REMAINS OPEN`, and `R30_AUDIT_COMPLETED`.
+  No optimizer, SDP, large numerical sweep, or remote computation is used.
