@@ -2072,7 +2072,97 @@ Gaussian rigidity 仍 OPEN。
 Hoeffding 正交与范数公式、低阶矩匹配下的 residual cancellation，以及 pair-sum
 恒等式。没有 optimizer、数值 sweep 或远程计算。
 
-## 24. 已探索路线与停止条件
+## 24. R29：Flat-Shadow One-Body Tail-to-Head 的算子包装与障碍
+
+R29 先读取本文件、工作日志和 R28 审计资产至提交 `ea59523`。本轮仍只讨论
+genuine full-exact iid law；原子 shadow、Gaussian prefix、形式矩和有限谱只作
+恒等式审计，不构成 full-exact 反例。
+
+### 24.1 下一 Jacobi 范数差
+
+令 `rho_M=P_a nu_M`，`W=P_(-a)(xP_M)`。在 flat-boundary 的 null/正交前提下，
+`W` 是两侧共享的 monic degree-`M+1` orthogonal direction，而 `mu` 与
+`rho_M` 至少匹配到 `2M+1` 阶。因此
+
+`q_M=||W||_(L^2(mu))^2-||W||_(L^2(rho_M))^2`
+
+可重写为下一 Jacobi norm 的差
+
+`q_M=h_(M+1)(mu)-h_(M+1)(rho_M)`
+
+以及
+
+`q_M=h_M (beta_(M+1)^mu-beta_(M+1)^rho_M)`。
+
+这是对 R28 one-body 缺口的精确 forward-Jacobi 包装；它本身没有给出符号。
+同一 heat algebra 仍是
+`R=P_(-a)P_M`、`W=P_(-a)(xP_M)=xR-aR'`，且 `W` 保持 monic。
+
+### 24.2 Gaussian pair kernel 的全阶标量信息
+
+定义
+
+`k_tau(x,y)=exp(-tau(x-y)^2/6)`，
+`T_tau f(x)=integral k_tau(x,y)f(y)dmu(y)`。
+
+因
+`k_tau(x,y)=exp(-tau x^2/6) exp(-tau y^2/6) exp(tau xy/3)`，
+其幂级数是正 feature expansion，故 `T_tau` 为正算子；并且
+`Tr(T_tau)=1`。三角迹的指数使用
+
+`sum_(i<j)(X_i-X_j)^2=3Q`
+
+得到
+
+`Tr(T_tau^3)=E exp(-tau Q/2)=1/(1+tau)`
+
+（最后一个等号只在 genuine exact `Q~chi^2_2` 层面使用）。若特征值为
+`lambda_j>=0`，则 `sum lambda_j=1`、`sum lambda_j^3=1/(1+tau)`，从而
+
+`1/(1+tau) <= Tr(T_tau^2) <= 1/sqrt(1+tau)`,
+`||T_tau||_op <= (1+tau)^(-1/3)`。
+
+这些是 scalar/radial 的 Schatten 信息；它们没有把指定的 `W` 与 shadow
+范数联系起来。紧算子在无限维空间没有 uniform reverse coercivity，因此不能
+从 `T_tau` 的 smoothing/contraction 自动反推出 `q_M` 的方向。
+
+### 24.3 有限 Q 矩与真正的 tail 目标
+
+令 `Z_mu(z)=E exp(-zQ/2)`。若前 `K` 个 `Q` 矩匹配 exact 值
+`E Q^n=2^n n!`，则 `Z_mu(z)-(1+z)^(-1)` 在零点至少有 `K+1` 阶；在统一
+square-exponential growth 下，网页端给出的 Cauchy remainder 还产生一个局部
+指数尾估计。这说明 scalar radial channel 有真实的 tail decay，但仍不控制
+directional one-body Rayleigh defect。
+
+R29 的最强 conditional 证书是：若能对固定 nondegenerate flat window 证明
+
+`(-q_M)_+ <= C_(M,W) sum_(n>N_K) r0^n a_n(mu)^2`,
+`0<r0<r1<1`,
+
+并由统一 square-exponential growth 控制右侧，则得到 `Omega_K->0`，进而
+`q_M>=0`，再接回 plateau、Laguerre 和 R21 cubic amplifier。等价的理想形式是
+把 `q_M=P_K+R_K` 分解为 finite Hankel/Jacobi 非负 slack 与可由远端 Hermite
+尾控制的 remainder。该 relative tail-to-head estimate 尚未证明。
+
+### 24.4 当前最小 OPEN
+
+### Uniform Flat-Shadow One-Body Tail-to-Head Gain — OPEN
+
+真正缺失的含义是：negative flat-shadow head defect 必须强迫 uniformly visible
+remote spectral/Hermite tail。普通 Christoffel/Markov/Stieltjes、scalar radial
+exactness、Schatten contraction，以及纯 triangular Jacobi elimination 都只看
+有限前缀或 unitary-invariant 量，不能提供这个方向性的 reverse estimate。
+因此 R29 下一步应直接尝试 adjoint/telescoping certificate；若只能得到
+operator-only、common-only 或已在 R28 精确抵消的 residual sector 结论，应记录
+no-go 而停止。`P_3K` 仍没有 charge-to-one-body quantitative bridge，Gaussian
+rigidity 仍 OPEN。
+
+本轮新增 `flat_shadow_tail_gain_r29/audit_r29.py` 与 README，运行输出
+`R29_TAIL_EJECTION_CERTIFICATE REMAINS OPEN` 和 `R29_AUDIT_COMPLETED`。审计
+覆盖 forward-Jacobi norm/beta 包装、Gaussian triangle kernel、Schatten 代数及
+径向矩消零阶数；没有 optimizer、数值 sweep 或远程计算。
+
+## 25. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -2085,7 +2175,7 @@ Hoeffding 正交与范数公式、低阶矩匹配下的 residual cancellation，
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 25. 每轮协作协议
+## 26. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -2098,10 +2188,10 @@ Hoeffding 正交与范数公式、低阶矩匹配下的 residual cancellation，
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 26. 当前 checkpoint
+## 27. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28、R29。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -2130,12 +2220,18 @@ Hoeffding 正交与范数公式、低阶矩匹配下的 residual cancellation，
   antisymmetric residual mode，并排除独立正实 residual-source completion，运行
   `R27_AUDIT_COMPLETED`；R28 又把该 residual contraction 路线搬到正 shadow
   概率律并以 Hoeffding 分解证明 residual sector 精确抵消，剩余符号完全退回
-  one-body `W=P_(-a)(xP_M)` 范数差，运行 `R28_AUDIT_COMPLETED`。
+  one-body `W=P_(-a)(xP_M)` 范数差，运行 `R28_AUDIT_COMPLETED`；R29 又把 one-body
+  差包装为下一 Jacobi norm/beta gap，并以正 Gaussian pair kernel 的
+  `Tr(T_tau^3)=1/(1+tau)`、Schatten sandwich 和有限 `Q` 矩的径向变换消零阶数
+  明确 scalar/radial channel 的信息边界，运行 `R29_AUDIT_COMPLETED`。真正的
+  tail-ejection certificate 仍未证明。
   `P_3K` 仍没有 quantitative bridge。
-- 当前方向：R28 已完成，最小 OPEN 改为 `Uniform Flat-Shadow One-Body
-  Tail-to-Head Gain`，等价地研究 R25 的 `Omega_K` infinite-tail compactness
-  modulus。后续候选必须直接反馈到 one-body `W` 或全阶 exact hierarchy；不得
-  再从已被审计抵消的 residual HS/Schur sector 堆叠形式。只有关闭 one-step sign
-  后，才回到 residual Laguerre `<3M` 与 R21 cubic amplifier。
+- 当前方向：R29 已完成，最小 OPEN 仍为 `Uniform Flat-Shadow One-Body
+  Tail-to-Head Gain`，但现在具体化为 `Flat-Shadow Tail-Ejection Certificate`：
+  证明 negative `q_M` 必须支付远端 Hermite/Jacobi 尾，或构造 genuine
+  full-exact 的反例。后续应直接尝试 one-body `W` 的 adjoint/telescoping
+  relative estimate；不得再从已被 R28 精确抵消的 residual HS/Schur sector
+  堆叠形式。只有关闭 one-step sign 后，才回到 residual Laguerre `<3M` 与
+  R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

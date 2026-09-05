@@ -851,3 +851,40 @@
   `R28_AUDIT_COMPLETED`.  No optimizer, numerical sweep, or remote computation
   was needed.  The audit verifies identities only; it does not prove the
   one-body norm monotonicity or Gaussian rigidity.
+
+# 2026-09-06 — R29 flat-shadow one-body tail-to-head operator packaging
+
+- R29 reread the durable framework, worklog, R28 README/audit, and the recorded
+  commit `ea59523` before working.  The web-side analysis remained inside the
+  genuine full-exact iid law class.  Atomic shadows, Gaussian prefixes, formal
+  moments, and finite spectra were used only as algebraic audit devices; none
+  was promoted to a full-exact counterexample.
+- At the flat boundary, with `W=P_(-a)(xP_M)` and the common degree-`M+1`
+  orthogonal direction, the one-body defect has the exact forward-Jacobi form
+  `q_M=h_(M+1)(mu)-h_(M+1)(rho_M)` and
+  `q_M=h_M(beta_(M+1)^mu-beta_(M+1)^rho_M)`.  This packages the R28 sign problem
+  but does not determine its sign.
+- The positive kernel `k_tau(x,y)=exp(-tau(x-y)^2/6)` has a positive feature
+  expansion and trace one.  Since `sum_(i<j)(X_i-X_j)^2=3Q`, genuine exactness
+  gives `Tr(T_tau^3)=E exp(-tau Q/2)=1/(1+tau)`.  Positive-spectrum algebra then
+  gives `1/(1+tau)<=Tr(T_tau^2)<=1/sqrt(1+tau)` and
+  `||T_tau||_op<=(1+tau)^(-1/3)`.  These scalar/radial facts are explicitly
+  insufficient for the directional `W` norm gap because the infinite-dimensional
+  smoothing operator has no uniform reverse coercivity.
+- Matching the first `K` exact `Q` moments makes the radial transform difference
+  `Z_mu(z)-(1+z)^(-1)` vanish to order `K+1`; under the uniform growth hypothesis
+  this supports a conditional local exponential remainder estimate.  It still
+  leaves the directional tail-to-head implication unproved.
+- The minimum OPEN is now stated as `Uniform Flat-Shadow One-Body Tail-to-Head
+  Gain`, with the falsifiable `Flat-Shadow Tail-Ejection Certificate`: a negative
+  `q_M` must force a uniformly visible remote Hermite/Jacobi tail strong enough to
+  imply `Omega_K->0`.  Ordinary Christoffel/Markov/Stieltjes, scalar radial,
+  Schatten, and triangular Jacobi arguments are stop conditions.  `P_3K` remains
+  disconnected and Gaussian rigidity remains OPEN.
+- Added `flat_shadow_tail_gain_r29/audit_r29.py` and README.  The local SymPy
+  audit passed the forward-Jacobi norm/beta identity, positive kernel/triangle
+  trace exponent, Schatten algebra, and radial moment zero-order schema, printing
+  `R29_TAIL_EJECTION_CERTIFICATE REMAINS OPEN` and `R29_AUDIT_COMPLETED`.  The
+  initial run caught and removed one invalid self-substitution assertion in the
+  audit itself; the corrected run exited 0.  No optimizer, numerical sweep, or
+  remote computation was used.
