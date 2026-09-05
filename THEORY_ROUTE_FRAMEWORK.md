@@ -691,7 +691,83 @@ R15 的本机审计结论：逆候选的 order-2 矩增长、局部 Gram PSD 到
 Hamburger PSD 的有限差分链、Hermite signed-preimage 的正性/MGF 障碍均已
 核对；不需要长数值扫描或远程计算。
 
-## 11. 已探索路线与停止条件
+## 11. R16：Primitive Closedness / Tail-to-Head Viability
+
+### 11.1 逆 Hankel failure 的 Jacobi exit-time 重写
+
+固定 `r>1`，把逆候选的形式矩记为 `m_k^(r)`。在逆 Hankel 前缀仍严格
+正定时，形式正交多项式给出 Jacobi 系数 `α_j,β_j`，并令
+`S_j=∑_{ℓ=0}^j α_ℓ`。已有的 full-exact Jacobi factorization 可写成
+
+`G_n=(2^n/3^(n-1))(∏_{j=1}^{n-1}β_j)(β_n+S_(n-1)^2-B_n)`.
+
+因此 exactness 在尚未退出的前缀上等价于
+`β_n=B_n-S_(n-1)^2`。写
+`u_n=S_(n-1)/√B_n`，则 Hankel viability 是
+`β_n=B_n(1-u_n^2)≥0`，即 `|u_n|≤1`。
+
+同时，`Q^n` 中最高新偶矩的系数为 `3(2/3)^n`，所以第 `n` 个 full-
+`Q` 方程只决定 `m_(2n)`，而 `m_(2n-1)` 不进入该方程：若某变量出现
+次数 `2n-1`，其余总次数为 1，中心化给出的 `m_1=0` 使该项消失。由此
+得到精确的 triangularity：higher exact equations 不会代数地回头修改已经
+选择的低阶 odd controls。`M_r(π)` 可理解为 inverse exact Jacobi control
+trajectory 首次离开 `|u_n|≤1` 的 exit-time。
+
+### 11.2 严格 no-go：有限阶 exact/Hankel/forward 检验无法给统一界
+
+任取有限 `M`，把矩设为 Gaussian 矩直到 `2M-2`，取一个足够小的
+`m_(2M-1)=ε≠0`，并保持 `m_(2M)` 为 Gaussian 值。Gaussian 的截断
+Hankel 矩阵严格正定，故小 `ε` 下仍落在 truncated Hamburger cone 内；一维
+截断矩定理给出真实正概率律。它 centered、variance-one、非 Gaussian，且前
+`M` 个 `Q`-moments 仍精确等于 `χ²_2`。再作一步正 OU 平滑，仍能通过这些
+有限 exact/Hankel/forward-OU 检验。
+
+所以任何只依赖有限多个 `Q`-moments、有限 Hankel block 或有限阶 forward
+positivity 的证明，都不能得到 uniform `M(r)`。这不是 full-exact 反例，
+只说明若统一阶界成立，其来源必须是 infinite-tail positivity/growth 向
+finite-prefix viability 的非局部反馈，而非 finite algebraic elimination。
+
+### 11.3 无条件等价：rank closure 就是 primitive stratum 闭合
+
+令 `E` 为 genuine full-exact probability class，令
+`A_M(r)={μ∈E:H_M^(r)(μ)⪰0}`。在 R12 的一致 square-exponential bound
+下，`E` 的弱极限保留固定阶矩；R15 的 local-Hamburger lemma 给出
+
+`∩_M A_M(r)=E_r={μ∈E:r(μ)≥r}`.
+
+因此固定 `r>1` 的 Uniform Inverse-Hankel Rank Closure 等价于 primitive
+stratum `P={r(π)=1}` 不向 `E_r` 聚集；对所有 `r>1` 合起来，等价于
+`P` 在 `E` 中弱闭。换句话说，R16 的核心已经从“找一个神奇的有限
+determinant”改写为：full-exact probability cone 中 backward divisibility
+depth 是否在弱极限下稳定。普通概率紧性只给出 backward radius 的
+upper-semicontinuity，允许极限中 radius 向上跳，尚不足以关闭该缺口。
+
+### 11.4 `P₃K` 必须继续断开
+
+本轮没有得到 `P₃K≠0⇒m_3≠0` 或
+`P₃K≠0⇒M_r(π)≤M_0(r)`。即使在首个 density Hermite mode 为 `d=3`
+时有 strong-OU 下的局部 charge survival，其振幅仍可任意小，而每个固定
+Gaussian Hankel block 都是严格内点；qualitative charge survival 不能推出
+uniform rank bound。primitive endpoint 还可能只存在于 probability-law 层面，
+不属于 `L²/K` 正则类。因此 charge-to-Hankel bridge 仍是独立 OPEN。
+
+### 11.5 R16 的最小 OPEN
+
+### Primitive Closedness / Tail-to-Head Viability — OPEN
+
+对 genuine full-exact class，证明或否定
+`π_N` primitive 且 `π_N⇒π` 是否必推出 `π` primitive；等价地，固定
+`r>1` 时，`full same-factor all-degree exactness + forward positivity +
+uniform exact-law growth` 是否迫使逆 Jacobi trajectory 在一个
+`N`-independent finite order 前离开 `|u_n|≤1`。若不能，可能的结构性
+rank escape 必须表现为每个固定前缀趋于 Gaussian，但 exit index
+`M_r(π_N)→∞`；这仍只是精确化的可能形态，不是已构造的 full-exact 反例。
+
+R16 的本机审计结论：已核对 triangularity、有限截断 no-go、
+`∩_M A_M(r)=E_r` 的适用范围及 `P₃K` 的逻辑断开；未声称 uniform rank
+closure 或 Gaussian rigidity 已完成，不需要长数值计算。
+
+## 12. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -704,7 +780,7 @@ Hamburger PSD 的有限差分链、Hermite signed-preimage 的正性/MGF 障碍�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 12. 每轮协作协议
+## 13. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -717,17 +793,19 @@ Hamburger PSD 的有限差分链、Hermite signed-preimage 的正性/MGF 障碍�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 13. 当前 checkpoint
+## 14. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
   escape 被无条件排除。剩余唯一 Bochner 缺口是 `M_r→∞` 的
-  inverse-Hankel rank escape；另保留 `P_3K` sector 限定。
-- 当前方向：R16，攻击 `Uniform Inverse-Hankel Rank Closure`：寻找
-  same-factor full-exact hierarchy 对逆 Hamburger failure order 的统一上界，
-  或给出严格 no-go/结构性逃逸；继续单独审计 `P_3K` survival。
+  inverse-Hankel rank escape；R16 又把它等价重写为 primitive stratum 的弱
+  闭合/尾到头 viability 问题，并证明有限阶检验不能提供统一界；另保留
+  `P_3K` sector 限定。
+- 当前方向：R17，攻击 `Primitive Closedness / Tail-to-Head Viability`：寻找
+  full-exact probability cone 对 backward divisibility depth 的下半连续性，
+  或构造严格的结构性 no-go；继续单独审计 `P_3K` survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

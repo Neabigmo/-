@@ -256,3 +256,48 @@
   N-independent finite inverse-Hankel failure order? `P_3K` remains separate;
   no uniform charge-to-Hankel implication was obtained. No long computation or
   numerical scan was needed.
+
+# 2026-09-05 — R16 primitive closedness / tail-to-head viability
+
+- R16 re-read the post-R15 local record through the repaired connection. It did
+  not prove a uniform inverse-Hankel bound. Its substantive result is a sharper
+  reformulation: `M_r(pi)` is the exit time of an inverse exact Jacobi control
+  trajectory from the Hankel viability strip.
+- Using the already established full-exact Jacobi factorization, with formal
+  inverse moments `m_k^(r)`, Jacobi coefficients `alpha_j,beta_j`, and
+  `S_j=sum_{ell<=j} alpha_ell`, the exact `Q^n` identity has the form
+  `G_n=(2^n/3^(n-1))*product_{j<n} beta_j*(beta_n+S_(n-1)^2-B_n)`.
+  Before the first Hankel exit this gives `beta_n=B_n-S_(n-1)^2`; with
+  `u_n=S_(n-1)/sqrt(B_n)`, positivity is exactly `|u_n|<=1`.
+- The `Q^n` equation is triangular in the moments: the coefficient of the new
+  even moment is `3(2/3)^n`, while `m_(2n-1)` cannot occur because a term with
+  that exponent leaves total exponent one in the other variables and is killed
+  by centering (`m_1=0`). Thus higher exact equations do not algebraically feed
+  back to previously selected odd controls. Any uniform rank bound, if true,
+  must come from nonlocal infinite-tail positivity/growth.
+- Finite-horizon no-go: for any finite `M`, perturb a Gaussian moment prefix by a
+  small nonzero `m_(2M-1)` while keeping `m_(2M)` Gaussian. Strict positivity of
+  the Gaussian truncated Hankel block and the one-dimensional truncated
+  Hamburger theorem give a real positive centered variance-one non-Gaussian law
+  passing the first `M` exact `Q` checks. A forward OU step preserves positivity
+  and the same finite `Q`-moment checks. This is not a full-exact counterexample;
+  it rules out only finite-prefix proofs of a uniform `M(r)`.
+- Let `E` be the genuine full-exact probability class and
+  `A_M(r)={mu in E: H_M^(r)(mu)>=0}`. Combining fixed-moment continuity from R12
+  with the R15 local-Hamburger lemma gives
+  `intersection_M A_M(r)={mu in E: backward_radius(mu)>=r}`.
+  Consequently fixed-r Uniform Inverse-Hankel Rank Closure is equivalent to
+  primitive laws not accumulating on the deeper backward-divisible stratum;
+  over all `r>1`, it is equivalent to weak closedness of the primitive stratum
+  inside `E`. Ordinary probability/MGF compactness supplies only upper
+  semicontinuity of backward radius and permits an upward jump in the limit.
+- `P_3K` remains logically separate. No audited implication from nonzero third
+  charge to `m_3!=0`, or to a uniformly bounded inverse-Hankel failure order,
+  was found. Even d=3 local survival can have arbitrarily small amplitude while
+  every fixed Gaussian Hankel block remains strictly interior.
+- Minimal OPEN is now `Primitive Closedness / Tail-to-Head Viability`: determine
+  whether full-exact probability positivity and uniform exact-law growth force
+  backward divisibility depth to be stable under weak limits. A rank-escape
+  sequence would have every fixed prefix asymptotically Gaussian but
+  `M_r(pi_N)->infinity`; no genuine full-exact example is known. No long
+  numerical computation was needed.
