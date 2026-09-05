@@ -542,3 +542,53 @@
   log-Stirling check, printing `R21_AUDIT_COMPLETED`.
 - Minimal OPEN is now `Post-Failure Tensor-Tail Domination`. Gaussian rigidity
   remains OPEN.
+
+# 2026-09-06 — R22 adjacent heat-Hankel transversality / flat leakage
+
+- R22 re-read the durable framework and worklog through commit `13f36d2` before
+  working. It stayed within the genuine full-exact iid inverse formal hierarchy;
+  no finite matrix, non-iid law, or formal candidate was promoted to a
+  full-exact counterexample.
+- Forward positivity can be written after scaling `tilde(mu)=D_r mu` as a
+  backward Gaussian heat transform with `b=r^2-1`. Vandermonde harmonicity and
+  the heat product identity give
+  `D_n(Lambda_r)=sum_k (-b)^k C_(n,k)`, with every `C_(n,k)>=0` and universal top
+  coefficient `C_(n,N_n)=prod_(j=0)^n j!`. This is a genuine all-order positivity
+  constraint, but it is an alternating polynomial at negative heat time.
+- The expansion does not compare the different coefficient arrays for
+  `D_M,D_(M+1),...,D_(3M)`. Thus it gives no zero interlacing, small-value
+  transversality, determinant-ratio bound, or uniform flat-leakage horizon. In
+  particular, absolute moment growth does not prevent `D_M` from approaching zero.
+- At a corank-one flat crossing, the first Jacobi norm crosses transversely:
+  `h'_M=L[(P'_M)^2]>=M^2 h_(M-1)>0`. The next determinant has the exact leakage
+  formula `D_(M+1)=-D_(M-1)*ell_M^2`. If `ell_M` is nonzero, the first nearby
+  post-failure norm is generically positive, so the nearest mixed tensor sector
+  helps rather than cancels the negative `h_M^3` channel. If `ell_M=0`, coherent
+  leakage can be delayed; infinite delay would force a finite-atomic flat branch,
+  incompatible with the continuous chi-square radial law, but no uniform delay
+  bound is known.
+- For a fixed countable sequence, real-analytic determinant dependence permits a
+  generic radius avoiding all individual determinant zeros, giving quasi-definite
+  Jacobi coordinates. This is only fixed-sequence coordinate hygiene and does
+  not yield uniform near-flat coercivity.
+- Any degree-`3M` residual test with nonzero top part has a nonzero rotationally
+  averaged `h_(3M)` channel. Translation invariance also forces six adjacent
+  coefficients around a nonzero `(M,M,M)` coefficient, with the sharp lower bound
+  `sum_six |c_adj|^2 >= 3M^2/(2(M+1)^2)|c_(M,M,M)|^2`. If `h_M,h_(M+1)<0`, these
+  adjacent sectors are positive and can already compete with the central cubic
+  term under the stated Jacobi-ratio threshold.
+- Exact triangularity leaves the new odd moment `m_(2M+1)` free at the relevant
+  stage, and the near-flat denominator in `alpha_M` can blow up. Therefore no
+  relative `beta_(M+1)/|beta_M|` bound follows from exactness plus absolute
+  growth alone. The most precise missing bridge is cross-rank heat-Hankel
+  zero/small-value geometry or a flat-leakage horizon theorem.
+- `P_3K` remains disconnected. The residual `cos(3*theta)` harmonic is not the
+  nonlinear log-density charge, and no charge-to-leakage, charge-to-Jacobi, or
+  charge-to-determinant estimate was obtained. Gaussian rigidity remains OPEN,
+  and no genuine full-exact iid non-closed sequence was constructed.
+- Added `post_failure_tensor_tail_r22/audit_r22.py` and its README. The audit
+  passed the Vandermonde heat identity/top coefficient, flat transversality,
+  flat leakage determinant, adjacent coefficient bound, and representative
+  degree-`3M` `h_(3M)` channel check, printing `R22_AUDIT_COMPLETED`.
+- Minimal OPEN is now `Adjacent Heat-Hankel Transversality / Flat-Leakage
+  Control`. Gaussian rigidity remains OPEN.

@@ -1330,7 +1330,135 @@ projection geometry、rotational polynomial lift、first-failure capture/ridge
 multiplier、`Gamma_M` 精确式和 Stirling 尺度；运行输出 `R21_AUDIT_COMPLETED`。
 这些是 proof-level 代数/尺度核验，不是 Gaussian rigidity 证明。
 
-## 17. 已探索路线与停止条件
+## 17. R22：Adjacent Heat-Hankel Transversality / Flat-Leakage Control
+
+R22 在读取 R21 的本机提交 `13f36d2` 后，继续严格限定 genuine full-exact iid
+inverse formal hierarchy。它没有证明 `Post-Failure Tensor-Tail Domination`，但把
+缺口再压缩到相邻 Hankel determinants 的跨 rank 小值/零点几何：forward positivity
+给每个 rank 一个全阶正系数 heat expansion，却尚未给出不同 rank 之间的相对控制。
+
+### 17.1 forward positivity 的 heat-Hankel alternating 展开
+
+固定 `r>1`，令 `b=r^2-1`，把真实 positive exact law 缩放为
+`tilde(mu)=D_r mu`。固定半径的 inverse formal functional 满足
+`M_(Lambda_r)(z)=exp(-b z^2/2) M_(tilde(mu))(z)`。令
+
+`D_n(L)=det[L(x^(i+j))]_(i,j=0)^n`,
+`V_n=prod_(i<j)(x_j-x_i)`, `N_n=n(n+1)/2`。
+
+Vandermonde 是 harmonic polynomial，且
+
+`D_n(L)=1/(n+1)! L^(tensor(n+1))[V_n^2]`,
+
+`exp(a Delta/2)V^2=sum_alpha a^|alpha|/alpha! (partial^alpha V)^2`。
+
+代入负 heat time `a=-b` 得到
+
+`D_n(Lambda_r)=sum_(k=0)^(N_n) (-b)^k C_(n,k)(tilde(mu))`,
+
+其中每个 `C_(n,k)>=0`，最高系数为
+`C_(n,N_n)=prod_(j=0)^n j!`。这是 genuine forward positivity 给出的全阶
+约束，不是 formal positivity；但负 heat time 使其表现为 alternating cancellation。
+
+### 17.2 仍没有 cross-rank tail control
+
+即使已知 `D_j(-b)>0`（`j<M`）而 `D_M(-b)<0`，上述展开对每个 `n` 使用的仍是
+不同的正系数数组 `(C_(n,k))`。它没有推出
+`D_(M+1),...,D_(3M)` 的 zero interlacing、small-value transversality、相对
+determinant bound 或 flat-leakage horizon。R12 的 moment growth 最多提供绝对尺度
+上界，不能防止 `|D_M|` 接近零，因此不能直接支持 cubic amplifier 所需的
+relative Jacobi ratio estimate。
+
+### 17.3 flat-Hankel crossing 与 leakage
+
+在 flat 点若 `H_(M-1) ≻ 0`、`H_M >= 0` 且 `D_M=0`，则新增的 monic null
+polynomial `P_M` 只给出 corank-one flat block。沿 forward heat parameter `a`，
+`h_M` 的导数满足
+
+`d h_M/da = L_a[(partial_x P_M)^2]`,
+
+并在 flat 点有
+`h'_M >= M^2 h_(M-1)>0`。所以非退化 flat crossing 是横截的，`D_M` 沿
+backward 方向线性穿过零点。
+
+令 `ell_M=L_*(P_M x^(M+1))`。换到
+`P_0,...,P_(M-1),P_M,Q_(M+1)` 的基后，flat 尾块给出精确公式
+
+`D_(M+1)(b_*)=-D_(M-1)(b_*) ell_M^2 <=0`。
+
+若 `ell_M != 0`，越过 crossing 进入 `h_M<0` 后通常有 `h_(M+1)>0`；最近的
+`(M-1,M,M+1)` tensor sector 因而会帮助负的 `h_M^3`，而不是自动抵消它。真正
+困难的是 `ell_M=0` 的 coherent leakage delay。若 leakage 无限延迟，会落入有限
+原子 flat extension，与完整连续 `chi_2^2` 径向律冲突；但现有 triangularity
+没有给出 uniform leakage horizon，有限 flat branch 也能通过许多后续 `Q`-moment
+方程。
+
+对固定可数序列，`D_n(r)` 关于 `r` 为 real analytic 且 `D_n(1)>0`，因此可以在
+`(1,R)` 选 generic `r` 避开全部 determinant zeros，使每个单独轨迹 quasi-definite。
+这只解决固定序列的坐标合法性，不提供 near-flat 的 uniform coercivity。
+
+### 17.4 degree `3M` 的结构性污染与相邻系数障碍
+
+任何非零 degree-`3M` residual top part `H_(3M)` 在旋转平均中都带来非零的
+`h_(3M)` channel，系数为
+`3(2/3)^(3M)||H_(3M)||_(L2(S1))^2`。所以想利用
+`P_M(X_1)P_M(X_2)P_M(X_3)` 的 triple pivot，不能通过选择测试多项式彻底绕开
+post-failure horizon。
+
+若最高齐次 residual polynomial 的 central coefficient 为 `c_(M,M,M)=c`，
+translation invariance `partial_1+partial_2+partial_3=0` 强制相邻六个系数满足
+
+`sum_six |c_(a,b,c)|^2 >= 3M^2/(2(M+1)^2) |c|^2`。
+
+这些 sector 都带 `h_(M-1)h_M h_(M+1)`。当 `h_M<0`、`h_(M+1)<0` 时它们是正
+贡献；若
+`beta_(M+1)/|beta_M| >= 2(M+1)^2/(3M^2)`，则相邻正项已足以压过 central
+`h_M^3` 项本身。故 R21 的 `Gamma_M h_M^3` 不能脱离 one-step post-failure
+ratio 单独统治 remainder。
+
+### 17.5 exact triangularity 与绝对 growth 不足以控制 ratio
+
+Jacobi recursion 中 `beta_(M+1)=B_(M+1)-S_M^2`，而
+`alpha_M=L(xP_M^2)/h_M` 的分母在 near-flat 时爆炸。`L(xP_M^2)` 对新奇矩
+`m_(2M+1)` 的系数为 1，且第 `M+1` 个 `Q`-exact 方程不含该新奇矩；因此
+triangularity 仍允许调节它来延迟 leakage。由
+
+`|beta_(M+1)/beta_M|=|D_(M+1)|D_(M-1)^3/(|D_M|^3 D_(M-2))`,
+
+可以看出绝对 moment growth 并不给所需的 relative bound。R22 因而排除了两条
+策略：只用 first failure block 的 cubic 证明，以及只用 exact triangularity 加
+绝对 growth 推出 post-failure ratio 控制。
+
+### 17.6 P₃K 与 R22 仍断开
+
+`cos(3 theta)` 只来自 residual cubic harmonic，不是 nonlinear log-density charge
+`P_3K`。本轮没有得到 `P_3K != 0` 到 `|ell_M|`、Jacobi ratio、determinant
+zero geometry 或 tail domination 的定量桥。因此 P₃K 继续与 R22/R23 closure
+逻辑断开。
+
+### 17.7 R22 结论与 R23 最小 OPEN
+
+无条件保留：forward positivity 的 heat-Hankel 正系数展开、flat crossing 横截性、
+flat leakage 行列式、degree `3M` 对 `h_(3M)` 的结构性污染，以及相邻系数/ratio
+障碍。没有证明 post-failure tensor-tail domination，也没有构造 genuine full-exact
+iid 非闭合序列。
+
+当前最小 OPEN 改为：
+
+### Adjacent Heat-Hankel Transversality / Flat-Leakage Control — OPEN
+
+对 genuine full-exact iid inverse heat-Hankel trajectory，若 `M` 是第一个 negative
+rank，forward positivity 与 same-factor all-degree exactness 是否迫使 flat null
+relation 在可控 horizon 内 leakage，或在 `h_M,h_(M+1)<0` 的情形给出足够的
+`beta_(M+1)/|beta_M|` uniform bound？若连这一阶都无法控制，R21 的 triple-pivot
+amplifier 不能启动；若能，再向 `M+2,...,3M` 迭代。
+
+本轮新增 `post_failure_tensor_tail_r22/audit_r22.py` 与 README，核验 Vandermonde
+harmonic heat identity、flat crossing、flat leakage、adjacent coefficient bound 和
+degree-`3M` 的 `h_(3M)` 通道；运行输出 `R22_AUDIT_COMPLETED`。这些是 proof-level
+代数/尺度核验，不是 Gaussian rigidity 证明。
+
+## 18. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1343,7 +1471,7 @@ multiplier、`Gamma_M` 精确式和 Stirling 尺度；运行输出 `R21_AUDIT_CO
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 18. 每轮协作协议
+## 19. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1356,10 +1484,10 @@ multiplier、`Gamma_M` 精确式和 Stirling 尺度；运行输出 `R21_AUDIT_CO
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 19. 当前 checkpoint
+## 20. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1372,9 +1500,11 @@ multiplier、`Gamma_M` 精确式和 Stirling 尺度；运行输出 `R21_AUDIT_CO
   Esscher–affine congruence 精确解决，并把缺口压成 multiscale affine alignment
   与 diagonal-tensor capture；R21 又在 genuine iid residual 几何内排除了只使用
   first failure block 的 dimension-free reverse-Schur，并发现 degree `3M` 的
-  triple-pivot amplifier；另保留 `P_3K` sector 限定。
-- 当前方向：R22，攻击 `Post-Failure Tensor-Tail Domination`：控制第一个负
-  Jacobi pivot 后 `M<k<=3M` 的 signs/sizes 与 tensor partitions，判断 cubic
-  amplifier 是否必然暴露负 pivot；继续单独审计 `P_3K` survival。
+  triple-pivot amplifier；R22 又把 post-failure 控制压成 heat-Hankel 跨 rank 小值、
+  flat leakage horizon 与 one-step Jacobi ratio；另保留 `P_3K` sector 限定。
+- 当前方向：R23，攻击 `Adjacent Heat-Hankel Transversality / Flat-Leakage Control`：
+  控制第一个负 rank 后的零点/小值几何、flat leakage 与
+  `beta_(M+1)/|beta_M|`，再判断能否向 `M+2,...,3M` 迭代；继续单独审计 `P_3K`
+  survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
