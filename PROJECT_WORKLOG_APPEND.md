@@ -637,3 +637,50 @@
   the next-Q-moment overshoot of the M-atomic iid quadrature shadow.  If that
   bridge holds, the remaining scale problem is improving the unconditional
   `O(M^3)` plateau horizon to `O(M)` (ideally `<=3M`).
+
+# 2026-09-06 — R24 infinite-tail flat-shadow orientation
+
+- R24 re-read the durable framework and worklog through the R23 final revision
+  `a006184` before starting.  The web-side analysis remained inside the genuine
+  full-exact iid class; all finite-prefix constructions below are strategy
+  no-go evidence, not full-exact counterexamples.
+- At a corank-one inverse-heat boundary with
+  `H_(M-1) ≻ 0`, `H_M ⪰ 0`, `ker H_M = <P_M>` and `ell_M = 0`, the null relation
+  extends one degree.  The next monic Schur direction is `x P_M`, so the
+  dangerous Schur complement is exactly
+  `q_M = L_(a_*)(x^2 P_M^2)`.  With `v_*=1-a_*` and
+  `T=Q/(2v_*)`, this is equivalently
+  `q_M = 3^M v_*^(M+1)[(M+1)! - E_(nu_M^3)T^(M+1)]`
+  and
+  `q_M = (-1)^M 3^M v_*^(M+1)(M+1)! E L_(M+1)(T)`.
+  Thus the one-step question is an orientation statement for the first unfixed
+  radial Laguerre coefficient, not a generic finite quadrature inequality.
+- A fully explicit positive 3-atomic Jacobi seed has one-body moments
+  `(1,0,1,1,3,4-2√3,22,3-36√3,274+44√3)`.  Its three iid copies satisfy
+  `EQ=2`, `EQ^2=8`, `EQ^3=48`, but
+  `EQ^4=4336/9+64√3>384`.  Its annihilating `P_3` gives `ell_3=0`; choosing
+  the formal next even moment to make `Q^4` exact yields
+  `q_3=-(165+108√3)<0`.
+- The same bad branch survives any preassigned finite exact horizon by the
+  triangular odd-moment freedom, and sufficiently large forward Gaussian
+  smoothing restores strict finite Hankel positivity.  This proves a strong
+  finite-horizon iid-compatible no-go: no proof using only a fixed finite number
+  of exact `Q` equations can establish `q_M>=0`.  It does not construct a
+  genuine full-exact non-Gaussian law; the missing implication is genuinely
+  infinite-tail -> one-step sign.
+- A local plateau refinement is available: `q_M>0` implies
+  `g_M=g_(M+1)>g_(M+2)`, because PSD at rank `M+2` would force the null
+  polynomial to be orthogonal through degree `M+2`, contradicting
+  `L(x^2P_M^2)=q_M>0`.  Hence a long plateau can only occur in the more
+  degenerate `q_M=0` branch.  The remaining scale problem can be written as an
+  M-atomic residual Laguerre zero-multiplicity bound, ideally with first defect
+  `<3M`.
+- Added `infinite_tail_flat_shadow_r24/audit_r24.py` and README.  The local audit
+  passed the null-square/explicit-overshoot calculation, the Laguerre sign
+  identity, and the positive Gaussian-smoothed finite-prefix witness, printing
+  `R24_AUDIT_COMPLETED`.  It intentionally does not prove the infinite-tail
+  orientation, the `<3M` plateau bound, or any `P_3K` bridge.
+- The correct R24 minimum OPEN is now `Infinite-Tail Flat-Shadow Orientation`:
+  under the genuine full-exact boundary and `ell_M=0`, prove or refute
+  `L(x^2P_M^2)>=0`, equivalently the first unfixed Laguerre sign.  Gaussian
+  rigidity remains OPEN.

@@ -1602,7 +1602,98 @@ rigidity 证明。
 若成立，R23 的 one-step cancellation obstacle 消失；下一关是把目前
 `O(M^3)` 的 plateau horizon 改进到 cubic 需要的 `O(M)`。
 
-## 19. 已探索路线与停止条件
+## 19. R24：Infinite-Tail Flat-Shadow Orientation
+
+R24 在读取 R23 最终修订提交 `a006184` 后，继续严格限定 genuine full-exact iid
+law；finite-prefix、ordinary iid stress test、exchangeable/non-iid 与 formal
+extension 只用于证明策略的 no-go，不计为 Gaussian rigidity 反例。
+
+### 19.1 无条件 reduction：`q_M` 是 null direction 的下一平方
+
+在 flat boundary `a_*=g_M` 上，若
+`H_(M-1)≻0, H_M⪰0, ker H_M=<P_M>` 且 `ell_M=0`，则 `P_M` 的正交关系从
+`deg<=M` 延长到 `deg<=M+1`。因此可把下一 monic Schur direction 取为
+`R_(M+1)=xP_M`，并得到
+
+`q_M=L_(a_*)(x^2 P_M^2)`。
+
+所以 R23 的 one-step overshoot exclusion 精确等价于
+
+`L(P_M^2)=L(xP_M^2)=0  =>  L(x^2P_M^2)>=0`。
+
+若令 `v_*=1-a_*`、`T=Q/(2v_*)`，则前 `M` 个 radial moments 为 `E T^j=j!`，并有
+
+`q_M=3^M v_*^(M+1)[(M+1)!-E T^(M+1)]`
+
+`=(-1)^M 3^M v_*^(M+1)(M+1)! E L_(M+1)(T)`。
+
+因此剩余命题不是一般的 atomic quadrature extremality，而是首个未定 radial
+Laguerre coefficient 的方向性：
+
+`(-1)^M E_(nu_M^3)L_(M+1)(Q/(2v_*)) >= 0`。
+
+### 19.2 严格 finite-prefix no-go：任意有限 exact horizon 都不足
+
+R24 给出一个显式的 `M=3` 正 3-原子 Jacobi seed，其 one-body moments 为
+`(1,0,1,1,3,4-2√3,22,3-36√3,274+44√3)`。三个 iid copies 满足
+
+`E Q=2, E Q^2=8, E Q^3=48`,
+
+但
+`E Q^4=4336/9+64√3>384`。
+
+其 `P_3` 在 support 上消失，故 `ell_3=0`；把 `m_8` 改为满足 `Q^4` exact 的
+formal value `109-64√3` 后，仍有
+
+`q_3=-(165+108√3)<0`。
+
+这严格说明 positivity、iid、same-factor、flatness 与任意固定有限段 exactness
+本身都不能推出 `q_M>=0`。进一步，利用 exact recurrence 的新 odd moment 自由度，
+固定任意有限 `K` 后可把该坏 prefix 延长至 `Q^K`，再施加足够大的 forward
+Gaussian smoothing，使有限 Hankel block 恢复严格正定。该构造仍然只是有限前缀
+no-go；它不构造 genuine full-exact non-Gaussian law。
+
+### 19.3 一个新的局部 plateau refinement
+
+在 `ell_M=0` 分支，若 `q_M>0`，则 `H_(M+1)` 在 boundary 仍为 PSD，但若
+`H_(M+2)` 也 PSD，kernel property 会强迫 `P_M` 与所有 degree `<=M+2` 多项式
+正交，特别给出 `L(x^2P_M^2)=0`，与 `q_M>0` 矛盾。因此
+
+`q_M>0 => g_M=g_(M+1)>g_(M+2)`。
+
+长 plateau 只能发生在更退化的 `q_M=0` 分支。此时可把 plateau 改写成纯
+atomic-Laguerre zero-multiplicity 问题：若 `nu` 为 M-atomic one-body shadow，
+`A_n=E_(nu^3)L_n(Q/(2v))`，则 plateau 到 `N` 意味着
+`A_1=...=A_(N-1)=0`。下一步应证明
+`min{n>=1:A_n!=0}<3M`（最好给出 universal `c<=3`），以把 R23 的
+`O(M^3)` support-count 界压到 cubic amplifier 所需的线性尺度。
+
+### 19.4 R24 的逻辑等级与最小 OPEN
+
+R24 已证明/保留：`q_M=L(x^2P_M^2)` 的 null-square reduction、Laguerre sign
+identity、显式 `M=3` finite-prefix overshoot，以及 finite-horizon no-go 的构造
+机制。尚未证明 `q_M>=0`，也没有 genuine full-exact iid non-closed sequence。
+
+因此当前最小 OPEN 精确改名为：
+
+### Infinite-Tail Flat-Shadow Orientation — OPEN
+
+对 genuine full-exact iid law，在
+`H_(M-1)≻0, H_M⪰0, ker H_M=<P_M>, ell_M=0` 时，simultaneous all-degree
+exactness、genuine forward positivity 与 uniform exact-law growth 是否强迫
+`L(x^2P_M^2)>=0`？等价地，是否强迫首个未定 Laguerre 系数满足上面的定向不等式？
+
+若该命题成立，下一关是 `M`-atomic residual Laguerre zero-multiplicity `<3M`，
+再之后才继续 R21 的 post-failure tensor-tail domination。`P_3K` 仍完全断开：
+没有 charge-to-Jacobi/determinant/Loewner 的 quantitative bridge，不能把
+`P_3K≠0` 接入 R24 closure。
+
+本轮新增 `infinite_tail_flat_shadow_r24/audit_r24.py` 与 README，运行输出
+`R24_AUDIT_COMPLETED`。本机只核验上述局部代数、显式 seed、Laguerre 恒等式和
+Gaussian-smoothed finite-prefix 正定性，不把 finite-prefix no-go 写成 full-exact
+反例，也不把 R24 写成 Gaussian rigidity 证明。
+
+## 20. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1615,7 +1706,7 @@ rigidity 证明。
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 20. 每轮协作协议
+## 21. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1628,10 +1719,10 @@ rigidity 证明。
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 21. 当前 checkpoint
+## 22. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1649,10 +1740,12 @@ rigidity 证明。
   `g_(n+1)<=g_n`、first-zero transversality
   `|beta_n|>=n^2(a-g_n)`，并把 generic leakage、degenerate overshoot 与 plateau
   三分支分开；plateau 只得到 `O(M^3)` 终止界，且 ordinary iid 的完整 zero
-  interlacing 被 discriminant `-216` 严格排除；另保留 `P_3K` sector 限定。
-- 当前方向：R24，攻击 `Flat-Shadow One-Step Overshoot Exclusion`：在严格
-  genuine full-exact iid 类内证明或否定 `ell_M=0 => q_M>=0`，等价检查
-  M-atomic iid quadrature shadow 的下一阶 Q-moment 是否必不 overshoot；若成立，
+  interlacing 被 discriminant `-216` 严格排除；R24 又把 one-step 问题化为
+  `q_M=L(x^2P_M^2)` 的 infinite-tail Laguerre orientation，并核验显式 finite-prefix
+  overshoot no-go，运行 `R24_AUDIT_COMPLETED`；另保留 `P_3K` sector 限定。
+- 当前方向：R24 已完成，最小 OPEN 改为 `Infinite-Tail Flat-Shadow Orientation`：
+  在严格 genuine full-exact iid 类内证明或否定 `ell_M=0 => q_M>=0`，等价检查
+  M-atomic iid quadrature shadow 的首个未定 Laguerre 系数是否必定向下；若成立，
   再把 plateau 的 `O(M^3)` horizon 改进到 cubic 所需的 `O(M)`，若不能则给出
   最小缺失条件。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
