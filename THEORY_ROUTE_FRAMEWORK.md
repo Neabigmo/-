@@ -2794,3 +2794,86 @@ SymPy 符号元组可变性问题和零多项式的 grade 约定后，审计输�
 `R35_CUBIC_FIRST_GRADE_LINEARITY PASSED`、`R35_FIRST_IDEAL_GRADE_CANONICAL PASSED`、
 `R35_FOCK_SOS_ANCHOR_TAX PASSED`、`R35_BOUNDED_FOCK_SOS_TRANSGRESSION NO_GO`、
 `R35_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`、`R35_AUDIT_COMPLETED`。
+
+## 34. R36：一体 Laguerre--Hoeffding 载体的固定头敏感性塌缩
+
+网页端在开始 R36 前先读取了本框架、工作日志、R35 README/审计，并核对真实
+HEAD `3e537e8`。本轮只推进一个新的可证伪子命题：能否用高 Laguerre 阶的一体
+Hoeffding 投影承载首个固定 Hermite/Fock 头部 mismatch，同时保持 Gaussian
+anchor 消失、固定头敏感性不塌缩和远端系数范数统一有界。
+
+### 34.1 full-exact iid 下的 Laguerre--Hoeffding 恒等式
+
+取 `Phi_n(X_1,X_2,X_3)=L_n(T)`，`T=(X_1^2+X_2^2+X_3^2)/2`。在 genuine
+full-exact iid law 下，`T~Exp(1)`，所以 `E Phi_n=0`、`E Phi_n^2=1` (`n>=1`)。
+令 `k_n^mu(x)=E_mu[Phi_n|X_1=x]`，并作三阶 Hoeffding 分解。正交性给出
+
+`1=3||k_n^mu||^2+3||h_(2,n)^mu||^2+||h_(3,n)^mu||^2`。
+
+一体投影的五副本 shared-coordinate 公式为
+
+`||k_n^mu||^2=E_{mu^5}[Phi_n(X_1,X_2,X_3)Phi_n(X_1,X_4,X_5)]`。
+
+这一步使用的是同一坐标共享后的 iid Fubini 分解，不是任意 exchangeable law
+上的形式类比。
+
+### 34.2 Gaussian anchor 的精确衰减
+
+在 Gaussian residual plane 上，令 `T=(R_1^2+R_2^2)/2`，`h_m=H_m/sqrt(m!)`。
+角向平均满足
+
+`E_theta h_(2n)(R dot e_theta)=(-1)^n c_n L_n(T)`，
+`c_n=sqrt((2n)!)/(2^n n!)`。
+
+Gaussian 条件收缩再给出
+
+`k_n^gamma(x)=kappa_n h_(2n)(x)`,
+`kappa_n=(-1)^n c_n(2/3)^n`,
+`||k_n^gamma||^2=binom(2n,n)/9^n`。
+
+故一体 energy `A_n(gamma)=3 binom(2n,n)/9^n` 指数趋于零；一体高阶载体
+天然丢失 `(2/3)^n` 量级的信息。
+
+### 34.3 固定 head 的敏感性同样塌缩
+
+取首个 mismatch `N=2M+2`，`Delta_N=q_M/sqrt(N!)`。沿形式 tangent
+`dmu_epsilon=(1+epsilon h_N)d gamma` 做导数审计（这只是导数测试，不是概率候选），
+五副本恒等式给出
+
+`dot A_(n,N)=3(S_(n,N)+4L_(n,N))`，
+
+其中 shared term `S_(n,N)=kappa_n^2 E[h_N h_(2n)^2]`，leaf term 满足
+`|L_(n,N)|<=|kappa_n|`。当 `N` 为偶数且 `N<=4n` 时，精确 Hermite triple
+coefficient 为
+
+`E[h_N h_(2n)^2]=sqrt(N!)(2n)!/((2n-N/2)!(N/2)!^2)`。
+
+因此对每个固定 `N`，
+`|dot A_(n,N)| <= C_N(1+n^(N/2))(2/3)^n ->0`。
+
+### 34.4 一体远端 carrier 的严格 no-go 与新的 OPEN
+
+若 `J_K(mu)=sum_{n>=R_K} lambda_(n,K)A_n(mu)` 且
+`sum|lambda_(n,K)|^2<=C^2`，Cauchy--Schwarz 与上面的敏感性塌缩共同推出：
+Gaussian value 和固定 head sensitivity 都趋于零。要传递
+`[u^N](J_K(mu_u)-J_K(rho_u))=q_M`，就必须让一体系数范数至少按
+`R_K^{-N/2}(3/2)^{R_K}` 爆炸。具有统一 `l2` outer gradient 的有界非线性
+重组也由 chain rule 同样排除。
+
+所以 R36 严格停止 **Uniform Remote One-Body Laguerre--Hoeffding
+Transgression**。这仍是 proof-mechanism no-go，不是 full-exact positive class
+中的反例；它不排除二体 degenerate Hoeffding 投影或跨阶 pair/tensor carrier。
+二体条件化能看到残余方向 `(X_1-X_2)/sqrt(2)`，可能绕过一体的 `(2/3)^n`
+衰减。故当前最小 OPEN 收缩为 **Two-Body Laguerre--Hoeffding Head
+Sensitivity**：计算 Gaussian 下 `E[L_n(T)|X_1,X_2]`、二体退化投影范数和
+`partial_(b_N)||h_(2,n)||^2|_gamma`，再判断 constraint-coupled non-SOS
+transgression 是否仍有可行窗口。Gaussian rigidity 与 `P_3K` bridge 仍 OPEN
+且逻辑断开。
+
+本轮新增 `flat_shadow_hoeffding_transgression_r36/audit_r36.py` 与 README。精确
+运行输出为 `R36_HOEFFDING_VALUE_IDENTITY PASSED`、
+`R36_GAUSSIAN_ONE_BODY_PROJECTION PASSED`、
+`R36_FIXED_HEAD_SENSITIVITY_COLLAPSE PASSED`、
+`R36_REMOTE_ONE_BODY_CARRIER NO_GO`、
+`R36_TWO_BODY CARRIER REMAINS OPEN`、`R36_AUDIT_COMPLETED`。未使用 optimizer、
+SDP、数值 sweep 或 remote computation。

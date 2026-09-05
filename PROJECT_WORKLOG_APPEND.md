@@ -1157,3 +1157,34 @@
   `R35_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`, and
   `R35_AUDIT_COMPLETED`.  No optimizer, SDP, degree search, large sweep, or
   remote computation was used.
+
+# 2026-09-06 — R36 one-body Laguerre–Hoeffding carrier obstruction
+
+- R36 began by rereading the durable theory framework, worklog, R35 README/audit,
+  and actual Git HEAD `3e537e8`, then stayed inside the genuine full-exact positive
+  iid class.  The target was a remote high-Laguerre one-body carrier for the first
+  fixed Hermite/Fock mismatch; R29–R35 were not rerun.
+- For `Phi_n=L_n((X1^2+X2^2+X3^2)/2)`, the exact iid radial variable is exponential,
+  so the Laguerre values are orthonormal.  The order-three Hoeffding decomposition
+  gives `1=3||h1||^2+3||h2||^2+||h3||^2`, while the one-body norm has the exact
+  five-copy shared-coordinate representation `E[Phi123 Phi145]`.
+- At the Gaussian anchor, exact angular Hermite–Laguerre averaging and conditional
+  Hermite contraction give `k_n^gamma=kappa_n h_(2n)`, with
+  `kappa_n=(-1)^n sqrt((2n)!)/(2^n n!)(2/3)^n` and
+  `||k_n^gamma||^2=binom(2n,n)/9^n`.  Thus the one-body anchor decays
+  exponentially.
+- With `N=2M+2` and `Delta_N=q_M/sqrt(N!)`, the five-copy derivative is exactly
+  `dot A_(n,N)=3(S_(n,N)+4L_(n,N))`.  The Hermite triple coefficient and the
+  Cauchy bound `|L|<=|kappa_n|` imply, for fixed `N`, a bound
+  `C_N(1+n^(N/2))(2/3)^n`, so fixed-head sensitivity also collapses.
+- Therefore an ordinary `l2`-bounded remote one-body Laguerre carrier, and bounded
+  nonlinear recombinations with uniformly bounded outer gradient, cannot transport
+  a nonzero fixed head.  R36 closes this one-body proof mechanism only; it does not
+  exclude a degenerate two-body Hoeffding or cross-grade pair/tensor carrier.
+- Added `flat_shadow_hoeffding_transgression_r36/audit_r36.py` and README.  The exact
+  audit exited 0 with markers `R36_HOEFFDING_VALUE_IDENTITY PASSED`,
+  `R36_GAUSSIAN_ONE_BODY_PROJECTION PASSED`,
+  `R36_FIXED_HEAD_SENSITIVITY_COLLAPSE PASSED`,
+  `R36_REMOTE_ONE_BODY_CARRIER NO_GO`,
+  `R36_TWO_BODY CARRIER REMAINS OPEN`, and `R36_AUDIT_COMPLETED`.  No optimizer,
+  SDP, numerical sweep, or remote computation was used.
