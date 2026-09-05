@@ -121,3 +121,52 @@
 - Reclassified the minimal OPEN as `OU-Invariant Shape Rigidity`: find an
   amplitude-normalized OU-homogeneous same-factor tensor invariant, or prove a
   genuine spectral noncompactness obstruction. No Codex computation was needed.
+
+# 2026-09-05 — R13 primitive shape and Bochner-tail closure
+
+- Scope audit: all reverse-OU statements below are for the genuine full exact
+  class `Q=sum_i(X_i-Xbar)^2 ~ chi^2_2`, not for an unproved scalar `RK=1`
+  identity. The `P_3K != 0` charge sector remains separate.
+- Reverse exactness: in the residual plane,
+  `R_t=sqrt(t)R+sqrt(1-t)G`. The conditional Laplace transform and the change
+  `theta=t z/(1+(1-t)z)` show that if `P_t mu` is full exact, then `mu` is
+  full exact. Thus actual positive OU preimages cannot leave the exact class.
+- Define the probability-level maximal backward radius
+  `r(mu)=sup{r>=1: mu=P_(r^-2)nu}`. The inverse characteristic-function
+  candidate is `phi_nu(u)=phi_mu(r u) exp((r^2-1)|u|^2/2)`. Uniform exact-law
+  sub-Gaussian bounds make preimages tight; cumulant scaling
+  `kappa_m(nu)=r^m kappa_m(mu)` makes `r=+infinity` impossible for a
+  nonGaussian law. A maximizing preimage exists at the probability-law level
+  by weak compactness and uniform integrability, but it need not be an `L2`
+  density or belong to the K-tensor regularity class.
+- The radius and primitive representative are OU-invariant in the expected
+  orbit coordinates:
+  `r(P_tmu)=r(mu)/sqrt(t)` and `Pi(P_tmu)=Pi(mu)`. If `d>=3` is the first
+  nonzero normalized Hermite moment, then
+  `Theta(mu)=r(mu)|a_d(mu)|^(1/d)=|a_d(Pi(mu))|^(1/d)>0` is an OU-invariant
+  primitive-shape scalar. It separates amplitude from shape but does not prove
+  primitive uniqueness.
+- Under the score regularity needed for the anchor expansion, the R13 local
+  residual-Fisher quantity obeys
+  `F_mu(a)=C_(d,rho) a^(d-1)|a_d(mu)|^2+o(a^(d-1))`, with
+  `C_(d,rho)=d E Var[psi_(d-1)(Xi+sqrt(1-rho)Z)]>0` and
+  `C_(3,rho)=(1-rho)(3-rho)`. Its scaling
+  `F_(P_tmu)(a)=t F_mu(t a)` means it decays like `t^d` along an orbit, so it
+  cannot supply the missing primitive coercivity from R11's fixed-s depth
+  estimate.
+- Strict obstruction: a depth-N first law factors as
+  `mu_N=P_(t_N)pi_N`, `t_N<=rho^N`, `r(pi_N)=1`. R11 controls only `t_N`; any
+  OU-invariant shape sees only `pi_N`. Combining the two cannot close Case B
+  without primitive exact-shape uniqueness.
+- Remaining escape is global inverse-OU positive-definiteness: primitive laws
+  may conceivably converge weakly to Gaussian while, for fixed `r>1`, the
+  inverse candidate fails Bochner positivity only at unbounded frequencies,
+  Gram sizes, degenerate point configurations, or vanishing margins. This is
+  distinct from the already excluded physical X-tail escape. `P_3K` survival
+  is automatic only in the local d=3 leading-mode regime; general survival is
+  still open.
+- Reclassified the minimal OPEN as
+  `Primitive Exact Shape Rigidity / Bochner-Tail Closure`: determine whether
+  same-factor product plus all-degree exactness rules out that global
+  inverse-OU tail escape. No Codex computation was needed; the remaining work
+  is an infinite-dimensional positivity/shape argument.

@@ -388,7 +388,115 @@ OU-homogeneous normalization 是否都会发生 spectral noncompactness，以及
 
 本轮 Codex 暂不执行；没有需要有限系数核验的地方。
 
-## 8. 已探索路线与停止条件
+## 8. R13：primitive shape、反向半径与 Bochner 尾障碍
+
+### 8.1 反向 exactness 与最大反向半径
+
+以下仍只对 genuine full exact law class `𝓔` 无条件成立：若 residual plane
+中 `R=A(X_1,X_2,X_3)`，则独立 OU 后
+
+`R_t=√t R+√(1-t)G`,  `G∼N(0,I_2)`.
+
+若 `P_tμ` 的 residual radius 仍为 `χ²_2`，条件 Laplace 变换给出
+
+`E exp(-zQ_{P_tμ}/2)
+ = (1+(1-t)z)^{-1}
+   E exp[-tzQ_μ/(2(1+(1-t)z))]`.
+
+右端与 `1/(1+z)` 相等时，令
+`θ=tz/(1+(1-t)z)`，在 `θ` 的一个非空区间上得到
+`E exp(-θQ_μ/2)=1/(1+θ)`；Laplace 唯一性遂推出 `Q_μ∼χ²_2`。
+所以 genuine exact law 的实际正 OU 原像也 exact；这不是由单个 `RK=1`
+标量等式推出的结论。
+
+对 exact probability law 定义
+
+`r(μ)=sup{r≥1: μ=P_{r^{-2}}ν 对某个 probability law ν}`.
+
+反向特征函数候选为
+
+`φ_ν(u)=φ_μ(ru) exp((r²-1)|u|²/2)`.
+
+R12 的 uniform sub-Gaussian bound 使所有 exact 原像 tight。若 `r_k→∞`，
+则 `κ_m(ν_k)=r_k^mκ_m(μ)` 与统一矩界冲突，除非 `κ_m(μ)=0` 对所有
+`m≥3`；矩确定性再给出 Gaussian。因此非 Gaussian exact law 的 `r(μ)` 有限。
+取 `r_k↑r(μ)` 时，原像 subsequence 的弱极限仍 exact（uniform
+integrability 保留均值和方差），并实现上述候选，故 primitive endpoint 可在
+概率律层面取到。该 endpoint 未必属于原先要求的 `L²` 密度或 K-tensor
+正则类；在 endpoint 上使用 `D` 或 K 恒等式必须另加正则性。
+
+若 `μ` exact，则
+
+`r(P_tμ)=r(μ)/√t`,  `Π(P_tμ)=Π(μ)`,
+
+其中 `Π(μ)` 是最大反向半径处的 primitive representative。第一式的反向
+方向来自特征函数消去：若 `P_tμ=P_{R^{-2}}ν`，先用
+`R≥t^{-1/2}`，再得 `μ=P_{1/(tR²)}ν`（即反向半径为 `√t R`）。
+
+### 8.2 可行的 OU-invariant shape 与其局限
+
+令 `a_n(μ)=E_μ[H_n(X)/√(n!)]`。对非 Gaussian exact law，令 `d≥3`
+为第一个非零 Hermite moment；矩确定性保证这样的 `d` 存在。OU 缩放为
+`a_d(P_tμ)=t^{d/2}a_d(μ)`，因而
+
+`Θ(μ)=r(μ)|a_d(μ)|^{1/d}=|a_d(Π(μ))|^{1/d}>0`
+
+是 primitive shape 上的 OU-invariant。它说明“振幅坐标”和“primitive 形状”
+可以分离，但并不说明 primitive shape 必须 Gaussian。
+
+对 R13 的 residual-Fisher anchor `F_μ(a)=𝒟^μ_{ρa,a}`，在 score 展开
+和相应可积性成立的条件下，若首个非零阶为 `d`，则
+
+`F_μ(a)=C_{d,ρ}a^{d-1}|a_d(μ)|²+o(a^{d-1})`,
+
+`C_{d,ρ}=d E_{Ξ∼N(0,ρ/3)} Var_Z[ψ_{d-1}(Ξ+√(1-ρ)Z)]>0`.
+
+特别地，直接计算得 `C_{3,ρ}=(1-ρ)(3-ρ)`。并且 profile scaling 为
+`F_{P_tμ}(a)=tF_μ(ta)`，所以这个小 `a` anchor 只测得 primitive
+shape 的局部系数，不能直接被 R11 的 fixed-`s` 深度界控制：对
+`μ_t=P_tΠ(μ)`，它按 `t^d` 衰减，而 primitive invariant 不变。
+
+### 8.3 严格 obstruction：深度只改变 orbit coordinate
+
+任意 depth-`N` Case B 首层 `μ_N` 都有
+`r(μ_N)≥ρ^{-N/2}`，故可写成
+
+`μ_N=P_{t_N}π_N`,  `t_N≤ρ^N`,  `r(π_N)=1`.
+
+于是 R11 的 `O(ρ^N)` 只约束 orbit coordinate `t_N`；任何真正 OU-invariant
+的 `Θ` 或 primitive anchor 只看 `π_N`。两者合并仍不能排除一列 primitive
+shapes，除非先证明 primitive exact shape 的全局唯一性。这避免把
+“amplitude decays”误写成“shape rigidity”。
+
+R12 的概率紧性还把剩余缺口精确化为 Bochner/Fourier 尾障碍：若 primitive
+`π_N` 弱收敛到 Gaussian，则每个固定阶 Hermite coefficient 都消失；但对
+固定 `r>1`，逆 OU 候选
+
+`Φ_{N,r}(u)=exp((r²-1)|u|²/2) φ_{π_N}(ru)`
+
+对每个 `N` 仍不是 characteristic function。任何负的 positive-definiteness
+witness 若不能在有界频率、固定 Gram 大小、非退化点配置中取得统一 margin，
+就只能向频率无穷、Gram 尺寸无穷、点配置退化或 margin→0 逃逸。这是
+global inverse-OU spectral tail escape，而不是 physical `X`-tail escape。
+
+`P₃K≠0` 仍是独立 sector：若 primitive 的首个非零密度 Hermite mode 为
+`d=3`，则小 `t` 时 `P_tπ=1+t^{3/2}a_3ψ_3+O(t²)`，局部可保留该 charge；
+`d>3` 或一般非线性 `P₃K` 沿 primitive normalization 的存活仍 OPEN。
+
+因此新的最小 OPEN 是：
+
+### Primitive Exact Shape Rigidity / Bochner-Tail Closure — OPEN
+
+是否存在 genuine full-exact primitive laws `π_N`，满足 `r(π_N)=1`、
+`π_N⇒γ`，且对每个 `r>1` 其 inverse-OU 正定性失败只能发生在无界频率、
+无界 Gram 尺寸、退化点配置或消失 margin？若 same-factor product 与
+all-degree exactness 能排除这种 Bochner-tail escape，才可能得到真正的
+primitive shape rigidity。该问题与 `P₃K` charge survival 分开处理。
+
+R13 没有给出 Gaussian rigidity 的无条件证明，也没有真实概率律反例；它把
+R11 的 depth decay 与 primitive shape 的逻辑分工固定下来。
+
+## 9. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -401,7 +509,7 @@ OU-homogeneous normalization 是否都会发生 spectral noncompactness，以及
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 9. 每轮协作协议
+## 10. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -414,14 +522,15 @@ OU-homogeneous normalization 是否都会发生 spectral noncompactness，以及
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 10. 当前 checkpoint
+## 11. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12；在 genuine full `Q∼χ²_2` exact law 层级下，审计 uniform
-  sub-Gaussian/MGF 紧性、OU 闭包，并证明 physical-tail escape 不可能；同时说明
-  absolute local isolation 等价 global uniqueness，保留 `P_3K` sector 限定。
-- 当前方向：R13，攻击 `OU-Invariant Shape Rigidity`：寻找不会随 OU amplitude
-  塌缩的 scale-normalized same-factor tensor invariant，或严格建立 spectral
-  high-chaos escape obstruction。
+- 已完成：R12、R13。R13 在 genuine full exact law 层级下审计了反向 exactness、
+  最大反向半径与 primitive representative，构造了 Hermite shape invariant，
+  并证明 R11 的 depth decay 不能单独约束 primitive shape；剩余缺口是
+  Bochner/Fourier inverse-OU 尾逃逸，另保留 `P_3K` sector 限定。
+- 当前方向：R14，攻击 `Primitive Exact Shape Rigidity / Bochner-Tail Closure`：
+  检查 same-factor product 与 all-degree exactness 是否能排除 primitive laws
+  向 Gaussian 收敛而正定性只在无界频率/无界 Gram 尺寸失败的情形。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
