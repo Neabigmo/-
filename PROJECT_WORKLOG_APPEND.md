@@ -59,7 +59,32 @@
   `lambda_s^3`, `Q/s` is not `chi^2_2`; that law belongs to the Gaussian reference.
   Consequently the claimed exponential shell density and complete monotonicity of
   `D/r` are not established and are removed from the framework.
-- R11 minimal OPEN is now Residual-Fisher Production Coherence: whether a genuine
-  positive same-factor all-degree tower has a nested small-bridge sequence with
-  `D=o(tau)`, or can rigorously sustain `D>=c tau`. No finite Codex computation is
-  needed unless a specific symbolic coefficient audit becomes necessary.
+- The pre-R11 minimal OPEN was Residual-Fisher Production Coherence: whether a
+  genuine positive same-factor all-degree tower has a nested small-bridge sequence
+  with `D=o(tau)`, or can rigorously sustain `D>=c tau`. R11 reclassified this after
+  the fixed-factor depth audit; no finite Codex computation was needed.
+
+# 2026-09-05 — R11 fixed-factor depth decay and compatible-tower no-go
+
+- Independently audited the OU–heat conjugacy with a distinct OU factor `rho`:
+  `P_rho=S_sqrt(rho) P_heat_(1-rho)`. For `H_a^(j)=P_heat_(1-a)g^(j)`, an exact
+  backward step is `H_a^(j)(x)=H_(rho a)^(j+1)(sqrt(rho)x)`. The fixed factor
+  therefore creates moving heat parameters and synchronized dilation; it does not
+  create a fixed-top-level small-bridge sequence.
+- For `Delta_j(a)=D^(j+1)_(rho a,a)`, the chain-rule scaling was audited as
+  `Delta_j(a)=rho Delta_(j+1)(rho a)`, equivalently
+  `a Delta_j(a)=(rho a) Delta_(j+1)(rho a)`.
+- Positivity of `g` and the posterior Hessian give the outer-horizon cap
+  `0<=D_(q,s)<=1/(1-s)` for `0<q<s<1`. Combining it with nested production and the
+  scaling yields, for any genuine depth-N tower,
+  `0<=D^(1)_(rho s,s)<=rho^(N-1)/(1-s)`.
+- Consequence: a first pair that is projectively compatible with arbitrary depth is
+  Gaussian (the bound forces `D=0`, then the R10 strict residual-Fisher no-go and
+  heat injectivity close the argument). This rules out compatible non-Gaussian exact
+  infinite fixed-factor towers without using the near-Gaussian assumption.
+- Scope correction: the original problem still permits mutually incompatible
+  depth-N towers. The bound only gives exponentially small production for that
+  sequence, not exact zero at finite N. The new minimal OPEN is
+  `Depth-to-Zero Production Rigidity`: obtain depth-independent zero-set isolation /
+  tensor coercivity from all-degree exactness plus positivity, or identify a genuine
+  probability-level tail-escape obstruction. No Codex computation was needed.

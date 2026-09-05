@@ -210,26 +210,84 @@ rigidity certificate，而不是非 Gaussian exact law 的反例。
 残差 Fisher 恒等式、嵌套分解和小桥渐近，不再使用错误的 chi-square shell
 归一化。
 
-## 6. 当前最小开放命题
+## 6. R11：固定因子缩放与深度衰减
 
-### Residual-Fisher Production Coherence — OPEN
+### 6.1 OU–heat 共轭的审计结论
 
-对 genuine positive、same-factor、all-degree exact backward tower，是否存在某个
-上层 `s` 及嵌套小桥 `τ_j↓0`，使
+为避免与 heat 时间混淆，将固定 OU 因子记为 `ρ∈(0,1)`。若
+`𝔓_t f(x)=E[f(x+√t Z)]`、`S_c f(x)=f(cx)`，则
 
-`liminf_j 𝒟_{s-τ_j,s}/τ_j=0`？
+`P_ρ=S_{√ρ}𝔓_{1-ρ}`。
 
-若答案为是，由小桥极限立即得 `E_{ν_s}[(K''_s)²]=0`，从而 Gaussian。若答案为
-否，则必须在全部 positivity、same-factor exactness 和 backward divisibility
-下证明某一 genuine tower 可沿所有相关小桥保持 `𝒟_{s-τ,s}≥cτ`，这才是
-真正的剩余障碍。
+对 `H_a^{(j)}=𝔓_{1-a}g^{(j)}`，exact backward 关系给出
 
-不得再把 `E_{μ}v_s≥0` 当作 OPEN 中间命题；它对非 Gaussian 顶层已被严格否定。
-也不得把 `∫S≥0`、`D=0` 或等价的 rigidity 结论作为假设。log-concave
-backward preimage 仍是已成立的充分条件：一维 Brascamp–Lieb 给出 `W≤τ`，
-从而 Gaussian；当前原始假设尚未推出任何 preimage 的 log-concavity。
+`H_a^{(j)}(x)=H_{ρa}^{(j+1)}(√ρ x)`.  (C)
 
-## 6. 已探索路线与停止条件
+所以固定 OU 因子在热坐标中制造的是 `a→ρa` 的移动参数和同步空间缩放，
+不是固定顶层 `s` 上的 `τ_j↓0` 桥。虽然自然桥宽
+`(1-ρ)ρ^j s→0`，但顶层函数与参数同时变化，不能直接套用 R10 的固定顶层
+小桥极限。
+
+### 6.2 经过审计的 production 缩放与 cap
+
+令
+
+`Δ_j(a)=𝒟^{(j+1)}_{ρa,a}`。
+
+由 (C) 及 `u→√ρu`、`v→ρv` 的链式缩放，得到
+
+`Δ_j(a)=ρ Δ_{j+1}(ρa)`,  即 `aΔ_j(a)=(ρa)Δ_{j+1}(ρa)`.
+
+另一方面，若 `H_s=𝔓_{1-s}g` 且 `g≥0`，后验 Hessian 给出
+
+`v_s≥-1/(1-s)`,  从而 `0≤𝒟_{q,s}≤1/(1-s)` 对 `0<q<s<1` 成立。
+
+### 6.3 有限深度与相容无限塔
+
+对深度 `N` 的 genuine positive same-factor all-degree exact tower，固定
+`s∈(0,1)`，第一层 production
+`Δ_0(s)=𝒟^{(1)}_{ρs,s}` 满足
+
+`ρ^{-(N-1)}Δ_0(s)
+ =𝒟^{(N)}_{ρ^Ns,ρ^{N-1}s}
+ ≤𝒟^{(N)}_{ρ^Ns,s}
+ ≤1/(1-s)`.
+
+因此
+
+`0≤𝒟^{(1)}_{ρs,s}≤ρ^{N-1}/(1-s)`.
+
+这不是 `τ→0` 结论，而是“深度 `N` 越大，固定第一层 production 越小”的
+深度衰减界。若同一第一层 pair 可相容地延拓到任意深度，则令 `N→∞` 得
+`𝒟^{(1)}_{ρs,s}=0`；R10 的严格残差 Fisher no-go 随即给出 `u_s^{(1)}`
+为常数，中心化与热半群 injectivity 进一步给出该层以及 `g^{(0)}` 为 Gaussian。
+
+因此已排除的是：**projectively compatible 的非 Gaussian 正 exact 无限固定因子塔**。
+原始命题还允许每个 `N` 取彼此不相容的新塔；对这类序列，上界只给出
+`𝒟_N=O(ρ^N)`，不能把有限 `N` 的正量升级为 exact zero。
+
+### 6.4 当前最小开放命题
+
+### Depth-to-Zero Production Rigidity — OPEN
+
+对彼此不相容的 genuine positive、same-factor、all-degree exact depth-`N` towers，
+已知固定 `s` 上
+
+`0≤𝒟^{(1,N)}_{ρs,s}≤ρ^{N-1}/(1-s)`。
+
+剩余问题是：all-degree exact zero-set 与 positivity 是否能提供
+depth-independent 的 zero-set isolation / tensor coercivity，把这个指数小量
+提升为 exact Gaussian；或者能否构造/排除一列真实概率律，使非 Gaussian exact
+one-step pair 的 production 沿任意深度仍可降到 `O(ρ^N)`。
+
+必须特别区分 near-Gaussian 紧性与 tail escape：不能无证据假设
+`N`-uniform coercivity，也不能用 tangent、形式 jet 或 operator-only 样例替代
+真实正概率律。不得再把 `E_{μ}v_s≥0`、`∫S≥0` 或 `D=0` 当作中间假设。
+
+log-concave backward preimage 仍是已成立的充分条件：一维 Brascamp–Lieb 给出
+`W≤τ`，从而 Gaussian；当前原始假设尚未推出任何 preimage 的 log-concavity。
+
+## 7. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -242,7 +300,7 @@ backward preimage 仍是已成立的充分条件：一维 Brascamp–Lieb 给出
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 7. 每轮协作协议
+## 8. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -255,13 +313,13 @@ backward preimage 仍是已成立的充分条件：一维 Brascamp–Lieb 给出
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 8. 当前 checkpoint
+## 9. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R10；将各向异性曲率排序提升为真实概率级严格 no-go，保留残差 Fisher
-  恒等式、嵌套分解和小桥极限；并纠正错误的非 Gaussian chi-square shell 推断。
-- 当前方向：R11，攻击 Residual-Fisher Production Coherence，即能否由 genuine
-  same-factor/all-degree backward tower 产生 `𝒟_{s-τ_j,s}=o(τ_j)` 的小桥序列，
-  或给出保持一阶 production 的严格概率级障碍。
+- 已完成：R11；审计 OU–heat 共轭、production 缩放与外部 heat-horizon cap，得到
+  固定第一层 production 的 `O(ρ^{N-1})` 深度衰减，并排除 projectively compatible
+  的非 Gaussian 正 exact 无限固定因子塔；同时保留 R10 的 shell 修正。
+- 当前方向：R12，攻击彼此不相容的有限深度塔：寻找 depth-independent
+  zero-set isolation / tensor coercivity，或给出真实概率级的 tail-escape 障碍。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
