@@ -155,25 +155,77 @@ same-factor exactness 如何控制这族各向异性 posterior covariance。
 方差的加权”。它仍然没有给出所需的反向排序；其作用是提供一个独立的
 rigidity certificate，而不是非 Gaussian exact law 的反例。
 
-## 5. 当前最小开放命题
+## 5. R10 审计：排序目标的严格 no-go 与必要修正
 
-### Anisotropic Curvature Ordering — OPEN
+### 5.1 有效的新结论
 
-对 sufficiently near-Gaussian 的 genuine positive、same-factor、all-degree exact
-backward tower，是否存在某个 `q<s` 使
+在三副本桥上定义 `P_⊥=I-(1/3)11ᵀ`、
+`𝓘_⊥(q,s)=E_{J_{q,s}}||P_⊥u_s(Y)||²`，则条件独立性给出
 
-`E_{μ_{q,s}}K''_s ≥ E_{ν_s}K''_s=0`？
+`𝓘_⊥(q,s)=2𝒟_{q,s}`，
+`E_{μ_{q,s}}v_s=-𝒟_{q,s}=-(1/2)𝓘_⊥(q,s)`。
 
-无条件桥接恒等式已经给出左边 `≤0`，所以若这个单一 scalar reverse-order
-不等式成立，两边即同时为零，`𝒟_{q,s}=0`，后验中 `u_s` 为常数，并进入
-Gaussian rigidity。它严格弱于点态 `W≤τ`，且直接瞄准唯一未控制的
-anisotropic marginal。
+若 `H_s` 非 Gaussian，则 `u_s` 非常数；由于后验核在 `ℝ` 上处处为正，
+`Var_{π_{q,s}}(u_s)>0`，所以
 
-一个平行的、同样足以关闭刚性的候选是
-`Cov_{λ_q}(W,ω_q)≤0`；但精确 escort–MMSE 恒等式表明它等价于
-`I(λ_q||γ_q)=0`，因此只能作为刚性证书，不能当作已知中间估计。
+`E_{μ_{q,s}}v_s<0` 对每个 `q<s` 成立。
 
-不得再把 `∫S≥0`、`D=0` 或等价的 rigidity 结论作为假设。log-concave
+因此 `E_{μ_{q,s}}v_s≥E_{ν_s}v_s=0` 不是尚未证明的中间排序，而是一个
+真实概率层面的严格 no-go：它本身等价于残差 Fisher 消失并立即导出 Gaussian。
+同理，escort–MMSE 的反向协方差也只能作 rigidity certificate，不能作
+非循环的中间 lemma。
+
+嵌套后验还给出一个有效的精确分解。对 `q<r<s`，
+
+`𝒟_{q,s}=𝒟_{q,r}+E_{μ_{q,r}}[Var_{π_{r,s}}(u_s)]`。
+
+这明确显示了 telescoping 的缺口：第二项的权重是 `μ_{q,r}`，而自然的下一层
+缺陷 `𝒟_{r,s}` 使用 `ν_r`，两者对同一个非负 production field 的比较未知。
+
+在同一正则性下，小桥极限为
+
+`lim_{τ↓0} 𝒟_{s-τ,s}/τ = E_{ν_s}[v_s²]`。
+
+所以若某个 exact tower 能产生 `𝒟_{s-τ_j,s}/τ_j→0` 的小桥序列，便有
+`v_s=0` 并进入 Gaussian；这是当前最弱的非循环 conditional closure。
+
+### 5.2 对 shell/Laplace 说法的审计修正
+
+三副本 Gaussian 密度比的代数分解仍然成立。令
+`Q=∑(Y_i-Ȳ)²`、`T=Q/(2s)`、`r=s/τ`，则
+
+`dJ_{q,s}=(s/τ)exp(-(q/(2sτ))Q)dλ_s^{⊗3}`。
+
+但在一般非 Gaussian exact law 下，`Q/s∼χ²_2` 是错误的；它只在
+`λ_s` 本身为 Gaussian 时成立。故由 `T∼Exp(1)` 推出的
+`𝒟/r` completely monotone 结论不能保留。
+
+一般只能写成（若 `ρ_s` 是 `T` 在 `λ_s^{⊗3}` 下的密度，
+`Φ_s(t)=E[||P_⊥u_s||²|T=t]`）
+
+`𝒟_{q,s}=(r/2)∫ exp(-(r-1)t) Φ_s(t)ρ_s(t)dt`。
+
+这里 `ρ_s` 是未知的非 Gaussian shell law，不能替换为 `e^{-t}`；因此不能
+从该分解推出完全单调性或自动的 production 消失。后续只使用已审计的
+残差 Fisher 恒等式、嵌套分解和小桥渐近，不再使用错误的 chi-square shell
+归一化。
+
+## 6. 当前最小开放命题
+
+### Residual-Fisher Production Coherence — OPEN
+
+对 genuine positive、same-factor、all-degree exact backward tower，是否存在某个
+上层 `s` 及嵌套小桥 `τ_j↓0`，使
+
+`liminf_j 𝒟_{s-τ_j,s}/τ_j=0`？
+
+若答案为是，由小桥极限立即得 `E_{ν_s}[(K''_s)²]=0`，从而 Gaussian。若答案为
+否，则必须在全部 positivity、same-factor exactness 和 backward divisibility
+下证明某一 genuine tower 可沿所有相关小桥保持 `𝒟_{s-τ,s}≥cτ`，这才是
+真正的剩余障碍。
+
+不得再把 `E_{μ}v_s≥0` 当作 OPEN 中间命题；它对非 Gaussian 顶层已被严格否定。
+也不得把 `∫S≥0`、`D=0` 或等价的 rigidity 结论作为假设。log-concave
 backward preimage 仍是已成立的充分条件：一维 Brascamp–Lieb 给出 `W≤τ`，
 从而 Gaussian；当前原始假设尚未推出任何 preimage 的 log-concavity。
 
@@ -206,10 +258,10 @@ backward preimage 仍是已成立的充分条件：一维 Brascamp–Lieb 给出
 ## 8. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R9；建立三副本曲率输运和 escort–MMSE 恒等式，确认点态 domination
-  过强，并将最小 OPEN 改为 Anisotropic Curvature Ordering。
-- 当前方向：R10，直接审查 `μ_{q,s}` 与 `ν_s` 的可能排序，寻找 genuine
-  same-factor/all-degree 约束能否提供该 scalar reverse inequality，或给出严格
-  no-go。
+- 已完成：R10；将各向异性曲率排序提升为真实概率级严格 no-go，保留残差 Fisher
+  恒等式、嵌套分解和小桥极限；并纠正错误的非 Gaussian chi-square shell 推断。
+- 当前方向：R11，攻击 Residual-Fisher Production Coherence，即能否由 genuine
+  same-factor/all-degree backward tower 产生 `𝒟_{s-τ_j,s}=o(τ_j)` 的小桥序列，
+  或给出保持一阶 production 的严格概率级障碍。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

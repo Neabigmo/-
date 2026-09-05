@@ -41,6 +41,25 @@
 - Exact obstruction is now a missing ordering/coherence statement comparing the
   anisotropic marginal `μ_{q,s}` with the scalar escort `ν_s`; ordinary positivity,
   total positivity, finite nested horizons, and arbitrary tangents do not provide it.
-- Minimal R10 OPEN: whether genuine positive same-factor all-degree exactness yields
-  some `q<s` with `E_{μ_{q,s}}K''_s≥E_{ν_s}K''_s=0`, or a rigorous no-go. No Codex
-  finite computation is needed.
+- R10's proposed curvature ordering is now treated as a strict probability-level
+  no-go for any non-Gaussian positive top level, not as an OPEN intermediate lemma.
+
+# 2026-09-05 — R10 residual-Fisher reduction and shell correction
+
+- Validated the three-copy residual dictionary
+  `I_perp(q,s)=2 D_{q,s}` and
+  `E_{mu_{q,s}} K''_s=-D_{q,s}=-(1/2)I_perp(q,s)`.
+  For a non-Gaussian positive top level, posterior full support makes this strict
+  for every `q<s`; therefore the proposed reverse curvature ordering is a strict
+  probability-level no-go, not an OPEN intermediate estimate.
+- Validated the nested decomposition
+  `D_{q,s}=D_{q,r}+E_{mu_{q,r}} Var_{pi_{r,s}}(K'_s)` and the regular small-bridge
+  asymptotic `D_{s-tau,s}/tau -> E_{nu_s}(K''_s)^2`.
+- Corrected a material error in the web response: under non-Gaussian
+  `lambda_s^3`, `Q/s` is not `chi^2_2`; that law belongs to the Gaussian reference.
+  Consequently the claimed exponential shell density and complete monotonicity of
+  `D/r` are not established and are removed from the framework.
+- R11 minimal OPEN is now Residual-Fisher Production Coherence: whether a genuine
+  positive same-factor all-degree tower has a nested small-bridge sequence with
+  `D=o(tau)`, or can rigorously sustain `D>=c tau`. No finite Codex computation is
+  needed unless a specific symbolic coefficient audit becomes necessary.
