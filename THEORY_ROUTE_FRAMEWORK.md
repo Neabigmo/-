@@ -1458,7 +1458,76 @@ harmonic heat identity、flat crossing、flat leakage、adjacent coefficient bou
 degree-`3M` 的 `h_(3M)` 通道；运行输出 `R22_AUDIT_COMPLETED`。这些是 proof-level
 代数/尺度核验，不是 Gaussian rigidity 证明。
 
-## 18. 已探索路线与停止条件
+## 18. R23：Adjacent Heat-Hankel Transversality / Flat-Leakage Control
+
+R23 在读取 R22 的本机提交 `90ca19e` 后，继续严格限定 genuine full-exact iid
+inverse heat-Hankel trajectory；ordinary positive measures、有限矩前缀、非 iid
+exchangeable 构造和 formal candidate 都不计为反例。
+
+### 18.1 near-flat Laurent law：相邻比值不是 uniform upper bound
+
+在 corank-one flat crossing 且 `ell_M != 0` 时，令横截参数为 `s`，并写
+`h_M=c s+O(s^2)`、`c != 0`。由 R22 的
+`D_(M+1)=-D_(M-1) ell_M^2+O(s)` 与 `D_n=D_(n-1)h_n` 得到
+
+`h_(M+1)=-ell_M^2/(c s)+O(1)=-ell_M^2/h_M+O(1)`,
+
+`beta_(M+1)=h_(M+1)/h_M=-ell_M^2/(c^2 s^2)+O(1/s)`。
+
+因此在 `h_M<0` 的一侧，首个相邻 Jacobi norm 的主项为正，而相邻
+`beta_(M+1)` 的绝对值会近 flat 发散。这个事实只能说明 adjacent mixed sectors
+可能帮助 cubic negativity，不能转化成所需的 uniform
+`beta_(M+1)/|beta_M|` 上界；near-flat Jacobi coordinates 本身是奇异坐标。
+
+### 18.2 截断 backward radius 的单调性，但没有 zero interlacing
+
+对 heat 参数 `a` 定义
+
+`g_n(mu)=sup{a>=0: H_n(exp(-a partial_x^2/2)mu) is PSD}`。
+
+因为 `H_n` 是 `H_(n+1)` 的 leading principal block，得到无条件的
+`g_(n+1)<=g_n`。这只给出 nested one-sided first-failure radii；要把
+`inf_n g_n` 识别为完整 backward heat radius，还需要已建立的全阶 moment-cone
+闭合和 determinacy passage。forward positivity 的 alternating positive-coefficient
+展开本身不提供跨 rank 的 real zero interlacing、small-value lower bound 或
+uniform transversality；也不能排除 higher-rank complex roots。
+
+若 `ell_M=0`，coherent leakage 可以延迟到更高 rank。无限延迟会导向有限原子
+flat branch，与连续 `chi_2^2` radial law 不相容；但现有 exact triangularity
+没有给出 uniform finite horizon。
+
+### 18.3 R23 的严格 no-go 与 conditional closure
+
+R23 进一步确认：exact triangularity 加 absolute moment growth 不能控制
+`beta_(M+1)/|beta_M|`，因为 near-flat odd moment/next Jacobi data 仍可使相邻
+determinants 的 relative ratio 变大。任何 degree `3M` residual test 仍带有
+`h_(3M)` channel；所以单靠 first-failure block 或单个 central triple pivot
+不能闭合 post-failure tail。
+
+要启动 R21 的 cubic amplifier，至少需要一个 genuine iid-compatible 的
+cross-rank heat-Hankel 结论，例如排除 near-flat 后的 determinant-ratio 控制，或
+在 `ell_M=0` 分支中的 uniform leakage horizon，并能把控制迭代到
+`M+2,...,3M`。R23 没有证明这些条件，也没有构造 genuine full-exact iid
+non-closed sequence。
+
+`P_3K` 仍与 heat-Hankel leakage 断开：没有 charge-to-Jacobi、charge-to-determinant
+或 charge-to-Loewner 的 quantitative bridge。主命题继续 OPEN。
+
+本轮新增 `adjacent_heat_hankel_r23/audit_r23.py` 与 README，运行输出
+`R23_AUDIT_COMPLETED`；只核验 near-flat Laurent 代数、截断 PSD 半径的主子块单调性、
+相邻 determinant ratio 公式和 adjacent-sector threshold，不把这些局部核验写成
+rigidity 证明。
+
+当前最小 OPEN 改为：
+
+### Cross-Rank Heat-Hankel Zero Geometry / Flat-Leakage Horizon — OPEN
+
+对 genuine full-exact iid inverse heat-Hankel trajectory，能否从 forward
+positivity、same-factor all-degree exactness 和连续 `chi_2^2` endpoint law 中得到
+跨 rank 的 zero/small-value geometry，或一个足以推进到 degree `3M` 的统一
+flat-leakage horizon？
+
+## 19. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1471,7 +1540,7 @@ degree-`3M` 的 `h_(3M)` 通道；运行输出 `R22_AUDIT_COMPLETED`。这些是
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 19. 每轮协作协议
+## 20. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1484,10 +1553,10 @@ degree-`3M` 的 `h_(3M)` 通道；运行输出 `R22_AUDIT_COMPLETED`。这些是
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 20. 当前 checkpoint
+## 21. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1501,10 +1570,12 @@ degree-`3M` 的 `h_(3M)` 通道；运行输出 `R22_AUDIT_COMPLETED`。这些是
   与 diagonal-tensor capture；R21 又在 genuine iid residual 几何内排除了只使用
   first failure block 的 dimension-free reverse-Schur，并发现 degree `3M` 的
   triple-pivot amplifier；R22 又把 post-failure 控制压成 heat-Hankel 跨 rank 小值、
-  flat leakage horizon 与 one-step Jacobi ratio；另保留 `P_3K` sector 限定。
-- 当前方向：R23，攻击 `Adjacent Heat-Hankel Transversality / Flat-Leakage Control`：
-  控制第一个负 rank 后的零点/小值几何、flat leakage 与
-  `beta_(M+1)/|beta_M|`，再判断能否向 `M+2,...,3M` 迭代；继续单独审计 `P_3K`
-  survival。
+  flat leakage horizon 与 one-step Jacobi ratio；R23 证明 near-flat 相邻 Jacobi
+  数据具有 Laurent 奇异性、截断 PSD radius 单调但不产生 zero interlacing，并确认
+  `beta_(M+1)/|beta_M|` 仍无 uniform bound；另保留 `P_3K` sector 限定。
+- 当前方向：R24，攻击 `Cross-Rank Heat-Hankel Zero Geometry / Flat-Leakage
+  Horizon`：在严格 genuine full-exact iid 类内寻找跨 rank zero interlacing、
+  small-value transversality 或有限 leakage horizon；若只能得到 conditional
+  结论，明确缺失条件并停止伪闭合。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

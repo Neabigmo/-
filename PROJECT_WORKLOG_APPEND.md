@@ -592,3 +592,43 @@
   degree-`3M` `h_(3M)` channel check, printing `R22_AUDIT_COMPLETED`.
 - Minimal OPEN is now `Adjacent Heat-Hankel Transversality / Flat-Leakage
   Control`. Gaussian rigidity remains OPEN.
+
+# 2026-09-06 — R23 near-flat Laurent law / cross-rank heat-Hankel geometry
+
+- R23 re-read the durable framework and worklog through commit `90ca19e` and
+  stayed inside the genuine full-exact iid inverse heat-Hankel hierarchy.  A
+  positive finite-prefix matrix, an exchangeable/non-iid construction, or a
+  formal inverse candidate is not a full-exact probability counterexample.
+- At a corank-one flat crossing with `ell_M != 0`, write
+  `h_M=c*s+O(s^2)`.  The R22 leakage identity gives
+  `h_(M+1)=-ell_M^2/(c*s)+O(1)` and
+  `beta_(M+1)=-ell_M^2/(c^2*s^2)+O(1/s)`.  Hence the first adjacent norm is
+  positive on the `h_M<0` side, while the Jacobi coordinate is singular near
+  flatness.  This can help a cubic negative channel, but it is not a uniform
+  upper bound on `beta_(M+1)/|beta_M|`.
+- For truncated heat admissible radii
+  `g_n=sup{a: H_n(exp(-a*partial_x^2/2)mu) PSD}`, leading-principal-block
+  inclusion proves `g_(n+1)<=g_n`.  This is only one-sided nested radius data;
+  identifying `inf_n g_n` with a full backward radius requires the full
+  moment-cone/determinacy passage.  No real zero interlacing or cross-rank
+  small-value transversality follows, and higher-rank complex roots are not
+  excluded by forward positivity alone.
+- The `ell_M=0` branch can have coherent leakage delayed to higher rank.  Infinite
+  delay would produce a finite-atomic flat branch incompatible with the
+  continuous `chi_2^2` endpoint law, but no uniform finite leakage horizon is
+  available from triangularity.  Absolute moment growth likewise does not
+  control the determinant ratio; degree `3M` still necessarily exposes an
+  `h_(3M)` channel.
+- Conditional closure still needs a genuine iid-compatible cross-rank theorem:
+  either a determinant-ratio/small-value estimate away from near-flatness or a
+  uniform leakage horizon in the coherent flat branch, iterated through
+  `M+2,...,3M`.  `P_3K` remains separate; no charge-to-Jacobi/determinant/Loewner
+  bridge was found.  Gaussian rigidity remains OPEN and no genuine iid
+  non-closed sequence was constructed.
+- Added `adjacent_heat_hankel_r23/audit_r23.py` and README.  The audit passed
+  near-flat Laurent asymptotics, truncated PSD-radius principal-block
+  monotonicity, the adjacent determinant ratio identity, and the
+  adjacent-sector threshold, printing `R23_AUDIT_COMPLETED`.  These are local
+  algebraic checks only.
+- Minimal OPEN is now `Cross-Rank Heat-Hankel Zero Geometry / Flat-Leakage
+  Horizon`.
