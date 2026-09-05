@@ -170,3 +170,47 @@
   same-factor product plus all-degree exactness rules out that global
   inverse-OU tail escape. No Codex computation was needed; the remaining work
   is an infinite-dimensional positivity/shape argument.
+
+# 2026-09-05 — R14 finite-complexity Bochner closure
+
+- R14 first re-audited the R13 reverse-OU radius and primitive endpoint. Those
+  probability-level statements remain valid with the same caveat: the
+  primitive endpoint need not be an `L2` density or have the project's score/K
+  regularity.
+- New exact obstruction: writing
+  `a_j(theta)=sqrt(2/3) cos(theta+2*pi*(j-1)/3)`, the full exact law obeys
+  `average_theta product_j phi(a_j(theta)u)=exp(-u^2/2)`. For the inverse
+  candidate `Phi_r(u)=exp((r^2-1)u^2/2) phi(r u)`, the identity remains exactly
+  true because `sum_j a_j(theta)^2=1`. Its finite Gram/Hadamard tensor lifts
+  remain true even when `Phi_r` is not positive definite. Hence exact
+  equality, even in the all-degree tensor hierarchy, cannot by itself detect
+  the primitive boundary; Bochner positivity is genuinely additional.
+- Finite-complexity closure: for primitive `pi_N => gamma`, fixed `r>1`, and
+  `K_N(u)=exp((r^2-1)u^2/2) phi_(pi_N)(r u)`, the R12 square-exponential bound
+  gives `K_N -> exp(-u^2/2)` in every fixed local `C^k` topology. For fixed
+  Gram size `m`, divide the determinant by the squared Vandermonde and use
+  confluent divided differences. The Gaussian kernel has
+  `D_m=e^(-sum x_i^2) det[e^(x_i x_j)]`, and Cauchy-Binet's first term gives
+  `D_m/Vandermonde^2 >= e^(-m L^2)/product_{j=0}^{m-1} j!` on `|x_i|<=L`.
+  Therefore, for every fixed `r,M,L`, all Gram tests with `m<=M` and bounded
+  frequency are eventually PSD, even with arbitrary point collisions.
+- This sharpens R13's four-way list: for primitive inverse candidates, any
+  negative Bochner witness must escape through unbounded frequency diameter or
+  unbounded Gram/spectral rank. Collision, small Gaussian eigenvalue margin,
+  and vanishing finite-witness margin are not independent channels once the
+  confluent determinant argument is used.
+- Strict remaining obstruction: bounded-window `C^k` convergence does not
+  control all Gram sizes because the Gaussian kernel's compact integral
+  operator has eigenvalues tending to zero. The needed target is a uniform
+  Gaussian-relative quadratic-form estimate, not ordinary local smooth
+  convergence. The same-factor angular map is inward-contracting
+  (`|a_j|<=sqrt(2/3)`), so it gives no outward frequency positivity induction.
+- Conditional closure: a uniform bounded-complexity negative-witness theorem,
+  or a bounded-frequency reduction plus Gaussian-relative form compactness,
+  would rule out primitive exact laws converging to Gaussian. Without one of
+  these, the minimal OPEN is now `Relative Bochner Closure`, with frequency
+  escape and spectral-rank escape as the only remaining channels.
+- `P_3K` was kept separate. The d=3 leading-mode local survival statement is
+  safe; general primitive endpoint regularity and charge survival remain OPEN.
+  No numerical or long Codex computation was needed; this was a proof-level
+  audit and a durable framework/worklog update.

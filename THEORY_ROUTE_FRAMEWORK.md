@@ -496,7 +496,103 @@ primitive shape rigidity。该问题与 `P₃K` charge survival 分开处理。
 R13 没有给出 Gaussian rigidity 的无条件证明，也没有真实概率律反例；它把
 R11 的 depth decay 与 primitive shape 的逻辑分工固定下来。
 
-## 9. 已探索路线与停止条件
+## 9. R14：有限复杂度 Bochner 闭合与两种剩余逃逸
+
+### 9.1 逆 OU 候选仍满足完整 exact tensor identity
+
+对 full exact law 的 characteristic function `φ`，取
+
+`a_j(θ)=√(2/3) cos(θ+2π(j-1)/3)`,  `∑_j a_j(θ)^2=1`.
+
+residual radius 的 exactness 等价于 same-factor identity
+
+`⟨∏_{j=1}^3 φ(a_j(θ)u)⟩_θ=e^{-u²/2}`.
+
+对任意 `r>1` 的 inverse-OU candidate
+`Φ_r(u)=exp((r²-1)u²/2)φ(ru)`，因为 `∑a_j²=1`，仍有
+
+`⟨∏_j Φ_r(a_j(θ)u)⟩_θ=e^{-u²/2}`.
+
+因此即使 `Φ_r` 已不是 characteristic function，它仍落在完整的
+same-factor、all-degree exact equality manifold 上；把 identity 做成任意有限
+Gram 点集的 Hadamard tensor lift 也仍成立。结论是：
+
+`same-factor tensor equality ≠ Bochner positivity`.
+
+这排除了“再多写一些 exact 系数/角向恒等式就能检测 primitive boundary”的
+路线；真正缺失的结构是 probability cone 的全局正定性。
+
+### 9.2 无条件的 confluent finite-complexity Bochner closure
+
+设 primitive exact laws `π_N⇒γ`，固定 `r>1`，并令
+
+`K_N(u)=exp((r²-1)u²/2) φ_{π_N}(ru)`.
+
+R12 的 uniform square-exponential moment bound 使 `φ_{π_N}` 及每个固定阶导数
+在紧区间上一致收敛到 Gaussian；故 `K_N→K_0=e^{-u²/2}` 于每个固定紧区间的
+任意固定 `C^k` 拓扑。
+
+对固定 Gram size `m`，令
+
+`D_m[K](x)=det[K(x_i-x_j)]`,
+`\widetilde D_m[K](x)=D_m[K](x)/∏_{i<j}(x_i-x_j)^2`.
+
+在 `C^{2m-2}` 收敛下，divided-difference/confluent extension 使
+`\widetilde D_m` 连续延拓到碰撞配置。Gaussian kernel 满足
+
+`D_m[K_0](x)=e^{-∑x_i²} det[e^{x_i x_j}]`
+
+以及 Cauchy–Binet 下界：若 `|x_i|≤L`，
+
+`\widetilde D_m[K_0](x)≥e^{-mL²}/∏_{j=0}^{m-1}j!>0`.
+
+所以对每个固定 `r>1、m≤M、L<∞`，充分大的 `N` 使 `K_N` 在所有
+`m` 点、`|x_i|≤L` 的 Gram 测试上 PSD；不需要点间 separation。primitive
+要求 `K_N` 对每个 `N` 都非 PD，于是任何负 Gram witness 必须满足
+
+`m_N→∞` 或 `diam{x_{N,i}}→∞`
+
+（经过子列）。R13 原先列出的碰撞、Gaussian 小特征值和 negativity margin
+消失不再是独立逃逸通道。
+
+### 9.3 为什么有限闭合仍不能推出全局正定
+
+固定频率窗口内让 `m→∞` 时，Gaussian translation kernel 对紧区间对应的
+positive integral operator 是 compact，非零特征值趋向零；因此没有
+infinite-rank spectral gap。需要的真正条件不是普通 `C^∞_{loc}` 收敛，而是
+Gaussian-relative form estimate，例如
+
+`|⟨c,(K_N-K_0)c⟩|≤ε_N⟨c,K_0c⟩`,  `ε_N→0`,
+
+对所有有限点集和系数一致成立。
+
+另外，角向系数满足 `|a_j(θ)|≤√(2/3)<1`，exact identity 只读取更小的
+frequency；它没有 inward-to-outward 的正定性传播，故不能把有限频率闭合
+自动推到高频。
+
+### 9.4 R14 的 conditional closure 与最小 OPEN
+
+若 same-factor positivity 能证明以下任一项，则 primitive-to-Gaussian 聚集
+不可能：
+
+1. 固定 `r_0>1` 下，所有 primitive inverse-PD failure 都有统一有限
+   Gram size 和统一有界频率的 negative witness；或
+2. 先把任意 PD failure 约化到统一有限频率，再证明上面的 Gaussian-relative
+   form estimate。
+
+这两个目标比“Gaussian 局部孤立”更小且可证伪。反之，若二者均失败，则剩余
+障碍已精确压缩为 `frequency escape` 或 `spectral-rank/Gram escape`，而不是
+物理质量尾部、点碰撞或普通小 margin。
+
+`P₃K` charge survival 仍须单独处理。`d=3` 首模给出强 OU 下的局部存活；
+一般 primitive endpoint 的 `K`/score 正则性和 charge 的非恒零性尚未由
+full exactness 推出。
+
+R14 没有完成 Gaussian rigidity；它把 primitive 正定性缺口从模糊的
+“Bochner tail”压缩成两个无限维通道，并证明完整 exact equality hierarchy
+本身不能消灭它们。
+
+## 10. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -509,7 +605,7 @@ R11 的 depth decay 与 primitive shape 的逻辑分工固定下来。
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 10. 每轮协作协议
+## 11. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -522,15 +618,16 @@ R11 的 depth decay 与 primitive shape 的逻辑分工固定下来。
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 11. 当前 checkpoint
+## 12. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13。R13 在 genuine full exact law 层级下审计了反向 exactness、
-  最大反向半径与 primitive representative，构造了 Hermite shape invariant，
-  并证明 R11 的 depth decay 不能单独约束 primitive shape；剩余缺口是
-  Bochner/Fourier inverse-OU 尾逃逸，另保留 `P_3K` sector 限定。
-- 当前方向：R14，攻击 `Primitive Exact Shape Rigidity / Bochner-Tail Closure`：
-  检查 same-factor product 与 all-degree exactness 是否能排除 primitive laws
-  向 Gaussian 收敛而正定性只在无界频率/无界 Gram 尺寸失败的情形。
+- 已完成：R12、R13、R14。R14 证明 primitive-to-Gaussian 序列在任意固定
+  frequency/Gram complexity 内最终通过 confluent Bochner tests；同时证明
+  inverse-OU candidate 仍满足完整 same-factor all-degree exact identity，故
+  equality hierarchy 单独无法提供正定性闭合。剩余逃逸只有无界频率或无界
+  spectral rank，另保留 `P_3K` sector 限定。
+- 当前方向：R15，攻击 `Relative Bochner Closure`：寻找 uniform bounded-
+  complexity witness 或 Gaussian-relative form estimate；若不可得，严格
+  构造/刻画 frequency-rank escape，并继续单独审计 `P_3K` survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
