@@ -765,3 +765,45 @@
   printing `R26_AUDIT_COMPLETED`.  The R24 and R25 audits were also rerun and
   `git diff --check` passed.  These are local algebraic checks only; they do not
   prove the conditional domination or a genuine full-exact orientation.
+
+# 2026-09-06 — R27 same-factor conditional residual-jet contraction
+
+- R27 reread the durable framework, worklog, R26 README/audit, and the recorded
+  commit `7268c1f` before working.  The web-side analysis remained in the
+  genuine full-exact iid class.  Independent residual sources, finite-prefix
+  seeds, ordinary iid laws, and formal inverse candidates were treated only as
+  proof-strategy objects, never as full-exact counterexamples.
+- The R25 trace witness lifts to an unconditional `3x3` residual Gram identity:
+  for `F_i=(X_i-bar X)P_M(X_i)`, flat orthogonality gives
+  `L^3(F_i F_j)=(4q_M/9) delta_ij`.  Applying the R26 heat product identity to
+  `G_i=P_(-a)F_i` yields the matrix decomposition
+  `A=E+(4q_M/9)I_3`.  `A>=0` is from forward probability positivity, while
+  `E>=0` is conditional on `H_M(L)>=0`; the two separate PSD facts do not imply
+  `A>=E`.
+- A single antisymmetric mode `F_-=(F_1-F_2)/sqrt(2)` is enough: its gap is
+  `A_--E_-=4q_M/9`, and
+  `F_1-F_2=(X_1-X_2)H_P` gives an explicit residual factorization.  The quotient
+  `H_P` still depends on the common coordinate, so this is not reducible to
+  pure-residual rotational positivity.  The strongest conditional bridge is a
+  same-factor conditional contraction realizing all inverse derivative-jet
+  sectors from the one forward vector `G_-`.
+- R27 gives a strict no-go for the entire independent positive real residual-HS
+  covariance-completion family.  If residual covariance satisfies the PSD
+  damping budget `0<=C_perp<=tP_perp`, then `tr(C_perp)<=2t` and the flat-jet
+  coefficient is `q_M(tr(C_perp)-2t)/2<=0`; maximal completion gives zero, not
+  `+c q_M t`.  The same first-order obstruction holds for centered real sources
+  of size `O(sqrt(t))` with the same budget, since higher cumulants are `o(t)`.
+- The minimum OPEN is renamed `Same-Factor Conditional Residual-Jet
+  Contraction`: prove/refute `A_-->=E_-` with the antisymmetric mode's common
+  dependence handled explicitly, or find an equivalent cross-factor Schur/
+  conditional contraction.  This remains a non-circular local bridge toward
+  Gaussian rigidity; `P_3K` has no charge-to-residual-jet contraction and stays
+  logically disconnected.  If this contraction is unavailable, stop expanding
+  HS candidates and return to the R25 `Omega_K` infinite-tail modulus.
+- Added `flat_null_square_r27/audit_r27.py` and README.  The local SymPy audit
+  passed the flat Gram identity, matrix heat decomposition, antisymmetric
+  factorization, and covariance-budget/no-go test, printing
+  `R27_AUDIT_COMPLETED`.  R24--R26 audits were rerun separately and passed;
+  `git diff --check` remains required before commit.  These are local identity
+  checks and do not prove the residual contraction, a full-exact orientation,
+  or Gaussian rigidity.

@@ -1887,7 +1887,109 @@ Python 3.12 运行，输出 `R26_AUDIT_COMPLETED`；并复跑 R24、R25 审计�
 `git diff --check`。脚本只核验局部恒等式和 degree schema，不把 conditional
 domination、full-exact orientation 或 Gaussian rigidity 写成已完成结论。
 
-## 22. 已探索路线与停止条件
+## 22. R27：Same-Factor Conditional Residual-Jet Contraction
+
+R27 先重新读取本文件、工作日志和 R26 审计资产至提交 `7268c1f`。本轮仍严格
+限定 genuine full-exact iid law；没有把 finite-prefix seed、ordinary iid、独立
+residual source、formal inverse candidate 或 sectorwise PSD 当作 full-exact 反例。
+R27 没有证明 `q_M>=0`，但把 R26 的 trace bridge 压成了一个单一 antisymmetric
+residual mode，并严格排除了一整类看似自然的 covariance completion。
+
+### 22.1 `3x3` residual Gram identity
+
+在 flat inverse boundary 令
+`F_i=(X_i-bar X)P_M(X_i)`。由 `L(P_M x^k)=0`、`0<=k<=M+1` 以及
+`L(x^2P_M^2)=q_M`，得到无条件的矩阵恒等式
+
+`B_ij=L^3(F_iF_j)=(4q_M/9) delta_ij`。
+
+这比 R25 的 trace identity 更强：坏 sign 在三个 residual-coordinate test
+方向上是同一个 scalar gap，而不是只存在于一个未指定的组合方向。
+
+### 22.2 矩阵 reverse-heat 分解
+
+令 `G_i=P_(-a)F_i`，并定义
+
+`A_ij=E_(mu^3)[G_iG_j]`,
+
+`E_ij=sum_(|alpha|>=1) a^|alpha|/alpha!
+L^3[(partial^alpha F_i)(partial^alpha F_j)]`。
+
+heat product identity 给出
+
+`A=E+(4q_M/9)I_3`。
+
+这里 `A>=0` 只来自 genuine forward probability positivity；`E>=0` 只在
+`H_M(L)>=0` 下由每个 derivative 的 one-body degree 不超过 `M` 得到。两者
+分别半正定仍不推出 `A>=E`；本轮所需的等价目标是
+
+`q_M>=0  <=>  A-E>=0`。
+
+取 `c=(1,-1,0)/sqrt(2)`，即可把它进一步压成单一 antisymmetric residual mode
+
+`F_-=(F_1-F_2)/sqrt(2)`,  `A_--E_-=4q_M/9`。
+
+并且
+
+`F_1-F_2=(X_1-X_2)H_P`,
+
+`H_P=(P(X_1)+P(X_2))/2
+ +(X_1+X_2-2X_3)(P(X_1)-P(X_2))/(6(X_1-X_2))`。
+
+所以这个 mode 确实含有 residual factor，但 quotient 仍依赖 common coordinate。
+
+### 22.3 独立正实 residual-source completion 的严格 no-go
+
+自然 common HS source 的 covariance trace 是 `t`。若再加入独立 centered
+residual source，且剩余 quadratic damping 保持 PSD，则
+
+`0<=C_perp<=tP_perp`,  `tr(C_perp)<=2t`。
+
+flat jet 的 `q_M` 首阶系数因此为
+
+`(q_M/2)(tr(C_perp)-2t)<=0`。
+
+最大 completion `C_perp=tP_perp` 只能把错误首阶抵消为 `0`，不能产生所需的
+`+c q_M t`。同样的首阶 no-go 也适用于与 common field 仅作外部正随机化、大小为
+`O(sqrt(t))` 且满足同一 damping budget 的一般 centered real source；高阶
+cumulants 只影响 `o(t)`。因此继续调 residual Gaussian covariance 已经没有
+意义，成功路线必须使用真正的 `U-R` 条件相关、cross-factor Schur term，或
+R18 matrix sectors 的非平凡 contraction。
+
+### 22.4 最强 conditional bridge 与当前 OPEN
+
+R27 把当前桥压成
+
+`E_(mu^3)G_-^2 >=
+sum_(|alpha|>=1) a^|alpha|/alpha! L^3[(partial^alpha F_-)^2]`。
+
+更结构化地，若 genuine full-exact conditional/common--residual Hilbert space
+能构造 contraction `C_M`，使
+
+`E_-=||C_M G_-||_2^2`,  `||C_M||<=1`,
+
+则 Bessel 不等式立即给出 `E_-<=A_-`，从而 `q_M>=0`。这不是把结论换名：它
+精确指出 R18 尚缺的 operator structure 是“所有 inverse derivative sectors
+共同来自同一个 forward residual vector 的 contractive conditional projection”。
+
+因此当前最小 OPEN 改名为：
+
+### Same-Factor Conditional Residual-Jet Contraction — OPEN
+
+在 genuine full-exact iid law 内证明或否定上述 `A_--> = E_-`，并显式处理
+antisymmetric mode 的 common-coordinate dependence。若新候选仍只是独立正实
+residual source、radial/pure-residual positivity 或 sectorwise PSD，按 R27.3
+直接淘汰。该 bridge 仍服务原 Gaussian rigidity 的非循环局部路线；但
+`P_3K` 没有 charge-to-residual-jet contraction 或 angular Hardy constant，仍
+与 closure 逻辑断开。若 contraction 也无法构造，则应回到 R25 的 `Omega_K`
+infinite-tail compactness modulus，而不再堆 HS 展开。
+
+本轮无条件审计了 flat Gram、矩阵 heat 分解、antisymmetric factorization 和
+residual covariance budget；新增 `flat_null_square_r27/audit_r27.py` 与 README，
+运行输出 `R27_AUDIT_COMPLETED`。这些局部恒等式和 no-go 不构成 full-exact
+反例，也没有关闭 Gaussian rigidity。
+
+## 23. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1900,7 +2002,7 @@ domination、full-exact orientation 或 Gaussian rigidity 写成已完成结论�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 23. 每轮协作协议
+## 24. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1913,10 +2015,10 @@ domination、full-exact orientation 或 Gaussian rigidity 写成已完成结论�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 24. 当前 checkpoint
+## 25. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1941,12 +2043,15 @@ domination、full-exact orientation 或 Gaussian rigidity 写成已完成结论�
   `Omega_K` conditional compactness modulus，运行 `R25_AUDIT_COMPLETED`；另保留
   `P_3K` sector 限定；R26 又得到 reverse-heat square decomposition、
   common-only HS wrong-sign obstruction 和两个 conditional bridges，运行
-  `R26_AUDIT_COMPLETED`。`P_3K` 仍没有 quantitative bridge。
-- 当前方向：R26 已完成，最小 OPEN 改为 `Residual-Corrected Flat Null-Square
-  Hardy Gain`：在严格 genuine full-exact iid 类内证明或否定 `A_M>=E_M`，或
-  找到等价的 residual-corrected common/residual coherence。下一轮先做一阶符号
-  测试与最小可审计的非标量 HS/matrix candidate；若仍无桥，则记录新的
-  full-exact-compatible no-go，不重复 common-only scalar escort 展开。只有关闭
-  one-step sign 后，才回到 residual Laguerre `<3M` 与 R21 cubic amplifier。
+  `R26_AUDIT_COMPLETED`；R27 又将其压成 `3x3` residual Gram、单一
+  antisymmetric residual mode，并排除独立正实 residual-source completion，运行
+  `R27_AUDIT_COMPLETED`。`P_3K` 仍没有 quantitative bridge。
+- 当前方向：R27 已完成，最小 OPEN 改为 `Same-Factor Conditional Residual-Jet
+  Contraction`：在严格 genuine full-exact iid 类内证明或否定单一 residual
+  mode 的 `A_-->=E_-`，或构造同等的 common--residual conditional contraction。
+  下一轮先做该 contraction 的一阶可审计候选；若候选仍属于独立正实 source、
+  radial positivity 或 sectorwise PSD，直接记录 no-go，必要时回到 R25 的
+  `Omega_K` infinite-tail modulus。只有关闭 one-step sign 后，才回到 residual
+  Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
