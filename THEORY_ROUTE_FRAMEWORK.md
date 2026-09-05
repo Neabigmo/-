@@ -1793,7 +1793,101 @@ Python 3.12 运行，输出 `R25_AUDIT_COMPLETED`；并复跑 R24 审计通过�
 局部代数和条件模量的单调性，不把 conditional compactness 或 R25 orientation
 写成已完成定理。
 
-## 21. 已探索路线与停止条件
+## 21. R26：Residual-Corrected Flat Null-Square Hardy Gain
+
+R26 先重新读取本文件、工作日志和 R25 审计资产至提交 `fb8c7e4`。本轮仍严格
+限定 genuine full-exact iid law；没有把 ordinary iid、finite-prefix、形式逆热
+候选或非 iid law 当作反例。R26 没有证明 `q_M>=0`，但给出了一个无条件的
+reverse-heat 分解、一个严格的 common-only 错符号 obstruction，以及两个很窄的
+conditional bridge。
+
+### 21.1 reverse-heat square decomposition
+
+令 `F_i=(X_i-bar X)P_M(X_i)`、`G_i=P_(-a)F_i`，并令 `L` 是 flat boundary
+处的 inverse functional。多元 heat product identity 为
+
+`P_a((P_(-a)F)^2)=sum_alpha a^|alpha|/alpha! (partial^alpha F)^2`。
+
+结合 R25 的 `L^3(sum_i F_i^2)=4q_M/3`，得到精确分解
+
+`A_M=4q_M/3+E_M`,
+
+其中
+
+`A_M=L^3(P_a(sum_i G_i^2))`
+
+是 forward heat image 下的真实 square expectation，而
+
+`E_M=sum_{i,|alpha|>=1} a^|alpha|/alpha! L^3((partial^alpha F_i)^2)`。
+
+对 `F_i` 的每个非零导数，每个 one-body degree 都不超过 `M`；所以在
+`H_M(L)>=0` 的条件下 `E_M>=0`。但这只给出“forward square energy 减去
+lower-rank Gaussian-noise energy”的表示，不给出所需的 `A_M>=E_M`。
+显式 pullback 也经过核验：若 `P_hat=P_(-a)P_M`，则
+
+`P_(-a)[(X_i-bar X)P_M(X_i)] =
+(X_i-bar X)P_hat(X_i)-(2a/3)P_hat'(X_i)`。
+
+### 21.2 posterior pullback 与严格错符号
+
+对 `A_t^mu(y)=E_mu exp(yX-tX^2/2)`，令 `D=1+at`、`s=y/D`、`u=t/D`，
+complete-the-square 给出
+
+`A_t^mu(y)=D^(-1/2) exp(ay^2/(2D))
+ L(exp(sX-uX^2/2))`。
+
+在 flat null `L(P_M^2)=L(XP_M^2)=0`、`L(X^2P_M^2)=q_M` 下，
+
+`L(exp(sX-uX^2/2)P_M^2)=q_M(s^2-u)/2
+ +O(|s|^3+|s|u+u^2)`。
+
+自然的三副本 HS escort 满足 `E[Y^2]=t/3+O(t^2)`，故其 common-shift 平均的
+首项为
+
+`E_eta[W_a,t,Y[p_t,Y]]=-(q_M/3)t+o(t)`。
+
+因此 ordinary raw conditional PSD、点态 `Psi_M>=0`、以及 common-only scalar
+HS averaging 都不能证明 `q_M>=0`；后者在 leading order 读取的还是 `-q_M`。
+任何成功的 HS/matrix 方案至少需要同阶 residual correction/common--residual
+coherence，不能把 pure-residual rotational positivity 直接套到
+`(X_i-bar X)P_M(X_i)` 上。
+
+### 21.3 两个最窄的 conditional bridge
+
+以下两条均为 conditional theorem schema，不是当前假设下已证命题：
+
+1. 若 flat rank-`M` deconvolved Hankel positivity 在一列 infinitesimal Esscher
+   slice 上保持，则 `q_M>=0`，因为该 slice 的二阶项是 `q_M y^2/2`。
+2. 若能证明 reverse-heat latent-energy domination `A_M>=E_M`，则由上述分解
+   得 `q_M>=0`。这只要求一个特殊 flat-null vector 的能量控制，远弱于整个
+   inverse `L` 在所有 squares 上正性。
+
+R26 还严格排除了三种模板：点态非负不等于 inverse `L^3` 正性；R18 raw
+conditional kernel 的 PSD 位于 Gaussian stripping 之前；自然 common-only HS
+平均的首阶方向相反。故本 special-cone bridge 仍服务原 Gaussian rigidity 路线，
+但必须先找到 residual-corrected inequality；`P_3K` 仍没有任何 quantitative
+bridge，继续与 R26 closure 断开。
+
+### 21.4 R26 逻辑等级与下一步
+
+本轮无条件审计的是 heat pullback、flat parabolic jet、wrong-sign leading
+coefficient、reverse-heat square identity 和显式 `P_(-a)F_i` 公式。当前最小
+OPEN 改名为：
+
+### Residual-Corrected Flat Null-Square Hardy Gain — OPEN
+
+在 genuine full-exact inverse flat boundary，证明或否定 `A_M>=E_M`，或找到
+等价的 residual-corrected common/residual coherence；第一阶符号必须为所需的
+`+c q_M t`（`c>0`），不能再次得到 common-only 的 `-q_M/3`。若这条桥关闭，
+才返回 residual Laguerre `<3M` 与 R21 cubic amplifier；Gaussian rigidity 仍
+OPEN。
+
+本轮新增 `flat_null_square_r26/audit_r26.py` 与 README。使用带 SymPy 的本机
+Python 3.12 运行，输出 `R26_AUDIT_COMPLETED`；并复跑 R24、R25 审计与
+`git diff --check`。脚本只核验局部恒等式和 degree schema，不把 conditional
+domination、full-exact orientation 或 Gaussian rigidity 写成已完成结论。
+
+## 22. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1806,7 +1900,7 @@ Python 3.12 运行，输出 `R25_AUDIT_COMPLETED`；并复跑 R24 审计通过�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 22. 每轮协作协议
+## 23. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1819,10 +1913,10 @@ Python 3.12 运行，输出 `R25_AUDIT_COMPLETED`；并复跑 R24 审计通过�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 23. 当前 checkpoint
+## 24. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1845,11 +1939,14 @@ Python 3.12 运行，输出 `R25_AUDIT_COMPLETED`；并复跑 R24 审计通过�
   overshoot no-go，运行 `R24_AUDIT_COMPLETED`；R25 又把它重写为 adjacent
   common-root derivative、same-factor residual-weighted null-square 与
   `Omega_K` conditional compactness modulus，运行 `R25_AUDIT_COMPLETED`；另保留
-  `P_3K` sector 限定。
-- 当前方向：R25 已完成，最小 OPEN 改为 `Flat Null-Square Tail-to-Head Positivity`：
-  在严格 genuine full-exact iid 类内证明或否定 `ell_M=0 => q_M>=0`，优先研究
-  `L^3(sum_i (X_i-bar X)^2P_M(X_i)^2)>=0` 或等价的 common-root derivative
-  orientation；如果不能，给出明确 uniformity 缺口或 full-exact no-go。只有关闭
+  `P_3K` sector 限定；R26 又得到 reverse-heat square decomposition、
+  common-only HS wrong-sign obstruction 和两个 conditional bridges，运行
+  `R26_AUDIT_COMPLETED`。`P_3K` 仍没有 quantitative bridge。
+- 当前方向：R26 已完成，最小 OPEN 改为 `Residual-Corrected Flat Null-Square
+  Hardy Gain`：在严格 genuine full-exact iid 类内证明或否定 `A_M>=E_M`，或
+  找到等价的 residual-corrected common/residual coherence。下一轮先做一阶符号
+  测试与最小可审计的非标量 HS/matrix candidate；若仍无桥，则记录新的
+  full-exact-compatible no-go，不重复 common-only scalar escort 展开。只有关闭
   one-step sign 后，才回到 residual Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

@@ -726,3 +726,42 @@
   iid laws.  The `P_3K` sector remains logically disconnected, and Gaussian
   rigidity remains OPEN.  R26 should attack the R18 conditional-matrix or
   Hubbard--Stratonovich route before returning to the `<3M` plateau target.
+
+# 2026-09-06 — R26 residual-corrected flat null-square Hardy gain
+
+- R26 reread the durable framework, worklog, R25 README/audit, and the recorded
+  R25 state `fb8c7e4` before working.  The web-side analysis remained inside the
+  genuine full-exact iid law class.  No ordinary iid stress test, finite-prefix
+  construction, formal inverse candidate, exchangeable/non-iid law, or raw
+  conditional PSD statement was promoted to a full-exact counterexample.
+- The reverse-heat product identity was reduced to a directly auditable formula:
+  `P_a((P_(-a)F)^2)=sum_alpha a^|alpha|/alpha! (partial^alpha F)^2`.  For
+  `F_i=(X_i-bar X)P_M(X_i)`, the R25 residual identity then gives
+  `A_M=4q_M/3+E_M`, where `A_M` is the forward-probability square energy and
+  `E_M` is the lower-rank Gaussian-noise correction.  Every nonzero derivative
+  has one-body degree at most `M`, so `E_M>=0` is conditional on `H_M(L)>=0`.
+  The missing inequality is `A_M>=E_M`; this is not supplied by forward
+  positivity or inverse positivity on arbitrary squares.
+- Completing the square gives the exact posterior pullback with
+  `D=1+at`, `s=y/D`, and `u=t/D`:
+  `A_t^mu(y)=D^(-1/2) exp(ay^2/(2D)) L(exp(sX-uX^2/2))`.
+  On the flat null direction the numerator has jet
+  `q_M(s^2-u)/2+O(|s|^3+|s|u+u^2)`.  Since the natural three-copy escort has
+  `E[Y^2]=t/3+O(t^2)`, common-only HS averaging has the strict leading orientation
+  `-q_M t/3+o(t)`, so it cannot prove the desired `q_M>=0`.
+- R26 therefore identifies the proof-level obstruction as missing
+  inverse common--residual conditional coherence.  R18 raw conditional matrix
+  positivity occurs before Gaussian stripping; R21 pure-residual rotational
+  positivity does not control the coupled polynomial
+  `(X_i-bar X)P_M(X_i)`.  The minimum OPEN is renamed
+  `Residual-Corrected Flat Null-Square Hardy Gain`: prove/refute `A_M>=E_M`, or
+  find an equivalent genuinely residual-corrected HS/matrix inequality whose
+  first-order sign is `+c q_M t`, `c>0`.  `P_3K` remains disconnected and
+  Gaussian rigidity remains OPEN.
+- Added `flat_null_square_r26/audit_r26.py` and README.  The local SymPy audit
+  passed the posterior pullback, flat parabolic jet, common-only wrong-sign
+  coefficient, reverse-heat square identity, explicit
+  `P_(-a)F_i` formula, and the `A_M=4q_M/3+E_M` decomposition/degree schema,
+  printing `R26_AUDIT_COMPLETED`.  The R24 and R25 audits were also rerun and
+  `git diff --check` passed.  These are local algebraic checks only; they do not
+  prove the conditional domination or a genuine full-exact orientation.
