@@ -1309,3 +1309,21 @@ computation was used.
   `R39_AUDIT_COMPLETED`.
 - No optimizer, SDP, numerical sweep, relaxed measure-LP, or remote
   computation was used.
+
+# 2026-09-06 — R40 local mixed-Hessian finite probe (web asymptotic review pending)
+
+- Added `flat_shadow_mixed_hessian_r40/audit_r40.py` and README while the same
+  project webpage continued computing the mixed-Hessian response.  The probe
+  extracts the `epsilon delta` coefficient from the affine density expansion
+  and independently evaluates the complete five-term second law-functional
+  derivative, including base-measure, conditional, subtraction, mean, and
+  mixed-internal terms.
+- Exact target-channel regression for `N=6` (`m=3`) is
+  `K_(1,3)=0`, `K_(2,3)=0`,
+  `K_(3,3)=-100sqrt(210)/81`, and
+  `K_(4,3)=-25264sqrt(210)/2187`.
+- These values are recorded only as finite evidence.  The asymptotic order and
+  response-rank relation to `D_(n,2m+4)` remain explicitly
+  `R40_ASYMPTOTIC_RESPONSE REQUIRES_WEB_REVIEW`; no transgression or no-go is
+  inferred from the table.  No optimizer, SDP, numerical sweep, relaxed
+  measure-LP, or remote computation was used.

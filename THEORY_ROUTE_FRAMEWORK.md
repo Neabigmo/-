@@ -3079,3 +3079,22 @@ Response Lemma**，即研究 `H_(n;2m+1,3)` 与已有 linear response rows 的
 因此上位路线仍是 **Constraint-Coupled Non-SOS Graded Value Transgression —
 OPEN**；Gaussian rigidity 仍 OPEN，`P_3K` bridge 仍完全断开。本轮没有使用
 optimizer、SDP、大规模 sweep、relaxed measure-LP 或 remote computation。
+
+## 37. R40：mixed-Hessian 本机有限回归（网页渐近复核待完成）
+
+为配合 R39 指出的最小 OPEN `K_(n,m)=D^2B_n(gamma)[h_(2m+1),h_3]`，本机新增
+`flat_shadow_mixed_hessian_r40/audit_r40.py` 与 README。该探针对 affine density
+`(1+epsilon h_a+delta h_b)d gamma` 直接提取 `epsilon delta` 系数，并与包含
+base-measure、conditional projection、one-body subtraction、mean correction
+及 mixed internal derivative 的完整五项公式逐项相等核验。
+
+在目标 `m=3`（`N=6`）下，精确回归为
+
+`K_(1,3)=0`、`K_(2,3)=0`、
+`K_(3,3)=-100sqrt(210)/81`、
+`K_(4,3)=-25264sqrt(210)/2187`。
+
+这只是有限 exact regression，不能单独推出 `n` 的主阶、与
+`D_(n,2m+4)` 的相关性或 response-rank 结论；上述渐近问题继续等待同一项目
+网页端的 R40 复核。当前上位 OPEN、Gaussian rigidity 与 `P_3K` bridge 的状态
+不变。
