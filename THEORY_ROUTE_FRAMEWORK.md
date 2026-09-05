@@ -3092,9 +3092,17 @@ base-measure、conditional projection、one-body subtraction、mean correction
 
 `K_(1,3)=0`、`K_(2,3)=0`、
 `K_(3,3)=-100sqrt(210)/81`、
-`K_(4,3)=-25264sqrt(210)/2187`。
+`K_(4,3)=-25264sqrt(210)/2187`、
+`K_(5,3)=-320648sqrt(210)/6561`。
 
 这只是有限 exact regression，不能单独推出 `n` 的主阶、与
 `D_(n,2m+4)` 的相关性或 response-rank 结论；上述渐近问题继续等待同一项目
 网页端的 R40 复核。当前上位 OPEN、Gaussian rigidity 与 `P_3K` bridge 的状态
 不变。
+
+本轮起，理论路线的整体框架、阶段大纲、每轮网页结论与本机 exact audit
+均以本文件和 `PROJECT_WORKLOG_APPEND.md` 为本机记录，并随研究提交 Git。
+每次向同一项目网页端继续推进前，必须先在提示中要求其阅读这两份最新记录及
+相关 R-folder README/audit，再开始新的推导；网页端返回后再把可核验的新结论
+补入本机记录。该记录协议只约束研究衔接，不改变当前 OPEN 命题、证据边界或
+其余工作方式。

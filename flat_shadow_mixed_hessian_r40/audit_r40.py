@@ -97,7 +97,7 @@ def mixed_hessian(n, a, b):
 def main():
     # The target R39 channel is a=2m+1, b=3.  Keep this deliberately small;
     # the output is a finite exact regression, not a numerical sweep.
-    values = [mixed_hessian(n, 7, 3) for n in range(1, 5)]
+    values = [mixed_hessian(n, 7, 3) for n in range(1, 6)]
     print(f"R40_K_N6_VALUES: {values}")
     print("R40_MIXED_HESSIAN_COMPLETE_DECOMPOSITION PASSED")
     print("R40_MIXED_HESSIAN_FINITE_REGRESSION PASSED")

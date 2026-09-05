@@ -7,7 +7,7 @@ checks it by extracting the `epsilon*delta` coefficient from the affine density
 expansion.  It includes base-measure weights, conditional projection terms,
 one-body subtraction, mean correction, and the mixed internal derivative.
 
-The initial target is `m=3`, namely `K_(n,3)` for `n=1,...,4`.  These are exact
+The initial target is `m=3`, namely `K_(n,3)` for `n=1,...,5`.  These are exact
 finite regression values only.  The asymptotic order, relation to
 `D_(n,2m+4)`, and any response-rank conclusion remain deferred to the web
 review and must not be inferred from this small table.
