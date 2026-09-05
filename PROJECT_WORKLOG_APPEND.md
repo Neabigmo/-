@@ -967,3 +967,56 @@
   `R31_JACOBI_SLACK_STRUCTURE PASSED`,
   `R31_POSITIVE_ADJOINT_INF_SUP REMAINS OPEN`, and `R31_AUDIT_COMPLETED`.
   No optimizer, SDP, large sweep, or remote computation is used.
+
+# 2026-09-06 — R32 global value-level remote adjoint locality
+
+- R32 reread the durable framework, worklog, R31 README/audit, and the recorded
+  commit `78ce2eacffcf2e216b1ba52b394f96cafa2f9415` before working.  The web-side
+  result stayed inside the genuine full-exact iid class.  Finite viable prefixes,
+  terminal flattening, and KKT/normal-cone systems were used only for proof
+  structure and no-go analysis, never as counterexamples.
+- For fixed `M`, finite `K`, a nondegenerate inverse-flat window, exact rows
+  `G_1=...=G_K=0`, forward `H_K>=0`, and the recorded even-moment bounds, the
+  viable moment set is compact and `q_M` continuous.  Hence
+  `Omega_K=max(-q_M)_+` is attained.  When `K>=M+2`, `G_K` and the fixed head do
+  not depend on the new odd moment; terminal flattening can therefore force
+  `beta_K=0` without changing feasibility data relevant to the head.
+- If a bad sequence retained a fixed singular forward Hankel rank, diagonal
+  extraction, PSD, all fixed exact rows, and Carleman would yield a genuine
+  full-exact limit with finite-support one-body law.  Then iid `Q` would have
+  finite support, contradicting `Q~chi^2_2`.  Thus active forward ranks escape to
+  infinity, and each fixed rank has a uniform positive margin at sufficiently
+  deep prefixes.  This solves rank escape but not moving-rank conditioning.
+- Finite-dimensional Fritz--John separation is available without assuming CQ;
+  exact rows have independent top-even pivots, but no audited uniform CQ upgrades
+  it to normalized KKT.  More importantly, standard normal-cone complementarity
+  gives `eta_j beta_j(mu_K)=0` and `<Z,H_K>=0`.  Therefore local normal cones cancel
+  gradients but cannot supply the positive value budget
+  `P_K=sum eta_j beta_j(mu_K)`; at a terminally forced active face the multiplier
+  is exactly zero, and inactive constraints have zero multiplier.
+- This strictly excludes **Local Jacobi KKT/Normal-Cone Value Completion**:
+  “bad extremizer + active-rank escape + local KKT” does not imply
+  `q_M=P_K+R_K` with `P_K>=0` and `R_K->0`.  Adding more same-type Jacobi slacks
+  cannot repair it without a new value-level telescoping identity.
+- On a fixed compact flat window, the positive Gaussian shadow obeys a linear
+  Jacobi normalization `beta_j(rho_M)/(j+1)<=C_W`, and normalized exact-Q shadow
+  defects are uniformly bounded.  A remote exponentially weighted multiplier
+  tail would therefore make shadow debt vanish by Cauchy--Schwarz.  The missing
+  fact is that active-rank escape does not push the low equality costate to high
+  degrees or provide a law-independent conic inf-sup.
+- The new conditional closure is: if a normalized global value adjoint has all
+  fixed/intermediate modes cancelled, its remaining Hermite dual coefficients
+  start at `N_K->infinity` with a law-independent exponential weighted bound,
+  and both Jacobi and exact-Q shadow debts obey the same remote estimate, then
+  R12 tail tightness gives `Omega_K->0` and `q_M>=0`.  The true minimum OPEN is
+  now **Global Value-Level Remote Adjoint Locality**.  Gaussian rigidity remains
+  open and `P_3K` remains disconnected.
+- Added `flat_shadow_normal_cone_r32/audit_r32.py` and README.  The exact local
+  audit covers terminal odd independence/flattening, zero terminal KKT multiplier,
+  complementarity no-value, the fixed-rank support contradiction note, Gaussian
+  shadow normalization, and the weighted geometric-tail estimate.  The corrected
+  run exited 0 and printed `R32_ACTIVE_RANK_ESCAPE PASSED`,
+  `R32_LOCAL_NORMAL_CONE_VALUE_COMPLETION NO_GO`,
+  `R32_REMOTE_EQUALITY_COSTATE LOCALITY REMAINS OPEN`, and
+  `R32_AUDIT_COMPLETED`.  No optimizer, SDP, large sweep, or remote computation
+  is used.

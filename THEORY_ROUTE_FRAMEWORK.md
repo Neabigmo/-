@@ -2330,7 +2330,118 @@ R31 后当前最小 OPEN 改为 **Uniform Positive Jacobi Normal-Cone Locality**
 OPEN`、`R31_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远程计算。
 `P_3K` 仍与该 normal-cone locality 逻辑断开，Gaussian rigidity 仍 OPEN。
 
-## 27. 已探索路线与停止条件
+## 27. R32：Global Value-Level Remote Adjoint Locality
+
+网页端在开始本轮前读取了本框架、工作日志、R31 审计资产和 Git 提交
+`78ce2eacffcf2e216b1ba52b394f96cafa2f9415`。本轮仍严格限定 genuine full-exact
+iid law；有限 viable prefix、terminal flattening 和 KKT 只用于证明结构与障碍，
+不构成反例。
+
+R32 把 `Omega_K` 的 finite worst-case 问题写成显式的 moment/Jacobi feasible set：
+exact `G_1=...=G_K=0`、forward `H_K(m)>=0`、记录的 even-moment bounds，以及
+固定 nondegenerate inverse-flat window。`q_M` 在该集合上连续，因此有限 `K` 的
+坏极值确实存在。这一步不需要 KKT 或数值 optimizer。
+
+### 27.1 active-rank escape
+
+在 `K>=M+2` 且前一阶 Hankel block 正定时，`G_K` 不含新 odd moment
+`m_(2K-1)`；固定其它量，把 Jacobi control `S_(K-1)` 推到
+`|S_(K-1)|=sqrt(B_K)`，不改变 exact rows、固定 head `q_M`、inverse-flat 条件或
+even growth bounds，得到 terminal flattening `beta_K=0`。所以每个有限坏极值都可
+选成 terminally flat。
+
+若 `Omega_K` 沿子列保持 `>=epsilon>0`，而某个固定 forward Hankel rank 一直奇异，
+则 even-moment bound 给出 diagonal extraction；PSD、所有固定 `G_n=0` 和 Carleman
+唯一性产生 genuine full-exact limit law。固定 Hankel 奇异又迫使一体 law 有限支持，
+从而 iid triple 的 `Q` 有限支持，与连续 `chi^2_2` 矛盾。因此
+
+`r_K:=min{j:H_j(m^(K)) singular} -> infinity`。
+
+同一紧性论证还给出：每个固定 rank `J` 在足够深的 viable prefix 上有统一正的
+`lambda_min H_J>=c_J`。所以固定 rank 的 conditioning 不是缺口，缺口发生在 moving
+rank。
+
+### 27.2 finite-dimensional normal cone 的边界
+
+在有限维变量 `z=(m_3,...,m_(2K),a)` 上，Fritz--John 分离可写成
+
+`alpha nabla f_K + DE_K^T lambda - D H_K^*[Z] + N_other=0`,
+
+其中 `f_K=-q_M`、`Z>=0`，并有 PSD complementarity
+`<Z,H_K>=0`。exact Q rows 的最高偶矩导数为正且三角独立，但完整 flat/equality
+流形是否有 uniform constraint qualification 尚未证明；因此无条件只能使用
+Fritz--John，不能把 `alpha=1` 或 uniform KKT normalization 当成已证事实。
+
+active-rank escape 只控制 singularity 出现的 degree，不控制 active-face 的 conic
+inf-sup `sigma_K`，故
+
+`r_K->infinity` 不推出 `sigma_K>=c>0`。
+
+更致命的是标准 local KKT value completion 的互补性：
+
+`eta_j>=0`, `beta_j(mu_K)>=0`, `eta_j beta_j(mu_K)=0`,
+以及矩阵形式 `<Z,H_K>=0`。
+
+因此 normal cone 只能消梯度，不能产生 R30 所需的正 value budget
+`P_K=sum eta_j beta_j(mu_K)`；该量在 KKT 点恒为零。人为 terminal flattening 的 active
+约束甚至满足 `theta_K=0`，所以 active rank escape 不保证存在 nonzero escaping
+multiplier；inactive slack 的 multiplier 则被互补性强制为零。
+
+这严格排除了 **Local Jacobi KKT/Normal-Cone Value Completion**：不能从“坏极值
+存在 + active ranks 逃远 + local KKT”自动推出 `q_M=P_K+R_K` 且 `R_K->0`。
+增加更多同类型 Jacobi constraints 也不修复这一机制，因为 inactive constraints
+没有 dual mass，active constraints 的 value slack 为零，新增非零 multiplier 只会
+增加 shadow debt。
+
+### 27.3 shadow debt 的条件压制与真正缺口
+
+在固定 compact flat window 内，positive Gaussian shadow `rho_M=Y+sqrt(a)Z` 的
+Jacobi coefficients 满足
+
+`beta_j(rho_M)/(j+1)<=C_W`,
+
+并且 normalized exact-Q defects `Gtilde_j(rho_M)` 有统一有界 normalization。若
+remote multiplier 支持从 `r_K->infinity` 开始，且存在 `0<theta<1` 使
+
+`sum_j theta^(-j)|etatilte_j^(K)|^2 <= C`,
+
+则 weighted Cauchy--Schwarz 给出 shadow debt `O(theta^(r_K/2))->0`。所以 shadow
+debt 不是独立终极障碍；它可以在真正的 remote weighted locality 已成立时被压掉。
+
+但 active-rank escape 只把 Jacobi normal support 推远，不把 equality multipliers
+`lambda_(M+1),lambda_(M+2),...` 推远。也没有 audited identity 把固定低阶 equality
+costate 转移到高阶。因此真正缺的是
+
+**low equality costate -> remote bounded costate**。
+
+这不是 rank 数量问题，而是 global value-level separation、conic inf-sup、shadow
+balance 和 law-independent Hermite-dual conditioning 的联合问题。
+
+### 27.4 conditional closure 与当前最小 OPEN
+
+若坏极值存在 normalized global adjoint，使 `alpha=1`，所有 fixed/intermediate
+Hermite modes 消失，并有 `N_K->infinity`、
+
+`sum_(ell>N_K) theta^(-ell)|Gamma_ell^(K)|^2<=C`,
+
+且 Jacobi 与 exact-Q shadow debt 同样被该 remote weighted bound 压到零，则 R12
+uniform Hermite tail 给出 `Omega_K->0`，进而 `q_M>=0`。随后旧链条仍接回
+strict-drop 排除、短 plateau、Laguerre first-defect `<3M` 与 R21 cubic amplifier。
+这是一条 conditional theorem，不是 local KKT 已证结论。
+
+R32 后当前最小 OPEN 改为 **Global Value-Level Remote Adjoint Locality**：构造真正
+的 global polynomial/SOS、same-factor adjoint telescoping 或其它 value-level
+separation，把固定 head functional `q_M` 的 equality costate 逐级推到 remote
+Hermite degrees，并保持 law-independent weighted norm。若没有新的 value identity，
+R25--R32 的 local one-body normal-cone 支线应停止，不再堆更多局部 Jacobi 代数。
+
+本轮新增 `flat_shadow_normal_cone_r32/audit_r32.py` 与 README。审计运行
+`R32_ACTIVE_RANK_ESCAPE PASSED`、`R32_LOCAL_NORMAL_CONE_VALUE_COMPLETION NO_GO`、
+`R32_REMOTE_EQUALITY_COSTATE LOCALITY REMAINS OPEN`、`R32_AUDIT_COMPLETED`；没有
+optimizer、SDP、大规模扫参或远程计算。`P_3K` 继续与该 value-level locality
+逻辑断开，Gaussian rigidity 仍 OPEN。
+
+## 28. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -2343,7 +2454,7 @@ OPEN`、`R31_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 28. 每轮协作协议
+## 29. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -2356,10 +2467,10 @@ OPEN`、`R31_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 29. 当前 checkpoint
+## 30. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28、R29、R30、R31。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28、R29、R30、R31、R32。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -2394,12 +2505,13 @@ OPEN`、`R31_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远�
   明确 scalar/radial channel 的信息边界，运行 `R29_AUDIT_COMPLETED`。真正的
   tail-ejection certificate 仍未证明。
   `P_3K` 仍没有 quantitative bridge。
-- 当前方向：R31 已完成，最小 OPEN 收窄为 `Uniform Positive Jacobi Normal-Cone
-  Locality`。同级或固定延迟一级 slack 的 one-slot 非负 completion 已被 sign/rank
-  审计排除；下一步若继续，只能研究 worst-case viable prefix 上的 multi-level
-  normal-cone multipliers、active-rank escape、shadow balance 和统一 weighted
-  dual inf-sup。若这些条件无法由 genuine full-exact hierarchy 提供，应将
-  R25--R31 的 one-body tail-ejection route 记录为严格 no-go，不再做代数换名；
-  只有关闭 one-step sign 后，才回到 residual Laguerre `<3M` 与 R21 cubic amplifier。
+- 当前方向：R32 已完成，local Jacobi KKT/normal-cone value completion 已严格
+  排除；active-rank escape 与 fixed-rank margin 已建立，但不能控制 equality costate
+  的 moving-rank conditioning。唯一 OPEN 收窄为 `Global Value-Level Remote Adjoint
+  Locality`：构造 global value certificate，把 fixed head 的 equality costate 推到
+  remote Hermite tail，并保持 law-independent weighted bound，同时处理 shadow debt。
+  若没有新的 value-level identity，应将 R25--R32 的 local one-body normal-cone
+  route 记录为严格 no-go，不再做代数换名；只有关闭 one-step sign 后，才回到
+  residual Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
