@@ -500,3 +500,45 @@
   `R20_AUDIT_COMPLETED`; it is an algebraic consistency audit, not a rigidity proof.
 - Minimal OPEN is now `Affine-Hankel Diagonal-Capture / Multiscale Reverse-Schur`.
   Gaussian rigidity remains OPEN.
+
+# 2026-09-06 — R21 post-failure tensor-tail domination
+
+- R21 re-read the durable framework and worklog through commit `8075da1` before
+  working. It remained within the genuine full-exact iid inverse formal hierarchy;
+  no finite matrix, non-iid object, or formal candidate was treated as a full-exact
+  probability counterexample.
+- A two-dimensional residual rotational lift was isolated. For
+  `A A^T=I_2`, `A^T A=I_3-11^T/3`, the SO(2)-average of any residual polynomial
+  square depends only on `Q=|AX|^2`; existing all-degree exactness therefore
+  identifies its formal value with the corresponding `gamma_2` value. This is an
+  algebraic lift inside the existing formal hierarchy, not a positivity claim.
+- If the first nonflat inverse-Hankel failure is at `M`, with
+  `h_0,...,h_(M-1)>0` and `h_M<0`, degree-`M` residual polynomial tests have the
+  exact decomposition `h_M sum_j |H_M(O v_j)|^2 + R_F(O)`, with `R_F>=0`.
+  Rotational averaging gives the first-pivot capture factor
+  `3(2/3)^M ||H_M||_(L2(S1))^2`; pointwise residual coefficients obey the same
+  exponential scale. Thus a dimension-free reverse-Schur theorem using only the
+  first failing block is impossible even in the genuine iid residual geometry.
+- For the ridge, this multiplier is
+  `lambda_(2M)=3(2/3)^M binom(2M,M)/4^M`, asymptotic to
+  `3(2/3)^M/sqrt(pi*M)`, matching the previously audited even-mode Fock loss.
+- The whole cubic hierarchy is not thereby ruled out. At degree `3M`, the
+  `(M,M,M)` tensor partition has a triple-negative `h_M^3` contribution with exact
+  angular coefficient
+  `Gamma_M=((3M)!/(M!^3))^2 binom(2M,M)/(54^M*4^M)`, whose Stirling scale is
+  `3(27/2)^M/(4*pi^(5/2)*M^(5/2))`. Unknown signs and sizes of
+  `h_(M+1),...,h_(3M)` and other partitions may still cancel it.
+- The new conditional closure target is therefore post-failure Jacobi/tensor-tail
+  domination: a bound such as
+  `R_M <= (1-epsilon) Gamma_M |h_M|^3` for a suitable degree-`3M` test would
+  expose the negative pivot and close primitive rank escape. No such bound is
+  currently proved.
+- The residual `cos(3*theta)` harmonic is not the nonlinear log-density charge
+  `P_3K`; no quantitative `P_3K` bridge was found. Gaussian rigidity remains OPEN,
+  and no genuine full-exact iid non-closed sequence was constructed.
+- Added `post_failure_tensor_tail_r21/audit_r21.py` and its README. The audit passed
+  residual projection geometry, a representative rotational lift, first-failure
+  capture/ridge multiplier, and the exact `Gamma_M` formula with a small
+  log-Stirling check, printing `R21_AUDIT_COMPLETED`.
+- Minimal OPEN is now `Post-Failure Tensor-Tail Domination`. Gaussian rigidity
+  remains OPEN.

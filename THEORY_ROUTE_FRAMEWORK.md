@@ -1209,7 +1209,128 @@ coordinatewise tensor overlap 趋于零，使 negativity 对 Hadamard diagonal c
 compression、Toeplitz eigenvalue no-go 及 `O(m^(-2))` capture bound；输出
 `R20_AUDIT_COMPLETED`。这些是代数/一致性核验，不是 Gaussian rigidity 证明。
 
-## 16. 已探索路线与停止条件
+## 16. R21：Post-Failure Tensor-Tail Domination
+
+R21 在读取 R20 的本机提交 `8075da1` 后，继续严格限定 genuine full-exact iid
+inverse formal hierarchy。它把 R20 的 generic diagonal-capture 问题推进到
+Hankel-specific 的 first-failure 分解：一级负 pivot 的可见度确实指数衰减，因而
+任何只依赖 first failing block 的维数无关 reverse-Schur 结论都不可能成立；但
+degree `3M` 的 triple-pivot 项又有组合学放大，所以不能把一级 no-go 误读成
+whole-cubic no-go。
+
+### 16.1 完整二维 residual rotational lift
+
+取 `A:R^3 -> R^2` 满足
+`A A^T=I_2`、`A^T A=I_3-11^T/3`，则 `|A X|^2=Q`。在已有固定半径
+inverse formal functional `Lambda_r` 与 all-degree exactness 下，对任意二维实多项式
+`F` 有
+
+`integral_SO(2) Lambda_r^(tensor 3)[F(O A X)^2] dO
+ = E_(gamma_2) F(G)^2`。
+
+理由是 SO(2) 平均后的 `F^2` 是 `|A X|^2=Q` 的多项式，因而只调用 exact
+`Q~chi^2_2` 的全部矩。这里的“无条件”仅指在已有 genuine exact formal hierarchy
+内的代数 lift；`Lambda_r` 本身未必正，因此这不是概率律反例或 positivity 结论。
+
+### 16.2 first-failure 的精确负通道
+
+假设 first inverse-Hankel failure 在 `M`，先取非退化情形
+`H_(M-1)(Lambda_r) ≻ 0`、`H_M(Lambda_r) not >= 0`。令 `P_k` 为 monic formal
+orthogonal polynomials，`Lambda_r(P_j P_k)=h_k delta_jk`，于是
+`h_0,...,h_(M-1)>0`、`h_M<0`。对 degree-`M` 二维多项式 `F`，最高齐次部为
+`H_M`，将 `F(O A X)` 展开到 `P_(k_1)(X_1)P_(k_2)(X_2)P_(k_3)(X_3)`，则
+
+`Lambda_r^(tensor 3)[F(O A X)^2]
+ = h_M sum_j |H_M(O v_j)|^2 + R_F(O)`,
+
+其中 `v_j` 是 `A` 的列，`|v_j|^2=2/3`，且 `R_F(O)>=0`，因为其余项只含
+`h_0,...,h_(M-1)`。这是精确的 triangular decomposition，不是切向近似。
+
+旋转平均给出
+
+`integral sum_j |H_M(O v_j)|^2 dO
+ = 3(2/3)^M ||H_M||_(L^2(S^1))^2`。
+
+所以 first pivot 在完整二维 residual polynomial test space 中仍只以
+`3(2/3)^M` 的几何系数进入可见通道。更强地，若
+`alpha_j(theta)` 是三列的 residual coordinates，则
+`sum_j |alpha_j(theta)|^(2M) <= (2/3)^(M-1)`；局部化 angular variable 也不能消除
+这一级指数损失。
+
+### 16.3 iid-compatible 的一级 reverse-Schur no-go
+
+对 ridge `H_M(u,v)=u^M`，有
+`||H_M||_(L^2(S^1))^2=binom(2M,M)/4^M`，故 capture multiplier 正好是
+
+`lambda_(2M)=3(2/3)^M binom(2M,M)/4^M
+ ~ 3/(sqrt(pi M)) (2/3)^M`。
+
+它与早期 uniform-Fock 路线的偶模 multiplier 一致，说明 inverse-Hankel diagonal
+invisibility 与 residual angular inverse 的 exponential loss 是同一个内禀谱。
+因此严格可以排除：任何只使用 first failing Hankel block `H_M` 的 dimension-free
+reverse-Schur/coercivity theorem。这个 no-go 发生在 genuine iid residual geometry
+内部，但不是 genuine full-exact primitive sequence 的构造。
+
+### 16.4 cubic 的 triple-pivot amplifier
+
+不能停在一级 no-go，因为 degree `3M` 的 ridge `S_theta^(3M)` 在 tensor orthogonal
+expansion 中含有 `(M,M,M)` 项，其系数平方的 angular average 为
+
+`Gamma_M = ((3M)!/(M!^3))^2 * (1/54^M) * binom(2M,M)/4^M`
+
+并且 Stirling 给出
+`Gamma_M ~ 3/(4 pi^(5/2)) * (27/2)^M / M^(5/2)`。
+
+它对应 `h_M^3<0` 的真正 triple-negative channel，呈指数放大而非衰减。因此
+same-factor cubic 不能被 R21 的一级 no-go 判死刑。
+
+### 16.5 当前闭合仍缺 post-failure tail domination
+
+degree `3M` 的一般测试满足
+`Lambda_r^(tensor 3)[F(O A X)^2]=sum_k |c_k(O)|^2 h_(k_1)h_(k_2)h_(k_3)`。
+我们只知道 `h_k>0`（`k<M`）和 `h_M<0`；`h_(M+1),...,h_(3M)` 的 signs/sizes
+以及所有其它 partitions 尚无统一控制。故 amplified `(M,M,M)` 项可能仍被
+post-failure Jacobi/tensor tail 抵消。
+
+一个足够的 conditional closure 是：若 forward positivity、exact-law growth 与
+Jacobi dynamics 能对某个 degree-`3M` test 给出
+
+`R_M <= (1-epsilon) Gamma_M |h_M|^3`,
+
+其中 `R_M` 汇总所有非 `(M,M,M)` partitions，则 exact Gaussian radial identity
+与 `h_M^3<0` 矛盾，primitive rank escape 被排除。这里的关键不是再寻找一级
+diagonal capture，而是控制 `M<k<=3M` 的 post-failure Jacobi tail。
+
+### 16.6 P₃K 仍然独立
+
+三列 residual coefficient 的乘积出现 `cos(3 theta)`，只是 residual cubic angular
+harmony，不是 nonlinear log-density charge `P_3K`。本轮没有得到
+`P_3K != 0` 到 `|h_M|`、`Gamma_M|h_M|^3` 或 `h_(M<k<=3M)` 的定量桥；因此
+`P_3K` 继续与 R21 closure 断开。
+
+### 16.7 R21 结论与 R22 最小 OPEN
+
+无条件保留：二维 rotational lift、first-failure 的精确负通道分解、一级
+`3(2/3)^M` capture loss、与旧 Fock multiplier 的一致性，以及 triple-pivot
+系数 `Gamma_M` 的组合学放大。严格 no-go 仅针对“只用 first failing block 的
+dimension-free reverse-Schur”；没有构造 genuine full-exact iid 非闭合序列。
+
+当前最小 OPEN 改为：
+
+### Post-Failure Tensor-Tail Domination — OPEN
+
+对 genuine full-exact iid inverse formal trajectory，若 `M` 是第一个负 Hankel/Jacobi
+pivot，能否由 forward positivity、simultaneous all-degree exactness 和 growth
+控制 `M<k<=3M` 的 Jacobi/tensor tail，使 degree-`3M` 的 amplified
+`Gamma_M h_M^3` 不被其它 partitions 抵消？这决定 cubic 是否必然暴露第一个
+negative Hankel pivot，并决定 primitive closedness 能否完成。
+
+本轮新增 `post_failure_tensor_tail_r21/audit_r21.py` 与 README，核验 residual
+projection geometry、rotational polynomial lift、first-failure capture/ridge
+multiplier、`Gamma_M` 精确式和 Stirling 尺度；运行输出 `R21_AUDIT_COMPLETED`。
+这些是 proof-level 代数/尺度核验，不是 Gaussian rigidity 证明。
+
+## 17. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1222,7 +1343,7 @@ compression、Toeplitz eigenvalue no-go 及 `O(m^(-2))` capture bound；输出
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 17. 每轮协作协议
+## 18. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1235,10 +1356,10 @@ compression、Toeplitz eigenvalue no-go 及 `O(m^(-2))` capture bound；输出
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 18. 当前 checkpoint
+## 19. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1249,10 +1370,11 @@ compression、Toeplitz eigenvalue no-go 及 `O(m^(-2))` capture bound；输出
   尾界；R19 又把 relative matrix closure 改写为 posterior Wick–Hankel 的固定 slice
   严格余量与 uniform witness alignment 问题；R20 又证明 posterior-`y` 对齐可由
   Esscher–affine congruence 精确解决，并把缺口压成 multiscale affine alignment
-  与 diagonal-tensor capture；另保留 `P_3K` sector 限定。
-- 当前方向：R21，攻击 `Affine-Hankel Diagonal-Capture / Multiscale Reverse-Schur`：
-  寻找 genuine iid Hankel 结构的维数无关 diagonal-capture/coercivity，或严格证明
-  same-factor cube 仍不足以阻止 rank/spectral-tail escape；继续单独审计 `P_3K`
-  survival。
+  与 diagonal-tensor capture；R21 又在 genuine iid residual 几何内排除了只使用
+  first failure block 的 dimension-free reverse-Schur，并发现 degree `3M` 的
+  triple-pivot amplifier；另保留 `P_3K` sector 限定。
+- 当前方向：R22，攻击 `Post-Failure Tensor-Tail Domination`：控制第一个负
+  Jacobi pivot 后 `M<k<=3M` 的 signs/sizes 与 tensor partitions，判断 cubic
+  amplifier 是否必然暴露负 pivot；继续单独审计 `P_3K` survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
