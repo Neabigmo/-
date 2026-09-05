@@ -1264,3 +1264,48 @@ computation was used.
 - No optimizer, SDP, numerical sweep, relaxed measure-LP, or remote
   computation was used.  The next minimum OPEN is uniform multi-grade
   cancellation for the normalized two-body carrier family.
+
+# 2026-09-06 — R39 first two-grade cancellation and mixed-Hessian bottleneck
+
+- The web side reread the updated local framework, worklog, R36/R37/R38 audits,
+  and verified HEAD `4184d3fd884ac6cbe5106e35cfcb05a77a6368ed` before deriving
+  the next result.
+- For fixed `N=2m`, parity and the centered variance-one constraints imply that
+  the grade-`N` and grade-`N+2` full/shadow difference channels are the linear
+  responses `D_(n,N)Delta_N` and `D_(n,N+2)Delta_(N+2)`.  Since
+  `D_(n,2r)~alpha_r n^(r-1/2)`, two sufficiently separated carrier ranks give
+  exact weights preserving grade `N` and cancelling grade `N+2`; for
+  `n_1=R,n_2=R^2`, the interpolation weights remain mild.
+- On genuine full-exact iid laws, `1/3-B_n=A_n+C_n^(3)/3>=0` lets the signed
+  two-carrier combination be rewritten as a nonnegative constraint-coupled
+  part minus a defect tending to zero.  Its Gaussian anchor tends to zero and
+  its grade-`N` head remains `q_M`, while parity removes the odd grades.  This
+  is a finite two-grade cancellation lemma, not a completed remote
+  transgression and not an ambient SOS identity.
+- At grade `N+4`, the full second law-functional derivative has five classes of
+  terms: base-measure weight, two first kernel/measure cross terms, the product
+  of first internal derivatives, and the mixed second internal derivative.
+  For `N>=6`, `b_4=0` leaves the independent mixed-Hessian channel
+  `H_(n;N+1,3)b_3Delta_(N+1)` alongside the linear `D_(n,N+4)Delta_(N+4)`;
+  `N=4` has an additional `-H_(n;4,4)Delta_4^2/2` resonance.
+- Thus a 3x3 linear Vandermonde is not the true obstruction.  The minimum OPEN
+  is now the **Mixed-Hessian Two-Body Response Lemma**: determine the
+  asymptotic span/sign/conditioning of `H_(n;2m+1,3)` relative to the linear
+  response rows.  Gaussian rigidity and the `P_3K` bridge remain disconnected.
+
+# 2026-09-06 — R39 local exact audit
+
+- Added `flat_shadow_multigrade_r39/audit_r39.py` and README.  It checks exact
+  two-grade weights, the full-exact Hoeffding complement at the Gaussian
+  anchor, an independent affine-density expansion of the complete mixed
+  second derivative, and the `N+4` Taylor channel bookkeeping.
+- Output:
+  `R39_TWO_GRADE_EXACT_CANCELLATION PASSED`,
+  `R39_CONSTRAINT_COUPLED_POSITIVITY PASSED`,
+  `R39_SECOND_DERIVATIVE_DECOMPOSITION PASSED`,
+  `R39_GRADE_NPLUS4_CHANNEL_DECOMPOSITION PASSED`,
+  `R39_LINEAR_VANDERMONDE_NOT_THE_OBSTRUCTION RECORDED`,
+  `R39_MIXED_HESSIAN_RESPONSE REMAINS OPEN`, and
+  `R39_AUDIT_COMPLETED`.
+- No optimizer, SDP, numerical sweep, relaxed measure-LP, or remote
+  computation was used.

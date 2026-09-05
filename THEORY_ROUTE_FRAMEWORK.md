@@ -3005,3 +3005,77 @@ R37 网页复核产生的新有限恒等式做精确小阶核验：normalized pa
 
 该审计确认二体 carrier window 的有限代数基础，但不从有限表推出渐近定理，
 也没有使用 optimizer、SDP、数值 sweep、relaxed measure-LP 或 remote computation。
+
+## 36. R39：二体 multi-grade 的第一道消项可行，但瓶颈移到 mixed Hessian
+
+R39 网页复核在开始工作前读取了最新框架、工作日志、R36/R37/R38 审计记录，
+并核对 HEAD `4184d3fd884ac6cbe5106e35cfcb05a77a6368ed`。固定首个 mismatch
+`N=2m`，记 `D_(n,d)=DB_n(gamma)[h_d]`、
+`lambda_(n,N)=sqrt(N!)/D_(n,N)`，则真实 full/shadow OU 路径的第一项为
+
+`[u^N](B_n(mu_u)-B_n(rho_u))=D_(n,N)Delta_N`。
+
+由于 `B_n` 在 reflection 下为偶函数且 centered variance-one 给出
+`b_1=b_2=b_4=0`，下一非零 fixed grade 没有 nonlinear contamination：
+
+`[u^(N+2)](B_n(mu_u)-B_n(rho_u))=D_(n,N+2)Delta_(N+2)`。
+
+R38 的渐近量级给出
+
+`D_(n,2r)~alpha_r n^(r-1/2)`，
+`alpha_r=3sqrt((2r)!)/(sqrt(2pi)(r!)^2)`，
+
+所以 `r_n=D_(n,N+2)/D_(n,N)=c_m n+O(1)`。取两个足够大的不同阶数，
+`w_1=r_(n2)/(r_(n2)-r_(n1))`、
+`w_2=-r_(n1)/(r_(n2)-r_(n1))` 精确满足
+`w_1+w_2=1` 与 `w_1r_(n1)+w_2r_(n2)=0`。例如层级分离
+`n_1=R,n_2=R^2` 时，`w_1=1+O(R^(-1))`、`w_2=-R^(-1)+O(R^(-2))`，
+第一步没有类似 R34 signed-filter 的 multiplier blow-up。
+
+在 genuine full-exact iid law 上，Hoeffding 正交分解给出
+
+`1/3-B_n=A_n+C_n^(3)/3>=0`。
+
+由于上述两级权重对应的实际 carrier coefficients 满足 `a_1>0>a_2`，可将
+signed combination 写为
+
+`a_1B_(n1)+a_2B_(n2)=P_R-delta_R`，
+
+其中 `P_R=a_1B_(n1)+|a_2|(1/3-B_(n2))>=0` 只在 genuine full-exact
+probability/Hoeffding 结构上成立，且 `delta_R=|a_2|/3 ->0`。Gaussian
+anchor 上 `P_R->0`，而 grade `N` 保持为 `q_M`、grade `N+2` 精确消失，
+奇数 grade 由 reflection parity 消失。这是一个真实的 finite-grade
+constraint-coupled cancellation lemma，不是 tangent 反例，也不是 ambient SOS。
+
+但 grade `N+4` 首次出现第二个 response channel。完整二阶 law-functional
+导数必须同时包括 base-measure weight、conditional projection、one-body
+subtraction、mean correction 和 mixed internal derivative：
+
+`H_(n;a,b)=E[(g_1r_2+r_1g_2)h^2]`
+`+2E[(g_1+g_2)h dot(h_r)]`
+`+2E[(r_1+r_2)h dot(h_g)]`
+`+2E[dot(h_g)dot(h_r)]+2E[h ddot(h_(g,r))]`。
+
+当 `N>=6` 时，`b_4=0`，因此
+
+`[u^(N+4)]F_n=D_(n,N+4)Delta_(N+4)
+ +H_(n;N+1,3)b_3Delta_(N+1)`。
+
+特殊 `N=4` 还多出 `-H_(n;4,4)Delta_4^2/2`。所以只根据
+`D_(n,N),D_(n,N+2),D_(n,N+4)` 做 3×3 Vandermonde 不能控制整个
+`N+4` grade；真正的最小 OPEN 进一步缩成 **Mixed-Hessian Two-Body
+Response Lemma**，即研究 `H_(n;2m+1,3)` 与已有 linear response rows 的
+渐近 span、符号和条件数。
+
+新增 `flat_shadow_multigrade_r39/audit_r39.py` 与 README。本机精确运行输出为
+
+`R39_TWO_GRADE_EXACT_CANCELLATION PASSED`、
+`R39_CONSTRAINT_COUPLED_POSITIVITY PASSED`、
+`R39_SECOND_DERIVATIVE_DECOMPOSITION PASSED`、
+`R39_GRADE_NPLUS4_CHANNEL_DECOMPOSITION PASSED`、
+`R39_LINEAR_VANDERMONDE_NOT_THE_OBSTRUCTION RECORDED`、
+`R39_MIXED_HESSIAN_RESPONSE REMAINS OPEN`、`R39_AUDIT_COMPLETED`。
+
+因此上位路线仍是 **Constraint-Coupled Non-SOS Graded Value Transgression —
+OPEN**；Gaussian rigidity 仍 OPEN，`P_3K` bridge 仍完全断开。本轮没有使用
+optimizer、SDP、大规模 sweep、relaxed measure-LP 或 remote computation。
