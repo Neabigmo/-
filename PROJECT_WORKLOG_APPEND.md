@@ -1217,5 +1217,50 @@
   `R37_TWO_BODY_ANCHOR_POLYNOMIAL_DECAY PASSED`,
   `R37_TWO_BODY_HEAD_SENSITIVITY REQUIRES WEB_REVIEW`,
   `R37_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`, and
-  `R37_AUDIT_COMPLETED`.  No optimizer, SDP, numerical sweep, or remote
-  computation was used.
+`R37_AUDIT_COMPLETED`.  No optimizer, SDP, numerical sweep, or remote
+computation was used.
+
+# 2026-09-06 — R37 web review: two-body head sensitivity passes screening
+
+- The same project conversation reread `THEORY_ROUTE_FRAMEWORK.md`,
+  `PROJECT_WORKLOG_APPEND.md`, the R36/R37 README files and audits, and verified
+  the nested repository HEAD `370dd03bf289f7f73b2624c2d4936018b446649d` before
+  doing new theory work.
+- The web review retained every term in the derivative of the law-dependent
+  degenerate two-body Hoeffding energy: the base `mu^2` weight, conditional
+  projection, one-body subtractions, and mean correction.  Gaussian degeneracy
+  and chaos-order orthogonality then reduce the full derivative to
+  `partial_(b_N)B_n|_gamma = 2 E[h_N(X1) h_(2,n)^2]`.
+- It supplied the normalized `S,D` coefficients and the exact finite
+  triple-Hermite sum for `D_(n,2m)`.  The reviewed asymptotic is
+  `D_(n,2m) ~ 3sqrt((2m)!)/(sqrt(2pi)(m!)^2) n^(m-1/2)`, while
+  `B_n^gamma ~ 3/(2sqrt(2pi n))`.
+- Thus the two-body sector passes the R36 carrier-window screen: after
+  `lambda_(n,2m)=sqrt((2m)!)/D_(n,2m)`, the fixed head is normalized to a
+  constant and the Gaussian anchor is `~(m!)^2 n^(-m)/2`.  This is not yet a
+  transgression theorem: uniform multi-grade cancellation, conditioning, and
+  remote-tail control remain open.  Gaussian rigidity and the `P_3K` bridge
+  remain disconnected.
+- The local preview already matched the web values
+  `D_(1,2)=2sqrt(2)/9`, `D_(2,2)=28sqrt(2)/27`, and `D_(2,4)=2sqrt(6)/3`.
+
+# 2026-09-06 — R38 exact follow-up audit
+
+- Added `flat_shadow_hoeffding_transgression_r38/audit_r38.py` and README to
+  check only the new finite identities from the R37 review.  The audit does
+  not treat `dmu=(1+epsilon*g)d_gamma` as a probability counterexample.
+- Exact checks passed for the normalized pair expansion, complete derivative
+  decomposition, cancellation/orthogonality of conditional-kernel,
+  subtraction, and mean derivatives, and the finite Hermite sum.  The exact
+  regression values for `n=1,...,4` and `N=2,4` include the three values above.
+- Output:
+  `R38_TWO_BODY_NORMALIZED_EXPANSION PASSED`,
+  `R38_TWO_BODY_FULL_DERIVATIVE PASSED`,
+  `R38_INTERNAL_HOEFFDING_DERIVATIVES_CANCEL PASSED`,
+  `R38_FIXED_HEAD_FINITE_SUM PASSED`,
+  `R38_TWO_BODY_CARRIER_WINDOW WEB_REVIEWED_LOCAL_FINITE_CHECK PASSED`,
+  `R38_MULTI_GRADE_CONDITIONING REMAINS OPEN`, and
+  `R38_AUDIT_COMPLETED`.
+- No optimizer, SDP, numerical sweep, relaxed measure-LP, or remote
+  computation was used.  The next minimum OPEN is uniform multi-grade
+  cancellation for the normalized two-body carrier family.

@@ -2946,3 +2946,62 @@ README/脚本，然后审查二体固定头导数：计算
 `R37_TWO_BODY_HEAD_SENSITIVITY REQUIRES WEB_REVIEW`、
 `R37_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`、
 `R37_AUDIT_COMPLETED`。未使用 optimizer、SDP、数值 sweep 或 remote computation。
+
+### 35.4 R37 网页复核：固定 head 敏感性通过筛选
+
+同一项目网页端在开始工作前读取了本框架、工作日志、R36/R37 README 与审计脚本，
+并核对真实 HEAD `370dd03bf289f7f73b2624c2d4936018b446649d`。网页复核给出
+normalized `S,D` 展开
+
+`p_n=(-1)^n sum_b 3^(-b)c_(n-b)c_b h_(2(n-b))(D)h_(2b)(S)`，
+
+以及退化二体系数
+
+`eta_(n,b)=(-1)^n[3^(-b)c_(n-b)c_b
+ - 2c_n3^(-n)sqrt(binomial(2n,2b))]`。
+
+对真实 law-functional `B_n(mu)=||h_(2,n)^mu||^2`，完整一阶导数先保留
+底层 `mu^(tensor 2)` 权重、条件投影、一体 subtraction 与均值修正；Gaussian
+退化性与 chaos-order 正交性随后给出精确简化
+
+`partial_(b_N)B_n|_gamma = 2 E_gamma[h_N(X1)(h_(2,n)^gamma)^2]`。
+
+对于 `N=2m`，网页端进一步给出有限 triple-Hermite 和
+
+`D_(n,2m)=2 sum_(j=0)^m 2^(-m)sqrt(binomial(2m,2j))
+ sum_(b,b'=0)^n eta_(n,b)eta_(n,b')
+ tau(n-b,n-b';m-j)tau(b,b';j)`，
+
+并得到固定 `m` 的渐近量级
+
+`D_(n,2m) ~ 3sqrt((2m)!)/(sqrt(2pi)(m!)^2) n^(m-1/2)`。
+
+这与本机预审计值一致：`D_(1,2)=2sqrt(2)/9`、
+`D_(2,2)=28sqrt(2)/27`、`D_(2,4)=2sqrt(6)/3`。结合
+`B_n^gamma~3/(2sqrt(2pi n))`，归一化 `lambda_(n,2m)=sqrt((2m)!)/D_(n,2m)`
+后，固定 head 保持为常数而 Gaussian anchor 按 `n^(-m)` 趋零。因此二体
+sector 通过了 R36 的 carrier-window screening；这仍不等于完整 graded
+transgression，因为多级 fixed-grade cancellation、uniform condition number
+和 remote tail 尚未证明。
+
+R37 后全局最小 OPEN 收缩为 **Uniform Multi-Grade Cancellation for Two-Body
+Hoeffding Carriers**，其上位路线仍是 **Constraint-Coupled Non-SOS Graded
+Value Transgression — OPEN**。Gaussian rigidity 与 `P_3K` bridge 仍 OPEN 且
+逻辑断开，本轮没有建立 charge-to-transgression bridge。
+
+### 35.5 R38 本机 proof-level follow-up
+
+新增 `flat_shadow_hoeffding_transgression_r38/audit_r38.py` 与 README。它只对
+R37 网页复核产生的新有限恒等式做精确小阶核验：normalized pair expansion、
+完整 Gateaux derivative 的各项分解、subtraction/mean/internal kernel 导数的
+正交消失、finite Hermite sum 以及 `n=1,...,4` 的 exact regression。运行输出为
+
+`R38_TWO_BODY_NORMALIZED_EXPANSION PASSED`、
+`R38_TWO_BODY_FULL_DERIVATIVE PASSED`、
+`R38_INTERNAL_HOEFFDING_DERIVATIVES_CANCEL PASSED`、
+`R38_FIXED_HEAD_FINITE_SUM PASSED`、
+`R38_TWO_BODY_CARRIER_WINDOW WEB_REVIEWED_LOCAL_FINITE_CHECK PASSED`、
+`R38_MULTI_GRADE_CONDITIONING REMAINS OPEN`、`R38_AUDIT_COMPLETED`。
+
+该审计确认二体 carrier window 的有限代数基础，但不从有限表推出渐近定理，
+也没有使用 optimizer、SDP、数值 sweep、relaxed measure-LP 或 remote computation。

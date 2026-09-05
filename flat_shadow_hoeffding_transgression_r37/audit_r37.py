@@ -151,6 +151,37 @@ def check_anchor_generating_function():
         assert simplify(coefficient - convolution) == 0
 
 
+def check_two_body_head_sensitivity_preview():
+    """Compute the full first-variation decomposition for small exact cases.
+
+    This is deliberately a preview: it checks all measure/projection terms but
+    does not infer the n->infinity theorem from a finite table.  The webpage
+    review is still required for the asymptotic conclusion.
+    """
+    x1, x2, x3, x4 = symbols("x1 x2 x3 x4")
+    for N in (2, 4):
+        values = []
+        for n in range(1, 5):
+            p = two_body_projection_formula(n, x1, x2)
+            k = one_body_kappa(n) * h_norm(2 * n, x1)
+            f123 = phi(n, x1, x2, x3)
+            f124 = phi(n, x1, x2, x4)
+            hN1 = h_norm(N, x1)
+            hN2 = h_norm(N, x2)
+            hN3 = h_norm(N, x3)
+
+            # P=||p||^2 has two shared and two leaf measure derivatives.
+            s2 = gaussian_expectation(hN1 * p**2, (x1, x2))
+            l2 = gaussian_expectation(hN3 * f123 * f124, (x1, x2, x3, x4))
+            # K=||k||^2 has one shared and four leaf derivatives; p/k
+            # already include the derivative of the conditional projections.
+            s1 = gaussian_expectation(hN1 * k**2, (x1,))
+            l1 = gaussian_expectation(hN2 * p * k, (x1, x2))
+            derivative = simplify(2 * (s2 + l2) - 2 * (s1 + 4 * l1))
+            values.append(derivative)
+        print(f"R37_LOCAL_HEAD_PREVIEW_N{N}: {values}")
+
+
 def main():
     check_conditional_projection_and_one_body()
     print("R37_TWO_BODY_CONDITIONAL_PROJECTION PASSED")
@@ -158,6 +189,8 @@ def main():
     print("R37_TWO_BODY_DEGENERATE_NORM PASSED")
     check_anchor_generating_function()
     print("R37_TWO_BODY_ANCHOR_POLYNOMIAL_DECAY PASSED")
+    check_two_body_head_sensitivity_preview()
+    print("R37_TWO_BODY_HEAD_SENSITIVITY_LOCAL_PREVIEW RECORDED")
     print("R37_TWO_BODY_HEAD_SENSITIVITY REQUIRES WEB_REVIEW")
     print("R37_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN")
     print("R37_AUDIT_COMPLETED")

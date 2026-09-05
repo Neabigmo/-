@@ -38,10 +38,14 @@ anchor still tends to zero, but only polynomially; the one-body exponential
 loss is genuinely absent.  This makes the pair sector a real carrier window,
 not a relabeling of the R36 no-go.
 
-The derivative of `B_n` with respect to the first Hermite head and the
-constraint-coupled sign mechanism are deliberately not claimed here.  They
-are the web-side R37 target and must be reviewed before drawing a
-transgression conclusion.
+The initial local R37 audit deliberately deferred the derivative of `B_n` with
+respect to the first Hermite head.  The same project conversation subsequently
+reviewed it and supplied the complete derivative decomposition and finite
+Hermite sum.  The exact finite follow-up is recorded in
+`flat_shadow_hoeffding_transgression_r38/README.md`; R37's original marker
+`R37_TWO_BODY_HEAD_SENSITIVITY REQUIRES WEB_REVIEW` is therefore historical.
+The reviewed result passes the carrier-window screen but is not a complete
+transgression theorem: uniform multi-grade cancellation remains open.
 
 Run:
 
