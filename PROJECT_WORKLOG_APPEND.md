@@ -627,8 +627,13 @@
   non-closed sequence was constructed.
 - Added `adjacent_heat_hankel_r23/audit_r23.py` and README.  The audit passed
   near-flat Laurent asymptotics, truncated PSD-radius principal-block
-  monotonicity, the adjacent determinant ratio identity, and the
-  adjacent-sector threshold, printing `R23_AUDIT_COMPLETED`.  These are local
-  algebraic checks only.
-- Minimal OPEN is now `Cross-Rank Heat-Hankel Zero Geometry / Flat-Leakage
-  Horizon`.
+  monotonicity, heat-interval/derivative-bound algebra, Schur trichotomy,
+  atomic-shadow sign convention, plateau support-count arithmetic, the
+  Bernoulli determinant/discriminant no-go, the adjacent determinant ratio
+  identity, and the adjacent-sector threshold, printing
+  `R23_AUDIT_COMPLETED`.  These are local algebraic checks only.
+- The correct R23 minimum OPEN is now `Flat-Shadow One-Step Overshoot
+  Exclusion`: under `ell_M=0`, prove or refute `q_M>=0`, equivalently rule out
+  the next-Q-moment overshoot of the M-atomic iid quadrature shadow.  If that
+  bridge holds, the remaining scale problem is improving the unconditional
+  `O(M^3)` plateau horizon to `O(M)` (ideally `<=3M`).

@@ -1479,30 +1479,102 @@ exchangeable 构造和 formal candidate 都不计为反例。
 可能帮助 cubic negativity，不能转化成所需的 uniform
 `beta_(M+1)/|beta_M|` 上界；near-flat Jacobi coordinates 本身是奇异坐标。
 
-### 18.2 截断 backward radius 的单调性，但没有 zero interlacing
+### 18.2 截断 Gaussian 可除半径与正确的 first-zero transversality
 
 对 heat 参数 `a` 定义
 
-`g_n(mu)=sup{a>=0: H_n(exp(-a partial_x^2/2)mu) is PSD}`。
+`L_a=exp(-a partial_x^2/2)mu`,
 
-因为 `H_n` 是 `H_(n+1)` 的 leading principal block，得到无条件的
-`g_(n+1)<=g_n`。这只给出 nested one-sided first-failure radii；要把
-`inf_n g_n` 识别为完整 backward heat radius，还需要已建立的全阶 moment-cone
-闭合和 determinacy passage。forward positivity 的 alternating positive-coefficient
-展开本身不提供跨 rank 的 real zero interlacing、small-value lower bound 或
-uniform transversality；也不能排除 higher-rank complex roots。
+`g_n(mu)=sup{a>=0: H_n(L_a) is PSD}`。
+
+若 `a_1<a_2` 且 `L_(a_2)` 在第 `n` 阶可行，则
+`L_(a_1)=E_Z L_(a_2)[p(x+sqrt(a_2-a_1)Z)^2]` 对所有
+`deg p<=n` 非负。因此每一级可行集是区间 `[0,g_n]`；leading-principal-block
+包含关系再给出无条件的
+`g_(n+1)<=g_n`。结合 R15 的 Hamburger determinacy/full-cone passage，
+`g_n downarrow mathfrak g`，其中 `mathfrak g` 是完整 Gaussian divisibility
+radius；primitive law 等价于 `g_n downarrow0`。
+
+在 `g_n<a<g_(n-1)` 的 quasi-definite 区间，monic orthogonal norm 满足
+
+`h_n'(a)=-L_a[(P_n')^2] <= -n^2 h_(n-1)(a)`,
+
+从而
+`|beta_n(a)|=|h_n(a)|/h_(n-1)(a) >= n^2(a-g_n)`。
+这给出 law-independent 的 first-zero small-value transversality。它不是
+`D_n(a)` 全部复/实零点的 classical interlacing；ordinary positive iid law
+仍可能有 higher-rank complex roots。
 
 若 `ell_M=0`，coherent leakage 可以延迟到更高 rank。无限延迟会导向有限原子
-flat branch，与连续 `chi_2^2` radial law 不相容；但现有 exact triangularity
-没有给出 uniform finite horizon。
+flat branch，与连续 `chi_2^2` radial law 不相容；但这还不等于 cubic 可见尺度内的
+uniform finite horizon。
 
-### 18.3 R23 的严格 no-go 与 conditional closure
+### 18.3 quasi-definite crossing：正确的 cancellation quantity
 
-R23 进一步确认：exact triangularity 加 absolute moment growth 不能控制
-`beta_(M+1)/|beta_M|`，因为 near-flat odd moment/next Jacobi data 仍可使相邻
-determinants 的 relative ratio 变大。任何 degree `3M` residual test 仍带有
-`h_(3M)` channel；所以单靠 first-failure block 或单个 central triple pivot
-不能闭合 post-failure tail。
+在 `a_*=g_M<g_(M-1)` 且 `ell_M!=0` 时，令 `s=a-a_*>0`、
+`c_M=L_(a_*)[(P_M')^2]>0`，则
+
+`h_M(a)=-c_M s+O(s^2)`,
+
+`h_(M+1)(a)=ell_M^2/(c_M s)+O(1)>0`,
+
+`beta_(M+1)=-ell_M^2/(c_M^2s^2)+O(s^(-1))<0`。
+
+因此 `|beta_(M+1)|/|beta_M|` 近 flat 发散，但这只是奇异坐标效应；
+`h_M h_(M+1) -> -ell_M^2`，最近邻 tensor sector 反而是有利的负贡献。
+R22 所需控制的不是绝对 ratio，而是 cancellation-relevant quantity
+`(beta_(M+1))_+/|beta_M|`；generic leakage 分支中它在 crossing 后局部为零。
+
+### 18.4 flat boundary 的三分支与 atomic-shadow overshoot
+
+对 `H_(M+1)` 在 lower positive block 上做 Schur reduction，尾块为
+`[[0,ell_M],[ell_M,q_M]]`：
+
+- `ell_M!=0`：尾块 indefinite，但越过 boundary 后 `h_(M+1)>0`；
+- `ell_M=0,q_M<0`：真正危险的 strict-drop branch，立即有
+  `h_M,h_(M+1)<0`，且 cancellation ratio 可发散；
+- `ell_M=0,q_M>=0`：进入 genuine plateau，`g_(M+1)=g_M`。
+
+在 `ell_M=0` 时，`H_M` 的唯一 flat null relation 给出 M-atomic quadrature
+shadow `nu_M`，并将 moment agreement 延伸到下一阶。若 `v_*=1-a_*`，则
+
+`q_M=[v_*^(M+1)2^(M+1)(M+1)! - E_(nu_M^3) Q^(M+1)] /
+      [3(2/3)^(M+1)]`。
+
+因此坏分支完全等价于 atomic shadow 的 next-Q-moment overshoot。R23 尚未证明
+该 overshoot 不会发生；这取代了不正确的 universal absolute beta-ratio 目标。
+
+### 18.5 plateau 的无条件终止界与尺度缺口
+
+若 flat plateau 从 `M` 持续到 `N`，PSD kernel propagation 给出
+`x^jP_M in ker H_N`（`0<=j<=N-M-1`），所以 `L_(a_*)` 与 `nu_M` 的 moments
+一致到 degree `2N-1`。而 `Q` 在 `nu_M^3` 下至多有
+
+`K_M <= 1+C(M,2)+C(M,3)=1+(M^3-M)/6`
+
+个 support values。其 `(K_M+1)`-阶 Q-Hankel 必奇异，而连续 scaled
+`chi_2^2` 的对应块严格正定；故
+`N<=2K_M<=2+(M^3-M)/3`。
+
+这确实排除了 infinite plateau，但只有 `O(M^3)`，而 cubic amplifier 需要约
+`O(M)`、至少推进到 `3M`，尚未闭合尺度。
+
+### 18.6 ordinary zero-interlacing no-go 与 conditional closure
+
+Bernoulli `X=+-1` 加任意正 Gaussian smoothing 的 ordinary positive iid stress
+test 有
+`D_3(t)=4t^2(t+2)(3t^3+12t^2+9t+2)`，cubic factor discriminant 为 `-216`。
+所以 forward positivity/smooth iid law 本身不推出所有 heat-Hankel zeros
+real-rooted 或 classical interlacing；这不是 full-exact `Q~chi_2^2` 反例。
+
+R21 cubic 路线若要继续，只需集中证明两条 genuine full-exact iid bridge：
+`ell_M=0 => q_M>=0`（排除 atomic-shadow overshoot），以及 plateau horizon
+`g_N=g_M => N<=cM`（最好 `c<=3`）。generic leakage 已有有利 sign，坏
+strict-drop branch 由第一条排除，plateau 再由第二条压到 cubic 可见范围；然后
+才有意义把 tensor amplifier 迭代到 `M+2,...,3M`。
+
+Exact triangularity 加 absolute moment growth 仍不能给 determinant-ratio control，
+任何 degree `3M` test 也仍带 `h_(3M)` channel；`P_3K` 继续与上述桥断开。
 
 要启动 R21 的 cubic amplifier，至少需要一个 genuine iid-compatible 的
 cross-rank heat-Hankel 结论，例如排除 near-flat 后的 determinant-ratio 控制，或
@@ -1520,12 +1592,15 @@ rigidity 证明。
 
 当前最小 OPEN 改为：
 
-### Cross-Rank Heat-Hankel Zero Geometry / Flat-Leakage Horizon — OPEN
+### Flat-Shadow One-Step Overshoot Exclusion — OPEN
 
-对 genuine full-exact iid inverse heat-Hankel trajectory，能否从 forward
-positivity、same-factor all-degree exactness 和连续 `chi_2^2` endpoint law 中得到
-跨 rank 的 zero/small-value geometry，或一个足以推进到 degree `3M` 的统一
-flat-leakage horizon？
+在 genuine full-exact inverse heat boundary
+`H_(M-1)≻0, H_M⪰0, ker H_M=<P_M>, ell_M=0` 时，是否必有 `q_M>=0`？
+等价地，匹配前 `M` 个 exact Q-moments 的 M-atomic iid quadrature shadow，
+是否必满足
+`E_(nu_M^3)Q^(M+1) <= v_*^(M+1)2^(M+1)(M+1)!`？
+若成立，R23 的 one-step cancellation obstacle 消失；下一关是把目前
+`O(M^3)` 的 plateau horizon 改进到 cubic 需要的 `O(M)`。
 
 ## 19. 已探索路线与停止条件
 
@@ -1570,12 +1645,15 @@ flat-leakage horizon？
   与 diagonal-tensor capture；R21 又在 genuine iid residual 几何内排除了只使用
   first failure block 的 dimension-free reverse-Schur，并发现 degree `3M` 的
   triple-pivot amplifier；R22 又把 post-failure 控制压成 heat-Hankel 跨 rank 小值、
-  flat leakage horizon 与 one-step Jacobi ratio；R23 证明 near-flat 相邻 Jacobi
-  数据具有 Laurent 奇异性、截断 PSD radius 单调但不产生 zero interlacing，并确认
-  `beta_(M+1)/|beta_M|` 仍无 uniform bound；另保留 `P_3K` sector 限定。
-- 当前方向：R24，攻击 `Cross-Rank Heat-Hankel Zero Geometry / Flat-Leakage
-  Horizon`：在严格 genuine full-exact iid 类内寻找跨 rank zero interlacing、
-  small-value transversality 或有限 leakage horizon；若只能得到 conditional
-  结论，明确缺失条件并停止伪闭合。
+  flat leakage horizon 与 one-step Jacobi ratio；R23 又证明截断 Gaussian 可除半径
+  `g_(n+1)<=g_n`、first-zero transversality
+  `|beta_n|>=n^2(a-g_n)`，并把 generic leakage、degenerate overshoot 与 plateau
+  三分支分开；plateau 只得到 `O(M^3)` 终止界，且 ordinary iid 的完整 zero
+  interlacing 被 discriminant `-216` 严格排除；另保留 `P_3K` sector 限定。
+- 当前方向：R24，攻击 `Flat-Shadow One-Step Overshoot Exclusion`：在严格
+  genuine full-exact iid 类内证明或否定 `ell_M=0 => q_M>=0`，等价检查
+  M-atomic iid quadrature shadow 的下一阶 Q-moment 是否必不 overshoot；若成立，
+  再把 plateau 的 `O(M^3)` horizon 改进到 cubic 所需的 `O(M)`，若不能则给出
+  最小缺失条件。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
