@@ -767,7 +767,115 @@ R16 的本机审计结论：已核对 triangularity、有限截断 no-go、
 `∩_M A_M(r)=E_r` 的适用范围及 `P₃K` 的逻辑断开；未声称 uniform rank
 closure 或 Gaussian rigidity 已完成，不需要长数值计算。
 
-## 12. 已探索路线与停止条件
+## 12. R17：OU–Laguerre 对角化与 All-Degree Spectral-Tail Tightness
+
+### 12.1 genuine full-exact 类的弱闭性与 backward radius
+
+令 `E` 为 genuine full-exact probability class，即 centered、variance-one
+且 `Q=∑_{i=1}^3(X_i-X̄)^2∼χ²_2` 的一体分布类，并保留 R12 的一致
+square-exponential bound。若 `μ_j⇒μ`，则 `μ_j^{⊗3}⇒μ^{⊗3}`，连续映射
+把 `Q` 的分布传到极限；一致可积性保留均值和方差。因此 `E` 弱闭且紧。
+
+固定 `r>1`，逆 OU 可除性类
+`E_r={μ∈E:𝔯(μ)≥r}` 满足 `E_r=P_{r^{-2}}(E)`：正向 OU 连续，且 R13
+的 reverse-exactness 保证任意实际正原像仍是 full-exact。因此 `E_r` 紧闭，
+`𝔯` 在 `E` 上只有上半连续性，允许 primitive 序列的极限出现 backward
+radius 向上跳。primitive closedness 需要额外的反向稳定性。
+
+### 12.2 OU–Laguerre 系数的精确对角化
+
+在三个 iid 坐标的 common/residual 正交分解中令
+
+`U=(X_1+X_2+X_3)/√3=√3 X̄`,  `T=Q/2`.
+
+full exactness 给 `T∼Exp(1)`。以 normalized Hermite
+`ψ_ℓ(U)=H_ℓ(U)/√(ℓ!)` 和普通 Laguerre `L_n(T)` 定义
+
+`C_{ℓn}(μ)=E_μ[ψ_ℓ(U)L_n(T)]`.
+
+对三个坐标同时施加 `P_s` 后，common 坐标和二维 residual 坐标分别仍是
+OU 变换；`ψ_ℓ` 的特征值为 `s^{ℓ/2}`，`L_n(|R|²/2)` 的特征值为 `s^n`。
+因此有精确的概率级恒等式
+
+`C_{ℓn}(P_s μ)=s^{n+ℓ/2}C_{ℓn}(μ)`.
+
+这不是 Gaussian tangent 近似，而是 OU 在 common/residual chaos 上的严格
+对角化；本地 `conditional_laguerre_odd_r17` 资产同时核对了 Laguerre 正交、
+odd 系数的三角最高矩项和有限条件矩公式。
+
+### 12.3 全阶 inverse-OU spectral viability inequality
+
+对 positive full-exact law `ν`，条件函数
+`m_ℓ(t)=E[ψ_ℓ(U)|T=t]` 属于 `L²(e^{-t}dt)`。Bessel/Parseval 给出
+
+`∑_{n≥0}C_{ℓn}(ν)^2≤E_ν[ψ_ℓ(U)^2]≤A_ℓ`,
+
+其中固定 `ℓ` 时 `A_ℓ` 由 R12 growth 一致控制。若 `μ=P_{r^{-2}}ν`，则
+
+`∑_{n≥0} r^{4n+2ℓ} C_{ℓn}(μ)^2≤A_ℓ`.
+
+这是此前缺少的全阶 inverse-OU 加权 viability 约束。特别地，令
+`c_n=E[ X̄ L_n(T)]`，则 `C_{1n}=√3c_n` 且 `E U²=1`，从而
+
+`3∑_{n≥0}r^{4n+2}c_n²≤1`.
+
+任一非零 `c_n` 都给出 `𝔯(μ)≤(3c_n²)^(-1/(4n+2))`。但这只控制每个
+固定 odd/Laguerre sector 的加权总量，并没有自动给出跨 `n,ℓ` 的 uniform
+weighted-tail tightness。
+
+### 12.4 严格 no-go：普通 growth 与任意长 finite prefix 仍不足
+
+固定奇数 `n`，令 `ψ_{2n}=H_{2n}/√((2n)!)`，`b_n=min ψ_{2n}<0`，
+`a_n=-1/b_n`，并设相对于 Gaussian 的密度
+
+`g_n(x)=1+a_nψ_{2n}(x)`.
+
+它非负且在最小点触零，centered、variance-one，并因
+`a_n=O(n^{1/4})` 而弱收敛到 Gaussian。逆向任何非平凡 OU 原像的候选为
+`1+a_nt^{-n}ψ_{2n}`，在最小点为 `1-t^{-n}<0`，所以每个 `g_n` 都 primitive。
+生成函数还给出对每个 `η<1/4` 的一致 `E exp(ηX²)` bound。由于
+`ψ_{2n}` 与所有次数 `<2n` 的多项式正交，`g_n` 通过
+`E Q^j=2^j j!`（`j≤n-1`）的越来越长前缀，但在第 `n` 阶因最高矩已改变
+而退出 exactness。
+
+该序列是 ordinary positive/growth 类中的严格 primitive non-closed no-go，
+不是 genuine full-exact 反例；它证明有限 exact prefix、普通概率紧性和
+固定阶 Hermite 收敛都不能替代“所有阶在同一个概率律上同时 exact”。
+特别要保留 `||g_n-1||_2=a_n` 并不趋于零这一点：该例展示的是 weak/MGF
+紧性与谱尾紧性的差异，而非 `L²` 近 Gaussian。
+
+### 12.5 当前唯一的全阶闭合目标
+
+如果 primitive closedness 成立，必须存在一种跨所有 conditional/angular
+sectors 的 moving-scale 控制，例如对任意弱紧 full-exact 序列和某个固定
+`r>1`，逆 OU 权重下的总 chaos/Laguerre/Jacobi 尾满足
+
+`lim_{M→∞} sup_j ∑_{2n+ℓ>M} r^{4n+2ℓ}|C_{ℓn}(μ_j)|²=0`
+
+（或等强的完整 conditional-moment-matrix 版本）。这会把逐项系数收敛
+升级为逆 OU 正性的强谱收敛，阻止 backward radius 在极限中向上跳。当前
+只得到 sector-wise viability，不得到该 uniform tail theorem。
+
+`P₃K` 仍与此逻辑断开：没有已审计的
+`P₃K≠0⇒m_3≠0`、charge-to-Laguerre 下界或 uniform inverse-Hankel bound。
+即使 `d=3` 首模在强 OU 下局部存活，其振幅仍可趋零，不能单独关闭谱尾
+逃逸。
+
+### 12.6 R17 的最小 OPEN
+
+### All-Degree Spectral-Tail Tightness — OPEN
+
+genuine full-exact same-factor product structure 加 forward positivity，是否
+能阻止 OU eigenmode/Laguerre/Jacobi control mass 迁移到总 chaos degree
+`∞`，从而把 backward radius 的上半连续性升级为 primitive 序列所需的
+下半连续性/闭性？若不能，必须构造真正同时满足 all-degree exactness 的
+rank/spectral-tail escape；有限前缀或形式候选不算反例。
+
+R17 的本机审计结论：full-exact 类弱闭/紧、`E_r` 闭、OU–Laguerre 对角化、
+`ℓ=1` 加权 Parseval 常数和 boundary Hermite primitive no-go 均已核对；
+没有宣称 primitive closedness 或 Gaussian rigidity 已完成，不需要长数值计算。
+
+## 13. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -780,7 +888,7 @@ closure 或 Gaussian rigidity 已完成，不需要长数值计算。
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 13. 每轮协作协议
+## 14. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -793,19 +901,21 @@ closure 或 Gaussian rigidity 已完成，不需要长数值计算。
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 14. 当前 checkpoint
+## 15. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
   escape 被无条件排除。剩余唯一 Bochner 缺口是 `M_r→∞` 的
   inverse-Hankel rank escape；R16 又把它等价重写为 primitive stratum 的弱
-  闭合/尾到头 viability 问题，并证明有限阶检验不能提供统一界；另保留
-  `P_3K` sector 限定。
-- 当前方向：R17，攻击 `Primitive Closedness / Tail-to-Head Viability`：寻找
-  full-exact probability cone 对 backward divisibility depth 的下半连续性，
-  或构造严格的结构性 no-go；继续单独审计 `P_3K` survival。
+  闭合/尾到头 viability 问题；R17 提取了 OU–Laguerre 全阶加权 viability
+  不等式，但证明它不足以自动给出跨 sector 的谱尾紧性；另保留 `P_3K`
+  sector 限定。
+- 当前方向：R18，攻击 `All-Degree Spectral-Tail Tightness`：寻找 full-exact
+  product structure 对 OU eigenmode/Laguerre/Jacobi moving-scale 尾的统一
+  控制，或构造严格的 simultaneous-all-degree no-go；继续单独审计 `P_3K`
+  survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

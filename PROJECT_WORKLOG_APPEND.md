@@ -301,3 +301,58 @@
   sequence would have every fixed prefix asymptotically Gaussian but
   `M_r(pi_N)->infinity`; no genuine full-exact example is known. No long
   numerical computation was needed.
+
+# 2026-09-05 — R17 OU–Laguerre spectral-tail viability
+
+- R17 re-read the post-R16 framework/worklog through the repaired connection.
+  The genuine full-exact class `E` is weakly compact and weakly closed under the
+  R12 uniform square-exponential bound: tensor-product weak convergence and the
+  continuous map `Q` preserve the exact `chi^2_2` law, while uniform
+  integrability preserves centering and variance.
+- For fixed `r>1`, the backward-divisible stratum satisfies
+  `E_r={mu in E: radius(mu)>=r}=P_(r^-2)(E)`, by forward-OU continuity and
+  reverse exactness. Hence `E_r` is compact/closed and the backward radius is
+  upper semicontinuous. Primitive closedness needs the missing opposite
+  stability; ordinary probability/MGF compactness does not supply it.
+- New exact OU–Laguerre coordinates: with
+  `U=(X1+X2+X3)/sqrt(3)=sqrt(3)*barX` and `T=Q/2~Exp(1)`, define
+  `C_(ell,n)(mu)=E[psi_ell(U)L_n(T)]`. Common/residual orthogonal coordinates
+  show the exact diagonal law
+  `C_(ell,n)(P_s mu)=s^(n+ell/2) C_(ell,n)(mu)`.
+  The local `conditional_laguerre_odd_r17` replay already verifies the ordinary
+  Laguerre convention, orthogonality, odd highest-moment triangularity, and the
+  finite conditional-moment formulas; the scaling itself follows from chaos
+  degree `ell+2n`.
+- For a positive full-exact law, conditional Bessel/Parseval gives
+  `sum_n C_(ell,n)^2 <= E psi_ell(U)^2 <= A_ell`, with `A_ell` uniformly
+  controlled for fixed `ell` by R12 growth. Therefore any positive
+  `r`-backward preimage forces the all-order sector inequality
+  `sum_n r^(4n+2ell) C_(ell,n)(mu)^2 <= A_ell`.
+  In the `ell=1` sector, `C_(1,n)=sqrt(3)c_n` for
+  `c_n=E[barX L_n(T)]` and `E U^2=1`, giving
+  `3*sum_n r^(4n+2)c_n^2 <= 1` and the individual radius bound
+  `radius(mu) <= (3*c_n^2)^(-1/(4n+2))` when `c_n!=0`.
+- This is a genuine full-exact all-order viability constraint, but only
+  sector-wise. It does not yet give cross-sector weighted-tail tightness, so it
+  does not prove primitive closedness. The missing exchange is between weak
+  coefficientwise convergence and sums weighted by `r^(4n+2ell)`; mass may move
+  to `n->infinity` unless simultaneous all-degree control is proved.
+- Stronger ordinary-class no-go: for odd `n`, let
+  `psi_(2n)=H_(2n)/sqrt((2n)!)`, `b_n=min psi_(2n)<0`, and
+  `g_n=1+(-1/b_n)psi_(2n)` relative to Gaussian. Each is a nonnegative
+  centered variance-one density touching zero. Its inverse OU candidate becomes
+  negative at the minimum for every nontrivial inverse step, so it is primitive;
+  `a_n=O(n^(1/4))` gives weak convergence to Gaussian and the generating
+  function gives uniform square-exponential moments for every `eta<1/4`.
+  Orthogonality makes its first `n-1` `Q`-moments exactly chi-square. This is
+  not a full-exact counterexample (the nth `Q` moment changes), but proves that
+  ordinary positivity, growth, and arbitrarily long finite exact prefixes cannot
+  replace simultaneous all-degree exactness. It also has `||g_n-1||_2=a_n`,
+  so it is a weak/MGF, not an L2-near-Gaussian, stress test.
+- Minimal OPEN is now `All-Degree Spectral-Tail Tightness`: can genuine
+  full-exact product structure plus positivity prevent OU-eigenmode,
+  Laguerre, and Jacobi control mass from escaping to infinite chaos degree?
+  A sufficient target is uniform inverse-weighted tail tightness across the
+  complete conditional/angular sectors. `P_3K` remains separate: no audited
+  charge-to-Laguerre lower bound or uniform inverse-Hankel implication was
+  obtained. No long numerical computation was needed.
