@@ -1339,7 +1339,7 @@ computation was used.
   `R40_AUDIT_COMPLETED`.
 - These values are recorded only as finite evidence.  The asymptotic order and
   response-rank relation to `D_(n,2m+4)` remain explicitly
-  `R40_ASYMPTOTIC_RESPONSE REQUIRES_WEB_REVIEW`; no transgression or no-go is
+  `R40_ASYMPTOTIC_RESPONSE WEB_CANDIDATE_RECORDED_UNAUDITED`; no transgression or no-go is
   inferred from the table.  No optimizer, SDP, numerical sweep, relaxed
   measure-LP, or remote computation was used.
 
