@@ -1693,7 +1693,107 @@ exactness、genuine forward positivity 与 uniform exact-law growth 是否强迫
 Gaussian-smoothed finite-prefix 正定性，不把 finite-prefix no-go 写成 full-exact
 反例，也不把 R24 写成 Gaussian rigidity 证明。
 
-## 20. 已探索路线与停止条件
+## 20. R25：Flat Null-Square Tail-to-Head Positivity
+
+R25 先重新读取本文件与工作日志至提交 `02f4bca`，继续严格限定 genuine
+full-exact iid law。R25 没有证明 `q_M>=0`，也没有构造 genuine full-exact
+non-Gaussian 反例；它把剩余命题进一步压缩成共同根导数、same-factor 残差平方
+以及一个需要 uniformity 假设的紧性模量。
+
+### 20.1 共同根导数的无条件重写
+
+在
+`D_M(a_*)=D_(M+1)(a_*)=0`、`D_M'(a_*)<0`、`ell_M=0` 的分支，沿
+quasi-definite 一侧有
+`D_(M+1)(a)=D_M(a)h_(M+1)(a)`，且 `h_(M+1)(a)->q_M`。因此
+
+`D_(M+1)'(a_*)=q_M D_M'(a_*)`，
+
+从而
+
+`q_M>=0  <=>  D_(M+1)'(a_*)<=0`。
+
+这不是完整 determinant-zero interlacing，只是 first boundary 的 adjacent
+common-root orientation，目标比 classical interlacing 窄得多。
+
+### 20.2 same-factor 残差平方恒等式
+
+R24 的 null relations 给出
+`L(P_M^2)=L(xP_M^2)=0`。故任意常数 `c` 都满足
+`L((x-c)^2P_M(x)^2)=q_M`。在三个 iid 坐标中取
+`c=(X_2+X_3)/2`，并令 `bar X=(X_1+X_2+X_3)/3`，得到
+
+`q_M=(3/4)L^3(Psi_M)`,
+
+其中
+`Psi_M=sum_i (X_i-bar X)^2 P_M(X_i)^2 >= 0` 点态成立。
+
+这是第一次把 one-step sign 写成 same-factor residual-weighted null-square。
+但 inverse `L^3` 本身尚未证明对该特殊平方保持正性；因此该恒等式不是
+`q_M>=0` 的证明，只准确指出了所需的窄 cone bridge。
+
+### 20.3 坏符号必导致 adjacent-radius gap
+
+若 `q_M<0`，令 `a_1=g_(M+1)`、`Delta_M=g_M-g_(M+1)>0`。在
+`a_1<a<a_*` 上两次 heat-Hankel 导数不等式积分得到
+
+`-q_M >= (M^2(M+1)^2/2) h_(M-1)(a_*) Delta_M^2`。
+
+所以坏 sign 具有真实的几何后果：在 lower-block margin 不退化的局部类内，
+`q_M` 若趋于零，adjacent truncated Gaussian radius gap 也必须趋于零。这个
+估计不能排除坏分支，但排除了“坏 sign 有固定余量而完全不改变半径结构”的想象。
+
+### 20.4 `Omega_K` 紧性模量：准确的 conditional closure
+
+固定 `M`、`a_*` 的紧参数窗口和 `H_(M-1)>=delta I`，在满足 genuine exact
+class 统一 square-exponential bound 的 `K`-prefix 类上定义
+
+`Omega_K=sup (-q_M)_+`。
+
+由于 prefix 类嵌套，`Omega_(K+1)<=Omega_K`。在统一增长界、参数窗口和
+lower-block margin 同时成立时，若 `lim Omega_K>0`，tightness、uniform
+integrability、子列极限、所有 `Q`-矩 exactness 及 `chi^2_2` moment determinacy
+会产生一个 genuine full-exact `q_M<0` boundary；反向若已有 full-exact 坏边界，
+它属于所有 prefix 类。因此在这些明确的 uniformity 假设下，
+
+`Omega_K -> 0  <=>` 该局部窗口内不存在 genuine full-exact 坏边界。
+
+这只是把 R25 的无限尾内容精确写成 uniform finite-prefix overshoot-decay
+modulus；它没有证明 `Omega_K->0`。R24 的“任意有限 horizon 都能 overshoot”与
+该模量并不矛盾，因为其坏余量、半径 gap、lower-block margin 或统一增长控制
+至少必须有一项退化。
+
+### 20.5 R25 的逻辑等级与当前最小 OPEN
+
+本轮无条件核验了共同根导数恒等式、residual null-square 恒等式和 radius-gap
+下界；没有得到 full-exact orientation，也没有得到 `P_3K` 的 quantitative
+bridge。R24 的 finite-prefix no-go 仍然有效，因此不存在只用固定有限个 exact
+`Q` 方程、有限 Hankel positivity 和有限 same-factor algebra 就推出 `q_M>=0`
+的证明模板。
+
+当前最小 OPEN 更精确地改名为：
+
+### Flat Null-Square Tail-to-Head Positivity — OPEN
+
+在 genuine full-exact inverse flat boundary，是否有以下等价/紧密对应的任一证明：
+
+1. `D_(M+1)'(a_*)<=0`；
+2. `L(x^2P_M^2)>=0`；
+3. `L^3(sum_i (X_i-bar X)^2P_M(X_i)^2)>=0`；
+4. 在明确 uniformity 假设下建立 `Omega_K->0`。
+
+下一轮 R26 应优先沿第三种 common/residual coherence 研究 R18 的 conditional
+matrix positivity 或 Hubbard–Stratonovich 表示能否覆盖这个特殊平方；若不能，
+则给出严格的最小缺失条件或 full-exact no-go。不要把 `M`-atomic residual
+Laguerre `<3M` 提前升级，也不要重新展开已被排除的普通 zero-interlacing。
+`P_3K` 继续断开，Gaussian rigidity 仍 OPEN。
+
+本轮新增 `flat_null_square_r25/audit_r25.py` 与 README。使用带 SymPy 的本机
+Python 3.12 运行，输出 `R25_AUDIT_COMPLETED`；并复跑 R24 审计通过。脚本只核验
+局部代数和条件模量的单调性，不把 conditional compactness 或 R25 orientation
+写成已完成定理。
+
+## 21. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1706,7 +1806,7 @@ Gaussian-smoothed finite-prefix 正定性，不把 finite-prefix no-go 写成 fu
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 21. 每轮协作协议
+## 22. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1719,10 +1819,10 @@ Gaussian-smoothed finite-prefix 正定性，不把 finite-prefix no-go 写成 fu
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 22. 当前 checkpoint
+## 23. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1742,11 +1842,14 @@ Gaussian-smoothed finite-prefix 正定性，不把 finite-prefix no-go 写成 fu
   三分支分开；plateau 只得到 `O(M^3)` 终止界，且 ordinary iid 的完整 zero
   interlacing 被 discriminant `-216` 严格排除；R24 又把 one-step 问题化为
   `q_M=L(x^2P_M^2)` 的 infinite-tail Laguerre orientation，并核验显式 finite-prefix
-  overshoot no-go，运行 `R24_AUDIT_COMPLETED`；另保留 `P_3K` sector 限定。
-- 当前方向：R24 已完成，最小 OPEN 改为 `Infinite-Tail Flat-Shadow Orientation`：
-  在严格 genuine full-exact iid 类内证明或否定 `ell_M=0 => q_M>=0`，等价检查
-  M-atomic iid quadrature shadow 的首个未定 Laguerre 系数是否必定向下；若成立，
-  再把 plateau 的 `O(M^3)` horizon 改进到 cubic 所需的 `O(M)`，若不能则给出
-  最小缺失条件。
+  overshoot no-go，运行 `R24_AUDIT_COMPLETED`；R25 又把它重写为 adjacent
+  common-root derivative、same-factor residual-weighted null-square 与
+  `Omega_K` conditional compactness modulus，运行 `R25_AUDIT_COMPLETED`；另保留
+  `P_3K` sector 限定。
+- 当前方向：R25 已完成，最小 OPEN 改为 `Flat Null-Square Tail-to-Head Positivity`：
+  在严格 genuine full-exact iid 类内证明或否定 `ell_M=0 => q_M>=0`，优先研究
+  `L^3(sum_i (X_i-bar X)^2P_M(X_i)^2)>=0` 或等价的 common-root derivative
+  orientation；如果不能，给出明确 uniformity 缺口或 full-exact no-go。只有关闭
+  one-step sign 后，才回到 residual Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

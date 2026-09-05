@@ -684,3 +684,45 @@
   under the genuine full-exact boundary and `ell_M=0`, prove or refute
   `L(x^2P_M^2)>=0`, equivalently the first unfixed Laguerre sign.  Gaussian
   rigidity remains OPEN.
+
+# 2026-09-06 — R25 flat null-square tail-to-head positivity
+
+- R25 reread the durable framework and worklog through commit `02f4bca` before
+  working.  It stayed inside the genuine full-exact iid class; no finite-prefix
+  construction, ordinary iid stress test, formal extension, or non-iid law was
+  promoted to a full-exact counterexample.
+- At an `ell_M=0` common boundary,
+  `D_M(a_*)=D_(M+1)(a_*)=0` and the quasi-definite factorization
+  `D_(M+1)=D_M h_(M+1)` give the exact derivative identity
+  `D_(M+1)'(a_*)=q_M D_M'(a_*)`.  Since `D_M'(a_*)<0`, the orientation is
+  equivalently `q_M>=0 <=> D_(M+1)'(a_*)<=0`.  This is an adjacent common-root
+  orientation, not a claim of complete real-rootedness or classical interlacing.
+- The null relations also give the same-factor residual identity
+  `q_M=(3/4)L^3(Psi_M)`, where
+  `Psi_M=sum_i (X_i-bar X)^2 P_M(X_i)^2` is pointwise nonnegative.  The inverse
+  triple functional is not known to be positive on this special square, so this
+  is a precise reduction, not the missing sign theorem.
+- If `q_M<0` and `Delta_M=g_M-g_(M+1)`, integrating the two heat-Hankel
+  derivative inequalities yields
+  `-q_M >= M^2(M+1)^2 h_(M-1)(a_*) Delta_M^2/2`.  Thus a nondegenerate local
+  family cannot keep a fixed negative overshoot while collapsing the adjacent
+  radius gap.
+- Define `Omega_K=sup(-q_M)_+` over a fixed local window of `K`-prefix laws with
+  a common square-exponential bound and a positive lower-block margin.  The
+  prefix classes are nested, so `Omega_(K+1)<=Omega_K`.  Under those explicit
+  uniformity assumptions, tightness plus uniform integrability makes
+  `Omega_K->0` equivalent to exclusion of a genuine full-exact bad boundary in
+  the window.  This is a conditional compactness formulation; the decay modulus
+  itself remains OPEN.  R24's arbitrary finite-horizon overshoot is compatible
+  because some uniform quantity must degenerate along such a sequence.
+- Added `flat_null_square_r25/audit_r25.py` and README.  The local proof-level
+  audit passed the common-root derivative identity, residual null-square identity,
+  radius-gap integration, and the nested-prefix Omega proxy, printing
+  `R25_AUDIT_COMPLETED`.  R24's audit was rerun and still printed
+  `R24_AUDIT_COMPLETED`.
+- The current minimum OPEN is now `Flat Null-Square Tail-to-Head Positivity`:
+  prove or refute the special residual-weighted square positivity (or establish
+  the equivalent derivative orientation / `Omega_K` decay) for genuine full-exact
+  iid laws.  The `P_3K` sector remains logically disconnected, and Gaussian
+  rigidity remains OPEN.  R26 should attack the R18 conditional-matrix or
+  Hubbard--Stratonovich route before returning to the `<3M` plateau target.
