@@ -3136,3 +3136,61 @@ base-measure、conditional projection、one-body subtraction、mean correction
 相关 R-folder README/audit，再开始新的推导；网页端返回后再把可核验的新结论
 补入本机记录。该记录协议只约束研究衔接，不改变当前 OPEN 命题、证据边界或
 其余工作方式。
+
+## 38. R41：residue 极限已显式化，m=3 的 N+4 条件数关口通过
+
+网页端在开始本轮前读取了 R36–R40 的本机记录，并核对了 R40 时点的
+`e9cd026`。本轮把 R40 的二体条件投影进一步压成固定 `S,D`-grade blocks：
+
+`T_(r,j)(n)=E[h_(2j)(S)h_(2(r-j))(D)p_n^2]`
+
+具有新的精确有限和
+
+`T_(r,j)=sum_(s=-j)^j sum_b 3^(-2b-s)c_b c_(b+s)c_(n-b)c_(n-b-s)`
+`times tau(2j,2b,2b+2s)tau(2r-2j,2n-2b,2n-2b-2s)`，
+
+其中只保留 factorial 合法项，`tau` 是 normalized triple-Hermite 系数。
+这给出了一个可直接审计的有限 block formula，而不是“类似可算”的声明。
+
+网页端进一步给出 residue
+
+`R_(n,m)=K_(n,m)+chi_m D_(n,2m+4)-rho_m D_(n,2m+2)`
+
+的渐近候选：
+
+`R_(n,m)=sigma_m alpha_m n^(m-1/2)+O_m(n^(m-3/2))`，其中
+
+`sigma_m=-sqrt(6(2m+1))(160m^3+312m^2+140m+15)/(64(m+1)(m+2))<0`
+
+对 `m>=3`。这意味着一般 `sigma_m` 不为零，但它本身不是 weighted
+conditioning 的 no-go；真正需要看 residue 去掉常数后的首个变化阶。
+
+最低情形 `m=3` 的网页渐近候选为
+
+`S_(n,3)=-7563sqrt(42)/1280+(6327sqrt(42)/512)n^(-1)+O(n^(-2))`，
+
+所以 `r_3=1<=m-1=2`。在该最低情形，N+4 mixed condition 的实际 carrier
+系数仍趋零，网页端给出有限级 conditional continuation；但这仍不包括
+`N+6,N+8,...`、任意深度 uniform conditioning 或 positive flat shadow 的
+remote analytic tail。
+
+本机新增 `flat_shadow_residue_r41/audit_r41.py` 与 README。它独立核验了
+R41.1 的有限 block 和、`q_(m,2)`/`q_(m,4)` 的 exact `S,D` 投影、`sigma_m`
+的精确特例与严格负号、`m=3` 商展开的 `1/n` 系数、三个 exact residue
+回归点及 `1,n,n^2,n^(-1)` 的 4×4 行列式恒等式。输出为
+
+`R41_BLOCK_FORMULA_FINITE_CHECK PASSED`、
+`R41_Q_COEFFICIENTS_FINITE_CHECK PASSED`、
+`R41_SIGMA_SPECIALIZATION_AND_SIGN PASSED`、
+`R41_M3_FIRST_VARIATION_ALGEBRA PASSED`、
+`R41_EXACT_RESIDUE_REGRESSION PASSED`、
+`R41_4X4_DETERMINANT_IDENTITY PASSED`、
+`R41_GENERAL_M_FIRST_VARIATION REMAINS OPEN`、
+`R41_ASYMPTOTIC_CLAIMS REMAIN_WEB_DERIVED_UNAUDITED`、
+`R41_AUDIT_COMPLETED`。
+
+因此 R41 的严格结论是：一般 `sigma_m` 的网页闭式已有明确候选且有限代数
+组件通过核验；`m=3` 的首个变化阶为 `1`，没有产生 N+4 family-specific
+weighted no-go；一般 `m>=4` 的 `kappa_m` 非零性仍是当前最小 OPEN。上位
+Constraint-Coupled Non-SOS Graded Value Transgression、Gaussian rigidity
+仍 OPEN，`P_3K` bridge 仍完全断开。

@@ -1348,5 +1348,39 @@ computation was used.
   committed to Git.  Before each new web-side research round, the prompt must
   explicitly require reading the latest framework/worklog and the relevant
   local audit records; after the reply, only verified new conclusions are
-  appended here.  This persistence rule does not change the route or its
-  evidence boundaries.
+ appended here.  This persistence rule does not change the route or its
+ evidence boundaries.
+
+# 2026-09-06 — R41 residue block formula and m=3 conditioning audit
+
+- The same project webpage first read the route framework, append-only log,
+  and R36–R40 audit records, then reduced the R40 residue to an exact finite
+  `S,D` block sum `T_(r,j)` over shift `s` and carrier index `b`.  It supplied
+  the candidate
+  `sigma_m=-sqrt(6(2m+1))(160m^3+312m^2+140m+15)/(64(m+1)(m+2))<0`
+  for `m>=3`.
+- For `m=3`, it supplied
+  `S_(n,3)=-7563sqrt(42)/1280+(6327sqrt(42)/512)n^(-1)+O(n^(-2))`,
+  hence `r_3=1<=m-1`.  The N+4 mixed-Hessian condition therefore does not
+  produce a family-specific weighted-conditioning no-go at the lowest case;
+  this remains a finite-grade conditional continuation, not full
+  transgression.
+- Added `flat_shadow_residue_r41/audit_r41.py` and README.  The local exact
+  audit checks the new block formula against direct Gaussian projection, the
+  `q_(m,2)` and `q_(m,4)` projections, exact specializations/sign of the
+  proposed `sigma_m`, the `m=3` quotient algebra, exact `S_(3,3)`, `S_(4,3)`,
+  `S_(5,3)` regressions, and the 4x4 `1,n,n^2,n^(-1)` determinant identity.
+- Exact markers passed:
+  `R41_BLOCK_FORMULA_FINITE_CHECK PASSED`,
+  `R41_Q_COEFFICIENTS_FINITE_CHECK PASSED`,
+  `R41_SIGMA_SPECIALIZATION_AND_SIGN PASSED`,
+  `R41_M3_FIRST_VARIATION_ALGEBRA PASSED`,
+  `R41_EXACT_RESIDUE_REGRESSION PASSED`,
+  `R41_4X4_DETERMINANT_IDENTITY PASSED`, and
+  `R41_AUDIT_COMPLETED`.  The script explicitly retains
+  `R41_GENERAL_M_FIRST_VARIATION REMAINS OPEN` and
+  `R41_ASYMPTOTIC_CLAIMS REMAIN_WEB_DERIVED_UNAUDITED`.
+- The general `kappa_m` nonzero question, higher grades, uniform weighted
+  conditioning, and the positive-shadow remote tail remain open.  No
+  optimizer, SDP, numerical sweep, relaxed measure-LP, or remote computation
+  was used.
