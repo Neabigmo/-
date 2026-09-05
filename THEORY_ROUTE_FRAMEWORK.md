@@ -875,7 +875,118 @@ R17 的本机审计结论：full-exact 类弱闭/紧、`E_r` 闭、OU–Laguerre
 `ℓ=1` 加权 Parseval 常数和 boundary Hermite primitive no-go 均已核对；
 没有宣称 primitive closedness 或 Gaussian rigidity 已完成，不需要长数值计算。
 
-## 13. 已探索路线与停止条件
+## 13. R18：Same-Factor Matrix Hardy Gain / Relative Tail-to-Head Coercivity
+
+R18 只攻击 R17 的 `All-Degree Spectral-Tail Tightness`，并先通过连接重新读取
+本文件与 `PROJECT_WORKLOG_APPEND.md`。结论不是 primitive closedness 已证明，
+而是把缺口进一步定位为“可除层内部已有谱尾控制，但该控制是否对邻域稳定”。
+
+### 13.1 完整 conditional generating function 与矩阵正性
+
+仍令 `U=(X_1+X_2+X_3)/√3`、`T=Q/2∼Exp(1)`，并令 `C_{ℓn}=E[ψ_ℓ(U)L_n(T)]`。
+对 `0≤q<1`、`d=1-q`，定义 tilted triple law
+
+`dP_q=d^(-1) exp(-qT/d)d(μ^⊗3)`.
+
+Laguerre 与 Hermite 生成公式给出同时包含所有扇区的二维生成函数
+
+`M_μ(q,z)=E_{P_q} exp(zU-z²/2)=∑_{ℓ,n≥0}C_{ℓn}q^n z^ℓ/√(ℓ!)`.
+
+因此不是若干彼此独立的 scalar sector；对任意复数 `z,w`，
+
+`K_q(z,w)=exp(z\bar w)M_μ(q,z+\bar w)⪰0`,
+
+因为它是 `E_{P_q}[f_z(U)\overline{f_w(U)}]` 的 Gram kernel。利用
+`Q=∑X_i²-U²` 的 Hubbard–Stratonovich 表示，还可写成同因子的 cubic form：
+
+`M_μ(q,z)=d^(-1)e^(-z²/2)E_G[A_q((z+√(q/d)G)/√3)^3]`,
+
+其中 `A_q(y)=E_μ exp(yX-qX²/(2d))`。在 `z=0`，full exact law 只给出该表达式的
+归一化；尚未给出所需的相对 Hardy 增益。
+
+### 13.2 无条件的完整谱尾结论
+
+令 `a_m(μ)=E_μψ_m(X)`。Mehler 展开及 `2xy≤x²+y²` 给出，对任意 `0<ρ<1`：
+
+`∑_mρ^m a_m(μ)^2≤(1-ρ²)^(-1/2)E exp(η_ρ(X²+Y²))`,
+
+其中 `η_ρ=ρ/(2(1+ρ))<1/4`。结合 R12 的统一 square-exponential bound，
+得到在整个 genuine full-exact 类 `E` 上统一的 subcritical Fock 预算。
+三重张量在总 chaos degree 上的系数为 `a_i a_j a_k`；common/residual 正交变换
+在每个总 degree 内是 unitary，所以对完整 conditional/angular basis 系数
+`B_{D,α}` 有
+
+`sup_{μ∈E}∑_{D,α}ρ^D|B_{D,α}(μ)|²≤K(ρ)^3`,  `ρ<1`.
+
+更强地，若 `μ∈E_r`、`r>1`，写 `μ=P_{r^(-2)}ν`、`ν∈E`。OU 对角化给
+`B_D(ν)=r^D B_D(μ)`，故对 `1<λ<r²`：
+
+`sup_{μ∈E_r}∑_{D,α}λ^D|B_{D,α}(μ)|²≤K(λ/r²)^3`.
+
+若 `1<λ_0<λ<r²`，还得到指数尾界
+
+`sup_{μ∈E_r}∑_{D>M,α}λ_0^D|B_{D,α}(μ)|²
+ ≤K(λ/r²)^3(λ_0/λ)^M`.
+
+这是 R18 的实质推进：跨 conditional/angular sector 的 supercritical moving-scale
+tail tightness 在真正的 deeper backward-divisible stratum `E_r` 内已经成立。
+但它没有说明 `μ_N∉E_r`、`μ_N⇒μ∈E_R` 时该界能否从极限层传播到邻域。
+
+### 13.3 可除极限提供的矩阵 margin 与 conditional closure
+
+若 `π∈E_R` 且 `1<r<R`，写 `π=P_{R^(-2)}ξ`，则它的 `r`-原像为
+`ν_r=P_sξ`，`s=r²/R²<1`。由 centered/variance-one 的 Chebyshev 下界，
+`ξ([-2,2])≥3/4`；OU 核因此给出：对任意 `0<τ<1-s`，存在 `c>0` 使
+
+`ν_r(dx)≥cγ_τ(dx)`,  从而  `L_{ν_r}(p²)≥cE_{γ_τ}p²`.
+
+所以若 `π_N⇒π∈E_R` 且固定 `r<R` 的 inverse formal moment functionals 满足
+
+`sup_{p≠0}|(L_{N,r}-L_{ν_r})(p²)|/E_{γ_τ}p²→0`,
+
+则最终所有 polynomial square 上 `L_{N,r}≥0`。结合 R15 的 inverse moment growth、
+Hamburger determinacy 和 same-factor exact identities，可恢复真实正的 `r`-原像，
+从而排除 primitive 序列收敛到 `E_R`。这说明真正足够的假设是相对于 smoothed
+preimage form 的 operator/Loewner 尾控制，而不是普通的 scalar Parseval 界。
+
+### 13.4 严格 no-go 与 P₃K 边界
+
+完整 conditional/angular moment-matrix 正性、精确径向律和统一 growth 单独仍不够。
+可取 `T∼Exp(1)`、均匀角变量和独立 Gaussian，令
+`U_ω=σ_ωZ+ε(cos(ωT)-(1+ω²)^(-1))`，再以 common/residual 正交变换还原三坐标。
+这给出真实、交换对称、centered/variance-one、`Q∼χ²_2` 且 growth 一致的三元律，
+其 Laguerre 生成函数含因子
+
+`1/(1+ω²(1-q)²)-1/(1+ω²)`,
+
+复奇点趋近 `q=1`，因此谱质量可向无限 Laguerre degree 逃逸。该例不是 iid
+`μ^⊗3`，故绝不是项目的 genuine full-exact 反例；它严格说明必须真正使用
+same-factor iid cube，不能只依赖条件/角向 PSD。
+
+`P₃K` 仍逻辑断开。没有已审计的 charge-to-Laguerre 或 charge-to-Loewner 下界，
+`P₃K≠0` 仍允许固定 charge 落在 `n→∞` 的径向尾上；不能据此推出 uniform
+backward-Hankel 阶界或 primitive closedness。
+
+### 13.5 R18 结论与 R19 最小 OPEN
+
+无条件保留：完整二维生成函数的矩阵正性、same-factor cubic representation、
+整个 `E` 上的 subcritical 全谱紧性，以及 `E_r` 内的 supercritical moving-scale
+尾界。严格 no-go 保留为非 iid exchangeable 模型，不能升级为项目反例。
+
+当前最小 OPEN 改为：
+
+### Same-Factor Matrix Hardy Gain / Relative Tail-to-Head Coercivity — OPEN
+
+对 `π_N⇒π∈E_R`、`r<R`，能否从 genuine iid same-factor cube 与 all-degree exactness
+推出相对于 `L_{ν_r}` 的矩阵型估计，使 `E_R` 内的 supercritical 尾界对邻域稳定，
+进而阻止 backward radius 的 upward jump？Gaussian rigidity 仍未完成；目前没有
+真正的 full-exact rank/spectral-tail escape 反例。
+
+R18 的本机动作只需 proof-level audit：既有 `conditional_laguerre_odd_r17` 与
+`laguerre_abel_endpoint_r18` 重放均通过；不启动优化、数值扫参、Gram campaign 或
+远程计算。
+
+## 14. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -888,7 +999,7 @@ R17 的本机审计结论：full-exact 类弱闭/紧、`E_r` 闭、OU–Laguerre
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 14. 每轮协作协议
+## 15. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -901,21 +1012,21 @@ R17 的本机审计结论：full-exact 类弱闭/紧、`E_r` 闭、OU–Laguerre
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 15. 当前 checkpoint
+## 16. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
   escape 被无条件排除。剩余唯一 Bochner 缺口是 `M_r→∞` 的
   inverse-Hankel rank escape；R16 又把它等价重写为 primitive stratum 的弱
   闭合/尾到头 viability 问题；R17 提取了 OU–Laguerre 全阶加权 viability
-  不等式，但证明它不足以自动给出跨 sector 的谱尾紧性；另保留 `P_3K`
+  不等式；R18 又证明完整 subcritical 全谱紧性和 `E_r` 内 supercritical moving-scale
+  尾界，并把剩余缺口压缩为 same-factor matrix Hardy gain；另保留 `P_3K`
   sector 限定。
-- 当前方向：R18，攻击 `All-Degree Spectral-Tail Tightness`：寻找 full-exact
-  product structure 对 OU eigenmode/Laguerre/Jacobi moving-scale 尾的统一
-  控制，或构造严格的 simultaneous-all-degree no-go；继续单独审计 `P_3K`
-  survival。
+- 当前方向：R19，攻击 `Same-Factor Matrix Hardy Gain / Relative Tail-to-Head
+  Coercivity`：寻找同因子 iid cube 产生的相对矩阵稳定性，或严格证明它仍不足以
+  阻止 rank/spectral-tail escape；继续单独审计 `P_3K` survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

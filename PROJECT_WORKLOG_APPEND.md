@@ -356,3 +356,64 @@
   complete conditional/angular sectors. `P_3K` remains separate: no audited
   charge-to-Laguerre lower bound or uniform inverse-Hankel implication was
   obtained. No long numerical computation was needed.
+
+# 2026-09-05 — R18 same-factor matrix Hardy gain / relative tail-to-head coercivity
+
+- R18 re-read the durable framework and worklog through the repaired connection
+  before starting. It attacked only the R17 target `All-Degree Spectral-Tail
+  Tightness`, and did not claim primitive closedness or Gaussian rigidity.
+- The complete conditional generating function is a single cross-sector object.
+  With `U=(X1+X2+X3)/sqrt(3)`, `T=Q/2~Exp(1)`, `C_(ell,n)=E[psi_ell(U)L_n(T)]`,
+  `0<=q<1`, and `d=1-q`, the tilted triple law
+  `dP_q=d^(-1) exp(-qT/d)d(mu^3)` gives
+  `M_mu(q,z)=E_Pq exp(zU-z^2/2)
+  =sum_(ell,n) C_(ell,n) q^n z^ell/sqrt(ell!)`.
+  Its kernel `K_q(z,w)=exp(z*conj(w))*M_mu(q,z+conj(w))` is PSD because it is
+  a Gram kernel. A Hubbard–Stratonovich step gives the same-factor cubic
+  representation through `A_q(y)=E_mu exp(yX-qX^2/(2d))`:
+  `M_mu(q,z)=d^(-1)exp(-z^2/2)E_G A_q((z+sqrt(q/d)G)/sqrt(3))^3`.
+- A new unconditional spectral lemma follows from Mehler. If
+  `a_m(mu)=E_mu psi_m(X)`, then for `rho<1`, the R12 square-exponential bound
+  gives a uniform `sum_m rho^m a_m(mu)^2` bound. Unitary common/residual
+  rotation preserves total-degree energy, so the full conditional/angular
+  coefficients `B_(D,alpha)` satisfy
+  `sup_(mu in E) sum_(D,alpha) rho^D |B_(D,alpha)|^2 <= K(rho)^3`.
+- More importantly, in `E_r`, `r>1`, write `mu=P_(r^-2)nu`, `nu in E`. OU degree
+  scaling and the preceding subcritical estimate imply, for `1<lambda<r^2`,
+  `sup_(mu in E_r) sum_(D,alpha) lambda^D |B_(D,alpha)|^2
+  <= K(lambda/r^2)^3`; for `1<lambda_0<lambda<r^2`, the tail is bounded by
+  `K(lambda/r^2)^3(lambda_0/lambda)^M`. Thus complete cross-sector
+  supercritical moving-scale tightness is already true inside the deeper
+  backward-divisible stratum.
+- A conditional closure target is now explicit. If `pi in E_R`, `1<r<R`, write
+  `pi=P_(R^-2)xi` and `nu_r=P_(r^2/R^2)xi`. Chebyshev plus the OU kernel gives a
+  Gaussian minorant `nu_r >= c gamma_tau` for every `0<tau<1-r^2/R^2`, hence
+  `L_(nu_r)(p^2)>=c E_(gamma_tau)p^2`. Therefore a relative quadratic-form
+  estimate
+  `sup_p |(L_(N,r)-L_(nu_r))(p^2)|/E_(gamma_tau)p^2 -> 0`
+  would force positivity of the limiting inverse formal form and, by the R15
+  Hamburger/moment-determinacy bridge, rule out primitive convergence into
+  `E_R`. This is the missing relative matrix/Loewner Hardy gain.
+- Strict no-go: conditional/angular PSD, exact radial `T~Exp(1)`, and uniform
+  growth alone do not control the Abel boundary. An explicit exchangeable but
+  non-iid construction with `U_omega=sigma_omega Z+epsilon(cos(omega T)-
+  (1+omega^2)^(-1))` has Laguerre transform
+  `1/(1+omega^2(1-q)^2)-1/(1+omega^2)`; its complex poles approach `q=1` and
+  its spectral mass escapes to high Laguerre degree. It is deliberately not a
+  `mu^3` law, so it is not a genuine full-exact counterexample; it only shows
+  that same-factor iid factorization must be used essentially.
+- `P_3K` remains separate. No audited charge-to-Laguerre/Loewner lower bound or
+  charge-to-Hankel rank estimate was found. A nonzero qualitative charge may
+  still sit at radial index `n->infinity`.
+- Local proof-level checks: `F:/anaconda3/python.exe
+  conditional_laguerre_odd_r17/audit_r17.py` passed with
+  `R17_AUDIT_COMPLETED`; `F:/anaconda3/python.exe
+  laguerre_abel_endpoint_r18/audit_r18.py` passed with
+  `R18_AUDIT_COMPLETED` and retained its earlier decision that the Abel
+  endpoint is non-coercive. No optimizer, Gram scan, long numerical campaign,
+  or remote computation was needed.
+- Minimal OPEN is now `Same-Factor Matrix Hardy Gain / Relative Tail-to-Head
+  Coercivity`: can genuine iid same-factor all-degree exactness make the
+  supercritical tail bound open/stable around `E_R`? The exchangeable model is
+  not promoted to a project counterexample, and Gaussian rigidity remains
+  OPEN.
