@@ -807,3 +807,47 @@
   `git diff --check` remains required before commit.  These are local identity
   checks and do not prove the residual contraction, a full-exact orientation,
   or Gaussian rigidity.
+
+# 2026-09-06 — R28 flat-shadow one-body tail-to-head collapse
+
+- R28 reread the durable framework, worklog, R27 README/audit, and the recorded
+  commit `cb3e70a` before working.  The web-side analysis stayed inside the
+  genuine full-exact iid class.  The positive atomic shadow, toy laws, and
+  formal moment vectors below were used only as structural/algebraic audit
+  devices; none was promoted to a full-exact counterexample.
+- At a flat boundary, let `nu_M` be the positive `M`-atomic shadow supported on
+  the zeros of `P_M`, and `rho_M=P_a nu_M`.  For the antisymmetric mode
+  `F_-=(F_1-F_2)/sqrt(2)` and `G_-=P_(-a)F_-`, heat intertwining gives
+  `E[G_-(Y+sqrt(a)Z)|Y]=F_-(Y)=0`.  Hence the R27 derivative energy has the
+  genuine positive realization `E_-=E_(rho_M^3)G_-^2`, as a conditional
+  variance under the shadow Gaussian mixture.
+- In pair coordinates `D=X_1-X_2`, `S=X_1+X_2`, `Y=X_3`, the exact identity is
+  `Q=D^2/2+(S-2Y)^2/6`.  Exact `Q~chi^2_2` therefore supplies only a weighted
+  scalar Laplace average for the pair fiber, not a pointwise conditional
+  Loewner order.  Permutation symmetry still gives the rank-one facts
+  `E[R|U,T]=0` and `E[RR^T|U,T]=T I_2`, but not the full derivative-jet
+  contraction or the required shadow comparison.
+- Define `R=P_(-a)P_M` and `W=P_(-a)(xP_M)=xR-aR'`.  The exact same-factor
+  decomposition is `G_i=(2/3)W_i-(1/3)(X_j+X_k)R_i`.  Its antisymmetric
+  Hoeffding sectors are orthogonal, giving
+  `E G_-^2=(4/9)E W^2+(2/9)E R^2-(1/9)(E[XR])^2` for centered unit-variance
+  product laws with the null means.  Since `mu` and `rho_M` match through
+  `2M+1` moments, the residual two-body terms and derivative/noise remainder
+  cancel exactly between them.  The remaining identity is
+  `A_--E_-=(4/9)(E_mu W^2-E_rho_M W^2)` and, by the one-body heat product,
+  `q_M=E_mu W^2-E_rho_M W^2`.
+- This is a new full-exact-compatible proof-route no-go: any additional
+  contraction acting only on the residual conditional/two-body Schur sector
+  has zero net sign effect.  The correct minimum OPEN is now `Uniform
+  Flat-Shadow One-Body Tail-to-Head Gain`, equivalently the R25 modulus
+  `Omega_K->0`.  A conditional theorem is that this one-body norm monotonicity
+  implies `q_M>=0`; it does not itself follow from exact radial law or from
+  residual-sector positivity.  `P_3K` and Gaussian rigidity remain open and
+  logically disconnected.
+- Added `flat_null_square_r28/audit_r28.py` and README.  The local SymPy audit
+  passed positive-shadow conditional-variance realization, same-factor heat
+  decomposition, Hoeffding orthogonality/norm identity, moment-degree
+  cancellation, and the pair-sum identity, printing
+  `R28_AUDIT_COMPLETED`.  No optimizer, numerical sweep, or remote computation
+  was needed.  The audit verifies identities only; it does not prove the
+  one-body norm monotonicity or Gaussian rigidity.

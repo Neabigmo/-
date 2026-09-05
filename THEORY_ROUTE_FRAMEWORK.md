@@ -1989,7 +1989,90 @@ residual covariance budget；新增 `flat_null_square_r27/audit_r27.py` 与 READ
 运行输出 `R27_AUDIT_COMPLETED`。这些局部恒等式和 no-go 不构成 full-exact
 反例，也没有关闭 Gaussian rigidity。
 
-## 23. 已探索路线与停止条件
+## 23. R28：Flat-Shadow One-Body Tail-to-Head Collapse
+
+R28 先重新读取本文件、工作日志和 R27 审计资产至提交 `cb3e70a`。本轮仍严格
+限定 genuine full-exact iid law；atomic shadow 只作为由 flat boundary 导出的
+正概率辅助对象，formal moment vector 和 toy law 只用于审计恒等式，均不作为
+full-exact 反例。
+
+### 23.1 正 shadow realization
+
+在 `ell_M=0` 的 flat boundary，令 `nu_M` 为 `P_M` 零点上的正 `M`-atomic
+shadow，并令 `rho_M=P_a nu_M`。对
+`F_-=(F_1-F_2)/sqrt(2)`、`G_-=P_(-a)F_-`，heat intertwining 给出
+`E[G_-(Y+sqrt(a)Z)|Y]=F_-(Y)=0`，因为 `P_M(Y_i)=0`。因此
+
+`E_-=E_(rho_M^3) G_-^2`
+
+确实是一个正 iid Gaussian-mixture law 下的条件方差，而不是把 inverse
+functional 直接误当成正量。于是 R27 的目标等价于两个正 iid law 对同一
+antisymmetric mode 的 `L^2` 范数比较：
+
+`A_--E_- >= 0  <=>  ||G_-||_(L^2(mu^3))^2 >= ||G_-||_(L^2(rho_M^3))^2`。
+
+### 23.2 pair fiber 与 exact Q 的真实信息量
+
+令 `D=X_1-X_2`、`S=X_1+X_2`、`Y=X_3`，则
+
+`Q=D^2/2+(S-2Y)^2/6`。
+
+因此 exact `Q~chi^2_2` 只直接给出 pair-difference conditional Laplace
+transform 的一个加权 scalar average；它不提供 `D|S` 的 pointwise variance/
+Loewner order，也不提供 full-exact law 与 `rho_M` 之间的 conditional Schur
+order。iid permutation symmetry虽给出 `E[R|U,T]=0`、
+`E[RR^T|U,T]=T I_2`，但只控制 rank-one residual harmonic，不能实现完整
+derivative-jet contraction。
+
+### 23.3 Hoeffding decomposition：residual sector 精确抵消
+
+令 `R=P_(-a)P_M`、`W=P_(-a)(xP_M)=xR-aR'`。same-factor heat algebra 给出
+
+`G_i=(2/3)W_i-(1/3)(X_j+X_k)R_i`。
+
+在 centered unit-variance product law、`E R=E W=0` 下，antisymmetric
+Hoeffding sectors 正交，并有
+
+`E G_-^2=(4/9)E W^2+(2/9)E R^2-(1/9)(E[XR])^2`。
+
+由于 `mu` 与 `rho_M` 在 flat boundary 上匹配到至少 `2M+1` 阶，`R^2`、
+`XR` 以及 `W^2` 的 derivative/noise remainder 全部匹配；唯一剩余的是
+one-body first-order mode：
+
+`A_--E_-=(4/9)(E_mu W^2-E_rho_M W^2)`，
+
+而 one-body heat product identity 又给
+
+`q_M=E_mu[P_(-a)(xP_M)]^2-E_rho_M[P_(-a)(xP_M)]^2`。
+
+所以所有 residual two-body/conditional Schur sector 对符号逐项抵消。只从
+该 sector 提取新 contraction gain 的路线不能关闭 `q_M`；这是一条
+full-exact-compatible 的 proof-route no-go，而不是 counterexample。
+
+### 23.4 当前最小 OPEN 与后续方向
+
+R28 将最小 OPEN 从 residual-jet contraction 进一步收缩为：
+
+### Uniform Flat-Shadow One-Body Tail-to-Head Gain — OPEN
+
+要求在 genuine exact-law uniform growth 和 nondegenerate flat window 下，证明
+
+`||P_(-a)(xP_M)||_(L^2(mu)) >= ||P_(-a)(xP_M)||_(L^2(rho_M))`，
+
+或等价地证明 `Omega_K -> 0`。R28 的 conditional theorem 是：若上述
+one-body norm monotonicity 成立，则 `q_M>=0`，随后可继续接回 plateau、残余
+Laguerre `<3M` 和 R21 cubic amplifier。未来候选必须直接触及 `W` 或
+infinite-tail feedback；common-only HS、独立正实 residual source、纯 residual
+rotation、sectorwise PSD，以及只处理 residual degenerate sector 的 Schur
+contraction 均按 R24–R28 的审计停止条件淘汰。`P_3K` 仍无 quantitative bridge，
+Gaussian rigidity 仍 OPEN。
+
+本轮新增 `flat_null_square_r28/audit_r28.py` 与 README，运行输出
+`R28_AUDIT_COMPLETED`；审计覆盖正 shadow 条件方差实现、same-factor heat 分解、
+Hoeffding 正交与范数公式、低阶矩匹配下的 residual cancellation，以及 pair-sum
+恒等式。没有 optimizer、数值 sweep 或远程计算。
+
+## 24. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -2002,7 +2085,7 @@ residual covariance budget；新增 `flat_null_square_r27/audit_r27.py` 与 READ
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 24. 每轮协作协议
+## 25. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -2015,10 +2098,10 @@ residual covariance budget；新增 `flat_null_square_r27/audit_r27.py` 与 READ
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 25. 当前 checkpoint
+## 26. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -2045,13 +2128,14 @@ residual covariance budget；新增 `flat_null_square_r27/audit_r27.py` 与 READ
   common-only HS wrong-sign obstruction 和两个 conditional bridges，运行
   `R26_AUDIT_COMPLETED`；R27 又将其压成 `3x3` residual Gram、单一
   antisymmetric residual mode，并排除独立正实 residual-source completion，运行
-  `R27_AUDIT_COMPLETED`。`P_3K` 仍没有 quantitative bridge。
-- 当前方向：R27 已完成，最小 OPEN 改为 `Same-Factor Conditional Residual-Jet
-  Contraction`：在严格 genuine full-exact iid 类内证明或否定单一 residual
-  mode 的 `A_-->=E_-`，或构造同等的 common--residual conditional contraction。
-  下一轮先做该 contraction 的一阶可审计候选；若候选仍属于独立正实 source、
-  radial positivity 或 sectorwise PSD，直接记录 no-go，必要时回到 R25 的
-  `Omega_K` infinite-tail modulus。只有关闭 one-step sign 后，才回到 residual
-  Laguerre `<3M` 与 R21 cubic amplifier。
+  `R27_AUDIT_COMPLETED`；R28 又把该 residual contraction 路线搬到正 shadow
+  概率律并以 Hoeffding 分解证明 residual sector 精确抵消，剩余符号完全退回
+  one-body `W=P_(-a)(xP_M)` 范数差，运行 `R28_AUDIT_COMPLETED`。
+  `P_3K` 仍没有 quantitative bridge。
+- 当前方向：R28 已完成，最小 OPEN 改为 `Uniform Flat-Shadow One-Body
+  Tail-to-Head Gain`，等价地研究 R25 的 `Omega_K` infinite-tail compactness
+  modulus。后续候选必须直接反馈到 one-body `W` 或全阶 exact hierarchy；不得
+  再从已被审计抵消的 residual HS/Schur sector 堆叠形式。只有关闭 one-step sign
+  后，才回到 residual Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
