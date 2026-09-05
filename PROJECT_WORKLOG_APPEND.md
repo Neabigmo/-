@@ -88,3 +88,36 @@
   `Depth-to-Zero Production Rigidity`: obtain depth-independent zero-set isolation /
   tensor coercivity from all-degree exactness plus positivity, or identify a genuine
   probability-level tail-escape obstruction. No Codex computation was needed.
+
+# 2026-09-05 — R12 exact-law compactness and OU-invariant-shape obstruction
+
+- Logic-level audit: the new tail and OU statements are unconditional for the
+  genuine full exact probability class `Q=sum_i(X_i-Xbar)^2 ~ chi^2_2`. They must not
+  be silently inferred from a single scalar `RK=1` equation unless that equivalence
+  has separately been proved. The requested nonzero `P_3K` charge sector remains a
+  separate qualifier.
+- From `Q >= (X1-X2)^2/2`, the exact chi-square Laplace transform, and conditional
+  Jensen, obtained the uniform bound
+  `E exp(eta X^2) <= exp(-eta)/(1-4 eta)` for `0<eta<1/4`. This gives uniform
+  probability tightness, fixed-moment uniform integrability, and local complex MGF
+  control across exact laws and tower depths; physical probability-tail escape is
+  excluded.
+- The same MGF estimate gives a law-independent exponential Hermite coefficient
+  envelope. With OU Hermite scaling and centered variance-one cancellation of modes
+  one and two, every depth-N top endpoint satisfies the uniform estimate
+  `||P_(rho^N) h_N - 1||_2 = O(rho^(3N/2))` for large N.
+- Audited exact OU closure geometrically: the residual-plane vector has chi-square
+  radius and is sent to `sqrt(t) R + sqrt(1-t) G`; isotropic Gaussian noise preserves
+  the Gaussian radial law. Thus `g in E => P_t g in E` for the full exact class.
+- A single genuine nonGaussian exact law automatically generates mutually
+  incompatible finite-depth towers by `g_N^(j)=P_(rho^(N-j))h`; hence Case B is
+  essentially the original nonGaussian exact-law existence problem. For the required
+  `P_3K != 0` sector, charge survival along this orbit must still be proved, not
+  assumed.
+- Absolute local isolation of Gaussian in the exact class is equivalent to global
+  uniqueness because of OU closure, `L2` convergence, and OU injectivity. Therefore
+  `D_N -> 0` plus ordinary continuous coercivity cannot yield finite-N exact zero.
+  Physical tail escape is gone; only amplitude/spectral high-chaos escape remains.
+- Reclassified the minimal OPEN as `OU-Invariant Shape Rigidity`: find an
+  amplitude-normalized OU-homogeneous same-factor tensor invariant, or prove a
+  genuine spectral noncompactness obstruction. No Codex computation was needed.

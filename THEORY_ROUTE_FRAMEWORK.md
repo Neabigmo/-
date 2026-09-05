@@ -287,7 +287,108 @@ one-step pair 的 production 沿任意深度仍可降到 `O(ρ^N)`。
 log-concave backward preimage 仍是已成立的充分条件：一维 Brascamp–Lieb 给出
 `W≤τ`，从而 Gaussian；当前原始假设尚未推出任何 preimage 的 log-concavity。
 
-## 7. 已探索路线与停止条件
+## 7. R12：exact 概率类的紧性、OU 闭包与真正的剩余逃逸
+
+### 7.1 先固定 exact law 的逻辑层级
+
+本节的无条件陈述针对 genuine full exact probability class `𝓔`：若
+`X_1,X_2,X_3` iid、centered、variance-one，且
+
+`Q=∑_{i=1}^3(X_i-X̄)^2∼χ²_2`，
+
+则称其为 exact law。若项目中的 `RK=1` 只是一个标量记号而尚未证明与
+这个 full `Q`-law 等价，则以下 tail/OU 结论必须标为“在 genuine exact law
+假设下”，不能直接从单个标量等式推出。`P_3K≠0` 的 charge sector 也必须单独
+保留，不能由“非 Gaussian”自动补上。
+
+### 7.2 无条件的 physical-tail no-go
+
+由
+
+`Q≥(X_1-X_2)^2/2`
+
+和 `E exp(2ηQ)=(1-4η)^{-1}`，再对 `X_2` 使用条件 Jensen，得到
+
+`E exp(ηX^2)≤e^{-η}/(1-4η)`,  `0<η<1/4`.
+
+常数与 exact law、tower depth 和 tower index 无关。因此 exact 类具有
+`N`-uniform tightness、任意固定阶矩的 uniform integrability，以及局部复 MGF
+控制；Case B 不可能靠概率质量向 `|X|→∞` 的 physical tail escape 存活。
+
+同一估计给 normalized Hermite coefficients 一个统一指数包络。若
+`a_n(μ)=E_μ[H_n(X)/√(n!)]`，则存在与 `μ` 无关的 `M,B` 使
+`|a_n(μ)|≤MB^n`。对深度 `N` 的顶层 `h_N`，OU 缩放给出
+
+`a_n(P_{ρ^N}h_N)=ρ^{Nn/2}a_n(h_N)`，
+
+于是 centered/variance-one 条件消去 `n=1,2` 后
+
+`||P_{ρ^N}h_N-1||_2=O(ρ^{3N/2})`
+
+一致成立（当 `N` 足够大）。这解释了为何 `g_N^(0)→1` 本身不是稀有额外
+假设，但也不等于有限 `N` 的 exact rigidity。
+
+### 7.3 exact 类对前向 OU 的无条件闭包
+
+在 residual plane 取 `R=A(X_1,X_2,X_3)`，其中
+`AA^T=I_2`、`A^TA=I_3-(1/3)11^T`，则 `|R|²=Q`。独立 OU 后
+
+`R_t=√t R+√(1-t)G`,  `G∼N(0,I_2)`.
+
+给定 `R` 时，`|R_t|` 的条件分布只依赖 `|R|`；而 `|R|` 与二维标准 Gaussian
+半径同分布，所以 `|R_t|` 仍与二维标准 Gaussian 半径同分布。故
+
+`g∈𝓔  ⇒  P_tg∈𝓔`,  `0<t<1`.
+
+这是真实概率律层面的 OU closure，不是 tangent 或有限 Fock 结论。
+
+### 7.4 Case B 与单个 counterexample 的关系
+
+若存在一个 genuine positive、centered、variance-one、`L²` 的 exact law `h`，
+则可定义
+
+`g_N^(j)=P_{ρ^{N-j}}h`,  `j=0,…,N`.
+
+它满足固定因子递推、每层 exact/positive，且 `g_N^(0)→1`。因此在不附加
+`P_3K` sector 限定时，Case B 与“存在一个非 Gaussian exact law”本质等价。
+对于本项目要求的 `P_3K≠0` sector，尚需显式证明该 charge 沿 OU 轨道不消失；
+不能把这一步隐藏在“非 Gaussian”表述中。反方向则直接成立，因为 Case B
+的任一有限层本身就是 exact law。
+
+### 7.5 绝对局部 isolation 不是较弱的桥梁
+
+在 exact 类 `𝓔` 对 OU 闭包且 `P_{ρ^m}h→1` 于 `L²` 的条件下，
+
+`1 在 𝓔 中局部绝对孤立  ⇔  𝓔={1}`.
+
+证明是直接的：局部孤立性作用于充分小的 `P_{ρ^m}h`，再用 OU 在
+`L²(γ)` 上 Hermite 乘子全非零的 injectivity 得 `h=1`。所以寻找
+`D_N=O(ρ^N)` 后直接推出 `D_N=0` 的 absolute depth-independent isolation，
+本身已接近完整 Gaussian uniqueness，不能继续包装成非循环中间 lemma。
+
+### 7.6 真正剩余的逃逸与最小 OPEN
+
+R11 的深度界只给 `D_N→0`，而连续 coercivity 只能给“更小”，不能给有限
+`N` 的 exact zero。physical tail escape 已被排除；剩下的是 amplitude escape
+和 spectral/high-chaos escape，且现有统一 MGF/Hermite 包络尚未给出 uniform
+`L²`-tail tightness 或非 Gaussian normalization。
+
+因此当前最小 OPEN 改为：
+
+### OU-Invariant Shape Rigidity — OPEN
+
+能否构造一个 `𝓙(g)≥0`，满足 `𝓙(g)=0` 当且仅当 `g` Gaussian，并且在前向
+OU 下具有可控的齐次缩放、不会随非 Gaussian 振幅一起塌缩；再将这个
+amplitude-normalized same-factor tensor invariant 与 R11 的 depth decay 结合？
+
+若不能，则需要严格刻画：在统一 sub-Gaussian compact class 中，任何自然的
+OU-homogeneous normalization 是否都会发生 spectral noncompactness，以及究竟
+是哪一类 all-degree angular/Fock tail 逃逸。不得以 absolute isolation、普通
+小量 coercivity、tangent、形式 jet 或 operator-only 样例替代这个问题。
+
+本轮 Codex 暂不执行；没有需要有限系数核验的地方。
+
+## 8. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -300,7 +401,7 @@ log-concave backward preimage 仍是已成立的充分条件：一维 Brascamp�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 8. 每轮协作协议
+## 9. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -313,13 +414,14 @@ log-concave backward preimage 仍是已成立的充分条件：一维 Brascamp�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 9. 当前 checkpoint
+## 10. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R11；审计 OU–heat 共轭、production 缩放与外部 heat-horizon cap，得到
-  固定第一层 production 的 `O(ρ^{N-1})` 深度衰减，并排除 projectively compatible
-  的非 Gaussian 正 exact 无限固定因子塔；同时保留 R10 的 shell 修正。
-- 当前方向：R12，攻击彼此不相容的有限深度塔：寻找 depth-independent
-  zero-set isolation / tensor coercivity，或给出真实概率级的 tail-escape 障碍。
+- 已完成：R12；在 genuine full `Q∼χ²_2` exact law 层级下，审计 uniform
+  sub-Gaussian/MGF 紧性、OU 闭包，并证明 physical-tail escape 不可能；同时说明
+  absolute local isolation 等价 global uniqueness，保留 `P_3K` sector 限定。
+- 当前方向：R13，攻击 `OU-Invariant Shape Rigidity`：寻找不会随 OU amplitude
+  塌缩的 scale-normalized same-factor tensor invariant，或严格建立 spectral
+  high-chaos escape obstruction。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
