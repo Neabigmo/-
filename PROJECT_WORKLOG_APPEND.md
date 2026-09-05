@@ -1113,3 +1113,47 @@
   `R34_NONLINEAR_GRADED_TRANSGRESSION REMAINS OPEN`, and
   `R34_AUDIT_COMPLETED`.  No optimizer, SDP, degree search, large sweep, or
   remote computation was used.
+
+# 2026-09-06 — R35 Fock first-grade linearity and SOS anchor tax
+
+- R35 reread the durable framework, worklog, R34 README/audit, and actual HEAD
+  `88fd022c6e52d27a02139261b88c527cf1247284` before working.  The web-side
+  analysis stayed inside the genuine full-exact positive iid class; Fock rings,
+  flat shadows, and formal homogeneous paths were used only for proof structure,
+  not as relaxed-law counterexamples.
+- Let `N=2M+2` and let `b_j` be normalized Hermite/Fock coordinates of a genuine
+  exact law and its positive flat shadow.  The first mismatch is
+  `Delta_N=q_M/sqrt(N!)`.  For a same-factor cubic homogeneous equation, exact
+  polarization gives `3B(H,S,S)+3B(H,H,S)+B(H,H,H)`.  With
+  `ord_OU(H)=N`, the three pieces begin at grades `N,2N,3N`; hence the first
+  mismatch is purely linear and cannot be canceled by a nonlinear cubic term.
+- The lowest nonzero grade of a regular exact-ideal transgression
+  `J=sum_d H_dF_d` is canonical:
+  `[u^N]J(rho_u)=H_N(g)F_N(rho)`.  If the shadow remainder must start above
+  `N` and `q_M!=0`, the grade-N ideal coefficient must vanish, so the exact
+  ideal cannot carry the first head defect.
+- For a finite positive square part `P=sum_r f_r^2`, put
+  `c_r=f_r(g,xi_0)` and `d_r=partial_(b_N)f_r(g,xi_0)`.  First-grade value
+  transport forces `sum_r c_rd_r=sqrt(N!)/2`, and Cauchy--Schwarz gives the
+  exact anchor tax `P(g,xi_0)D_(N,K)^2>=N!/4`.  A uniform analytic factor norm
+  bounds `D_(N,K)`, so a nonzero `q_M` forces a K-independent positive anchor
+  budget.  This conflicts with both a vanishing grade-zero defect and a
+  K-uniform norm.  The scalar completion `x=(c+x)^2/(2c)-c/2-x^2/(2c)` is the
+  sharp one-dimensional analogue.
+- R35 strictly closes **Uniformly Bounded Finite Fock--SOS Graded Transgression**
+  on the `q_M!=0` branch.  The remaining minimum OPEN is
+  **Constraint-Coupled Non-SOS Graded Value Transgression**: positivity must
+  emerge only after coupling signed homogeneous pieces to the genuine
+  same-factor exact manifold and probability cone, while retaining a vanishing
+  grade-zero defect and uniform remote norm.  Gaussian rigidity and the `P_3K`
+  bridge remain OPEN and disconnected.
+- Added `flat_shadow_fock_transgression_r35/audit_r35.py` and README.  The first
+  run exposed a mutable SymPy tuple issue and the zero-polynomial convention in
+  the grade helper; both were corrected.  The final exact audit exited 0 and
+  printed `R35_CUBIC_FIRST_GRADE_LINEARITY PASSED`,
+  `R35_FIRST_IDEAL_GRADE_CANONICAL PASSED`,
+  `R35_FOCK_SOS_ANCHOR_TAX PASSED`,
+  `R35_BOUNDED_FOCK_SOS_TRANSGRESSION NO_GO`,
+  `R35_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`, and
+  `R35_AUDIT_COMPLETED`.  No optimizer, SDP, degree search, large sweep, or
+  remote computation was used.

@@ -2702,3 +2702,95 @@ cubic/Fock homogeneous algebra，在求和成 gauge-invariant total evaluation �
 问题后，精确运行输出为 `R34_FLAT_OU_COVARIANCE PASSED`、
 `R34_TOTAL_SHADOW_HIGH_PASS NO_GO`、`R34_SIGNED_OU_FILTER_NORM_BLOWUP RECORDED`、
 `R34_NONLINEAR_GRADED_TRANSGRESSION REMAINS OPEN`、`R34_AUDIT_COMPLETED`。
+
+## 33. R35：Fock first-grade linearity 与 SOS anchor tax
+
+网页端在开始 R35 前已先读取本框架、工作日志、R34 README/审计脚本，并核对
+真实 HEAD `88fd022c6e52d27a02139261b88c527cf1247284`。本轮只测试一个新的
+value-level 子命题：same-factor cubic/Fock homogeneous polarization 能否在求和
+成 total evaluation 之前提供正性兼容的非线性 grade transport。结论是自然的
+有限、uniform、Fock-SOS 类被严格排除；constraint-coupled non-SOS 仍开放。
+
+### 33.1 首个 shadow mismatch 与 cubic 的首级纯线性
+
+令 `N=2M+2`，用 normalized Hermite/Fock 坐标 `b_j` 表示 full exact law `mu`
+与 positive flat shadow `rho`。已有匹配关系给出
+
+`b_j(mu)=b_j(rho)` (`j<N`)，`Delta_N=b_N(mu)-b_N(rho)=q_M/sqrt(N!)`。
+
+same-factor homogeneous cubic
+
+`F_n(b)=sum_(i+j+k=n) sqrt(n!/(i!j!k!)) A_(ijk)b_i b_j b_k`
+
+的精确 polarization 是
+
+`F(S+H)-F(S)=3B(H,S,S)+3B(H,H,S)+B(H,H,H)`。
+
+若 `ord_OU(H)=N`，三项最低 grades 分别为 `N,2N,3N`；所以所有真正 nonlinear
+cubic correction 在首 mismatch grade `N` 完全缺席。首个 defect 只能来自 linear
+polarization。对 symmetric same-factor coefficient，首级为
+
+`F_N(b(mu))-F_N(b(rho))=3A_(N00)Delta_N`，
+
+而 `A_(N00)=(2/3)^d binom(2d,d)/4^d>0` (`N=2d`)，故首个 cubic shadow defect
+与 `q_M` 同义，不能藏入同级 nonlinear cancellation。
+
+### 33.2 exact ideal 的最低非零 grade 是规范不变量
+
+考虑 regular（不含负 OU grade）ideal transgression
+`J_K=sum_d H_(d,K)F_d`。shadow 上 `F_d(rho)=0` 对 `d<N` 成立，`d>N` 的
+generator 只从更高 grade 开始，因此
+
+`[u^N]J_K(rho_u)=H_(N,K)(g)F_N(rho)`。
+
+这一个最低非零 shadow-grade coefficient 不受 equality multiplier 的 syzygy
+gauge 影响，因为其它 generators 无法贡献 grade `N`。若要求 shadow remainder
+从 `N` 之后才开始，而 `q_M!=0`，就必须有 `H_(N,K)(g)=0`，于是 exact-ideal
+部分不能承担首个 head defect。
+
+### 33.3 Fock-SOS anchor tax
+
+若 positivity part 是有限平方和 `P_K=sum_r f_(r,K)^2`，记 Gaussian Fock anchor
+处的
+
+`c_r=f_(r,K)(g,xi_0)`, `d_r=partial_(b_N)f_(r,K)(g,xi_0)`。
+
+full law 与 shadow 在首级相减，且 ideal 部分已被要求 remote 后，得到
+
+`q_M=2Delta_N sum_r c_r d_r`。
+
+在 `q_M!=0` 时因此
+`sum_r c_r d_r=sqrt(N!)/2`，Cauchy--Schwarz 给出
+
+`P_K(g,xi_0) D_(N,K)^2 >= N!/4`,
+
+其中 `D_(N,K)^2=sum_r|d_r|^2`。任何固定 grade 的 analytic/weighted factor norm
+都会控制 `D_(N,K)`；若 factors 的总 norm law-independent 且 `K`-uniform，
+`P_K(g,xi_0)` 就必须保留一个 `K`-independent 的正预算，不能与允许的
+`delta_K->0` 同时成立。等价的一维 sharp model 是
+
+`x=(c+x)^2/(2c)-c/2-x^2/(2c)`，`c>0`：令 grade-zero `c/2` 消失会使 remote
+coefficient `1/(2c)` 发散。
+
+这也说明 cubic 的高阶项没有隐藏的 first-grade positivity gain：它们本来就从
+`2N,3N` 才开始，真正的 sign-indefinite linear head 仍必须由正平方承担。
+
+### 33.4 R35 的严格 no-go 与剩余 OPEN
+
+本轮严格停止 **Uniformly Bounded Finite Fock--SOS Graded Transgression**：有限
+cubic factors、有限 same-factor homogeneous products、正平方/二次模块、
+`delta_K->0`、exact-ideal shadow remote 和 law-independent `K`-uniform analytic
+factor norm 不能在 `q_M!=0` 分支同时成立。这是 proof-mechanism no-go，不是
+full-exact probability counterexample。
+
+仍未排除的唯一有意义方向是 **Constraint-Coupled Non-SOS Graded Value
+Transgression**：signed homogeneous pieces 不能各自依赖 ambient SOS 正性，而
+必须在 genuine same-factor exact manifold 与 probability cone 联合后才出现总的
+非负性，同时保持 grade-zero defect 趋零和 remote norm 统一受控。Gaussian rigidity
+与 `P_3K` bridge 仍 OPEN 且逻辑断开。
+
+本轮新增 `flat_shadow_fock_transgression_r35/audit_r35.py` 与 README。修正一处
+SymPy 符号元组可变性问题和零多项式的 grade 约定后，审计输出为
+`R35_CUBIC_FIRST_GRADE_LINEARITY PASSED`、`R35_FIRST_IDEAL_GRADE_CANONICAL PASSED`、
+`R35_FOCK_SOS_ANCHOR_TAX PASSED`、`R35_BOUNDED_FOCK_SOS_TRANSGRESSION NO_GO`、
+`R35_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`、`R35_AUDIT_COMPLETED`。
