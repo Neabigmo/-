@@ -592,7 +592,106 @@ R14 没有完成 Gaussian rigidity；它把 primitive 正定性缺口从模糊�
 “Bochner tail”压缩成两个无限维通道，并证明完整 exact equality hierarchy
 本身不能消灭它们。
 
-## 10. 已探索路线与停止条件
+## 10. R15：从 Bochner 局部化到 Uniform Inverse-Hankel Rank Closure
+
+### 10.1 无条件局部化 lemma：非正定性在任意小窗口内出现
+
+固定 `r>1`，对 genuine full-exact primitive law `π` 定义逆 OU 候选
+
+`K_r(z)=exp((r^2-1)z^2/2) φ_π(rz)`.
+
+R12 的 square-exponential moment bound 使 `K_r` 成为整个函数，并满足某个
+order-2 增长估计；于是其形式逆矩
+
+`m_k^(r)=i^(-k) K_r^(k)(0)`
+
+满足 `|m_k^(r)|≤C_r(B_r√k)^k`。若存在 `L>0` 使核
+`K_r(x-y)` 在所有 `x_i∈(-L,L)` 的有限 Gram 测试上都 PSD，则把点配置
+通过有限差分压向 `0`，并使用 confluent limit，可得全部逆 Hamburger 矩阵
+
+`H_M^(r)=[m_(j+k)^(r)]_(j,k=0)^M ⪰ 0`.
+
+这里有限差分产生的相位只对应一个对角酉共轭，不改变 PSD。Hamburger 矩
+定理给出具有这些矩的概率律；上述 order-2 增长又给出某个 `δ>0` 的
+`E exp(δX^2)<∞`，从而矩确定性/整函数恒等定理迫使其 characteristic
+function 就是 `K_r`。这意味着 `π` 有半径 `r` 的正 OU 原像，与
+`r(π)=1` 矛盾。
+
+因此得到无条件结论：
+
+`primitive + r>1 ⇒ 对每个 L>0，K_r 在 (-L,L) 内都有有限负 Gram witness`.
+
+等价地，逆候选的第一个 Hamburger-positivity failure 阶数
+
+`M_r(π)=min{M:H_M^(r) 不为 PSD}`
+
+必有限；所谓 frequency escape 被排除，剩余的唯一无限维逃逸是
+`M_r→∞` 的 Gram/Hamburger rank escape。
+
+### 10.2 Gaussian 聚集时，失败阶数必逃向无穷
+
+若 genuine full-exact primitive laws `π_N⇒γ`，R12 的一致可积性给出每个
+固定阶逆矩收敛到 Gaussian 逆矩。因此 Gaussian 的每个固定有限 Hankel
+矩阵严格正定，故对固定 `r>1` 有
+
+`M_r(π_N)→∞`.
+
+这不是新的反例，而是对可能反例结构的精确刻画：forward law 保持正、
+所有 exact algebraic identities 仍成立，但 inverse formal moment sequence
+只在越来越高的 Hamburger 阶数才暴露非正性。
+
+### 10.3 对 Gaussian-relative form estimate 的严格 no-go
+
+在固定窗口 `[-L,L]` 上定义
+
+`R_L(K)=sup |Q_K(c,x)-Q_γ(c,x)|/Q_γ(c,x)`，
+
+其中 supremum 遍历任意有限点集与非零系数。上面的任意小窗口负 Gram
+witness 给出 `Q_K<0`，而 Gaussian kernel 对非零指数多项式严格正，故
+`R_L(K_r)>1`（可能为无穷）。所以要求 `R_L(K_{N,r})→0` 的 relative
+form bound 并非较弱的紧性中间引理；它逐项排除了 primitive law，实质上
+已经是 closure theorem。R15 因此把原来的两个候选压缩为一个纯 rank 命题。
+
+### 10.4 正概率 Hermite 模型说明一般紧性不足
+
+为审计“positivity + MGF + near-Gaussian”是否足以统一控制阶数，固定
+`r>1`、`t=r^(-2)`，取奇数 `n`、`ψ_(2n)=H_(2n)/√((2n)!)`，令
+`b_n=min ψ_(2n)<0`、`A_n=2/|b_n|`，并设
+
+`q_n=1+A_nψ_(2n)`,  `g_n=P_tq_n=1+A_nt^nψ_(2n)`.
+
+`q_n` 是归一化的 signed Gaussian density，`g_n` 对充分大 `n` 为正，且
+centered、variance-one、`g_n→1` 于 `L^2`。由 Cauchy–Schwarz 与
+`||ψ_(2n)||_2=1`，对每个 `η<1/4` 有一致 square-exponential moment bound。
+同时，`q_n` 与 Gaussian 的所有阶 `<2n` 的矩相同，而 q_n 的某个更高阶
+Hankel 矩阵必失败；所以 positivity、概率紧性、MGF 和固定阶 Hermite
+收敛本身不能给出 uniform inverse-Hankel rank bound。
+
+该模型不是 full exact `Q`-law，不能作为本项目反例；它只严格排除了不含
+same-factor full-exact hierarchy 的一般性闭合论证。
+
+### 10.5 R15 的最小 OPEN 与独立的 `P₃K` 缺口
+
+当前最小可证伪命题改为：
+
+### Uniform Inverse-Hankel Rank Closure — OPEN
+
+固定 `r>1`，是否存在 `M(r)<∞`，使每个 genuine full-exact primitive law
+的逆 formal moment sequence 都在不超过 `M(r)` 阶暴露 Hamburger 非正性？
+即，full same-factor all-degree exact hierarchy 加 forward positivity，
+能否阻止 inverse failure order `M_r(π)` 无界？若能，则 primitive-to-Gaussian
+聚集立即矛盾；若不能，则需要构造/刻画同时满足 full exactness 的高阶 rank
+escape，而不是再追逐频率尾。
+
+`P₃K` 仍单独处理。首个非零 density Hermite mode 为 `d=3` 时有局部 charge
+survival；一般仍没有从 nonGaussian 或 inverse-Hankel failure 推出
+`P₃K≠0` 的 uniform charge-to-Hankel lemma。
+
+R15 的本机审计结论：逆候选的 order-2 矩增长、局部 Gram PSD 到全部
+Hamburger PSD 的有限差分链、Hermite signed-preimage 的正性/MGF 障碍均已
+核对；不需要长数值扫描或远程计算。
+
+## 11. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -605,7 +704,7 @@ R14 没有完成 Gaussian rigidity；它把 primitive 正定性缺口从模糊�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 11. 每轮协作协议
+## 12. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -618,16 +717,17 @@ R14 没有完成 Gaussian rigidity；它把 primitive 正定性缺口从模糊�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 12. 当前 checkpoint
+## 13. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14。R14 证明 primitive-to-Gaussian 序列在任意固定
-  frequency/Gram complexity 内最终通过 confluent Bochner tests；同时证明
-  inverse-OU candidate 仍满足完整 same-factor all-degree exact identity，故
-  equality hierarchy 单独无法提供正定性闭合。剩余逃逸只有无界频率或无界
-  spectral rank，另保留 `P_3K` sector 限定。
-- 当前方向：R15，攻击 `Relative Bochner Closure`：寻找 uniform bounded-
-  complexity witness 或 Gaussian-relative form estimate；若不可得，严格
-  构造/刻画 frequency-rank escape，并继续单独审计 `P_3K` survival。
+- 已完成：R12、R13、R14、R15。R14 证明 primitive-to-Gaussian 序列在任意
+  固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
+  又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
+  对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
+  escape 被无条件排除。剩余唯一 Bochner 缺口是 `M_r→∞` 的
+  inverse-Hankel rank escape；另保留 `P_3K` sector 限定。
+- 当前方向：R16，攻击 `Uniform Inverse-Hankel Rank Closure`：寻找
+  same-factor full-exact hierarchy 对逆 Hamburger failure order 的统一上界，
+  或给出严格 no-go/结构性逃逸；继续单独审计 `P_3K` survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

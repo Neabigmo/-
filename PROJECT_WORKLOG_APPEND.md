@@ -214,3 +214,45 @@
   safe; general primitive endpoint regularity and charge survival remain OPEN.
   No numerical or long Codex computation was needed; this was a proof-level
   audit and a durable framework/worklog update.
+
+# 2026-09-05 — R15 local Bochner-to-Hankel reduction
+
+- R15 re-read the post-R14 framework/worklog through the repaired bridge and
+  attacked only `Relative Bochner Closure`. The inverse candidate for a genuine
+  full-exact primitive law is
+  `K_r(z)=exp((r^2-1)z^2/2) phi_pi(rz)`, with fixed `r>1`.
+- Unconditional local-to-global lemma: R12's square-exponential bound gives
+  `K_r` an entire order-2 growth estimate and inverse formal moments
+  `m_k^(r)=i^(-k)K_r^(k)(0)` of Gaussian-type moment growth. If `K_r(x-y)` is
+  PSD for every finite Gram configuration in any nonempty interval, confluent
+  finite differences at zero give all inverse Hamburger matrices PSD. Hamburger
+  then supplies a probability law; the order-2 growth gives a square-exponential
+  moment and moment determinacy, so its characteristic function must equal
+  `K_r` globally. This is a positive r-backward OU preimage, contradicting
+  primitiveness. Thus every `L>0` already contains a finite negative witness;
+  frequency escape is eliminated.
+- Define `M_r(pi)=min{M: H_M^(r) is not PSD}`. For every primitive law this
+  order is finite. If primitive full-exact laws `pi_N=>gamma`, each fixed inverse
+  Hankel matrix converges to the strictly positive Gaussian one, hence
+  `M_r(pi_N)->infinity`. The remaining Bochner obstruction is therefore purely
+  an unbounded Hamburger/Gram rank escape.
+- The proposed Gaussian-relative quadratic-form estimate on any bounded window
+  is not a weaker compactness lemma: the local negative witness has
+  `Q_K<0` while the Gaussian form is strictly positive, so its relative defect
+  is `>1` (possibly infinite) for every primitive inverse candidate. Such an
+  estimate would already be a closure theorem and cannot be assumed as an
+  intermediate consequence.
+- A proof audit of the Hermite stress test was recorded. With odd `n`,
+  `q_n=1+A_n psi_(2n)` and `g_n=P_(r^-2)q_n`, choose
+  `A_n=2/|min psi_(2n)|`. Then `q_n` is signed, `g_n` is eventually positive,
+  centered and variance-one, and `g_n->1` in `L2`. Cauchy-Schwarz and
+  `||psi_(2n)||_2=1` give uniform `E exp(eta X^2)` for every `eta<1/4`;
+  orthogonality makes all moments below order `2n` Gaussian, while a higher
+  Hankel matrix must fail because `q_n` is signed. This is not a full-exact
+  counterexample; it proves only that positivity, MGF tightness and fixed-order
+  Hermite convergence alone cannot bound inverse-Hankel rank.
+- Minimal OPEN is now `Uniform Inverse-Hankel Rank Closure`: does the genuine
+  same-factor all-degree exact hierarchy plus forward positivity force an
+  N-independent finite inverse-Hankel failure order? `P_3K` remains separate;
+  no uniform charge-to-Hankel implication was obtained. No long computation or
+  numerical scan was needed.
