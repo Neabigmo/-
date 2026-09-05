@@ -2218,7 +2218,119 @@ vector 只落在 `l>N_K`、`N_K->infinity`，并满足一个 law-independent wei
 `R30_AUGMENTED_ADJOINT_IDENTITY PASSED`、`R30_SIGN_COMPATIBLE_LOCALITY REMAINS
 OPEN`、`R30_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远程计算。
 
-## 26. 已探索路线与停止条件
+## 26. R31：Jacobi-Slack Adjoint Completion
+
+网页端在开始本轮前读取了本框架、工作日志、R30 审计资产和 Git 提交
+`7198c91b18b1e76874a453af2e946047b5111363`。本轮仍严格限定 genuine full-exact
+iid law；formal Jacobi prefix、odd-control 坐标和有理数 sign test 只用于结构审计，
+不构成 full-exact 反例。
+
+R31 没有构造完整的 `q_M=P_K+R_K`、`P_K>=0` 且 `R_K` 具有统一远端尾界的证书，
+但把 Jacobi-slack completion 的失败位置精确拆成三层：同级 slack 对新 odd
+direction 的 pivot 可为零；固定延迟一级的 slack 没有普遍固定正号；即使 differential
+cancellation 成功，路径增强仍留下非远端的 shadow-slack debt。rank 数量本身已经
+匹配，因此不能再把障碍归因于“约束数量不够”。
+
+### 26.1 无条件 odd-block 结构
+
+在 forward Jacobi budget
+
+`beta_n=B_n-S_(n-1)^2`, `h_n=beta_n h_(n-1)`
+
+中，新 odd moment 的最高项给出
+
+`partial_(m_(2n-1)) S_(n-1)=1/h_(n-1)`,
+`partial_(m_(2n-1)) beta_n=-2S_(n-1)/h_(n-1)`。
+
+因此以 odd controls 为列、以 `beta_(M+2), beta_(M+3),...` 为行为下标的
+Jacobi-slack block 是 lower triangular，但其 diagonal 可能退化。canonical control
+`u_n=S_(n-1)/sqrt(B_n)` 下，`beta_n=B_n(1-u_n^2)`，且
+
+`partial_(u_n) beta_n=-2B_nu_n`,
+`partial_(u_k) beta_n=(1-u_n^2)partial_(u_k)B_n`。
+
+`u_n=0` 和 `|u_n|->1` 分别给出 pivot 消失及 off-diagonal leverage 被压低的两种
+退化面，故 positivity 本身不提供显然的 uniform conic right inverse。
+
+### 26.2 all-degree odd pressure 与首个 sign obstruction
+
+对 centered `m_1=0`，same-factor cubic equation 满足全阶公式
+
+`partial_(m_(2n-1))G_(n+1)
+=-n(n+1)(n+5)(2/3)^(n+1)m_3`。
+
+它说明新 odd moment 第一次进入下一条 exact row 时，压力方向由 `m_3` 决定；若尝试
+只用同级 `beta_n` 消除，则必要 multiplier 的符号要求为
+
+`eta_n>=0 iff m_3 S_(n-1)<=0`。
+
+在 `S_(n-1)=0` 且 `m_3!=0` 时同级 slack 没有一阶 pivot；在相反符号时 multiplier
+必须为负。因此“一个 odd slot 配自己的 `beta_n`”不是普遍可行规则。
+
+固定延迟一级也失败。取 Jacobi 坐标
+
+`s=m_3=1/20`, `p=2-s^2=799/400`, `c=S_2=-1`,
+
+则
+
+`beta_2>0`, `beta_3=1607/799>0`, `B_4=51765601/12839930>0`,
+
+但固定 `S_3` 时
+
+`partial_c beta_4=-5809029/5164898<0`,
+`partial_c G_4=-6392/3375<0`。
+
+故只用下一 slack 解 `partial_cG_4+eta_4 partial_c beta_4=0` 强迫
+`eta_4<0`。这是 natural positive prefix cone 上的 sign obstruction，不是
+genuine full-exact counterexample。
+
+### 26.3 path augmentation 的 shadow debt
+
+若沿 `v_s=r+s(m-r)` 对 Jacobi slack 定义
+
+`bar H_(j,k)=integral_0^1 partial_(v_k)beta_j(v_s) ds`,
+
+则
+
+`beta_j(mu)-beta_j(rho_M)=sum_k bar H_(j,k)d_k`。
+
+把这条零恒等式加入 R30 的 equality adjoint 后，正项确实出现为
+`sum_j eta_j beta_j(mu)`，但同时必然留下
+
+`D_K^sh=-sum_n lambda_n G_n(rho_M)-sum_j eta_j beta_j(rho_M)`。
+
+由于正 Gaussian-smoothed shadow 满足有限阶 `beta_j(rho_M)>0`，gradient-level
+completion 不等于 value-level certificate；除非 `D_K^sh=o_K(1)` 或它本身能被
+远端 Hermite tail 控制，否则仍不能得到 `q_M=P_K+R_tail`。
+
+因此真正需要的不是更多 slack，而是 simultaneous positive cone inf-sup、path sign
+coherence、moving-rank conditioning 和 shadow balance。rank 已匹配，但 sign、
+conditioning、shadow debt 及 law-independent weighted dual norm 仍未解决。
+
+### 26.4 conditional closure 与当前最小 OPEN
+
+令 finite odd block 为 `H_K=[bar H^(odd)_(j,n)]`。若对 worst-case viable prefixes
+能够证明
+
+`-c^(K) in H_K^T R_+^(J_K)`,
+`||eta^(K)||_(ell^2(w))<=C`（`C` 与 law、`K` 无关），
+
+并且 `D_K^sh=o_K(1)` 或具有同样的 remote-tail 表示，则
+`q_M=sum_j eta_j beta_j(mu)+R_K`、`R_K->0`，从而 `q_M>=0`。这是一条条件定理，
+没有假设 norm monotonicity，也没有偷用 Gaussian rigidity。
+
+R31 后当前最小 OPEN 改为 **Uniform Positive Jacobi Normal-Cone Locality**：
+对 `Omega_K` 的 worst-case viable prefixes，能否让 active forward Jacobi ranks
+逃向无穷，同时构造非负 normal-cone multipliers，使 weighted Hermite-dual norm
+统一有界并消除 shadow debt。固定 active rank 会导致有限支持并与
+`Q~chi^2_2` 矛盾，但这只说明 rank escape，不给 multiplier bound。
+
+本轮新增 `flat_shadow_jacobi_slack_r31/audit_r31.py` 与 README。审计运行
+`R31_JACOBI_SLACK_STRUCTURE PASSED`、`R31_POSITIVE_ADJOINT_INF_SUP REMAINS
+OPEN`、`R31_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远程计算。
+`P_3K` 仍与该 normal-cone locality 逻辑断开，Gaussian rigidity 仍 OPEN。
+
+## 27. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -2231,7 +2343,7 @@ OPEN`、`R30_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 27. 每轮协作协议
+## 28. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -2244,10 +2356,10 @@ OPEN`、`R30_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 28. 当前 checkpoint
+## 29. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28、R29、R30。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20、R21、R22、R23、R24、R25、R26、R27、R28、R29、R30、R31。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -2282,11 +2394,12 @@ OPEN`、`R30_AUDIT_COMPLETED`；没有 optimizer、SDP、大规模扫参或远�
   明确 scalar/radial channel 的信息边界，运行 `R29_AUDIT_COMPLETED`。真正的
   tail-ejection certificate 仍未证明。
   `P_3K` 仍没有 quantitative bridge。
-- 当前方向：R30 已完成，最小 OPEN 收窄为 `Sign-Compatible Augmented Adjoint
-  Locality`，下一轮直接检查 Jacobi slack `beta_n=B_n-S_(n-1)^2>=0` 能否为
-  equality-adjoint 的 odd-control 方向提供非负 dual pivot，并同时给出统一
-  weighted tail 界。若失败，应把 R25--R30 的 one-body tail-ejection route
-  记录为严格 no-go，不再做代数换名；只有关闭 one-step sign 后，才回到
-  residual Laguerre `<3M` 与 R21 cubic amplifier。
+- 当前方向：R31 已完成，最小 OPEN 收窄为 `Uniform Positive Jacobi Normal-Cone
+  Locality`。同级或固定延迟一级 slack 的 one-slot 非负 completion 已被 sign/rank
+  审计排除；下一步若继续，只能研究 worst-case viable prefix 上的 multi-level
+  normal-cone multipliers、active-rank escape、shadow balance 和统一 weighted
+  dual inf-sup。若这些条件无法由 genuine full-exact hierarchy 提供，应将
+  R25--R31 的 one-body tail-ejection route 记录为严格 no-go，不再做代数换名；
+  只有关闭 one-step sign 后，才回到 residual Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

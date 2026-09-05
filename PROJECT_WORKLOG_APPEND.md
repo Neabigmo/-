@@ -923,3 +923,47 @@
   `R30_AUGMENTED_ADJOINT_IDENTITY PASSED`,
   `R30_SIGN_COMPATIBLE_LOCALITY REMAINS OPEN`, and `R30_AUDIT_COMPLETED`.
   No optimizer, SDP, large numerical sweep, or remote computation is used.
+
+# 2026-09-06 — R31 Jacobi-slack adjoint completion
+
+- R31 reread the durable framework, worklog, R30 README/audit, and the recorded
+  commit `7198c91b18b1e76874a453af2e946047b5111363` before working.  The web-side
+  result stayed inside the genuine full-exact iid class.  Jacobi prefixes,
+  odd-control coordinates, and exact rational sign points were used only for
+  structural audits, never as full-exact counterexamples.
+- For `beta_n=B_n-S_(n-1)^2` and `h_n=beta_n h_(n-1)`, the top odd derivatives are
+  `partial_(m_(2n-1))S_(n-1)=1/h_(n-1)` and
+  `partial_(m_(2n-1))beta_n=-2S_(n-1)/h_(n-1)`.  In canonical coordinates
+  `u_n=S_(n-1)/sqrt(B_n)`, `beta_n=B_n(1-u_n^2)`, so `u_n=0` and
+  `|u_n|->1` are explicit pivot/leverage degeneracies.  The all-degree cubic
+  pressure identity is
+  `partial_(m_(2n-1))G_(n+1)=-n(n+1)(n+5)(2/3)^(n+1)m_3`.
+- A same-level slack completion therefore requires a nonnegative multiplier only
+  when `m_3 S_(n-1)<=0`; at `S_(n-1)=0` the slack has no first-order pivot.  A
+  fixed one-step delayed slack also has no universal sign: at
+  `s=m_3=1/20,c=S_2=-1`, the exact rational audit gives
+  `beta_2>0`, `beta_3=1607/799>0`, `B_4=51765601/12839930>0`, but
+  `partial_c beta_4=-5809029/5164898<0` and
+  `partial_cG_4=-6392/3375<0`, forcing a negative next-slack multiplier.
+  This is a sign-regularity obstruction on a positive algebraic prefix cone,
+  not a probability-law counterexample.
+- Adding path-averaged slack differences to the R30 adjoint does create a
+  nonnegative full-law term `sum eta_j beta_j(mu)`, but exact regrouping leaves
+  the shadow debt
+  `D_K^sh=-sum lambda_nG_n(rho_M)-sum eta_j beta_j(rho_M)`.  Since the smoothed
+  shadow has positive finite Jacobi slacks, this is not automatically a remote
+  Hermite tail.  Thus gradient cancellation is not yet a value-level certificate.
+- Rank count is no longer the main issue: equality rows and Jacobi slack rows
+  match in number.  The remaining quantitative target is a multi-level positive
+  normal-cone inf-sup with active ranks escaping to infinity, shadow balance, and
+  a law-independent weighted dual norm.  Fixed active rank would imply finite
+  support and contradict `Q~chi^2_2`, but rank escape alone does not bound the
+  multipliers.  The minimum OPEN is now **Uniform Positive Jacobi Normal-Cone
+  Locality**.  Gaussian rigidity and `P_3K` remain open/disconnected.
+- Added `flat_shadow_jacobi_slack_r31/audit_r31.py` and README.  The exact SymPy
+  audit covers the Jacobi odd block, canonical control formulas, the odd-pressure
+  formula for `n=2,...,6`, the rational delayed-slack sign test, and the exact
+  path-slack/shadow-debt regrouping.  The corrected run exited 0 and printed
+  `R31_JACOBI_SLACK_STRUCTURE PASSED`,
+  `R31_POSITIVE_ADJOINT_INF_SUP REMAINS OPEN`, and `R31_AUDIT_COMPLETED`.
+  No optimizer, SDP, large sweep, or remote computation is used.
