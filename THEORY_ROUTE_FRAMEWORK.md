@@ -986,7 +986,124 @@ R18 的本机动作只需 proof-level audit：既有 `conditional_laguerre_odd_r
 `laguerre_abel_endpoint_r18` 重放均通过；不启动优化、数值扫参、Gram campaign 或
 远程计算。
 
-## 14. 已探索路线与停止条件
+## 14. R19：Same-Factor Uniform Witness Alignment / Reverse-Schur Coercivity
+
+R19 在读取 R18 的本机提交 `8d38b82` 后，继续只研究 genuine full-exact iid 类
+中的 relative matrix/Loewner closure，不声称 Gaussian rigidity 已完成。它把
+R18 的尾到头问题进一步改写成 posterior Gaussian deconvolution 的高秩见证人
+对齐问题。
+
+### 14.1 Gaussian-component 共轭
+
+定义 centered variance-one 概率律的最大 Gaussian component 方差
+
+`g(mu)=sup{a in [0,1]: mu=rho*gamma_a}`。
+
+在 R13 的 backward-radius 记号下，网页端给出并使用
+`g(mu)=1-r(mu)^(-2)`。对二次/Esscher posterior
+
+`A_t^mu(y)=E_mu exp(yX-tX^2/2)`,
+
+`d mu_(t,y)(x)=exp(yx-tx^2/2) dmu(x)/A_t^mu(y)`,
+
+Gaussian convolution 的 complete-the-square 计算给出精确共轭
+
+`g(mu_(t,y))=g(mu)/(1+t*g(mu))`。
+
+因此 posteriorization 不会把 primitive boundary 变成内部点，而是精确保留它；
+同时若 `pi in E_R`，每个固定 slice 都保留显式的 Gaussian component。
+
+### 14.2 固定半径的 posterior Wick–Hankel cone
+
+固定 `r>1`，令 `d_r=1-r^(-2)`，并设
+
+`sigma_(r,t)^2=d_r/(1+d_r*t)`,
+
+`B_(r;t,y)^mu(z)=exp(-sigma_(r,t)^2 z^2/2) A_t^mu(y+z)/A_t^mu(y)`。
+
+在已有 moment-growth/determinacy 条件下，`mu in E_r` 等价于一个（事实上任一）
+固定 `(t,y)` 的 `B_(r;t,y)^mu` 是概率律的 MGF，等价地其完整
+exponential-convex/Wick–Hankel cone 成立。对应的多项式二次型为
+
+`W_(r,t,y)^mu[p] = E_(mu_(t,y))[(exp(-sigma_(r,t)^2 partial_x^2/2) p^2)(X)]`。
+
+其 rank-2 条件恰为
+`Var_(mu_(t,y))(X) >= sigma_(r,t)^2`；但 rank-2 通过仍不等价于 Gaussian
+可除性，全部 Wick–Hankel ranks 仍不可省略。
+
+### 14.3 只需一个固定 slice 的 conditional closure
+
+对 `pi_N=>pi in E_R`、`1<r<R`，若能对某个固定 `t>0`（甚至 `y=0`）证明
+
+`sup_(p ne 0) |W_(r,t,0)^(pi_N)[p]-W_(r,t,0)^pi[p]| /
+ E_(gamma_tau) p^2 -> 0`,
+
+其中 `tau` 小于极限 posterior 的严格 Gaussian 余量，则该余量会使充分大的
+`N` 满足完整 Wick–Hankel 正性；结合已有 Hamburger determinacy，得到
+`pi_N in E_r`，从而排除 primitive 序列收敛到 `E_R`。这把 R18 的 relative
+matrix target 缩成了一个固定 slice 的 relative Wick–Hankel convergence 问题。
+
+### 14.4 same-factor cube 的精确重写与量词障碍
+
+令
+`d eta_t(y)=(1+t) A_t^mu(y)^3 d gamma_(t/3)(y)`。
+
+对 residual unit vector `alpha(theta)` 满足 `sum_j alpha_j=0`、`sum_j alpha_j^2=1`，
+R19 将 genuine iid same-factor all-degree exactness 重写为
+
+`E_(eta_t) <prod_(j=1)^3 B_(r;t,Y)^mu(z alpha_j(theta))>_theta
+ = exp(delta_(r,t) z^2/2)`,
+
+其中
+`delta_(r,t)=r^(-2)/((1+t)(1+d_r*t))`。
+
+二阶项只给出 posterior variance deficit 的正平均值，不能直接给出每个 slice
+的 pointwise Loewner floor。于是 primitive `pi_N` 只能推出
+
+`for every y, there exists a high-rank p_(N,y) with W_(r,t,y)^[pi_N][p_(N,y)]<0`,
+
+而 cubic escort 平均要检测的是一个在一批 `y` 上同时有效的共同见证人。R19
+因此把精确缺口定位为
+`uniform high-rank witness alignment / inverse-Schur localization`：
+`(for all y exists witness_y)` 并不自动推出
+`(there exists one coherent witness detectable by the iid cubic average)`。
+
+这是相对于 R18 的新定位；不是普通 Parseval 尾界、局部 entire 收敛或低阶
+log-convexity 能补上的量词转换。
+
+### 14.5 严格边界、P₃K 与本机审计
+
+- 普通 log-convexity 只控制 rank 2；固定 damping/posteriorization 与原 Gaussian
+  divisibility 问题精确共轭，不会自行改善闭合性。
+- Hubbard–Stratonovich cube 是正向的 escort-averaged Hadamard/cubic identity；
+  当前没有可用的 reverse-Schur theorem 将其反推为逐 slice 的矩阵正性。
+- 平移只把 escort 参数重命名，不能把平均局部化到坏 slice；指数 tilt 又不一般
+  保留精确 `Q`-law。
+- `P₃K` 仍与 closure 逻辑断开。没有定量 charge-to-Laguerre、charge-to-Loewner
+  或固定秩负下界，`P₃K != 0` 仍可能沿径向 `n -> infinity` 逃逸。
+- 本机新增 `posterior_witness_alignment_r20/audit_r20.py`，通过 Gaussian-component
+  共轭、posterior 逆卷积矩、严格 gap、Gaussian escort identity/normalization 和
+  translation covariance 六项检查，输出 `R20_AUDIT_COMPLETED`。其中 Gaussian
+  检查只是一致性核验，不是一般性证明。
+
+### 14.6 R19 结论与 R20 最小 OPEN
+
+无条件保留：posterior Gaussian-component 共轭、固定 slice 的 Wick–Hankel
+criterion、`E_R` 对 `r<R` 的严格 Gaussian margin，以及 same-factor cubic identity
+的 posterior 重写。严格 no-go 是量词/见证人对齐障碍；没有构造 genuine full-exact
+iid 非闭合序列。
+
+当前最小 OPEN 改为：
+
+### Same-Factor Uniform Witness Alignment / Reverse-Schur Coercivity — OPEN
+
+对 genuine full-exact iid law，same-factor cubic identity 是否迫使所有 posterior
+Wick–Hankel failure 共享一个可控的 degree/Loewner complexity，或等价地推出一个
+固定 slice 的 relative operator estimate？若能，primitive closedness 随即闭合；
+否则需要在 iid 约束下给出最小无条件 no-go。Gaussian rigidity 与 `P₃K` bridge
+仍然分别 OPEN。
+
+## 15. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -999,7 +1116,7 @@ R18 的本机动作只需 proof-level audit：既有 `conditional_laguerre_odd_r
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 15. 每轮协作协议
+## 16. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1012,10 +1129,10 @@ R18 的本机动作只需 proof-level audit：既有 `conditional_laguerre_odd_r
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 16. 当前 checkpoint
+## 17. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1023,10 +1140,11 @@ R18 的本机动作只需 proof-level audit：既有 `conditional_laguerre_odd_r
   inverse-Hankel rank escape；R16 又把它等价重写为 primitive stratum 的弱
   闭合/尾到头 viability 问题；R17 提取了 OU–Laguerre 全阶加权 viability
   不等式；R18 又证明完整 subcritical 全谱紧性和 `E_r` 内 supercritical moving-scale
-  尾界，并把剩余缺口压缩为 same-factor matrix Hardy gain；另保留 `P_3K`
+  尾界；R19 又把 relative matrix closure 改写为 posterior Wick–Hankel 的固定 slice
+  严格余量与 uniform witness alignment 问题；另保留 `P_3K`
   sector 限定。
-- 当前方向：R19，攻击 `Same-Factor Matrix Hardy Gain / Relative Tail-to-Head
-  Coercivity`：寻找同因子 iid cube 产生的相对矩阵稳定性，或严格证明它仍不足以
-  阻止 rank/spectral-tail escape；继续单独审计 `P_3K` survival。
+- 当前方向：R20，攻击 `Same-Factor Uniform Witness Alignment / Reverse-Schur
+  Coercivity`：寻找同因子 iid cube 产生的共同高秩见证人/逆 Schur 稳定性，或严格
+  证明它仍不足以阻止 rank/spectral-tail escape；继续单独审计 `P_3K` survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

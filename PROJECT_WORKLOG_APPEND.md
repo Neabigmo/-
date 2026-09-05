@@ -417,3 +417,50 @@
   supercritical tail bound open/stable around `E_R`? The exchangeable model is
   not promoted to a project counterexample, and Gaussian rigidity remains
   OPEN.
+
+# 2026-09-05 — R19 posterior witness alignment / reverse-Schur coercivity
+
+- R19 re-read the durable framework and worklog through the R18 commit
+  `8d38b82` before working. It remained restricted to the genuine full-exact
+  iid class and did not claim Gaussian rigidity.
+- The new coordinate is the maximal Gaussian component
+  `g(mu)=sup{a: mu=rho*gamma_a}`, which is equivalent to the backward radius by
+  `g(mu)=1-r(mu)^(-2)`. Under the quadratic/Esscher posterior
+  `dmu_(t,y) proportional to exp(yx-tx^2/2)dmu`, complete-the-square algebra
+  gives the exact conjugacy `g(mu_(t,y))=g(mu)/(1+t*g(mu))`. Thus posteriorization
+  preserves, rather than removes, the primitive boundary.
+- For `r>1`, `d_r=1-r^(-2)`, define
+  `sigma_(r,t)^2=d_r/(1+d_r*t)` and
+  `B_(r;t,y)(z)=exp(-sigma_(r,t)^2*z^2/2)A_t(y+z)/A_t(y)`. In the established
+  growth/determinacy range, `mu in E_r` is equivalent to this fixed-slice
+  posterior deconvolution being a probability MGF, or equivalently to the
+  complete posterior Wick–Hankel quadratic form
+  `W_(r,t,y)[p]=E_(mu_(t,y))[(exp(-sigma_(r,t)^2*partial_x^2/2)p^2)(X)]`
+  being nonnegative for every polynomial `p`.
+- If `pi in E_R` and `1<r<R`, the limit has a strict posterior Gaussian margin
+  `Delta_(R,r,t)=(d_R-d_r)/((1+d_R*t)(1+d_r*t))>0`. Therefore a relative
+  Wick–Hankel convergence estimate on one fixed posterior slice would force
+  positivity for all polynomial squares and, via Hamburger determinacy, rule out
+  primitive convergence into `E_R`.
+- The same-factor iid cube can be rewritten with the escort
+  `deta_t(y)=(1+t)A_t(y)^3 dgamma_(t/3)(y)` and residual coefficients satisfying
+  `sum alpha_j=0`, `sum alpha_j^2=1` as an escort-averaged cubic identity for
+  the candidates `B_(r;t,y)`. Its second-order content is only a positive
+  average variance deficit, not a pointwise Loewner floor.
+- R19's strict iid-compatible obstruction is a quantifier mismatch: primitive
+  slices yield `for every y there exists a high-rank negative witness`, while
+  the cubic average would need `there exists one coherent witness` effective
+  on a nontrivial set of `y`. No reverse-Schur/common-witness theorem is known
+  here. Log-convexity only reaches rank 2; posteriorization is an exact
+  conjugacy; translation covariance only relabels the escort parameter.
+- `P_3K` remains logically separate. No charge-to-Laguerre, charge-to-Loewner,
+  or fixed-rank negative lower bound was obtained, and no genuine full-exact
+  iid non-closed sequence was constructed.
+- Added `posterior_witness_alignment_r20/audit_r20.py`. It passed six small
+  symbolic checks and printed `R20_AUDIT_COMPLETED`: Gaussian-component
+  conjugacy, posterior deconvolution moments, strict gap, Gaussian escort
+  identity, Gaussian escort normalization, and translation covariance. The
+  Gaussian identity check is explicitly only a consistency check, not a
+  rigidity proof.
+- Minimal OPEN is now `Same-Factor Uniform Witness Alignment / Reverse-Schur
+  Coercivity`. Gaussian rigidity remains OPEN.
