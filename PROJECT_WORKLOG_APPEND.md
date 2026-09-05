@@ -1310,19 +1310,33 @@ computation was used.
 - No optimizer, SDP, numerical sweep, relaxed measure-LP, or remote
   computation was used.
 
-# 2026-09-06 — R40 local mixed-Hessian finite probe (web asymptotic review pending)
+# 2026-09-06 — R40 mixed-Hessian asymptotic review and local exact audit
 
-- Added `flat_shadow_mixed_hessian_r40/audit_r40.py` and README while the same
-  project webpage continued computing the mixed-Hessian response.  The probe
-  extracts the `epsilon delta` coefficient from the affine density expansion
-  and independently evaluates the complete five-term second law-functional
-  derivative, including base-measure, conditional, subtraction, mean, and
-  mixed-internal terms.
+- The same project webpage first read the latest route records and R36–R39
+  audits, then supplied a finite Hermite representation for
+  `K_(n,m)=D^2B_n(gamma)[h_(2m+1),h_3]` and an asymptotic candidate.  With
+  `chi_m=sqrt(binomial(2m+4,3))` and
+  `rho_m=sqrt(3(m+1))(2m+1)(4m+5)/(4(m+2))`, it claims
+  `K_(n,m)+chi_m D_(n,2m+4)-rho_m D_(n,2m+2)=O_m(n^(m-1/2))`.
+  Thus the leading mixed row is absorbed by the existing `N+4` and `N+2`
+  linear rows; the unresolved object is the normalized residue `S_(n,m)` and
+  its limit/first nonconstant `1/n` term.
+- `flat_shadow_mixed_hessian_r40/audit_r40.py` now extracts the `epsilon delta`
+  coefficient from the affine density expansion and independently evaluates
+  the complete five-term second law-functional derivative, including
+  base-measure, conditional, subtraction, mean, and mixed-internal terms.  It
+  also checks the three exact chaos cancellations and the two `S,D` leading
+  component coefficients used by the web argument.
 - Exact target-channel regression for `N=6` (`m=3`) is
   `K_(1,3)=0`, `K_(2,3)=0`,
   `K_(3,3)=-100sqrt(210)/81`, and
   `K_(4,3)=-25264sqrt(210)/2187`, and
   `K_(5,3)=-320648sqrt(210)/6561`.
+- The additional web candidate `K_(4,4)=-25808sqrt(105)/2187` also passes.
+- Exact markers are `R40_CHAOS_CROSS_TERMS_CANCEL PASSED`,
+  `R40_LEADING_COMPONENT_COEFFICIENTS PASSED`,
+  `R40_MIXED_HESSIAN_FINITE_REGRESSION PASSED`, and
+  `R40_AUDIT_COMPLETED`.
 - These values are recorded only as finite evidence.  The asymptotic order and
   response-rank relation to `D_(n,2m+4)` remain explicitly
   `R40_ASYMPTOTIC_RESPONSE REQUIRES_WEB_REVIEW`; no transgression or no-go is

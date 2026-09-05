@@ -3080,25 +3080,55 @@ Response Lemma**，即研究 `H_(n;2m+1,3)` 与已有 linear response rows 的
 OPEN**；Gaussian rigidity 仍 OPEN，`P_3K` bridge 仍完全断开。本轮没有使用
 optimizer、SDP、大规模 sweep、relaxed measure-LP 或 remote computation。
 
-## 37. R40：mixed-Hessian 本机有限回归（网页渐近复核待完成）
+## 37. R40：mixed-Hessian 的渐近共线性与 residue OPEN
 
-为配合 R39 指出的最小 OPEN `K_(n,m)=D^2B_n(gamma)[h_(2m+1),h_3]`，本机新增
-`flat_shadow_mixed_hessian_r40/audit_r40.py` 与 README。该探针对 affine density
+为配合 R39 指出的最小 OPEN `K_(n,m)=D^2B_n(gamma)[h_(2m+1),h_3]`，网页端
+给出了完整有限 Hermite 表示，并进一步把五项 Hessian 在 `a=2m+1>=7,b=3`
+时精确缩成 `K=W+2C`：`⟨dot h_a,dot h_3⟩=0`、
+`⟨h,ddot h_(a,3)⟩=0`，以及 `h_3`-外部交叉项均由 chaos order 消失。
+网页端的渐近候选为，令 `chi_m=sqrt(binomial(2m+4,3))`、
+`rho_m=sqrt(3(m+1))(2m+1)(4m+5)/(4(m+2))`，则
+
+`K_(n,m)+chi_m D_(n,2m+4)-rho_m D_(n,2m+2)=O_m(n^(m-1/2))`。
+
+等价地，`K/D_(n,2m)` 的最高 `n^2` 与 `n` 两层被已有 linear rows 吸收；
+当前尚未决定的是
+
+`S_(n,m)=(K_(n,m)+chi_m D_(n,2m+4)-rho_m D_(n,2m+2))/D_(n,2m)`
+
+的极限 `sigma_m` 及首个非恒定 `1/n` 阶。该渐近结论目前作为网页端推导候选
+记录，不能由有限表单独推出。
+
+本机 `flat_shadow_mixed_hessian_r40/audit_r40.py` 对 affine density
 `(1+epsilon h_a+delta h_b)d gamma` 直接提取 `epsilon delta` 系数，并与包含
 base-measure、conditional projection、one-body subtraction、mean correction
-及 mixed internal derivative 的完整五项公式逐项相等核验。
+及 mixed internal derivative 的完整五项公式逐项相等核验；同时核验了上述
+三个 chaos cancellation 和 `S,D` 基底的 leading-component 系数。
 
 在目标 `m=3`（`N=6`）下，精确回归为
 
 `K_(1,3)=0`、`K_(2,3)=0`、
 `K_(3,3)=-100sqrt(210)/81`、
 `K_(4,3)=-25264sqrt(210)/2187`、
-`K_(5,3)=-320648sqrt(210)/6561`。
+`K_(5,3)=-320648sqrt(210)/6561`，并额外核验
+`K_(4,4)=-25808sqrt(105)/2187`。
+
+网页端给出的 `g_(m,0)` leading coefficient、
+`q_(m,2)=2^(-m)sqrt(3)(2m+1)sqrt(2m+2)` 也通过了本机精确投影核验。
+审计输出为
+
+`R40_MIXED_HESSIAN_COMPLETE_DECOMPOSITION PASSED`、
+`R40_CHAOS_CROSS_TERMS_CANCEL PASSED`、
+`R40_LEADING_COMPONENT_COEFFICIENTS PASSED`、
+`R40_MIXED_HESSIAN_FINITE_REGRESSION PASSED`、
+`R40_ASYMPTOTIC_RESPONSE REQUIRES_WEB_REVIEW`、
+`R40_AUDIT_COMPLETED`。
 
 这只是有限 exact regression，不能单独推出 `n` 的主阶、与
-`D_(n,2m+4)` 的相关性或 response-rank 结论；上述渐近问题继续等待同一项目
-网页端的 R40 复核。当前上位 OPEN、Gaussian rigidity 与 `P_3K` bridge 的状态
-不变。
+`D_(n,2m+4)` 的相关性或 response-rank 结论；网页端的 `S_(n,m)` residue
+仍需继续求出。当前上位 OPEN、Gaussian rigidity 与 `P_3K` bridge 的状态不变，
+二体子路线的最小 OPEN 已从 mixed-Hessian row 缩为
+**Renormalized Mixed-Hessian Residue / Weighted Conditioning — OPEN**。
 
 本轮起，理论路线的整体框架、阶段大纲、每轮网页结论与本机 exact audit
 均以本文件和 `PROJECT_WORKLOG_APPEND.md` 为本机记录，并随研究提交 Git。

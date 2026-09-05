@@ -9,7 +9,7 @@ from R39, and prints exact low-degree values.  It is not an asymptotic claim.
 import sys
 from pathlib import Path
 
-from sympy import expand, simplify, symbols
+from sympy import Rational, binomial, expand, simplify, sqrt, symbols
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -23,7 +23,7 @@ from flat_shadow_hoeffding_transgression_r37.audit_r37 import (  # noqa: E402
 )
 
 
-def mixed_hessian(n, a, b):
+def mixed_hessian(n, a, b, *, return_terms=False):
     """Return D^2 B_n(gamma)[h_a,h_b] by two independent exact expansions."""
     x1, x2, x3 = symbols("x1 x2 x3")
     g1, g2, g3 = h_norm(a, x1), h_norm(a, x2), h_norm(a, x3)
@@ -79,11 +79,18 @@ def mixed_hessian(n, a, b):
     )
     ddot_h = simplify(-ddot_k1 - ddot_k2 + ddot_theta)
 
-    displayed = gaussian_expectation((g1 * r2 + r1 * g2) * h2**2, (x1, x2))
-    displayed += 2 * gaussian_expectation((g1 + g2) * h2 * dot_r, (x1, x2))
-    displayed += 2 * gaussian_expectation((r1 + r2) * h2 * dot_g, (x1, x2))
-    displayed += 2 * gaussian_expectation(dot_g * dot_r, (x1, x2))
-    displayed += 2 * gaussian_expectation(h2 * ddot_h, (x1, x2))
+    terms = {
+        "W": gaussian_expectation((g1 * r2 + r1 * g2) * h2**2, (x1, x2)),
+        "g_cross": 2 * gaussian_expectation(
+            (g1 + g2) * h2 * dot_r, (x1, x2)
+        ),
+        "r_cross": 2 * gaussian_expectation(
+            (r1 + r2) * h2 * dot_g, (x1, x2)
+        ),
+        "dot_dot": 2 * gaussian_expectation(dot_g * dot_r, (x1, x2)),
+        "ddot": 2 * gaussian_expectation(h2 * ddot_h, (x1, x2)),
+    }
+    displayed = sum(terms.values())
 
     epsilon, delta = symbols("epsilon delta")
     h_affine = h2 + epsilon * dot_g + delta * dot_r + epsilon * delta * ddot_h
@@ -91,15 +98,67 @@ def mixed_hessian(n, a, b):
     direct_coeff = expand(density * h_affine**2).coeff(epsilon, 1).coeff(delta, 1)
     direct = gaussian_expectation(direct_coeff, (x1, x2))
     assert simplify(displayed - direct) == 0
-    return simplify(direct)
+    direct = simplify(direct)
+    if return_terms:
+        return {**terms, "direct": direct}
+    return direct
+
+
+def sd_coefficient(polynomial, s, d, j, total):
+    """Project a total-chaos polynomial onto h_j(S) h_(total-j)(D)."""
+    return simplify(
+        gaussian_expectation(
+            polynomial * h_norm(j, s) * h_norm(total - j, d), (s, d)
+        )
+    )
+
+
+def check_web_finite_coefficients():
+    """Check the new exact S,D leading-cancellation coefficients."""
+    s, d = symbols("s d")
+    for m in (3, 4):
+        a = 2 * m + 1
+        total = 2 * m + 4
+        x1 = (s + d) / sqrt(2)
+        x2 = (s - d) / sqrt(2)
+        G = h_norm(a, x1) * h_norm(3, x2) + h_norm(3, x1) * h_norm(a, x2)
+        sum_total = h_norm(total, x1) + h_norm(total, x2)
+        chi = sqrt(binomial(total, 3))
+        assert sd_coefficient(G, s, d, 0, total) == simplify(
+            -2 ** (1 - Rational(total, 2)) * chi
+        )
+        q2 = simplify(
+            Rational(1, 2) ** m * sqrt(3) * (2 * m + 1) * sqrt(2 * m + 2)
+        )
+        assert sd_coefficient(G + chi * sum_total, s, d, 2, total) == q2
+
+
+def check_cancellation_terms_and_regressions():
+    """Audit exact chaos cancellations and the web's extra low-order point."""
+    values = []
+    for n in range(1, 6):
+        terms = mixed_hessian(n, 7, 3, return_terms=True)
+        values.append(terms["direct"])
+        assert terms["dot_dot"] == 0
+        assert terms["ddot"] == 0
+        assert terms["r_cross"] == 0
+        assert simplify(terms["direct"] - terms["W"] - terms["g_cross"]) == 0
+    assert values[2] == -100 * sqrt(210) / 81
+    assert values[3] == -25264 * sqrt(210) / 2187
+    assert values[4] == -320648 * sqrt(210) / 6561
+    assert mixed_hessian(4, 9, 3) == -25808 * sqrt(105) / 2187
+    return values
 
 
 def main():
     # The target R39 channel is a=2m+1, b=3.  Keep this deliberately small;
     # the output is a finite exact regression, not a numerical sweep.
-    values = [mixed_hessian(n, 7, 3) for n in range(1, 6)]
+    values = check_cancellation_terms_and_regressions()
     print(f"R40_K_N6_VALUES: {values}")
     print("R40_MIXED_HESSIAN_COMPLETE_DECOMPOSITION PASSED")
+    print("R40_CHAOS_CROSS_TERMS_CANCEL PASSED")
+    check_web_finite_coefficients()
+    print("R40_LEADING_COMPONENT_COEFFICIENTS PASSED")
     print("R40_MIXED_HESSIAN_FINITE_REGRESSION PASSED")
     print("R40_ASYMPTOTIC_RESPONSE REQUIRES_WEB_REVIEW")
     print("R40_AUDIT_COMPLETED")
