@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import math
+
 import sympy as sp
 
 
@@ -79,6 +81,56 @@ def check_translation_covariance() -> None:
     assert sp.simplify(lhs - rhs) == 0
 
 
+def check_esscher_affine_congruence() -> None:
+    y, z, sigma2 = sp.symbols("y z sigma2", real=True)
+    s_i, s_j = sp.symbols("s_i s_j", real=True)
+    C = sp.Function("C")
+
+    # R20.1: every posterior slice is an Esscher-affine transform of C.
+    B_y = sp.exp(sigma2 * y * z) * C(y + z) / C(y)
+    # R20.2: H_y(s_i,s_j) is a positive scalar and diagonal congruence of C.
+    w_i, w_j = s_i + y / 2, s_j + y / 2
+    lhs = B_y.subs(z, s_i + s_j)
+    rhs = (
+        sp.exp(-sigma2 * y**2)
+        / C(y)
+        * sp.exp(sigma2 * y * w_i)
+        * C(w_i + w_j)
+        * sp.exp(sigma2 * y * w_j)
+    )
+    assert sp.simplify(lhs - rhs) == 0
+
+
+def check_hadamard_diagonal_compression() -> None:
+    # Verify A1 o A2 o A3 = J^*(A1 tensor A2 tensor A3)J exactly.
+    A1 = sp.Matrix([[1, 2], [3, 4]])
+    A2 = sp.Matrix([[2, 0], [1, 5]])
+    A3 = sp.Matrix([[7, 1], [0, 3]])
+    J = sp.zeros(8, 2)
+    J[0, 0], J[7, 1] = 1, 1
+    compressed = J.T * sp.kronecker_product(A1, A2, A3) * J
+    hadamard = A1.multiply_elementwise(A2).multiply_elementwise(A3)
+    assert compressed == hadamard
+
+
+def check_toeplitz_reverse_schur_no_go() -> None:
+    m = 5
+    min_A = 1 - sp.Rational(6, 5) * sp.cos(sp.pi / (m + 1))
+    min_cube = 1 - sp.Rational(54, 125) * sp.cos(sp.pi / (m + 1))
+    assert bool(sp.N(min_A) < 0)
+    assert bool(sp.N(min_cube) > 0)
+
+    # The normalized sine eigenvector has diagonal-capture mass O(m^-2):
+    # sum |v_i|^6 <= 8m/(m+1)^3 <= 8/m^2.
+    for m in (5, 20, 80):
+        norm_sq = sum(math.sin(i * math.pi / (m + 1)) ** 2 for i in range(1, m + 1))
+        capture = sum(
+            (math.sin(i * math.pi / (m + 1)) / math.sqrt(norm_sq)) ** 6
+            for i in range(1, m + 1)
+        )
+        assert capture <= 8 / (m**2)
+
+
 def main() -> None:
     checks = [
         check_gaussian_component_conjugacy,
@@ -87,6 +139,9 @@ def main() -> None:
         check_gaussian_escort_identity,
         check_gaussian_escort_normalization,
         check_translation_covariance,
+        check_esscher_affine_congruence,
+        check_hadamard_diagonal_compression,
+        check_toeplitz_reverse_schur_no_go,
     ]
     for check in checks:
         check()

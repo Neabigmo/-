@@ -1103,7 +1103,113 @@ Wick–Hankel failure 共享一个可控的 degree/Loewner complexity，或等�
 否则需要在 iid 约束下给出最小无条件 no-go。Gaussian rigidity 与 `P₃K` bridge
 仍然分别 OPEN。
 
-## 15. 已探索路线与停止条件
+## 15. R20：Affine-Hankel Diagonal-Capture / Multiscale Reverse-Schur
+
+R20 在读取 R19 的本机提交 `7ec40ac` 后，继续严格限制于 genuine full-exact iid 类。
+本轮证明了 posterior 参数 `y` 的见证人对齐并非真正缺口；剩余问题是同一 Hankel
+负方向在三个 residual affine scales 上的共同可见性，以及它在 same-factor
+Hadamard cubic 的 diagonal tensor channel 中是否具有维数无关的捕获量。Gaussian
+rigidity 仍未完成。
+
+### 15.1 posterior slices 的精确 Esscher–affine 共轭
+
+固定 `r>1,t>0`，写
+`sigma^2=(1-r^(-2))/(1+t(1-r^(-2)))`，并令
+`C(z)=B_(r;t,0)^mu(z)`。直接从 R19 的定义得到
+
+`B_(r;t,y)^mu(z)=exp(sigma^2*y*z) C(y+z)/C(y)`。
+
+因此对 Hankel Gram `H_y(s)_(ij)=B_(r;t,y)(s_i+s_j)`，置
+`w_i=s_i+y/2`、`D_y=diag(exp(sigma^2*y*w_i))`，有
+
+`H_y(s)=exp(-sigma^2*y^2)/C(y) * D_y [C(w_i+w_j)] D_y`。
+
+前面的标量严格为正、`D_y` 可逆，且 `w_i` 在实轴上可任意取值。因此每个
+posterior slice 与同一个 base kernel 只差平移节点、正对角 congruence 和正标量；
+最小负 Gram 尺寸完全不依赖 `y`。负 witness 还能按
+`s_i(y)=w_i-y/2`、`c_i(y)=exp(-sigma^2*y*w_i)v_i` 显式搬运到所有 slices。
+非零 residual dilation 也不改变这一复杂度。
+
+这给出一个无条件修正：R19 的 `for every y exists witness_y` 量词障碍在单因子层面
+已经解决；真正剩下的是三重 affine/multiscale 对齐，而不是 posterior-`y` 对齐。
+
+### 15.2 same-factor cubic 是 diagonal tensor compression
+
+对任意同阶矩阵 `A_1,A_2,A_3`，令
+`J e_i=e_i tensor e_i tensor e_i`，则精确有
+
+`A_1 o A_2 o A_3 = J^*(A_1 tensor A_2 tensor A_3)J`。
+
+所以 same-factor cubic 只观察 full tensor product 在
+`Ran(J)=span{e_i tensor e_i tensor e_i}` 上的压缩。对单位负方向
+`v_1,v_2,v_3`，其 diagonal capture 量是
+
+`C(v_1,v_2,v_3)=sum_i |v_(1,i)v_(2,i)v_(3,i)|^2`。
+
+在 residual coefficients `alpha_j(theta)` 下，三个 factor 实际来自同一个 `C`
+在 `y/2+alpha_j(theta)s` 上的三个 affine copies。因而所需结构不是普通 reverse-Schur，
+而是同时控制 multiscale affine alignment 与 diagonal-tensor capture。
+
+### 15.3 严格的 generic reverse-Schur no-go
+
+取 `m>=5`、`a=3/5` 的三对角 Toeplitz 矩阵
+`A_m=I+a(S+S^*)`。其特征值为
+`1+(6/5)cos(k*pi/(m+1))`，所以 `lambda_min(A_m)<0`；但
+
+`A_m^(o3)=I+(27/125)(S+S^*)`
+
+的最小特征值为
+`1-(54/125)cos(pi/(m+1))>71/125>0`。
+
+因此 `A_m` indefinite 而 entrywise cube 严格正定。其最低特征向量是 spread-out
+sine mode；归一化后
+`sum_i |v_i|^6 <= 8m/(m+1)^3 <= 8/m^2`，故负方向在 diagonal channel 中
+可随维数消失。这个例子不是概率律、不是 exact iid 反例，但严格排除了仅凭 generic
+Loewner indefiniteness 反推 Hadamard cubic negativity 的维数无关策略。
+
+### 15.4 conditional closure
+
+对 `pi_N=>pi in E_R`、`1<r<R`，若每个负 inverse-Hankel direction 都能在三个
+residual affine copies 上选择匹配的方向，使负 spectral margin 有统一 relative
+下界，并且
+
+`integral sum_i |v_(N,1,i)v_(N,2,i)v_(N,3,i)|^2 d(eta_t x theta) >= kappa>0`,
+
+同时非负 spectral remainder 具有 dimension-independent domination，则 diagonal
+compression 不能抹掉负性；它会给出与 exact Gaussian cubic RHS 的 PSD 矛盾，继而在
+固定 posterior slice 得到 Wick–Hankel 正性并排除 primitive rank escape。这里必须同时
+要求 remainder domination；单独的 overlap 下界不足以保证压缩后的 Rayleigh quotient
+为负。
+
+### 15.5 P₃K 与 R20 缺口仍断开
+
+本轮没有得到 `P₃K` 到 diagonal capture、Laguerre rank 或 relative Loewner norm 的
+定量桥。`P₃K != 0` 仍不能推出
+`C(v_1,v_2,v_3)>=kappa`，也不能阻止 Hankel/radial rank 趋于无穷；因此 P₃K
+继续与 R20 closure 逻辑断开。
+
+### 15.6 R20 结论与 R21 最小 OPEN
+
+无条件保留：posterior slices 的 Esscher–affine congruence、slice-wise witness
+complexity 不变、Hadamard cubic 的 diagonal compression 公式，以及 Toeplitz
+矩阵给出的 generic reverse-Schur no-go。没有构造 genuine full-exact iid 非闭合序列。
+
+当前最小 OPEN 改为：
+
+### Affine-Hankel Diagonal-Capture / Multiscale Reverse-Schur — OPEN
+
+genuine full-exact iid same-factor Hankel kernels 是否能排除这样的 rank escape：负
+eigendirections 的 rank 趋于无穷，同时在三个 residual affine contractions 下的
+coordinatewise tensor overlap 趋于零，使 negativity 对 Hadamard diagonal compression
+渐近不可见？若能建立 Hankel-specific、维数无关的 diagonal-capture/coercivity，R18
+的 relative matrix closure 才能完成；否则还需寻找真正的 full-exact iid 实现或更小的
+不可避免障碍。
+
+本轮本机新增的 proof-level audit 核验了 Esscher–affine congruence、Hadamard diagonal
+compression、Toeplitz eigenvalue no-go 及 `O(m^(-2))` capture bound；输出
+`R20_AUDIT_COMPLETED`。这些是代数/一致性核验，不是 Gaussian rigidity 证明。
+
+## 16. 已探索路线与停止条件
 
 - Angular/Fourier、低阶 Fock、radial coefficient：已提供必要恒等式，但没有全阶
   positivity/coercivity；停止继续无约束展开。
@@ -1116,7 +1222,7 @@ Wick–Hankel failure 共享一个可控的 degree/Loewner complexity，或等�
 - 任何新 Codex 计算必须先证明它会触及一个尚未解决的全阶/各向异性结构；若只是
   有限系数核验、数值扫参或重复低阶展开，明确记录“Codex 暂不执行”。
 
-## 16. 每轮协作协议
+## 17. 每轮协作协议
 
 1. 网页端开始新一轮理论工作前，先通过连接阅读本文件和
    `PROJECT_WORKLOG_APPEND.md`，再阅读当前 Git 状态与已有审计资产；不得要求粘贴
@@ -1129,10 +1235,10 @@ Wick–Hankel failure 共享一个可控的 degree/Loewner complexity，或等�
 5. 若需要计算，使用独立专用分支和明确输入/输出/验收标记；计算结果不能替代理论
    可实现性证明。
 
-## 17. 当前 checkpoint
+## 18. 当前 checkpoint
 
 - C2C task：`c2c_7b4e`。
-- 已完成：R12、R13、R14、R15、R16、R17、R18、R19。R14 证明 primitive-to-Gaussian 序列在任意
+- 已完成：R12、R13、R14、R15、R16、R17、R18、R19、R20。R14 证明 primitive-to-Gaussian 序列在任意
   固定 frequency/Gram complexity 内最终通过 confluent Bochner tests；R15
   又证明 genuine full-exact primitive 的逆候选若在任意一个非空小窗口内
   对所有 Gram size 都 PSD，就会由 order-2 矩增长升级为全局正定，故频率
@@ -1141,10 +1247,12 @@ Wick–Hankel failure 共享一个可控的 degree/Loewner complexity，或等�
   闭合/尾到头 viability 问题；R17 提取了 OU–Laguerre 全阶加权 viability
   不等式；R18 又证明完整 subcritical 全谱紧性和 `E_r` 内 supercritical moving-scale
   尾界；R19 又把 relative matrix closure 改写为 posterior Wick–Hankel 的固定 slice
-  严格余量与 uniform witness alignment 问题；另保留 `P_3K`
-  sector 限定。
-- 当前方向：R20，攻击 `Same-Factor Uniform Witness Alignment / Reverse-Schur
-  Coercivity`：寻找同因子 iid cube 产生的共同高秩见证人/逆 Schur 稳定性，或严格
-  证明它仍不足以阻止 rank/spectral-tail escape；继续单独审计 `P_3K` survival。
+  严格余量与 uniform witness alignment 问题；R20 又证明 posterior-`y` 对齐可由
+  Esscher–affine congruence 精确解决，并把缺口压成 multiscale affine alignment
+  与 diagonal-tensor capture；另保留 `P_3K` sector 限定。
+- 当前方向：R21，攻击 `Affine-Hankel Diagonal-Capture / Multiscale Reverse-Schur`：
+  寻找 genuine iid Hankel 结构的维数无关 diagonal-capture/coercivity，或严格证明
+  same-factor cube 仍不足以阻止 rank/spectral-tail escape；继续单独审计 `P_3K`
+  survival。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。

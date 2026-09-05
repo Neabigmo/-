@@ -464,3 +464,39 @@
   rigidity proof.
 - Minimal OPEN is now `Same-Factor Uniform Witness Alignment / Reverse-Schur
   Coercivity`. Gaussian rigidity remains OPEN.
+
+# 2026-09-06 — R20 affine-Hankel diagonal capture / multiscale reverse-Schur
+
+- R20 re-read the durable framework and worklog through commit `7ec40ac` before
+  working. It stayed within the genuine full-exact iid class: no finite-prefix,
+  formal-kernel, exchangeable, or Gaussian-only object was treated as a counterexample.
+- The posterior deconvolution slices have an exact Esscher-affine relation. With
+  `C(z)=B_(r;t,0)(z)`,
+  `B_(r;t,y)(z)=exp(sigma^2*y*z) C(y+z)/C(y)`. Their Hankel Gram matrices are
+  positive scalar plus invertible positive diagonal congruences of the same base
+  Hankel kernel at translated nodes. Hence minimum negative-Gram size is invariant
+  in `y`, and a base witness can be explicitly transported to every posterior slice.
+  The former slice-wise witness-alignment obstruction is therefore solved.
+- The same-factor cubic is exactly a diagonal tensor compression:
+  `A1 o A2 o A3 = J^*(A1 tensor A2 tensor A3)J`, where
+  `Je_i=e_i tensor e_i tensor e_i`. The remaining geometry is multiscale affine
+  alignment across `y/2+alpha_j*s` and dimension-free diagonal-tensor capture.
+- A strict finite-dimensional generic reverse-Schur no-go was audited with the
+  tridiagonal Toeplitz matrix `A_m=I+(3/5)(S+S^*)`, `m>=5`: `A_m` is indefinite,
+  while `A_m^(o3)` is positive definite with lower eigenvalue above `71/125`.
+  Its spread-out negative sine mode has diagonal-capture mass at most `8/m^2`.
+  This is not a probability or full-exact iid counterexample; it only rules out a
+  generic Loewner-to-Hadamard converse.
+- Conditional closure now requires a Hankel-specific negative-direction alignment,
+  a uniform diagonal-capture lower bound, and dimension-independent domination of
+  the positive remainder. Overlap alone does not force a negative compressed
+  Rayleigh quotient.
+- `P_3K` remains disconnected: no charge-to-capture, charge-to-Laguerre, or
+  charge-to-Loewner quantitative bridge was obtained, and no genuine full-exact
+  iid non-closed sequence was constructed.
+- Extended `posterior_witness_alignment_r20/audit_r20.py` with symbolic/numeric
+  checks for the Esscher-affine congruence, diagonal compression, Toeplitz
+  reverse-Schur no-go, and `O(m^(-2))` capture bound. The run passed and printed
+  `R20_AUDIT_COMPLETED`; it is an algebraic consistency audit, not a rigidity proof.
+- Minimal OPEN is now `Affine-Hankel Diagonal-Capture / Multiscale Reverse-Schur`.
+  Gaussian rigidity remains OPEN.
