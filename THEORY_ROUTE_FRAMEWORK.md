@@ -2515,3 +2515,106 @@ optimizer、SDP、大规模扫参或远程计算。`P_3K` 继续与该 value-lev
   residual Laguerre `<3M` 与 R21 cubic amplifier。
 - 结论状态：主命题仍 OPEN；没有 Gaussian rigidity 的无条件证明，也没有真实概率
   律反例。
+
+## 31. R33：global value duality 与 positive-shadow quotient obstruction
+
+网页端在开始 R33 前应先读取本框架、`PROJECT_WORKLOG_APPEND.md`、R32 审计
+资产以及当前 Git 提交 `d1af16e3b98a0fbb2f86bd46b444826da1c47201`。本轮仍只
+讨论 genuine full-exact iid law；global SOS、quotient 和 shadow 只作证明结构，
+不构成反例。R33 的本机 proof-level 审计位于
+`flat_shadow_global_value_r33/`，没有运行 SOS solver、optimizer、degree search
+或远程计算。
+
+### 31.1 有限 `K` 的 global value duality 不是首要障碍
+
+在固定有限 `K` 的 compact Archimedean feasible set 上，若 `Omega_K` 是坏 head
+defect 的 worst-case value，则对任意严格上界 `gamma>Omega_K`，标准
+Positivstellensatz/Archimedean duality 给出
+
+`gamma+q_M = P_K+E_K`,  `P_K in M_K`, `E_K in I_K`。
+
+这只说明有限 `K` 有近似值证书，并不说明 `Omega_K->0`。等价地，对每个
+`epsilon>0` 存在有限 `K(epsilon)` 使
+
+`epsilon+q_M in M_(K(epsilon)) + I_(K(epsilon))`
+
+当且仅当 `Omega_K->0`。因此“存在越来越好的 generic SOS certificate”本身
+与待证明的 orientation 等价，不是新的 closure mechanism。
+
+### 31.2 exact-`Q` ideal 的 triangular quotient
+
+在 `m_0=1,m_1=0,m_2=1` 下，same-factor cubic rows 满足
+
+`G_n = c_n m_(2n)-F_n(m_3,...,m_(2n-2))`,
+
+其中 `c_n=3(2/3)^n>0`，且 `partial_(m_(2n-1))G_n=0`。所以有限截断的 exact
+ideal 可递归消去所有 even moments，形式上给出
+
+`R[m_3,m_4,...,m_(2K)]/<G_2,...,G_K> ~= R[m_3,m_5,...,m_(2K-1)]`。
+
+对任意 `SOS=sum s_r^2`，逐项作递归 substitution 仍是
+`sum (R_K s_r)^2`，故 quotient 不破坏 SOS 形式。R33 本机审计对 `G_2,G_3,G_4`
+核验了 triangular pivot、odd-control 保留和 SOS substitution。
+
+### 31.3 equality gauge 与 positive shadow 的冲突
+
+global redundant-coordinate certificate 的 equality multipliers 没有 canonical
+含义。例如
+
+`P+s^2G^2+(h-s^2G)G=P+hG`。
+
+因此不能逐项追踪 arbitrary `h_n` 的“shadow debt”。更基本地，正 flat shadow
+`rho_M` 与 exact law 的 moments 匹配至 `2M+1`，但
+
+`G_(M+1)(rho_M)=-c_(M+1)q_M`。
+
+把 shadow 的 odd moments继续代入 exact quotient 所得到的 formal even continuation
+满足
+
+`rhat_(2M+2)-r_(2M+2)=q_M`。
+
+只要 `q_M!=0`，这个 quotient point 就不在实际 positive shadow 的 exact-`Q`
+variety 上。故 canonical exact quotient 消去了 equality costate，却丢失了正
+shadow anchor；保留 redundant coordinates 则保留 shadow，却留下 gauge/costate
+问题。这是 proof architecture obstruction，不是 counterexample。
+
+若写成 `gamma+q=P+E_Q+E_flat`，在 genuine feasible law 上有
+`gamma+q(mu)=P(mu)`；在 flat shadow 上有
+`gamma=P(rho_M)+E_Q(rho_M)`，因为 `q(rho_M)=0` 且 flat ideal 在 shadow 上消失。
+真正规范不变的是整个 shadow evaluation，而不是其 positive/equality 两个分块。
+
+### 31.4 当前真正需要的 graded theorem
+
+所需的不是任意 global certificate，而是一族 shadow-compatible、gauge-invariant
+的 value certificates，其 canonical shadow normal form 满足：存在 `N_K->infinity`
+使所有 Hermite degrees `ell<=N_K` 消失，且 remote coefficients 有 law-independent
+weighted bound，例如
+
+`sum_(ell>N_K) r_0^(-ell)|Gamma_(ell,K)|^2 <= C`，
+
+并且
+
+`gamma_K=sum_(ell>N_K) Gamma_(ell,K)a_ell(rho_M)`。
+
+固定 Gaussian smoothing 的统一 Hermite tail 随即给 `gamma_K->0`，再由
+`q_M=P_K(mu)-gamma_K` 得到 `Omega_K->0`。这是 conditional closure，尚未构造。
+
+高 constraint rank 不等于高 Hermite degree：每个 `G_n` 仍依赖整个 moment prefix；
+同样，简单 measure-LP relaxation 会丢掉 `Pi=mu^(tensor 3)` 的 same-factor/rank-one
+结构。因此更多 local Jacobi minors 或无结构的 generic SOS 不能单独修复缺口。
+
+### 31.5 R33 后的最小 OPEN 与逻辑边界
+
+当前最小 OPEN 收窄为 **Shadow-Compatible Graded Global Positivstellensatz**，
+也可称 **gauge-invariant Global Value-Level Remote Adjoint Locality**：能否构造
+上述证书，使全部 fixed/intermediate shadow Hermite content 真正消失，并保持
+对 `K`、law 和 moving rank 的统一 analytic/weighted norm。
+
+Gaussian rigidity 仍 OPEN；`P_3K` 仍没有到该 graded certificate 的 audited bridge，
+所以 `P_3K!=0` 与 R33 closure 继续逻辑断开。若下一轮没有新的 value-level identity，
+R25--R32 的 local one-body normal-cone 支线不再堆叠更多同类约束；网页端必须先
+阅读本框架与工作日志，再提出下一轮唯一可证伪的 global 子命题。
+
+本轮新增 `flat_shadow_global_value_r33/audit_r33.py` 与 README。审计输出为
+`R33_FINITE_GLOBAL_VALUE_DUALITY RECORDED`、`R33_Q_IDEAL_GAUGE_AND_SHADOW_OBSTRUCTION
+PASSED`、`R33_GRADED_REMOTE_LOCALITY REMAINS OPEN`、`R33_AUDIT_COMPLETED`。

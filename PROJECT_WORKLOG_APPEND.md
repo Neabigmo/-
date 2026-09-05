@@ -1020,3 +1020,52 @@
   `R32_REMOTE_EQUALITY_COSTATE LOCALITY REMAINS OPEN`, and
   `R32_AUDIT_COMPLETED`.  No optimizer, SDP, large sweep, or remote computation
   is used.
+
+# 2026-09-06 — R33 global value duality and shadow-compatible grading
+
+- R33 reread the durable framework, worklog, R32 README/audit, and the recorded
+  commit `d1af16e3b98a0fbb2f86bd46b444826da1c47201` before working.  The web-side
+  analysis stayed inside the genuine full-exact iid class.  Finite Archimedean
+  feasible sets, Positivstellensatz certificates, quotient coordinates, and flat
+  shadows were used only for proof structure; no relaxed measure construction is
+  a full-exact counterexample.
+- For every fixed finite `K`, standard Archimedean value duality supplies a
+  certificate for any strict upper bound `gamma>Omega_K`.  The exact equivalence
+  is that `Omega_K->0` iff for every `epsilon>0` some finite certificate puts
+  `epsilon+q_M` in the corresponding quadratic module plus exact ideal.  Thus
+  unstructured global SOS existence is not the missing theorem; it is equivalent
+  to the open orientation when required uniformly.
+- With `m_0=1,m_1=0,m_2=1`, the same-factor rows satisfy
+  `G_n=c_n m_(2n)-F_n`, `c_n=3(2/3)^n>0`, and have no `m_(2n-1)` term.  Recursive
+  even elimination gives the formal odd-control quotient.  SOS is preserved under
+  substitution because each square is substituted before squaring.  The exact
+  `G_2,G_3,G_4` identities, pivots, odd-control retention, and substitution-SOS
+  property are checked in the new local audit.
+- The global equality representation has a polynomial gauge:
+  `P+s^2G^2+(h-s^2G)G=P+hG`.  Hence individual equality costates and separate
+  positive/equality shadow-debt pieces are not canonical.  More importantly, the
+  positive flat shadow has `G_(M+1)(rho_M)=-c_(M+1)q_M`; exact quotient continuation
+  changes the first unmatched even moment by exactly `q_M`.  For `q_M!=0`, the
+  canonical quotient point is therefore off the actual positive shadow variety.
+  The quotient removes equality costate but loses the positive shadow anchor.
+- The invariant object is the total shadow evaluation.  If
+  `gamma+q=P+E_Q+E_flat`, then `gamma+q(mu)=P(mu)` on a genuine feasible law and
+  `gamma=P(rho_M)+E_Q(rho_M)` on the flat shadow.  The required new theorem is a
+  shadow-compatible, gauge-invariant, Hermite-graded certificate: all fixed and
+  intermediate Hermite content must vanish, while the remote coefficient norm is
+  uniformly controlled and its shadow pairing tends to zero.  High constraint
+  rank alone does not imply high Hermite grade; a linear measure-LP relaxation
+  also loses same-factor rank-one structure.
+- The minimum OPEN is now **Shadow-Compatible Graded Global Positivstellensatz**,
+  equivalently gauge-invariant Global Value-Level Remote Adjoint Locality.  The
+  Gaussian rigidity conclusion and the `P_3K` bridge remain OPEN and disconnected.
+  If no new value-level identity appears, do not add more local Jacobi/KKT algebra.
+- Added `flat_shadow_global_value_r33/audit_r33.py` and README.  The first run
+  caught an overstrong local assertion that `m_7` must occur in the finite
+  `G_2,...,G_4` substitution; corrected it to record `m_7` as a retained free odd
+  control.  The corrected exact audit exited 0 and printed
+  `R33_FINITE_GLOBAL_VALUE_DUALITY RECORDED`,
+  `R33_Q_IDEAL_GAUGE_AND_SHADOW_OBSTRUCTION PASSED`,
+  `R33_GRADED_REMOTE_LOCALITY REMAINS OPEN`, and
+  `R33_AUDIT_COMPLETED`.  No optimizer, SDP, degree search, large sweep, or
+  remote computation was used.
