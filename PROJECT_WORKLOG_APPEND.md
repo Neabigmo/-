@@ -1069,3 +1069,47 @@
   `R33_GRADED_REMOTE_LOCALITY REMAINS OPEN`, and
   `R33_AUDIT_COMPLETED`.  No optimizer, SDP, degree search, large sweep, or
   remote computation was used.
+
+# 2026-09-06 — R34 OU-graded total-shadow high-pass obstruction
+
+- R34 first reread the durable framework, worklog, R33 README/audit, and the
+  actual Git HEAD `c6fdf1844d4ed73a73e5b248985b0d97642220d0`, as required by the
+  new local-record protocol.  The web-side task was restricted to one falsifiable
+  subproblem and did not revisit R29--R33's stopped local routes.
+- The OU/heat MGF algebra gives exact covariance under
+  `a_t=1-t+ta`: `L_(a_t)^(P_t mu)=S_(sqrt(t))L_a^mu`.  The monic flat-null
+  polynomial rescales as `P_(M,t)(x)=t^(M/2)P_M(x/sqrt(t))`, the first defect as
+  `q_(M,t)=t^(M+1)q_M`, and a smoothed atomic shadow as
+  `rho_(M,t)=P_t rho_M`.  Hermite coefficients scale by
+  `a_ell(rho_(M,t))=t^(ell/2)a_ell(rho_M)`.
+- For any finite global certificate, the gauge-invariant total shadow response
+  `Theta_K(t)=P_K(rho_(M,t))+E_(Q,K)(rho_(M,t))` is exactly the constant `gamma_K`
+  along the whole OU orbit.  Therefore an exact law-independent OU-regular
+  remote-only expansion with strictly positive grade has no constant term and
+  would force `gamma_K=0`.  The same argument rules out regular nonlinear
+  expressions whose every monomial has positive total OU grade.
+- Positive OU mixtures are necessarily low-pass because
+  `m_ell=integral u^ell dnu(u)` is monotone decreasing on `[0,1]`; normalizing a
+  grade to one forces the identity mixture.  Signed filters can annihilate low
+  grades, but the monic Chebyshev minimax bound gives
+  `||sigma||_TV>=2^(2N-1)` when the first `N` moments are killed and the `N`th is
+  normalized.  Thus bounded linear OU/heat high-pass cannot supply the required
+  uniform norm.  These are proof-mechanism obstructions, not full-exact laws or
+  counterexamples.
+- R34 strictly closes the route **OU/heat-semigroup linear grading of the total
+  shadow evaluation**.  The remaining minimum OPEN is **Nonlinear
+  Shadow-Compatible Graded Value Transgression**: use same-factor cubic/Fock
+  homogeneous algebra before summing to the gauge-invariant total, allow only an
+  independently controlled grade-zero defect tending to zero, and send the rest
+  to high OU grade with a uniform norm.  Gaussian rigidity and the `P_3K` bridge
+  remain OPEN and disconnected.
+- Added `flat_shadow_ou_grading_r34/audit_r34.py` and README.  The first run
+  caught an abstract shadow-evaluation substitution omission (`E_Q=gamma-P`)
+  and a floating-point negative-exponent issue in the Chebyshev normalization;
+  both were corrected.  The final exact audit exited 0 and printed
+  `R34_FLAT_OU_COVARIANCE PASSED`,
+  `R34_TOTAL_SHADOW_HIGH_PASS NO_GO`,
+  `R34_SIGNED_OU_FILTER_NORM_BLOWUP RECORDED`,
+  `R34_NONLINEAR_GRADED_TRANSGRESSION REMAINS OPEN`, and
+  `R34_AUDIT_COMPLETED`.  No optimizer, SDP, degree search, large sweep, or
+  remote computation was used.

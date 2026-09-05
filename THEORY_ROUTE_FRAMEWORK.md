@@ -2618,3 +2618,87 @@ R25--R32 的 local one-body normal-cone 支线不再堆叠更多同类约束；�
 本轮新增 `flat_shadow_global_value_r33/audit_r33.py` 与 README。审计输出为
 `R33_FINITE_GLOBAL_VALUE_DUALITY RECORDED`、`R33_Q_IDEAL_GAUGE_AND_SHADOW_OBSTRUCTION
 PASSED`、`R33_GRADED_REMOTE_LOCALITY REMAINS OPEN`、`R33_AUDIT_COMPLETED`。
+
+## 32. R34：OU-covariant total-shadow high-pass no-go
+
+网页端在开始 R34 前已先通过连接读取本框架、工作日志、R33 README/审计脚本，
+并核对真实 HEAD `c6fdf1844d4ed73a73e5b248985b0d97642220d0`。本轮将 R33 的
+“总 shadow evaluation”目标进一步做成一个可证伪子命题：能否直接用 OU/heat
+grading 把它变成 uniform remote-only object。结论是这整类直接线性机制严格失败，
+但求和前的 nonlinear same-factor/Fock value transgression 尚未被排除。
+
+### 32.1 OU 协变的无条件恒等式
+
+令 `X_t=sqrt(t)X+sqrt(1-t)Z`，`a_t=1-t+ta`。MGF/heat 代数给出
+
+`L_(a_t)^(P_t mu)=S_(sqrt(t))L_a^mu`。
+
+若 `P_M` 为 monic flat-null polynomial，令
+`P_(M,t)(x)=t^(M/2)P_M(x/sqrt(t))`，则 flat-null relations 保持，并且
+
+`q_(M,t)=t^(M+1)q_M`。
+
+对 `rho_M=P_a nu_M` 与 `nu_(M,t)=S_(sqrt(t))nu_M`，还有
+`rho_(M,t)=P_t rho_M`，故 shadow 的 Hermite coefficient 按
+`a_ell(rho_(M,t))=t^(ell/2)a_ell(rho_M)` 缩放。R34 本机脚本精确核验这些
+MGF、polynomial 和 semigroup identities。
+
+### 32.2 总 shadow evaluation 沿 OU 轨道是纯 grade 0
+
+对任意有限值证书
+
+`gamma+q_M=P_K+E_(Q,K)+E_(flat,K)`，
+
+在 genuine exact law 上 ideal terms 消失；在 positive flat shadow 上 `q_M=0` 且
+flat ideal 消失。因此规范不变的总响应
+
+`Theta_K(t)=P_K(rho_(M,t))+E_(Q,K)(rho_(M,t))`
+
+恒等于 `gamma`，与 equality gauge 和 `t` 都无关。若要求它在 OU-stable interval
+上由 law-independent、OU-regular 的 strictly positive grade remote series 表示，
+令 `u=sqrt(t)` 后右侧在 `u=0` 没有常数项，而左侧恒为 `gamma`；解析唯一性强迫
+`gamma=0`。同样，任何所有 monomial 总 grade 都严格为正的 regular nonlinear
+normal form也会在 `u=0` 消失，不能表示非零 finite-`K` 误差。
+
+因此不能把整个 gauge-invariant total evaluation 本身 exact high-pass；成功方案
+必须在“求和成 total evaluation”之前产生非平凡的 transgression/cancellation。
+
+### 32.3 正 OU averaging 与 signed high-pass 的双重障碍
+
+正性保持的 OU mixture
+`A_nu=int_0^1 P_(u^2)dnu(u)` 的 grade multiplier 为
+`m_ell=int_0^1 u^ell dnu(u)`。因为 `0<=u<=1`，有
+`m_0>=m_1>=m_2>=...>=0`；若归一化 `m_N=1`，则 `u=1` 几乎处处成立，滤波
+退化为恒等。因此所有 positive OU/heat averaging 都是 low-pass。
+
+允许 signed filter 后，若其前 `N` 个 moments 被 annihilate 且第 `N` 个 moment
+归一为 1，则对任意 `deg(p)<N` 有
+
+`1 <= ||sigma||_TV ||u^N-p||_(infinity,[0,1])`。
+
+monic Chebyshev minimax theorem 给最优误差 `2^(1-2N)`，从而
+`||sigma||_TV>=2^(2N-1)`。所以 signed linear high-pass 的自然 norm 至少指数
+爆炸，不能给出 R33 所需的 `K`-uniform weighted bound。R34 audit 核验了 Chebyshev
+monic normalization 与该精确下界的代数 schema；minimax 结论作为标准证明定理
+记录，不通过数值优化取得。
+
+### 32.4 R34 后的最小 OPEN
+
+R34 严格停止 **OU/heat-semigroup linear grading of the total shadow evaluation**，
+包括 positive OU mixtures 和 signed finite-difference high-pass。新的最小 OPEN 为
+**Nonlinear Shadow-Compatible Graded Value Transgression**：能否利用 same-factor
+cubic/Fock homogeneous algebra，在求和成 gauge-invariant total evaluation 之前，
+构造 positivity-compatible 的非线性 transgression，使唯一允许的 grade-zero defect
+`delta_K->0`，其余项逃向高 OU grade 且 norm 统一有界。
+
+相应 conditional closure 是：若存在
+`gamma_K+q_M=mathcal P_K+mathcal T_K`，其中 `mathcal P_K(mu)>=0`，且
+`mathcal T_K(rho_M)=delta_K+remote_K`，有 `delta_K->0`、远端 Hermite/OU norm
+统一受控并由 Gaussian smoothing 统一尾估计压到 0，则 `gamma_K->0`、
+`Omega_K->0`、`q_M>=0`，随后接回既有 plateau/Laguerre/cubic amplifier 链。
+该 transgression 尚未构造。Gaussian rigidity 与 `P_3K` bridge 仍 OPEN 且断开。
+
+本轮新增 `flat_shadow_ou_grading_r34/audit_r34.py` 与 README。修正两处审计实现
+问题后，精确运行输出为 `R34_FLAT_OU_COVARIANCE PASSED`、
+`R34_TOTAL_SHADOW_HIGH_PASS NO_GO`、`R34_SIGNED_OU_FILTER_NORM_BLOWUP RECORDED`、
+`R34_NONLINEAR_GRADED_TRANSGRESSION REMAINS OPEN`、`R34_AUDIT_COMPLETED`。
