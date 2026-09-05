@@ -1188,3 +1188,34 @@
   `R36_REMOTE_ONE_BODY_CARRIER NO_GO`,
   `R36_TWO_BODY CARRIER REMAINS OPEN`, and `R36_AUDIT_COMPLETED`.  No optimizer,
   SDP, numerical sweep, or remote computation was used.
+
+# 2026-09-06 — R37 two-body Laguerre–Hoeffding Gaussian anchor
+
+- The browser-side control layer remained temporarily unavailable, while the
+  bridge/connector doctor stayed green.  To make substantive progress without
+  inventing a web review, R37 completed only the local exact anchor calculation
+  already identified by R36; the fixed-head derivative is explicitly deferred to
+  web review.
+- With `S=(X1+X2)/sqrt(2)` and `D=(X1-X2)/sqrt(2)`, exact conditional Gaussian
+  integration gives
+  `sum_n E[L_n(T)|X1,X2]z^n`
+  `=(1-z)^(-1/2)(1-z/3)^(-1/2)` times
+  `exp(-zD^2/(2(1-z))-zS^2/(6(1-z/3)))`.
+  The corresponding finite polynomial formula was checked against direct
+  Gaussian marginalization for `n=0,...,4`.
+- Writing `w_j=binom(2j,j)/4^j`, the exact pair projection norm is
+  `||p_n||^2=sum_b 9^(-b)w_(n-b)w_b`, with generating function
+  `((1-z)(1-z/9))^(-1/2)`.  After subtracting the two one-body projections,
+  `B_n^gamma=sum_b9^(-b)w_(n-b)w_b-2(4/9)^nw_n`.
+- The `z=1` singularity gives
+  `B_n^gamma~(3/(2sqrt(2)))w_n~3/(2sqrt(2pi n))`.  Therefore the degenerate
+  two-body anchor loses only polynomially, not exponentially: it genuinely
+  bypasses the R36 one-body `(2/3)^n` information loss.
+- Added `flat_shadow_hoeffding_transgression_r37/audit_r37.py` and README.  The
+  exact audit exited 0 with markers `R37_TWO_BODY_CONDITIONAL_PROJECTION PASSED`,
+  `R37_TWO_BODY_DEGENERATE_NORM PASSED`,
+  `R37_TWO_BODY_ANCHOR_POLYNOMIAL_DECAY PASSED`,
+  `R37_TWO_BODY_HEAD_SENSITIVITY REQUIRES WEB_REVIEW`,
+  `R37_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`, and
+  `R37_AUDIT_COMPLETED`.  No optimizer, SDP, numerical sweep, or remote
+  computation was used.

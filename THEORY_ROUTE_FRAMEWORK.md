@@ -2877,3 +2877,72 @@ transgression 是否仍有可行窗口。Gaussian rigidity 与 `P_3K` bridge 仍
 `R36_REMOTE_ONE_BODY_CARRIER NO_GO`、
 `R36_TWO_BODY CARRIER REMAINS OPEN`、`R36_AUDIT_COMPLETED`。未使用 optimizer、
 SDP、数值 sweep 或 remote computation。
+
+## 35. R37：二体 Laguerre--Hoeffding 投影确实绕过一体指数损失
+
+由于右侧网页标签的控制层暂时连续超时，本轮先完成 R36 已明确指向的二体
+Gaussian anchor 子问题本机精确审计；没有把未经过网页复核的固定头导数当作
+结论。新增审计前提仍是 genuine full-exact iid Gaussian anchor 的 common/
+residual 坐标分解。
+
+### 35.1 二体条件投影的精确生成函数
+
+令 `S=(X_1+X_2)/sqrt(2)`、`D=(X_1-X_2)/sqrt(2)`。条件在 `(X_1,X_2)` 后，
+残余 radial variable `T=(Y^2+Z^2)/2` 仍留下一个 variance `2/3` 的 Gaussian
+方向。直接完成条件 Gaussian 积分得到
+
+`sum_n E[L_n(T)|X_1,X_2]z^n`
+`=(1-z)^(-1/2)(1-z/3)^(-1/2)`
+`  * exp(-zD^2/(2(1-z))-zS^2/(6(1-z/3)))`。
+
+等价地，写 `c_j=sqrt((2j)!)/(2^j j!)`、
+`L_j^(-1/2)(x^2/2)=(-1)^j c_j h_(2j)(x)`，则
+
+`p_n(X_1,X_2)=sum_(a+b=n)3^(-b)
+ L_a^(-1/2)(D^2/2)L_b^(-1/2)(S^2/2)`。
+
+本机 SymPy 审计对 `n=0,...,4` 将该式与直接对第三个 Gaussian 坐标积分的
+`E[L_n(T)|X_1,X_2]` 逐项相等核验，并同时复核一体投影
+`k_n^gamma=(-1)^n c_n(2/3)^n h_(2n)`。
+
+### 35.2 退化二体范数与 anchor 的真实量级
+
+令 `w_j=binom(2j,j)/4^j`。由于 `S,D` 独立标准 Gaussian，二体条件投影的
+精确范数为
+
+`||p_n||^2=sum_(b=0)^n9^(-b)w_(n-b)w_b`。
+
+从 `p_n=k_n(X_1)+k_n(X_2)+h_(2,n)` 的 Hoeffding 正交分解，以及
+`||k_n^gamma||^2=binom(2n,n)/9^n=(4/9)^nw_n`，得到
+
+`B_n^gamma=||h_(2,n)||^2`
+`=sum_(b=0)^n9^(-b)w_(n-b)w_b-2(4/9)^nw_n`。
+
+其生成函数是
+`sum_n||p_n||^2z^n=((1-z)(1-z/9))^(-1/2)`。`z=1` 的主奇点给出
+
+`B_n^gamma~(3/(2sqrt(2)))w_n~3/(2sqrt(2pi n))`。
+
+这与 R36 一体载体的指数衰减有本质区别：二体 anchor 仍趋零，但只按
+`n^(-1/2)` 衰减，不能用 R36 的 `(2/3)^n` 塌缩机制排除。因而二体退化
+Hoeffding sector 是真实的 carrier window，而不是把一体路线换个记号。
+
+### 35.3 当前最小 OPEN 不变
+
+本轮严格只关闭了 **Two-Body Gaussian Conditional Projection and Anchor
+Scale**。尚未计算或宣称
+`partial_(b_N)B_n^gamma` 的固定头敏感性，也尚未证明该 sector 能与 genuine
+probability cone、same-factor exact ideal 和非 SOS 正性拼成 uniform
+transgression。下一轮网页端必须先读取本框架、工作日志、R36 审计和本 R37
+README/脚本，然后审查二体固定头导数：计算
+`partial_(b_N)||h_(2,n)||^2|_gamma` 的精确五/六副本表达式及其 `n`-量级，
+并判断它是否足以承载 `q_M`。Gaussian rigidity 与 `P_3K` bridge 仍 OPEN
+且逻辑断开。
+
+本轮新增 `flat_shadow_hoeffding_transgression_r37/audit_r37.py` 与 README，
+精确运行输出为 `R37_TWO_BODY_CONDITIONAL_PROJECTION PASSED`、
+`R37_TWO_BODY_DEGENERATE_NORM PASSED`、
+`R37_TWO_BODY_ANCHOR_POLYNOMIAL_DECAY PASSED`、
+`R37_TWO_BODY_HEAD_SENSITIVITY REQUIRES WEB_REVIEW`、
+`R37_CONSTRAINT_COUPLED_TRANSGRESSION REMAINS OPEN`、
+`R37_AUDIT_COMPLETED`。未使用 optimizer、SDP、数值 sweep 或 remote computation。
