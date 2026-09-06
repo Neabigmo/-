@@ -3284,3 +3284,33 @@ computation was used.
 - Added `flat_shadow_background_gap_r96/README.md` and `audit_r96.py`.  The
   exact local audit target is `R96_BACKGROUND_GAP_AUDIT_COMPLETED`; no determinant,
   optimizer, SDP, parameter sweep, or remote computation is used。
+
+## R97 — background-centered finite-horizon factorization (2026-09-07)
+
+- 在不使用 determinant 的前提下，补齐了 finite LDL/Cholesky recursion：对
+  `G=I+H=G^*`、`||H||op<=h<1`，递归构造 `G=TDT^*` 与 `C=T^{-1}`，并严格得到
+  `CGC^*=D`、`1-h<=D_ii<=1+h` 以及
+  `||C||op^2,||C^{-1}||op^2<=(1+h)/(1-h)`。因此正式背景
+  `I+aA_n+a^2B_n^(2)` 在 `|a|M_1+a^2M_2<1` 下具有 horizon-independent
+  operator conditioning。
+- 发现并记录一个可用的替代定理：虽然 `W_n` conjugation 不能从 operator
+  positivity 推出，但 trace norm 满足
+  `||C_(0,n)H C_(0,n)^*||_1<=kappa(h_0)||H||_1`；归一化到 `D_(0,n)` 后系数为
+  `beta(h_0)=(1+h_0)/(1-h_0)^2`。故在
+  `beta(h_0)||H||_1<=1/[64(1+log N)^2]` 时，R94 给出显式 finite-horizon
+  strict-lower contraction，收缩因子 `97/1024`。
+- 对 `G_n(a)=I+aA_n` 在 `a=0` 微分，严格下三角方程给出
+  `C_n'(0)=-L_-A_n`。结合 R96 实际 `g1` 的 harmonic gap lower，得到
+  `sup_n||C_n'(0)||_(W_n)=infinity`。这否定的是 dimension-free `W_n`
+  background local-Lipschitz 方案，而不是未经证明地声称固定非零参数下的
+  全部 conjugation 发散。
+- 新增 `flat_shadow_background_centered_r97/README.md` 与 `audit_r97.py`。
+  本机审计通过：`R97_EXACT_LDL_RECURSION_PASSED`、
+  `R97_CONDITIONING_AND_CONTRACTION_CONSTANTS_PASSED`、
+  `R97_LINEARIZED_TRIANGULAR_NO_GO_ANCHOR_PASSED`、
+  `R97_BACKGROUND_CENTERED_AUDIT_COMPLETED`；并复跑 R95/R96 审计通过。
+- 状态边界：上述 finite factorization、operator conditioning、trace-norm
+  substitute 与实际 `g1` linearized no-go 为 PROVED；将 trace residual bound
+  施加到完整 branch 为 CONDITIONAL；uniform background-centered `W_n`
+  comparison、`g2` gap sum、hybrid feedback、global positivity、positive
+  infinite tower、backward OU divisibility、`FS_3` 仍 OPEN。

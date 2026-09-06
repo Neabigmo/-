@@ -6954,3 +6954,40 @@ R92/R93 已覆盖只含 `w` 的部分，含 `gamma` 的 Gram-transfer 部分尚�
 
 R96 本机记录目录为 `flat_shadow_background_gap_r96/`；审计应只使用固定精确
 恒等式和代表性 channels，不以数值 sweep 代替上述 factorial-ratio 证明。
+
+### 9.5 R97：background-centered finite-horizon theorem 与线性 no-go
+
+对任意 Hermitian `G=I+H`、`||H||op<=h<1`，不用 determinant 的 finite LDL
+递归给出 `G=TDT^*`、`C=T^{-1}` 以及精确恒等式 `CGC^*=D`。Schur complement
+的变分表示直接给出
+
+`1-h<=D_ii<=1+h`，`||C||op^2,||C^{-1}||op^2<=kappa(h):=(1+h)/(1-h)`。
+
+所以正式背景 `G_(0,n)=I+aA_n+a^2B_n^(2)` 在
+`h_0=|a|M_1+a^2M_2<1` 下有与 `n` 无关的 operator conditioning；这一步是
+PROVED，但不等同于 `W_n` conditioning。
+
+若 `E=C_(0,n)H C_(0,n)^*`，则 trace norm 给出真正 uniform 的替代：
+
+`||E||_1<=kappa(h_0)||H||_1`，
+
+`||D_(0,n)^(-1/2)E D_(0,n)^(-1/2)||_1
+ <=(1+h_0)/(1-h_0)^2 ||H||_1`。
+
+故在 horizon `N=n+1` 上，只要
+
+`[(1+h_0)/(1-h_0)^2]||H||_1 <=1/[64(1+log N)^2]`
+
+即可调用 R94 的 finite-horizon strict-lower contraction；这是一个可发表的
+finite-horizon corollary，不是 infinite-horizon closure。
+
+另一方面，对 `G_n(a)=I+aA_n` 在 `a=0` 微分，严格下三角部分强制
+`C_n'(0)=-L_-A_n`。R96 对实际 `g1` 已证 `||L_-A_n||_(W_n)>=c log(n+2)`，
+所以 `sup_n||C_n'(0)||_(W_n)=infinity`。这严格否定任何基于该范数的
+dimension-free background local-Lipschitz/perturbative conjugation 论证；它是
+linearized PROVED no-go，不声称每个固定非零 `a` 的 conjugation 都发散。
+
+R97 本机记录目录为 `flat_shadow_background_centered_r97/`，审计目标为
+`R97_BACKGROUND_CENTERED_AUDIT_COMPLETED`。background-relative `W_n` norm、
+`g2` 全 gap sum、hybrid `gamma` feedback、global positivity、positive
+backward tower、backward OU divisibility 与 `FS_3` 继续标为 OPEN。
