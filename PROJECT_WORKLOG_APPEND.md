@@ -2930,3 +2930,41 @@ computation was used.
   `R86_MESOSCOPIC_FACTORIAL_MAJORANT_ARITHMETIC_PASSED`, and
   `R86_GREEN_RESUMMED_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
   passed.
+
+## R87 — Small-proportional safety window audit and endpoint correction (2026-09-07)
+
+- The webpage proposed a two-track R87 plan: close a small-proportional
+  `PSC_delta`, or fall back to an all-gap/mesoscopic factorial upper bound in
+  the `n^(-j)`-rescaled coefficient component.  The plan was not accepted
+  wholesale because its endpoint factors were written in both orientations.
+- Exact symbolic audit confirms the continuous root-filter branch through
+  `x(0)=1` is locally analytic and nondegenerate, and the complete-phase
+  envelope derivative gives
+  `zeta=4*alpha*x/(omega^2*(1+omega*x)^2)=4*alpha+O(alpha^2)`.
+  Hence `Delta=1+alpha+2*zeta=1+9*alpha+O(alpha^2)`.
+- The proportional source variable is `lambda=zeta/L`, with
+  `L=1+alpha+zeta`, not its reciprocal.  Therefore
+  `P_H=Delta^3/((1+alpha)L^2)`.  Preserving the R86 correction gives
+  `P_G=(L-zeta)/(L+zeta)=(1+alpha)/Delta`, and the correct product is
+  `P_H*P_G=Delta^2/L^2`.  The inverse Green factor and its induced
+  `Delta^4/((1+alpha)^2L^2)` product are explicitly rejected.
+- On the original real Green segment, if `Re(Delta)>=eta>0`, then
+  `Re(phi'(u))=Re(Delta)+(1/u-1)Re(L)>=eta`; this closes only the endpoint
+  monotonicity algebra.  Uniform complex source amplitude bounds and source
+  endpoint continuation remain open.
+- The conjugate-phase target needs the nondegeneracy condition
+  `Theta not in pi*Z` or `Re(C)!=0`; `C!=0` alone admits an identically
+  cancelling pure-imaginary example.  The local audit records this exact
+  logical correction.
+- The finite fallback convolution satisfies the exact multinomial identity
+  `sum 1/(r!s!g!)=3^D/D!`, but the proposed angular `(1+r)^2` factor leaves
+  an explicit `(1+D)^2`; the polynomial exponent in the target upper bound
+  must therefore be recalibrated before claiming closure.
+- Added `flat_shadow_green_region_r87/README.md` and `audit_r87.py`.
+  Exact audit passed: `R87_ANGULAR_BRANCH_AND_ZETA_PASSED`,
+  `R87_ENDPOINT_ALGEBRA_AND_CORRECTION_PASSED`,
+  `R87_GREEN_ENDPOINT_DERIVATIVE_PASSED`,
+  `R87_CONJUGATE_PHASE_NONDEGENERACY_PASSED`,
+  `R87_FALLBACK_MULTINOMIAL_ARITHMETIC_PASSED`, and
+  `R87_GREEN_REGION_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
+  passed.

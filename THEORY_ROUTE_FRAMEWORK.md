@@ -6367,3 +6367,19 @@ candidate rate `delta(1-log delta)+Phi_A(delta)` 仍为 conditional。下一步�
 `R86_GREEN_ENDPOINT_FACTOR_CORRECTION_PASSED`、
 `R86_MESOSCOPIC_FACTORIAL_MAJORANT_ARITHMETIC_PASSED` 与
 `R86_GREEN_RESUMMED_AUDIT_COMPLETED`；没有使用扫描、行列式、优化器或远程计算。
+
+## 84. R87：small-proportional safety window audit and endpoint corrections（2026-09-07）
+
+R87 网页端提出了两轨路线：先尝试小比例 `PSC_delta`，若 complex source/phase 仍不能闭合，则切换到 `n^(-j)`-rescaled coefficient 的 mesoscopic factorial upper。网页方案的方向有价值，但本机逐项审计发现其中的端点因子在不同段落出现了互为倒数的写法，故本轮只提交修正后的代数层结论。
+
+令 `omega=exp(2*pi*i/3)`、`rho=alpha/(1+alpha)`，取 root-filter saddle `x(0)=1` 的解析分支。因为 `P_x(0,1)=-(1+omega)!=0`，隐函数定理给出局部非退化分支。完整 angular phase 的 envelope derivative 为 `Phi_A'=2*Log(omega*(1+omega*x))-Log(x)-2*log(2)`，所以 PSC stationary 参数满足 `zeta=4*alpha*x/(omega^2*(1+omega*x)^2)=4*alpha+O(alpha^2)`。从而 `L=1+alpha+zeta`、`Delta=L+zeta=1+alpha+2*zeta` 满足 `Delta=1+9*alpha+O(alpha^2)`。
+
+source proportional endpoint 的参数必须是 `lambda=zeta/L`（不是 `L/zeta`）。因此 `P_H=(1+lambda)^3/(1-lambda)=Delta^3/((1+alpha)L^2)`。R86 已经钉死的 Green 端点因子仍是 `P_G=1-2*zeta/(L+zeta)=(L-zeta)/(L+zeta)=(1+alpha)/Delta`，而不是其倒数。正确乘积为 `P_H P_G=Delta^2/L^2`；网页 R87 中出现的 `Delta^4/((1+alpha)^2L^2)` 正是误用倒数后的乘积。本机记录以正确式为准。
+
+在 `Re(Delta)>=eta>0` 的小比例安全窗内，实 `u` 段的局部 Green exponent `phi(u)=zeta*u+L*Log(u)` 满足 `Re(phi'(u))=Re(Delta)+(1/u-1)Re(L)>=eta`，故 `u=1` 是原始实段的唯一端点最大值；但这仍需 uniform source amplitude bounds 才能升级成 endpoint Laplace theorem。
+
+网页 R87 的 conjugate-phase lemma 也需补充非退化条件：`C!=0` 单独不够，因为 `Theta=0` 且 `C` 纯虚时两共轭主项恒等相消。应要求 `Theta notin pi*Z` 或 `Re(C)!=0`，然后才可从 Cesàro 平方均值推出 limsup lower。
+
+fallback 的有限算术已核验 `sum 1/(r!s!g!)=3^D/D!`，但 angular bound 中的 `(1+r)^2` 会留下显式 `(1+D)^2` 多项式因子；因此 R87 的固定 `q=6` 形式不能由三条目标不等式直接推出，必须重新校准 polynomial prefactor。
+
+本轮新增 `flat_shadow_green_region_r87/README.md` 与 `audit_r87.py`。审计通过 angular branch/zeta、endpoint correction、Green endpoint derivative、conjugate non-degeneracy 与 fallback multinomial arithmetic；不把 PSC、source analytic continuation 或 uniform upper 写成已证定理。整体主线仍是：先关闭 rescaled coefficient propagation，再处理 hybrid Gram/triangular stability；positive backward tower、OU divisibility、global positivity 与 `FS_3` 仍在更高层开放。
