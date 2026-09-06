@@ -2160,9 +2160,45 @@ computation was used.
 - Added `flat_shadow_canonical_beta8_r61/README.md` and
   `flat_shadow_canonical_beta8_r61/audit_r61.py`.  The audit passed exact
   rational degree-16 row/norm checks, Gaussian orientation, and both Bernstein
-  sign certificates; py_compile and `git diff --check` passed.  Commit is
-  pending after this record is staged.
+  sign certificates; py_compile and `git diff --check` passed.  The result is
+  committed as `6be35de`.
 - R61 establishes the partial even-cutoff pattern `tau6>tau8>0`, with beta7
   positive between them, but does not close D.1, infinite positive viability,
   eventual skew annihilation, Gaussian rigidity, or the `P_3 K` bridge.  Next
   unique target: corrected degree-18 `beta9` sign lemma on `0<t<tau8`.
+
+## R62 — corrected beta9 cutoff (2026-09-06)
+
+- The local degree-18 continuation was independently derived before accepting
+  any high-order webpage fraction.  With `a=m3`, `t=a^2`, and the canonical
+  zero diagonal from level 3 onward, `alpha8=0` gives
+  `m17=2a(5799325t^5-17049855t^4+3925920t^3+13603108t^2+
+  3127296t-4435200)/(2-t)^3`.  The degree-18 same-factor row gives
+  `m18=(2948477t^6+1914655626t^5-11976383460t^4+24318362039t^3-
+  15915490026t^2-432574380t+275675400)/(2-t)^3`.
+- The corrected norm factor is `h9=3Q9/[(2-t)^4 P7]`, where `Q9` is the
+  exact degree-16 polynomial recorded in
+  `flat_shadow_canonical_beta9_r62/README.md`.  Together with
+  `h8=-3P8/[2(2-t)^3 P6]`, the project orientation gives
+  `beta9=h9/h8=-2P6 Q9/[(2-t)P7 P8]`.  At `t=0`,
+  `(h8,h9,beta9)=(40320,362880,9)`, so the direction is fixed.
+- Exact Bernstein certificates show `Q9>0` on `[0,1/100]` and
+  `Q9'<0` on `[1/100,1/25]`.  Exact endpoint signs give
+  `Q9(1/100)>0`, `Q9(19/500)<0`, while the R61 certificate plus
+  `P8(19/500)>0>P8(1/25)` gives `tau8>19/500`.  Hence a unique
+  `tau9 in (1/100,19/500)` satisfies `Q9(tau9)=0`, and
+  `tau9<tau8`; numerically `tau9≈0.0379679226232613` only as orientation.
+- On `0<t<tau8`, prior signs give `P6<0`, `P7>0`, `P8>0`, so
+  `beta9>0` exactly on `0<t<tau9` and `beta9<0` on `tau9<t<tau8`.
+  This is a second consecutive even-stage contraction after R61, with the
+  partial pattern `tau6>tau8>tau9>0` and beta7 positive between the first
+  two cutoffs.
+- Added `flat_shadow_canonical_beta9_r62/README.md` and
+  `flat_shadow_canonical_beta9_r62/audit_r62.py`.  The audit passed the exact
+  degree-18 row and norm checks, Gaussian orientation, Bernstein sign
+  certificates, and the cutoff comparison.  D.1, infinite positive
+  viability, eventual skew annihilation, Gaussian rigidity, and the `P_3 K`
+  bridge remain open.  No determinant, optimizer, SDP, sweep, relaxed
+  measure-LP, or remote computation was used.  The next unique target is a
+  structural all-even-stage contraction lemma, not another unverified large
+  formula.

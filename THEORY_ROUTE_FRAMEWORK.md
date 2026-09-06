@@ -4614,3 +4614,96 @@ rigidity 与 `P_3 K` bridge 仍独立 OPEN。下一唯一 lemma 改为 corrected
 degree-16 `beta_8` sign lemma，继续区分 OU law 与 auxiliary Jacobi law，
 禁止 determinant、optimizer、SDP、sweep、relaxed measure-LP 和 remote
 computation。
+
+## 59. R62：corrected degree-18 再次收缩 canonical window（2026-09-06）
+
+R62 在校正后的 `0<t<tau_8` 上继续同一个 canonical family。这里仍然取
+`a=m_3`、`t=a^2`、`alpha_1=a`、`alpha_2=-a`、`alpha_n=0 (n>=3)`，并且
+严格使用项目约定 `beta_n=h_n/h_(n-1)`。网页端高阶分式存在反复倒置风险，
+故本节只保留本机 exact recurrence 与 Bernstein 证书通过的表达式。
+
+### 59.1 degree-18 exact rows
+
+`alpha_8=0` 给出
+
+`m_17=2a(5799325t^5-17049855t^4+3925920t^3+13603108t^2+
+       3127296t-4435200)/(2-t)^3`。
+
+degree-18 same-factor row `G_9=0` 的 reduced Fock relation 为
+
+`b_18=(42240 sqrt(221)b_11b_7+30030 sqrt(238)b_13b_5+
+       37180 sqrt(51)b_15b_3+244 sqrt(255255)b_3b_6b_9+
+       120 sqrt(102102)b_5b_6b_7-280 sqrt(2431)b_6^3+
+       3139 sqrt(12155)b_9^2)/24310`。
+
+代回 Hermite moments 得
+
+`m_18=(2948477t^6+1914655626t^5-11976383460t^4+24318362039t^3-
+       15915490026t^2-432574380t+275675400)/(2-t)^3`。
+
+本机在 `a=0,1/10,1/5` 三个 exact rational points 上同时核验 odd row、
+degree-18 relation 与 `m_18`，没有把浏览器显示的未核验大式直接写入记录。
+
+### 59.2 norm factor and sign polynomial
+
+令
+
+`Q_9(t)=3165494381056t^16+30325981442862714t^15-374454388483999229t^14
+       +1980117276228617592t^13-5948703596679826184t^12
+       +11525374336730958528t^11-15614218470552621360t^10
+       +14603518104424932288t^9-6281195243972625024t^8
+       -4538141298321788672t^7+7271911315244371968t^6
+       -2538108384598913024t^5-76181770793263104t^4
+       -23999642267549696t^3-2927350178119680t^2
+       +45013480243200t+4161798144000`。
+
+本机 recurrence 与 exact rational norm evaluation 给出
+
+`h_8=-3P_8/[2(2-t)^3P_6]`,
+`h_9=3Q_9/[(2-t)^4P_7]`,
+
+从而正确的第九级系数是
+
+`beta_9=h_9/h_8=-2P_6Q_9/[(2-t)P_7P_8]`。
+
+Gaussian sanity check 为 `h_8(0)=40320`、`h_9(0)=362880`、
+`beta_9(0)=9`。这同时确认了 norm ratio 的方向。
+
+### 59.3 exact cutoff comparison
+
+`Q_9` 在 `[0,1/100]` 的 degree-16 Bernstein coefficients 全部严格正，
+所以 `Q_9>0`；`Q_9'` 在 `[1/100,1/25]` 的 degree-15 Bernstein
+coefficients 全部严格负，所以 `Q_9` 在该区间严格递减。精确端点符号为
+
+`Q_9(1/100)>0`, `Q_9(19/500)<0`, `Q_9(1/25)<0`。
+
+因此存在唯一
+
+`tau_9 in (1/100,19/500)`, `Q_9(tau_9)=0`。
+
+R61 的 `P_8'<0` on `[0,1/25]` 证书与
+`P_8(19/500)>0>P_8(1/25)` 又给出 `tau_8>19/500`，故
+`tau_9<tau_8`。数值 `tau_9≈0.0379679226232613` 仅作定位，正式结论
+是上述有理区间与严格 Bernstein 证书。
+
+在 `0<t<tau_8` 上，前轮已有 `P_6<0`、`P_7>0`、`P_8>0`，于是
+
+`beta_9>0  <=>  0<t<tau_9`,
+`beta_9<0  for tau_9<t<tau_8`。
+
+这给出目前可靠的局部里程碑：`tau_6>tau_8>tau_9>0`，且 beta7 在
+`tau_8` 之前不产生额外截断。
+
+### 59.4 全局解释与唯一下一步
+
+R62 不是 full-exact counterexample，也没有证明任意固定非零 skew 最终
+退出；它只说明 canonical branch 的 even-stage contraction 至少再次发生。
+若要从“有限阶段可报道结果”走向 D.1，下一条真正需要的是 structural
+all-even-stage lemma，例如证明 `tau_(2k+2)<tau_(2k)` 并控制其极限，或
+给出不依赖逐阶大多项式的统一 tail sign/curvature mechanism。
+
+因此 D.1、infinite positive viability、eventual skew annihilation、Gaussian
+rigidity 与 `P_3 K` bridge 仍保持彼此独立的 OPEN 状态；R62 没有把
+Favard 辅助谱测度偷换成原始 OU law。新增本机审计为
+`flat_shadow_canonical_beta9_r62/audit_r62.py`，没有使用 determinant、
+optimizer、SDP、sweep、relaxed measure-LP 或 remote computation。
