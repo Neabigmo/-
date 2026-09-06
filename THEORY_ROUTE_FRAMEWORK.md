@@ -3813,3 +3813,89 @@ prefix 证明某个有限阶的 ordinary Jacobi exit `S_(n-1)^2>B_n`，或者更
 R36–R49 的 README/audit，并只攻这个 quantitative tail lemma；不得把
 fixed-K prefix、`Gamma`-only positivity 或 formal Gateaux coefficient
 extractor 当作 genuine full-exact law。
+
+## 48. R50：ordinary-Jacobi 两步中心分离与 tail-budget 形式化
+
+网页端在核对本机 R49 记录后，将当前最小 OPEN 从 lifted-Christoffel
+方向收缩为 ordinary Jacobi 的两步延拓问题。本轮网页端读取并核验的嵌套
+仓库基准是 `3775204505b223767c71fb13a4b930be5e145875`；本机新增
+`flat_shadow_jacobi_center_separation_r50/audit_r50.py` 与 README，审计脚本
+对一般矩符号在 `n=3` 做两步 Schur 核验，并对 same-factor pressure 的
+`n=2,...,6` 做精确核验。
+
+令当前 odd coordinate `y=m_(2n-1)`，exact row 给出
+`m_(2n)=E_n(y)`，并令
+`S_(n-1)=(y-y_n^0)/h_(n-1)`。在 `H_(n-1)>0` 时，一步可行性是
+`h_n(y)=h_(n-1)B_n-(y-y_n^0)^2`，等价于
+`|S_(n-1)|<sqrt(B_n)`。
+
+下一 exact row 中定义
+`w_n(y)=(m_(n+1),...,m_(2n-2),y,m_(2n))^T`，
+`D_n(y)=E_(n+1)(y)-w_n(y)^T H_(n-1)^(-1)w_n(y)`。自由的
+`m_(2n+1)` 可以令两步 Schur off-diagonal 为零；于是穿过下一块的充要
+条件是 `h_n(y)>0` 且 `D_n(y)>0`。本轮精确核验了新的凹度恒等式
+
+`D_n''(y)=-2(H_(n-1)^(-1))_(n-2,n-2)
+        =-2B_(n-1)/h_(n-1)<0`。
+
+其中第二个等号来自 inverse Gram / orthogonal-polynomial decomposition。
+若以 `s=S_(n-1)` 重写，则存在 `M_n` 与 `sigma_n` 使
+
+`D_n(s)=M_n-B_(n-1)h_(n-1)(s-sigma_n)^2`，
+
+故当前一步区间与下一步延拓区间的交叠成为两个显式区间的 overlap
+问题。same-factor cubic pressure 的精确导数和 even pivot 为
+
+`partial_(m_(2n-1))G_(n+1)
+ =-n(n+1)(n+5)(2/3)^(n+1)m_3`，
+`partial_(m_(2n+2))G_(n+1)=3(2/3)^(n+1)`，
+
+所以沿 exact manifold 的中心平移为
+
+`Delta sigma_n^sf
+ =n(n+1)(n+5)m_3/(6B_(n-1))`。
+
+这给出可直接攻击的 sufficient tail estimate：若对固定 `X`，所有 viable
+prefix 在某个 `n<=N(X)` 满足
+
+`sqrt(2)*n(n+1)(n+5)
+ /(6(1+X)^(3/2)B_(n-1))
+ >|sigma_n^geom|+sqrt(B_n)+R_n^+`，
+
+其中 `R_n^+=sqrt(M_n/(B_(n-1)h_(n-1)))`，则两区间分离并得到 uniform
+finite ordinary-Jacobi exit。该条件本身尚未证明；R50 只把它精确化为
+一个 tail-budget lemma，未把 pressure shift 误报成 exit。
+
+固定 `X` 的 rank-2 head 给出 `v>=1/(1+X)`、`m_3^2=2v^3`，故
+`|m_3|>=sqrt(2)/(1+X)^(3/2)`；因此最简单的 amplitude-to-zero rank
+escape 已排除。但 `R12` 型 raw-moment bounds 不控制 moving inverse-Hankel
+spectrum、`h_(n-1)^(-1)`、`B_n` 或 root leverage，仍不足以推出上述统一估计。
+固定 `X` 的有限前缀紧性可以沿 R25 的 finite-intersection 逻辑给出
+“若每阶 prefix 都存在，则存在 compatible moment sequence”的条件性结论，
+但这不是新的 coercivity，也不自动给出 genuine positive inverse-
+Christoffel law 或 OU backward preimage。
+
+本机输出：
+
+`R50_SAME_FACTOR_PRESSURE_AND_EVEN_PIVOT PASSED`、
+`R50_ONE_STEP_VIABILITY_INTERVAL n=3 PASSED`、
+`R50_TWO_STEP_CURVATURE n=3 PASSED`、
+`R50_TWO_STEP_EXTENSION_CRITERION n=3 PASSED`、
+`R50_SAME_FACTOR_CENTER_SHIFT PASSED`、
+`R50_INTERVAL_OVERLAP_COMPLETION PASSED`、
+`R50_FIXED_X_HEAD_NONZERO PASSED`、
+`R50_FIXED_HEAD_TWO_STEP_EXIT REMAINS OPEN`、
+`R50_ROOT_LEVERAGE_DOMINATED_EXIT REMAINS OPEN`、
+`R50_FIXED_X_COMPACTNESS REMAINS CONDITIONAL`、
+`R50_AUDIT_COMPLETED`；并通过 `py_compile` 与 `git diff --check`。
+
+证据边界：本轮没有证明 ordinary Jacobi exit、`Xi_K->infinity`、Gaussian
+rigidity、`P_3K` bridge 或 global transgression；R46 rank>=2、R48 collar
+与 R49 Christoffel compression 的边界全部保留。下一轮网页端必须先读取本
+框架、日志与 R36–R50 README/audit，然后只推进
+`Fixed-Head Two-Step Jacobi Center-Separation / Tail-Budget Lemma`：要么
+给出 `B_n`、`sigma_n^geom`、`R_n^+` / inverse-Hankel spectrum 的全阶
+控制并证明 uniform exit，要么构造严格 compatible 的 bounded-`x` all-degree
+chain。不得用 fixed-K compactness、`Gamma`-only positivity 或 formal
+系数提取冒充 genuine full-exact law，也不得使用 optimizer、SDP、sweep、
+relaxed measure-LP 或 remote computation。

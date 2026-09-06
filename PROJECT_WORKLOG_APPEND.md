@@ -1460,6 +1460,7 @@ computation was used.
   labels the algebraic `u=1` expansion scope; the `u=9`/`z=3` pieces are
   exponentially small for fixed `m`.  No optimizer, SDP, numerical sweep,
   relaxed measure-LP, or remote computation was used.
+
 - Since `r_5=1<=m-1`, the N+4 two-body mixed row still has extra actual
   coefficient scale `R^(1-5+1/2)=R^(-7/2)->0`; this is only a finite-grade
   conditional continuation.  Higher grades, arbitrary-depth conditioning,
@@ -1747,3 +1748,65 @@ computation was used.
   `x=a/v`.  Before the next webpage round, require reading the updated
   framework, worklog, and R36–R49 README/audits.  No optimizer, SDP, sweep,
   relaxed measure-LP, or remote computation was used.
+
+## R50 — two-step Jacobi center separation and tail budget (2026-09-06)
+
+- The webpage completed R50 after reading the local framework, worklog, and
+  R36–R49 audits, and verified nested-repository HEAD
+  `3775204505b223767c71fb13a4b930be5e145875`.  It selected the ordinary-Jacobi
+  route and did not claim that the new identities already prove an exit.
+- For the current odd coordinate `y=m_(2n-1)`, the exact row
+  `m_(2n)=E_n(y)` gives
+  `h_n(y)=h_(n-1)B_n-(y-y_n^0)^2` and
+  `S_(n-1)=(y-y_n^0)/h_(n-1)`, hence one-step viability is
+  `|S_(n-1)|<sqrt(B_n)`.
+- With
+  `w_n(y)=(m_(n+1),...,m_(2n-2),y,m_(2n))^T` and
+  `D_n(y)=E_(n+1)(y)-w_n(y)^T H_(n-1)^(-1)w_n(y)`, the free
+  `m_(2n+1)` can cancel the two-step Schur off-diagonal.  Extension through
+  the next block is then equivalent to `h_n(y)>0` and `D_n(y)>0`.
+- The new exact curvature identity is
+  `D_n''(y)=-2(H_(n-1)^(-1))_(n-2,n-2)
+   =-2B_(n-1)/h_(n-1)<0`.  Completing the square in
+  `s=S_(n-1)` gives
+  `D_n(s)=M_n-B_(n-1)h_(n-1)(s-sigma_n)^2`, so the two-step question is an
+  explicit overlap of the current viability interval with the next extension
+  interval.
+- Reusing the audited same-factor pressure, the exact odd derivative and even
+  pivot are
+  `partial_(m_(2n-1))G_(n+1)
+   =-n(n+1)(n+5)(2/3)^(n+1)m_3` and
+  `partial_(m_(2n+2))G_(n+1)=3(2/3)^(n+1)`.  Along the exact manifold the
+  center shift is
+  `Delta sigma_n^sf=n(n+1)(n+5)m_3/(6B_(n-1))`.
+- Fixed `X` and the rank-2 head imply `v>=1/(1+X)` and
+  `|m_3|>=sqrt(2)/(1+X)^(3/2)`, excluding the simplest head-amplitude-to-zero
+  escape.  The proposed sufficient exit condition compares this pressure
+  shift against `|sigma_n^geom|+sqrt(B_n)+R_n^+`, with
+  `R_n^+=sqrt(M_n/(B_(n-1)h_(n-1)))`.  This is a precise target, not a proved
+  estimate: R12 raw-moment bounds do not control moving inverse-Hankel spectra,
+  `h_(n-1)^(-1)`, `B_n`, or root leverage.
+- Added `flat_shadow_jacobi_center_separation_r50/audit_r50.py` and README.
+  The local exact audit checks the pressure/pivot formulas for `n=2,...,6`, the
+  two-step Schur identities and curvature for `n=3`, the center shift,
+  completed-square algebra, and the fixed-`X` head lower bound.
+- Local markers passed:
+  `R50_SAME_FACTOR_PRESSURE_AND_EVEN_PIVOT PASSED`;
+  `R50_ONE_STEP_VIABILITY_INTERVAL n=3 PASSED`;
+  `R50_TWO_STEP_CURVATURE n=3 PASSED`;
+  `R50_TWO_STEP_EXTENSION_CRITERION n=3 PASSED`;
+  `R50_SAME_FACTOR_CENTER_SHIFT PASSED`;
+  `R50_INTERVAL_OVERLAP_COMPLETION PASSED`;
+  `R50_FIXED_X_HEAD_NONZERO PASSED`;
+  `R50_FIXED_HEAD_TWO_STEP_EXIT REMAINS OPEN`;
+  `R50_ROOT_LEVERAGE_DOMINATED_EXIT REMAINS OPEN`;
+  `R50_FIXED_X_COMPACTNESS REMAINS CONDITIONAL`; and
+  `R50_AUDIT_COMPLETED`.  `py_compile` and `git diff --check` also passed.
+- Evidence boundary remains strict: no ordinary-Jacobi exit, `Xi_K->infinity`,
+  Gaussian rigidity, `P_3K` bridge, or global transgression is claimed.
+  Fixed-`X` compactness is only the R25-derived conditional finite-intersection
+  statement and does not supply a genuine positive inverse-Christoffel law or
+  OU backward preimage.  The next webpage round must read R36–R50 and attack
+  the `Fixed-Head Two-Step Jacobi Center-Separation / Tail-Budget Lemma` or
+  construct a rigorously compatible bounded-`x` all-degree chain.  No optimizer,
+  SDP, sweep, relaxed measure-LP, or remote computation was used.
