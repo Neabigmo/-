@@ -2999,3 +2999,43 @@ computation was used.
   `R88_LOWER_BOUNDARY_BOOKKEEPING_PASSED`, and
   `R88_ENDPOINT_LEMMA_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
   passed.
+
+## R89 — Source factorization, moving-saddle obstruction, and conditional absolute majorant (2026-09-07)
+
+- R89 tested the R88 global fixed-saddle amplitude hypothesis against the
+  fully resummed source.  The local record defines
+  `T_(m,s)=2(s-1)!*binom(m+s+1,s-1)*binom(m+s-3,s-1)` and
+  `Xi_(m,s)=p_(m+s,m)/T_(m,s)`, then verifies the exact identity
+  `R_(m+s,m)=-4*(2m)!/((m+2)!(m-2)!)*D_(m,s)*Xi_(m,s)/(s-1)!`.
+  This avoids the webpage's mixed `Theta`/`1/Theta` convention.
+- The same identity gives a formal Poisson-type coefficient representation
+  for `R_m(z)`, but no complex asymptotic is inferred from it.
+- A second sensitive algebraic correction was found: with `y=omega*x`, the
+  audited PSC formula becomes
+  `zeta=4*alpha*y/(1+y)^2`, not its reciprocal.  On the continuous real
+  branch, the transformed quadratic has unit-circle roots and this corrected
+  expression is positive real.
+- In the leading model `R_m(z) proportional to z*e^z`, the frozen source
+  normalization has logarithmic modulus
+  `j*[zeta*(u-1-log u)-alpha*log u]+log u`, which is positive for fixed
+  `0<u<1` and `zeta>0`.  Thus the global R88 `C^1` amplitude assumption fails
+  already in the leading model.  This is a no-go for that normalization, not
+  a no-go for PSC; a moving-saddle or boundary-layer proof is required.
+- Conditional on a source band majorant
+  `|Xi_(m,s)|<=C exp(C*s^2/m)`, the exact factorization plus the R87
+  angular/Green targets gives the precise conditional bound
+  `|K_(j+D+1,j)|<=C*j^(-3)*(1+D)^3*3^D/D!*exp(C*D^2/j)`.
+  The `(1+D)^3` factor is explicit and is not hidden in a polynomial `q`.
+- The exact rescaled coefficient-weight ratio is
+  `16^D*c_(j+D)/c_j`, bounded by
+  `4^D*exp(D*(D+1)/j)`; this is the correct weight input for the conditional
+  mesoscopic closure.
+- Added `flat_shadow_source_majorant_r89/README.md` and `audit_r89.py`.
+  Exact audit passed: `R89_EXACT_SOURCE_FACTORIZATION_PASSED`,
+  `R89_POISSON_COEFFICIENT_IDENTITY_PASSED`,
+  `R89_CORRECTED_ZETA_SUBSTITUTION_PASSED`,
+  `R89_LEADING_MODEL_NO_GO_PASSED`,
+  `R89_SOURCE_MAJORANT_ARITHMETIC_PASSED`,
+  `R89_RESCALED_WEIGHT_RATIO_PASSED`, and
+  `R89_SOURCE_MAJORANT_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
+  passed.

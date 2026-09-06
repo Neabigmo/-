@@ -6411,3 +6411,38 @@ conjugate branch 的非退化 limsup。因而本轮不宣称 proportional lower/
 本机新增 `flat_shadow_endpoint_lemma_r88/README.md` 与 `audit_r88.py`。审计通过
 endpoint differentiation、endpoint geometry、explicit remainder constant、corrected
 Green factor 与 lower-boundary bookkeeping；`py_compile`、`git diff --check` 通过。
+
+## 86. R89：source factorization、moving-saddle obstruction 与 conditional absolute majorant（2026-09-07）
+
+R89 对 R88 的 uniform-amplitude 假设做了正确的压力测试。定义
+`T_(m,s)=2(s-1)! binom(m+s+1,s-1)binom(m+s-3,s-1)` 与无除法的
+`Xi_(m,s)=p_(m+s,m)/T_(m,s)`，则 exact source 公式严格化简为
+`R_(m+s,m)=-4(2m)!/((m+2)!(m-2)!) * (m+s+1)/((m+s)(m+s-1)(m+s-2)) * Xi_(m,s)/(s-1)!`。
+本机 exact rational blocks 已逐项核对。若使用 `Theta=T/Xi` 的记号，则 source 中应出现 `1/Theta`；因此本轮统一使用 `Xi`，避免与网页端 source factor 的正反定义混淆。
+
+由此 `R_m(z)` 可形式地写成 `-C_m z e^z E[D_(m,N+1)Xi_(m,N+1)]`，其中
+`C_m=4(2m)!/((m+2)!(m-2)!)`、`D_(m,s)=(m+s+1)/((m+s)(m+s-1)(m+s-2))`、`N~Poisson(z)`；这是 coefficient-by-coefficient 的 formal identity，不是复 source asymptotic。
+
+本轮又纠正一个敏感代数点。令 `y=omega*x`、`q=exp(-i*pi/6)`、`y=qv`，saddle 方程化为
+`v^2-sqrt(3)(2rho-1)v+1=0`。实 `alpha>=0` 的连续分支满足 `|y|=1`、`arg(y) in [0,2*pi/3]`，并且把已审计的
+`zeta=4*alpha*x/(omega^2(1+omega*x)^2)` 代入后得到
+`zeta=4*alpha*y/(1+y)^2=alpha/cos(arg(y)/2)^2>0`。
+网页 R89 某段写成 `4*alpha(1+y)^2/y`，这是倒数错误；虽然在 `alpha=0` 的首阶展开上看不出来，本机 audit 已拒绝该式。
+
+固定 endpoint saddle 的 fully-resummed source normalization 在 leading model
+`R_m(z) proportional to z e^z` 下满足
+`A_src^(0)(u)=u^(1-(alpha+zeta)j)exp(j*zeta(u-1))`，故
+`log|A_src^(0)(u)|=j[zeta(u-1-log u)-alpha log u]+log u`。
+对固定 `0<u<1`、实 `zeta>0`，主指数严格为正。这给出一个结构性 no-go：R88 的 global frozen-saddle `C^1` amplitude 假设不能直接套在 fully-resummed source 上。它否定的是该归一化方式，不是否定 PSC；后续必须采用 moving source saddle、endpoint boundary layer 或 absolute majorant。
+
+若另行证明 `|Xi_(m,s)|<=C exp(C s^2/m)`，则 exact factorization、`D_(m,s)<=9/m^2` 与 R87 angular/Green 目标不等式条件性推出
+`|K_(j+D+1,j)| <= C j^(-3)(1+D)^3 3^D/D! exp(CD^2/j)`。
+其中 `(1+D)^3` 的三次来源已明确：angular 的 `(1+r)^2` 与 source 的
+`1/(s-1)!=s/s!`。这仍是 conditional target，因为 source band、angular band 和 uniform Green majorants 尚未全部证明。
+
+rescaled coefficient weight 的 exact ratio 为
+`tilde omega_(n,j+D)/tilde omega_(n,j)=16^D c_(j+D)/c_j`
+`=16^D prod_(h=1)^D(j+h)^2 / prod_(h=1)^(2D)(2j+h)`，从而直接有
+`<=4^D exp(D(D+1)/j)`。因此一旦 conditional kernel upper 真实闭合，weighted target 只增加 `12^D` 与同阶 `exp(CD^2/j)`，factorial 从 `D~C log j` 起可吞掉显式多项式因子。
+
+本机新增 `flat_shadow_source_majorant_r89/README.md` 与 `audit_r89.py`。审计通过 exact source factorization、Poisson coefficient bookkeeping、corrected zeta substitution、leading-model no-go、source majorant arithmetic 与 rescaled weight ratio；R89 不宣称 actual source majorant、PSC 或 proportional lower。
