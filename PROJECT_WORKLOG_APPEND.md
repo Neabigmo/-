@@ -2318,3 +2318,27 @@ computation was used.
   `flat_shadow_mehler_projection_r66/audit_r66.py`. The exact audit is the
   authoritative local record; it does not use determinant, optimizer, SDP,
   sweep, relaxed measure-LP, or remote computation.
+
+## R67 — associated-Hermite projection square-root law (2026-09-07)
+
+- Webpage R67 derived the exact representation
+  q_n=-A_(n-3)^(3)+3xA_(n-4)^(4), with associated-Hermite recurrence
+  A_(m+1)^(c)=xA_m^(c)-(m+c)A_(m-1)^(c).
+- Combining the ordinary Hermite expansions yields a positive finite sum for
+  p_n=||q_n||_gamma^2/n!, with coefficients
+  c_(m,j)=(-1)^(j+1)((j+1)(j+2)(j^2+5j-2m)/2)
+  ((m-j-1)!/(m-2j)!), m=n-3.
+- The exact factorial ratio has the Gaussian scaling
+  rho_(m,j)=m^5(m-j-1)!^2/((m-2j)!(m+3)!), and the Riemann limit is
+  integral (1/4)y^4(y^2-2)^2 exp(-y^2)dy=33 sqrt(pi)/128. Hence
+  p_n~(33 sqrt(pi)/128)n^(-1/2).
+- Consequently P(z)~(33 pi/128)(1-z)^(-1/2) radially at z=1, while
+  K(z)=D(z)-P(z) has the opposite singular part under the R66 D-boundary
+  hypothesis. This is a reportable Gaussian-local projection result.
+- Full coefficientwise Lambda_n asymptotics remain OPEN because the D-part
+  needs a coefficient-level transfer and first-difference bound. No finite
+  samples were promoted to an eventual-sign theorem.
+- Added `flat_shadow_associated_hermite_r67/README.md` and
+  `flat_shadow_associated_hermite_r67/audit_r67.py`. The exact audit
+  passed; it does not use beta_11/degree22, determinant, optimizer, SDP, sweep,
+  relaxed measure-LP, or remote computation.

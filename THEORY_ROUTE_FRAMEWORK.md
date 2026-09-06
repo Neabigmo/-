@@ -4966,3 +4966,50 @@ p_n=||q_n||_gamma^2/n!
 尺度、finite-t cutoff、backward divisibility 与 D.1 仍 OPEN。
 
 新增本机审计为 `flat_shadow_mehler_projection_r66/audit_r66.py`。
+
+## 64. R67：associated-Hermite 投影尾的严格平方根律（2026-09-07）
+
+R67 继续沿用 R66 的 finite-head tangent，固定
+q_0=q_1=0、q_2=-H_1、q_3=-H_0、q_(n+1)=xq_n-nq_(n-1)。
+引入 associated-Hermite 多项式
+A_(-1)^(c)=0、A_0^(c)=1、A_(m+1)^(c)=xA_m^(c)-(m+c)A_(m-1)^(c)，
+则对 n>=3、m=n-3，
+
+q_n=-A_m^(3)+3xA_(m-1)^(4)。
+
+其普通 Hermite 展开为
+
+A_m^(c)=sum_(j=0)^(floor(m/2)) (-1)^j binom(m-j,j)(c)_j H_(m-2j)，
+
+合并后得到
+
+q_n=sum_j c_(m,j)H_(m-2j)，
+c_(m,j)=(-1)^(j+1)((j+1)(j+2)(j^2+5j-2m)/2)((m-j-1)!/(m-2j)!)。
+
+因此投影范数拥有全正有限和
+
+p_n=||q_n||_gamma^2/n!
+=1/(4(m+3)!) sum_j (j+1)^2(j+2)^2(j^2+5j-2m)
+^2*((m-j-1)!^2/(m-2j)!)。
+
+将 j=y sqrt(m) 后，精确 factorial ratio 的主项为
+rho_(m,j)=m^5(m-j-1)!^2/((m-2j)!(m+3)!) -> exp(-y^2)；
+对数不等式与 entropy 区域给出可积 Gaussian majorant。于是得到严格
+
+p_n ~ (33 sqrt(pi)/128)n^(-1/2)。
+
+等价地，投影生成函数在径向 z->1- 满足
+
+P(z)=sum p_n z^n ~ (33 pi/128)(1-z)^(-1/2)，
+
+而 R66 的 D(z) 仍只有有限 Abel 边界，所以
+K(z)=D(z)-P(z) ~ -(33 pi/128)(1-z)^(-1/2)，均在现有 analytic
+boundary hypotheses 下理解。本机 exact audit 核验 associated 展开、正有限和、
+rho 乘积、Riemann 项归一化与常数积分；没有把 finite samples 当作证明。
+
+这给出了一个可独立报告的 Gaussian-local projection 结果，但尚不能推出完整
+kappa_n 或 Lambda_n 的 coefficientwise 渐近：缺口是 D_n/n! 及其 first
+difference 的 transfer bound。因此 eventual sign、full Lambda_n asymptotic、
+shrinking cutoff、backward divisibility 与 D.1 仍 OPEN。
+
+新增本机审计为 `flat_shadow_associated_hermite_r67/audit_r67.py`。
