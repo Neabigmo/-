@@ -2408,3 +2408,34 @@ computation was used.
   and `git diff --check` passed after correcting the audit's symbol-substitution
   check. The next webpage target is R71: derive a profile `N_n(s_n x)` or prove
   a uniform `o(1)` tail bound.
+
+## R71 — Hermite–Gram all-order boundary-layer barrier (2026-09-07)
+
+- The webpage explicitly reported that its connector could not read the R70
+  local records. I therefore treated its output as a proposal and re-derived
+  the admitted identities against the local R64/R70 framework before recording.
+- The new conditional lemma lifts the scalar boundary-layer necessity to the
+  finite Hermite Gram block `G_n(a)=(L_a[e_j e_k])`, with `e_k=H_k/sqrt(k!)`.
+  The first tangent is represented by a bounded Gaussian multiplier `g_1`, so
+  `sup_n ||A_n||_op<infinity` in `G_n=I+aA_n+R_n`.
+- If a prior-positive norm chain has a shrinking first exit, the normalized Gram
+  block is singular while `sqrt(tau_n)A_n=o(1)`. Hence the nonlinear Gram tail
+  must satisfy `||R_n(sqrt(tau_n))||_op>=1-o(1)`. This is a genuine operator-level
+  barrier and does not construct a reversal.
+- Hermite product expansion gives the exact finite reduction
+  `R_n(a)=sum_(m<=2n)r_m(a)T_(m,n)` and the explicit conditional majorant
+  `M_n(a)=3^(n/2)sum_(m<=2n)3^(m/2)|r_m(a)|`. A bound for this quantity on an
+  explicit `a_n` scale would immediately produce a no-reversal result on
+  `t<=a_n^2`; no such all-`n` source bound is yet available.
+- The exact angular eigenvalue is `A_(2k)=3 binom(2k,k)/6^k`, decreasing by the
+  ratio `(2k+1)/(3(k+1))`; the inverse solver scale is asymptotic to
+  `sqrt(pi*n)/3*(3/2)^n`. This is only a locator for possible amplification, not
+  an existence or cutoff theorem.
+- Added `flat_shadow_gram_barrier_r71/README.md` and
+  `flat_shadow_gram_barrier_r71/audit_r71.py`. The audit passed the normalization,
+  Gaussian-transform, endpoint-bound, Schur-kernel, all-order-majorant, and
+  angular-eigenvalue checks; `py_compile` and `git diff --check` remain to be run.
+- R71 does not close D.1, positive exact backward-tower existence, or backward
+  OU divisibility. The next unique target is a same-factor nonlinear-source
+  Banach majorant for `M_n(a)`, or a rigorously derived operator profile near the
+  angular-solver scale.

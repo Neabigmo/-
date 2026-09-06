@@ -5161,3 +5161,89 @@ scaling：构造 `N_n(s_n x)` 的非平凡极限并得到负值，或证明其�
 `o(1)`（从而排除 reversal）。
 
 新增本机审计为 `flat_shadow_boundary_layer_r70/audit_r70.py`。
+
+## 68. R71：Hermite–Gram all-order boundary-layer barrier（2026-09-07）
+
+网页端本轮明确报告连接器未能读取 R70 两处本机记录，因此本节只把其新推导
+中可独立核验的部分纳入，并以本机 R70/R64 记录校正浏览器纯文本中的分式方向。
+
+令 `e_k=H_k/sqrt(k!)`、`V_n=span(e_0,...,e_n)`，并在 conditional
+full same-factor canonical formal branch 下定义有限 Hermite Gram 块
+
+`G_n(a)=(L_a[e_j e_k])_(0<=j,k<=n)`，`t=a^2`。
+
+Gaussian 点为 `G_n(0)=I`。写
+
+`G_n(a)=I+a A_n+mathcal R_n(a)`，
+`(A_n)_(j,k)=L_1[e_j e_k]`。
+
+R64 的一阶 tangent transform 为
+`U(z)=z^3 integral_0^1 q exp(-q z^2)(1-q z^2/2)ds`，其中 `q=s(1-s)`。
+用 Gaussian Hermite transform `T` 和 `R=x-partial_x`，其一阶 functional 有
+显式代表
+
+`g_1(x)=integral_0^1(qR^3-q^2R^5/2)psi_q(x)ds`，
+`psi_q=(1-2q)^(-1/2)exp(-q x^2/(1-2q))`。
+
+因为 `T psi_q=exp(-qz^2)`、`T(Rf)=zT(f)`，并利用 `q=s(1-s)` 的两个端点，
+可得 `g_1 in L^infinity(gamma)`。故
+
+`A_n=P_n M_(g_1)P_n`，`sup_n ||A_n||_op<=||g_1||_infinity=:M_*<infinity`。
+
+这是比 scalar `Lambda_n` 更强的 Gaussian 一阶统一界。
+
+再令 `gamma_n(a)=h_n(a)/n!`。规范化 Hermite 块的 Schur complement 给出
+`gamma_n`，故
+
+`beta_n(t)/n=gamma_n(a)/gamma_(n-1)(a)`。
+
+若前级 norm ratios 为正且 `beta_n(tau_n)=0`，则 lower block 可逆，Schur
+complement 的 kernel vector 说明 `G_n(sqrt(tau_n))` 奇异。于是
+
+`||G_n(sqrt(tau_n))-I||_op>=1`。
+
+而 `sqrt(tau_n)A_n` 在 `tau_n->0` 时一致趋于零，所以任何 shrinking exit
+必须满足
+
+`||mathcal R_n(sqrt(tau_n))||_op>=1-o(1)`。
+
+换言之，趋零退出不可能由 Gaussian 一阶 tangent 累积产生；二阶及以上的
+same-factor/Jacobi Hermite tail 必须在 Gram operator norm 中造成 order-one
+变形。若某点满足 `||G_n(a)-I||_op<1`，则所有 leading blocks 的 Schur
+complements 都为正，从而得到一个 exact finite-stage no-reversal certificate。
+
+该障碍还能化为全阶 Hermite moment tail。令
+`eta_m(a)=L_a[e_m]`、
+`r_m(a)=eta_m(a)-delta_(m,0)-aL_1[e_m]`，则 Hermite product formula 给出
+
+`mathcal R_n(a)=sum_(m=0)^(2n)r_m(a)T_(m,n)`，
+`(T_(m,n))_(j,k)=<e_j e_k,e_m>_gamma`。
+
+Hölder `(4,2,4)` 与 Gaussian hypercontractivity 给出
+`||T_(m,n)||_op<=3^((n+m)/2)`，因此
+
+`||mathcal R_n(a)||_op<=mathcal M_n(a)`，
+`mathcal M_n(a)=3^(n/2)sum_(m=0)^(2n)3^(m/2)|r_m(a)|`。
+
+这提供了一个真正的 conditional all-order reduction：若能在显式 `a_n->0`
+上证明 `sup_(|a|<=a_n)mathcal M_n(a)->0`（或统一小于 `1-delta`），便在
+原变量 `0<=t<=a_n^2` 得到 no-reversal；但 R71 本身还没有证明这个 source
+majorant。
+
+同一轮还校正并记录了 angular solver 的确切尺度。对
+`r_j=sqrt(2/3)cos(theta+2pi j/3)`，
+
+`A(z^(2k))=A_(2k)z^(2k)`，
+`A_(2k)=3 binom(2k,k)/6^k`，
+`A_(2k+2)/A_(2k)=(2k+1)/(3(k+1))<1`。
+
+故 degree `<=2n` 的 coefficient-`ell^1` inverse norm 为 `A_(2n)^(-1)`，且
+`A_(2n)^(-1)~sqrt(pi n)/3*(3/2)^n`。这是 solver 的潜在指数放大器，不能
+单独推出 cutoff 或其尺度。
+
+R71 仍未证明 (A) 负 profile、(B) 无附加假设的显式 no-reversal scale、D.1、
+positive backward tower 或 backward OU divisibility。下一条唯一目标是从
+same-factor nonlinear source recursion 控制 `mathcal M_n(a)`，或在该潜在放大
+尺度上建立非平凡 operator profile。
+
+新增本机审计为 `flat_shadow_gram_barrier_r71/audit_r71.py`。
