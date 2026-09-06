@@ -6496,6 +6496,53 @@ source leg 在上述小比例 band 上 **PROVED**；angular、uniform Green、fu
 kernel 拼接、PSC moving saddle、比例下界/等式及更高层 positive tower/OU/`FS_3`
 仍 OPEN 或 CONDITIONAL。
 
+## 89. R92：global source polynomial bound and all-gap rescaled closure（2026-09-07）
+
+R92 没有把 R85 的 proportional saddle `o(j)` 强行升级成 compact-uniform
+估计，而是从 R90 修正版的 exact `A/B` finite sums 取一个粗但全局的 bound。
+R83 binomial support 强制每个非零项满足 `a<=m-2`。对 `m>=3`，corrected
+`m`-factor product 不超过 1；剩余 factorial 比值配对后，对 `s>=2` 的 A 组和
+`s>=3` 的 B 组分别可压到 `1/(s-1)`、`1/(s-2)`，而多项式因子至多为
+`4*ell^2` 量级。计数项数并单独处理 `s=1,2`，得到全带 actual theorem
+
+`|Xi_(m,s)|<=16*(m+s)^4`，`m>=3,s>=1`。
+
+结合 R89 exact factorization、`D_(m,s)<=9/m^2` 和正确方向的
+`(2m)!/((m+2)!(m-2)!)<=4^m/sqrt(m)`，得到
+`|R_(m+s,m)|<=576*4^m*m^(-5/2)*(m+s)^4*s/s!`。
+
+Green exact coefficient 可全局分解为
+`|G_(ell+g,ell)|<=1/g!+2^g/((ell+1)(g-1)!)`（`g>=1`，`g=0` 时 `G=1`）。
+与 R91 global angular bound 及 exact convolution 拼接后，对 `j>=1,D>=2` 有
+
+`|K_(j+D+1,j)|<= (256/3)j^(-3)(j+D+1)^4`
+`*D(D^2+6D+2)3^D/D!`
+` +18j^(-3)(j+D+1)^3`
+`*D(D-1)(D^2+7D-2)4^D/D!`。
+
+两个 polynomial 都来自精确生成函数：第一项为
+`(x^2+3x+1)e^x * x e^x * e^x`，第二项为
+`(x^2+3x+1)e^x * x e^x * 2x e^(2x)`。没有把大 gap 的 source 或 Green
+当作 fixed-gap 渐近外推。
+
+R90 的 global weight inequality `<4^(D+1)` 使 weighted terms 仅增加
+`12^D/D!`、`16^D/D!`。在 `D>=j/8` 时 `j<=8D`、`j+D+1<=10D`，
+故 tail 被可求和序列 `C D^7 16^D/D!` 控制；R91 已证明的 `D<=j/8`
+区间负责其余部分。于是 exact mixed-kernel decomposition 的
+`n^(-j)`-rescaled coefficient column 全 gap 有界：
+
+`sup_(n,j>=1) sum_k |K_(k,j)^(n)|*tilde omega_(n,k)/tilde omega_(n,j)<infinity`。
+
+本机新增 `flat_shadow_global_tail_r92/README.md` 与 `audit_r92.js`。
+BigInt 有理审计通过 `R92_GLOBAL_SOURCE_ANCHORS_PASSED`、
+`R92_GLOBAL_GREEN_BOUND_ANCHORS_PASSED`、
+`R92_GLOBAL_CONVOLUTION_IDENTITIES_PASSED`、`R92_TAIL_ARITHMETIC_PASSED` 与
+`R92_GLOBAL_TAIL_AUDIT_COMPLETED`。R92 期间还明确拒绝网页端 central-binomial
+分式倒置写法；状态因此更新为：rescaled coefficient propagation 已全 gap
+**PROVED**，下一主瓶颈转移到 hybrid Gram/strict-triangular stability，随后
+才是 PSC lower/equality、global positivity、positive backward tower、OU
+divisibility 与 `FS_3`。
+
 ## 88. R91：mesoscopic angular/Green/full-kernel closure（2026-09-07）
 
 R90 已把 source theorem 关闭在 `m>=8`、`s<=m/8`。R91 网页端进一步给出两条

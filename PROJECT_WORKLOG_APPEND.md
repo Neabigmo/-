@@ -3108,3 +3108,34 @@ computation was used.
 - The next overall bottleneck is now sharply localized to the compact-uniform
   large-gap sector `D/j>=1/8`; PSC lower/equality and the positive backward
   tower remain higher-level open problems.
+
+## R92 — Global source bound and all-gap rescaled closure (2026-09-07)
+
+- R92 found a direct route around uniformizing the R85 proportional saddle:
+  the corrected R90 exact `A/B` sums have support `a<=m-2`, the `m`-factor
+  product is at most one, and factorial pairing gives a coarse global theorem
+  `|Xi_(m,s)|<=16*(m+s)^4` for `m>=3`, `s>=1`.  The `s=1,2` heads are handled
+  separately; no fixed-gap asymptotic is extrapolated to moving `s`.
+- With the exact source factorization and the correctly oriented
+  `(2m)!/((m+2)!(m-2)!)<=4^m/sqrt(m)`, this gives
+  `|R_(m+s,m)|<=576*4^m*m^(-5/2)*(m+s)^4*s/s!` globally on the source indices.
+- The exact Green coefficient has the global absolute bound
+  `|G|<=1/g!+2^g/((ell+1)(g-1)!)` for `g>=1`, with `G=1` for `g=0`.
+  Splitting these two Green pieces and using the exact R91 angular bound gives
+  the all-gap kernel upper with bases `3^D/D!` and `4^D/D!`:
+  `|K| <= (256/3)j^(-3)(j+D+1)^4 D(D^2+6D+2)3^D/D!`
+  ` +18j^(-3)(j+D+1)^3 D(D-1)(D^2+7D-2)4^D/D!`.
+- R90 weight `<4^(D+1)` turns these into `12^D/D!` and `16^D/D!`.
+  The R91 interval `D<=j/8` and the R92 tail `D>=j/8` therefore combine to
+  prove a globally bounded `n^(-j)`-rescaled mixed coefficient column.
+- Added `flat_shadow_global_tail_r92/README.md` and `audit_r92.js`.
+  Exact audit output:
+  `R92_GLOBAL_SOURCE_ANCHORS_PASSED maxRatio=1/4096`,
+  `R92_GLOBAL_GREEN_BOUND_ANCHORS_PASSED`,
+  `R92_GLOBAL_CONVOLUTION_IDENTITIES_PASSED`,
+  `R92_TAIL_ARITHMETIC_PASSED`, and
+  `R92_GLOBAL_TAIL_AUDIT_COMPLETED`.
+- This closes the coefficient-propagation branch at the rescaled norm.  The
+  next central problem is no longer source/angle/Green, but hybrid
+  Gram/strict-triangular stability; PSC lower/equality and positive backward
+  tower/OU-divisibility remain separate open layers.
