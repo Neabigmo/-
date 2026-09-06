@@ -3256,3 +3256,58 @@ exact 与网页渐近：二元 block generator、`dot p_3` generator、`m=4`
 Non-SOS Graded Value Transgression、Gaussian rigidity 仍 OPEN，`P_3K`
 bridge 仍完全断开。下一轮网页端开始工作前必须先读取本框架、工作日志及
 R36–R42 的 README/audit；只有新的可精确核验有限恒等式才继续新增本机审计。
+
+## 40. R43：m=5 的首个 residue 变化阶通过，OPEN 收缩到一般 m>=5
+
+本轮本机沿用 R42 的精确二元 block generator 与 `dot p_3` generator，直接
+推进下一未决情形 `m=5`。这里严格区分了三层证据：生成函数和有限回归是
+exact；`u=1` 的系数提取是固定 `m` 的代数渐近装配；由 residue 推出
+N+4 条件数行为仍只是 conditional continuation。
+
+对 `m=5`，取消 pure-D component 后的相关系数为
+`q_(5,2)=33/16`、`q_(5,4)=23sqrt(11)/8`、`q_(5,6)=47sqrt(33)/16`。
+
+本机从 R42.3/R42.5 的 exact generator 得到目标阶的装配：
+
+`W+chi_5D_(n,14)` 的 `n^(11/2), n^(9/2), n^(7/2)` 系数分别为
+`55sqrt(231)/(224sqrt(pi))`、`-11343sqrt(231)/(7168sqrt(pi))`、
+`2266031sqrt(231)/(2293760sqrt(pi))`；
+
+`D_(n,12)` 的相应三阶系数为
+`sqrt(462)/(240sqrt(pi))`、`-sqrt(462)/(2560sqrt(pi))`、
+`-14917sqrt(462)/(163840sqrt(pi))`；
+
+`C_(n,5)` 的 `n^(9/2), n^(7/2)` 系数为
+`-57sqrt(231)/(3584sqrt(pi))`、`6871sqrt(231)/(114688sqrt(pi))`；
+
+`D_(n,10)` 的前两阶为
+`3sqrt(14)/(40sqrt(pi))`、`-9sqrt(14)/(1280sqrt(pi))`。
+
+因此，使用 `rho_5=825sqrt(2)/28`，residue numerator 为
+`-5703sqrt(231)/(3584sqrt(pi)) n^(9/2)`
+`+3711849sqrt(231)/(573440sqrt(pi)) n^(7/2)+O(n^(5/2))`，
+从而本机得到
+`sigma_5=-9505sqrt(66)/896`、
+`kappa_5=18887sqrt(66)/448>0`、`r_5=1`。
+
+这与 `m=3,4` 的行为一致，但仍不能从三个值外推一般 `kappa_m` 闭式或
+非零性。由于 `r_5=1<=m-1`，N+4 mixed row 的额外实际 carrier 尺度仍为
+`R^(1-5+1/2)=R^(-7/2)->0`，所以这一层没有 two-body family-specific
+weighted-conditioning no-go；仍缺 N+6 以上 channel、任意深度 uniform
+conditioning，以及 positive flat-shadow remote tail。
+
+本机新增 `flat_shadow_residue_r43/audit_r43.py` 与 README。它核验：R42.3
+block generator 的有限 Hermite 对照、m=5 的 exact finite regression、
+R42.5 raw `dot p_3` generator 的直接 Gaussian 对照、`q_2/q_4/q_6`、
+`C^(1)+C^(3)` 的目标阶装配、D denominator、residue quotient 及
+weighted exponent arithmetic。关键有限回归是
+`K_(5,5)=-219200sqrt(462)/6561`、`D_(5,10)=91916sqrt(7)/2187`、
+`D_(5,12)=46160sqrt(231)/6561`、`D_(5,14)=15400sqrt(858)/6561`、
+`S_(5,5)=-687675sqrt(66)/160853`。
+
+当前最小 OPEN 仍是 **General-m>=5 First Residue Variation Lemma** 的
+一般非零性（以及更理想的一般显式 `kappa_m`），而不是 m=5。上位
+Constraint-Coupled Non-SOS Graded Value Transgression、Gaussian rigidity
+仍 OPEN，`P_3K` bridge 仍完全断开。下一轮网页端开始工作前必须先读取本框架、
+工作日志及 R36–R43 的 README/audit；只有新的精确有限恒等式才继续新增
+本机审计。

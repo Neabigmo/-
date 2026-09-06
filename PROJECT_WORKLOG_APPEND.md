@@ -1427,3 +1427,39 @@ computation was used.
   the next web round, the prompt must require reading the updated framework,
   this append-only log, and R36–R42 local audit records.  No optimizer, SDP,
   numerical sweep, relaxed measure-LP, or remote computation was used.
+
+# 2026-09-06 — R43 local m=5 first-residue-variation audit
+
+- The web-side R43 request was placed once in the same project conversation.
+  While its response was pending, the local audit used only the exact R42.3
+  bivariate block generator and R42.5 `dot p_3` generator; no duplicate web
+  request was sent.
+- The exact m=5 cancelled-chaos coefficients are
+  `q_(5,2)=33/16`, `q_(5,4)=23sqrt(11)/8`, and `q_(5,6)=47sqrt(33)/16`.
+  The local algebraic singular extraction through the residue scale gives
+  `sigma_5=-9505sqrt(66)/896` and
+  `kappa_5=18887sqrt(66)/448>0`, hence `r_5=1`.
+- The residue numerator coefficients were independently assembled as
+  `-5703sqrt(231)/(3584sqrt(pi))` at `n^(9/2)` and
+  `3711849sqrt(231)/(573440sqrt(pi))` at `n^(7/2)`.  The `D_(n,10)`
+  denominator coefficients used were `3sqrt(14)/(40sqrt(pi))` and
+  `-9sqrt(14)/(1280sqrt(pi))`.
+- Added `flat_shadow_residue_r43/audit_r43.py` and README.  The script checks
+  the exact block generator against finite Hermite contractions, checks the
+  raw `dot p_3` generator against direct Gaussian marginalization, checks the
+  full genuine finite regression at `(n,m)=(5,5)`, and verifies the m=5
+  algebraic assembly.  The finite regression is
+  `K_(5,5)=-219200sqrt(462)/6561`,
+  `D_(5,10)=91916sqrt(7)/2187`,
+  `D_(5,12)=46160sqrt(231)/6561`,
+  `D_(5,14)=15400sqrt(858)/6561`, and
+  `S_(5,5)=-687675sqrt(66)/160853`.
+- The local output retains `R43_GENERAL_M_KAPPA REMAINS OPEN` and explicitly
+  labels the algebraic `u=1` expansion scope; the `u=9`/`z=3` pieces are
+  exponentially small for fixed `m`.  No optimizer, SDP, numerical sweep,
+  relaxed measure-LP, or remote computation was used.
+- Since `r_5=1<=m-1`, the N+4 two-body mixed row still has extra actual
+  coefficient scale `R^(1-5+1/2)=R^(-7/2)->0`; this is only a finite-grade
+  conditional continuation.  Higher grades, arbitrary-depth conditioning,
+  the positive remote tail, the global transgression, Gaussian rigidity, and
+  the `P_3K` bridge remain open.
