@@ -2137,3 +2137,32 @@ computation was used.
 - R60 leaves D.1, infinite positive viability, eventual skew annihilation,
   Gaussian rigidity and the `P_3 K` bridge OPEN.  The next unique target is
   corrected degree-16 `beta_8` sign/positivity on `0<t<tau_6`.
+
+## R61 — corrected beta8 cutoff (2026-09-06)
+
+- R61 completed in the same Project conversation and qualitatively found a new
+  degree-16 cutoff.  The webpage's high-degree `m16`, `P8`, and norm fractions
+  failed independent local recurrence/Gaussian checks, so they were not
+  adopted verbatim.
+- The corrected continuation is
+  `m15=a(42287t^5-330144t^4+228921t^3+556826t^2+306060t-531720)/(2-t)^3`
+  and
+  `m16=3(12981388t^3-26820320t^2-837195t+1351350)/(2-t)`.
+  With the corrected degree-12 `P8`,
+  `h8=-3P8/[2(2-t)^3P6]` and
+  `beta8=h8/h7=-p5*P8/(2*P6*P7)`, giving the Gaussian check
+  `h7=5040,h8=40320,beta8=8` at `t=0`.
+- Exact Bernstein certificates show `P8' < 0` on `[0,1/25]` and
+  `P8 < 0` on `[1/25,9/100]`; since `P8(0)>0` and `P8(1/25)<0`, there is a
+  unique `tau8 in (0,1/25)`.  R59's strict `P6` monotonicity plus
+  `P6(9/100)>0` puts `tau6<9/100`, so `beta8>0` iff `0<t<tau8` within the
+  prior window and `beta8<0` on `tau8<t<tau6`.
+- Added `flat_shadow_canonical_beta8_r61/README.md` and
+  `flat_shadow_canonical_beta8_r61/audit_r61.py`.  The audit passed exact
+  rational degree-16 row/norm checks, Gaussian orientation, and both Bernstein
+  sign certificates; py_compile and `git diff --check` passed.  Commit is
+  pending after this record is staged.
+- R61 establishes the partial even-cutoff pattern `tau6>tau8>0`, with beta7
+  positive between them, but does not close D.1, infinite positive viability,
+  eventual skew annihilation, Gaussian rigidity, or the `P_3 K` bridge.  Next
+  unique target: corrected degree-18 `beta9` sign lemma on `0<t<tau8`.

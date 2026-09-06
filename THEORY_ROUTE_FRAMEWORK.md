@@ -3475,6 +3475,61 @@ Graded Value Transgression 与 `P_3K` bridge 继续 OPEN。
 本轮没有使用 optimizer、SDP、大规模 sweep、relaxed measure-LP 或 remote
 computation。
 
+## 58. R61：corrected degree-16 cutoff（2026-09-06）
+
+R61 的可靠结论仍是 degree 16 产生新的 finite sign cutoff，但网页端给出的
+`m_16`、`P_8` 及 norm fractions 未通过本机 Gaussian sanity check 与
+degree-16 relation 核验。故本机按 R60 的正确 `P_7`、`beta_7=h_7/h_6` 重新
+生成 degree-16 continuation。
+
+令 `a=m_3,t=a^2`。由 `alpha_7=0` 和 degree-16 same-factor row，在本机
+exact rational family points 上核验的矩为
+
+`m_15=a(42287t^5-330144t^4+228921t^3+556826t^2
+       +306060t-531720)/(2-t)^3`,
+
+`m_16=3(12981388t^3-26820320t^2-837195t+1351350)/(2-t)`。
+
+校正后的 degree-12 sign polynomial 是
+
+`P_8(t)=1204550144t^12-35494536455t^11-2967319034778t^10
+       +24133342031328t^9-68513207463264t^8+75535499377824t^7
+       -6513636214656t^6-32358682547712t^5+576720933888t^4
+       +8343384129536t^3-662433824768t^2-28728360960t+1651507200`。
+
+直接按正确 norm 方向得到
+
+`h_7=3P_7/[(2-t)^3p_5]`,
+`h_8=-3P_8/[2(2-t)^3P_6]`,
+
+`beta_8=h_8/h_7=-p_5P_8/(2P_6P_7)`。
+
+在 `0<t<tau_6` 上，`p_5>0,P_7>0,P_6<0`，所以 `sign(beta_8)=sign(P_8)`。
+精确值 `P_8(0)=1651507200>0`、
+`P_8(1/25)<0`；`P_8'` 在 `[0,1/25]` 的 Bernstein 系数全负，
+而 `P_8` 在 `[1/25,9/100]` 的 Bernstein 系数全负。结合 R59 的
+`P_6` 严格递增性和 `P_6(9/100)>0`（故 `tau_6<9/100`），得到唯一
+
+`tau_8 in (0,1/25)`，`P_8(tau_8)=0`,
+
+并且在 `0<t<tau_6` 上
+
+`beta_8>0 <=> 0<t<tau_8`,
+`beta_8<0` 于 `tau_8<t<tau_6`。
+
+这比网页端未校正的约 `0.085` cutoff 更小；本机正确结果把窗口再次压缩
+到 `tau_8<0.04`。它仍只是 finite-stage contraction：尚未证明所有固定
+`t>0` 最终退出，也没有构成 full-exact non-Gaussian counterexample。
+
+本机新增 `flat_shadow_canonical_beta8_r61/audit_r61.py` 与 README。审计通过
+degree-16 row、`m_15/m_16`、Gaussian `h_7=5040,h_8=40320,beta_8=8` 的
+exact rational checks，以及两个 Bernstein sign certificates；没有使用
+determinant、optimizer、SDP、sweep、relaxed measure-LP 或 remote computation。
+当前偶数 cutoff 的可靠部分是 `tau_6>tau_8>0`，中间 `beta_7` 全程正。
+下一唯一 lemma 是 `beta_9` 在 `0<t<tau_8` 上的 corrected degree-18 sign
+lemma。D.1、eventual skew annihilation、Gaussian rigidity 与 `P_3 K`
+bridge 仍分别 OPEN。
+
 ## 43. R46：N=6 second-residue quotient 已证明 rank 至少为 2，但完整矩阵仍 OPEN
 
 网页端 R46 在右侧前端出现了工具调用未收尾的不同步状态；本轮不把未同步的
