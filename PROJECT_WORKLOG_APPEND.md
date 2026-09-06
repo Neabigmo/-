@@ -2439,3 +2439,31 @@ computation was used.
   OU divisibility. The next unique target is a same-factor nonlinear-source
   Banach majorant for `M_n(a)`, or a rigorously derived operator profile near the
   angular-solver scale.
+
+## R72 — Analytic-norm angular tameness and conditional odd-solver closure (2026-09-07)
+
+- The webpage again reported that its connector could not read the R71 local
+  files. I used its new formulas only as a proposal and checked them against the
+  local R71 normalization. The exact angular eigenvalue is
+  `A_(2k)=3*binom(2k,k)/6^k` with `q=sqrt(2/3)`.
+- In the truncated analytic Wiener norm, the even source equation is exact:
+  `f_e=-A_e^(-1)[Q(f,f)+C(f,f,f)]`, with source bounds
+  `||Q||_R<=3||f||_(qR)^2` and `||C||_R<=||f||_(qR)^3`. A fixed radius loss gives
+  `||A_e^(-1)||<=C_A(theta)` and `C_A(1/2)=1/6`; the coefficientwise exponential
+  inverse scale is cancelled by the `q` radius factor.
+- With the explicit but unproved odd-solver tame hypothesis
+  `||O_n(a,e)||_(8sqrt(n))<=Omega_n(|a|^3+|a| ||e||_(4sqrt(n)))`, the even
+  bootstrap closes and yields
+  `Mcal_n(a)<=4*C_B*3^(n/2)*a^2*U_n^2` with
+  `C_B=1/(1-sqrt(6)/4)`. The explicit conditional scale `a_n#` in the local
+  record then gives `Mcal_n<=1/n` and an all-degree no-reversal interval
+  `t<=a_n#^2`.
+- This is not an unconditional scale: `Omega_n`, its domain, and repeated odd
+  source accumulation are still unproved. The unique next target is the
+  canonical odd-solver Banach estimate with explicit `n` growth, or a rigorous
+  proof of its failure at a specific scale.
+- Added `flat_shadow_odd_solver_majorant_r72/README.md` and
+  `flat_shadow_odd_solver_majorant_r72/audit_r72.py`. The exact audit passed
+  angular scaling/Wallis, Wiener source constants, bootstrap constants, Gram
+  majorant scaling, and the conditional window; `py_compile` and
+  `git diff --check` remain to be run.

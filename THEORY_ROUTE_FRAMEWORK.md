@@ -5247,3 +5247,88 @@ same-factor nonlinear source recursion 控制 `mathcal M_n(a)`，或在该潜在
 尺度上建立非平凡 operator profile。
 
 新增本机审计为 `flat_shadow_gram_barrier_r71/audit_r71.py`。
+
+## 69. R72：analytic Wiener 范数下的 angular tame 与 conditional source closure（2026-09-07）
+
+R72 在 R71 的 Gram barrier 上继续分离 even angular solver 与 canonical odd
+solver。网页端本轮明确报告连接器仍不可读 R71 本机文件，因此本节只记录其
+新推导中经本机校正和审计的部分。
+
+令 `q=sqrt(2/3)`，`e_m=H_m/sqrt(m!)`，并写
+
+`F_a(z)=sum_(m>=0)L_a[e_m] z^m/sqrt(m!)=1+f_a(z)`。
+
+full same-factor identity 的 even 部分给出精确 coefficientwise 方程
+
+`f_e=-A_e^(-1)[Q(f,f)+C(f,f,f)]`，
+
+其中 `A(z^(2k))=A_(2k)z^(2k)`、`A(z^(2k+1))=0`，且
+`A_(2k)=3 binom(2k,k)/6^k`。在截断 analytic Wiener 范数
+`||g||_R=sum_m|g_m|R^m` 下，`|r_j|<=q` 给出
+
+`||Q(f,f)||_R<=3||f||_(qR)^2`，
+`||C(f,f,f)||_R<=||f||_(qR)^3`。
+
+Wallis 下界
+`binom(2k,k)>=4^k/(2sqrt(k))` 导致
+`A_(2k)>=3q^(2k)/(2sqrt(k))`。因此对任意固定 `0<theta<1`，
+
+`||A_e^(-1)g||_(theta qR)<=C_A(theta)||g||_R`，
+`C_A(theta)=(2/3)sup_(k>=1)sqrt(k)theta^(2k)<infinity`。
+
+特别 `C_A(1/2)=1/6`，故
+
+`||f_e||_(qR/2)<=1/6[3||f||_(qR)^2+||f||_(qR)^3]`。
+
+这严格说明：在付出固定 analytic-radius loss 后，angular inverse 没有随 `n`
+增长的 operator norm；系数级 `A_(2n)^(-1)~sqrt(pi n)(3/2)^n/3` 的指数增长
+会被 `r_j` 的半径缩放抵消，不能单独解释 nonlinear remainder 的 order-one
+增长。
+
+再写 `f_o=aU+o`、`e=f_e`，并把 canonical odd remainder 记为
+`o=O_n(a,e)`。R72 暴露出的唯一未审计输入是如下 tame estimate：取
+`rho_n=4sqrt(n)`、`sigma_n=8sqrt(n)`，在 `||e||_(rho_n)<=1` 的 connected
+branch 上假设
+
+`||O_n(a,e)||_(sigma_n)<=Omega_n(|a|^3+|a| ||e||_(rho_n))`。
+
+这是 `alpha_k=0 (k>=3)` 的 triangular odd solver 的全阶 Banach 稳定性；当前
+没有 `Omega_n` 的可审计 `n` 依赖，也没有把该假设误报成定理。
+
+在该假设下，令 `U_n=||U||_(sigma_n)`，并使用 R64 tangent 的粗界
+
+`U_n<=bar U_n=(256/3)n^(3/2)(1+8n)e^(16n)`。
+
+若 `U_n>1` 且
+`|a|bar U_n<=4^(-(n+1))`、`|a|<=1/(4Omega_n)`，even source bootstrap 给出
+
+`||e||_(rho_n)<=3|a|^2U_n^2`，
+`||o||_(sigma_n)<=|a|^2U_n^2`，
+`||e+o||_(rho_n)<=4|a|^2U_n^2`。
+
+若 `w=e+o=sum_(m<=2n)r_m(a)z^m/sqrt(m!)`，则 R71 的 Gram majorant 满足
+
+`mathfrak R_n(a):=3^(n/2)sum_(m<=2n)3^(m/2)|r_m(a)|`
+`<=4C_B3^(n/2)|a|^2U_n^2`，
+`C_B=1/(1-sqrt(6)/4)`。
+
+因此定义条件性尺度
+
+`a_n#=min{1/n,1/(4M_*),1/(4^(n+1)bar U_n),1/(4Omega_n),`
+`1/(2bar U_n sqrt(n C_B 3^(n/2)))}`。
+
+在 odd tame estimate 及其适用域成立时，对 `|a|<=a_n#` 有
+`mathfrak R_n(a)<=1/n` 且
+`||G_n(a)-I||_op<=1/4+1/n<1`（充分大 `n`）。于是原变量的区间
+`0<=t<=(a_n#)^2` 上所有 `beta_k(t)>0 (k<=n)`。这是一个真正的 conditional
+all-order no-reversal window，但它不是无条件结果，因为 `Omega_n` 与 odd
+solver 的 analytic domain 仍未控制。
+
+所以 R72 的实质性推进是：even angular recursion 已在合适 analytic norm 中
+tame；任何 order-one boundary profile 必须来自 odd-solver instability、source
+累积或 analytic-radius collapse，而非 angular inverse 的裸系数放大。D.1、
+positive backward tower 与 backward OU divisibility 仍 OPEN。下一条唯一目标是
+直接证明 canonical odd-solver 的上述 Banach tame estimate，并给出 `Omega_n`
+的明确增长率；在此之前不再增加 degree 或计算新的 Gaussian-point 导数。
+
+新增本机审计为 `flat_shadow_odd_solver_majorant_r72/audit_r72.py`。
