@@ -1957,3 +1957,38 @@ computation was used.
   computation was used.  Before R54, read the updated framework, worklog, and
   R36–R53 README/audit; the next target is eventual-skew annihilation or a
   genuine moving-quadrature sign theorem, not another fixed-degree expansion.
+
+## R55 — finite skew head versus eventual zero tail (2026-09-06)
+
+- The webpage continued in the same Project conversation after the R53
+  canonical-tail round.  It found no genuine full-exact non-Gaussian
+  counterexample, but gave the exact control family
+  `alpha=[0,a,-a,0,...]`, `beta_n=1`, with
+  `m_1=0`, `m_2=1`, `m_3=a`, and `m_4=2+a^2`.  At `a=1/2`, `m_4=9/4 != 3`,
+  so this family fails the second full-exact row and is only an obstruction to
+  the implication “eventual zero Jacobi diagonal implies symmetry”.
+- The associated-tail resolvent relation
+  `m_k(z)=1/(z-alpha_k-beta_(k+1)m_(k+1)(z))` shows that a finite positive
+  Jacobi head is a nonconstant Mobius transform of the tail m-function.
+  Hence a symmetric eventual tail does not erase finite-head skew; full exact
+  coherence would have to supply the missing cancellation.
+- R55 proposed a factorial-growth obstruction, but its displayed
+  `limsup log(n!/h_n)/n=+infinity` is not equivalent to failure of
+  `h_n<=C*A^n*n!`.  The correct root-test form is
+  `limsup (h_n/n!)^(1/n)=infinity`, equivalently
+  `liminf log(n!/h_n)/n=-infinity`, for envelope failure.  The stronger
+  skew-forced statement remains an OPEN lemma and must not be recorded as a
+  consequence of the R12 upper envelope alone.
+- Added `flat_shadow_skew_forced_escape_r55/audit_r55.py` and README.  The
+  local audit passed the finite-head moment identities, nonconstant Mobius
+  coupling, corrected factorial-envelope logic, and conditional positive
+  deficit sign.  It records
+  `R55_SKEW_FORCED_FACTORIAL_ESCAPE REMAINS OPEN`,
+  `R55_EVENTUAL_DIAGONAL_SKEW_ANNIHILATION REMAINS OPEN`, and the D.1/P3K
+  implications without claiming them proved.
+- No determinant, optimizer, SDP, sweep, relaxed measure-LP, or remote
+  computation was used.  Before R56, read the updated framework, worklog, and
+  R36–R55 README/audits.  The next target is the corrected
+  `R56 — Skew-Forced Factorial Escape Lemma`, including a search for the
+  weakest additional tail-transfer hypothesis if the unconditional statement
+  fails.

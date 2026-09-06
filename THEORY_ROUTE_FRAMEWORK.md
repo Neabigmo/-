@@ -4197,3 +4197,75 @@ Jacobi tail、Gauss even/odd error、deficit/norm ratio、cubic stabilization �
 条件性 Favard positivity；没有 determinant、optimizer、SDP、sweep、relaxed
 measure-LP 或 remote computation。证据边界严格保留：条件性 realization
 不是 canonical positivity 的证明。
+
+## 52. R55：finite skew head、eventual zero tail 与 factorial-escape target（2026-09-06）
+
+R55 沿同一 Project 对话继续检查 canonical centered branch 失败时的全局
+含义。它没有找到 genuine full-exact counterexample，但把一个容易混淆的
+逻辑点钉死：eventual zero Jacobi diagonal 并不推出原始 law 对称。
+
+### 52.1 finite head 保留 skew
+
+在 centered variance-one 归一化 `alpha_0=0`、`beta_1=1` 下，取
+
+`alpha_0=0, alpha_1=a, alpha_2=-a, alpha_n=0 (n>=3), beta_n=1`。
+
+有限 Jacobi 代数给出
+
+`m_1=0, m_2=1, m_3=a, m_4=2+a^2`。
+
+所以 `a!=0` 时 finite head 保留非零 skew；`a=1/2` 给出 `m_4=9/4`，
+不满足 target `m_4=3`，故这只是 control/obstruction example，不是 full-exact
+反例。对应的无限 `beta_n=1` chain 是 bounded positive Favard example，
+但它只说明“正性 + eventually symmetric tail”不足以推出原始对称性。
+
+对 symmetric Jacobi resolvent，tail m-function 满足
+
+`m_k(z)=1/(z-alpha_k-beta_(k+1)m_(k+1)(z))`。
+
+任意 finite positive head 都是 tail m-function 的非恒定 Möbius 复合；
+正 `beta` 使其对 tail 的导数不是恒等于零。因此要消掉 `m_3`，必须使用
+整个 full-exact moment system 或额外的 tail-transfer 约束，不能只用
+eventual diagonal zero。
+
+### 52.2 factorial envelope 的逻辑修正
+
+R55 中提出的
+
+`limsup (1/n) log(n!/h_n)=+infinity`
+
+不能等价替代 R12 的 `h_n<=C*A^n*n!` 包络失败。对 `h_n>0`，正确的
+root-test 等价是
+
+`exists finite C,A: h_n<=C*A^n*n!`
+`<=> limsup (h_n/n!)^(1/n)<infinity`，
+
+亦即包络失败要求
+
+`limsup (1/n)log(h_n/n!)=+infinity`
+
+或等价的 `liminf (1/n)log(n!/h_n)=-infinity`。原先 reversed-log 的正
+limsup 甚至可与有效包络共存，不能作为 contradiction。故真正的
+`Skew-Forced Factorial Escape Lemma` 仍需从 full-exact recurrence 推导额外
+的 lower-growth/invariant，不能由 R12 upper envelope 单独推出。
+
+### 52.3 全局二分与下一步
+
+若 canonical branch 有限到达 `B_n<=0`，则得到 D.1；若所有 `B_n>0`，
+Favard/Hamburger 给出 genuine positive full-exact candidate，并带有
+eventually zero Jacobi diagonal，但 R55 证明其 tail shape 不足以让 `m_3=0`。
+因此下一轮唯一值得推进的是
+
+`R56 — Skew-Forced Factorial Escape Lemma`：
+
+对 `mu in E`、full-exact、eventually `alpha_n=0` 且 `m_3!=0` 的链，或者
+证明某个 `beta_n<=0`，或者证明校正后的 factorial root-growth escape；若
+做不到，则给出成立该结论所需的最弱额外 tail-transfer condition，并说明
+它是否可由 R12/R47 得到。D.1、Gaussian rigidity 与 `P_3 K` bridge 仍是
+OPEN，三者不能互相冒充已证。
+
+本机新增 `flat_shadow_skew_forced_escape_r55/audit_r55.py` 与 README。审计
+通过 finite-head moments、非恒定 Möbius tail coupling、factorial-envelope
+逻辑与条件 deficit sign，并显式保留 R56、D.1、Gaussian rigidity、`P_3 K`
+bridge 的 OPEN 边界。下一轮网页端必须先读取本框架、工作日志及 R36–R55
+相关 README/audit。
