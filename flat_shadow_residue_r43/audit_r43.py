@@ -12,6 +12,7 @@ from pathlib import Path
 from functools import lru_cache
 
 from sympy import (
+    Matrix,
     Poly,
     Rational,
     binomial,
@@ -328,6 +329,10 @@ def check_m5_finite_regressions():
         (K + chi * finite_sum_head(n, m + 2) - rho * finite_sum_head(n, m + 1))
         / finite_sum_head(n, m)
     )
+    residue_numerator = simplify(
+        K + chi * finite_sum_head(n, m + 2) - rho * finite_sum_head(n, m + 1)
+    )
+    assert residue_numerator == -Rational(916900, 5103) * sqrt(462)
     assert residue == -Rational(687675, 160853) * sqrt(66)
     # The raw C generator is independently checked against direct Gaussian
     # marginalization after replacing the finite p_n coefficients.
@@ -402,6 +407,13 @@ def check_m5_asymptotic_assembly():
     assert kappa5 == Rational(18887, 448) * sqrt(66)
 
 
+def check_m5_weighted_conditioning():
+    ranks = (1, 2, 3, 5)
+    matrix = [[1] * 4, list(ranks), [n**2 for n in ranks], [Rational(1, n) for n in ranks]]
+    assert Matrix(matrix).det() != 0
+    assert simplify(Rational(1) - 5 + Rational(1, 2)) == -Rational(7, 2)
+
+
 def main():
     check_exact_block_and_head()
     print("R43_BLOCK_GENERATOR_AND_HEAD_FINITE_CHECK PASSED")
@@ -412,8 +424,9 @@ def main():
     print("R43_M5_BLOCK_AND_C_SECTORS PASSED")
     print("R43_M5_RESIDUE_ASYMPTOTIC_ASSEMBLY PASSED")
     print("R43_M5_SIGMA_AND_KAPPA PASSED")
+    check_m5_weighted_conditioning()
     print("R43_M5_WEIGHTED_CONDITIONING r5=1 PASSED")
-    print("R43_GENERAL_M_KAPPA REMAINS OPEN")
+    print("R43_GENERAL_M_KAPPA REMAINS OPEN (m>=6)")
     print("R43_SINGULAR_EXPANSION_SCOPE: u=1 algebraic terms audited; u=9 terms exponentially small")
     print("R43_AUDIT_COMPLETED")
 

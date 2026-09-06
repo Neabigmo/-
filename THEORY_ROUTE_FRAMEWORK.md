@@ -3257,7 +3257,7 @@ Non-SOS Graded Value Transgression、Gaussian rigidity 仍 OPEN，`P_3K`
 bridge 仍完全断开。下一轮网页端开始工作前必须先读取本框架、工作日志及
 R36–R42 的 README/audit；只有新的可精确核验有限恒等式才继续新增本机审计。
 
-## 40. R43：m=5 的首个 residue 变化阶通过，OPEN 收缩到一般 m>=5
+## 40. R43：m=5 的首个 residue 变化阶通过，OPEN 收缩到一般 m>=6
 
 本轮本机沿用 R42 的精确二元 block generator 与 `dot p_3` generator，直接
 推进下一未决情形 `m=5`。这里严格区分了三层证据：生成函数和有限回归是
@@ -3305,8 +3305,8 @@ weighted exponent arithmetic。关键有限回归是
 `D_(5,12)=46160sqrt(231)/6561`、`D_(5,14)=15400sqrt(858)/6561`、
 `S_(5,5)=-687675sqrt(66)/160853`。
 
-当前最小 OPEN 仍是 **General-m>=5 First Residue Variation Lemma** 的
-一般非零性（以及更理想的一般显式 `kappa_m`），而不是 m=5。上位
+当前最小 OPEN 已收窄为 **General-m>=6 First Residue Variation Lemma** 的
+一般非零性（以及更理想的一般显式 `kappa_m`）；`m=5` 已完成但不能外推。上位
 Constraint-Coupled Non-SOS Graded Value Transgression、Gaussian rigidity
 仍 OPEN，`P_3K` bridge 仍完全断开。下一轮网页端开始工作前必须先读取本框架、
 工作日志及 R36–R43 的 README/audit；只有新的精确有限恒等式才继续新增

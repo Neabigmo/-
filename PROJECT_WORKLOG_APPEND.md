@@ -1430,7 +1430,8 @@ computation was used.
 
 # 2026-09-06 — R43 local m=5 first-residue-variation audit
 
-- The web-side R43 request was placed once in the same project conversation.
+- The web-side R43 request was placed once in the same project conversation and
+  later completed with the same `m=5` coefficients as the local calculation.
   While its response was pending, the local audit used only the exact R42.3
   bivariate block generator and R42.5 `dot p_3` generator; no duplicate web
   request was sent.
@@ -1447,8 +1448,9 @@ computation was used.
 - Added `flat_shadow_residue_r43/audit_r43.py` and README.  The script checks
   the exact block generator against finite Hermite contractions, checks the
   raw `dot p_3` generator against direct Gaussian marginalization, checks the
-  full genuine finite regression at `(n,m)=(5,5)`, and verifies the m=5
-  algebraic assembly.  The finite regression is
+  full genuine finite regression at `(n,m)=(5,5)`, verifies the m=5 algebraic
+  assembly, and checks the `1,n,n^2,n^(-1)` response determinant together with
+  the `R^(-7/2)` coefficient scale.  The finite regression is
   `K_(5,5)=-219200sqrt(462)/6561`,
   `D_(5,10)=91916sqrt(7)/2187`,
   `D_(5,12)=46160sqrt(231)/6561`,
@@ -1462,4 +1464,6 @@ computation was used.
   coefficient scale `R^(1-5+1/2)=R^(-7/2)->0`; this is only a finite-grade
   conditional continuation.  Higher grades, arbitrary-depth conditioning,
   the positive remote tail, the global transgression, Gaussian rigidity, and
-  the `P_3K` bridge remain open.
+  the `P_3K` bridge remain open.  The current smallest residue OPEN is now
+  the general `m>=6` first-variation lemma, ideally via a closed rational
+  formula for `kappa_m`; the three checked cases `m=3,4,5` are not extrapolated.

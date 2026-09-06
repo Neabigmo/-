@@ -61,7 +61,7 @@ r_5 = 1
 
 This is a fixed-`m` algebraic consequence of exact generators, not a
 numerical fit. It remains a residue statement only: it does not prove the
-general `m>=5` formula, arbitrary-depth conditioning, positivity of a full
+general `m>=6` formula, arbitrary-depth conditioning, positivity of a full
 remote construction, or Gaussian rigidity.
 
 An independent genuine finite regression at `(n,m)=(5,5)` is
@@ -84,7 +84,7 @@ R43_M5_BLOCK_AND_C_SECTORS PASSED
 R43_M5_RESIDUE_ASYMPTOTIC_ASSEMBLY PASSED
 R43_M5_SIGMA_AND_KAPPA PASSED
 R43_M5_WEIGHTED_CONDITIONING r5=1 PASSED
-R43_GENERAL_M_KAPPA REMAINS OPEN
+R43_GENERAL_M_KAPPA REMAINS OPEN (m>=6)
 R43_SINGULAR_EXPANSION_SCOPE: u=1 algebraic terms audited; u=9 terms exponentially small
 R43_AUDIT_COMPLETED
 ```
