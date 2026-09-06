@@ -2644,3 +2644,38 @@ computation was used.
   treating `aU` as background. Added
   `flat_shadow_even_same_radius_r78/README.md` and
   `flat_shadow_even_same_radius_r78/audit_r78.py`.
+
+## R79 — Tangent-centered Gram/source bootstrap (2026-09-07)
+
+- The completed webpage R79 response was extracted and recorded locally. Its
+  main structural lemma is the exact decomposition
+  `G_n(a,E,o)=I+aA_n+Hcal_n(E+o)`, with
+  `A_n=P_n M_(g_1) P_n` and `sup_n ||A_n||_op<=||g_1||_infinity`. Thus the
+  Gaussian tangent is handled as a bounded operator background rather than as
+  a coefficient-Wiener small quantity.
+- With `R_n=4sqrt(n)`, the residual Gram operator obeys
+  `||Hcal_n(h)||_op<=C_G||h||_n`, `C_G<5`. On
+  `|a|M_1+C_G(||E||_n+||o||_n)<=1/2`, Neumann control gives
+  `||G_n^(-1)||_op<=2`; the first three resolvent derivatives depend on
+  `M_1|dot a|+C_G||dot h||_n`, not `|a| ||U||_n`.
+- Reflection gives `P G_n(a,E,o) P=G_n(-a,E,-o)`. After writing
+  `Y=aU+o` and subtracting the R64 finite-head tangent source, the local
+  signed source has the ideal form `E(a,o)+(a,o)^3`; conditionally for
+  `mu>3`, `k!|S_tilde_k|<=C_mu mu^k[(|a|+O)E_*+(|a|+O)^3]`.
+- Combining with R78, `x=|a|H_n` gives `E_*<=5x^2` and, when
+  `48 Gamma_(n,mu)x^2<=1`, `O<=x/2`. The tangent norm satisfies
+  `H_n<=4n^3(4e)^n`, while
+  `Gamma_(n,mu)=K_mu n^(-1/2)[16e(mu+1)]^n`. The resulting conditional
+  window has the sufficient scale
+  `a#>=c_mu n^(-11/4)[4e sqrt(16e(mu+1))]^(-n)` and square scale
+  `n^(-11/2)[256e^3(mu+1)]^(-n)`.
+- The key failure boundary is explicit rather than hidden: the scalar feedback
+  `E=x^2`, `O=Gamma(aE+EO)` solves to
+  `O=Gamma aE/(1-Gamma E)`. Hence bounded `A_n` removes the Gram-centering
+  penalty but does not remove the residual `Gamma E_*<1` condition. D.1,
+  positive backward tower, backward OU divisibility, global positivity closure,
+  and endpoint `FS_3` remain OPEN.
+- Added `flat_shadow_tangent_centered_r79/README.md` and
+  `flat_shadow_tangent_centered_r79/audit_r79.py`. Next target: R80 quadratic
+  even centered operator lemma for `E=a^2V+Ehat`, or a direct uniform signed
+  Green `O(a^2)` bound for the `a^2V` contribution.

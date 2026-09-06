@@ -5900,3 +5900,83 @@ R78 尚未证明 D.1、positive backward tower、backward OU divisibility，也
 检验能否移除 `16^n` tangent penalty。
 
 新增本机审计为 `flat_shadow_even_same_radius_r78/audit_r78.py`。
+
+## 76. R79：tangent-centered Gram/source bootstrap（2026-09-07）
+
+网页端 R79 的完整回复已在本机提取；本轮将其作为 R78 的后续局部定理，
+并对算子域、奇偶理想、bootstrap 算术及反馈边界作独立审计。R79 的核心
+进展是把“大切向量在 growing Wiener radius 中很大”与“切向 Gram 作用的
+算子范数有界”区分开来，而不是把二者继续混为同一个小量条件。
+
+令 `e_j=H_j/sqrt(j!)`，`V_n=span{e_0,...,e_n}`，`P_n` 为 Gaussian
+正交投影。若 `L_(a,E,o)=L_0+aL_1+L_(E+o)`，且 `L_1[p]` 的代表函数为
+有界的 `g_1`，则有精确 Gram 分解
+
+`G_n(a,E,o)=I+aA_n+Hcal_n(E+o)`，
+`A_n=P_nM_(g_1)P_n`，`sup_n||A_n||_op<=||g_1||_infinity`。
+
+在 `R_n=4sqrt(n)` 及 `||h||_n=sum|h_m|R_n^m` 下，沿用 R77 的 degree-local
+Hermite 乘法估计
+
+`||Hcal_n(h)||_op<=C_G||h||_n`，
+`C_G=(sqrt(3)/2)^3/(1-sqrt(3)/2)<5`。
+
+所以只要
+
+`|a|M_1+C_G(||E||_n+||o||_n)<=1/2`，
+
+就有 `||G_n^(-1)||_op<=2`。resolvent 的一至三阶导数只看
+`M_1|dot a|+C_G||dot h||_n`，从 Gram 逆本身移除了 `|a| ||U||_n` 的小量
+要求。这是 R79 最可靠的 structural operator lemma。
+
+反射给出 `PA_nP=-A_n`、`PHcal_n(E)P=Hcal_n(E)`、
+`PHcal_n(o)P=-Hcal_n(o)`，即
+`PG_n(a,E,o)P=G_n(-a,E,-o)`。写 `Y=aU+o` 并减去 R64 finite-head
+切向源 `aS^(1)`（`S^(1)(x)=x+x^2/2`）后，R76/R77 的 signed-source
+机制在局部假设下给出
+
+`S_tilde in E(a,o)+(a,o)^3`，
+
+其中 `E(a,o)` 表示含一个 `E` 且至少含一个 `a` 或 `o` 的项，后者表示
+关于 `(a,o)` 总次数至少三。相应 factorial 源估计为
+
+`k!|S_tilde_k|<=C_mu mu^k[(|a|+||o||_n)||E||_n
+ +( |a|+||o||_n)^3]`，`mu>3`，
+
+signed Green 后得到
+
+`||o||_n<=Gamma_(n,mu)[(|a|+||o||_n)E_*+(|a|+||o||_n)^3]`，
+`Gamma_(n,mu)=K_mu n^(-1/2)[16e(mu+1)]^n`。
+
+与 R78 同因子 even 方程结合，令 `x=|a|H_n`、`E_*=||E||_n`、
+`O=||o||_n`，则局部 bootstrap 给出 `E_*<=5x^2` 及（当
+`48Gamma x^2<=1`）`O<=x/2`。切向精确系数满足
+
+`H_n=sum_(k=1)^n k(k+1)!/[2(2k+1)!](4sqrt(n))^(2k+1)
+ <=4n^3(4e)^n`。
+
+因此当前可写出条件性的窗口
+
+`a#=min{1/(4M_1), x#/H_n}`，
+`x#=min{x_0,[48Gamma_(n,mu)]^(-1/2)}`，
+`x_0=min{1/100,1/(32C_G)}`。
+
+但 R79 同时给出不可忽略的失败边界：标量模型
+
+`E=x^2`，`O=Gamma(aE+EO)`，故
+`O=Gamma aE/(1-Gamma E)`。
+
+所以有界 `A_n` 只修复 Gram 逆的中心问题，不能自动消除 `Gamma E_*<1`
+这一残差反馈条件。用粗界仍只有
+
+`a#>=c_mu n^(-11/4)[4e sqrt(16e(mu+1))]^(-n)`，
+`(a#)^2>=c'_mu n^(-11/2)[256e^3(mu+1)]^(-n)`。
+
+这是一项真实的局部算子/源项里程碑，但不是 D.1、positive backward tower
+或 backward OU divisibility 的证明。下一步唯一主攻目标是 R80：把 R64 的
+二次偶响应写成 `E=a^2V+Ehat`，证明 `sup_n||Hcal_n(V)||_op<infinity`
+并吸收为 `I+aA_n+a^2B_n`，或者直接证明该 `a^2V` 对 odd signed Green
+的贡献有统一 `O(a^2)` 乘子。若成功，`Gamma a^2H_n^2` 将被替换为统一
+`Ca^2`，才可能取得实质强于 R79 的窗口。
+
+新增本机审计为 `flat_shadow_tangent_centered_r79/audit_r79.py`。
