@@ -4118,3 +4118,82 @@ bridge 或 global transgression 已完成。下一轮网页端开始前必须读
 工作日志及 R36–R52 README/audit；优先攻 D.1 的 canonical centered branch，
 不得重复 determinant，也不得使用 optimizer、SDP、sweep、relaxed measure-LP
 或 remote computation。
+
+## 51. R53：canonical centered tail 与 moving Gauss-quadrature deficit（2026-09-06）
+
+网页端本轮在同一 Project 对话中完成 READ_FIRST，核对嵌套仓库 HEAD 为
+`abee8f94007648df2d349f9e3e856ae6ca307a1e`，并重新读取总纲、工作日志及
+R36–R52 README/audit。全局判断是：R11–R13、R36–R44、R48–R52 已足够整理为
+三个层级不同的自包含 theorem package；R45–R47 更适合作为桥。这里仍不把
+“自包含”写成已核验的文献新颖性。
+
+R53 确认 D.1 是正确的下一层 model problem，但不是最终等价问题：固定
+`S_k=0` 会移除 arbitrary-control chain 中可能提供 rescue 的 odd controls。
+它的价值在于：一旦失败，得到的是 genuine all-degree positive law，而非
+fixed-prefix 或 Gateaux extractor。
+
+### 51.1 canonical Jacobi tail
+
+对 monic recurrence
+
+`x*pi_n=pi_(n+1)+alpha_n*pi_n+beta_n*pi_(n-1)`、
+`h_n=||pi_n||^2`、`beta_n=h_n/h_(n-1)`、
+`S_n=sum_(j=0)^n alpha_j`、`B_n=beta_n+S_(n-1)^2`，full-exact factorization
+
+`G_n=c_n*h_(n-1)*(beta_n+S_(n-1)^2-B_n)`,
+`c_n=3*(2/3)^n`
+
+给出 canonical tail 上（连续两个新 centered slots 之后）
+
+`alpha_n=0`, `B_n=beta_n`,
+`pi_(n+1)=x*pi_n-B_n*pi_(n-1)`,
+`h_n=B_n*h_(n-1)=h_K*product_(j=K+1)^n B_j`.
+
+因此在前面 Jacobi block 正的前提下，canonical finite exit 精确等价于
+某一步 `B_n<=0`。
+
+### 51.2 moving Gauss-quadrature deficit
+
+令 `nu_(n-1)` 为 n 点 Jacobi truncation 的 spectral measure，记
+`q_r(n)=integral x^r d nu_(n-1)(x)`。它匹配现有矩到 `2n-1`，并满足
+
+`m_(2n)-q_(2n)(n)=h_n`,
+`m_(2n+1)-q_(2n+1)(n)=(S_n+S_(n-1))*h_n`.
+
+第二式中的 `2*S_(n-1)` 来自 degree-`2n` error，不能误写成
+`alpha_n*h_n`。所以 canonical choice `S_(n-1)=S_n=0` 恰好令
+`m_(2n+1)=q_(2n+1)(n)`。
+
+若 `delta_n` 表示目标 chi-square cubic-product moment 与 n 点 product
+quadrature 的差，则 exact same-factor row 给出
+
+`delta_n=c_n*h_n`,
+`h_n=(3^(n-1)/2^n)*delta_n`,
+`B_n=beta_n=(3/2)*(delta_n/delta_(n-1))`.
+
+于是（在前级 norm 正时）
+`B_n<=0 <=> delta_n<=0`。D.1 被压缩为一个 moving product
+Gauss quadrature 是否必在有限阶对目标矩 overshoot 的问题。
+
+### 51.3 条件性二分法与新的 OPEN
+
+若所有 canonical `B_n>0`，Favard/Hamburger 给出 genuine positive representing
+law；`G_n=0` 给出完整 `E[Q^n]=2^n*n!`，且 centered tail 的 Jacobi diagonal
+eventually 为零。这是 genuine full-exact candidate，但仍需 positive backward
+OU preimage，不能直接推出原 Gaussian rigidity，也不能自动给出 `P_3K != 0`。
+
+若要证明 D.1，只需排除该 candidate class。一个更弱但可报告的充分目标是
+
+`mu in E, alpha_n=0 eventually => m_3(mu)=0`。
+
+Eventual zero Jacobi diagonal 本身不足以推出原 law 对称：有限 Jacobi head
+可以保留 skewness。R12 raw-tail 也不控制 moving quadrature nodes、weights、
+inverse-Hankel conditioning 或 deficit sign。故 canonical finite exit、eventual
+skew annihilation、Gaussian rigidity、`P_3K` bridge 与 arbitrary-control exit
+继续 OPEN。
+
+本机新增 `flat_shadow_canonical_tail_r53/audit_r53.py` 与 README，审计
+Jacobi tail、Gauss even/odd error、deficit/norm ratio、cubic stabilization 及
+条件性 Favard positivity；没有 determinant、optimizer、SDP、sweep、relaxed
+measure-LP 或 remote computation。证据边界严格保留：条件性 realization
+不是 canonical positivity 的证明。

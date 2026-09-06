@@ -1911,3 +1911,49 @@ computation was used.
   framework, worklog, and R36–R52 README/audits; prioritize D.1 and avoid
   determinants, optimizer, SDP, sweep, relaxed measure-LP, or remote
   computation.
+
+## R53 — canonical centered tail and moving Gauss deficit (2026-09-06)
+
+- The webpage completed READ_FIRST in the same Project conversation, verified
+  nested-repository HEAD `abee8f94007648df2d349f9e3e856ae6ca307a1e`, and
+  assessed R11–R13, R36–R44, and R48–R52 as three self-contained theorem
+  packages at different levels.  R45–R47 are best treated as the bridge
+  between the second and third packages.  This is a self-containment record,
+  not a checked literature-novelty claim.
+- R53 confirmed that canonical centered-tail rigidity is the correct next
+  model problem but not the final equivalent theorem: fixing all new
+  `S_k=0` removes arbitrary-control rescue directions.  Its failure would be
+  much stronger than a finite-prefix failure because positive Jacobi norms
+  would produce a genuine full-exact positive representing law.
+- With `S_j=0` on the opened tail, the exact recurrence becomes
+  `alpha_n=0`, `B_n=beta_n`,
+  `pi_(n+1)=x*pi_n-B_n*pi_(n-1)`, and
+  `h_n=h_K*product_(j=K+1)^n B_j`.  Canonical exit is the first `B_n<=0`
+  while the preceding block is positive.
+- The new quadrature identities are
+  `m_(2n)-q_(2n)(n)=h_n` and
+  `m_(2n+1)-q_(2n+1)(n)=(S_n+S_(n-1))*h_n`.  The second coefficient is
+  `S_n+S_(n-1)`, not `alpha_n`, because the degree-`2n` error contributes
+  `2*S_(n-1)*h_n`.  Hence canonical centering makes the next odd moment equal
+  to the current n-point Gauss odd moment.
+- Writing `delta_n` for the target chi-square cubic-product deficit, the
+  full-exact row gives `delta_n=c_n*h_n`, `c_n=3*(2/3)^n`, and on the centered
+  tail `B_n=beta_n=(3/2)*delta_n/delta_(n-1)`.  Thus D.1 is equivalent to a
+  finite-stage sign change / overshoot question for a moving product Gauss
+  quadrature.
+- The obstruction is now narrower but genuine: eventual zero Jacobi diagonal
+  need not make the original law symmetric because a finite Jacobi head can
+  retain skewness; R12 raw tails do not control moving quadrature sign,
+  nodes, weights, or inverse-Hankel conditioning.  A weaker sufficient target
+  is `mu in E and alpha_n=0 eventually => m_3(mu)=0`.  Gaussian rigidity and
+  the `P_3K` bridge remain separate OPEN problems.
+- Added `flat_shadow_canonical_tail_r53/audit_r53.py` and README.  The local
+  audit checks the canonical Jacobi recurrence, even/odd Gauss error formulas,
+  deficit/norm ratio, cubic-trace stabilization, and finite Favard positivity.
+  It passed the exact markers and explicitly leaves canonical rigidity and
+  eventual skew annihilation OPEN.  The realization marker is conditional on
+  all future `beta_n>0`; it is not a positivity proof.
+- No determinant, optimizer, SDP, sweep, relaxed measure-LP, or remote
+  computation was used.  Before R54, read the updated framework, worklog, and
+  R36–R53 README/audit; the next target is eventual-skew annihilation or a
+  genuine moving-quadrature sign theorem, not another fixed-degree expansion.
