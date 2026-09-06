@@ -2610,3 +2610,37 @@ computation was used.
   bootstrap without common-radius conversion.
 - Added `flat_shadow_odd_green_source_r77/README.md` and
   `flat_shadow_odd_green_source_r77/audit_r77.py`.
+
+## R78 — Same-radius factorial even bootstrap (2026-09-07)
+
+- The webpage again reported that its connector could not read the local R77
+  files. I extracted the completed R78 raw math sources and audited their
+  coefficient arithmetic against the R77/R76 baselines.
+- Under the explicit same-factor angular coefficient bounds
+  `|C_(r,s)+C_(s,r)|<=2A_(2k)` and `|D_(r,s,t)|<=A_(2k)`, the exact even source
+  obeys `|E_(2k)|<=sum|f_r f_s|+sum|f_r f_s f_t|`. Thus the arbitrary-source
+  `(3/2)^k` angular inverse loss is absent from the actual same-factor source.
+- In the single coefficient Wiener norm
+  `||g||_n=sum|g_m|(4sqrt(n))^m`, the even equation closes as
+  `||E||_n<=||E+Y||_n^2+||E+Y||_n^3`, with no additional `rho_n->sigma_n`
+  conversion and no separate `4^n` factor.
+- Combining R77 `FS_(3+epsilon)` and R76 signed transfer gives
+  `Gamma_(n,mu)=K_mu n^(-1/2)[16e(mu+1)]^n` for the odd correction in the same
+  norm. The audited R64 tangent satisfies
+  `H_n<=8/3 n^(3/2)16^n`.
+- With `x=|a|H_n`, the local bootstrap `||Y||<=2x`, `||E||<=8x^2`,
+  `x<=1/100` closes when `36Gamma x^2<=1`, yielding conditional
+  `a#=H_n^(-1)min{1/100,[36Gamma]^(-1/2)}` and
+  `t#=(a#)^2`. For large n this has sufficient scale
+  `a# >= [16sqrt(K_mu)]^(-1)n^(-5/4)[64sqrt(e(mu+1))]^(-n)` and
+  `t# >= [256K_mu]^(-1)n^(-5/2)[4096e(mu+1)]^(-n)`.
+- The result is local and conditional on the exact same-factor angular
+  coefficient bounds and R77 Gram ball. It does not prove D.1, a positive
+  infinite backward tower, or backward OU divisibility, and it remains far below
+  `A_(2n)~3(2/3)^n/sqrt(pi n)` because the tangent has size `~16^n` in this
+  growing norm.
+- The next target is tangent-centered Gram/source bootstrap:
+  `G_n(a)=I+aA_n+R_n(a)` with bounded `A_n`, controlling only `(E,o)` while
+  treating `aU` as background. Added
+  `flat_shadow_even_same_radius_r78/README.md` and
+  `flat_shadow_even_same_radius_r78/audit_r78.py`.

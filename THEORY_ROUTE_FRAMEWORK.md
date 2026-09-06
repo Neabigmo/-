@@ -5804,3 +5804,99 @@ backward tower 或 backward OU divisibility。下一条唯一目标转为
 solver，去除 `e^(64lambda_mu n)` 与 `4^n` 的共同半径损失。
 
 新增本机审计为 `flat_shadow_odd_green_source_r77/audit_r77.py`。
+
+## 75. R78：same-radius factorial even bootstrap（2026-09-07）
+
+网页端 R78 完成时连接器仍返回账户连接错误，未实际读取 R77 本机文件；本节
+采用其 raw math sources，并以 R77 的局部 `FS_(3+epsilon)` 与 R76 的 signed
+factorial transfer 为基线。结论必须保留为有限层、局部、条件性的 same-factor
+闭包，不把任意 even forcing 的 angular inverse 当成已解决。
+
+令 Gaussian-normalized Hermite series 为
+
+`f(z)=E(z)+Y(z)=sum_(m>=1)f_m z^m`，`f_m=L[e_m]/sqrt(m!)`。
+
+在 exact same-factor angular identity 的 `2k` 次系数中，假设其形式为
+
+`A_(2k)E_(2k)+Q_(2k)(f,f)+C_(2k)(f,f,f)=0`，
+
+`A_(2k)=3 binom(2k,k)/6^k`，并具有角系数绝对值控制
+
+`|C_(r,s)+C_(s,r)|<=2A_(2k)`，
+`|D_(r,s,t)|<=A_(2k)`，
+
+其中 `r+s=2k`、`r+s+t=2k`。由加权 Young 不等式，实际同因子 source
+满足
+
+`|E_(2k)|<=sum_(r+s=2k)|f_r f_s|
+ +sum_(r+s+t=2k)|f_r f_s f_t|`。
+
+因此 arbitrary-source 的 `A_(2k)^(-1)~sqrt(k)(3/2)^k` 不进入实际
+same-factor nonlinear source。这里的角系数绝对值控制是明确的 conditional
+input；没有它，不能把这个 cancellation 推给任意 even forcing。
+
+对固定 truncation `n`，取单一系数 Wiener 半径
+`R_n=4sqrt(n)`，范数
+`||g||_n=sum_(m<=2n+1)|g_m|R_n^m`。普通卷积的三角不等式给
+
+`||gh||_n<=||g||_n||h||_n`，
+
+并从上述 exact same-factor coefficient majorant 得到 conditional even
+bootstrap lemma
+
+`||E||_n<=||f||_n^2+||f||_n^3`，`f=E+Y`。
+
+这一步消除了两种人为损失：不再把 `rho_n=4sqrt(n)` 换到
+`sigma_n=8sqrt(n)`，也不再单独支付 `4^n`；但它并没有说明完整解已经处于
+R77 的 Gram 小球。
+
+与 R77 结合时，若 `||E||_n+||Y||_n<=1/40`，因为
+`rho_k<=R_n` 对 `k<=n`，每个 prefix 都满足 R77 的局部条件。取任意
+`mu>3`、`lambda=mu+1`，R76 signed transfer 给
+
+`|Z_tilde_k|<=D_mu lambda^k/k! Xi`，可取
+`D_mu<=2mu C_mu/(mu-1)`。
+
+换回 odd Hermite coefficient
+`|o_(2k+1)|<=D_mu Xi k!lambda^k/(2k+1)!`，直接在同一 `R_n` 求和。
+利用 `k!/(2k+1)!<=1/(k+1)!` 及末项比值控制，得到
+
+`||o||_n<=Gamma_(n,mu)Xi`，
+`Gamma_(n,mu)=K_mu n^(-1/2)[16e(mu+1)]^n`，
+`K_mu=256mu C_mu/[31(mu-1)]`。
+
+R64 tangent 的同范数大小记为 `H_n`。其精确 odd coefficient 与相邻比值给出
+
+`H_n<=8/3 n^(3/2)16^n`。
+
+令 `x=|a|H_n`，采用
+`||Y||_n<=2x`、`||E||_n<=8x^2`、`x<=1/100`。even lemma 严格改善，
+R77 source factor 则满足 `Xi<=36x^3`；若
+`36Gamma_(n,mu)x^2<=1`，odd 也严格改善。故保守的 conditional local
+window 为
+
+`a_(n,mu)#=H_n^(-1)min{1/100,[36Gamma_(n,mu)]^(-1/2)}`，
+`t_(n,mu)#=(a_(n,mu)#)^2`。
+
+使用 `H_n` 与 `Gamma` 的显式上界，充分大 `n` 时可取
+
+`a_(n,mu)# >= [16sqrt(K_mu)]^(-1)n^(-5/4)
+[64sqrt(e(mu+1))]^(-n)`，
+
+`t_(n,mu)# >= [256K_mu]^(-1)n^(-5/2)
+[4096e(mu+1)]^(-n)`。
+
+这比 R77/R74 共同半径链条的 `e^(-1088n)` 更好，也准确说明了新的主要
+瓶颈：不是 angular inverse 的 `(3/2)^n`，不是额外 `4^n`，而是为了进入
+R77 Gram 小球而支付的 Gaussian tangent 同范数 `H_n~n^(3/2)16^n`，以及
+在该 growing radius 上的 signed Green evaluation loss。与
+`A_(2n)~3(2/3)^n/sqrt(pi n)` 比较仍有巨大指数差距。
+
+R78 尚未证明 D.1、positive backward tower、backward OU divisibility，也
+没有把 Gram 小球中心从 `0` 移到大背景 `aU`。下一条唯一目标是
+**tangent-centered Gram/source bootstrap**：利用 R71 的
+`A_n=P_nM_(g_1)P_n`、`sup_n||A_n||<infinity`，写
+`G_n(a)=I+aA_n+R_n(a)`，只约束 `(E,o)` 的小量而把 `aU` 作为精确背景，
+检验能否移除 `16^n` tangent penalty。
+
+新增本机审计为 `flat_shadow_even_same_radius_r78/audit_r78.py`。
