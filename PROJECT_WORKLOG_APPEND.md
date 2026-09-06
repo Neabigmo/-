@@ -1467,3 +1467,52 @@ computation was used.
   the `P_3K` bridge remain open.  The current smallest residue OPEN is now
   the general `m>=6` first-variation lemma, ideally via a closed rational
   formula for `kappa_m`; the three checked cases `m=3,4,5` are not extrapolated.
+
+# 2026-09-06 — R44 general first-residue variation audit
+
+- The same project webpage first read the local route framework, append-only
+  worklog, and R36–R43 audit records, and verified nested-repository HEAD
+  `5855acd94a5d4312d456af68bc3a26829a3cefa8`.  It then returned a general
+  fixed-`m` formula, rather than interpolating the three earlier cases:
+
+  `kappa_m = sqrt(6(2m+1)) *
+  (608m^4+672m^3-386m^2-207m-27)/(256(m+1)(m+2))`.
+
+- Added `flat_shadow_residue_r44/audit_r44.py` and README.  The local audit
+  independently checks the `A_1,A_2` Darboux/Gamma-ratio algebra, the exact
+  `j=1,2,3` diagonal moments, the general `q_(m,2),q_(m,4),q_(m,6)` formulas,
+  exact `C^(1)`/`C^(3)` pole cancellations, the C-sector constant-term
+  identities, positivity of the proposed polynomial, the existing `m=3,4,5`
+  kappa values, and the full fixed-`m` residue quotient reassembly for
+  `m=3,4,5` using the R43 exact generator machinery.
+
+- Output:
+  `R44_GENERAL_DARBOUX_COEFFICIENT_ALGEBRA PASSED`,
+  `R44_GENERAL_BLOCK_MOMENTS PASSED`,
+  `R44_C_SECTOR_POLE_CANCELLATION PASSED`,
+  `R44_GENERAL_Q_FORMULAS PASSED`,
+  `R44_C_CONSTANT_TERM_IDENTITIES PASSED`,
+  `R44_GENERAL_KAPPA_SPECIALIZATIONS PASSED`,
+  `R44_GENERAL_KAPPA_POSITIVITY PASSED`,
+  `R44_FIXED_M_ASSEMBLY m=3,4,5 PASSED`,
+  `R44_NPLUS4_WEIGHTED_CONDITIONING PASSED`,
+  `R44_NPLUS6_MULTI_RESPONSE REMAINS OPEN`, and
+  `R44_AUDIT_COMPLETED`.
+
+- The numerator polynomial is strictly positive for every integer `m>=1`:
+  `608m^4-386m^2>=222` and `672m^3-207m>=465`, hence the full numerator is
+  at least `660`.  Thus the fixed-`m` first-variation conclusion is
+  `kappa_m>0` and `r_m=1` for every admissible `m>=3`.
+
+- The N+4 continuation is now closed at the fixed-`m` algebraic level and
+  still has no family-specific weighted-conditioning no-go.  This does not
+  establish a uniform-in-`m` remainder theorem or a full transgression.  The
+  current smallest OPEN is **Grade-(N+6) Multi-Response Conditioning Lemma**:
+  new `D_(n,N+6)`, `H_(n;N+3,3)`, `H_(n;N+1,5)`, and third-Gateaux response
+  channels must be controlled together.  Gaussian rigidity, the accumulated
+  grade-zero debt, the positive flat-shadow remote tail, and the `P_3K` bridge
+  remain open.
+
+- No optimizer, SDP, numerical sweep, relaxed measure-LP, or remote
+  computation was used.  Before the next web round, the prompt must require
+  reading the updated framework, worklog, and R36–R44 local audit records.

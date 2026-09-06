@@ -3311,3 +3311,83 @@ Constraint-Coupled Non-SOS Graded Value Transgression、Gaussian rigidity
 仍 OPEN，`P_3K` bridge 仍完全断开。下一轮网页端开始工作前必须先读取本框架、
 工作日志及 R36–R43 的 README/audit；只有新的精确有限恒等式才继续新增
 本机审计。
+
+## 41. R44：一般 first-residue variation lemma 关闭，OPEN 前移至 N+6 多响应
+
+本轮网页端先通过连接读取本框架、工作日志与 R36–R43 的本机记录，并核对
+嵌套仓库真实 HEAD `5855acd94a5d4312d456af68bc3a26829a3cefa8`。网页端随后
+将 R42.3/R42.5 的五类目标阶贡献一般化；本机 R44 audit 已对新增有限代数
+与 `m=3,4,5` 的整套 fixed-`m` residue quotient 重装配完成核验。
+
+### 41.1 无条件 exact / fixed-`m` 结论
+
+对 `H_(alpha,beta)(u)=(1-u/9)^(-alpha)(1-u)^(-beta)`，固定 `m` 和固定
+shift 时，主奇点 `u=1` 的 Darboux 展开由 `A_1,A_2` 给出，`u=9` 只贡献
+`O(9^(-n) poly(n))` 的指数小项。本机核验了该系数规则及其 Gamma-ratio
+实现。
+
+R42.3 的 diagonal central-binomial moments `M_0,M_1,M_2` 在 `j=1,2,3`
+的通式、本轮需要的 cancelled-chaos 系数通式均通过 exact polynomial
+核验。其中
+
+`q_(m,2)=2^(-m)sqrt(3)(2m+1)sqrt(2m+2)`，
+
+`q_(m,4)=2^(1-m)sqrt(2m+1)(2m^2-m+1)`，
+
+`q_(m,6)=2^(1-m)(6m^2-15m+19)
+sqrt((2m-1)(2m)(2m+1)/120)`。
+
+R42.5 的 `C` sectors 出现新的 exact pole-cancellation：`C^(1)` 和 `C^(3)`
+中原本的 `(3-z)^(-3)` 因子分别精确约去，剩下统一的 `u=zw=1` 代数
+奇点与 `u=9` 指数尾。相应的 `C^(1)` 两个 constant-term moments、
+`C^(3)` leading constant-term identity 也通过本机核验。
+
+将网页端的一般五项装配在固定 `m` 的 exact generator 上重装配，`m=3,4,5`
+均严格复现既有本机结果；其中新的统一候选为
+
+`kappa_m = sqrt(6(2m+1))
+(608m^4+672m^3-386m^2-207m-27)/(256(m+1)(m+2))`。
+
+因此 `P(m)=608m^4+672m^3-386m^2-207m-27`。对 `m>=1`，
+`608m^4-386m^2>=222` 且 `672m^3-207m>=465`，所以
+`P(m)>=660>0`；在 admissible `m>=3` 上 `kappa_m>0`，从而
+`r_m=1`。这不是由 `m=3,4,5` 插值，而是由 exact finite moments、Darboux
+规则和五项装配组成的固定-`m` 公式。
+
+### 41.2 Conditional theorem 与证据边界
+
+在假设 R39/R40 的 full-exact positivity conversion 和固定-`m` remainder
+控制可沿用时，N+4 normalized response rows 仍为
+`1,n,n^2,S_(n,m)-sigma_m`，其 leading span 是 `1,n,n^2,n^(-1)`。
+由于 `lambda_(R,2m)=O(R^(-(m-1/2)))`，消去该 row 的额外 `O(R)` 放大后为
+`O(R^(-m+3/2))->0`（`m>=3`），故整个 N+4 two-body mixed-Hessian level
+不产生 family-specific weighted-conditioning no-go。
+
+本机 R44 标记为：
+
+`R44_GENERAL_DARBOUX_COEFFICIENT_ALGEBRA PASSED`、
+`R44_GENERAL_BLOCK_MOMENTS PASSED`、
+`R44_C_SECTOR_POLE_CANCELLATION PASSED`、
+`R44_GENERAL_Q_FORMULAS PASSED`、
+`R44_C_CONSTANT_TERM_IDENTITIES PASSED`、
+`R44_GENERAL_KAPPA_SPECIALIZATIONS PASSED`、
+`R44_GENERAL_KAPPA_POSITIVITY PASSED`、
+`R44_FIXED_M_ASSEMBLY m=3,4,5 PASSED`、
+`R44_NPLUS4_WEIGHTED_CONDITIONING PASSED`、
+`R44_AUDIT_COMPLETED`。
+
+这些标记不把固定-`m` 代数误写成 `m`-uniform remainder theorem，也不把
+N+4 continuation写成完整 transgression。`N+6` 多响应、任意深度 uniform
+conditioning、负系数补偿的 grade-zero debt 总控、positive flat-shadow
+remote analytic tail、Gaussian rigidity 和 `P_3K` bridge 仍未解决。
+
+### 41.3 当前最小 OPEN
+
+`General-m>=6 First Residue Variation Lemma` 现已关闭；当前最小可证伪
+子问题前移为：
+
+**Grade-(N+6) Multi-Response Conditioning Lemma — OPEN**。
+
+下一轮网页端开始前必须先读取本框架、工作日志及 R36–R44 的 README/audit。
+只有产生新的可精确核验有限恒等式才新增本机 audit；不使用 optimizer、SDP、
+大规模 sweep、relaxed measure-LP 或 remote computation。
