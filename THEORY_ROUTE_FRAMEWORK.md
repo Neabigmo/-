@@ -6495,3 +6495,59 @@ BigInt 有理审计通过：`R90_CORRECTED_A_B_FORMS_PASSED`、
 source leg 在上述小比例 band 上 **PROVED**；angular、uniform Green、full
 kernel 拼接、PSC moving saddle、比例下界/等式及更高层 positive tower/OU/`FS_3`
 仍 OPEN 或 CONDITIONAL。
+
+## 88. R91：mesoscopic angular/Green/full-kernel closure（2026-09-07）
+
+R90 已把 source theorem 关闭在 `m>=8`、`s<=m/8`。R91 网页端进一步给出两条
+可以直接和该窗口拼接的 elementary estimates。本机复核发现其 central-binomial
+induction 的 ratio 也写反了一次：正确的是
+`a_(k+1)/a_k=(2k+1)/(2k+2)`，并由
+`(2k+1)^2-4k(k+1)=1` 得到
+`C(2k,k)>=4^k/(2 sqrt(k))`。修正后，R83/R87 exact root-filter formula
+`M_(j+r+1,j)=c_j upsilon_r B_(r,j)` 给出全局 angular upper
+
+`|M_(j+r+1,j)|<=4^(-j-r) j^(-1/2) (r+1)^2/r!`，
+
+因为 root-filter probability 的 `rho` 落在 `[0,3]`，故 `|B|<=1`，而
+`c_j=(j!)^2/(2j+1)!` 与 `|upsilon_r|` 分别由同一 central-binomial lower bound
+控制。
+
+Green 部分不需要 R88 的 amplitude 或 PSC contour 假设。R83/R86 exact coefficient
+为
+`G_(ell+g,ell)=(-1)^g/g!*[1+2g integral_0^1 t^ell(2-t)^(g-1)dt]`。
+由 `t(2-t)<=1` 得积分不超过 `1/(ell-g+2)`。在共同窗口
+`D=r+s+g<=j/8`、`ell=j+r+s+1` 下，`ell>=j+3`、`g<=j/8`，从而
+`2g/(ell-g+2)<2/7`，即
+`|G_(ell+g,ell)|<=9/(7g!)`。
+
+现在令 `D=r+s+g`。当 `j>=16`、`2<=D<=j/8` 时，每条非空路径都满足
+`m=j+r+1>=8`、`s<=D<=j/8<=m/8`，所以 R90 source theorem 可逐路径应用。
+三条已证上界给出单路径
+`|GRM|<=5184*j^(-3)(r+1)^2*s/(r!s!g!)`。利用精确生成函数
+`sum_r (r+1)^2x^r/r!=(x^2+3x+1)e^x`、
+`sum_s sx^s/s!=xe^x`，有
+
+`sum_(r+s+g=D)(r+1)^2s/(r!s!g!)`
+`=(3^D/D!)*D(D^2+6D+2)/27`。
+
+因此 exact mixed-kernel 分解在整个区间 `2<=D<=j/8` 上满足真正的 theorem
+
+`|K_(j+D+1,j)|<=192*j^(-3)*D(D^2+6D+2)*3^D/D!`。
+
+再用 R90 已证的全局权重比
+`tilde omega_(n,j+D+1)/tilde omega_(n,j)<4^(D+1)`，得到区间级的
+rescaled column bound
+
+`sum_(2<=D<=j/8)|K_(j+D+1,j)|`
+`*tilde omega_(n,j+D+1)/tilde omega_(n,j)`
+`<=2405376*e^12*j^(-3)`。
+
+本机新增 `flat_shadow_mesoscopic_kernel_r91/README.md` 与 `audit_r91.js`。
+BigInt 有理审计通过 `R91_CENTRAL_BINOMIAL_INDUCTION_PASSED`、
+`R91_ANGULAR_MAJORANT_ANCHORS_PASSED`、`R91_GREEN_WINDOW_BOUND_PASSED`、
+`R91_CONVOLUTION_IDENTITY_AND_CONSTANTS_PASSED` 与
+`R91_MESOSCOPIC_KERNEL_AUDIT_COMPLETED`。所以状态实质更新为：source、global
+angular、共同窗口 Green，以及 `D<=j/8` 的 full kernel/weighted column 均
+**PROVED**（基于已有 exact decomposition）；真正剩余的 coefficient-propagation
+大缺口收窄为 `D/j>=1/8` 的 compact-uniform upper，再之后才是 hybrid stability、
+PSC lower/equality、positive backward tower、OU divisibility 与 `FS_3`。

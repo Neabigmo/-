@@ -3075,3 +3075,36 @@ computation was used.
   `R90_EXPLICIT_SOURCE_BOUND_ANCHORS_PASSED`,
   `R90_WEIGHT_PRODUCT_AND_BOUND_PASSED`, and
   `R90_CORRECTED_SOURCE_MAJORANT_AUDIT_COMPLETED`.
+
+## R91 — Mesoscopic angular, Green, and full-kernel closure (2026-09-07)
+
+- R91 proposed a global angular estimate and a `D<=j/8` Green estimate.  The
+  webpage's central-binomial induction ratio was backwards; after correction,
+  `a_(k+1)/a_k=(2k+1)/(2k+2)` and the squared step follows from the exact
+  difference `1`.
+- Exact root-filter probability gives `0<=rho<=3`, hence `|B_(r,j)|<=1`.
+  Together with the corrected central-binomial lower bound,
+  `c_j=(j!)^2/(2j+1)!` and `upsilon_r` yield the global actual angular bound
+  `|M_(j+r+1,j)|<=4^(-j-r)j^(-1/2)(r+1)^2/r!`.
+- From the exact Green coefficient,
+  `G=(-1)^g/g!*[1+2g integral_0^1 t^ell(2-t)^(g-1)dt]`, the inequality
+  `t(2-t)<=1` gives `|G|<=9/(7g!)` whenever `D=r+s+g<=j/8`.
+- Combining R90 source, the angular bound, and this Green bound gives the
+  exact path majorant `5184*j^(-3)(r+1)^2*s/(r!s!g!)`.  Its exact convolution
+  is `(3^D/D!)*D(D^2+6D+2)/27`, so the full mixed kernel satisfies
+  `|K_(j+D+1,j)|<=192*j^(-3)D(D^2+6D+2)3^D/D!` for
+  `j>=16`, `2<=D<=j/8`.
+- With the R90 global ratio `<4^(D+1)`, the whole rescaled weighted interval
+  obeys `sum_{2<=D<=j/8}|K|*weight_ratio <=2405376*e^12*j^(-3)`.
+  This upgrades an entire interval-level coefficient-propagation statement
+  from CONDITIONAL to PROVED under the existing exact decomposition.
+- Added `flat_shadow_mesoscopic_kernel_r91/README.md` and `audit_r91.js`.
+  Exact audit output:
+  `R91_CENTRAL_BINOMIAL_INDUCTION_PASSED`,
+  `R91_ANGULAR_MAJORANT_ANCHORS_PASSED`,
+  `R91_GREEN_WINDOW_BOUND_PASSED`,
+  `R91_CONVOLUTION_IDENTITY_AND_CONSTANTS_PASSED`, and
+  `R91_MESOSCOPIC_KERNEL_AUDIT_COMPLETED`.
+- The next overall bottleneck is now sharply localized to the compact-uniform
+  large-gap sector `D/j>=1/8`; PSC lower/equality and the positive backward
+  tower remain higher-level open problems.
