@@ -3573,3 +3573,75 @@ uniform tail 与 global transgression 仍 OPEN。
 并区分 genuine full-exact、formal Gateaux coefficient extractor 与 positive
 flat shadow 三种层次。本轮仍未使用 optimizer、SDP、大规模 sweep、relaxed
 measure-LP 或 remote computation。
+
+## 45. R47：有限 Fock/Hermite 约束不降掉 N=6 的两个方向，但 all-degree 积分仍 OPEN
+
+网页端已完成本轮 constraint-coupling 推导。它把 `N=6` 的 rank-2 flat
+shadow 写成二原子结构：令 `U=Y/sqrt(v)`，则 `EU=0`、`EU^2=1`，并且
+支撑为两点等价于 `U^2=tU+1`。`b_4^rho=0` 给出 `t^2=2`，因此矩满足
+`m_(k+2)=t m_(k+1)+m_k`，并有
+`EH_5(U)=-6t`、`EH_6(U)=-4`、`EH_7(U)=36t`、
+`EH_9(U)=-232t`、`EH_10(U)=-432`、`EH_12(U)=2848`。
+
+配合 Hermite-heat covariance，网页端得到 `b_3,b_5 != 0`，以及
+`b_5=-(3v/sqrt(5))b_3`、`Delta_6=(9sqrt(5)/10)b_3^2`。这些是
+rank-2 flat shadow 的 exact head identities，不是 formal tangent 结论。
+
+### 45.1 degree-10/12 same-factor identities
+
+本机新增 `flat_shadow_constraint_coupling_r47/audit_r47.py`，独立用三方向
+angular constant-term 计算 same-factor cubic 系数，并核验网页给出的
+degree-6、degree-10、degree-12 方程。genuine full-exact 层的两个新式子为
+
+`b_10 = sqrt(30)b_3 b_7 + (17sqrt(7)/14)b_5^2`，
+
+以及在 `b_6=(7sqrt(5)/10)b_3^2` 后
+
+`b_12 = (10sqrt(55)/11)b_3 b_9
+       + (21sqrt(22)/11)b_5 b_7
+       - (369sqrt(231)/440)b_3^4`。
+
+把它们与二原子 shadow 的 `b_7,b_9,b_10,b_12` 相减，得到 exact
+mismatch-coordinate 变换：
+
+`b_5 Delta_7 = b_5/(sqrt(30)b_3) Delta_10
+               + (13sqrt(42)/35) Delta_6^2`，
+
+`b_3 Delta_9 = (sqrt(55)/50) Delta_12
+               - (7sqrt(3)/50)(b_5/b_3) Delta_10
+               - (1073sqrt(105)/31500) Delta_6^2`。
+
+其线性部分对 `(Delta_10,Delta_12)` 的 Jacobian（自由坐标取
+`(b_7^mu,b_9^mu)`）为 `(10sqrt(1650)/11)b_3^2 != 0`。
+
+所以有限 degree-10/12 Fock 方程并没有把 `b_3 Delta_9` 与
+`b_5 Delta_7` 压成一维；它们只是被可逆地改写成两个 even-mismatch
+坐标，另加固定的 `Delta_6^2` 项。
+
+### 45.2 证据边界与新的最小 OPEN
+
+本机 R47 审计通过：
+
+`R47_SHADOW_TWO_ATOM_RECURRENCE PASSED`、
+`R47_DEGREE10_FOCK_IDENTITY PASSED`、
+`R47_DEGREE12_FOCK_IDENTITY PASSED`、
+`R47_MISMATCH_COORDINATE_IDENTITIES PASSED`、
+`R47_LOCAL_JACOBIAN_RANK2 PASSED`。
+
+这关闭了“有限 Fock/Hermite/Hankel 关系会自动把 rank-2 response 降秩”
+这一局部猜想，但没有构造 genuine all-degree positive full-exact law。
+网页端明确保留的真正 OPEN 是：两个有限前缀方向能否同时积分为满足
+all-degree same-factor exactness、正性、OU backward divisibility 与
+uniform weighted-tail 要求的真实 laws。有限 positive prefix 不是
+all-degree realization，不能用它直接宣布 global obstruction 或 no-go。
+
+因此当前路线应从“有限约束是否降秩”转向“全阶正性/相干性是否阻止二维
+odd-control cone 的积分”。formal Gateaux 仍只是 OU Taylor coefficient
+extractor，positive flat shadow 仍不能使用 full-exact Fock positivity；
+Gaussian rigidity、`P_3K` bridge 与完整 Constraint-Coupled Non-SOS
+Graded Value Transgression 继续 OPEN。
+
+下一轮网页端开始前必须先读取本框架、工作日志及 R36–R47 README/audit；
+只有出现新的 all-degree exact identity、正性递推或可证伪的全阶 cone
+obstruction，才进入下一次本机 proof-level audit。本轮没有使用 optimizer、
+SDP、大规模 sweep、relaxed measure-LP 或 remote computation。

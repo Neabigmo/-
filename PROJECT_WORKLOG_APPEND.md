@@ -1614,3 +1614,40 @@ computation was used.
   genuine full-exact same-factor manifold.  Do not promote response rank to a
   weighted no-go; preserve the distinction between full-exact, formal Gateaux,
   and positive flat-shadow levels.
+
+## R47 — N=6 constraint-coupling exact reduction (2026-09-06)
+
+- The webpage R47 round completed after reading the corrected local R46
+  records.  Its main conclusion is that finite same-factor/Fock/Hermite
+  constraints do not collapse `b_3 Delta_9` and `b_5 Delta_7` to one
+  direction; they give an invertible coordinate change to
+  `(Delta_10,Delta_12)` plus a fixed `Delta_6^2` term.
+- For the rank-two flat shadow, `U^2=tU+1`, `EU=0`, `EU^2=1`, and the matched
+  `b_4` head gives `t^2=2`.  The exact recurrence is
+  `m_(k+2)=t*m_(k+1)+m_k`; the audited heads include
+  `EH_5=-6t`, `EH_6=-4`, `EH_7=36t`, `EH_9=-232t`,
+  `EH_10=-432`, and `EH_12=2848`.
+- Added `flat_shadow_constraint_coupling_r47/audit_r47.py` and README.  The
+  script independently reconstructs the angular constant terms and verifies
+  the genuine full-exact identities
+  `b_10=sqrt(30)b_3b_7+(17sqrt(7)/14)b_5^2` and
+  `b_12=(10sqrt(55)/11)b_3b_9+(21sqrt(22)/11)b_5b_7
+  -(369sqrt(231)/440)b_3^4` after the audited degree-six relation.
+- Subtracting the two-atom shadow gives the exact identities
+  `b_5 Delta_7=b_5/(sqrt(30)b_3) Delta_10+(13sqrt(42)/35)Delta_6^2` and
+  `b_3 Delta_9=(sqrt(55)/50)Delta_12
+  -(7sqrt(3)/50)(b_5/b_3)Delta_10
+  -(1073sqrt(105)/31500)Delta_6^2`.
+  The Jacobian in the free coordinates `(b_7^mu,b_9^mu)` is
+  `(10sqrt(1650)/11)b_3^2 != 0`.
+- Local markers passed:
+  `R47_SHADOW_TWO_ATOM_RECURRENCE PASSED`,
+  `R47_DEGREE10_FOCK_IDENTITY PASSED`,
+  `R47_DEGREE12_FOCK_IDENTITY PASSED`,
+  `R47_MISMATCH_COORDINATE_IDENTITIES PASSED`, and
+  `R47_LOCAL_JACOBIAN_RANK2 PASSED`.
+- This closes the finite algebraic “automatic rank collapse” possibility, but
+  not the genuine all-degree problem.  The remaining OPEN is whether the two
+  finite-prefix controls integrate simultaneously into all-degree positive
+  full-exact laws with OU backward divisibility and the required weighted tail.
+  Finite positive prefixes are not such laws; no no-go is claimed.
