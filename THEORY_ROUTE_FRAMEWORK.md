@@ -6383,3 +6383,31 @@ source proportional endpoint 的参数必须是 `lambda=zeta/L`（不是 `L/zeta
 fallback 的有限算术已核验 `sum 1/(r!s!g!)=3^D/D!`，但 angular bound 中的 `(1+r)^2` 会留下显式 `(1+D)^2` 多项式因子；因此 R87 的固定 `q=6` 形式不能由三条目标不等式直接推出，必须重新校准 polynomial prefactor。
 
 本轮新增 `flat_shadow_green_region_r87/README.md` 与 `audit_r87.py`。审计通过 angular branch/zeta、endpoint correction、Green endpoint derivative、conjugate non-degeneracy 与 fallback multinomial arithmetic；不把 PSC、source analytic continuation 或 uniform upper 写成已证定理。整体主线仍是：先关闭 rescaled coefficient propagation，再处理 hybrid Gram/triangular stability；positive backward tower、OU divisibility、global positivity 与 `FS_3` 仍在更高层开放。
+
+## 85. R88：带显式余项的 real-`u` endpoint lemma（2026-09-07）
+
+R88 选择了 A 路，先把 Green 的实积分从 PSC 的复 contour 问题中剥离出来。对
+`phi(u)=zeta*u+L*Log(u)`、`Delta=L+zeta`，假设参数集上
+`Re(Delta)>=eta>0`、`Re(L)>=ell_0>0`，并给定 normalized source amplitude
+`A_j in C^1([0,1])` 满足 `||A_j||_{C^1}<=M`，则一次分部积分给出真正的抽象定理
+`integral_0^1 exp(j*phi(u))A_j(u)du = exp(j*zeta)A_j(1)/(j*Delta)+R_j`，且
+`|R_j| <= (M/eta)(1/c+L_max/c^2) exp(j*Re(zeta))/j^2`，其中
+`c=min(eta,ell_0)`。证明只用
+`B_j=A_j/phi'=A_j*u/(zeta*u+L)`、
+`B_j'=A_j'*u/(zeta*u+L)+A_j*L/(zeta*u+L)^2`，以及
+`Re(phi'(u))=Re(Delta)+(1/u-1)Re(L)>=eta`；下端点因 `Re L>0` 消失。
+
+若另有 `|A_j(1)|>=m>0`，可将余项写成相对 `1+O(j^(-1))`。代回 R86 exact
+Green operator 后得到 analytic realization of the corrected factor
+`P_G=1-2*zeta/Delta=(L-zeta)/(L+zeta)=(1+alpha)/Delta`。与仍属 conditional
+的 source endpoint `P_H=Delta^3/((1+alpha)L^2)` 拼接时，正确乘积仍是
+`P_H P_G=Delta^2/L^2`。
+
+这一轮真正关闭的是“给定 uniform amplitude 假设的 endpoint theorem”，不是 actual
+source 的复延拓。要把它升级为 PSC，仍需证明：actual source amplitude 的 uniform
+`C^1` 控制及端点非零、`z`-Cauchy contour 的合法变形与 Stokes 排除、angular
+conjugate branch 的非退化 limsup。因而本轮不宣称 proportional lower/equality。
+
+本机新增 `flat_shadow_endpoint_lemma_r88/README.md` 与 `audit_r88.py`。审计通过
+endpoint differentiation、endpoint geometry、explicit remainder constant、corrected
+Green factor 与 lower-boundary bookkeeping；`py_compile`、`git diff --check` 通过。

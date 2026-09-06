@@ -2968,3 +2968,34 @@ computation was used.
   `R87_FALLBACK_MULTINOMIAL_ARITHMETIC_PASSED`, and
   `R87_GREEN_REGION_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
   passed.
+
+## R88 — Explicit real-u endpoint lemma under a uniform amplitude hypothesis (2026-09-07)
+
+- The webpage selected route A and supplied a concrete one-integration-by-
+  parts lemma for the real Green segment.  The local record treats it as an
+  abstract theorem for a prescribed normalized source amplitude, not as a
+  bound for the actual source series.
+- Under `Re(Delta)>=eta>0`, `Re(L)>=ell_0>0`, and
+  `sup(|A_j|+|A_j'|)<=M`, with `phi(u)=zeta*u+L*Log(u)`, exact differentiation
+  gives `B=A_j/phi'=A_j*u/(zeta*u+L)` and
+  `B'=A_j'*u/(zeta*u+L)+A_j*L/(zeta*u+L)^2`.
+  Integration by parts yields
+  `I_j=e^(j*zeta)A_j(1)/(j*Delta)+R_j` with
+  `|R_j| <= (M/eta)(1/c+L_max/c^2)e^(j*Re(zeta))/j^2`,
+  `c=min(eta,ell_0)`.
+- If `|A_j(1)|>=m>0`, this becomes a relative `1+O(j^(-1))` expansion.  The
+  exact Green operator then realizes the corrected factor
+  `P_G=(L-zeta)/(L+zeta)=(1+alpha)/Delta`; with the separately conditional
+  source factor `P_H`, the product is `Delta^2/L^2`.
+- The remaining PSC gaps are now sharply isolated: actual complex source
+  `C^1` amplitude/endpoint nonvanishing, `z`-Cauchy contour legality and
+  Stokes control, and nondegenerate angular conjugate phase. No proportional
+  lower/equality is claimed.
+- Added `flat_shadow_endpoint_lemma_r88/README.md` and `audit_r88.py`.
+  Exact audit passed: `R88_ENDPOINT_DIFFERENTIATION_PASSED`,
+  `R88_ENDPOINT_GEOMETRY_PASSED`,
+  `R88_EXPLICIT_REMAINDER_CONSTANT_PASSED`,
+  `R88_CORRECTED_GREEN_FACTOR_PASSED`,
+  `R88_LOWER_BOUNDARY_BOOKKEEPING_PASSED`, and
+  `R88_ENDPOINT_LEMMA_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
+  passed.
