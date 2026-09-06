@@ -1810,3 +1810,45 @@ computation was used.
   the `Fixed-Head Two-Step Jacobi Center-Separation / Tail-Budget Lemma` or
   construct a rigorously compatible bounded-`x` all-degree chain.  No optimizer,
   SDP, sweep, relaxed measure-LP, or remote computation was used.
+
+## R51 — optimized two-step Jacobi budget (2026-09-06)
+
+- The webpage first read the local framework, worklog, R36–R50 README/audits,
+  and verified nested-repository HEAD `c04f58c4ec34138f6a1bec25b8e4983e775dd269`.
+  It then refined the R50 target rather than repeating fixed-degree
+  determinants.
+- The new formal choice of the next odd moment cancels the two-step Schur
+  off-diagonal and is equivalent to `S_n=0`.  With `widehat B_(n+1)` the
+  doubly-centered next Jacobi budget, the exact identities are
+  `D_n(0)/h_(n-1)=B_n*widehat B_(n+1)` and
+  `D_n(s)/h_(n-1)=B_n*widehat B_(n+1)+2*B_(n-1)*sigma_n*s-B_(n-1)*s^2`.
+- Completing the square gives
+  `(R_n^+)^2=sigma_n^2+B_n*widehat B_(n+1)/B_(n-1)`.  Optimizing over
+  `|s|<sqrt(B_n)` gives the exact value
+  `V_n=B_n*widehat B_(n+1)+B_(n-1)*Psi_(sqrt(B_n))(sigma_n)`, with a
+  nonnegative rescue term.  Strict two-step extension is equivalent to
+  `V_n>0`, and exit to `V_n<=0`; if `widehat B_(n+1)>=0`, center pressure by
+  itself cannot separate the two intervals.
+- The geometric center is now explicitly
+  `B_(n-1)*sigma_n=n*(n+1)*(n+5)*m_3/6-tr((J_n^circ)^3)/3`, and the generic
+  tail identity is
+  `tr(J_n(s)^3)=tr((J_n^circ)^3)+3*B_(n-1)*s`.  With
+  `A_n=B_(n-1)*sigma_n`, the rescue term has the exact two-branch expression
+  recorded in `flat_shadow_two_step_budget_r51/README.md`.
+- The webpage's conditional theorem is algebraically valid: for fixed finite
+  `X`, if some `4<=n<=N(X)` has
+  `|A_n|<=kappa_X*B_(n-1)*sqrt(B_n)` and
+  `widehat B_(n+1)<=-theta_X*B_(n-1)` with `theta_X>kappa_X^2`, then
+  `V_n<0` and ordinary Jacobi exit occurs by `N(X)+1`.  Neither tail
+  hypothesis is proved here; the current smallest one-lemma is uniform
+  cubic-trace tracking plus centered-budget negativity.
+- Added `flat_shadow_two_step_budget_r51/audit_r51.py` and README.  The local
+  exact audit passed all five new markers, plus `py_compile` and
+  `git diff --check`.  It records `R51_FIXED_HEAD_TWO_STEP_EXIT REMAINS OPEN`,
+  `R51_ROOT_LEVERAGE_DOMINATED_EXIT REMAINS OPEN`, and
+  `R51_XI_DIVERGENCE REMAINS OPEN`.
+- Evidence boundary remains strict: no ordinary-Jacobi exit,
+  `Xi_K->infinity`, Gaussian rigidity, `P_3K` bridge, or global transgression
+  is claimed.  No optimizer, SDP, sweep, relaxed measure-LP, or remote
+  computation was used.  Before the next webpage round, require reading the
+  updated framework, worklog, and R36–R51 README/audits.

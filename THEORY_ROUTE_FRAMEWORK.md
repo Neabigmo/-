@@ -3899,3 +3899,81 @@ rigidity、`P_3K` bridge 或 global transgression；R46 rank>=2、R48 collar
 chain。不得用 fixed-K compactness、`Gamma`-only positivity 或 formal
 系数提取冒充 genuine full-exact law，也不得使用 optimizer、SDP、sweep、
 relaxed measure-LP 或 remote computation。
+
+## 49. R51：优化后的 two-step Jacobi budget 与 cubic-trace tracking（2026-09-06）
+
+网页端在开始本轮前通过已连接 Codex 读取了本机总纲、工作日志和 R36–R50
+审计，并核对嵌套仓库真实 HEAD 为 `c04f58c4ec34138f6a1bec25b8e4983e775dd269`。
+本机新增 `flat_shadow_two_step_budget_r51/audit_r51.py` 与 README；本轮只
+核验网页端新出现的 exact all-degree algebra，不把 conditional theorem 当成
+已完成的 obstruction。
+
+R51 首先把自由的下一 odd moment 选择解释为消去两步 Schur off-diagonal：在
+当前 viable prefix 上，这等价于 formal Jacobi 坐标 `S_n=0`。令
+`\hat B_(n+1)` 表示当前 `S_(n-1)=0` 且下一步 `S_n=0` 的
+doubly-centered formal extension 的 next Jacobi budget。则新的 transfer law 为
+
+`D_n(0)/h_(n-1)=B_n*\hat B_(n+1)`,
+
+`D_n(s)/h_(n-1)=B_n*\hat B_(n+1)
+  +2*B_(n-1)*sigma_n*s-B_(n-1)*s^2`。
+
+因此 completed square 给出
+
+`(R_n^+)^2=sigma_n^2+B_n*\hat B_(n+1)/B_(n-1)`。
+
+在当前区间 `|s|<sqrt(B_n)` 上优化后，严格两步延拓的充要条件可以压成
+
+`V_n=B_n*\hat B_(n+1)+B_(n-1)*Psi_(sqrt(B_n))(sigma_n)>0`,
+
+其中 `Psi_r(sigma)=sigma^2`（`|sigma|<=r`），否则为
+`2*r*|sigma|-r^2`。故 ordinary two-step exit 等价于 `V_n<=0`，而 rescue
+项始终非负。特别是 `\hat B_(n+1)>=0` 时，same-factor center pressure
+把中心推远并不会自动造成区间分离；R50.21 的 pressure-vs-radius sufficient
+路线若要成功，必须先有一个负的 centered next budget。
+
+R51 还把 R50 的 geometric center 识别为 doubly-centered Jacobi truncation
+`J_n^circ` 的 cubic trace：
+
+`B_(n-1)*sigma_n
+ =n*(n+1)*(n+5)*m_3/6-tr((J_n^circ)^3)/3`,
+
+并给出尾部当前 `S_(n-1)=s`、下一步 `S_n=0` 下的 affine law
+
+`tr(J_n(s)^3)=tr((J_n^circ)^3)+3*B_(n-1)*s`。
+
+写 `A_n=B_(n-1)*sigma_n` 后，优化 rescue 项的两支为
+
+`R_n=A_n^2/B_(n-1)`，当 `|A_n|<=B_(n-1)*sqrt(B_n)`；
+
+`R_n=2*|A_n|*sqrt(B_n)-B_(n-1)*B_n`，否则。
+
+由此得到的可审计 conditional theorem 是：固定有限 `X`，若每个 compatible
+prefix 在某个 `4<=n<=N(X)` 同时满足
+`|A_n|<=kappa_X*B_(n-1)*sqrt(B_n)`、
+`\hat B_(n+1)<=-theta_X*B_(n-1)` 且 `theta_X>kappa_X^2`，则
+`V_n<0`，ordinary Jacobi exit 在 `N(X)+1` 之前发生。R51 只核验了这个
+蕴含的代数；没有证明两个 tail hypotheses。当前真正缺的 one-lemma 因而
+从 R50 的三量 tail bound 收缩成 `cubic-trace tracking` 加
+`centered-budget negativity`，而 root-leverage-dominated exit 仍然更强、
+更靠后。
+
+本机输出：
+
+`R51_DOUBLY_CENTERED_TRANSFER_IDENTITY PASSED`、
+`R51_RADIUS_AND_OPTIMIZED_FUNCTIONAL PASSED`、
+`R51_CENTERED_BUDGET_EXIT_ALGEBRA PASSED`、
+`R51_CUBIC_JACOBI_TRACE_AFFINE_LAW PASSED`、
+`R51_CUBIC_TRACE_CENTER_REDUCTION PASSED`、
+`R51_FIXED_HEAD_TWO_STEP_EXIT REMAINS OPEN`、
+`R51_ROOT_LEVERAGE_DOMINATED_EXIT REMAINS OPEN`、
+`R51_XI_DIVERGENCE REMAINS OPEN`、
+`R51_AUDIT_COMPLETED`；并通过 `py_compile` 与 `git diff --check`。
+
+证据边界：R51 没有证明 ordinary Jacobi exit、`Ξ_K->infinity`、Gaussian
+rigidity、`P_3K` bridge 或 global transgression；fixed-K formal prefix、
+genuine all-degree full-exact law 与 formal Gateaux/Hermite extractor 仍严格
+区分。下一轮网页端必须先读取本框架、日志和 R36–R51 README/audit，再攻
+`Uniform Cubic-Trace Tracking + Centered-Budget Negativity Lemma`，或构造
+真正兼容的 bounded-`x` all-degree chain；不得重复巨大 determinant，也不得
+使用 optimizer、SDP、sweep、relaxed measure-LP 或 remote computation。
