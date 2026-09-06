@@ -49,6 +49,44 @@ assert_true(sp.Rational(97, 1024) < 1, "R94 contraction factor failed")
 print("R97_CONDITIONING_AND_CONTRACTION_CONSTANTS_PASSED")
 
 
+# Exact number-operator commutator audit on a nontrivial polynomial test.
+x = sp.symbols("x")
+g = x**5 - 2*x**3 + x
+f = 1 + 2*x + x**2 - x**4
+
+def number_op(u):
+    return -sp.diff(u, x, 2) + x * sp.diff(u, x)
+
+def first_comm(u):
+    return number_op(g * u) - g * number_op(u)
+
+left_second = sp.expand(number_op(first_comm(f)) - first_comm(number_op(f)))
+right_second = sp.expand(
+    number_op(number_op(g)) * f
+    - 2 * sp.diff(number_op(g), x) * sp.diff(f, x)
+    - 2 * number_op(sp.diff(g, x)) * sp.diff(f, x)
+    + 4 * sp.diff(g, x, 2) * sp.diff(f, x, 2)
+    + 2 * sp.diff(g, x) * sp.diff(f, x)
+)
+assert_true(sp.expand(left_second - right_second) == 0,
+            "second number-operator commutator failed")
+print("R97_SECOND_COMMUTATOR_IDENTITY_PASSED")
+
+
+# The min-envelope summation used for the g2 growing-gap estimate.
+A = sp.Rational(3, 2)
+B = sp.Integer(72)
+finite_sum = sum(min(A, B / sp.Integer(d * d)) for d in range(1, 25))
+majorant = A + 2 * sp.sqrt(A * B)
+assert_true(finite_sum <= majorant, "min-envelope sum bound failed")
+full_majorant = 3 * A + 4 * sp.sqrt(A * B)
+assert_true(2 * finite_sum + A <= full_majorant,
+            "two-sided gap sum bound failed")
+assert_true(sp.simplify(3 * A + 4 * sp.sqrt(A * B)) > 0,
+            "g2 growing-gap majorant must be positive")
+print("R97_G2_MIN_ENVELOPE_SUMMATION_PASSED")
+
+
 # Linearized Cholesky identity: for strict-lower K, K + A + K^T
 # has zero strict-lower part iff K=-L_-A.
 A = sp.Matrix([
