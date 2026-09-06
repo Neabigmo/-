@@ -6172,3 +6172,56 @@ uniform `O(1)`。
 
 新增本机记录与审计：`flat_shadow_exact_mixed_kernel_r82/README.md`、
 `flat_shadow_exact_mixed_kernel_r82/audit_r82.py`。
+
+## 80. R83：all-gap mixed-kernel growth 与固定-gap生成函数（2026-09-07）
+
+R83 网页端继续报告桥接无法读取 R82 本机文件，因此本节严格区分形式
+same-factor/Jacobi 层级推导与本机审计范围。网页端从 R82 的 exact kernel
+出发，保留 gap、Hermite band 与 signed Green 回传，得到固定 gap 的统一主项。
+
+令 `r>=1`、`m=j+r+1`，root-of-unity filter 给出 mixed angular ratio
+`B_(r,j)=-1/(2*4^r)+O_r(j^(-1))`，故
+`M_(j+r+1,j)=c_j upsilon_r B_(r,j)`。同时，`q_ell` 的 exact Hermite band
+系数为
+`Q_(ell,a)=(-1)^(a+1)(a+1)(a+2)[a^2+5a-2(ell-3)]
+ (ell-a-4)!/[2(ell-3-2a)!]`，并由 Hermite product formula 得到
+`p_(ell,ell-s)=2ell^(2s-2)/(s-1)!+O_s(ell^(2s-3))`。
+
+signed Green 的 exact gap coefficient 为
+`G_(ell+g,ell)=(-1)^g/g!
+-2sum_(u=0)^(g-1)(-2)^(g-1-u)/[(g-1-u)!u!(ell+u+1)]`。
+固定 gap 时其 leading generating factor 是 `exp(-z)`；source band 的求和给出
+`exp(z)`，两者精确抵消。于是形式 fixed-gap theorem 为
+`K_(j+d,j)=kappa_d j^(-3)+O_d(j^(-4))`，其中
+`kappa_d=2(-1)^(d-1)(d-2)(d-1)!/(2d-3)!`，所有 `d>=3` 均非零。
+
+其 gap generating function为
+`sum_(d>=3)kappa_d z^d=4z^(3/2)U(sqrt(z))`
+`=4z^3 integral_0^1 q_s exp(-q_s z)(1-q_s z/2)ds`，并有
+`sum_d4^d|kappa_d|<infinity`。因此 R82 的 `d=3`、`d=4` 通道只是这一
+完整 fixed-gap profile 的前两项，而不是孤立异常。
+
+对 R82 权重 `omega_(n,j)=((j!)^2/(2j+1)!)(4sqrt(n))^(2j+1)`，若
+`j/n->theta in (0,1)`，则单个固定 gap 的 weighted channel为
+`4^d|kappa_d|theta^(-3)n^(d-3)(1+o(1))`。由于每个固定 `d>=3` 的
+`kappa_d` 非零，对任意固定 `p` 取 `d>p+3`，便得到当前 weighted mixed
+norm 快于 `n^p` 的严格 lower-growth 结论。这里不能把 fixed-gap 结果偷换
+成 `d=d(n)`，所以尚未得到 exponential lower bound；`d/j->delta>0` 与
+uniform moderate-gap remainder 仍 OPEN。
+
+路线判断发生了实质更新：当前 `4sqrt(n)` coefficient-Wiener norm 不仅
+无法给出 `O(1)` MGK，也无法给出任意固定 polynomial bound。将权重乘以
+`n^(-j)` 可消除 fixed-gap 的 `n^d` 因子，并保留可求和的 `4^d|kappa_d|`，
+但该 rescaling 不能单独承担 Gram/strict-triangular stability。因此更合理
+的下一步是 hybrid Gram + triangular + rescaled-coefficient norm，并首先证明
+`d=o(sqrt j)` 的 uniform moderate-gap theorem，或从 proportional-gap saddle
+point 提取真实 rate function。
+
+本机新增：`flat_shadow_all_gap_r83/README.md`、
+`flat_shadow_all_gap_r83/audit_r83.py`。审计以 exact rational arithmetic
+核验 root filter、Hermite band、Green coefficient、`d=3..8` 的 fixed-gap
+主项与生成函数 Taylor 系数；不将这些有限核验冒充 proportional-gap 证明。
+
+严格边界：R80 safe window 尚未改善；D.1、全局 positivity、positive infinite
+exact backward tower、backward OU divisibility、endpoint `FS_3` 以及
+proportional-gap regime 继续 OPEN。

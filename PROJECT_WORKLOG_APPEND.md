@@ -2767,3 +2767,40 @@ computation was used.
   would force a hybrid Gram/triangular norm.
 - Added `flat_shadow_exact_mixed_kernel_r82/README.md` and
   `flat_shadow_exact_mixed_kernel_r82/audit_r82.py`.
+
+## R83 — All-gap mixed-kernel growth and fixed-gap generating function (2026-09-07)
+
+- The webpage completed R83 but again said the bridge could not read the R82
+  local files.  Its result is recorded conditionally on the formal
+  same-factor/Jacobi hierarchy, while the local audit verifies the finite
+  algebra independently.
+- The exact root-of-unity angular filter yields, for fixed `r`,
+  `B_(r,j)=-1/(2*4^r)+O_r(j^(-1))`.  The exact Hermite-band formula for `q_l`
+  gives `p_(l,l-s)=2l^(2s-2)/(s-1)!+O_s(l^(2s-3))`, and the signed Green has
+  an explicit finite gap coefficient with leading term `(-1)^g/g!`.
+- Combining these three blocks produces a common `j^(-3)` fixed-gap scale.
+  The source-band `exp(z)` and signed-Green `exp(-z)` factors cancel, giving
+  `K_(j+d,j)=kappa_d j^(-3)+O_d(j^(-4))` with
+  `kappa_d=2(-1)^(d-1)(d-2)(d-1)!/(2d-3)!` for every fixed `d>=3`.
+- The fixed-gap generating function is
+  `sum_(d>=3)kappa_d z^d=4z^(3/2)U(sqrt(z))`, and its coefficients are all
+  nonzero with factorial gap decay.  The first two terms recover R82's
+  `2/3` and `-1/5` channels.
+- Under the R82 weight, every fixed gap contributes
+  `4^d|kappa_d|theta^(-3)n^(d-3)(1+o(1))` when `j/n->theta`.  Hence, choosing a
+  fixed `d>p+3` for any fixed `p`, one obtains a strict lower bound faster than
+  `n^p`.  The current weighted mixed norm has no finite polynomial envelope.
+  This is not yet an exponential lower bound because the fixed-gap remainder
+  is not uniform when `d` grows with `j`.
+- The route must therefore switch from a hoped-for polynomial bound in the
+  `4sqrt(n)` coefficient-Wiener norm to a hybrid norm.  Rescaling weights by
+  `n^(-j)` removes the fixed-gap obstruction and leaves a summable `4^d` profile,
+  but Gram and strict-triangular stability still require separate components.
+  The next target is the two-parameter regime `d/j->delta` or, first,
+  a uniform moderate-gap estimate for `d=o(sqrt(j))`.
+- Added `flat_shadow_all_gap_r83/README.md` and
+  `flat_shadow_all_gap_r83/audit_r83.py`.  Exact audit passed:
+  `R83_ROOT_FILTER_AND_HERMITE_BAND_PASSED`,
+  `R83_GREEN_AND_FIXED_GAP_KAPPA_PASSED`,
+  `R83_GENERATING_FUNCTION_AND_SUPERPOLY_LOWER_BOUND_PASSED`, and
+  `R83_ALL_GAP_AUDIT_COMPLETED`; `py_compile` and `git diff --check` passed.
