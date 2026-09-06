@@ -2365,3 +2365,25 @@ computation was used.
   associated-Hermite first difference
   `p_(n-1)-p_n~(33 sqrt(pi)/256)n^(-3/2)`; full `Lambda_n` eventual sign and
   D.1 remain OPEN.
+
+## R69 — Projection first-difference asymptotic (2026-09-07)
+
+- The webpage directly compared adjacent summands in the R67 positive finite
+  sum. With `m=n-3`, the exact ratio is
+  `L_(m,j)=(m+3)(m-2j)/(m-j-1)^2`, and
+  `L_(m,j)-1=(5m-j^2-8j-1)/(m-j-1)^2`.
+- After scaling `G_(m,j)=m^2(T_(m-1,j)-T_(m,j))` and using the R67
+  factorial-ratio majorant, the common `j~sqrt(m)` limit is
+  `G(y)=(1/4)(-y^10+9y^8-20y^6+12y^4)exp(-y^2)`. The floor endpoint is
+  exponentially negligible, and exact Gaussian moments give
+  `integral G=33 sqrt(pi)/256`.
+- Thus the projection difference theorem is now established in the conditional
+  R64–R68 framework:
+  `p_(n-1)-p_n~(33 sqrt(pi)/256)n^(-3/2)`.
+- Combining this with R68's D-part transfer yields
+  `Lambda_n~(33 sqrt(pi)/256)n^(-1/2)>0` and closes the Gaussian-local
+  eventual-sign question under the stated hypotheses. It rules out the
+  large-n negative-slope shrinking-cutoff mechanism but does not prove D.1.
+- Added `flat_shadow_projection_difference_r69/README.md` and
+  `flat_shadow_projection_difference_r69/audit_r69.py`. The exact audit passed;
+  the next target is finite-t nonlinear/boundary-layer behavior.

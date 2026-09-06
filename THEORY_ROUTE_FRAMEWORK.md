@@ -5062,3 +5062,62 @@ quadratic-response 的符号问题，但仍不会单独证明 D.1；它只会排
 Gaussian-local negative slope 驱动 shrinking cutoff 的机制。
 
 新增本机审计为 `flat_shadow_dpart_transfer_r68/audit_r68.py`。
+
+## 66. R69：projection 一阶差分渐近与 Gaussian-local 符号闭合（2026-09-07）
+
+R69 直接比较 R67 正有限和的相邻阶，而不是对
+`p_n~C n^(-1/2)` 做形式差分。令 `m=n-3`，写
+
+`p_(m+3)=sum_j T_(m,j)`，
+`T_(m,j)=((j+1)^2(j+2)^2(j^2+5j-2m)^2)/(4(m+3)!)`
+` *((m-j-1)!^2/(m-2j)!)`。
+
+在共同范围内令
+`A_(m,j)=j^2+5j-2m` 与
+`L_(m,j)=(m+3)(m-2j)/(m-j-1)^2`。精确相邻阶约去阶乘后，
+
+`T_(m-1,j)-T_(m,j)`
+`=base_(m,j)[L_(m,j)(A_(m,j)+2)^2-A_(m,j)^2]`，
+
+其中 `base_(m,j)` 是 `T_(m,j)` 去掉 `A_(m,j)^2` 的部分。引入 R67 的
+`rho_(m,j)` 并令 `G_(m,j)=m^2(T_(m-1,j)-T_(m,j))`，得到
+
+`G_(m,j)=(1/4)((j+1)^2(j+2)^2/m^2)rho_(m,j)B_(m,j)`，
+
+`B_(m,j)=m(L_(m,j)-1)(A_(m,j)/m)^2`
+` +4L_(m,j)(A_(m,j)/m)+4L_(m,j)/m`，
+
+以及精确恒等式
+`L_(m,j)-1=(5m-j^2-8j-1)/(m-j-1)^2`。
+
+在 `j=y sqrt(m)` 的共同尺度上，R67 的 `rho_(m,j)->exp(-y^2)`，故
+
+`G_(m,j)->(1/4)(-y^10+9y^8-20y^6+12y^4)exp(-y^2)`。
+
+R67 的全区间 Gaussian majorant 与上述精确恒等式给出可积支配
+`|G_(m,j)|<=C(1+y_j^10)exp(-c y_j^2)`。floor 边界若出现额外项，
+`T_(m,m/2)=O(m^4 2^(-m))`，故不贡献极限。于是
+
+`m^(3/2)(p_(m+2)-p_(m+3)) -> integral_0^infinity G(y)dy`
+`=33 sqrt(pi)/256`，换回 `n=m+3` 得到严格
+
+`p_(n-1)-p_n ~ (33 sqrt(pi)/256)n^(-3/2)`。
+
+本机 `flat_shadow_projection_difference_r69/audit_r69.py` 精确核验相邻项
+恒等式、差分缩放、局部极限多项式、floor 端点中心二项式化、积分常数和换标。
+R67 的 factorial-ratio 全区间 majorant 作为解析输入保留，不以有限数值取代。
+
+结合 R68 的 conditional D-part transfer
+`d_n=O(n^(-5/2))`、`n(d_n-d_(n-1))=O(n^(-3/2))`，在
+R64–R68 full same-factor hierarchy 下终于得到
+
+`Lambda_n=n(kappa_n-kappa_(n-1))`
+`~(33 sqrt(pi)/256)n^(-1/2)>0`。
+
+因此 Gaussian-local quadratic-response 的 eventual sign 在该条件框架下闭合，
+并且 `|Lambda_n|/n->0`，与 R65 局部 shrinking-cutoff 所需的
+`|Lambda_n|/n->infinity` 相反。这个里程碑排除了 large-n Gaussian-local
+negative-slope 机制，但不证明 D.1；若 R59–R63 的 shrinking finite-stage
+cutoffs 继续存在，剩余机制必须是 finite-t nonlinear/boundary-layer effect。
+
+新增本机审计为 `flat_shadow_projection_difference_r69/audit_r69.py`。
