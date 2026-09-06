@@ -1852,3 +1852,62 @@ computation was used.
   is claimed.  No optimizer, SDP, sweep, relaxed measure-LP, or remote
   computation was used.  Before the next webpage round, require reading the
   updated framework, worklog, and R36–R51 README/audits.
+
+## R52 — global route audit and trace–budget obstruction (2026-09-06)
+
+- The webpage first read `THEORY_ROUTE_FRAMEWORK.md`,
+  `PROJECT_WORKLOG_APPEND.md`, R36–R51 README/audits, and verified nested
+  repository HEAD `f7025279f3d625d5257e26319ed079a74e2bcb53`.  It then gave a
+  global route audit before continuing the ordinary-Jacobi target.
+- The global assessment is that R36–R51 completed three mechanism-level
+  compressions: (i) one-body loss followed by a viable two-body
+  Laguerre–Hoeffding carrier; (ii) finite-grade residue/rank separation up to
+  corrected R46 and R47; and (iii) inverse-heat/Christoffel compression to an
+  ordinary Hankel/Jacobi tail with an optimized two-step budget.  More fixed
+  `m` determinants would now be local repetition; the remaining barrier is
+  all-degree coherence.
+- The three most mature self-contained theorem packages are R11–R13
+  (exact-class tail/OU closure/tower rigidity), R36–R44 (two-body carrier and
+  finite-grade constraint-coupled transgression), and R48–R51
+  (inverse-heat/Christoffel to ordinary Jacobi plus two-step budget).  This is
+  a mathematical self-containment assessment, not a checked novelty claim.
+  Gaussian rigidity and the `P_3K` charge bridge remain open and logically
+  distinct from fixed `m_3`, rank-two head, or Jacobi exit.
+- R52 added the full-exact Jacobi walk identities
+  `T_k-T_(k-1)=alpha_k^3+3*beta_k*(alpha_(k-1)+alpha_k)` and its
+  `S_k,B_k` form, plus the two-control law
+  `tr(J_n(s,t)^3)-tr((J_n^circ)^3)
+   =3*B_(n-1)*s+t^3-3*s*t^2+3*B_n*t`.
+- The centered-budget formulas are recorded with their variable distinction:
+  displacement `s` in (A.7) completes as
+  `B_n*B_(n+1)-B_(n-1)*(s-A_n/B_(n-1))^2+A_n^2/B_(n-1)`, while the actual
+  chain coordinate `S_(n-1)` in (A.8) completes as
+  `...+B_(n-1)*(S_(n-1)-A_n/B_(n-1))^2-A_n^2/B_(n-1)`.  They must not be
+  conflated.  The sharp rescue function is
+  `Phi(a)=a^2` for `a<=1` and `2*a-1` for `a>=1`, giving the optimal
+  conditional threshold `theta>Phi(kappa)`.
+- The structural obstruction is now explicit: cubic trace controls the
+  linear/center channel, while centered budget is an independent constant
+  channel.  Hence `Uniform Cubic-Trace Tracking + Centered-Budget Negativity`
+  remains open; R12 raw tail bounds do not control the moving inverse-Hankel
+  spectrum or Jacobi spikes.
+- The recommended weaker milestone is `Canonical Centered-Tail Rigidity`:
+  from a fixed R47-compatible bounded-`X` head, set each new odd coordinate
+  `S_k=0` and solve exact `G_(k+1)=0`; prove finite occurrence of `B_k<=0`.
+  If this fails with all `B_k>0`, Hamburger gives a genuine positive law with
+  `E[Q^k]=2^k*k!` and eventually zero Jacobi diagonal, so the alternative is
+  a strong infinite-chain candidate rather than a formal prefix.
+- Added `flat_shadow_trace_budget_r52/audit_r52.py` and README.  Local exact
+  markers passed:
+  `R52_FULL_EXACT_JACOBI_TRACE_INCREMENT PASSED`,
+  `R52_S_COORDINATE_TRACE_INCREMENT PASSED`,
+  `R52_TWO_CONTROL_CUBIC_TRACE_LAW PASSED`,
+  `R52_CENTERED_BUDGET_COMPLETE_SQUARE PASSED`,
+  `R52_SHARP_RESCUE_CONE_AND_CONDITIONAL_EXIT PASSED`, followed by the four
+  explicit OPEN markers and `R52_AUDIT_COMPLETED`.  `py_compile` passed.
+- Evidence boundary remains strict: no ordinary-Jacobi exit, D.1,
+  `Xi_K->infinity`, Gaussian rigidity, `P_3K` bridge, or global transgression
+  is claimed.  Before the next webpage round, require reading the updated
+  framework, worklog, and R36–R52 README/audits; prioritize D.1 and avoid
+  determinants, optimizer, SDP, sweep, relaxed measure-LP, or remote
+  computation.

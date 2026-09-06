@@ -3977,3 +3977,144 @@ genuine all-degree full-exact law 与 formal Gateaux/Hermite extractor 仍严格
 `Uniform Cubic-Trace Tracking + Centered-Budget Negativity Lemma`，或构造
 真正兼容的 bounded-`x` all-degree chain；不得重复巨大 determinant，也不得
 使用 optimizer、SDP、sweep、relaxed measure-LP 或 remote computation。
+
+## 50. R52：全局路线审计与 trace–budget obstruction（2026-09-06）
+
+网页端本轮首先通过已连接 Codex 读取 `THEORY_ROUTE_FRAMEWORK.md`、
+`PROJECT_WORKLOG_APPEND.md` 及 R36–R51 README/audit，并核对嵌套仓库真实
+HEAD 为 `f7025279f3d625d5257e26319ed079a74e2bcb53`。本轮先做整体路线审计，
+再推进 R51 的 ordinary-Jacobi target；没有回到固定阶 determinant。
+
+### 50.1 全局进度与路线边界
+
+R36–R51 已完成三次机制级压缩：
+
+1. R36–R38 排除一体远端 carrier，并识别出二体 degenerate
+   Laguerre–Hoeffding carrier 的 `n^(-1/2)` 级 anchor 损失和固定头响应；
+2. R39–R47 把 constraint-coupled positivity、mixed-Hessian residue 与
+   N+6 quotient rank 分开，corrected R46/R47 表明有限 same-factor
+   Fock/Hermite 关系不能把两个响应方向压成一个；
+3. R48–R51 把 inverse-heat / lifted-Christoffel 层压回 ordinary
+   Hankel/Jacobi tail，并得到 exact two-step budget 与 cubic-trace 坐标。
+
+因此，继续增加固定 `m` 的低阶 determinant 会真正进入局部重复；当前关口
+是 global coherence barrier：必须证明 all-degree exactness 产生的 centered
+deficit 超过 odd-center/cubic-trace rescue，或者构造 genuine bounded-`x`
+all-degree positive chain。R49 的 Christoffel compression 没有额外负号资源，
+R50–R51 的 center pressure 也不是自动 exit。
+
+目前最成熟、可以独立整理为 theorem package 的方向是：R11–R13 的
+exact-class tail/OU closure/projectively-compatible tower rigidity；R36–R44
+的 two-body Laguerre–Hoeffding generator、fixed-head asymptotics 与
+finite-grade transgression；R48–R51 的 inverse-heat/Christoffel 到
+ordinary-Jacobi reduction 与 optimized two-step budget。这里记录的是数学
+自包含程度，不把文献新颖性当作已核验事实。Gaussian rigidity 尚未完成；
+`P_3K != 0`、固定 `m_3`、rank-two head 与 Jacobi exit 也仍逻辑独立，当前
+没有 `P_3K` charge-to-exit bridge。
+
+### 50.2 R52 无条件 Jacobi identities
+
+对 monic Jacobi recurrence
+
+`x*pi_k=pi_(k+1)+alpha_k*pi_k+beta_k*pi_(k-1)`、`beta_k>0`，定义
+`S_k=sum_(j=0)^k alpha_j`、`S_(-1)=0`、`B_k=beta_k+S_(k-1)^2`，并令
+`T_k=tr(J_k^3)`。逐闭路计数给出
+
+`T_k-T_(k-1)=alpha_k^3+3*beta_k*(alpha_(k-1)+alpha_k)`,
+
+以及
+
+`T_k-T_(k-1)=(S_k-S_(k-1))^3
+  +3*(B_k-S_(k-1)^2)*(S_k-S_(k-2))`.  (A.3)
+
+固定旧 prefix `S=S_(n-2)`，取 `s=S_(n-1)`、`t=S_n`，two-control law 为
+
+`tr(J_n(s,t)^3)-tr((J_n^circ)^3)
+  =3*B_(n-1)*s+t^3-3*s*t^2+3*B_n*t`.  (A.4)
+
+特别地，`t=0` 时
+
+`A_n=B_(n-1)*sigma_n
+  =n*(n+1)*(n+5)*m_3/6-tr((J_n^circ)^3)/3`.  (A.5)
+
+这些是 genuine full-exact Jacobi identities，不使用 Gateaux 提取，也不能
+把 fixed-K prefix 变成概率律。
+
+### 50.3 centered budget 与 sharp rescue cone
+
+R51 的位移变量 `s` 满足
+
+`(B_n-s^2)*B_(n+1)(s)
+  =B_n*B_(n+1)+2*A_n*s-B_(n-1)*s^2`.  (A.7)
+
+位移变量的完成平方为
+
+`B_n*B_(n+1)-B_(n-1)*(s-A_n/B_(n-1))^2
+  +A_n^2/B_(n-1)`。
+
+实际 compatible chain 的坐标 `S_(n-1)` 另满足
+
+`B_n*B_(n+1)=beta_n*beta_(n+1)+beta_n*S_n^2
+  +B_(n-1)*S_(n-1)^2-2*A_n*S_(n-1)`,  (A.8)
+
+其完成平方为
+
+`beta_n*beta_(n+1)+beta_n*S_n^2
+ +B_(n-1)*(S_(n-1)-A_n/B_(n-1))^2-A_n^2/B_(n-1)`.  (A.9)
+
+两式的变量和符号不同，不能混合。由实际链式式可得
+`B_(n+1)>-A_n^2/(B_(n-1)*B_n)`，且 `B_(n+1)<0` 必须有
+`A_n*S_(n-1)>0`。令
+
+`a_n=|A_n|/(B_(n-1)*sqrt(B_n))`,
+
+`Phi(a)=a^2`（`0<=a<=1`），`Phi(a)=2*a-1`（`a>=1`）。在
+`|S_(n-1)|<sqrt(B_n)` 上优化 rescue 后，strict compatibility 的必要条件为
+
+`B_(n+1)/B_(n-1)+Phi(a_n)>0`.  (A.13)
+
+于是，若固定有限 `X` 下存在 `4<=n<=N(X)` 使
+`|A_n|<=kappa_X*B_(n-1)*sqrt(B_n)`、
+`B_(n+1)<=-theta_X*B_(n-1)`，且 `theta_X>Phi(kappa_X)`，则 two-step
+viability value 为负，ordinary Jacobi exit 发生。对 `kappa_X>1`，新阈值
+`2*kappa_X-1` 优于旧的 `kappa_X^2`。
+
+### 50.4 当前 OPEN 与较弱里程碑
+
+R52 没有证明 `Uniform Cubic-Trace Tracking + Centered-Budget Negativity`。
+障碍是具体的：cubic trace 控制 linear/center channel，而 centered budget
+是独立 constant channel；R46–R47 的 rank-two survival 正是同一结构在
+有限 Fock 坐标中的表现。R12 的 square-exponential tail 也不足以控制
+moving inverse-Hankel spectrum、`B_n`、`h_(n-1)^(-1)` 或 Jacobi spikes。
+
+更值得优先的弱命题是 `Canonical Centered-Tail Rigidity`：固定一个
+R47-compatible bounded-`X` head，之后每个新 odd slot 取 `S_k=0`，并由
+exact `G_(k+1)=0` 决定 even moment；目标为
+
+`forall X<infinity, canonical centered branch 在有限阶出现 B_k<=0`. (D.1)
+
+若 D.1 失败且所有 `B_k>0`，则 Jacobi norms 保持正，Hamburger 定理给出
+positive representing law；exact `G_k=0` 给出 `E[Q^k]=2^k*k!`，且
+`S_k=S_(k-1)=0` 后 `alpha_k=0`，形成具有 eventually-zero Jacobi diagonal
+的 genuine infinite-chain candidate。它仍需 positive backward OU preimage，
+但比形式 prefix 强得多，因而是清晰的可证/可反证二分法。
+
+本机新增 `flat_shadow_trace_budget_r52/audit_r52.py` 与 README。exact
+symbolic audit 通过：
+
+`R52_FULL_EXACT_JACOBI_TRACE_INCREMENT PASSED`、
+`R52_S_COORDINATE_TRACE_INCREMENT PASSED`、
+`R52_TWO_CONTROL_CUBIC_TRACE_LAW PASSED`、
+`R52_CENTERED_BUDGET_COMPLETE_SQUARE PASSED`、
+`R52_SHARP_RESCUE_CONE_AND_CONDITIONAL_EXIT PASSED`、
+`R52_UNIFORM_TRACE_BUDGET_LEMMA REMAINS OPEN`、
+`R52_CANONICAL_CENTERED_BRANCH_EXIT REMAINS OPEN`、
+`R52_GAUSSIAN_RIGIDITY REMAINS OPEN`、
+`R52_P3K_BRIDGE REMAINS OPEN`、`R52_AUDIT_COMPLETED`；并通过 `py_compile`。
+
+证据边界：本轮只审计 exact algebra 与 conditional implication，没有声称
+ordinary Jacobi exit、D.1、`Xi_K->infinity`、Gaussian rigidity、`P_3K`
+bridge 或 global transgression 已完成。下一轮网页端开始前必须读取本框架、
+工作日志及 R36–R52 README/audit；优先攻 D.1 的 canonical centered branch，
+不得重复 determinant，也不得使用 optimizer、SDP、sweep、relaxed measure-LP
+或 remote computation。
