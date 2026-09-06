@@ -2577,3 +2577,36 @@ computation was used.
 - Added `flat_shadow_odd_green_source_r76/README.md` and
   `flat_shadow_odd_green_source_r76/audit_r76.py`. Next target: R77 Gram-to-source
   factorial estimate, or its smallest rigorous failure boundary.
+
+## R77 — Local Gram-to-source factorial estimate (2026-09-07)
+
+- The webpage again reported that its connector could not read the local R76
+  files. I extracted the finished R77 raw math sources and checked the arithmetic
+  against the R76 signed-source baseline.
+- R77 proves a degree-local theorem on the explicit Hermite–Wiener ball
+  `rho_k=4sqrt(k)`, `||E||_(rho_k)+||Y||_(rho_k)<=1/40`: for every fixed
+  `mu>3`, `k!|S_tilde_k|<=C_mu mu^k Xi_k`, with constants independent of `k,n`.
+  The endpoint `FS_3` remains open.
+- The Gram perturbation ratio is exactly `(sqrt(3)/2)^m`; hence
+  `C_G=(sqrt(3)/2)^3/(1-sqrt(3)/2)<5`, the inverse norm is at most `8/7`, and
+  the displayed first-to-third inverse-derivative bounds have no `k!` or `n`
+  dependence on this small ball.
+- The source numerator's degree growth is controlled by
+  `q_mu=mu+1`, `p_mu=2(mu+1)/(mu-3)`, and
+  `||x psi chi||_2<=||x||_(p_mu)mu^k||psi||_2||chi||_2`. This proves the
+  `mu>3` base; the blow-up `p_mu->infinity` at `mu=3` is the current method's
+  explicit failure boundary, not a proof of optimality.
+- Parity/Taylor structure still gives `EY+Y^3` for `k>=3`; finite head gives
+  `a(E+Y^2)` after tangent subtraction. Lower-odd Volterra feedback is not
+  re-convolved inside the source estimate.
+- Combining `mu=3+epsilon` with the R76 signed transfer gives conditional
+  `exp((256+64epsilon)n)` odd control and the conservative common-radius scales
+  `|a|<=c_epsilon n^(-1/4)e^(-(288+32epsilon)n)`,
+  `t<=c_epsilon^2 n^(-1/2)e^(-(576+64epsilon)n)`. This improves the earlier
+  `e^(-1088n)` scale but remains far below the angular natural scale.
+- This is a local conditional theorem, not a global theorem from Gram
+  positivity alone. D.1, the positive backward tower, backward OU divisibility,
+  and the endpoint `FS_3` remain OPEN. The next target is factorial-type even
+  bootstrap without common-radius conversion.
+- Added `flat_shadow_odd_green_source_r77/README.md` and
+  `flat_shadow_odd_green_source_r77/audit_r77.py`.

@@ -5701,3 +5701,106 @@ window。已新增本机审计
 下一轮唯一目标是 R77：直接从 exact Gram/Jacobi source map、Gram inverse 与
 Hermite product 证明 `FS_mu`，或给出最小的 degree-local 失败边界；不再把所有
 degree 压成顶层 `n` 的粗 uniform source bound。
+
+## 74. R77：degree-local Gram-to-source factorial estimate（2026-09-07）
+
+网页端 R77 完成时连接器仍返回账户连接错误，未实际读取 R76 本机文件；本节
+采用其 raw math sources，并以 R76 的 exact source、parity ideal 与 corrected
+signed Green 为已审计基线。关键是把新结果写成明确的局部条件定理，而不是
+把“Gram-connected”泛化成仅凭正定/可逆即可。
+
+令 `rho_k=4sqrt(k)`，在 degree `<=2k` 的 Hermite moments 上定义
+
+`||h||_(rho_k)=sum_(m=3)^(2k)|eta_m|rho_k^m/sqrt(m!)`，`h=E+Y`。
+
+在 degree-local Hermite-Wiener 小球
+`||E||_(rho_k)+||Y||_(rho_k)<=delta_*=1/40` 内，R77 给出以下
+source estimate：对任意固定 `mu>3`，存在与 `k,n` 无关的 `C_mu`，使 `k>=3`
+时
+
+`k!|S_k(E,Y)| <= C_mu mu^k
+(||E||_(rho_k)||Y||_(rho_k)+||Y||_(rho_k)^3)`。
+
+恢复 finite head `alpha_1=a`、`alpha_2=-a` 并减去
+`S^(1)(x)=x+x^2/2` 后，
+
+`k!|S_tilde_k(a,E,Y)|<=C_mu mu^k Xi_k`，
+
+`Xi_k=|a|(||E||_(rho_k)+||Y||_(rho_k)^2)
+ +||E||_(rho_k)||Y||_(rho_k)+||Y||_(rho_k)^3`。
+
+因此得到局部的 `FS_(3+epsilon)`，对任意 `epsilon>0` 成立；端点
+`FS_3` 仍 OPEN。这里的“局部”是实质限制：若只知道每个 finite Gram
+matrix 正定或可逆，而没有统一的 weighted small-ball/derivative control，
+R77 的结论不能直接推出。
+
+R77 的 Gram 端算术如下。Hermite multiplication 的 degree-local bound 为
+
+`||P_(V_k)M_(e_m)P_(V_k)||<=2^m(3k)^(m/2)/sqrt(m!)`。
+
+配合 `rho_k=4sqrt(k)`，每个 moment perturbation 的加权贡献恰为
+`(sqrt(3)/2)^m`，故
+
+`||G_(k-1)-I||<=C_G||h||_(rho_k)`，
+`C_G=(sqrt(3)/2)^3/(1-sqrt(3)/2)<5`。
+
+在 `delta_*=1/40` 时它小于 `1/8`，从而
+`||G_(k-1)^(-1)||<=8/7`。resolvent derivative identity 给出
+
+`||D^rG^(-1)||<=r!(8/7)^(r+1)C_G^r`，`r<=3`，
+
+说明在该局部域内 Gram inverse 的有限阶导数不产生 `k!` 或 `n` 灾难。
+`phi_k=e_k+v_k` 的相应一至三阶 degree-local 导数界是本结论需要显式
+保留的 analytic input，不能仅由 positivity 自动推出。
+
+source numerator 的 degree growth 来自 `x psi chi`。固定 `mu>3`，令
+
+`q_mu=mu+1`，`p_mu=2(mu+1)/(mu-3)`，
+`1/2=1/p_mu+2/q_mu`。
+
+Gaussian hypercontractivity 与 Holder 给出
+
+`||xpsi chi||_2<=||x||_(p_mu)mu^k||psi||_2||chi||_2`。
+
+对 `phi_k` 及其至多三阶导数应用后，exact triangular numerator 的导数
+满足 `||D^rB_k||<=C_(mu,r)mu^k`。因 `T_k=B_k/k!`，这个 `k!` 分母
+正好转化为 `FS_mu` 所需的 factorial scale。`mu=3` 端点在当前证明中
+对应 `p_mu=infinity`，而高斯下 `x` 不属于 `L^infinity`；这是当前
+Holder–hypercontractive 方法的失败边界，不等于最佳常数已被证明为 3。
+
+parity 部分沿用 R76：对 `k>=3`，`B_k(E,Y)` 对 `Y` 为 odd，且
+`S_k=T_k+sum_(j<k)q_(k,j)Z_j` 恰好去掉 Gaussian Y-linear term。沿 E、Y
+分别使用 Taylor 公式，得到 `EY+Y^3`；finite head 只增加
+`a(E,Y^2)`。所以 lower odd feedback 不在 source estimate 中再作一次
+卷积，而留给 corrected signed Green 一次处理。
+
+对 `k<=n`，`rho_k<=rho_n`，绝对值序列范数单调，因此局部估计统一为
+
+`k!|S_tilde_k|<=C_mu mu^k
+[|a|(||E||_(rho_n)+||Y||_(rho_n)^2)
+ +||E||_(rho_n)||Y||_(rho_n)+||Y||_(rho_n)^3]`。
+
+取 `mu=3+epsilon` 并接上 R76 的 signed factorial transfer，令
+`lambda_mu=4+epsilon`，得到条件性 common-radius odd bound
+
+`||Z_tilde||_(sigma_n)<=C_epsilon n^(-1/2)
+ exp((256+64epsilon)n)Xi`，`sigma_n=8sqrt(n)`。
+
+结合此前审计的 `||U||_(sigma_n)<=32sqrt(n)e^(160n)`，保守 bootstrap
+代数给出
+
+`|a|<=c_epsilon n^(-1/4)e^(-(288+32epsilon)n)`，
+`t=a^2<=c_epsilon^2 n^(-1/2)e^(-(576+64epsilon)n)`。
+
+该 scale 仍是 conditional 的：它需要前面 even response 与 Gram-domain
+closure；它约为 `e^(-576n)`，显著优于 R74 的 `e^(-1088n)`，但仍远小于
+`A_(2n)~3e^(-0.405465n)/sqrt(pi n)`。因此 R77 是一个真正的 all-degree
+local source milestone，却不是 D.1 或 positive tower 的解决。
+
+本轮尚未证明 `FS_3`、仅凭 Gram positivity 的 global theorem、D.1、positive
+backward tower 或 backward OU divisibility。下一条唯一目标转为
+**factorial-type even bootstrap without common-radius conversion**：在与
+`k!|S_k|<=Cmu^k` 兼容的 sequence norm 中闭合 same-factor even angular
+solver，去除 `e^(64lambda_mu n)` 与 `4^n` 的共同半径损失。
+
+新增本机审计为 `flat_shadow_odd_green_source_r77/audit_r77.py`。
