@@ -4763,3 +4763,88 @@ R63 是一个可明确陈述的 finite-stage exact-positive obstruction：即使
 uniform all-even-stage lemma，而不是继续无结构地堆叠大多项式。
 
 新增本机审计为 `flat_shadow_canonical_beta10_r63/audit_r63.py`。
+
+## 61. R64：从逐阶 cutoff 提炼 quadratic-response 结构（2026-09-06）
+
+R64 不再继续计算 `beta_11` 的完整闭式，而是审计网页端提出的结构化压缩。
+本节的全阶表述以“formal moment functional 满足 full same-factor hierarchy”为
+条件；本机只把它核验到 degree 20，故不能把条件性全阶式误报成已经存在的
+非 Gaussian full-exact tower。
+
+### 61.1 finite-head Jacobi tangent
+
+在 canonical head
+`alpha_1=a`、`alpha_2=-a`、`alpha_n=0 (n>=3)`、`t=a^2` 下，已知
+`beta_n(t)=n+O(a^2)`，于是 orthonormal Jacobi operator 的一阶变化只有有限
+diagonal head：
+
+`J_a=J_0+aD+O(a^2)`,
+
+`D=|e_1><e_1|-|e_2><e_2|`。
+
+令
+`F_a(z)=L_a[exp(zX-z^2/2)]=1+aU(z)+a^2V(z)+O(a^3)`。Duhamel 公式与
+Gaussian Jacobi kernel 给出
+
+`U(z)=z^3 integral_0^1 s(1-s) exp(-s(1-s)z^2)
+       (1-s(1-s)z^2/2) ds`。
+
+故
+
+`[a]L_a[H_(2m+1)]=(-1)^(m-1)m(m+1)!/2`。
+
+这不是由 R59–R63 的有限模式猜出的经验式；它来自 finite-head perturbation。
+本机 exact audit 对 `m=1,...,9`（Hermite degree `3,...,19`）全部通过。
+
+### 61.2 full same-factor 的二阶 even convolution
+
+取
+`r_j(theta)=sqrt(2/3)cos(theta+2pi(j-1)/3)`，则 `sum_j r_j^2=1`。若 formal
+full same-factor identity 为
+
+`average_theta product_{j=1}^3 F_a(r_j z)=1`,
+
+并定义
+`A_(2n)=average sum_j r_j^(2n)=3*binomial(2n,n)/6^n`，
+`C_(r,s)=average sum_{i<j}r_i^r r_j^s`，
+则 `a^2 z^(2n)` 系数满足
+
+`[a^2]L_a[H_(2n)]/(2n)!
+ = -A_(2n)^(-1) sum_{r+s=2n, r,s odd, r,s>=3}
+     u_r u_s C_(r,s)/(r!s!)`,
+
+其中 `u_r=[a]L_a[H_r]`。`C_(r,s)` 是有限 root-of-unity exact sum。R64 本机
+对 even degrees `4,...,20` 全部与 audited canonical moments 相符。
+
+### 61.3 norm ratio 的统一局部曲率
+
+写 `L_a=L_0+aL_1+a^2L_2+O(a^3)`，`pi_n=H_n+aq_n+O(a^2)`。一阶正交性给出
+
+`q_n=-sum_{k<n}L_1[H_nH_k]H_k/k!`，
+
+从而
+
+`h_n=n!+K_n t+O(t^2)`,
+
+`K_n=L_2[H_n^2]-sum_{k<n}L_1[H_nH_k]^2/k!`。
+
+因此
+
+`beta_n(t)=n+Lambda_n t+O(t^2)`,
+`Lambda_n=beta_n'(0)=(K_n-nK_(n-1))/(n-1)!`。
+
+本机 exact audit 核验到 `n=10`，并复现 R63 的 `Lambda_10=-1481/21`。
+
+### 61.4 理论地位与剩余桥
+
+R64 的正式地位是一个 conditional all-degree response lemma：finite skew head
+唯一决定 odd tangent；full same-factor hierarchy 唯一决定 even quadratic
+response；norm/beta 的 Gaussian-local slopes 由一个显式 finite quadratic form
+决定。它比单列 `P_6,P_8,Q_9,A_10` 更接近可发表的机制性结果。
+
+但 `Lambda_n<0` 只是在 Gaussian 点的局部方向，不能单独给出 cutoff，更不能
+保证 cutoffs 全阶单调。离 D.1 的唯一桥仍是 uniform shrinking-cutoff certificate：
+需要同时控制某个负 slope 的 `O(t^2)` remainder，或直接建立有限 `t` 的统一 tail
+deficit，并且仍需另行处理原始 OU law 与 Favard 辅助谱测度的 bridge。
+
+新增本机审计为 `flat_shadow_structural_response_r64/audit_r64.py`。

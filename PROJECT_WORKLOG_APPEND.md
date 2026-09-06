@@ -2237,3 +2237,31 @@ computation was used.
   including exact row checks, norm factorization, Gaussian orientation, and
   Bernstein sign certificates; no determinant, optimizer, SDP, sweep,
   relaxed measure-LP, or remote computation was used.
+
+## R64 — structural quadratic-response audit (2026-09-06)
+
+- The webpage supplied a candidate all-degree structural reduction rather than
+  another high-degree coefficient list.  Under the full same-factor hierarchy,
+  the canonical Jacobi head has first variation
+  `J_a=J_0+a(|e1><e1|-|e2><e2|)+O(a^2)`.  Duhamel expansion gives the exact
+  odd Hermite tangent
+  `[a]L_a[H_(2m+1)]=(-1)^(m-1)m(m+1)!/2`.
+- The formal same-factor generating identity gives a universal second-order
+  even convolution in terms of the exact three-angle sums `A_(2n)` and
+  `C_(r,s)`.  Exact root-of-unity evaluation agrees with the canonical moments
+  for every even degree `4,6,...,20`.
+- Monic orthogonality gives the norm-curvature formula
+  `K_n=L2[H_n^2]-sum_{k<n}L1[H_nH_k]^2/k!` and
+  `beta_n'(0)=(K_n-nK_(n-1))/(n-1)!`.  It passes through `n=10`, including
+  R63's `beta10'(0)=-1481/21`.
+- This is recorded as a conditional all-degree response lemma: it explains
+  the common mechanism behind the finite cutoffs but does not prove a uniform
+  `O(t^2)` remainder, `tau_(2k+2)<tau_(2k)` for all `k`, D.1, or the OU/Favard
+  bridge.  The next target is a uniform asymptotic/sign estimate for this
+  quadratic response, or a finite-`t` tail deficit if Gaussian-local curvature
+  is insufficient.
+- Added `flat_shadow_structural_response_r64/README.md` and
+  `flat_shadow_structural_response_r64/audit_r64.py`.  The exact audit passed
+  odd tangent checks through degree 19, even convolution checks through degree
+  20, and norm-slope checks through `n=10`; py_compile and `git diff --check`
+  passed.
