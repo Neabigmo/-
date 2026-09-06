@@ -3391,3 +3391,86 @@ remote analytic tail、Gaussian rigidity 和 `P_3K` bridge 仍未解决。
 下一轮网页端开始前必须先读取本框架、工作日志及 R36–R44 的 README/audit。
 只有产生新的可精确核验有限恒等式才新增本机 audit；不使用 optimizer、SDP、
 大规模 sweep、relaxed measure-LP 或 remote computation。
+
+## 42. R45：N=6 second-residue resonance 的有限核验，quotient rank 仍 OPEN
+
+本轮网页端先读取本框架、追加工作日志及 R36–R44 的 README/audit，并核对
+嵌套仓库 HEAD `73f063031a0362d9deb49b3e50305c3339252398`。网页端随后完成了
+Grade-(N+6) Multi-Response Conditioning 的第一轮结构分析。本机只审计其中
+可有限精确核验的最低危险情形 `N=6`、`m=3`，不把网页推导直接升级为一般定理。
+
+### 42.1 新的 exact finite 结论
+
+对 genuine full-exact law，degree-6 same-factor Fock 方程在 `b_1=b_2=b_4=0`
+下只有 `(6,0,0)` 与 `(3,3,0)` 两类，精确给出
+
+`b_6 = (7sqrt(5)/10) b_3^2`。
+
+因此当 `N>6` 时，网页端的 `H_(n;N,6)b_6 Delta_N` 可以与
+`(1/2)D^3B_n[h_N,h_3,h_3]b_3^2 Delta_N` 合并为一个 effective channel；
+但在最低 `N=6` 时，`b_6` 已经是 mismatch grade，不能这样直接代入，额外
+出现
+
+`- (1/2) H_(n;6,6) Delta_6^2`。
+
+所以网页端的 channel bookkeeping 修正为：`N>6` 有四个 law-monomial
+channels，而 `N=6` 有五个，其中第五个是这个 quadratic resonance。
+
+本机 R45 audit 用完整 law-functional 恒等式
+
+`B_n(zeta)=E[K_4]-2E[K_5]+E[K_6]`
+
+计算 `eps*delta^2` 系数；这等于
+`(1/2)D^3B_n[h_6,h_3,h_3]`。在 `(n,m)=(3,3)` 得到
+
+`K_4=376sqrt(5)/729`、`K_5=196sqrt(5)/729`、
+`K_6=-28sqrt(5)/81`，
+
+从而
+
+`(1/2)D^3B_3[h_6,h_3,h_3]=-268sqrt(5)/729`。
+
+完整 law-dependent Hoeffding kernel 的另外三个 finite regressions 为
+
+`H_(3;9,3)=-32sqrt(105)/81`、
+`H_(3;7,5)=-800sqrt(42)/729`、
+`H_(3;6,6)=5560/729`。
+
+因此
+
+`J_(3,3)=(7sqrt(5)/10)H_(3;6,6)
+          +(1/2)D^3B_3[h_6,h_3,h_3]
+        =1208sqrt(5)/243`。
+
+这里的 `K_4,K_5,K_6` 来自 exact multi-copy representation，包含底层 law
+weight、conditional projection、one-body subtraction 和 mean correction；
+它们不是只微分固定 kernel 的近似。
+
+本机新增 `flat_shadow_residue_r45/audit_r45.py` 与 README，输出
+
+`R45_DEGREE6_FOCK_RELATION PASSED`、
+`R45_FULL_LAW_THIRD_VARIATION PASSED`、
+`R45_M3_HESSIAN_REGRESSIONS PASSED`、
+`R45_N6_RESONANCE_COMBINATION PASSED`、
+`R45_NPLUS6_QUOTIENT_RANK REMAINS OPEN`、
+`R45_AUDIT_COMPLETED`。
+
+### 42.2 Conditional continuation 与当前最小 OPEN
+
+网页端进一步指出：对固定 `m`，N+6 新 response 在旧
+`{D_(N+6),D_(N+4),D_(N+2),1,S_(n,m)-sigma_m}` span 商空间中的渐近从
+`n^(-2)` 开始。于是一般 `m>=4` 应计算三行
+`H_(N+3,3), H_(N+1,5), J` 的 `n^(-2),n^(-3),n^(-4)` 系数矩阵；`m=3`
+还要加入 `H_(6,6)` resonance row，并检查四阶 quotient matrix。
+
+这只是 conditional rank diagnosis：本轮尚未计算 `C_m` 或 `C_3^res` 的
+determinant，也没有 uniform-in-`m` remainder、uniform inverse bound、
+positive-shadow remote tail 或完整 transgression。因此当前最小 OPEN 更新为
+
+**N=6 Second-Residue Rank Lemma**：先精确计算 `C_3^res` 的 rank，至少判断
+它是 `1` 还是已经 `>=2`。Gaussian rigidity、Constraint-Coupled Non-SOS
+Graded Value Transgression 与 `P_3K` bridge 继续 OPEN。
+
+下一轮网页端开始前必须先读取本框架、工作日志及 R36–R45 的 README/audit。
+本轮没有使用 optimizer、SDP、大规模 sweep、relaxed measure-LP 或 remote
+computation。

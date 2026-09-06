@@ -1516,3 +1516,44 @@ computation was used.
 - No optimizer, SDP, numerical sweep, relaxed measure-LP, or remote
   computation was used.  Before the next web round, the prompt must require
   reading the updated framework, worklog, and R36–R44 local audit records.
+
+# 2026-09-06 — R45 finite N+6 resonance audit
+
+- The same project webpage completed the R45 review after reading the local
+  framework, append-only worklog, and R36–R44 audit records, and verified
+  nested-repository HEAD `73f063031a0362d9deb49b3e50305c3339252398`.
+- The web result corrected the lowest-grade bookkeeping.  For genuine
+  full-exact laws, the degree-six same-factor Fock relation is
+  `b_6=(7sqrt(5)/10)b_3^2`.  For `N>6`, the `H_(n;N,6)` and third-Gateaux
+  contributions can therefore be combined.  For the resonant minimum `N=6`,
+  `b_6` is itself a mismatch coefficient and an additional term
+  `-(1/2)H_(n;6,6)Delta_6^2` remains.  Thus the generic case has four
+  law-monomial channels, while `N=6` has five.
+- Added `flat_shadow_residue_r45/audit_r45.py` and README.  The exact audit
+  checks the degree-six angular coefficients, the complete four/five/six-copy
+  law-functional third variation, and the full law-dependent Hoeffding
+  regressions at `(n,m)=(3,3)`.
+- Exact output:
+  `R45_DEGREE6_FOCK_RELATION PASSED`,
+  `R45_FULL_LAW_THIRD_VARIATION PASSED`,
+  `R45_M3_HESSIAN_REGRESSIONS PASSED`,
+  `R45_N6_RESONANCE_COMBINATION PASSED`,
+  `R45_NPLUS6_QUOTIENT_RANK REMAINS OPEN`, and
+  `R45_AUDIT_COMPLETED`.
+- The finite third-variation coefficients were
+  `K4=376sqrt(5)/729`, `K5=196sqrt(5)/729`, and
+  `K6=-28sqrt(5)/81`, giving
+  `(1/2)D^3B_3[h_6,h_3,h_3]=-268sqrt(5)/729`.
+  The exact Hessian regressions were
+  `H_(3;9,3)=-32sqrt(105)/81`,
+  `H_(3;7,5)=-800sqrt(42)/729`, and
+  `H_(3;6,6)=5560/729`; hence
+  `J_(3,3)=1208sqrt(5)/243`.
+- The audit deliberately does not claim the general channel-exhaustion
+  formula, the quotient matrices `C_m`/`C_3^res`, their determinants, uniform
+  conditioning, or full transgression.  The current smallest OPEN is now
+  **N=6 Second-Residue Rank Lemma**: compute the lowest resonance quotient rank,
+  beginning with whether it is `1` or `>=2`.
+- Before the next web round, require reading the updated framework, worklog,
+  and R36–R45 local audit records.  No optimizer, SDP, sweep, relaxed
+  measure-LP, or remote computation was used.
