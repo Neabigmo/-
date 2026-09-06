@@ -6680,3 +6680,84 @@ Node BigInt/rational audit 输出
 `R93_NONLINEAR_GRAM_IDENTITY_PASSED`、
 `R93_SHIFT_NO_GO_AND_FOURIER_SELECTOR_PASSED` 与
 `R93_TRIANGULAR_STABILITY_AUDIT_COMPLETED`。
+
+## 91. R94：finite-horizon nonlinear Gram stability（2026-09-07）
+
+R94 先把 R93 的 abstract Volterra theorem 写成显式版本，再继续处理 D1 的
+nonlinear Gram--Schmidt 闭合。对 `X=ell^1(w)`、`C_K=sup_j kappa_j`、
+`epsilon_J=sup_(j>=J)kappa_j`，若 `|lambda|epsilon_J<=1/2`，则
+
+`sup_n||(I-lambda P_nKP_n)^(-1)||`
+`<=max(2,(1+2|lambda|C_K)sum_(q=0)^(J-1)(|lambda|C_K)^q)`。
+
+本结论只作用于 R81 mixed linearized coefficient loop；它不作用于 nonlinear
+Gram map，也不直接作用于 positivity。
+
+### 91.1 finite-horizon nonlinear Gram theorem
+
+设 `N>=2`、`Lambda_N=1+log N`，并明确要求 `H=H^*` 为 Hermitian Gram
+perturbation。令
+
+`Phi_H(L)=-L_-[H+LH+HL^*+LL^*+LHL^*]`，
+
+且 `h=||H||`。若
+
+`h<=1/[64 Lambda_N^2]`，`r=2Lambda_N h`，
+
+则在严格下三角矩阵的 operator-norm ball `||L||<=r` 上，
+
+`||Phi_H(L)||<=Lambda_N[h(1+r)^2+r^2]`，
+
+并且
+
+`||Phi_H(L)-Phi_H(M)||`
+`<=2Lambda_N[h+r(1+h)]||L-M||`
+`<=97/1024 ||L-M||`。
+
+使用 `r<=1/32`、`r^2/h<=1/16`、`(1+r)^2+r^2/h<=1153/1024<2`，Banach
+fixed point theorem 给出唯一严格下三角解
+
+`L=Phi_H(L)`, `||L||<=2(1+log N)||H||`。
+
+由于 `H=H^*` 且 `h<1`，`G=I+H>0`；令 `C=I+L`，则
+`L_-(CGC^*)=0`。Hermitian 性使 `CGC^*` 的上、下三角同时消失，故它是
+正 diagonal matrix，并满足
+
+`(1-r)^2(1-h)I<=CGC^*<=(1+r)^2(1+h)I`。
+
+这是一个真正的 finite-horizon nonlinear Gram factorization 小定理。`H=H^*`
+是正性结论的必要条件，已在本机记录中显式补上。
+
+### 91.2 generic operator norm 的严格 dimension-free no-go
+
+取 `A_(jk)=1/(j-k)`、`H=iA`。`A` 是 skew-symmetric，故 `H` Hermitian；离散
+Hilbert transform 使 `||H||` 可保持有界，而严格下三角部分作用于常向量的
+norm 至少为 `c log N`。因此 Cholesky solution map 在零点的导数
+
+`D Psi_N(0)[H]=-L_-H`
+
+满足 `||D Psi_N(0)||>=c log N`。不存在固定 operator-norm 小球上的
+`N`-uniform Lipschitz 常数。故 `Lambda_N^(-2)` 是严格的 sufficient scale，
+不是 optimal claim；仅凭 `LL^*>=0` 不能去掉 logarithmic loss。
+
+当前真正值得攻的结构化小 lemma 是 actual Hermite Gram compression 的
+dimension-free triangular bound，例如
+
+`||L_-H_n(h)||_op<=C[||H_n(h)||_op+||h||_(ell^1(w))]`。
+
+这仍为 **CONDITIONAL/OPEN**，不能由 arbitrary-matrix operator theory 推出。
+
+### 91.3 大局状态
+
+R92--R94 已把 linear coefficient propagation 层真正移出主瓶颈：当前有
+`kappa_j->0`、compact/quasinilpotent formal `K` 和固定参数的 horizon-uniform
+resolvent；并且 finite horizon 的 nonlinear Gram 小球已闭合。剩余的最小高层
+缺口仍是 actual Hermite structure 的 dimension-free triangular cancellation，
+以及它之后的 fixed-parameter all-degree positivity。positive infinite backward
+tower、backward OU divisibility 与 `FS_3` 仍是更高层 OPEN。
+
+本轮新增 `flat_shadow_nonlinear_gram_r94/README.md` 与 `audit_r94.js`；
+Node exact audit 输出 `R94_CONTRACTION_CONSTANTS_PASSED`、
+`R94_FINITE_RESOLVENT_ANCHOR_PASSED`、
+`R94_HERMITIAN_WITNESS_ANCHOR_PASSED` 与
+`R94_NONLINEAR_GRAM_AUDIT_COMPLETED`。

@@ -3177,3 +3177,38 @@ computation was used.
   `R93_NONLINEAR_GRAM_IDENTITY_PASSED`,
   `R93_SHIFT_NO_GO_AND_FOURIER_SELECTOR_PASSED`, and
   `R93_TRIANGULAR_STABILITY_AUDIT_COMPLETED`.
+
+## R94 — Finite-horizon nonlinear Gram stability (2026-09-07)
+
+- R94 rechecked R93's weighted Volterra argument and supplied an explicit
+  horizon-uniform finite-section bound.  If
+  `epsilon_J=sup_(j>=J)kappa_j` and `|lambda|epsilon_J<=1/2`, then
+  `sup_n||(I-lambda P_nKP_n)^(-1)||` is at most
+  `max(2,(1+2|lambda|C_K)sum_(q=0)^(J-1)(|lambda|C_K)^q)`.  The same proof gives
+  `sigma(K)={0}` by taking `lambda=1/mu` for each `mu!=0`; boundedness of `K`
+  is supplied by R92's column bound.
+- The main new result is a genuine finite-horizon nonlinear Gram theorem.  For
+  Hermitian `H`, `Lambda_N=1+log N`, and
+  `||H||<=1/[64 Lambda_N^2]`, the map
+  `Phi_H(L)=-L_-[H+LH+HL^*+LL^*+LHL^*]` is a contraction on
+  `||L||<=2Lambda_N||H||`.  The exact self-map and Lipschitz constants are
+  `1153/1024<2` and `97/1024<1`, respectively.  It yields a unique strict
+  lower `L`, `||L||<=2Lambda_N||H||`, and positive diagonalization
+  `CGC^*` with explicit two-sided conditioning.
+- The Hermitian hypothesis was made explicit in the local record: without
+  `H=H^*`, the positive Gram conclusion is not justified, even though the
+  contraction estimates themselves are algebraically valid.
+- Generic operator-norm stability cannot be made dimension-free.  The
+  Hermitian discrete Hilbert witness `H=i/(j-k)` has bounded full norm but
+  strict-lower norm `>=c log N`, so the derivative of the Cholesky solution map
+  has the same lower growth.  Positivity of `LL^*` alone cannot cancel it.
+- The next structural target is a dimension-free triangular estimate for actual
+  Hermite Gram compressions; this is conditional/open.  The finite-horizon
+  theorem does not prove global positivity, a positive infinite backward tower,
+  backward OU divisibility, or `FS_3`.
+- Added `flat_shadow_nonlinear_gram_r94/README.md` and
+  `flat_shadow_nonlinear_gram_r94/audit_r94.js`.  Audit output:
+  `R94_CONTRACTION_CONSTANTS_PASSED`,
+  `R94_FINITE_RESOLVENT_ANCHOR_PASSED`,
+  `R94_HERMITIAN_WITNESS_ANCHOR_PASSED`, and
+  `R94_NONLINEAR_GRAM_AUDIT_COMPLETED`.
