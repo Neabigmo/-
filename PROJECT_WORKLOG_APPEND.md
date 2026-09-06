@@ -3212,3 +3212,45 @@ computation was used.
   `R94_FINITE_RESOLVENT_ANCHOR_PASSED`,
   `R94_HERMITIAN_WITNESS_ANCHOR_PASSED`, and
   `R94_NONLINEAR_GRAM_AUDIT_COMPLETED`.
+
+## R95 — Hermite gap-Wiener algebra and actual multiplier obstruction
+
+- R95 audited the exact normalized Hermite multiplication matrix.  With
+  `e_k=H_k/sqrt(k!)` and `eta_m=L_h[e_m]`,
+  `Hcal_n(h)_(ij)=sum_r r! binom(i,r)binom(j,r)
+  sqrt((i+j-2r)!/(i!j!)) eta_(i+j-2r)`.  The equivalent `m`-parameter form
+  exposes the exact triangle and parity constraints.  The bivariate identity
+  is `sum Hcal(h)_(ij) z^i/sqrt(i!) w^j/sqrt(j!)=exp(zw)F_h(z+w)`.
+- Introduced the finite degree-gap norm
+  `||A||_(W_n)=sum_d||Delta_d A||_op`.  Fourier diagonal extraction gives the
+  exact convolution law, submultiplicativity, adjoint invariance, and
+  `L_-` contractivity in this norm.
+- Combining this algebra with the R77 audited bound
+  `||P_nM_(e_m)P_n||<=2^m(3n)^(m/2)/sqrt(m!)` and `rho_n=4sqrt(n)` gives the
+  horizon-uniform estimates
+  `||Hcal_n(h)||_(W_n)<=189/64 ||h||_(rho_n)` and
+  `||L_-Hcal_n(h)||_op<=27sqrt(3)/32 ||h||_(rho_n)`.
+- The same R94 nonlinear off-diagonal map therefore contracts in `W_n` when
+  `||H||_(W_n)<=1/64`, with `||L||_(W_n)<=2||H||_(W_n)` and positive diagonal
+  factorization, uniformly in `n`.  This is a genuine structured replacement
+  for the generic `1/log^2 n` finite-horizon condition.
+- The structured theorem is not valid for all bounded multipliers.  The actual
+  bounded odd multiplier `sgn(x)` has an exact OU Green formula for its odd-even
+  Hermite matrix entries; a signed even input block yields a `c log n` lower
+  bound, while R94 gives the matching `O(log n)` upper.  Thus parity and
+  bounded Gram compression alone do not imply gap summability.
+- State boundary: **PROVED** for the exact formula, gap algebra, growing-radius
+  structured theorem, nonlinear `W_n` factorization, and actual `sgn` no-go;
+  **CONDITIONAL** for applying it to `g1,g2` and the hybrid map; **OPEN** for
+  the two concrete background gap-Wiener bounds, fixed-parameter global
+  positivity, positive infinite backward tower, backward OU divisibility, and
+  `FS_3`.
+- Added `flat_shadow_hermite_gap_wiener_r95/README.md` and
+  `audit_r95.js`.  Audit output:
+  `R95_HERMITE_ENTRY_AND_LOCALITY_PASSED`,
+  `R95_GAP_CONVOLUTION_IDENTITY_PASSED`,
+  `R95_STRUCTURED_CONSTANTS_PASSED`,
+  `R95_TANGENT_MOMENT_NORMALIZATION_PASSED`,
+  `R95_SIGN_GREEN_IDENTITY_ANCHORS_PASSED`,
+  `R95_SIGN_LOWER_CONSTRUCTION_ANCHOR_PASSED`, and
+  `R95_HERMITE_GAP_WIENER_AUDIT_COMPLETED`.

@@ -6761,3 +6761,109 @@ Node exact audit 输出 `R94_CONTRACTION_CONSTANTS_PASSED`、
 `R94_FINITE_RESOLVENT_ANCHOR_PASSED`、
 `R94_HERMITIAN_WITNESS_ANCHOR_PASSED` 与
 `R94_NONLINEAR_GRAM_AUDIT_COMPLETED`。
+
+## 92. R95：Hermite gap-Wiener algebra and an actual multiplier obstruction（2026-09-07）
+
+R95 直接处理 R94 留下的 actual Hermite triangular cancellation，而不是
+再次估计任意矩阵。对 `e_k=H_k/sqrt(k!)`、`Hcal_n(h)=P_nM_hP_n`、
+`eta_m=L_h[e_m]`，Hermite product formula 给出精确矩阵元
+
+`Hcal_n(h)_(ij)=sum_r r! binom(i,r)binom(j,r)
+sqrt((i+j-2r)!/(i!j!)) eta_(i+j-2r)`。
+
+等价地，`m=i+j-2r` 时只在 `|i-j|<=m<=i+j` 且
+`m=i+j (mod 2)` 的 degree-local/parity 支持上出现。其双变量生成恒等式为
+
+`sum_(i,j>=0)Hcal(h)_(ij)z^i/sqrt(i!) w^j/sqrt(j!)`
+`=exp(zw)F_h(z+w)`。
+
+### 92.1 gap-Wiener 代数
+
+令 `D_theta=diag(1,e^(itheta),...,e^(intheta))`，以 Fourier 投影
+`Delta_d A` 提取 `i-j=d` 的一条矩阵对角线，并定义
+
+`||A||_(W_n)=sum_(d=-n)^n||Delta_dA||_op`。
+
+逐项恒等式为
+
+`Delta_d(AB)=sum_r Delta_r(A)Delta_(d-r)(B)`，
+`||AB||_(W_n)<=||A||_(W_n)||B||_(W_n)`，
+`||A^*||_(W_n)=||A||_(W_n)`，
+以及 `||L_-A||_(W_n)<=||A||_(W_n)`。
+
+因此 `L_-` 在这个结构化代数中是 contractive，generic operator norm 的
+`log n` 不再出现；这一步是 exact gap convolution，不是把 generic
+Hilbert estimate 误用于 actual class。
+
+### 92.2 dimension-free structured theorem
+
+使用 R77 已审计的 degree-local bound
+`||P_nM_(e_m)P_n||_op<=2^m(3n)^(m/2)/sqrt(m!)`，取
+`rho_n=4sqrt(n)`、`q=sqrt(3)/2` 和
+`||h||_(rho_n)=sum_(m<=2n)|eta_m|rho_n^m/sqrt(m!)`，得到
+
+`||Hcal_n(h)||_(W_n)<= (189/64)||h||_(rho_n)`，
+
+以及只保留正 gaps 的更尖锐估计
+
+`||L_-Hcal_n(h)||_op <= (27sqrt(3)/32)||h||_(rho_n)<(3/2)||h||_(rho_n)`。
+
+常数与 `n` 无关；`189/64` 的标量最大项在 `m=6`，正-gap常数的最大
+奇项在 `m=5`。于是若 `H=H^*` 且
+`||H||_(W_n)<=1/64`，R94 的 nonlinear map 在 `W_n` 中以半径
+`2||H||_(W_n)` 严格收缩，给出唯一 strict-lower `L`，
+
+`||L||_(W_n)<=2||H||_(W_n)`，
+
+并使 `(I+L)(I+H)(I+L)^*` 成为正 diagonal；全套常数对 horizon `n`
+一致。特别地，`||h||_(rho_n)<=1/189` 足以给出该结构化 Gram 闭合。
+
+### 92.3 bounded multiplier 的 actual no-go
+
+上述结论不能降格为“所有 bounded Hermite multiplier 都成立”。取实际
+乘子 `h(x)=sgn(x)`，有 `||Hcal_n(h)||_op<=1`。OU 半轴 Green 恒等式给出
+对 `i=2p+1,j=2q`
+
+`Hcal_n(sgn)_(2p+1,2q)=2gamma(0)sqrt(2p+1)e_(2p)(0)e_(2q)(0)`
+`/[2(p-q)+1]`，其中
+`e_(2r)(0)=(-1)^r sqrt((2r)!)/(2^r r!)`。
+
+中央二项式下界与一个带符号的 even 输入块共同给出
+`||L_-Hcal_n(sgn)||_op >= c log n-C`；R94 的 generic Fourier upper 给出
+相反方向。因此实际 Hermite multiplier 也可以达到
+`||L_-Hcal_n(sgn)||_op=Theta(log n)`，而 odd parity 本身不能消除障碍。
+
+### 92.4 大局更新与边界
+
+**PROVED（在 R77 degree-local estimate 的已审计前提下）：** 精确 Hermite
+矩阵元与双变量恒等式、gap-Wiener product algebra、growing-radius 类的
+dimension-free triangular bound、`1/64` 小球上的 horizon-uniform nonlinear
+Gram factorization，以及 bounded multiplier 类的 actual `sgn` 对数障碍。
+
+**CONDITIONAL：** 若项目实际的 Gaussian-mixture backgrounds 满足
+
+`sup_n||Hcal_n(g1)||_(W_n)<infinity`，
+`sup_n||Hcal_n(g2)||_(W_n)<infinity`，
+
+且 residual 在同一 hybrid 小球内，则 R95 theorem 可接回固定非零参数的
+all-degree Gram factorization。
+
+**OPEN：** `g1,g2` 的具体 gap-Wiener 可和性；
+`||Z(h)||_(ell^1(w))+||Hcal_n(h)||_(W_n)` 的 nonlinear same-factor
+invariance；global positivity；positive infinite backward tower；backward
+OU divisibility；以及 `FS_3`。
+
+所以 R95 的整体判断是：linear coefficient propagation 已真正移出主瓶颈，
+Gram 侧的 generic `log n` 也已被结构化代数替代；当前最小项目特异问题
+已经收缩为 `g1,g2` 两个具体 Gaussian-mixture background 是否具有统一
+gap summability。
+
+本轮新增 `flat_shadow_hermite_gap_wiener_r95/README.md` 与
+`audit_r95.js`。Node 固定精确/代数锚点审计输出：
+`R95_HERMITE_ENTRY_AND_LOCALITY_PASSED`、
+`R95_GAP_CONVOLUTION_IDENTITY_PASSED`、
+`R95_STRUCTURED_CONSTANTS_PASSED`、
+`R95_TANGENT_MOMENT_NORMALIZATION_PASSED`、
+`R95_SIGN_GREEN_IDENTITY_ANCHORS_PASSED`、
+`R95_SIGN_LOWER_CONSTRUCTION_ANCHOR_PASSED` 与
+`R95_HERMITE_GAP_WIENER_AUDIT_COMPLETED`。
