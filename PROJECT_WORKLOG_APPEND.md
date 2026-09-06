@@ -2056,3 +2056,26 @@ computation was used.
   computation was used.  Before R58, read the updated framework, worklog, and
   R36–R57 README/audits.  The next target is the moving-deficit zero-set on
   the surviving skew interval, not another factorial-growth argument.
+
+## R58 — OU/Jacobi bridge boundary (2026-09-06)
+
+- R58 was sent to the same Project conversation to test whether the R53
+  Favard/Hamburger spectral law automatically inherits the original positive
+  backward-OU tower.  The webpage distinguished the objects but stalled before
+  giving a transfer map; it was safely stopped.  No bridge theorem is claimed.
+- The audit records the exact conditional implication: if the bridge supplied
+  `mu_*=P_{q^N}nu_N` for every `N`, then
+  `h_2(mu_*)>=2(1-q^N)^2` and the exact `h_2=2-m_3^2` row would give
+  `m_3^2<=2q^N(2-q^N)`, hence `m_3=0` as `N->infinity`.
+- The missing data are law identification (or an explicit map), normalization
+  preservation, moment/Jacobi-variable preservation, and OU intertwining.
+  Positivity of an abstract Hankel functional is not enough to transfer the
+  density-level equation `g^(j)=P_q g^(j+1)`.
+- Added `flat_shadow_ou_jacobi_bridge_r58/README.md` and
+  `flat_shadow_ou_jacobi_bridge_r58/audit_r58.py`.  The local audit checks the
+  conditional algebra and limit, and prints the bridge as OPEN.  No determinant,
+  optimizer, SDP, sweep, relaxed measure-LP, or remote computation was used.
+- R58 does not close D.1, infinite positive viability, Gaussian rigidity, or
+  the `P_3 K` bridge.  Next R59 must either prove an explicit OU–Favard transfer
+  lemma or state the exact missing hypothesis and perform one concrete
+  corrected-orientation `beta_6/beta_7` recurrence.

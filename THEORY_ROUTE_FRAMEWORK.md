@@ -4388,3 +4388,49 @@ factorial-growth 路线，不是 D.1；下一轮唯一主攻应是 surviving
 `0<a^2<32-12sqrt(7)` 中 moving `delta_n(a)` 的有限变号，或证明其存在
 infinite positive exact chain。相关 theorem 仍需与 Gaussian rigidity、
 `P_3 K` bridge 分开。
+
+## 55. R58：OU tower 与 Favard/Jacobi realization 的桥接边界（2026-09-06）
+
+R58 直接审计 R53–R57 最容易被偷换的一步：若 canonical branch 的所有
+`beta_n>0`，Favard/Hamburger 给出的 `mu_*` 是否自动继承原始正 OU tower
+`g^(j)=P_q g^(j+1)`。网页端本轮只完成了对象区分，未在生成长链中给出严格
+operator/measure map，随后被安全停止；故不能把它记作 bridge 已证。
+
+这里必须区分三层对象：原始假设中的正密度 `g^(j)` 及其 OU action；由
+escort 或 cubic row 产生的 ordinary moment functional；以及 R53 用 Favard
+重建的 Jacobi 变量 `x` 的谱测度。Favard 只从正 Hankel/Jacobi 数据重建最后一
+个对象。除非另有定理同时证明 law identification（或显式 map）、归一化保持、
+`x` 矩/monic norm 保持以及与 `P_lambda` 的 intertwining，否则
+`mu_*=P_(q^N)nu_N` 不能从 `g^(j)=P_qg^(j+1)` 推出。
+
+### 55.1 可保留的 conditional theorem
+
+若上述 bridge 以后被严格建立，并且 R53 law 满足对所有 `N`
+
+`mu_*=P_(q^N)nu_N`, `0<q<1`,
+
+同时 exact second row 给出 `h_2(mu_*)=2-m_3(mu_*)^2`，则 Gaussian
+conditional-Hermite bound 立即给出
+
+`h_2(mu_*) >= 2(1-q^N)^2`,
+`m_3(mu_*)^2 <= 2q^N(2-q^N)`。
+
+令 `N->infinity` 得 `m_3(mu_*)=0`。这会关闭“eventually zero Jacobi
+diagonal + arbitrarily deep positive OU divisibility 仍保留 finite-head skew”
+这一候选分支；它只关闭 D.1 的一个 conditional/eventual-skew 层，不等于
+原始 law 的 Gaussian rigidity，也不等于 `P_3 K` bridge。
+
+### 55.2 R58 的证据边界与下一步
+
+本机新增 `flat_shadow_ou_jacobi_bridge_r58/audit_r58.py` 与 README，审计
+conditional OU degree-two algebra、`q^N->0` 的极限及桥接所需的四项数据，
+但明确打印 Favard law 的 OU inheritance 仍 OPEN。R58 因网页端未完成而不是
+数学结论；下一轮 R59 必须二选一：给出显式 OU–Favard transfer lemma 并逐项
+验证，或明确指出当前假设不足并转入 canonical moving-deficit 的一条具体
+`beta_6/beta_7` 递推。不得再把 auxiliary spectral law 当作原始 OU density。
+
+R58 继续保留 D.1、infinite positive exact viability、Gaussian rigidity 与
+`P_3 K` bridge 的独立 OPEN 状态；没有使用 determinant、optimizer、SDP、
+sweep、relaxed measure-LP 或 remote computation。下一轮网页端开始前必须读取
+本框架、工作日志及 R36–R58 相关 README/audit，但只需先处理本桥接边界与
+R53/R57 的相关公式，避免重复扫描整套历史。
