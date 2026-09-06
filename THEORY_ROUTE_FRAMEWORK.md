@@ -5531,3 +5531,61 @@ infinite exact backward tower 与 backward OU divisibility 仍 OPEN；下一条
 继续压低指数 `544` 并检验 `t_n#` 能否逼近 `A_(2n)`。
 
 新增本机审计为 `flat_shadow_odd_green_r74/audit_r74.py`。
+
+## 72. R75：moving-radius conjugation 的符号校正（2026-09-07）
+
+R75 的 moving-radius factorization 本身成立，但其 Volterra 方程出现了一个
+必须纠正的符号。对任意正半径 `sigma_k`，定义
+
+`v_k=(k!)^2 sigma_k^(2k+1)/(2k+1)!`，
+`Z_k=eta_(2k+1)sqrt((2k+1)!)/(k!)^2`。
+
+R74 的带权 transfer 精确因子化为
+
+`K_(k,j)^mov=(v_k/v_j)q_(k,j)`，
+`q_(k,j)=1/(k-j)!*(1+2(k-j)/(j+1))`。
+
+这一步完全吸收了 moving radius 与 factorial weight；它是本轮保留的
+unconditional algebraic lemma。
+
+但 R73 exact recursion 是
+
+`eta_(2k+1)=factor_k*[alpha_k gamma_k-sum_(m<=2k)c_(k,m)eta_m]`，
+
+而 Gaussian 的 `c_(k,2j+1)>0`。因此 signed conjugated variable 的确切方程
+是
+
+`Z_k=S_k-sum_(j<k)q_(k,j)Z_j`，
+
+不是网页端原先写出的 plus 号。令 `Z(x)=sum Z_k x^k`、
+`S(x)=sum S_k x^k`、`F(x)=integral_0^x Z(t)dt`，正确的解析式为
+
+`Z+2F=e^(-x)S`，
+`F'+2F=e^(-x)S`，
+`F=e^(-2x) integral_0^x e^tS(t)dt`，
+`Z=e^(-x)S-2e^(-2x) integral_0^x e^tS(t)dt`。
+
+因此 signed Gaussian Green 对 entire source 不产生 `2-e^x` 分母，也没有
+真实的 `log(2)` 极点。网页端给出的
+`(2-e^x)^{-1}`、`(log 2)^(-1)` 和 resonance functional 只适用于将 signed
+递推取绝对值后的 positive majorant；它们不能被记录为 canonical Gaussian
+odd propagation 的谱障碍。R64 tangent 的交替号
+
+`z_m=(-1)^(m-1)m(m+1)/(2m!)`
+
+恰好通过 corrected signed Volterra equation；本机审计用 `S(x)=x+x^2/2`
+复现了 `z_1=1,z_2=-3/2,z_3=1,z_4=-5/12`。
+
+所以 R75 的可报告进展不是“发现了 `1/log 2` 的真实障碍”，而是把
+moving-radius Green 的半径共轭精确化，并排除了一个由绝对值 majorant 引入
+的假谱障碍。它也说明：要升级到 nonlinear odd tame，必须保留 canonical
+source 的符号/结构，不能直接使用 positive Volterra row sum。R75 的另一个
+网页估计 `e^(64mu n/e)` 也没有纳入，因为其从
+`k!/(2k+1)!` 到指数常数的推导尚未通过本机审计。
+
+D.1、positive infinite exact backward tower 与 backward OU divisibility 仍
+OPEN。下一条唯一目标改为 R76：从 `alpha_k=0` 的 exact Jacobi/Gram recursion
+导出 sign-preserving nonlinear source，检查其在 corrected signed Green 下的
+实际 cancellation，而不是研究 artificial `log(2)` resonance。
+
+新增本机审计为 `flat_shadow_odd_green_mov_r75/audit_r75.py`。

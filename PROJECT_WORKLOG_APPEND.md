@@ -2524,3 +2524,27 @@ computation was used.
   `flat_shadow_odd_green_r74/audit_r74.py`. The next unique target is the
   moving-radius Green kernel `sigma_k~sqrt(k)` to reduce the exponent `544` and
   compare the window with `A_(2n)`.
+
+## R75 — Moving-radius conjugation and sign correction (2026-09-07)
+
+- The webpage reported a moving-radius factorization
+  `K_(k,j)^mov=(v_k/v_j)q_(k,j)`, with
+  `v_k=(k!)^2 sigma_k^(2k+1)/(2k+1)!` and
+  `q_(k,j)=(1+2(k-j)/(j+1))/(k-j)!`. The factorization is exact and passed
+  local symbolic checks.
+- A decisive sign audit found that the signed R73 recursion is
+  `Z_k=S_k-sum_(j<k)q_(k,j)Z_j`, not the plus recursion used in the webpage's
+  claimed `log(2)` Green resonance. The plus equation is only the absolute-value
+  majorant. The correct signed Green formula is
+  `F=e^(-2x) integral_0^x e^tS(t)dt` and
+  `Z=e^(-x)S-2e^(-2x) integral_0^x e^tS(t)dt`, so it is entire for entire `S`.
+- The corrected formula reproduces the audited R64 alternating tangent signs
+  from the finite source `S(x)=x+x^2/2`. Therefore the claimed actual spectral
+  threshold `(log 2)^(-1)` and nonlinear resonance obstruction are rejected;
+  they belong only to a positive majorant that discards cancellation.
+- R75's claimed `e^(64mu n/e)` bound was not recorded because its factorial
+  summation constant was not independently valid. The full nonlinear tame
+  estimate still requires a sign-preserving source identity.
+- Added `flat_shadow_odd_green_mov_r75/README.md` and
+  `flat_shadow_odd_green_mov_r75/audit_r75.py`. Next target: R76 canonical
+  nonlinear source cancellation in the corrected signed Green equation.
