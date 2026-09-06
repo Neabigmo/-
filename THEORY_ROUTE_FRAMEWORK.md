@@ -6048,3 +6048,63 @@ positivity 以及 endpoint `FS_3` 继续 OPEN。
 
 新增本机记录与审计：`flat_shadow_quadratic_even_r80/README.md`、
 `flat_shadow_quadratic_even_r80/audit_r80.py`。
+
+## 78. R81：mixed tangent–residual operator cancellation（2026-09-07）
+
+R81 网页端已完成，但最终回复再次说明桥接账户连接错误，未实际读到 R80
+本机文件或独立核验 `7c42885`；以下记录严格按本机 R80 基线审计。
+
+在 `Y=aU+o`、`E=a^2V+Ehat` 坐标中，令
+`M_n=A_e^(-1)Q(U,·)`，令 `L_n` 为 corrected signed-Green 后的
+`D_Ehat` odd source map。R81 给出 formal same-factor/Jacobi 层级内的精确
+Schur 补恒等式
+`D_o Ehat[o]=-2aM_no`、`D_Ehat o[Ehat]=aL_nEhat`，所以 mixed Jacobian
+为 `D_o o_new=-2a^2K_n`、`K_n=L_nM_n`。R80 中的 `Gamma_n H_n` 正是
+将这两个因子分别粗估后丢掉复合结构的结果。
+
+一个新的 operator-level 正结果是：若 `U=Tg_1`、`o=Th` 且 `g_1,h` 为
+bounded Gaussian multipliers，则对 `r^2+s^2<=1` 可选择标准 Gaussian
+`Y_1,Y_2`，使其无条件独立、条件均值为 `rX,sX`、条件噪声协方差为 `-rs`。
+于是 Wick contraction 满足
+`||Gamma_r g_1 diamond Gamma_s h||_infinity
+<=||g_1||_infinity||h||_infinity`。
+由于三因子 angular 几何有 `r_i^2+r_j^2<=1`，故 angular inverse 之前的
+mixed source 满足 dimension-free bound
+`||T^(-1)Q(U,o)||_infinity<=3||g_1||_infinity||h||_infinity`。
+因此 R80 的 `H_n~(4e)^n` 不是 U-leg 本身产生的，而是后续 angular inverse
+与 triangular source transport 的损失。
+
+R81 同时给出两个严格失败边界。第一，generic even Hermite mode
+`W_k=z^(2k)/sqrt((2k)!)` 的 `L^2` 范数为 1，但
+`||A_e^(-1)W_k||=A_(2k)^(-1)~sqrt(pi k)(3/2)^k/3`；所以 bounded
+multiplier 的 pre-inverse 估计不能由抽象 operator theory 推成 `M_n` 的
+uniform bound，必须利用 actual mixed image 的 signed degree localization。
+
+第二，Gram-Schmidt 一阶导数含 strict-lower-triangular projection
+`Dphi_k[H]=-sum_(j<k)H_(jk)e_j`。对离散 Hilbert 矩阵
+`H_(jk)=1/(j-k)`，full compression operator norm 有界，但取常向量可得
+`||L_-(H)||_op>=c log N`。所以即使 `Hcal_n(M_no)` 的 operator compression
+uniformly bounded，也不能仅凭此控制 `D_E S` 的 n-uniform derivative；实际
+mixed image 若有 cancellation，必须另证。
+
+R81 将缺口化为精确 weighted column criterion。若
+`omega_(n,j)=((j!)^2/(2j+1)!)R_n^(2j+1)`、`R_n=4sqrt(n)`，则
+`||K_n||_(l^1(omega)->l^1(omega))` 恰为
+`sup_j omega_(n,j)^(-1)sum_k omega_(n,k)|K_(k,j)^(n)|`。
+故需要核验
+`sup_(n,j)sum_k|K_(k,j)^(n)|omega_(n,k)/omega_(n,j)<infinity`。
+固定 gap `d` 且 `j/n` 保持在 `(0,1]` 时，权重比
+`omega_(n,j+d)/omega_(n,j)~(4n)^d`；无跨 degree cancellation 时，必须有
+`K_(j+d,j)^(n)=O(n^(-d))`。
+
+定义 `MGK(C_K)` 为上述 column bound。若它成立，mixed linear feedback
+从 R80 的 `Gamma a^2H_n` 改为 `2C_Ka^2<1`。但 quartic even remainder
+仍给出 `Gamma a^4H_n^4<<1`，故当前 machinery 只能条件性地改善为
+`t#>=c_mu n^(-23/4)[64e^2 sqrt(e(mu+1))]^(-n)`；固定 `mu downarrow3`
+时 denominator base 趋近 `128e^2 sqrt(e)`，仍远低于 angular natural
+scale `A_(2n)~3(2/3)^n/sqrt(pi n)`。
+
+本机已审计 Schur 补、Wick 协方差、angular inverse 增长、triangular no-go、
+weighted fixed-gap 比值、quartic 指数和 MGK column norm。新增记录与审计为
+`flat_shadow_mixed_kernel_r81/README.md`、
+`flat_shadow_mixed_kernel_r81/audit_r81.py`。

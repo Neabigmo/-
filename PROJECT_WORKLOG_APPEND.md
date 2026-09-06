@@ -2709,3 +2709,33 @@ computation was used.
   `o -> A^(-1)Q(U,o) -> signed-Green D_E S`.
 - Added `flat_shadow_quadratic_even_r80/README.md` and
   `flat_shadow_quadratic_even_r80/audit_r80.py`.
+
+## R81 — Mixed tangent–residual operator cancellation (2026-09-07)
+
+- The webpage completed R81 but again reported that the bridge could not read
+  the R80 local files or independently check HEAD `7c42885`. The local record
+  keeps the response conditional on the existing formal same-factor/Jacobi
+  hierarchy.
+- Exact structural reduction: with `E=a^2V+Ehat` and `Y=aU+o`, the mixed loop
+  has `D_o Ehat=-2a M_n` and `D_Ehat o=a L_n`, hence the Jacobian is
+  `-2a^2 K_n` with `K_n=L_n M_n`. This isolates the feedback that R80 bounded
+  separately by `Gamma_n H_n`.
+- New positive lemma before angular inversion: bounded Gaussian multiplier legs
+  satisfy a conditional Gaussian Wick-contraction bound, so the actual
+  `U`-mixed source has dimension-free `L_infinity` norm at most
+  `3||g_1||_infinity||h||_infinity` because `r_i^2+r_j^2<=1`.
+- Two strict no-go boundaries were audited. Generic angular inversion has mode
+  growth `A_(2k)^(-1)~sqrt(pi k)(3/2)^k/3`; and strict lower-triangular
+  Gram-Schmidt truncation can grow at least `c log N` even when the full Gram
+  perturbation has bounded operator norm. Thus R80's bounded Gram compression
+  alone cannot imply a uniform mixed source derivative.
+- The exact missing input is a weighted `l^1` column condition for the mixed
+  kernel. With `omega_(n,j)=((j!)^2/(2j+1)!)R_n^(2j+1)`, fixed gap `d` has
+  weight ratio asymptotic `(4n)^d`, requiring `K_(j+d,j)=O(n^(-d))` absent
+  cross-degree cancellation.
+- Conditional theorem: if `MGK(C_K)` holds, the mixed-linear feedback changes
+  from `Gamma_n a^2 H_n` to `2C_K a^2<1`. The existing quartic residual still
+  gives only `t#>=c_mu n^(-23/4)[64e^2 sqrt(e(mu+1))]^(-n)`, with fixed-
+  `mu downarrow3` base `128e^2 sqrt(e)`; the angular scale remains far away.
+- Added `flat_shadow_mixed_kernel_r81/README.md` and
+  `flat_shadow_mixed_kernel_r81/audit_r81.py`.
