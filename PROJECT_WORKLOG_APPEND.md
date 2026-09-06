@@ -2494,3 +2494,33 @@ computation was used.
   `flat_shadow_odd_solver_bound_r73/audit_r73.py`. Next target: degree-local odd
   Green-function sharpening that retains the factorial denominator instead of
   collapsing all levels into `B_n`; aim for `e^(O(n log n))` or `C^n n^p`.
+
+## R74 — Degree-local odd Green kernel and exponential conditional tame (2026-09-07)
+
+- The webpage again reported that the connector could not read the local R72/R73
+  files. I used the raw R74 math sources and checked them against the local R73
+  normalization. The exact triangular factor is unchanged:
+  `d_k=sqrt((2k+1)!)/k!` and `eta_(2k+1)` carries
+  `k!/sqrt((2k+1)!)`.
+- The new Gaussian product calculation is exact. For `d=k-j`,
+  `K_(k,j)<= (1+2d)(16n)^d/d!` and
+  `sum_(j<k)K_(k,j)<=(1+32n)e^(16n)-1`. This gives a genuine
+  `e^(O(n))` degree-local row bound and isolates R73's
+  `e^(O(n^2 log n))` as an artifact of repeatedly applying the uniform `B_n`.
+- The finite-head Jacobi/Duhamel route uses the parity fact
+  `Delta B=O(E)+O(Y^2)`. Under the explicitly stated Gram-domain and resolvent
+  assumptions, the arithmetic yields `C_n=2^25 n^3e^(544n)`,
+  `Omega_n=2^26 n^3e^(544n)`, and `r_n=2^(-31)n^(-3)e^(-544n)`.
+  The local record treats the full Schur/Duhamel chain as conditional analytic
+  input pending a line-by-line resolvent proof; it is not an unconditional
+  infinite-law theorem.
+- The even bootstrap was recorded with the necessary correction: because the
+  angular coefficient is `1/4`, strict improvement uses
+  `X<=3|a|Ubar_n/2` from two separate quarter bounds, not the looser
+  `2|a|Ubar_n`. For sufficiently large `n`, the conditional no-reversal scales
+  are `a_n#=2^(-31)n^(-3)e^(-544n)` and
+  `t_n#=2^(-62)n^(-6)e^(-1088n)`.
+- Added `flat_shadow_odd_green_r74/README.md` and
+  `flat_shadow_odd_green_r74/audit_r74.py`. The next unique target is the
+  moving-radius Green kernel `sigma_k~sqrt(k)` to reduce the exponent `544` and
+  compare the window with `A_(2n)`.

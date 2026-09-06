@@ -5420,3 +5420,114 @@ infinite exact tower 或 backward OU divisibility。R73 本机审计为
 degree-local odd Green-function sharpening：保留每一级
 `k!/sqrt((2k+1)!)`，争取把 `exp(O(n^2 log n))` 降到 `e^(O(n log n))` 或
 `C^n n^p`。
+
+## 71. R74：degree-local odd Green kernel 与 exponential conditional tame（2026-09-07）
+
+R74 继续保留 R73 exact triangular recursion 的 factorial transfer，而不再把
+每一级 source 都压到同一个 `B_n`。网页端本轮仍报告连接器不可读 R72/R73
+本机记录，因此本节只采纳其原始 `data-math-source` 并由本机审计；其中
+Gaussian kernel、半径常数和 bootstrap 算术通过，完整 Duhamel/resolvent
+链仍明确属于 conditional analytic lemma。
+
+### 1. Gaussian degree-local kernel
+
+规范化固定为 `e_m=H_m/sqrt(m!)`、`eta_m=L[e_m]`、
+`phi_k=pi_k/sqrt(k!)`。因此 `d_k=sqrt((2k+1)!)/k!`，并且
+
+`eta_(2k+1)=k!/sqrt((2k+1)!)*[alpha_k gamma_k-
+sum_(m<=2k)c_(k,m)eta_m]`。
+
+Gaussian 点 `phi_k=e_k` 时，Hermite product formula 与
+`xH_m=H_(m+1)+mH_(m-1)` 给出
+
+`[x e_k^2]_(e_(2j+1)) = sqrt((2j+1)!)*k!/[j!^2(k-j)!]
+*(1+2(k-j)/(j+1))`。
+
+令 `y_j=|eta_(2j+1)|sigma_n^(2j+1)/sqrt((2j+1)!)`，
+`sigma_n=8sqrt(n)`，则真实的线性下三角 transfer 是
+
+`K_(k,j)=(k!)^2(2j+1)!/[(2k+1)!j!^2(k-j)!]
+*(1+2(k-j)/(j+1))*sigma_n^(2(k-j))`。
+
+写 `d=k-j`，阶乘比满足
+
+`(k!)^2(2j+1)!/[j!^2(2k+1)!]
+=prod_(r=1)^d (j+r)^2/[(2j+2r)(2j+2r+1)] <=4^(-d)`。
+
+所以
+
+`K_(k,j)<=(1+2d)(16n)^d/d!`，
+`sum_(j<k)K_(k,j)<=(1+32n)e^(16n)-1`。
+
+这是本轮最干净的 unconditional algebraic result：Gaussian linearized odd
+Green row 只有 `e^(O(n))` 大小，故 R73 的 `e^(O(n^2 log n))` 确实来自
+uniform source recursion 的人为累乘，而非 factorial denominator 本身。
+
+### 2. Conditional finite-head Jacobi resummation
+
+有限 Jacobi matrix 写成 `J=B+aD`，其中
+`D=diag(0,1,-1,0,...)`，`B` 为 zero-diagonal Jacobi part，Gaussian 值
+`B_0` 的 off-diagonal 为 `sqrt(k)`。对 degree `<=2n+1`，
+
+`Phi_(B,a)(z)=e^(-z^2/2)<e_0,e^(z(B+aD))e_0>`，
+`Y(a,B)=[Phi_(B,a)-Phi_(B,-a)]/2`。
+
+在 `rho_n=4sqrt(n)`、`||E||_rho<=1`、`||Y||_rho<=1/16` 的 Gram-domain
+下，R74 给出条件性的 parity-Schur estimate
+
+`|gamma_k(E,Y)-gamma_k(E,0)|<=40||Y||_rho^2`，
+`|beta_k/k-1|<=5||E||_rho+275||Y||_rho^2`，
+`||B-B_0||<=sqrt(n)(10||E||_rho+550||Y||_rho^2)`。
+
+其结构含义是精确的：odd moment block `C` 在 Gram inverse 的 diagonal
+上一阶必然消失，因此 `Delta B=O(E)+O(Y^2)`，而不是 `O(Y)`。不过这些
+Schur-complement 常数和之后的 Duhamel 估计需要完整写出 resolvent 细节，
+本机当前审计的是公式之间的归一化和常数相容性，不把它们误报成已脱离
+conditional domain 的 unconditional theorem。
+
+取 `R=2sigma_n=16sqrt(n)`，网页端的粗 resolvent bound 为 `e^(224n)`，
+并给出
+
+`||Y-aU||_sigma <=1024n e^(224n)|a|||B-B_0||
+ +1366n^(3/2)e^(224n)|a|^3`。
+
+代入 parity estimate，并利用 odd degree `>=3` 的 radius loss，得到
+
+`||o||_sigma <= C_n(|a|||E||_rho+|a|^3)
+ +17600n^(3/2)e^(224n)|a|||o||_sigma^2`，
+`C_n=2^25 n^3e^(544n)`。
+
+在 `|a|<=r_n=2^(-31)n^(-3)e^(-544n)` 上二次项可吸收，从而条件性地得到
+
+`||O_n(a,E)||_sigma<=Omega_n(|a|^3+|a|||E||_rho)`,
+`Omega_n=2^26n^3e^(544n)=e^(O(n))`。
+
+### 3. Conditional no-reversal window
+
+直接在输入半径 `sigma_n`、输出半径 `rho_n=sigma_n/2` 上使用 angular
+coefficient bound：
+
+`A_(2k)^(-1)(rho_n/sigma_n)^(2k)<=1/4`。
+
+这与 R72 的固定 `q` 半径损失表述不同，但本身的系数算术成立。令
+`Ubar_n=32sqrt(n)e^(160n)`，则 sufficient scales 为
+
+`|a|<=min{r_n,1/(12*4^n Ubar_n),
+sqrt(Ubar_n/[4Omega_n(1+3Ubar_n^2)])}`。
+
+bootstrap 的严格改善必须使用 `||o||_sigma<=|a|Ubar_n/4` 和
+`||E||_sigma<=|a|Ubar_n/4`，从而 `X<=3|a|Ubar_n/2`；若直接替换成
+`2|a|Ubar_n`，在系数 `1/4` 下不够推出严格改善。充分大 `n` 时
+`r_n` 最小，于是得到 conditional
+
+`a_n#=2^(-31)n^(-3)e^(-544n)`，
+`t_n#=2^(-62)n^(-6)e^(-1088n)`，
+并有 `gamma_k(t)>0`、`beta_k(t)>0 (k<=n)` 在 `0<=t<=t_n#` 上成立。
+
+这把 R73 的 super-exponential gap 降为 pure-exponential gap，但仍远未匹配
+`A_(2n)~3(2/3)^n/sqrt(pi n)` 的 natural angular scale。D.1、positive
+infinite exact backward tower 与 backward OU divisibility 仍 OPEN；下一条
+唯一目标是 moving-radius Green kernel，在第 `k` 层用 `sigma_k~sqrt(k)`，
+继续压低指数 `544` 并检验 `t_n#` 能否逼近 `A_(2n)`。
+
+新增本机审计为 `flat_shadow_odd_green_r74/audit_r74.py`。
