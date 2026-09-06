@@ -6598,3 +6598,85 @@ angular、共同窗口 Green，以及 `D<=j/8` 的 full kernel/weighted column �
 **PROVED**（基于已有 exact decomposition）；真正剩余的 coefficient-propagation
 大缺口收窄为 `D/j>=1/8` 的 compact-uniform upper，再之后才是 hybrid stability、
 PSC lower/equality、positive backward tower、OU divisibility 与 `FS_3`。
+
+## 90. R93：weighted Volterra stability versus Gram triangular loss（2026-09-07）
+
+R93 处理两个不同的 triangular objects，不能把它们合并：其一是 R82--R92
+的 mixed coefficient kernel `K`，它严格提高 degree；其二是 Gram--Schmidt 的
+矩阵截断 `L_-`，它只保留矩阵的严格下三角。
+
+### 90.1 mixed kernel 的 column tails、紧性与 resolvent
+
+令 `w_j=16^j(j!)^2/(2j+1)!`，这是 `n^(-j)omega_(n,j)` 去掉公共因子
+`4sqrt(n)` 后的权重。定义
+
+`kappa_j=w_j^(-1)sum_(k>j)w_k|K_(k,j)|`。
+
+R91 在 `D<=j/8` 给出 `C_91 j^(-3)`；R92 的 all-gap majorant 加上已审计的
+`w_(j+D+1)/w_j<4^(D+1)`，在 `D>=j/8` 时用
+`j+D+1<=10D`、`D^2+6D+2<=9D^2`、`D^2+7D-2<=4D^2`，得到安全显式上界
+`C_92 D^7 16^D/D!`，可取 `C_92=31,008,000`。因此
+
+`kappa_j <= C_91 j^(-3)+C_92 sum_(D>=j/8)D^7 16^D/D! ->0`。
+
+这里使用 exact factorial tail，没有把 moving-gap 渐近外推到 source-large 区域。
+于是对 `ell^1(w)` 的有限首坐标投影 `P_J`，
+
+`||K-KP_J||=sup_(j>=J)kappa_j ->0`。
+
+因为 `KP_J` 是 finite rank，得到 mixed coefficient operator 的 compactness。
+更强地，按 `P_JX+(I-P_J)X` 分块，严格 degree-raising 给出
+
+`K=[[K_H,0],[C,K_T]]`，
+
+其中 `K_H^J=0`、`||K_T||<=epsilon_J`、`||C||<=C_K`。对固定 `lambda` 取
+`|lambda|epsilon_J<=1/2`，tail resolvent 满足 `||R_T||<=2`，head resolvent 是
+有限和 `R_H=sum_(q=0)^(J-1)lambda^qK_H^q`。因此 exact block inverse 给出每个
+固定 `lambda` 下所有 finite sections `K^(n)=P_nKP_n` 的 uniform resolvent
+bound；同一论证对任意非零谱参数给出 `sigma(K)={0}`。在已审计的 formal
+exact decomposition 层面，`K` 是 compact quasinilpotent / Volterra-type operator。
+
+这一步明确不等价于 full nonlinear Gram bootstrap。unilateral shift 是最小 no-go：
+`||S_N||=1`、`S_N^N=0`，但 `||(I-S_N)^(-1)||=N`。所以 “column bounded +
+triangular” 不足；真正的新输入是 `kappa_j->0`。
+
+### 90.2 Gram--Schmidt 投影的 sharp logarithmic loss
+
+对 `0,...,N-1` 的矩阵，`(L_-H)_(jk)=1_(j>k)H_(jk)`。取
+`D_theta=diag(1,e^(itheta),...,e^((N-1)itheta))` 与
+`p_N(theta)=sum_(d=1)^(N-1)e^(-idtheta)`，系数抽取得
+
+`L_-H=(2pi)^(-1)integral p_N(theta)D_theta H D_theta^*dtheta`。
+
+`|p_N(theta)|<=min(N,pi/|theta|)` 从而
+`||L_-H||_op<=(1+log N)||H||_op`。R81 的离散 Hilbert-matrix witness 给出
+`||L_-||>=c log N`，故 generic Gram triangular loss 是 `Theta(log N)`，而非
+dimension-free。若 `(1+log N)epsilon_N<1`，线性化 inverse 有显式 bound
+`||(I+L_-H_N)^(-1)|| <= [1-(1+log N)epsilon_N]^(-1)`。
+
+对真正的 `G=I+H`、`C=I+L`，strict-lower part 只给出 exact nonlinear identity
+
+`L=-L_-[H+LH+HL^*+LL^*+LHL^*]`。
+
+本轮已审计此恒等式的符号与有限矩阵展开，但没有把它升级成 contraction。
+
+### 90.3 当前状态分层
+
+**PROVED（基于 R91/R92 exact decomposition）：** rescaled column vanishing、
+compact/quasinilpotent mixed kernel、每个固定参数的 finite-section resolvent；
+`L_-` 的 Fourier upper bound 与 Cholesky off-diagonal identity。
+
+**Sharp/inherited：** R81 离散 Hilbert witness 的 `c log N` lower。
+
+**仍 OPEN：** uniform nonlinear Gram--Schmidt theorem、global positivity、positive
+infinite backward tower、backward OU divisibility 与 `FS_3`。这些结论不能从
+mixed-kernel resolvent 或 Gram linearization 自动推出。
+
+本轮新增 `flat_shadow_triangular_stability_r93/README.md` 与 `audit_r93.js`；
+Node BigInt/rational audit 输出
+`R93_TAIL_CONSTANTS_AND_FACTORIAL_DECAY_PASSED`、
+`R93_WEIGHT_RATIO_AND_COLUMN_VANISHING_ANCHORS_PASSED`、
+`R93_FINITE_STRICT_RESOLVENT_PASSED`、
+`R93_NONLINEAR_GRAM_IDENTITY_PASSED`、
+`R93_SHIFT_NO_GO_AND_FOURIER_SELECTOR_PASSED` 与
+`R93_TRIANGULAR_STABILITY_AUDIT_COMPLETED`。

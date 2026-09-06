@@ -3139,3 +3139,41 @@ computation was used.
   next central problem is no longer source/angle/Green, but hybrid
   Gram/strict-triangular stability; PSC lower/equality and positive backward
   tower/OU-divisibility remain separate open layers.
+
+## R93 — Weighted Volterra stability versus Gram triangular loss (2026-09-07)
+
+- R93 explicitly separated the mixed coefficient kernel `K` from the unrelated
+  Gram--Schmidt strict-lower projection `L_-`.  The former raises degree; the
+  latter truncates matrix entries.  No conclusion about one is silently used for
+  the other.
+- From R91's mesoscopic column bound and R92's all-gap majorant, the corrected
+  weight ratio `<4^(D+1)` gives, for `D>=j/8`, the safe tail majorant
+  `C92 D^7 16^D/D!`, with `C92=31,008,000`.  Hence
+  `kappa_j=w_j^(-1)sum_(k>j)w_k|K_(k,j)|` tends to zero, not merely remains bounded.
+- On `ell^1(w)`, `||K-KP_J||=sup_(j>=J)kappa_j ->0`; `KP_J` is finite rank.
+  Therefore the formal mixed kernel is compact.  The finite-head/small-tail
+  block form `K=[[K_H,0],[C,K_T]]`, with `K_H` nilpotent and
+  `||K_T||<=epsilon_J`, gives for every fixed `lambda` a uniform-in-`n`
+  resolvent bound for `K^(n)=P_nKP_n`, and the same argument gives
+  `sigma(K)={0}`.  This is a compact quasinilpotent/Volterra-type theorem for
+  the rescaled coefficient propagation layer.
+- The minimal obstruction to a weaker inference is the unilateral shift:
+  bounded strict triangular columns and nilpotence do not prevent
+  `||(I-S_N)^(-1)||=N`.  The actual additional ingredient is column vanishing.
+- Separately, Fourier coefficient extraction proves
+  `||L_-H||_op <= (1+log N)||H||_op`.  The R81 discrete Hilbert witness supplies
+  the matching `c log N` lower, so the generic Gram triangular loss is sharp
+  `Theta(log N)`.  The linearized threshold is
+  `(1+log N)||H_N||<1`; the exact nonlinear Cholesky off-diagonal relation is
+  `L=-L_-[H+LH+HL^*+LL^*+LHL^*]`.
+- The nonlinear identity was checked with exact rational finite-matrix algebra;
+  this does not claim nonlinear contraction.  Global positivity, positive
+  infinite backward towers, backward OU divisibility, and `FS_3` remain OPEN.
+- Added `flat_shadow_triangular_stability_r93/README.md` and
+  `flat_shadow_triangular_stability_r93/audit_r93.js`.  Audit output:
+  `R93_TAIL_CONSTANTS_AND_FACTORIAL_DECAY_PASSED`,
+  `R93_WEIGHT_RATIO_AND_COLUMN_VANISHING_ANCHORS_PASSED`,
+  `R93_FINITE_STRICT_RESOLVENT_PASSED`,
+  `R93_NONLINEAR_GRAM_IDENTITY_PASSED`,
+  `R93_SHIFT_NO_GO_AND_FOURIER_SELECTOR_PASSED`, and
+  `R93_TRIANGULAR_STABILITY_AUDIT_COMPLETED`.
