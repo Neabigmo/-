@@ -2387,3 +2387,24 @@ computation was used.
 - Added `flat_shadow_projection_difference_r69/README.md` and
   `flat_shadow_projection_difference_r69/audit_r69.py`. The exact audit passed;
   the next target is finite-t nonlinear/boundary-layer behavior.
+
+## R70 — Finite-t boundary-layer necessity (2026-09-07)
+
+- Webpage R70 supplied a scale-free necessary lemma for the remaining finite-t
+  mechanism. For `beta_hat_n=beta_n/n=1+ell_n t+N_n(t)`, any zero `tau_n` obeys
+  `N_n(tau_n)=-1-ell_n tau_n` and therefore the absolute nonlinear Taylor tail
+  has mass at least `1+ell_n tau_n` on that scale.
+- The C2 version gives the sharper curvature requirement
+  `tau_n^2 M_n(tau_n)>=2(1+ell_n tau_n)`, so a shrinking zero needs curvature of
+  order `tau_n^(-2)` (or `n*tau_n^(-2)` before normalization). A uniform Cauchy
+  radius/bound instead yields a geometric tail bound and rules out zeros when
+  the tested scale is `o(R_n)`.
+- This is a necessary/no-go result, not a construction of a reversal and not a
+  proof of D.1 or of the positive backward tower. The remaining target is now
+  sharply narrowed to an all-order nonlinear-tail scaling profile or an all-order
+  tail majorant.
+- Added `flat_shadow_boundary_layer_r70/README.md` and
+  `flat_shadow_boundary_layer_r70/audit_r70.py`. The exact audit, `py_compile`,
+  and `git diff --check` passed after correcting the audit's symbol-substitution
+  check. The next webpage target is R71: derive a profile `N_n(s_n x)` or prove
+  a uniform `o(1)` tail bound.

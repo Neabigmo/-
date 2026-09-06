@@ -5121,3 +5121,43 @@ negative-slope 机制，但不证明 D.1；若 R59–R63 的 shrinking finite-st
 cutoffs 继续存在，剩余机制必须是 finite-t nonlinear/boundary-layer effect。
 
 新增本机审计为 `flat_shadow_projection_difference_r69/audit_r69.py`。
+
+## 67. R70：finite-t nonlinear boundary-layer 必要性（2026-09-07）
+
+R70 将问题从 Gaussian-local slope 推进到有限 `t` 的非线性尾部。对条件性
+formal branch 记
+
+`beta_hat_n(t)=beta_n(t)/n=1+ell_n t+N_n(t)`，其中
+`ell_n=Lambda_n/n`、`N_n(t)=sum_(r>=2) b_(n,r)t^r`。
+
+若在解析半径内存在零 `tau_n>0`，则有精确恒等式
+
+`N_n(tau_n)=-1-ell_n tau_n`，
+
+从而 `sum_(r>=2)|b_(n,r)|tau_n^r >= 1+ell_n tau_n`。特别地，若
+`tau_n->0`，非线性 Taylor 尾部必须在 shrinking scale 上承担 order-one
+负响应，而不可能由有限阶 slope 单独造成。
+
+R70 还给出一个只用二阶余项的必要条件。令
+`M_n(s)=sup_(0<=u<=s)(-beta_hat_n''(u))_+`，则
+
+`beta_hat_n(t)>=1+ell_n t-(1/2)M_n(s)t^2`，
+
+并且任何零 `tau_n` 都必须满足
+`tau_n^2 M_n(tau_n)>=2(1+ell_n tau_n)`。因此 shrinking zero 要求
+`M_n(tau_n)>=(2+o(1))/tau_n^2`，未归一化时相应为
+`sup(-beta_n'')_+ >=(2+o(1))n/tau_n^2`。
+
+解析半径版本也排除了一个常见误读：若 `beta_hat_n` 在 `|t|<R_n` 内解析，
+且圆盘上统一有界，则 Cauchy 估计给出
+`sum_(r>=2)|b_(n,r)|s_n^r <= M(s_n/R_n)^2/(1-s_n/R_n)`。
+若 `s_n/R_n->0`，则 `beta_hat_n=1+o(1)`，所以 shrinking zero 只能发生在
+`tau_n` 不再远小于解析半径，或该统一有界性失效。
+
+这是一条 scale-free 的 necessary/no-go lemma，而非 D.1 的证明，也没有构造
+positive exact backward tower；所有结论仍处于 R64–R69 的 conditional
+same-factor/Jacobi formal hierarchy。下一步唯一应攻克的是全阶 nonlinear-tail
+scaling：构造 `N_n(s_n x)` 的非平凡极限并得到负值，或证明其在某尺度上统一为
+`o(1)`（从而排除 reversal）。
+
+新增本机审计为 `flat_shadow_boundary_layer_r70/audit_r70.py`。
