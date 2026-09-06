@@ -1651,3 +1651,48 @@ computation was used.
   finite-prefix controls integrate simultaneously into all-degree positive
   full-exact laws with OU backward divisibility and the required weighted tail.
   Finite positive prefixes are not such laws; no no-go is claimed.
+
+## R48 — heat-lift null hierarchy and moving-rank threshold (2026-09-06)
+
+- The webpage completed the next round after reading the local framework,
+  worklog, R36–R47 audit records, and exact nested-repository HEAD
+  `27cf9753f898b2531728daf70607c9533c5424dd`.  It chose the all-degree
+  obstruction route and used the rank-two shadow only to define a test
+  polynomial, never imposing its null relation on the genuine full law.
+- The new test is `P(x)=x^2-c*x-v`, with `v=1-a`, `c^2=2v`, and
+  `r_k=L_a^mu(x^k P(x)^2)`.  The webpage identified the first defect slots:
+  `r_3` sees `Delta_7` and `r_5` sees `Delta_9`.
+- Added `flat_shadow_heatlift_rankescape_r48/audit_r48.py` and README.  The
+  audit uses the variance-`v` generalized Hermite monomial expansion, which is
+  essential for the `28v` and `36v` terms, and checks the exact rows
+  `r_2` through `r_5`, the degree-eight same-factor identity, the flat block,
+  the interior heat-lift formulas, the completed-square determinant, the root
+  bracket for `f`, and OU scaling.
+- Exact local output:
+  `R48_NULL_DEFECT_HIERARCHY PASSED`;
+  `R48_DEGREE8_BRANCH_IDENTITY PASSED`;
+  `R48_SHIFTED_NULL_HANKEL_STRICTLY_INDEFINITE PASSED`;
+  `R48_INTERIOR_HEAT_LIFT_FORMULAS PASSED`;
+  `R48_COMPLETED_SQUARE_THRESHOLD_BRACKET PASSED`;
+  `R48_XI1_SCALAR_THRESHOLD RECORDED`;
+  `R48_OU_NULL_DEFECT_SCALING PASSED`;
+  `R48_LIFTED_NULL_THRESHOLD_DIVERGENCE REMAINS OPEN`;
+  `R48_AUDIT_COMPLETED`.
+- The strict finite identity is
+  `det [[r_2,r_3],[r_3,r_4]]
+   =-(r_3+18*c*v^3)^2-648*v^7<0`.  This closes only the direct inverse-null
+  positive-Christoffel route; it is not Gaussian-rigidity no-go and does not
+  promote rank>=2 into a weighted no-go.
+- The completed-square calculation gives the positive divisibility collar
+  condition `(a-s)/v >= xi_*` whenever the relevant inverse law is positive,
+  with `3/50<xi_*<1/16`.  This rules out near-flat endpoint approach as the
+  source of rank escape, but it does not solve the original all-degree tail.
+- The webpage's new smallest OPEN is the moving-rank threshold question
+  `Xi_K -> infinity`, where `Xi_K` is the least `x=a/v` admitting the stated
+  finite exact prefix and `Gamma_K>=0`.  Fixed `K` feasibility and
+  all-degree positive full-exact realization remain strictly separate; `K=2`
+  is the first lifted block seeing both odd defect slots.
+- No optimizer, SDP, sweep, relaxed measure-LP, or remote computation was
+  used.  Before the next web round, require reading the updated framework,
+  worklog, and R36–R48 audit records and target `Xi_K` divergence or a rigorous
+  obstruction to it.

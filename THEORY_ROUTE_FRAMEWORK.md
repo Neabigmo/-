@@ -3645,3 +3645,100 @@ Graded Value Transgression 继续 OPEN。
 只有出现新的 all-degree exact identity、正性递推或可证伪的全阶 cone
 obstruction，才进入下一次本机 proof-level audit。本轮没有使用 optimizer、
 SDP、大规模 sweep、relaxed measure-LP 或 remote computation。
+
+## 46. R48：heat-lift null hierarchy 给出固定阶不定性与 moving-rank OPEN
+
+网页端 R48 已在读取本机 R47 记录后选择 all-degree obstruction 路线。它没有
+宣称 Gaussian rigidity 或 two-body no-go，而是把 rank-2 shadow 的二原子关系
+只作为一个 test polynomial，构造了可逐项审计的 inverse-heat Gram hierarchy。
+
+### 46.1 本机 proof-level audit
+
+本机新增 `flat_shadow_heatlift_rankescape_r48/audit_r48.py` 与 README，并用
+精确 SymPy 代数核验网页本轮的新有限/结构性内容。为避免一个隐蔽的归一化
+错误，`x^p` 使用方差 `v` 的 generalized Hermite 展开；这正是网页公式中
+`28v`、`36v` 等项的来源，而不是标准方差一的展开。
+
+在 `v=1-a`、`c^2=2v`、
+`P(x)=x^2-cx-v`、`r_k=L_a^mu(x^kP(x)^2)` 下，本机核验：
+
+`r_2=sqrt(6!) Delta_6`，
+
+`r_3=sqrt(7!) Delta_7-2c sqrt(6!) Delta_6`，
+
+`r_4=sqrt(8!) Delta_8-2c sqrt(7!) Delta_7
+     +28v sqrt(6!) Delta_6`，
+
+`r_5=sqrt(9!) Delta_9-2c sqrt(8!) Delta_8
+     +36v sqrt(7!) Delta_7-54cv sqrt(6!) Delta_6`。
+
+本机还独立核验 genuine full-exact 的 degree-8 same-factor identity
+
+`b_8=(8sqrt(14)/7)b_3b_5`，
+
+并结合 rank-2 shadow 得到
+
+`Delta_8=-(9sqrt(70)/35)v^4`、`r_2=18v^3`、
+`r_4=-72v^4-2cr_3`。
+
+因此最小 shifted inverse-null block 的 determinant 精确为
+
+`det [[r_2,r_3],[r_3,r_4]]
+ =-(r_3+18cv^3)^2-648v^7<0`。
+
+这关闭的只是“把 `L_a(P^2R^2)` 当作正 Christoffel/Hankel 形式”的直接
+证明路线；它不是 Gaussian-rigidity no-go，也没有把 shadow 的 `P=0`
+施加到 genuine full law。
+
+进一步，本机从 `L_s=L_a exp((a-s)partial_x^2/2)` 的三条 polynomial
+heat-lift 公式实际重建并核验了 completed-square determinant：令
+`x=(a-s)/v`、`R=r_3/v^(7/2)`，则
+
+`det(N_1(s))/v^7
+ =-(R-(t/2)A(x))^2+9(x+3)(5x^2+2)f(x)`，
+
+其中
+
+`A(x)=30x^3-132x^2-24x-36`，
+
+`f(x)=35x^4+110x^3+129x^2+186x-12`。
+
+本机核验 `f'(x)>0`（`x>=0`）、`f(3/50)<0<f(1/16)`，并记录网页给出的
+唯一非负根阈值 `xi_*`。同时核验 forward-OU 缩放
+
+`r_k(tau)=tau^(k/2+2)r_k`。
+
+本机输出：
+
+`R48_NULL_DEFECT_HIERARCHY PASSED`、
+`R48_DEGREE8_BRANCH_IDENTITY PASSED`、
+`R48_SHIFTED_NULL_HANKEL_STRICTLY_INDEFINITE PASSED`、
+`R48_INTERIOR_HEAT_LIFT_FORMULAS PASSED`、
+`R48_COMPLETED_SQUARE_THRESHOLD_BRACKET PASSED`、
+`R48_XI1_SCALAR_THRESHOLD RECORDED`、
+`R48_OU_NULL_DEFECT_SCALING PASSED`、
+`R48_LIFTED_NULL_THRESHOLD_DIVERGENCE REMAINS OPEN`、
+`R48_AUDIT_COMPLETED`。
+
+### 46.2 证据边界与新的最小 OPEN
+
+对每个固定 `K`，ordinary/lifted Gram block 仍可能有严格正 margin；因此
+固定阶 positive prefix 不能推出 all-degree realization。网页端将真正的全阶
+问题压缩为 moving-rank feasibility threshold `Xi_K`：若定义为满足 rank-2
+lower heads、所需 same-factor exact rows 与 `Gamma_K>=0` 的最小 `x=a/v`，
+则 `Xi_{K+1}>=Xi_K`，每个固定 `K` 的有限阈值可存在，而是否
+
+`Xi_K -> infinity`
+
+仍完全 OPEN。`K=2` 才首次同时看到 `r_3` 与 `r_5`，即同时看到 `b_7` 与
+`b_9` 的两条 defect slots；这解释了 fixed-`K` 论证为何不足。
+
+本轮已关闭：最小 shifted inverse-null positivity 路线，以及 near-flat
+Gaussian-divisibility collar 内的“阶数逃逸”解释。仍开放：ordinary
+Hamburger/Jacobi tail 的 moving-rank compatibility、`Xi_K` 发散与真实
+all-degree positive full-exact law 的存在性。全局 Constraint-Coupled
+Non-SOS Graded Value Transgression、Gaussian rigidity、`P_3K` bridge 继续
+OPEN；R46 rank>=2 仍不是 no-go。下一轮网页端开始前必须先读取本框架、日志
+与 R36–R48 README/audit，并优先证明或反驳 `Xi_K` 的递增发散，而不是重复
+固定低阶展开。本轮没有使用 optimizer、SDP、大规模 sweep、relaxed
+measure-LP 或 remote computation。
