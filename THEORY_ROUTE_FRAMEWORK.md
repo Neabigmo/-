@@ -3194,3 +3194,65 @@ R41.1 的有限 block 和、`q_(m,2)`/`q_(m,4)` 的 exact `S,D` 投影、`sigma_
 weighted no-go；一般 `m>=4` 的 `kappa_m` 非零性仍是当前最小 OPEN。上位
 Constraint-Coupled Non-SOS Graded Value Transgression、Gaussian rigidity
 仍 OPEN，`P_3K` bridge 仍完全断开。
+
+## 39. R42：m=4 的首个 residue 变化阶通过，OPEN 收缩到一般 m>=5
+
+网页端在开始本轮前读取了 R36–R41 的本机记录，并核对嵌套仓库 HEAD
+`1b5d2ac`。本轮没有发现 R41 的渐近装配漏项：固定-chaos one-body
+subtraction 以及 `dot p_3` 中的 one-body correction 只给出
+`poly(n)(2/3)^n` 级的指数小项，不进入任何固定 `m` 的代数 `1/n` 展开。
+`C` 项中 `j=1` 的首个修正与 `j=3` 的首项进入 `n^(m-3/2)`，而 `j>=5`
+只从更低阶开始；对应地，`q_(m,2)` 需要二阶修正、`q_(m,4)` 需要一阶
+修正、`q_(m,6)` 需要首项，且 `D_(n,2m+2)` 需要二阶修正。
+
+网页端给出了两个新的 exact generating identity。若
+`A(x;z)=(1-z)^(-1/2) exp(-zx^2/(2(1-z)))`，则
+
+`P(z;S,D)=sum_n p_n(S,D)z^n=A(D;z)A(S;z/3)`，并且
+
+`E[h_(2q)(G)A(G;z)A(G;w)]`
+`=(-1)^q c_q (z+w-2zw)^q/(1-zw)^(q+1/2)`。
+
+因此 `T_(r,j)` 具有精确二元生成函数
+
+`sum_(k,l) E[h_(2j)(S)h_(2r-2j)(D)p_kp_l] z^k w^l`
+`=(-1)^r 3^(-j)c_jc_(r-j)`
+`*(z+w-(2/3)zw)^j(z+w-2zw)^(r-j)`
+`/((1-zw/9)^(j+1/2)(1-zw)^(r-j+1/2))`。
+
+插入 `h_3(X_3)` 的 odd conditional derivative 也有精确生成式：
+
+`sum_n dot p_(3,n)z^n`
+`=P(z;S,D)[2sqrt(3)z^2(2z-3)/(3-z)^3 h_1(S)`
+`+2sqrt(2)z^3/(3-z)^3 h_3(S)]`。
+
+在 `m=4`、`N=8` 下，网页端由这些生成式给出完整的 residue assembly：
+
+`sigma_4=-15807sqrt(6)/640`，
+`kappa_4=38325sqrt(6)/512>0`，因此 `r_4=1`。这与 R41 的 `sigma_m`
+候选在 `m=4` 的特化一致。相应的 N+4 response row 为 `n^(-1)`，实际
+carrier coefficient 的额外尺度为 `R^(1-4+1/2)=R^(-5/2)->0`，所以这一
+层没有 family-specific weighted-conditioning no-go；这仍只是 finite-grade
+conditional continuation，不是完整 transgression。
+
+本机新增 `flat_shadow_residue_r42/audit_r42.py` 与 README。审计严格区分
+exact 与网页渐近：二元 block generator、`dot p_3` generator、`m=4`
+`q_2,q_4,q_6` 投影、residue quotient algebra、`S_(4,4)` exact regression
+及 weighted exponent arithmetic 均通过；网页给出的 singular expansions
+仍明确标为未审计。输出为
+
+`R42_BLOCK_BIVARIATE_GENERATOR PASSED`、
+`R42_DOTP3_GENERATOR PASSED`、
+`R42_M4_Q_COEFFICIENTS PASSED`、
+`R42_M4_RESIDUE_QUOTIENT_ALGEBRA PASSED`、
+`R42_M4_EXACT_RESIDUE_REGRESSION PASSED`、
+`R42_M4_WEIGHTED_CONDITIONING PASSED`、
+`R42_M4_SINGULAR_EXPANSIONS REMAIN_WEB_DERIVED_UNAUDITED`、
+`R42_GENERAL_M_KAPPA REMAINS OPEN`、`R42_AUDIT_COMPLETED`。
+
+`S_(4,4)` 的新 exact 回归为 `-11639sqrt(6)/1179`。因此当前最小 OPEN
+收窄为 **General-m>=5 First Residue Variation Lemma**，仍不能从 `m=3,4`
+两例外推一般闭式或宣布所有 `kappa_m` 非零。上位 Constraint-Coupled
+Non-SOS Graded Value Transgression、Gaussian rigidity 仍 OPEN，`P_3K`
+bridge 仍完全断开。下一轮网页端开始工作前必须先读取本框架、工作日志及
+R36–R42 的 README/audit；只有新的可精确核验有限恒等式才继续新增本机审计。

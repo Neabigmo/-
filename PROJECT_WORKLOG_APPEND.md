@@ -1384,3 +1384,46 @@ computation was used.
   conditioning, and the positive-shadow remote tail remain open.  No
   optimizer, SDP, numerical sweep, relaxed measure-LP, or remote computation
   was used.
+
+# 2026-09-06 — R42 bivariate generators and m=4 residue audit
+
+- The same project webpage first read the R36–R41 local records and verified
+  nested-repository HEAD `1b5d2ac`.  It reported no missing contribution in the
+  R41 assembly at the target order: fixed-chaos one-body subtraction is
+  `poly(n)(2/3)^n` and therefore exponentially small; `C^(1)`'s first
+  correction and `C^(3)`'s leading term enter `n^(m-3/2)`; `C^(j>=5)` is lower
+  order.  The `q_(m,2)`, `q_(m,4)`, `q_(m,6)` and `D_(n,2m+2)` correction order
+  bookkeeping was made explicit.
+- The web review supplied an exact bivariate generating function for the
+  `T_(r,j)` blocks and an exact generating function for `dot p_3`.  These are
+  recorded in the route framework as R42.1–R42.5-style identities.  It also
+  completed the `m=4` singular assembly:
+
+  `sigma_4=-15807sqrt(6)/640`,
+  `kappa_4=38325sqrt(6)/512>0`, hence `r_4=1`.
+
+  The resulting `N+4` weighted scale is `R^(-5/2)`, so this finite-grade step
+  does not produce a family-specific no-go.  The result remains conditional on
+  the web-derived singular expansions and does not prove full transgression.
+- Added `flat_shadow_residue_r42/audit_r42.py` and README.  The local audit
+  checks the bivariate block generator against the exact double finite sum,
+  checks the `dot p_3` generator against direct Gaussian marginalization,
+  checks the `m=4` cancelled-polynomial coefficients `q_2,q_4,q_6`, verifies
+  the supplied numerator/denominator quotient algebra for `sigma_4,kappa_4`,
+  and verifies the new exact regression
+  `S_(4,4)=-11639sqrt(6)/1179`.
+- Audit output:
+  `R42_BLOCK_BIVARIATE_GENERATOR PASSED`,
+  `R42_DOTP3_GENERATOR PASSED`,
+  `R42_M4_Q_COEFFICIENTS PASSED`,
+  `R42_M4_RESIDUE_QUOTIENT_ALGEBRA PASSED`,
+  `R42_M4_EXACT_RESIDUE_REGRESSION PASSED`,
+  `R42_M4_WEIGHTED_CONDITIONING PASSED`,
+  `R42_M4_SINGULAR_EXPANSIONS REMAIN_WEB_DERIVED_UNAUDITED`,
+  `R42_GENERAL_M_KAPPA REMAINS OPEN`, and `R42_AUDIT_COMPLETED`.
+- The current smallest OPEN is now the general `m>=5` first residue variation
+  lemma.  Constraint-Coupled Non-SOS Graded Value Transgression and Gaussian
+  rigidity remain OPEN; the `P_3K` bridge remains fully disconnected.  Before
+  the next web round, the prompt must require reading the updated framework,
+  this append-only log, and R36–R42 local audit records.  No optimizer, SDP,
+  numerical sweep, relaxed measure-LP, or remote computation was used.
