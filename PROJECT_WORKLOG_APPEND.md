@@ -2889,3 +2889,44 @@ computation was used.
   `R85_ENTROPY_AND_RESCALED_WEIGHT_ARITHMETIC_PASSED`, and
   `R85_PROPORTIONAL_SADDLE_AUDIT_COMPLETED`; `py_compile` and
   `git diff --check` passed.
+
+## R86 — Exact Green-resummed generating identity and endpoint correction (2026-09-07)
+
+- R86 returned a PLAN centered on folding the whole signed `s/g` convolution
+  into one generating series.  With
+  `R_m(z)=sum_(s>=1)R_(m+s,m)z^s` and
+  `S_j(z)=sum_(r>=1)M_(j+r+1,j)z^(r+1)R_(j+r+1)(z)`, the exact formal identity is
+  `K_j(z)=e^(-z)S_j(z)-2ze^(-2z)integral_0^1e^(zu)u^jS_j(zu)du`, with
+  `[z^d]K_j(z)=K_(j+d,j)`.  The local audit matches this series coefficient by
+  coefficient against the previous exact finite kernel for several finite
+  `j,d` blocks.
+- The first-term action
+  `Phi_1=Phi_A(alpha)+alpha+beta-alpha log alpha-beta log beta`
+  `+(alpha+beta-delta)Log zeta-zeta` has stationary equations
+  `beta=zeta` and `zeta=alpha+beta-delta`, hence `alpha=delta` and
+  `gamma=-beta`.  The full complex angular action must include the external
+  root-filter phase `2alpha Log(omega)`.
+- The second Green action gives
+  `zeta=-gamma/(2-u)=-L/u`, `L=1+alpha+beta`, and
+  `u_*=2L/(L+gamma)`.  The transition `u_*=1` is exactly `gamma=L`.
+- Endpoint expansion produces the corrected Green factor
+  `P_G=1-2zeta/(L+zeta)=(L-zeta)/(L+zeta)`.  At the formal PSC point this is
+  `(1+delta)/(1+delta+2zeta)`.  The inverse factor would be wrong; exact
+  symbolic algebra and finite Green anchors verify the correction.  This
+  does not prove that the complex endpoint contour is legal or dominant.
+- The local audit also verifies the exact source coefficient identity, the
+  saddle derivatives and phase bookkeeping, the `g<j` Green factorial
+  majorant arithmetic, and the multinomial bound
+  `sum_{r+s+g=D}1/(r!s!g!)=3^D/D!`.
+- R86 therefore closes the exact resummation and corrects a sensitive
+  prefactor, but not `PSC_delta`: complex source endpoint continuation,
+  endpoint/interior separation, and conjugate angular phase remain OPEN.
+  The candidate `delta(1-log delta)+Phi_A(delta)` is still conditional.
+- Added `flat_shadow_green_resummed_r86/README.md` and
+  `flat_shadow_green_resummed_r86/audit_r86.py`. Exact audit passed:
+  `R86_EXACT_GREEN_RESUMMED_IDENTITY_PASSED`,
+  `R86_CORRECTED_SADDLE_AND_PHASE_BOOKKEEPING_PASSED`,
+  `R86_GREEN_ENDPOINT_FACTOR_CORRECTION_PASSED`,
+  `R86_MESOSCOPIC_FACTORIAL_MAJORANT_ARITHMETIC_PASSED`, and
+  `R86_GREEN_RESUMMED_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
+  passed.

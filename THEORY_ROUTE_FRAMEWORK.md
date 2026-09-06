@@ -6321,3 +6321,49 @@ infinite backward tower、backward OU divisibility 与 `FS_3` 继续 OPEN。
 endpoint finite anchors、source–mixed proportional prefactor anchors、entropy optimization
 和 rescaled weight arithmetic；不把网页端未逐行展开的 uniform saddle remainder 或
 `PSC_delta` 冒充已证明结论。
+
+## 83. R86：exact Green-resummed generating identity 与 endpoint correction（2026-09-07）
+
+R86 的第一步可以在 exact finite/formal 层级闭合。定义
+`R_m(z)=sum_(s>=1)R_(m+s,m)z^s`，
+`S_j(z)=sum_(r>=1)M_(j+r+1,j)z^(r+1)R_(j+r+1)(z)`，则
+`[z^h]S_j(z)=sum_(m=j+2)^(j+h-1)R_(j+h,m)M_(m,j)`，并且完整 mixed kernel 的
+gap generating series 满足
+`K_j(z)=e^(-z)S_j(z)-2ze^(-2z)integral_0^1e^(zu)u^jS_j(zu)du`。
+因此 `[z^d]K_j(z)=K_(j+d,j)`。本机用 exact rational finite blocks 对多个 `j,d`
+逐项核验了该 identity 与旧的 `exact_K` 完全一致；这一步把 signed `s/g`
+convolution 真正折叠为单一 entire/formal operator。
+
+第一 Green 项在 `r/j->alpha`、`s/j->beta`、`d/j->delta`、`z=jzeta` 下的 action 为
+`Phi_1=Phi_A(alpha)+alpha+beta-alpha log alpha-beta log beta`
+`+(alpha+beta-delta)Log zeta-zeta`。其 `beta,zeta` stationary equations 为
+`beta=zeta` 与 `zeta=alpha+beta-delta`，所以自动给出 `alpha=delta`、
+`gamma=delta-alpha-beta=-beta`。这里 `Phi_A` 必须包含 root-filter 外部相位
+`2alpha Log(omega)`；只取实部会破坏 signed phase bookkeeping。第二 Green 项的
+formal action 给出
+`zeta=-gamma/(2-u)=-L/u`、`u_*=2L/(L+gamma)`，其中 `L=1+alpha+beta`，
+且 `u_*=1` 正好是 `gamma=L` 的 Green transition。
+
+本轮钉死了一个前因子修正。若 `u=1` endpoint branch 合法，
+`integral_0^1e^(zu)u^(Lj)du ~ e^z/[j(zeta+L)]`，故两项 Green 合并因子是
+`P_G=1-2zeta/(L+zeta)=(L-zeta)/(L+zeta)`，而不是其倒数。形式 PSC 点
+`alpha=delta,beta=zeta,L=1+delta+zeta` 的前因子为
+`P_G^PSC=(1+delta)/(1+delta+2zeta)`。本机 exact audit 已验证这一化简；但不把
+它升级为“endpoint contour 一定占优”，因为 endpoint legality 仍是 PSC 缺口。
+
+因此 R86 目前交付的是：exact Green-resummed identity、corrected complex saddle
+equations、Green endpoint factor correction，以及 `g<j` 区间的 factorial-majorant
+算术（`|G|<=C_epsilon/g!` 的积分比较和
+`sum_{r+s+g=D}1/(r!s!g!)=3^D/D!`）。尚未证明 complex source endpoint continuation、
+Green endpoint/interior separation、angular conjugate phase control 或完整 `PSC_delta`；
+candidate rate `delta(1-log delta)+Phi_A(delta)` 仍为 conditional。下一步应围绕这些
+缺口推进，或把 factorial-majorant 补成 all-gap `n^(-j)` rescaled upper，而不是把
+形式 saddle 当成 actual lower。
+
+本机新增 `flat_shadow_green_resummed_r86/README.md` 与
+`flat_shadow_green_resummed_r86/audit_r86.py`。审计通过
+`R86_EXACT_GREEN_RESUMMED_IDENTITY_PASSED`、
+`R86_CORRECTED_SADDLE_AND_PHASE_BOOKKEEPING_PASSED`、
+`R86_GREEN_ENDPOINT_FACTOR_CORRECTION_PASSED`、
+`R86_MESOSCOPIC_FACTORIAL_MAJORANT_ARITHMETIC_PASSED` 与
+`R86_GREEN_RESUMMED_AUDIT_COMPLETED`；没有使用扫描、行列式、优化器或远程计算。
