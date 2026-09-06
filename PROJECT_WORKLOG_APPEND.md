@@ -1587,3 +1587,30 @@ computation was used.
   computation was used.
 - Before the next web round, require reading the updated framework, worklog,
   and R36–R46 local audit records.
+
+## R46 correction and web-result reconciliation (2026-09-06)
+
+- The right-side web task had in fact completed.  Its final answer confirms
+  `rank C_{3,{n^-2,n^-3}}^{res}=2`, hence `rank C_3^{res} >= 2`, while keeping
+  the full four-row matrix, weighted inverse, and no-go statement OPEN.
+- The first local R46 run had used an insufficient central-binomial/Gamma-ratio
+  helper.  Replaced it with exact formal y-series algebra for the full
+  half-integer Gamma ratio; the central test through order four is
+  `1-1/(8n)+1/(128n^2)+5/(1024n^3)-21/(32768n^4)`.
+- Re-running `flat_shadow_residue_r46/audit_r46.py` after the correction gives
+  `c_(3,2)=-3967045866009sqrt(21)/294859571200`,
+  `c_(3,3)=350225725881sqrt(21)/49660559360`,
+  `c_(5,2)=1178920184481sqrt(210)/294859571200`, and
+  `c_(5,3)=-184569690489sqrt(210)/49660559360`; the first-two-row minor is
+  `4530725172882348802803sqrt(10)/9893845431379558400 != 0`.
+- The local `c_(3,2)` and `c_(5,2)` agree with the webpage transcript.  The
+  webpage's displayed `n^-3` entries differ from the corrected local
+  coefficient extraction, so this is recorded as an explicit coefficient-level
+  reconciliation OPEN rather than silently merging the transcripts.  The rank
+  lower bound itself is unchanged and independently nonzero.
+- The next smallest web-side question is the
+  `N=6 Second-Residue Constraint-Coupling / Weighted-Inverse Lemma`: determine
+  whether `b_3 Delta_9` and `b_5 Delta_7` remain independently activatable on the
+  genuine full-exact same-factor manifold.  Do not promote response rank to a
+  weighted no-go; preserve the distinction between full-exact, formal Gateaux,
+  and positive flat-shadow levels.

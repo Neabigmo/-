@@ -13,9 +13,11 @@ from pathlib import Path
 from sympy import (
     Poly,
     Rational,
+    bernoulli,
     binomial,
     expand,
     factorial,
+    pi,
     series,
     simplify,
     sqrt,
@@ -39,7 +41,6 @@ from flat_shadow_residue_r43.audit_r43 import (  # noqa: E402
     block_generator_coefficient,
     c_exact_raw,
     c_generator_terms,
-    half_binomial_asym,
     hermite_product_coeff,
     rational_coefficient_at,
 )
@@ -167,6 +168,15 @@ def rf(alpha, n):
     return out
 
 
+def rising_factorial_signed(alpha, n):
+    if n >= 0:
+        return rf(alpha, n)
+    out = 1
+    for k in range(n, 0):
+        out /= alpha + k
+    return out
+
+
 @lru_cache(maxsize=None)
 def d_asym_cached(m, rel):
     return d_asym_full(m, rel)
@@ -186,8 +196,102 @@ def denominator_asym_full(alpha, beta, shift, rel=2):
         analytic = f0 * (-1) ** p * rf(alpha, p) / (
             factorial(p) * 8**p
         )
-        out += analytic * half_binomial_asym(beta - p, shift, rel - p)
+        out += analytic * half_binomial_asym_full(
+            beta - p, shift, rel - p
+        )
     return series(out, y, 0, rel + 1).removeO()
+
+
+@lru_cache(maxsize=None)
+def half_binomial_asym_full(gamma, shift, rel=2):
+    """Full half-integer Gamma-ratio expansion through ``rel`` orders.
+
+    The older R43 helper retained only the first three central-binomial
+    terms.  R46 needs the n^-3 and higher coefficients after quotienting the
+    old response span, so this routine performs the formal y-series algebra
+    directly.  This avoids repeated SymPy ``series`` calls while preserving
+    exact rational arithmetic.
+    """
+    if rel < 0:
+        return 0
+
+    def multiply(left, right):
+        out = [0] * (rel + 1)
+        for i, left_i in enumerate(left):
+            if left_i == 0:
+                continue
+            for j, right_j in enumerate(right[: rel + 1 - i]):
+                if right_j:
+                    out[i + j] += left_i * right_j
+        return out
+
+    def linear_power(a, exponent):
+        """Coefficients of (1 + a*y)^exponent through ``rel``."""
+        return [binomial(exponent, j) * a**j for j in range(rel + 1)]
+
+    q = int(gamma - Rational(1, 2))
+
+    # N^(-1/2), where N = y^(-1) - shift.
+    central = [
+        rf(Rational(1, 2), j) / factorial(j) * shift**j
+        for j in range(rel + 1)
+    ]
+
+    # The logarithm of Gamma(N+1/2)/(Gamma(N+1)*N^(-1/2)) has only the
+    # Bernoulli-polynomial corrections below.  Convert N^(-k) to y-series.
+    log_series = [0] * (rel + 1)
+    for k in range(1, rel + 1):
+        delta = bernoulli(k + 1, Rational(1, 2)) - bernoulli(
+            k + 1, Rational(1)
+        )
+        log_coeff = (-1) ** (k + 1) * delta / (k * (k + 1))
+        for j in range(rel - k + 1):
+            log_series[k + j] += (
+                log_coeff
+                * rf(k, j)
+                / factorial(j)
+                * shift**j
+            )
+
+    # Exponentiate a formal series using E' = L' E.
+    correction = [0] * (rel + 1)
+    correction[0] = 1
+    for n in range(1, rel + 1):
+        correction[n] = simplify(
+            sum(
+                k * log_series[k] * correction[n - k]
+                for k in range(1, n + 1)
+            )
+            / n
+        )
+
+    # Relative to the central coefficient, gamma=1/2+q contributes an exact
+    # finite Gamma ratio.  Each factor is y^(-1)*(1+(c-shift)y).
+    if q >= 0:
+        ratio = [
+            Rational(1, 1) / rising_factorial_signed(Rational(1, 2), q)
+        ] + [0] * rel
+        for k in range(q):
+            ratio = multiply(
+                ratio,
+                linear_power(Rational(1, 2) + k - shift, 1),
+            )
+    else:
+        ratio = [
+            Rational(1, 1) / rising_factorial_signed(Rational(1, 2), q)
+        ] + [0] * rel
+        for k in range(q, 0):
+            ratio = multiply(
+                ratio,
+                linear_power(Rational(1, 2) + k - shift, -1),
+            )
+
+    relative = multiply(multiply(central, correction), ratio)
+    return sum(
+        simplify(coefficient) * y ** (Rational(1, 2) - q + j)
+        for j, coefficient in enumerate(relative)
+        if coefficient
+    ) / sqrt(pi)
 
 
 @lru_cache(maxsize=None)
@@ -350,6 +454,18 @@ def quotient_row(row, basis, min_power=-3, max_power=3):
 
 
 def main():
+    central_expected = (
+        sqrt(y)
+        - Rational(1, 8) * y ** Rational(3, 2)
+        + Rational(1, 128) * y ** Rational(5, 2)
+        + Rational(5, 1024) * y ** Rational(7, 2)
+        - Rational(21, 32768) * y ** Rational(9, 2)
+    ) / sqrt(pi)
+    assert simplify(
+        half_binomial_asym_full(Rational(1, 2), 0, 4) - central_expected
+    ) == 0
+    print("R46_FULL_GAMMA_RATIO_ASYM PASSED")
+
     # The q=5 generator is checked against the independently defined full
     # mixed Hessian at the first nontrivial finite point.
     c53 = c5_exact_raw(3, 3)

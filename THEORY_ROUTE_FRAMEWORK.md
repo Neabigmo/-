@@ -3540,3 +3540,36 @@ coefficient extractor，positive flat shadow 仍不能偷用 full-exact positivi
 下一轮网页端开始前必须先读取本框架、工作日志及 R36–R46 的 README/audit。
 全局 `Constraint-Coupled Non-SOS Graded Value Transgression`、Gaussian
 rigidity 与 `P_3K` bridge 继续 OPEN。
+
+## 44. R46 correction：网页终稿已读，秩结论确认，n^-3 系数暂不强行合并
+
+随后读取了右侧网页端已经完成的 R46 终稿。网页端直接给出
+`rank C_{3,{n^-2,n^-3}}^{res}=2`，并因此确认完整 `C_3^{res}` 的 rank
+至少为 2；这与本机的非零 `2 x 2` minor 结论一致。网页终稿同时把下一刀
+收窄为 `N=6 Second-Residue Constraint-Coupling / Weighted-Inverse Lemma`：
+需要判断 genuine full-exact same-factor manifold 中 `b_3 Delta_9` 与
+`b_5 Delta_7` 是否能够独立激活，不能把 response rank >= 2 直接升级为
+weighted no-go。
+
+本机重新实现了完整的半整数 Gamma-ratio 形式展开，补足中心二项式的
+`n^-3` 及更高阶项，并通过中心项
+`1-1/(8n)+1/(128n^2)+5/(1024n^3)-21/(32768n^4)` 校验；随后重新运行
+`flat_shadow_residue_r46/audit_r46.py`。当前本机可复核输出为：
+
+`c_(3,2)=-3967045866009sqrt(21)/294859571200`，
+`c_(3,3)=350225725881sqrt(21)/49660559360`；
+
+`c_(5,2)=1178920184481sqrt(210)/294859571200`，
+`c_(5,3)=-184569690489sqrt(210)/49660559360`；其 minor 为
+`4530725172882348802803sqrt(10)/9893845431379558400 != 0`。
+
+其中本机的 `c_(3,2)`、`c_(5,2)` 与网页显示一致，网页显示的两个
+`n^-3` 系数则不同。故当前严谨状态是：`rank >= 2` 已确认，网页与本机
+的二阶 residue 列尚需逐项对账；不把两套 `n^-3` 数字混成一个“已核验”
+矩阵。完整四行 `C_3^{res}`、weighted inverse、positive complement debt、
+uniform tail 与 global transgression 仍 OPEN。
+
+下一轮网页端开始前必须先读取本框架、工作日志及 R36–R46 的 README/audit，
+并区分 genuine full-exact、formal Gateaux coefficient extractor 与 positive
+flat shadow 三种层次。本轮仍未使用 optimizer、SDP、大规模 sweep、relaxed
+measure-LP 或 remote computation。
