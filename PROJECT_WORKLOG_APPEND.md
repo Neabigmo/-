@@ -2289,3 +2289,32 @@ computation was used.
   py_compile, and `git diff --check` passed.  The next target is a rigorous
   generating-function or finite-`t` tail analysis, not another local-slope
   extrapolation.
+
+## R66 — Mehler decomposition and projection-tail reduction (2026-09-06)
+
+- Webpage R66 accepted the R65 reciprocal-scale correction. The correct local
+  zero scale remains `n/|Lambda_n|`; no asymptotic sign or `n^(-1/2)` law was
+  promoted.
+- The quadratic response was split as `K(z)=D(z)-P(z)`, with
+  `D(z)=sum D_n z^n/n!` and `P(z)=sum P_n z^n/n!`.
+- The exact D-part binomial transform is
+  `D(z)=1/(1-z) sum_m (v_(2m)/m!) (z/(1-z))^m`. The same-factor hierarchy
+  converts it to
+  `D(z)=-1/(3z) integral exp(-(1-z)u/z) B(sqrt(6u)) du`.
+- The finite-head tangent gives the associated-Hermite recurrence
+  `q_0=q_1=0`, `q_2=-H_1`, `q_3=-H_0`,
+  `q_(n+1)=xq_n-nq_(n-1)` for `n>=3`; hence
+  `P_n=||q_n||_gamma^2`.
+- The EGF `Q`, Gaussian two-variable kernel `R`, angular diagonal extraction,
+  and factorial Laplace transform were independently checked. In particular,
+  `H(y)=sum ||q_n||^2 y^n/(n!)^2` and
+  `P(z)=sum ||q_n||^2 z^n/n!`; the explicit Gaussian-shift polynomial has the
+  factor `st/4`.
+- The endpoint expansion gives `U(w)=w^3/6+O(w^5)` at zero and
+  `U(w)=-4/w^3+O(w^(-5))` at positive infinity. Under the corresponding
+  angular zero-neighborhood estimate, `B(w)=O(w^(-4))`, so D has no pole at
+  `z=1`; the only unresolved singularity is the associated-Hermite norm tail.
+- Added `flat_shadow_mehler_projection_r66/README.md` and
+  `flat_shadow_mehler_projection_r66/audit_r66.py`. The exact audit is the
+  authoritative local record; it does not use determinant, optimizer, SDP,
+  sweep, relaxed measure-LP, or remote computation.

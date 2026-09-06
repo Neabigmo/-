@@ -4903,3 +4903,66 @@ R65 的实际结论是：局部 quadratic response 已可精确组合化，但�
 Mehler generating function 或直接寻找 uniform finite-`t` tail deficit。
 
 新增本机审计为 `flat_shadow_quadratic_response_r65/audit_r65.py`。
+
+## 63. R66：Mehler 分解与 associated-Hermite 投影尾（2026-09-06）
+
+R66 将 K(z)=sum kappa_n z^n 分成两个性质不同的部分：
+K(z)=D(z)-P(z)，其中 D(z)=sum D_n z^n/n! 是 same-factor even
+quadratic term，P(z)=sum P_n z^n/n! 且 P_n=||q_n||_gamma^2 是
+lower-triangular projection norm。网页端公式已用本机 exact symbolic audit
+复核；这里统一使用普通分式记法，避免浏览器堆叠分式的阅读歧义。
+
+### 63.1 D-part 的闭合
+
+Mehler kernel 的对角线给出 D(z)=L_2[M_z(x,x)]，Hermite product formula
+给出精确二项式变换
+
+D(z)=1/(1-z) sum_(m>=0) (v_(2m)/m!) (z/(1-z))^m。
+
+令 B(w)=sum b_m w^(2m) 为 same-factor pair term。由
+A_(2m)=3 binom(2m,m)/6^m 与 full same-factor hierarchy，
+v_(2m)/m!=-(6^m m!/3)b_m，从而
+
+D(z)=-1/(3z) integral_0^infinity exp(-(1-z)u/z)
+       B(sqrt(6u)) du。
+
+本机 exact coefficient checks 对 D 到 n=10、same-factor conversion 到
+m=8 通过。利用 U(w)=w^3/6+O(w^5) 与
+U(w)=-4/w^3+O(w^(-5))，角向 zero-neighborhood 分解给出
+B(w)=O(w^(-4))（大 w）及 B(w)=O(w^6)（小 w），因此在相应
+analytic convergence domain 内 D(1-) 有限，且误差为
+O((1-z)log(1/(1-z)))。这排除了 D 部分在 z=1 的 pole；边界估计的
+analytic hypotheses 与形式系数计算需继续区分。
+
+### 63.2 projection part 的闭合
+
+有限 head 的一阶 monic correction 满足
+
+q_0=q_1=0、q_2=-H_1、q_3=-H_0、
+q_(n+1)=xq_n-nq_(n-1)（n>=3），
+
+并有 P_n=||q_n||_gamma^2。其 EGF Q(x,w) 由一个精确积分闭式给出；
+将 R(xi,eta)=integral Q(x,xi)Q(x,eta)d gamma(x) 作角向对角提取，得到
+
+H(y)=sum ||q_n||^2 y^n/(n!)^2，
+P(z)=integral_0^infinity e^(-s) H(zs) ds
+=sum ||q_n||^2 z^n/n!。
+
+显式二重积分中的 Gaussian-shift polynomial 已由本机 symbolic audit 核验，
+包括关键因子 st/4。因此 lower-triangular finite sum 已真正压缩为一个
+associated-Hermite norm tail，而不是被误当成原始 OU law 或形式谱测度。
+
+### 63.3 实际影响与唯一剩余目标
+
+在 P_n>=0 且相应级数收敛的条件下，K(z) 在 z=1 的主奇性只能来自
+P(z)；若 sum ||q_n||^2/n!<infinity，则 K(1-) 有限，若发散则
+K(z)=-P(z)+O(1)。因此当前 Gaussian-local quadratic response 的唯一
+未闭合项是
+
+p_n=||q_n||_gamma^2/n!
+
+的严格大阶行为，或等价的 P(z) 在 z=1 的 leading singularity。R65 的
+有限级符号检查不能替代这一 asymptotic proof；eventual sign、n^(-1/2)
+尺度、finite-t cutoff、backward divisibility 与 D.1 仍 OPEN。
+
+新增本机审计为 `flat_shadow_mehler_projection_r66/audit_r66.py`。
