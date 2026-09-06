@@ -2679,3 +2679,33 @@ computation was used.
   `flat_shadow_tangent_centered_r79/audit_r79.py`. Next target: R80 quadratic
   even centered operator lemma for `E=a^2V+Ehat`, or a direct uniform signed
   Green `O(a^2)` bound for the `a^2V` contribution.
+
+## R80 — Quadratic-even centered operator lemma (2026-09-07)
+
+- The webpage completed R80 but again reported that its bridge could not read
+  the local R79 files. The local record therefore treats the response as a
+  proposed continuation of the audited R64/R79 baseline, with status labels
+  for unconditional identities, conditional transport, and OPEN claims.
+- The Beta inverse for the angular operator was verified exactly. The displayed
+  `R^6,R^8,R^10,R^12` Gaussian multiplier polynomial was verified symbolically
+  after imposing the necessary relation `alpha=xi+eta`.
+- The endpoint integral in the webpage was independently tightened. On a
+  symmetry quarter, `I<=32J`; the exact integral after `x=as,y=bu` is
+  `J=sqrt(ab)/(4(a+b))<=1/8`, hence `I<=4`, not merely `I<=32`.
+  This gives `||g_2||_infinity<=4C_*` for the explicit quadratic multiplier.
+- The inverse-Hermite formula was checked for degrees 0 through 3, and the
+  fixed-point bootstrap arithmetic for `delta=10^(-4)` was checked exactly.
+  The corrected dominant safe-window base is
+  `t# >= c_mu n^(-5/2)[64e^2(mu+1)]^(-n)`; its ratio to the angular scale is
+  `O_mu(n^(-2)[3/(128e^2(mu+1))]^n)`.
+- Conditional structural conclusion: with `E=a^2V+Ehat`, the quadratic
+  response can be absorbed as `I+aA_n+a^2B_n^(2)` with uniformly bounded Gram
+  compression. This removes the old `Gamma a^2H_n^2` feedback and leaves the
+  improved `Gamma a^2H_n` sufficient condition.
+- The stronger target `||signed-Green D_E S[V]||=O(1)` uniformly in n remains
+  OPEN. Bounded multiplier/Gram compression alone controls the L2 operator
+  background, not the growing coefficient-Wiener re-summation. The next target
+  is the mixed tangent-residual composition
+  `o -> A^(-1)Q(U,o) -> signed-Green D_E S`.
+- Added `flat_shadow_quadratic_even_r80/README.md` and
+  `flat_shadow_quadratic_even_r80/audit_r80.py`.

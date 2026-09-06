@@ -5980,3 +5980,71 @@ signed Green 后得到
 `Ca^2`，才可能取得实质强于 R79 的窗口。
 
 新增本机审计为 `flat_shadow_tangent_centered_r79/audit_r79.py`。
+
+## 77. R80：quadratic-even centered operator lemma（2026-09-07）
+
+网页端 R80 已完成，但桥接在本轮仍返回账户连接错误，因此网页端没有
+实际读取 R79 本机记录；本机只把其完成回复与 R64/R79 基线逐项对照，且不
+把条件性层级误写成无条件正性结论。
+
+在 R64 的 formal same-factor equation 下，写
+`F_a=1+aU+a^2V+O(a^3)`。Beta 恒等式
+`1/binomial(2m,m)=(2m+1) integral_0^1[tau(1-tau)]^m dtau`
+给出系数级精确逆
+`A^(-1)W=(1/3) integral(1+z partial_z)W(sqrt(6q_tau)z)dtau`。
+对 `B=average sum_(i<j)U(r_i z)U(r_j z)`，令
+`xi=6q_tau q_s r_i^2`、`eta=6q_tau q_u r_j^2`、`alpha=xi+eta`，则
+`alpha<=3/8<1/2`，且反 Hermite 表示使用
+`psi_alpha=(1-2alpha)^(-1/2)exp[-alpha x^2/(1-2alpha)]`。
+
+本机符号审计确认了四项微分多项式、Beta 逆以及
+`R^m psi_alpha=delta^(-(m+1)/2)H_m(x/sqrt(delta))
+exp[-alpha x^2/delta]`（`R=x-partial_x`）。注意微分多项式必须在
+`alpha=xi+eta` 后比较；这是公式成立所用的隐含关系。
+
+网页端给出的参数端点估计也被本机独立加强。对
+`I(a,b)=integral q_s q_u a^(3/2)b^(3/2)/(a q_s+b q_u)^3 dsdu`，四象限
+对称性和 `s/2<=q_s<=s`（`s<=1/2`）把问题化为 `I<=32J`。令
+`x=as,y=bu`，精确积分
+`integral_[0,A]integral_[0,B]xy/(x+y)^3 dxdy=AB/[2(A+B)]`
+给出 `J=sqrt(ab)/[4(a+b)]<=1/8`，故实际有 `I<=4`，强于网页端
+使用的 `I<=32`。因此显式 Gaussian multiplier `g_2` 满足
+`||g_2||_infinity<=4C_*=:M_2`，条件是 R64 formal quadratic equation 与
+三因子 angular 几何成立。
+
+于是在 normalized Hermite basis `e_k=H_k/sqrt(k!)` 下，无条件的
+operator identity（相对于上述 formal V）为
+`Hcal_n(V)=P_nM_(g_2)P_n`，从而
+`sup_n||Hcal_n(V)||_op<=M_2`。写 `E=a^2V+Ehat` 后，Gram background
+变为
+`G_n=I+aA_n+a^2B_n^(2)+Hcal_n(Ehat+o)`，其中
+`B_n^(2)=P_nM_(g_2)P_n`。这证明二次偶响应不是 Gram-level boundary-layer
+blow-up 来源；`aU` 与 `a^2V` 都可在 operator norm 中作为背景处理。
+
+依赖 R77 factorial transport 在新背景上重做的 conditional lemma 为
+`k!|S_tilde_k|<=C_mu^(2)mu^k[(|a|+||o||)||Ehat||
++(|a|+||o||)^3]`，`mu>3`。与 R78 exact even closure 拼接，令
+`x=|a|H_n`、`G=Gamma_(n,mu)`、`η=Ga^2H_n`、`ζ=Ga^4H_n^4`，在
+`x,η,ζ<=10^(-4)` 下，本机审计确认网页端 bootstrap
+`O<=16|a|(Ga^2+ζ)`、`Ehat_*<=8(xO+x^4)` 的标量算术闭合。
+
+相应条件性窗口可写为
+`a#=min{a_bg,delta/H_n,sqrt(delta/(Gamma H_n)),
+(delta/(Gamma H_n^4))^(1/4)}`，其中
+`a_bg=min{1,1/(8M_1),1/sqrt(8M_2)}`。结合
+`H_n<=4n^3(4e)^n`、`Gamma<=K_mu^(2)n^(-1/2)[16e(mu+1)]^n`，大 n 的
+主导条件变为 `Gamma a^2 H_n<=delta`，即
+`t# >= c_mu n^(-5/2)[64e^2(mu+1)]^(-n)`。与
+`A_(2n)~3(2/3)^n/sqrt(pi n)` 的比值为
+`O_mu(n^(-2)[3/(128e^2(mu+1))]^n)`，仍趋于零；但相对 R79 已移除一
+个完整的 tangent H_n 因子。
+
+严格边界：`sup_n||Hcal_n(V)||<infinity` 不蕴含 signed-Green 后
+`Ehat->o` multiplier 的 n-uniform `O(a^2)` 界；当前仍有
+`Gamma a^2H_n` 反馈。下一目标是混合算子
+`o -> A^(-1)Q(U,o) -> signed-Green D_E S` 的 cancellation。D.1、
+positive infinite exact backward tower、backward OU divisibility、全局
+positivity 以及 endpoint `FS_3` 继续 OPEN。
+
+新增本机记录与审计：`flat_shadow_quadratic_even_r80/README.md`、
+`flat_shadow_quadratic_even_r80/audit_r80.py`。
