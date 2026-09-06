@@ -3742,3 +3742,74 @@ OPEN；R46 rank>=2 仍不是 no-go。下一轮网页端开始前必须先读取�
 与 R36–R48 README/audit，并优先证明或反驳 `Xi_K` 的递增发散，而不是重复
 固定低阶展开。本轮没有使用 optimizer、SDP、大规模 sweep、relaxed
 measure-LP 或 remote computation。
+
+## 47. R49：Christoffel 压缩揭示 lifted-null hierarchy 没有独立正性增益
+
+网页端在读取本机 R48 记录后选择 obstruction 路线，得到一组新的全阶
+Christoffel/Schur 恒等式。本机新增
+`flat_shadow_christoffel_rankescape_r49/audit_r49.py` 与 README，并以嵌套
+仓库真实 HEAD `23abb45b3671693c7fc408caaea7d777b2dcb1c9` 为记录基准。
+
+令 `q(x)=x P(x)=x(x^2-cx-v)`，其中 `c^2=2v`，并令 `Q_K` 是乘以 `q`
+在单项式系数上的矩阵。对任意有限 `K`，本机用一般矩符号核验
+
+`Gamma_K = Q_K^T H_(K+3) Q_K`。
+
+因此 lifted-null Gram 是 ordinary Hamburger Gram 的压缩：
+`H_(K+3)>=0` 自动推出 `Gamma_K>=0`，不能单独提供更强的正性压力。
+
+设 `pi_n,h_n` 是原矩泛函的 monic orthogonal polynomials/norms，三根为
+`zeta=(0,(c+sqrt(c^2+4v))/2,(c-sqrt(c^2+4v))/2)`，并明确采用
+
+`K_n(zeta_i,zeta_j)=sum_(j=0)^n pi_j(zeta_i)pi_j(zeta_j)/h_j`，
+`D_n=det K_n(zeta_i,zeta_j)`。
+
+在 `N=K+3` 且原 Hankel 前缀严格正定时，网页给出的 Schur complement
+恒等式为
+
+`det(Gamma_K)/det(Gamma_(K-1))
+ = h_N + p_N^T K_(N-1)^(-1) p_N`，
+
+其中 `p_N=(pi_N(zeta_i))`。本机用标准高斯和一个精确的归一化五点正
+测度逐项核验。进一步核验三根 Vandermonde square 为 `6v^3`，并得到
+
+`det(Gamma_K)=det(H_(K+3))*D_(K+3)/(6v^3)`，
+
+以及 transformed Jacobi quotient
+
+`beta_tilde_K=beta_(K+3)*D_(K+3)*D_(K+1)/D_(K+2)^2`。
+
+这些公式中的新增项是非负的 three-root interpolation leverage，而不是
+负反馈；`K=1` 的 `xi_*` 仍只是 ordinary-Hankel 必要下界，`K=2` 虽首次
+看到 `r_5/Delta_9`，也不会在原始 Hankel block 正定时自动产生新的
+`b_9` obstruction。
+
+本机输出：
+
+`R49_CHRISTOFFEL_COMPRESSION_IDENTITY PASSED`、
+`R49_THREE_ROOT_SCHUR_FORMULA GAUSSIAN PASSED`、
+`R49_HANKEL_KERNEL_DETERMINANT_FACTORIZATION GAUSSIAN PASSED`、
+`R49_TRANSFORMED_JACOBI_RECURSION GAUSSIAN PASSED`、
+`R49_THREE_ROOT_SCHUR_FORMULA FIVE_POINT PASSED`、
+`R49_HANKEL_KERNEL_DETERMINANT_FACTORIZATION FIVE_POINT PASSED`、
+`R49_TRANSFORMED_JACOBI_RECURSION FIVE_POINT PASSED`、
+`R49_LIFTED_GRAM_NO_INDEPENDENT_SIGN_PRESSURE RECORDED`、
+`R49_ROOT_LEVERAGE_DOMINATED_EXIT REMAINS OPEN`、
+`R49_AUDIT_COMPLETED`；`py_compile` 亦通过。
+
+证据边界保持严格：即使所有 `Gamma_K` 都正，也至多首先得到
+`q^2 L_0` 的正矩测度；要恢复 genuine positive `L_0`，仍需
+inverse-Christoffel/Geronimus 可积性、根处无原子及完整 same-factor exact
+相干性。故本轮不宣布 `Xi_K->infinity`、ordinary Jacobi exit、Gaussian
+rigidity 或 global transgression。
+
+当前最小 OPEN 改写为：对固定有限 `X`，能否对所有 R47-compatible exact
+prefix 证明某个有限阶的 ordinary Jacobi exit `S_(n-1)^2>B_n`，或者更强地
+证明 root-leverage-dominated exit
+`S_(n-1)^2-B_n>=Lambda_n+epsilon(X)`；其中
+`Lambda_n=p_n^T K_(n-1)^(-1)p_n/h_(n-1)`。R48 没有给出 moving-`n`
+的 leverage 上界、Jacobi drift 或 uniform exit，因此
+`Xi_K->infinity` 继续 OPEN。下一轮网页端开始前必须读取本框架、日志和
+R36–R49 的 README/audit，并只攻这个 quantitative tail lemma；不得把
+fixed-K prefix、`Gamma`-only positivity 或 formal Gateaux coefficient
+extractor 当作 genuine full-exact law。

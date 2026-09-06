@@ -1696,3 +1696,54 @@ computation was used.
   used.  Before the next web round, require reading the updated framework,
   worklog, and R36–R48 audit records and target `Xi_K` divergence or a rigorous
   obstruction to it.
+
+## R49 — Christoffel compression and the moving-rank obstruction (2026-09-06)
+
+- The webpage completed the R49 round after reading the local R48 framework,
+  worklog, and audits, and verified nested-repository HEAD
+  `23abb45b3671693c7fc408caaea7d777b2dcb1c9`.
+- The new cubic test multiplier is
+  `q(x)=x*(x^2-c*x-v)` with `c^2=2*v`.  If `Q_K` is the coefficient matrix
+  of multiplication by `q`, the exact finite compression is
+  `Gamma_K=Q_K^T H_(K+3) Q_K`.  Thus the lifted-null hierarchy is an ordinary
+  Hamburger Gram compression, not an independent stronger positivity cone.
+- With monic orthogonal polynomials `pi_n`, norms `h_n`, roots
+  `zeta=(0,(c+sqrt(c^2+4v))/2,(c-sqrt(c^2+4v))/2)`, and
+  `D_n=det[K_n(zeta_i,zeta_j)]` where `K_n` sums `pi_0,...,pi_n`, the exact
+  Schur identity is
+  `det(Gamma_K)/det(Gamma_(K-1))
+   =h_(K+3)+p_(K+3)^T K_(K+2)^(-1)p_(K+3)`.
+- The corresponding exact identities are
+  `det(Gamma_K)=det(H_(K+3))*D_(K+3)/(6*v^3)` and
+  `beta_tilde_K=beta_(K+3)*D_(K+3)*D_(K+1)/D_(K+2)^2`.
+  The extra term is a nonnegative three-root interpolation leverage.  The
+  webpage therefore correctly concludes that the lifted Gram block supplies
+  no automatic sign pressure beyond ordinary Hankel positivity.
+- Added `flat_shadow_christoffel_rankescape_r49/audit_r49.py` and README.  The
+  audit checks the compression symbolically for generic moments and checks the
+  Schur formula, determinant factorization, and transformed Jacobi recursion
+  exactly for both standard Gaussian moments and a normalized positive
+  five-point measure.  `py_compile` also passed.
+- Local markers passed:
+  `R49_CHRISTOFFEL_COMPRESSION_IDENTITY PASSED`,
+  `R49_THREE_ROOT_SCHUR_FORMULA GAUSSIAN PASSED`,
+  `R49_HANKEL_KERNEL_DETERMINANT_FACTORIZATION GAUSSIAN PASSED`,
+  `R49_TRANSFORMED_JACOBI_RECURSION GAUSSIAN PASSED`,
+  `R49_THREE_ROOT_SCHUR_FORMULA FIVE_POINT PASSED`,
+  `R49_HANKEL_KERNEL_DETERMINANT_FACTORIZATION FIVE_POINT PASSED`,
+  `R49_TRANSFORMED_JACOBI_RECURSION FIVE_POINT PASSED`,
+  `R49_LIFTED_GRAM_NO_INDEPENDENT_SIGN_PRESSURE RECORDED`,
+  `R49_ROOT_LEVERAGE_DOMINATED_EXIT REMAINS OPEN`, and
+  `R49_AUDIT_COMPLETED`.
+- Evidence boundary: all `Gamma_K>=0` would first produce a positive measure
+  for `q^2*L_0`; inverse-Christoffel integrability and positivity of `L_0`
+  remain separate.  No `Xi_K->infinity`, ordinary Jacobi exit, Gaussian
+  rigidity, or transgression no-go is claimed.  `K=1` remains the audited
+  scalar `xi_*` threshold, and `K=2` seeing `r_5/Delta_9` does not by itself
+  create a new obstruction while the ordinary Hankel block is positive.
+- The current smallest OPEN is the moving-rank quantitative tail: prove a
+  uniform ordinary Jacobi exit, or the stronger root-leverage-dominated exit
+  involving `Lambda_n`, for every compatible exact prefix at bounded
+  `x=a/v`.  Before the next webpage round, require reading the updated
+  framework, worklog, and R36–R49 README/audits.  No optimizer, SDP, sweep,
+  relaxed measure-LP, or remote computation was used.
