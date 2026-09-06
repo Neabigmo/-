@@ -4434,3 +4434,80 @@ R58 继续保留 D.1、infinite positive exact viability、Gaussian rigidity 与
 sweep、relaxed measure-LP 或 remote computation。下一轮网页端开始前必须读取
 本框架、工作日志及 R36–R58 相关 README/audit，但只需先处理本桥接边界与
 R53/R57 的相关公式，避免重复扫描整套历史。
+
+## 56. R59：canonical beta6 positivity contraction（2026-09-06）
+
+R59 对 R58 的桥接问题给出明确选择 (II)：R53 的 Favard/Hamburger
+`mu_*` 只是 canonical ordinary moment functional 在 Jacobi 变量 `x` 上的
+谱测度。原始 `g^(j)` 相对 OU 不变 Gaussian 的密度所对应的 ordinary law
+`lambda_j=g^(j)gamma` 确实满足 `lambda_j=P_q lambda_(j+1)`，但 escort 的
+非线性重加权/归一化不与 `P_q` 交换；更没有证据说明 canonical odd controls
+所选的 `m_k^*` 是原始 `lambda_0` 的全阶 moments。因此 `mu_*=P_(q^N)nu_N`
+不能由 Favard 正性自动推出。
+
+若要补足 bridge，至少需要：law identification 或显式 measure map、归一化
+保持、`x`-moment/monic-norm 保持，以及与 `P_lambda` 的 intertwining；在全矩
+层可写成对每个 `N` 存在正 probability `nu_N`、`lambda=q^N`，满足
+
+`m_k^*=sum_(r=0)^[k/2] binom(k,2r)(1-lambda)^r(2r-1)!!
+ lambda^((k-2r)/2) m_(k-2r)(nu_N)`。
+
+这个缺口一旦补上，degree-two conditional Hermite bound 给出
+`h_2(mu_*)>=2(1-q^N)^2`、`m_3(mu_*)^2<=2q^N(2-q^N)`，故 `N->infinity`
+时 `m_3(mu_*)=0`。它只关闭具有深层正 OU 可除性的 canonical skew 分支，
+不自动关闭 ordinary eventual-zero diagonal、Gaussian rigidity 或 `P_3 K`
+bridge。
+
+### 56.1 第六级 exact recurrence
+
+R59 沿 R57 一参数 canonical family
+
+`a=m_3`, `t=a^2`, `alpha_0=0`, `alpha_1=a`, `alpha_2=-a`,
+`alpha_n=0 (n>=3)`
+
+继续到 degree-12 row。记
+
+`p_4(t)=t^2-64t+16`,
+`p_5(t)=253t^3-1278t^2+816t+160`,
+
+`P_6(t)=532t^6-45655t^5+351508t^4-625952t^3
+         +110432t^2+83200t-7680`。
+
+本机以 monic recurrence 直接重算并校正浏览器纯文本分式方向，得到
+
+`m_11=a(140t^2-913t-30)/(2-t)`,
+`m_12=(2849t^3-19102t^2-15987t+20790)/(2-t)`,
+
+`h_5=3p_5/[2(2-t)(1+t)]`,
+`h_6=-6P_6/[(2-t)^2p_4]`。
+
+因此项目约定 `beta_n=h_n/h_(n-1)` 给出正确的新式
+
+`beta_6(t)=-4(1+t)P_6(t)/[(2-t)p_4(t)p_5(t)]`。
+
+网页端给出的 `delta_5,delta_6,beta_6` 文字分式再次发生倒置；本机审计
+以 `h_6/h_5` 和 `beta_n=(3/2)delta_n/delta_(n-1)` 校正。倒置不改变
+`beta_6` 的 sign，但不能把网页显示式当作已核验公式。
+
+在 `0<t<r`, `r=32-12sqrt(7)` 上，`2-t,p_4,p_5` 都正。并且 `P_6'` 在
+`[0,r]` 严格正（用 `r<13/50`、保留正的 `t^3,t^5`、并对负的 `t^2,t^4`
+作上界即可得到正的显式下界）。精确值
+
+`P_6(1/20)=-26559850671/8000000<0`,
+`P_6(1/10)=576531391/500000>0`
+
+给出唯一 `tau_6 in (1/20,1/10)` 满足 `P_6(tau_6)=0`，从而
+
+`beta_2,...,beta_6>0  <=> 0<t<tau_6`
+
+对这条 canonical finite-stage family 成立。此前五级窗口被严格压缩；但
+`beta_7,beta_8,...` 仍未定，故没有 genuine full-exact counterexample 或
+D.1 的无条件证明。
+
+本机新增 `flat_shadow_canonical_beta6_r59/audit_r59.py` 与 README，审计
+degree-12 same-factor relation、`h_6/h_5` 方向、`P_6` 单调性和精确变号
+区间；没有使用 determinant、optimizer、SDP、sweep、relaxed measure-LP 或
+remote computation。R59 的最小可报告结果是 canonical nonzero-skew
+positivity window 在第六级收缩为显式唯一根以前的区间。下一唯一 lemma 是
+`beta_7` positivity-interval contraction：在 `0<t<tau_6` 上找
+`tau_7<tau_6` 或证明 `beta_7` 全程正。

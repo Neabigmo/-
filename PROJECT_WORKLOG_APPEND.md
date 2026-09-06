@@ -2079,3 +2079,34 @@ computation was used.
   the `P_3 K` bridge.  Next R59 must either prove an explicit OU–Favard transfer
   lemma or state the exact missing hypothesis and perform one concrete
   corrected-orientation `beta_6/beta_7` recurrence.
+
+## R59 — canonical beta6 positivity contraction (2026-09-06)
+
+- R59 completed in the same Project conversation.  It selected the precise
+  negative bridge result: Favard/Hamburger positivity reconstructs an auxiliary
+  Jacobi spectral law and does not transfer the original density-level OU tower.
+  The minimum missing data are law identification or an explicit map,
+  normalization preservation, moment/monic-norm preservation, and OU
+  intertwining.  Conditional on `mu_*=P_{q^N}nu_N`, the exact degree-two bound
+  still yields `m_3^2<=2q^N(2-q^N)` and hence `m_3=0` as `N` tends to infinity.
+- The webpage supplied the degree-12 continuation of the canonical family:
+  `m_11=a(140t^2-913t-30)/(2-t)` and
+  `m_12=(2849t^3-19102t^2-15987t+20790)/(2-t)`, with
+  `P_6(t)=532t^6-45655t^5+351508t^4-625952t^3+
+  110432t^2+83200t-7680`.
+- Independent local recurrence recomputation corrected the browser's recurring
+  flattened-fraction inversion.  The verified norms are
+  `h_5=3p_5/[2(2-t)(1+t)]`, `h_6=-6P_6/[(2-t)^2p_4]`, and the project
+  convention `beta_6=h_6/h_5` gives
+  `beta_6=-4(1+t)P_6/[(2-t)p_4p_5]`.  The sign is `-sign(P_6)` on the prior
+  positive interval, so strict monotonicity of `P_6` and its exact signs at
+  `1/20` and `1/10` produce a unique `tau_6 in (1/20,1/10)` and shrink the
+  nonzero-skew prefix window to `0<t<tau_6`.
+- Added `flat_shadow_canonical_beta6_r59/README.md` and
+  `flat_shadow_canonical_beta6_r59/audit_r59.py`.  The audit passed the
+  degree-12 same-factor row, direct `h_6/h_5` orientation, `P_6` monotonicity,
+  and exact sign bracket.  No determinant, optimizer, SDP, sweep,
+  relaxed measure-LP, or remote computation was used.
+- R59 does not close D.1, infinite positive viability, eventual skew
+  annihilation, Gaussian rigidity, or the `P_3 K` bridge.  The next unique
+  lemma is `beta_7` positivity-interval contraction on `0<t<tau_6`.
