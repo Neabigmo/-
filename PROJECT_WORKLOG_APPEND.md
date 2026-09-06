@@ -3027,9 +3027,9 @@ computation was used.
   `|K_(j+D+1,j)|<=C*j^(-3)*(1+D)^3*3^D/D!*exp(C*D^2/j)`.
   The `(1+D)^3` factor is explicit and is not hidden in a polynomial `q`.
 - The exact rescaled coefficient-weight ratio is
-  `16^D*c_(j+D)/c_j`, bounded by
-  `4^D*exp(D*(D+1)/j)`; this is the correct weight input for the conditional
-  mesoscopic closure.
+  `16^D*c_(j+D)/c_j`
+  `=prod_(h=1)^D 8*(j+h)/(2*(j+h)+1)<4^D`; this is the corrected weight
+  input for the conditional mesoscopic closure.
 - Added `flat_shadow_source_majorant_r89/README.md` and `audit_r89.py`.
   Exact audit passed: `R89_EXACT_SOURCE_FACTORIZATION_PASSED`,
   `R89_POISSON_COEFFICIENT_IDENTITY_PASSED`,
@@ -3039,3 +3039,39 @@ computation was used.
   `R89_RESCALED_WEIGHT_RATIO_PASSED`, and
   `R89_SOURCE_MAJORANT_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
   passed.
+
+## R90 — Source-band theorem recovered after formula correction (2026-09-07)
+
+- The webpage supplied a strong candidate: `|Xi_(m,s)|<28` for
+  `m>=8`, `1<=s<=m/8`.  The local review found that its displayed normalized
+  factorial ratios were inverted: literal substitution at `a=0` gives
+  `A_(m,s,0)=(m+s-3)^2`, contradicting the required normalization `A_0=1`.
+  The central-binomial inequality was also written in the inverse orientation.
+- Re-derived from the R83 exact band formula, the corrected terms are
+  `A=(-1)^(a+1)(a+1)(a+2)/4*[a^2+5a-2(m+s)+6]` times
+  `(m+s-a-4)!/(m+s-3)!`, `(s-1)!/(s-a-1)!`,
+  `(m+2)!/(m+a+2)!`, `(m-2)!/(m-a-2)!`; `B` has the analogous
+  `(m+s)/(m+s+1)`, `(m+s-a-5)!/(m+s-3)!`, and `s-a-2` factors.
+  These corrected closed forms match every exact finite band term checked and
+  give `A_0=1`.
+- With `q=s/(m-2)<=1/6`, finite-product bounds prove
+  `|A_a|<=(a+3)^4 q^a/8` and
+  `|B_a|<=(a+4)^4 q^(a+1)/8`.  The exact infinite geometric-polynomial sum is
+  `681843/25000<28`, so the source theorem is now **PROVED** on this band,
+  rather than merely conditional on `exp(C*s^2/m)`.
+- Combining the exact R89 factorization with `D_(m,s)<=9/m^2` and the correct
+  upper bound `(2m)!/((m+2)!(m-2)!)<=4^m/sqrt(m)` gives
+  `|R_(m+s,m)|<=1008*4^m*m^(-5/2)/(s-1)!`.
+- Corrected the weight bookkeeping as well:
+  `tilde omega_(n,j+D)/tilde omega_(n,j)=16^D c_(j+D)/c_j`
+  `=prod_(h=1)^D 8(j+h)/(2(j+h)+1)<4^D`; for output `K_(j+D+1,j)` use
+  `D+1`.
+- Added `flat_shadow_source_majorant_r90/README.md` and `audit_r90.js`.
+  Exact audit output:
+  `R90_CORRECTED_A_B_FORMS_PASSED`,
+  `R90_LITERAL_WEB_FORM_REJECTED`,
+  `R90_UNIFORM_TERM_AND_XI_ANCHORS_PASSED maxXi=1/1`,
+  `R90_EXACT_GEOMETRIC_SUM_PASSED 681843/25000`,
+  `R90_EXPLICIT_SOURCE_BOUND_ANCHORS_PASSED`,
+  `R90_WEIGHT_PRODUCT_AND_BOUND_PASSED`, and
+  `R90_CORRECTED_SOURCE_MAJORANT_AUDIT_COMPLETED`.

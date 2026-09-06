@@ -6442,7 +6442,56 @@ R89 对 R88 的 uniform-amplitude 假设做了正确的压力测试。定义
 
 rescaled coefficient weight 的 exact ratio 为
 `tilde omega_(n,j+D)/tilde omega_(n,j)=16^D c_(j+D)/c_j`
-`=16^D prod_(h=1)^D(j+h)^2 / prod_(h=1)^(2D)(2j+h)`，从而直接有
-`<=4^D exp(D(D+1)/j)`。因此一旦 conditional kernel upper 真实闭合，weighted target 只增加 `12^D` 与同阶 `exp(CD^2/j)`，factorial 从 `D~C log j` 起可吞掉显式多项式因子。
+`=16^D prod_(h=1)^D(j+h)^2 / prod_(h=1)^(2D)(2j+1+h)`，成对化简为
+`prod_(h=1)^D 8(j+h)/(2(j+h)+1)<4^D`。因此一旦 conditional kernel upper 真实闭合，weighted target 只增加 `12^D`，factorial 从 `D~C log j` 起可吞掉显式多项式因子。
 
 本机新增 `flat_shadow_source_majorant_r89/README.md` 与 `audit_r89.py`。审计通过 exact source factorization、Poisson coefficient bookkeeping、corrected zeta substitution、leading-model no-go、source majorant arithmetic 与 rescaled weight ratio；R89 不宣称 actual source majorant、PSC 或 proportional lower。
+
+## 87. R90：corrected exact source-band majorant（2026-09-07）
+
+网页端 R90 找到了一个真正可能关闭 source leg 的局部定理：对 `m>=8`、
+`1<=s<=m/8`，有 `|Xi_(m,s)|<28`。本机复核发现网页展示的归一化 factorial
+比值方向写反：按网页字面代入 `a=0` 会得到 `A_(m,s,0)=(m+s-3)^2`，
+而不是其同时要求的 `A_(m,s,0)=1`；source 中 central-binomial 上界的分子分母
+也必须按 exact R factorization 取倒数。故本轮没有盲目接受网页式子，而是从 R83
+`p_band_formula` 重新化简并审计修正版。
+
+令 `ell=m+s`，则正确的两组归一化项为
+
+`A_(m,s,a)=(-1)^(a+1)(a+1)(a+2)/4`
+`*[a^2+5a-2ell+6]*(ell-a-4)!/(ell-3)!`
+`*(s-1)!/(s-a-1)!*(m+2)!/(m+a+2)!*(m-2)!/(m-a-2)!`，
+
+`B_(m,s,a)=(-1)^(a+1)(a+1)(a+2)/4`
+`*[a^2+5a-2ell+8]*ell/(ell+1)*(ell-a-5)!/(ell-3)!`
+`*(s-1)!/(s-a-2)!*(m+2)!/(m+a+2)!*(m-2)!/(m-a-2)!`。
+
+这些式子与 exact R83 finite band 逐项一致，且 `A_(m,s,0)=1`。在
+`q=s/(m-2)<=1/6` 下，有限乘积给出
+`|A_(m,s,a)|<=(a+3)^4 q^a/8`、
+`|B_(m,s,a)|<=(a+4)^4 q^(a+1)/8`；关键是
+`(m+2)!/(m+a+2)!*(m-2)!/(m-a-2)!<=1`，而不是网页中倒置后声称的
+contraction。精确几何和为 `681843/25000<28`，因此 source theorem
+`|Xi_(m,s)|<28` 在该 mesoscopic source band 上成立。
+
+再用 exact R89 factorization、`D_(m,s)<=9/m^2` 及
+`(2m)!/((m+2)!(m-2)!)<=4^m/sqrt(m)`，得到实际显式 bound
+
+`|R_(m+s,m)|<=1008*4^m*m^(-5/2)/(s-1)!`
+`=1008*4^m*m^(-5/2)*s/s!`。
+
+权重方面，R89 文本中的 denominator index 也需修正。对
+`c_j=(j!)^2/(2j+1)!`，有全局精确式
+`tilde omega_(n,j+D)/tilde omega_(n,j)=16^D c_(j+D)/c_j`
+`=prod_(h=1)^D 8(j+h)/(2(j+h)+1)<4^D`；若卷积输出是
+`K_(j+D+1,j)`，应用时把 gap 换成 `D+1`。
+
+本机新增 `flat_shadow_source_majorant_r90/README.md` 与 `audit_r90.js`。
+BigInt 有理审计通过：`R90_CORRECTED_A_B_FORMS_PASSED`、
+`R90_LITERAL_WEB_FORM_REJECTED`、`R90_UNIFORM_TERM_AND_XI_ANCHORS_PASSED`、
+`R90_EXACT_GEOMETRIC_SUM_PASSED`、`R90_EXPLICIT_SOURCE_BOUND_ANCHORS_PASSED`、
+`R90_WEIGHT_PRODUCT_AND_BOUND_PASSED` 与
+`R90_CORRECTED_SOURCE_MAJORANT_AUDIT_COMPLETED`。因此状态实质更新为：
+source leg 在上述小比例 band 上 **PROVED**；angular、uniform Green、full
+kernel 拼接、PSC moving saddle、比例下界/等式及更高层 positive tower/OU/`FS_3`
+仍 OPEN 或 CONDITIONAL。

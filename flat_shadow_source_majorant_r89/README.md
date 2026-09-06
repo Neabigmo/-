@@ -127,12 +127,12 @@ ratio is
 
 `tilde omega_(n,j+D)/tilde omega_(n,j)
  =16^D*c_(j+D)/c_j`
-` =16^D*prod_(h=1)^D(j+h)^2 / prod_(h=1)^(2D)(2j+h)`.
+` =16^D*prod_(h=1)^D(j+h)^2 / prod_(h=1)^(2D)(2j+1+h)`.
 
-Hence
+Hence, by pairing the denominator factors,
 
 `tilde omega_(n,j+D)/tilde omega_(n,j)
- <=4^D*exp(D*(D+1)/j)`.
+ =prod_(h=1)^D 8*(j+h)/(2*(j+h)+1)<4^D`.
 
 The weighted conditional kernel target is therefore
 

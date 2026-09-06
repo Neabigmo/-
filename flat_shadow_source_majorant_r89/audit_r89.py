@@ -148,11 +148,11 @@ def check_source_majorant_arithmetic() -> None:
 def check_rescaled_weight_ratio() -> None:
     j, D = sp.symbols("j D", positive=True, integer=True)
     c_ratio = sp.prod((j + h) ** 2 for h in range(1, 5)) / sp.prod(
-        2 * j + h for h in range(1, 9)
+        2 * j + 1 + h for h in range(1, 9)
     )
     exact = 16**4 * c_ratio
     expected = 16**4 * sp.prod((j + h) ** 2 for h in range(1, 5)) / sp.prod(
-        2 * j + h for h in range(1, 9)
+        2 * j + 1 + h for h in range(1, 9)
     )
     assert sp.simplify(exact - expected) == 0
 
@@ -163,7 +163,7 @@ def check_rescaled_weight_ratio() -> None:
             for h in range(1, D_value + 1):
                 ratio *= sp.Rational((j_value + h) ** 2, 1)
             for h in range(1, 2 * D_value + 1):
-                ratio /= 2 * j_value + h
+                ratio /= 2 * j_value + 1 + h
             assert ratio > 0
             bound = sp.Rational(4**D_value) * sp.exp(
                 sp.Rational(D_value * (D_value + 1), j_value)
