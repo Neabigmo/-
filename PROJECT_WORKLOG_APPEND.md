@@ -1992,3 +1992,32 @@ computation was used.
   `R56 — Skew-Forced Factorial Escape Lemma`, including a search for the
   weakest additional tail-transfer hypothesis if the unconditional statement
   fails.
+
+## R56 — factorial-escape gap recorded, not closed (2026-09-06)
+
+- R56 was sent in the same Project conversation and returned a substantive
+  response, but it did not prove or refute the skew-forced factorial escape
+  lemma.  It correctly located the missing bridge between all-degree exact
+  recurrence and the R12 upper norm envelope; no lower-growth or sign
+  mechanism was obtained.
+- The webpage response repeated an invalid “or equivalently” after the
+  expression `limsup (1/n) log(n!/h_n)=+infinity`.  This was corrected locally:
+  `h_n<=C*A^n*n!` is equivalent to
+  `limsup (h_n/n!)^(1/n)<infinity`; envelope failure is equivalent to
+  `limsup log(h_n/n!)/n=+infinity`, or reversed-log `liminf=-infinity`.
+  The explicit sequence `h_n=n!/2^(n^2)` proves that the reversed-log
+  `limsup=+infinity` can coexist with a valid envelope.
+- The exact canonical constants remain
+  `delta_n=c_n*h_n`, `c_n=3*(2/3)^n`, and
+  `beta_n=(3/2)*delta_n/delta_(n-1)` under the positive-chain premise.  This
+  gives conditional deficit positivity, not a proof of future positivity.
+- Added `flat_shadow_skew_forced_escape_r56/audit_r56.py` and README.  The
+  local audit passed both growth-logic checks and the canonical constants.  It
+  records `R56_SKEW_FORCED_FACTORIAL_ESCAPE REMAINS OPEN`,
+  `R56_EVENTUAL_DIAGONAL_SKEW_ANNIHILATION REMAINS OPEN`, and keeps D.1,
+  Gaussian rigidity, and the P3K bridge distinct.
+- No determinant, optimizer, SDP, sweep, relaxed measure-LP, or remote
+  computation was used.  Before R57, read the updated framework, worklog, and
+  R36–R56 README/audits.  The next target is one concrete all-degree invariant,
+  a genuine full-exact positive counterexample, or a weakest tail-transfer
+  condition supplied by backward-OU positivity.

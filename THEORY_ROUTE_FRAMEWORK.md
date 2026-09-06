@@ -4269,3 +4269,51 @@ OPEN，三者不能互相冒充已证。
 逻辑与条件 deficit sign，并显式保留 R56、D.1、Gaussian rigidity、`P_3 K`
 bridge 的 OPEN 边界。下一轮网页端必须先读取本框架、工作日志及 R36–R55
 相关 README/audit。
+
+## 53. R56：factorial-escape gap 的严格边界（2026-09-06）
+
+R56 要求证明或反驳 `Skew-Forced Factorial Escape Lemma`：full-exact、
+positive Jacobi/Favard、`alpha_n=0 eventually` 且 `m_3!=0` 是否必然导致
+有限 `beta_n<=0` 或违反 `h_n<=C A^n n!`。网页端没有完成证明或反例，
+但把真正缺口定位为：exact recurrence 目前只有 moving deficit/norm 的
+上界/递推信息，而 R12 只提供 `h_n` 的 upper envelope；尚未得到 lower
+growth 或 sign mechanism。
+
+### 53.1 必须保留的 root-test 修正
+
+`limsup (1/n)log(n!/h_n)=+infinity` 不能与 envelope failure 等价。反例
+`h_n=n!/2^(n^2)` 同时满足 `h_n<=n!` 与该 reversed-log limsup。正确的
+等价式是
+
+`exists finite C,A: h_n<=C A^n n!`
+`<=> limsup (h_n/n!)^(1/n)<infinity`，
+
+因此 envelope failure 等价于
+
+`limsup (1/n)log(h_n/n!)=+infinity`
+
+或 `liminf (1/n)log(n!/h_n)=-infinity`。这是逻辑修正，不是从
+full-exact recurrence 得到的 escape 结论。
+
+### 53.2 可保留的 exact identity 与证据边界
+
+canonical centered tail 在此前级 norm 正时仍满足
+
+`delta_n=c_n h_n`, `c_n=3(2/3)^n`,
+`beta_n=(3/2)delta_n/delta_(n-1)`。
+
+所以已知正链上 `delta_n>0`，而 `beta_n<=0` 是 finite canonical exit；
+但这是 candidate chain 的条件传播，不能反过来证明下一步正性。R56 没有
+产生 genuine full-exact positive non-Gaussian counterexample，也没有证明
+eventual-diagonal skew annihilation。
+
+若未来证明该桥，则可推出 R12 类上的 `alpha_n=0 eventually=>m_3=0`，
+从而结合 R47 bounded-head 下界关闭 D.1；仍不能自动推出 Gaussian rigidity
+或 `P_3 K` bridge。三者继续区分。
+
+本机新增 `flat_shadow_skew_forced_escape_r56/audit_r56.py` 与 README，审计
+通过两组 factorial-growth counterexample 与 canonical deficit constants，
+并显式保留 R56、D.1、Gaussian rigidity、`P_3 K` 的 OPEN 边界。下一轮须
+先读取框架、工作日志与 R36–R56 README/audit，直接寻找 all-degree invariant、
+真正 full-exact counterexample，或可由 backward-OU positivity 提供的最弱
+tail-transfer 条件。
