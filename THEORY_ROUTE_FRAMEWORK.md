@@ -6867,3 +6867,90 @@ gap summability。
 `R95_SIGN_GREEN_IDENTITY_ANCHORS_PASSED`、
 `R95_SIGN_LOWER_CONSTRUCTION_ANCHOR_PASSED` 与
 `R95_HERMITE_GAP_WIENER_AUDIT_COMPLETED`。
+
+## 9. R96：真实背景的 gap-Wiener 分叉与背景中心化（2026-09-07）
+
+R96 首次把 R95 的 gap-Wiener 问题直接作用于项目自身的 `g1,g2`，并保留
+Gaussian-mixture 参数端点。结论不是“两个背景都进入小球”：canonical tangent
+`g1` 的统一 gap-Wiener 可和性严格失败，而 quadratic `g2` 暂只得到端点安全的
+逐 gap 上界。
+
+### 9.1 `g1`：精确 gap 公式与 `Theta(log n)`
+
+由 R71 的
+`g1=integral_0^1(qR^3-q^2R^5/2)psi_q ds`、`T(R^m psi_q)=z^m exp(-qz^2)`
+及 R95 双变量恒等式，若 `K_(d,n)^(m)(q)=Delta_d Hcal_n(R^m psi_q)`，则
+
+`Delta_d Hcal_n(g1)=integral_0^1[q K_(d,n)^(3)(q)-q^2 K_(d,n)^(5)(q)/2]ds`。
+
+其单 entry 的有限系数抽取为
+
+`c_(j,d)^(m)(q)=sqrt((j+d)!j!)
+ [z^(j+d)w^j] exp(zw)(z+w)^m exp(-q(z+w)^2)`。
+
+R82/R83 的 canonical Jacobi tangent 给出同一实际矩阵的 closed form：gap 1
+除有限 head `A_(2,1)=1/sqrt(2)` 外完全消失；gap 3 从 finite head 后为
+`A_(k+3,k)=-2sqrt(k!/(k+3)!)`；对 `a>=1`，gap `2a+3` 为
+
+`A_(k+2a+3,k)=(-1)^a (a+1)(a+2)[a(a+1)-2k](k+a-1)!
+ sqrt(k!/(k+2a+3)!)/(2k!)`。
+
+令 `R_(k,a)^2=prod_(r=1)^(a-1)(k+r)/prod_(r=a)^(2a+3)(k+r)`。
+在 `k=a(a+1)` 处得到 `||Delta_(2a+3)A_n|| >= exp(-7/2)/(2(a+1))`
+（当 `a^2+3a+3<=n`）。配对分子分母则给 `||Delta_(2a+3)A_n||<=864/(a+1)`，
+有限 head 单独吸收。因此本机拟核验的结论是
+
+`||Hcal_n(g1)||_(W_n)=Theta(log(n+2))`,
+`sup_n||Hcal_n(g1)||_(W_n)=infinity`。
+
+这是实际 R71 tangent 的障碍，不是 R95 的 `sgn` 替代反例。
+
+### 9.2 `g2`：端点安全但尚未求和
+
+R80 的四项 representer 令 `A=r_i^2,B=r_j^2`、
+`xi=6q_tau q_sA`、`eta=6q_tau q_uB`、`alpha=xi+eta`，并有 signed weight
+`w_(ij)=(6q_tau)^3q_sq_ur_i^3r_j^3`。对 gap `d` 的 exact formula 是把同一
+`c_(j,d)^(m)(alpha)` 代入 `R^6,R^8,R^10,R^12` 四项组合；奇数 gap 恒为零。
+
+不能假设 `alpha` 有固定正下界。整体组合满足 `||g_(alpha,xi,eta)||_infty
+<=C_R80 alpha^(-3)`，且
+
+`|w_(ij)|alpha^(-3)=q_sq_uA^(3/2)B^(3/2)/(Aq_s+Bq_u)^3`。
+
+因此 `q_tau^3` 精确抵消，R80 的 endpoint integral 给出
+`sup_(n,d)||Delta_d Hcal_n(g2)||_op<=M2:=4C_R80`。这只推出
+`||Hcal_n(g2)||_(W_n)<=M2(n+1)`；`g2` 的绝对 gap sum 仍 OPEN。
+
+### 9.3 路线修正：background 必须先吸收
+
+因为 `A_n` 只占 odd gaps、`B_n^(2)` 只占 even gaps，
+
+`||aA_n+a^2B_n^(2)||_(W_n)=|a|||A_n||_(W_n)+a^2||B_n^(2)||_(W_n)`。
+
+所以固定 `a!=0` 时，`g1` 的 `log n` 增长阻止 uncentered background 进入 R95 的
+`1/64` 小球；但 R80 的 operator bound 仍允许
+`|a|M1+a^2M2+sup_n||Hcal_n(Ehat(a)+o(a))||_op<1` 作为 conditional
+all-degree positivity criterion。
+
+正确目标是先取 `C_(0,n)G_(0,n)C_(0,n)^*=D_(0,n)`，再对
+`E_n=C_(0,n)Hcal_n(h)C_(0,n)^*` 证明 uniform structured bound，并同时保持
+`0<c_-<=D_(0,n)<=c_+`。这条 background-conjugation lemma、`g2` gap sum、hybrid
+invariance、global positivity、positive infinite tower、backward OU divisibility
+和 `FS_3` 仍为 OPEN。
+
+### 9.4 R92/R93 与 growing-radius norm 的精确不匹配
+
+若 `o(z)=sum_j c_jZ_jz^(2j+1)`、`c_j=(j!)^2/(2j+1)!`、`w_j=16^jc_j`，则
+
+`||o||_(rho_n)=4sqrt(n)sum_j n^jw_j|Z_j|`。
+
+故 `ell^1(w)` 不会均匀嵌入 R95 的 growing-radius 球。对单位 `Z_j` 模式令
+`gamma_(n,j)=||Hcal_n(o^(j))||_(W_n)`，并设 `v_(n,j)=w_j+gamma_(n,j)`；一个明确
+的 sufficient hybrid column criterion 是
+
+`sup_(n,j) v_(n,j)^(-1)sum_k v_(n,k)|K_(k,j)^(n)|<infinity`。
+
+R92/R93 已覆盖只含 `w` 的部分，含 `gamma` 的 Gram-transfer 部分尚未证明。
+
+R96 本机记录目录为 `flat_shadow_background_gap_r96/`；审计应只使用固定精确
+恒等式和代表性 channels，不以数值 sweep 代替上述 factorial-ratio 证明。

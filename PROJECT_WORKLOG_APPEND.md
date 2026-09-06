@@ -3254,3 +3254,33 @@ computation was used.
   `R95_SIGN_GREEN_IDENTITY_ANCHORS_PASSED`,
   `R95_SIGN_LOWER_CONSTRUCTION_ANCHOR_PASSED`, and
   `R95_HERMITE_GAP_WIENER_AUDIT_COMPLETED`.
+
+## R96 — actual background gap obstruction and endpoint-safe quadratic bound (2026-09-07)
+
+- R96 先读取 R95 本机记录并回查 R71/R79/R80/R82/R83。由 R71 的 Gaussian-mixture
+  tangent representation 和 R95 双变量恒等式，得到 `g1` 每条 gap 的 exact
+  coefficient-extraction formula；没有把 entrywise decay 偷换成 operator-norm
+  gap summability。
+- R82/R83 的 canonical Jacobi tangent closed form 与直接 Hermite multiplier
+  entries 对齐：gap one 除 `A_(2,1)=1/sqrt(2)` 外消失；gap `2a+3` 的 entries
+  是显式 factorial ratio。取 `k=a(a+1)` 得每条 gap 的 `c/(a+1)` lower，
+  配对 factorials 得 `C/(a+1)` upper。因此实际项目 tangent 满足
+  `||Hcal_n(g1)||_(W_n)=Theta(log(n+2))`，严格否定
+  `sup_n||Hcal_n(g1)||_(W_n)<infinity`。这是实际 `g1` 障碍，不是 `sgn` 的替代反例。
+- 对 R80 quadratic `g2`，保留 `alpha=6q_tau(Aq_s+Bq_u)` 的端点几何和四项
+  `R^6/R^8/R^10/R^12` 组合，得到 exact gap operator formula。整体 endpoint
+  cancellation 为 `|w|alpha^(-3)=q_sq_uA^(3/2)B^(3/2)/(Aq_s+Bq_u)^3`，
+  所有 `q_tau^3` 消失，遂有 `sup_(n,d)||Delta_d Hcal_n(g2)||<=M2=4C_R80`。
+  但 `sum_d` 尚未控制；`g2` 真实 gap-Wiener growth 仍 OPEN。
+- 因 `A_n` 只占 odd gaps、`B_n^(2)` 只占 even gaps，固定非零 `a` 的 uncentered
+  background 必然携带 `|a|log n` 的 `W_n` 增长。R95 小球必须改为
+  background-centered：先分解 `G_(0,n)=I+aA_n+a^2B_n^(2)`，再研究
+  `C_(0,n)H_resC_(0,n)^*` 的 structured bound。
+- exact hybrid mismatch 也落地为
+  `||o||_(rho_n)=4sqrt(n)sum_j n^jw_j|Z_j|`；`ell^1(w)` 与 growing-radius
+  ball 不存在 uniform embedding。候选 hybrid weight
+  `v_(n,j)=w_j+gamma_(n,j)` 及其 weighted-column criterion 已写明；含
+  `gamma` 的 feedback 仍 OPEN。
+- Added `flat_shadow_background_gap_r96/README.md` and `audit_r96.py`.  The
+  exact local audit target is `R96_BACKGROUND_GAP_AUDIT_COMPLETED`; no determinant,
+  optimizer, SDP, parameter sweep, or remote computation is used。
