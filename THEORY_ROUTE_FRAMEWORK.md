@@ -4848,3 +4848,58 @@ response；norm/beta 的 Gaussian-local slopes 由一个显式 finite quadratic 
 deficit，并且仍需另行处理原始 OU law 与 Favard 辅助谱测度的 bridge。
 
 新增本机审计为 `flat_shadow_structural_response_r64/audit_r64.py`。
+
+## 62. R65：quadratic-response 有限和与 cutoff 尺度校正（2026-09-06）
+
+R65 将 R64 的 root-of-unity convolution 化为可直接审计的二项式有限和。对
+`r+s=2n`、`r,s` 为奇数，令
+
+`E_(r,s)=sum_p [0<=n-p<=s, 2p-r=0 mod 3] binom(r,p)binom(s,n-p)`。
+
+则
+
+`C_(r,s)=3(3E_(r,s)-binom(2n,n))/(2*6^n)`。
+
+等价的 root-of-unity filter 与界
+`-1/2<=C_(r,s)/A_(2n)<=1` 也随之成立。代入 R64 的 odd tangent，得到
+
+`v_(2n)/(2n)! = -(1/(2 binom(2n,n)))
+  sum_(r+s=2n, r,s odd>=3) (u_r/r!)(u_s/s!)
+  (3E_(r,s)-binom(2n,n))`。
+
+再用 Hermite product formula，`K_n` 与
+`Lambda_n=beta_n'(0)=(K_n-nK_(n-1))/(n-1)!` 完全化为有限有理和。本机对
+R63/R64 可用的 targeted stages exact 核验了 `Lambda_10=-1481/21`、
+`Lambda_15=15335/858`、`Lambda_20=-42799/19019`、
+`Lambda_30=1063856351/38818159380`，并核验 `Lambda_100>0`、
+`Lambda_200>0`。因此不能把“偶数级局部斜率一直为负”当作结构定理；
+eventual sign 与渐近尺度仍 OPEN。
+
+### 62.1 local-slope cutoff lemma 的正确版本
+
+网页端给出的局部 cutoff 引理在零点尺度上把分子分母倒置了。正确设定为
+
+`beta_n(t)=n+Lambda_n t+R_n(t)`, `Lambda_n<0`,
+`|R_n(t)|<=eta_n|Lambda_n|t`，其中 `0<=eta_n<1` 且 `0<=t<=rho_n`。
+
+于是
+
+`n-(1+eta_n)|Lambda_n|t <= beta_n(t)
+ <= n-(1-eta_n)|Lambda_n|t`。
+
+若
+`T_n=n/((1-eta_n)|Lambda_n|)<=rho_n`，则连续性给出零点；第一正零点满足
+
+`n/((1+eta_n)|Lambda_n|)<=tau_n
+ <=n/((1-eta_n)|Lambda_n|)`。
+
+所以要由局部斜率推出 `tau_n->0`，必要的尺度条件是
+`|Lambda_n|/n->infinity`，还要有覆盖 `T_n` 的 uniform remainder radius；
+若想控制整个 prior window，还需 no-reentry/导数符号。网页端原先写的
+`|Lambda_n|/n` cutoff scale 已被本机审计排除。
+
+R65 的实际结论是：局部 quadratic response 已可精确组合化，但它目前不能
+单独解释 R59–R63 的 finite-`t` cutoff chain。下一步应转向 `K_n/n!` 的
+Mehler generating function 或直接寻找 uniform finite-`t` tail deficit。
+
+新增本机审计为 `flat_shadow_quadratic_response_r65/audit_r65.py`。

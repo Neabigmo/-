@@ -2265,3 +2265,27 @@ computation was used.
   odd tangent checks through degree 19, even convolution checks through degree
   20, and norm-slope checks through `n=10`; py_compile and `git diff --check`
   passed.
+
+## R65 — finite quadratic sums and local-slope correction (2026-09-06)
+
+- The webpage's root-of-unity reduction was independently checked and recorded
+  as the exact finite formula
+  `C_(r,s)=3(3E_(r,s)-binom(2n,n))/(2*6^n)`, with `E_(r,s)` the mod-3 selected
+  binomial sum.  The induced `v_(2n)`, `M_(n,k)`, `D_n`, `K_n`, and
+  `Lambda_n` formulas are now in `flat_shadow_quadratic_response_r65/README.md`.
+- Targeted exact arithmetic reproduces the audited slopes at `n=10,15,20,30`
+  and gives `Lambda_100>0`, `Lambda_200>0`.  Eventual sign and asymptotic
+  scale remain OPEN; no finite table is promoted to a theorem.
+- The webpage's conditional local-slope cutoff lemma contained a decisive
+  reciprocal error.  From `beta_n=n+Lambda_n t+R_n` and
+  `|R_n|<=eta|Lambda_n|t`, the correct linear zero scale is
+  `T_n=n/((1-eta)|Lambda_n|)`, with first-zero bounds
+  `n/((1+eta)|Lambda_n|)<=tau_n<=n/((1-eta)|Lambda_n|)`.  Thus cutoff shrinkage
+  would require `|Lambda_n|/n -> infinity` plus a uniform remainder radius;
+  the opposite condition stated on the webpage is invalid and is explicitly
+  excluded from the local record.
+- Added `flat_shadow_quadratic_response_r65/README.md` and
+  `flat_shadow_quadratic_response_r65/audit_r65.py`.  The exact targeted audit,
+  py_compile, and `git diff --check` passed.  The next target is a rigorous
+  generating-function or finite-`t` tail analysis, not another local-slope
+  extrapolation.
