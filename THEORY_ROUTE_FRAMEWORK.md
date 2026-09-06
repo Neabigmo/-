@@ -3474,3 +3474,69 @@ Graded Value Transgression 与 `P_3K` bridge 继续 OPEN。
 下一轮网页端开始前必须先读取本框架、工作日志及 R36–R45 的 README/audit。
 本轮没有使用 optimizer、SDP、大规模 sweep、relaxed measure-LP 或 remote
 computation。
+
+## 43. R46：N=6 second-residue quotient 已证明 rank 至少为 2，但完整矩阵仍 OPEN
+
+网页端 R46 在右侧前端出现了工具调用未收尾的不同步状态；本轮不把未同步的
+网页中间态当作定理。基于 R45 已确认的 exact generators，本机独立完成了
+`flat_shadow_residue_r46/audit_r46.py` 的 proof-level algebra audit，目标只收窄
+`N=6 Second-Residue Rank Lemma`，不回做 R29–R45。
+
+### 43.1 本机 exact / Darboux 计算
+
+对 `q=5` 的 conditional-score generator，先用 R45 的生成公式构造
+`C^(5)`，再在 `(n,m)=(3,3)` 与直接 Gaussian marginalization 对照；这一有限
+恒等式通过。`H_(n;7,5)` 的 `W` 部分则由 exact bivariate block generator 的
+total-grade-12 `S,D` 分解得到。为取 second-residue，不能把 R43 只到二阶的
+analytic Taylor truncation 继续外推；R46 audit 对
+`(1-u/9)^(-alpha)` 在 `u=1` 的 Taylor 尾按所需阶数完整保留，并以 Laurent
+级数逐行消去旧 span
+
+`{D_(n,12)/D_(n,6), D_(n,10)/D_(n,6), D_(n,8)/D_(n,6), 1,
+  S_(n,3)-sigma_3}`。
+
+得到两条新 quotient rows 的前两列：
+
+`H_(n;9,3)/D_(n,6)`：
+
+`c_(3,2)=-3970123318809sqrt(21)/294859571200`，
+`c_(3,3)=59155049844691sqrt(21)/8491955650560`；
+
+`H_(n;7,5)/D_(n,6)`：
+
+`c_(5,2)=1176526610081sqrt(210)/294859571200`，
+`c_(5,3)=-2147390944445sqrt(210)/566130376704`。
+
+这两个数构成的 `2 x 2` minor 为
+
+`72543614649557486062397sqrt(10)/148407681470693376000 != 0`。
+
+因此本机已经无条件地得到当前有限 Darboux 层面的 rank lower bound
+
+`rank(C_3^res) >= 2`。
+
+### 43.2 结论边界与下一刀
+
+这不是 `rank(C_3^res)` 的完整计算：`J_(n,3)` 与额外 resonance row
+`H_(n;6,6)` 的前两列尚未纳入同一审计，四行矩阵的完整 determinant 仍 OPEN。
+所以当前只能说“旧 span 后至少出现两个独立 second-residue directions”，
+不能把它升级为 weighted conditioning no-go；仍需具体 carrier-node scheme、
+weighted norm、positive complement debt 以及 uniform tail 控制。
+
+在现有 sequential/inverse bookkeeping 下，`rank >= 2` 使 `N=6` 的
+conditioning danger 成为真实的 conditional possibility；它尚未证明
+`R^(5/2)` blow-up 必然发生。形式 Hermite 方向仍只是 genuine OU Taylor
+coefficient extractor，positive flat shadow 仍不能偷用 full-exact positivity。
+
+本机新增 `flat_shadow_residue_r46/README.md` 与 `audit_r46.py`，输出：
+
+`R46_H75_GENERATOR_FINITE_CHECK PASSED`、
+`R46_H93_QUOTIENT_SECOND_RESIDUE`、
+`R46_H75_QUOTIENT_SECOND_RESIDUE`、
+`R46_C3RES_FIRST_TWO_ROWS_RANK_GE2`、
+`R46_C3RES_FULL_MATRIX REMAINS OPEN`、
+`R46_AUDIT_COMPLETED`。
+
+下一轮网页端开始前必须先读取本框架、工作日志及 R36–R46 的 README/audit。
+全局 `Constraint-Coupled Non-SOS Graded Value Transgression`、Gaussian
+rigidity 与 `P_3K` bridge 继续 OPEN。

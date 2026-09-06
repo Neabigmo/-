@@ -1557,3 +1557,33 @@ computation was used.
 - Before the next web round, require reading the updated framework, worklog,
   and R36–R45 local audit records.  No optimizer, SDP, sweep, relaxed
   measure-LP, or remote computation was used.
+
+## R46 — N=6 second-residue rank lower bound (2026-09-06)
+
+- The right-side web session did not synchronize a final R46 answer; it remained
+  at the tool-call state.  I therefore continued from the audited R45 formulas
+  locally and did not resend the prompt.
+- Added `flat_shadow_residue_r46/audit_r46.py` and README.  The audit derives the
+  `q=5` conditional-score generator, checks it against direct Gaussian
+  marginalization at `(n,m)=(3,3)`, and assembles the `H_(n;7,5)` raw block row.
+- To avoid an invalid extrapolation of R43's low-order helper, the R46 script
+  retains the complete analytic Taylor tail at `u=1` to the order needed for
+  the Laurent quotient.  It reduces the `H_(n;9,3)` and `H_(n;7,5)` rows against
+  `{D_(n,12)/D_(n,6), D_(n,10)/D_(n,6), D_(n,8)/D_(n,6), 1,
+  S_(n,3)-sigma_3}`.
+- Exact output:
+  `R46_H75_GENERATOR_FINITE_CHECK PASSED`;
+  `c_(3,2)=-3970123318809sqrt(21)/294859571200`;
+  `c_(3,3)=59155049844691sqrt(21)/8491955650560`;
+  `c_(5,2)=1176526610081sqrt(210)/294859571200`;
+  `c_(5,3)=-2147390944445sqrt(210)/566130376704`; and the minor is
+  `72543614649557486062397sqrt(10)/148407681470693376000`, nonzero.
+- Therefore the first two quotient rows already prove the finite fixed-`m`
+  lower bound `rank(C_3^res) >= 2`.  The full four-row matrix, its determinant,
+  weighted carrier norm, and any no-go conclusion remain OPEN.
+- The formal Hermite directions remain OU Taylor coefficient extractors, not
+  probability counterexamples; positive flat shadows are not treated as
+  full-exact laws.  No optimizer, SDP, sweep, relaxed measure-LP, or remote
+  computation was used.
+- Before the next web round, require reading the updated framework, worklog,
+  and R36–R46 local audit records.
