@@ -5589,3 +5589,115 @@ OPEN。下一条唯一目标改为 R76：从 `alpha_k=0` 的 exact Jacobi/Gram r
 实际 cancellation，而不是研究 artificial `log(2)` resonance。
 
 新增本机审计为 `flat_shadow_odd_green_mov_r75/audit_r75.py`。
+
+## 73. R76：corrected signed source 与 factorial-transfer 接口（2026-09-07）
+
+网页端 R76 已完成，但其连接器仍返回账户连接错误，未能实际读取本机
+R75 的 framework/README/audit。这里把网页端返回的 raw math sources 与本机
+R75 校正基线重新对齐后记录；因此以下是已审计公式与明确条件的研究记录，
+不是把网页端未读到的本机文件当作已读证据。
+
+R76 的第一个无条件代数对象是 exact signed nonlinear source。沿用
+`e_m=H_m/sqrt(m!)`、`eta_m=L[e_m]`、`phi_k=pi_k/sqrt(k!)`、
+`gamma_k=L[phi_k^2]`，精确 Jacobi 展开为
+
+`x phi_k^2 = sqrt((2k+1)!)/k! e_(2k+1) + sum_(m<=2k)c_(k,m)(E,Y)e_m`，
+
+`T_k=1/k![alpha_k(a)gamma_k(E,Y)-sum_(m<=2k)c_(k,m)(E,Y)eta_m]`，
+
+`Z_k=eta_(2k+1)sqrt((2k+1)!)/(k!)^2`。
+
+R75 已审计的 Gaussian linearization 是
+
+`D_Y T_k(0)[Z]=-sum_(j<k)q_(k,j)Z_j`，
+
+其中
+
+`q_(k,j)=(1+2(k-j)/(j+1))/(k-j)!`。
+
+所以必须定义
+
+`S_k:=T_k+sum_(j<k)q_(k,j)Z_j`，
+
+从而 exact signed recursion 仍是
+
+`Z_k=S_k-sum_(j<k)q_(k,j)Z_j`。
+
+这个 `S_k` 是 R76 的关键 source residual；它与取绝对值后的正 majorant
+不同，不能混用。
+
+R76 的第二个代数里程碑是 parity ideal。反射给出
+
+`phi_k(E,-Y;x)=(-1)^k phi_k(E,Y;-x)`，`gamma_k(E,-Y)=gamma_k(E,Y)`。
+
+结合 `alpha_1=a`、`alpha_2=-a`、`alpha_k=0 (k>=3)`，在 involution
+`(a,Y)->(-a,-Y), E->E` 下 source 为 odd。减去已校正的 Gaussian tangent
+
+`S^(1)(x)=x+x^2/2`，令 `S_tilde=S-aS^(1)`，则在 Gram inverse 存在的
+formal/analytic neighborhood 中有精确理想包含
+
+`S_tilde in a(E,Y^2)+EY+Y^3`。
+
+对 `k>=3` 因为没有显式 `alpha_k`，更精确地有
+`S_k in EY+Y^3`。这里的内容是反射与 exact Jacobi linearization 强迫的
+代数消去，不是把 `O(a^3)` 当作尚未证明的 uniform norm bound。代入
+`Y=O(a)`、`E=O(a^2)` 后 source 从 cubic canonical order 开始。
+
+R76 的第三个结果是把 corrected signed Green 写成整个函数的 Volterra 算子。
+令 `Z(x)=sum Z_k x^k`、`S(x)=sum S_k x^k`、`F=int_0^x Z(t)dt`，则
+
+`Z+2F=e^(-x)S`，
+
+`F=e^(-2x)int_0^x e^tS(t)dt`，
+
+`Z=e^(-x)S-2e^(-2x)int_0^x e^tS(t)dt`。
+
+所以 entire source 产生 entire signed solution，不存在 signed Green 的
+`log(2)` 极点；该极点只属于丢失交替抵消后的 absolute-value majorant。
+取 `S^(1)=x+x^2/2` 时得到
+
+`Z^(1)=e^(-x)(x-x^2/2)`，
+`[x^k]Z^(1)=(-1)^(k-1)(k+1)/(2(k-1)!)`，`k>=1`，
+
+与 R64 已审计的 alternating tangent 完全一致。
+
+R76 还给出一个严格的 conditional transfer theorem。若
+
+`|S_k|<=M mu^k/k!`，`mu>=0`，
+
+则由 `Z'+2Z=e^(-x)(S'-S)` 和 `b_k=k!|Z_k|` 得
+
+`b_(k+1)<=M(mu+1)^(k+1)+2b_k`，`b_0<=M`。
+
+当 `mu!=1` 时其 equality majorant 为
+
+`b_k<=M[2^k+(mu+1)((mu+1)^k-2^k)/(mu-1)]`，
+
+`mu=1` 时为 `b_k<=M(k+1)2^k`。故 signed propagation 只产生固定
+exponential-type shift `lambda_mu=max(2,mu+1)`，而不是 `log(2)` resonance。
+
+这一转移仍是 conditional 的，因为 source 自身的 uniform factorial bound
+尚未证明。当前最小缺口定义为 `FS_mu`：存在与 `n` 无关的 `C,mu`，使
+
+`|S_tilde_k|<=C mu^k/k! Xi`，
+
+`Xi=|a|(||E||+||Y||^2)+||E||||Y||+||Y||^3`。
+
+若 `FS_mu` 成立，则在 `sigma_n=8sqrt(n)` 上由
+`(2k+1)!/k! >= (k+1)!` 得条件性 odd tame conversion
+
+`||o||_(sigma_n)<=C C_mu [8sqrt(n)/(64lambda_mu n)]
+(exp(64lambda_mu n)-1)Xi`。
+
+这会把 R74 的问题进一步归结为一个清晰的 Gram-to-source degree-local
+factorial estimate，而不是 Green propagation resonance。
+
+本轮边界：R76 没有证明 `FS_mu`、D.1、positive infinite exact backward
+tower 或 backward OU divisibility；也没有宣称新的 unconditional no-reversal
+window。已新增本机审计
+`flat_shadow_odd_green_source_r76/audit_r76.py`，覆盖 source 符号、tangent
+系数、形式 ideal、factorial convolution/transfer 及 common-radius 算术。
+
+下一轮唯一目标是 R77：直接从 exact Gram/Jacobi source map、Gram inverse 与
+Hermite product 证明 `FS_mu`，或给出最小的 degree-local 失败边界；不再把所有
+degree 压成顶层 `n` 的粗 uniform source bound。

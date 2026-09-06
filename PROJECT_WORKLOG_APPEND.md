@@ -2548,3 +2548,32 @@ computation was used.
 - Added `flat_shadow_odd_green_mov_r75/README.md` and
   `flat_shadow_odd_green_mov_r75/audit_r75.py`. Next target: R76 canonical
   nonlinear source cancellation in the corrected signed Green equation.
+
+## R76 — Corrected signed source and factorial-transfer interface (2026-09-07)
+
+- The webpage's connector again returned an account-connection error and did not
+  actually read the local R75 files. I extracted the finished R76 response's
+  raw math sources and aligned them with the locally audited R75 sign correction.
+- The exact source residual is
+  `S_k=T_k+sum_(j<k)q_(k,j)Z_j`, so the exact signed recursion remains
+  `Z_k=S_k-sum_(j<k)q_(k,j)Z_j`. This separates the canonical signed source from
+  the positive absolute-value majorant.
+- Reflection and exact Gaussian linearization yield the formal/analytic Gram
+  neighborhood ideal
+  `S_tilde in a(E,Y^2)+EY+Y^3` after subtracting
+  `a S^(1)`, `S^(1)(x)=x+x^2/2`; for `k>=3`, `S_k in EY+Y^3`. Under
+  `Y=O(a), E=O(a^2)`, the nonlinear odd source therefore starts at cubic order.
+- The corrected Volterra solution is entire-source preserving:
+  `Z=e^(-x)S-2e^(-2x) integral_0^x e^tS(t)dt`. The R64 tangent source gives
+  the alternating coefficients exactly, so no signed `log(2)` resonance remains.
+- Conditional factorial transfer was audited: if
+  `|S_k|<=M mu^k/k!`, then `|Z_k|<=C_mu M lambda_mu^k/k!`,
+  `lambda_mu=max(2,mu+1)`, with only a `k+1` factor at `mu=1`. The common-radius
+  conversion at `sigma_n=8sqrt(n)` was checked using
+  `(2k+1)!/k! >= (k+1)!`.
+- The remaining analytic interface is `FS_mu`, a fixed-`C,mu` degree-local
+  factorial bound for `S_tilde`. It is explicitly still OPEN; R76 does not prove
+  D.1, a positive infinite exact backward tower, or backward OU divisibility.
+- Added `flat_shadow_odd_green_source_r76/README.md` and
+  `flat_shadow_odd_green_source_r76/audit_r76.py`. Next target: R77 Gram-to-source
+  factorial estimate, or its smallest rigorous failure boundary.
