@@ -6271,3 +6271,53 @@ rescaled coefficient propagation uniformly tame；Gram/triangular stability
 saddle、Green integral、fixed-gap anchors、hybrid weight 与 stretched exponent。
 R80 safe window、D.1、global positivity、positive infinite exact backward tower、
 backward OU divisibility、`FS_3` 以及 proportional-gap 继续 OPEN。
+
+## 82. R85：proportional-gap joint saddle 与 signed-cancellation 边界（2026-09-07）
+
+R85 将增长 gap 推进到 `d/j -> delta>0`，但明确保持“full signed kernel 的上界”与
+“实际 lower/equality”之间的边界。网页端在 formal same-factor/Jacobi hierarchy 中从
+R82 exact simplex decomposition 出发，分别保留 angular root-filter、Hermite/source
+band、signed Green 三条 leg，得到
+`limsup_j j^(-1) log(j^d |K_(j+d,j)|) <= delta(1+log(3/delta))`。
+也就是
+`|K_(j+d,j)| <= j^(-d) exp(j*delta(1+log(3/delta))+o(j))`。
+
+这条 bound 是 full `K` 的一侧 bound，而不是从 modulus 最大路径得到的 lower。它直接
+推出原 `4sqrt(n)` 权重下 proportional channel 至多 exponential-in-`n`；若把系数权重
+再乘 `n^(-j)`，则固定 `delta>0` 的 channel 在 `j log j` 尺度上严格为负，因而
+super-exponentially tame。于是 hybrid coefficient route 没有被 proportional sector
+否定，但 full Gram/triangular 稳定性仍未由此获得。
+
+R85 的三个结构块如下。第一，若 `rho=r/(j+r)`，angular saddle 方程为
+`1+(1-omega)(2rho-1)x-omega x^2=0`；若写 `delta=j/r`，则
+`rho=1/(1+delta)`，若写 `delta=r/j`，则 `rho=delta/(1+delta)`。第二，
+`G_(ell+g,ell)=(-1)^g/g![1+2g integral_0^1 t^ell(2-t)^(g-1)dt]`，其
+interior rate 为
+`J_G(L,gamma)=L log(2L/(L+gamma))+gamma log(2gamma/(L+gamma))`，且在约束
+`L=1+delta-gamma` 下导数为 `log(gamma/L)`。第三，比例 source band 的 endpoint
+sum 给出非零 prefactor
+`p_(ell,ell-s)/T_0 -> (1-lambda)/(1+lambda)^3`，其中
+`T_0=2(s-1)! binom(ell+1,s-1)binom(ell-3,s-1)`；因此 Hermite/source
+交错和本身没有把 proportional leg 指数级消掉。
+
+丢掉 angular decay 后，三变量实 simplex 上的 absolute action 最大值是
+`delta(1+log(3/delta))`。在 Green interior branch 令 `a=alpha+beta` 并先取
+`alpha=beta=a/2`，约束导数明确为 `log(2(1+a)/a)>0`，所以该 branch 只能在
+`gamma=L` 边界达到最大；随后由三项 entropy 的等分最大性得到上述上界。
+
+真正的 obstruction 也被压缩成严格命题：signed phase 在 `gamma<L` 时要求
+`log(beta/gamma)+i*pi=0`，在 `gamma>L` 时要求 `log(beta/L)+i*pi=0`；两者都不可能
+在 positive-real simplex 上成立。因此 modulus saddle 不能直接给 actual exponential
+lower。形式 complex cancellation `gamma=-beta` 再强迫 `alpha=delta`，指向 candidate
+rate `delta(1-log(delta))+Lambda_A(delta)`，但还缺 `PSC_delta`：合法 contour deformation、
+无更大 Stokes 项、conjugate angular saddle 无指数级抵消且前因子非零。`PSC_delta`、
+actual proportional lower/equality、mesoscopic `log(j)<<d<<j`、full hybrid
+Gram/triangular norm、R80 safe-window improvement、D.1、global positivity、positive
+infinite backward tower、backward OU divisibility 与 `FS_3` 继续 OPEN。
+
+本机新增 `flat_shadow_proportional_saddle_r85/README.md` 与
+`flat_shadow_proportional_saddle_r85/audit_r85.py`。审计以 exact rational/symbolic
+方式通过 root-filter 与 corrected saddle、signed Green rate/phase obstruction、source
+endpoint finite anchors、source–mixed proportional prefactor anchors、entropy optimization
+和 rescaled weight arithmetic；不把网页端未逐行展开的 uniform saddle remainder 或
+`PSC_delta` 冒充已证明结论。

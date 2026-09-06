@@ -2838,3 +2838,54 @@ computation was used.
   `R84_STRETCHED_EXPONENT_ARITHMETIC_PASSED`, and
   `R84_MODERATE_GAP_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
   passed.
+
+## R85 — Proportional-gap joint saddle and signed-cancellation boundary (2026-09-07)
+
+- The webpage completed R85 after reading the R84 direction.  Its strict new
+  result is the full-kernel one-sided bound, within the formal
+  same-factor/Jacobi hierarchy,
+  `limsup j^(-1) log(j^d |K_(j+d,j)|) <= delta(1+log(3/delta))`
+  for `d/j -> delta>0`.  Equivalently,
+  `|K_(j+d,j)| <= j^(-d) exp(j*delta(1+log(3/delta))+o(j))`.
+  This proves proportional channels are at most exponential under the
+  original `4sqrt(n)` weight and super-exponentially tame after the `n^(-j)`
+  coefficient rescaling.  It is not an actual proportional lower bound.
+- The exact root-filter representation and corrected normalization remain:
+  `rho=r/(j+r)`, hence `rho=1/(1+delta)` for `delta=j/r` and
+  `rho=delta/(1+delta)` for `delta=r/j`; the saddle polynomial is
+  `1+(1-omega)(2rho-1)x-omega x^2=0`.
+- The signed Green has exact positive-integral representation
+  `G=(-1)^g/g![1+2g integral t^ell(2-t)^(g-1)dt]`.  Its interior rate is
+  `J_G=L log(2L/(L+gamma))+gamma log(2gamma/(L+gamma))`, and along
+  `L=1+delta-gamma` its derivative is `log(gamma/L)`.
+- The proportional Hermite/source endpoint has nonzero factor
+  `p_(ell,ell-s)/T_0 -> (1-lambda)/(1+lambda)^3`; the first and second
+  endpoint groups have fixed-a ratios
+  `(-1)^a binom(a+2,2)lambda^a` and the same multiplied by `lambda`.
+  The source–mixed factorial cancellation leaves `1/(r!s!)` and the angular
+  factor at exponential scale.  The local finite anchors also verify the
+  positive prefactor
+  `2*sqrt(pi)*alpha^(3/2)*beta*sqrt(1+alpha)/(1+alpha+2beta)^3` after
+  factoring out `(-1)^r B_(r,j) j^(-1/2)/(r!s!)`.
+- Dropping angular decay and maximizing the absolute real action gives
+  `delta(1+log(3/delta))`.  On the Green interior branch the local calculus
+  makes the monotonicity explicit:
+  with `a=alpha+beta` and `alpha=beta=a/2`,
+  `dF/da=log(2(1+a)/a)>0`, so the branch reaches `gamma=L`, after which
+  entropy concavity gives the equal split upper bound.
+- There is a strict signed-phase obstruction on the real simplex.  The
+  gamma equation is `log(beta/gamma)+i*pi=0` when `gamma<L` and
+  `log(beta/L)+i*pi=0` when `gamma>L`, so no positive-real signed saddle
+  exists.  Formal cancellation `gamma=-beta` forces `alpha=delta` and gives
+  the candidate `delta(1-log(delta))+Lambda_A(delta)`, but the required
+  contour/phase statement `PSC_delta` is not proved.  Mesoscopic bridge,
+  actual proportional lower/equality, full hybrid norm, R80 safe-window,
+  D.1, positivity, backward tower/OU divisibility and `FS_3` remain OPEN.
+- Added `flat_shadow_proportional_saddle_r85/README.md` and
+  `flat_shadow_proportional_saddle_r85/audit_r85.py`.  Exact audit passed:
+  `R85_ROOT_FILTER_AND_CORRECTED_SADDLE_PASSED`,
+  `R85_GREEN_RATE_AND_SIGNED_PHASE_OBSTRUCTION_PASSED`,
+  `R85_SOURCE_ENDPOINT_AND_PREFactor_PASSED`,
+  `R85_ENTROPY_AND_RESCALED_WEIGHT_ARITHMETIC_PASSED`, and
+  `R85_PROPORTIONAL_SADDLE_AUDIT_COMPLETED`; `py_compile` and
+  `git diff --check` passed.
