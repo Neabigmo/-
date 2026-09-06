@@ -2467,3 +2467,30 @@ computation was used.
   angular scaling/Wallis, Wiener source constants, bootstrap constants, Gram
   majorant scaling, and the conditional window; `py_compile` and
   `git diff --check` remain to be run.
+
+## R73 — Explicit canonical odd-solver majorant (2026-09-07)
+
+- The webpage again reported that its connector could not read the local R72
+  files. I extracted the raw `data-math-source` values from the finished R73
+  response and audited those sources locally; this corrected the browser's
+  flattened plain-text fraction direction. The accepted normalization is
+  `g_m=L[e_m]/sqrt(m!)`, `e_m=H_m/sqrt(m!)`, with
+  `d_k=sqrt((2k+1)!)/k!` and odd solve factor `k!/sqrt((2k+1)!)`.
+- R73's exact structural contribution is the triangular odd recursion
+  `eta_(2k+1)=k!/sqrt((2k+1)!)[alpha_k gamma_k-
+  sum_(m<=2k)c_(k,m)eta_m]`; the current odd coordinate is the only new unknown,
+  while `phi_k` and the source use earlier moments.
+- Under the stated analytic Gram-domain/source estimate, the constants audit to
+  `rho=4sqrt(n)`, `sigma=8sqrt(n)`, weighted Gram factor `27/64`, domain bound
+  `19/16`, and inverse bound `1024/511`. The source propagation gives
+  `B_n=512 n(448n)^n`, `L_n=(1+B_n)^n`, and the Cauchy majorant
+  `Omega_n=22L_n^3=exp(O(n^2 log n))`.
+- The R72 conditional no-reversal window can therefore be made explicit as
+  `a_n#=min{r_n/2,1/(20*4^n U_n),
+  sqrt(U_n/[2Omega_n(1+10U_n^2)])}`, with `t_n#=(a_n#)^2`.
+  This is a conditional all-order no-reversal interval only; it does not prove
+  D.1, an infinite positive exact tower, or backward OU divisibility.
+- Added `flat_shadow_odd_solver_bound_r73/README.md` and
+  `flat_shadow_odd_solver_bound_r73/audit_r73.py`. Next target: degree-local odd
+  Green-function sharpening that retains the factorial denominator instead of
+  collapsing all levels into `B_n`; aim for `e^(O(n log n))` or `C^n n^p`.

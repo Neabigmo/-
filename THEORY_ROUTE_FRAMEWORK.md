@@ -5332,3 +5332,91 @@ positive backward tower 与 backward OU divisibility 仍 OPEN。下一条唯一�
 的明确增长率；在此之前不再增加 degree 或计算新的 Gaussian-point 导数。
 
 新增本机审计为 `flat_shadow_odd_solver_majorant_r72/audit_r72.py`。
+
+## 70. R73：explicit canonical odd-solver majorant（2026-09-07）
+
+R73 在 R72 的唯一未量化缺口上继续推进。网页端本轮仍报告连接器无法读取
+本机 R72 记录，因此本节只采纳其原始 DOM 数学源，并由本机脚本逐项核验分式
+方向与常数。网页纯文本曾把若干分数显示反向；校正后的关键数值是
+
+`rho_n=4sqrt(n)`、`sigma_n=8sqrt(n)`，
+`g_m=L[e_m]/sqrt(m!)`，`e_m=H_m/sqrt(m!)`，以及
+`d_k=sqrt((2k+1)!)/k!`。
+
+### Exact triangular odd recursion
+
+令 `eta_m=L[e_m]`，`phi_k=pi_k/sqrt(k!)=e_k+sum_(j<k)v_(k,j)e_j`，并记
+
+`G_(k-1)=(L[e_i e_j])_(i,j<k)`、
+`g_k=(L[e_k e_j])_(j<k)`。
+
+块正交方程给出精确的 `v_k=-G_(k-1)^(-1)g_k`。canonical diagonal
+`alpha_1=a`、`alpha_2=-a`、`alpha_k=0 (k>=3)` 与
+`L[x phi_k^2]=alpha_k L[phi_k^2]` 结合
+
+`x phi_k^2=d_k e_(2k+1)+sum_(m<=2k)c_(k,m)e_m`
+
+给出唯一的新 odd moment
+
+`eta_(2k+1)=k!/sqrt((2k+1)!)*[alpha_k gamma_k-
+sum_(m<=2k)c_(k,m)eta_m]`，其中 `gamma_k=L[phi_k^2]`。
+
+这是一条真正的 exact triangular source recursion：第 `k` 步未知只出现在
+`eta_(2k+1)`，source 只到 `2k`，并保留了 factorial inverse；even identity
+并未被用来解 odd coefficient。
+
+### Conditional analytic majorant
+
+取 `V_n=span(e_0,...,e_n)`、`T_(m,n)=P_(V_n)M_(e_m)P_(V_n)`。creation /
+annihilation normal ordering 给出
+
+`||T_(m,n)||_op<=2^m(n+m)^(m/2)/sqrt(m!)`。
+
+所以对 `3<=m<=2n`、`n>=3`，
+
+`sqrt(m!)/rho_n^m * ||T_(m,n)||
+ <=(1/2 sqrt(1+m/n))^m<=27/64`。
+
+若 perturbation 没有 degree 1、2 项，则
+`||G_n-I||_op <=(27/64)||f||_(rho_n)`。在网页端给出的复域
+`||e||_(rho_n)<=17/16`、`||Y_n||_(sigma_n)<=1` 上，odd 起始 degree 为 3，
+故 `||Y_n||_(rho_n)<=1/8`、`||f||_(rho_n)<=19/16`，从而
+
+`||G_n-I||_op<=513/1024<1`，`||G_k^(-1)||<1024/511<2.01`。
+
+在这一 Gram-domain/source estimate 作为解析输入时，粗 source 权重由
+`32*7^n*k!*sigma_n^(2k+1)/(2k+1)!` 控制，并可统一压到
+
+`B_n=512 n(448n)^n`。
+
+若 `S_k` 是累计的 sigma-weighted odd coordinates，则
+
+`S_k<=(1+B_n)S_(k-1)+B_n|a|`，
+`S_n<=L_n|a|`，`L_n=(1+B_n)^n`。
+
+取 `r_n=1/(4L_n)`，再用 `Y_n(-a,e)=-Y_n(a,e)` 和 Cauchy 估计，得到
+
+`||O_n(a,e)||_(sigma_n)<=Omega_n(|a|^3+|a| ||e||_(rho_n))`,
+`Omega_n=22L_n^3`，
+
+以及显式增长
+
+`Omega_n<=22(1024n)^(3n)(448n)^(3n^2)=exp(O(n^2 log n))`。
+
+因此 R72 的 odd tame hypothesis 获得了一个显式但很粗的 conditional bound。
+配合 R72 even bootstrap，令
+
+`a_n#=min{r_n/2, 1/(20*4^n U_n),
+sqrt(U_n/[2Omega_n(1+10U_n^2)])}`，
+`t_n#=(a_n#)^2`，
+
+可得到 `||G_n-I||<1`、`gamma_k>0`、`beta_k(t)>0 (k<=n)` 对
+`0<=t<=t_n#` 成立。这里 `U_n=||U^(n)||_(sigma_n)`。
+
+这关闭的是 R72 的“显式 odd majorant”缺口，不是 D.1。该窗口仍极其保守，
+不能与 natural angular cutoff 做有意义的尺度比较；也没有构造 positive
+infinite exact tower 或 backward OU divisibility。R73 本机审计为
+`flat_shadow_odd_solver_bound_r73/audit_r73.py`。下一轮只推进
+degree-local odd Green-function sharpening：保留每一级
+`k!/sqrt((2k+1)!)`，争取把 `exp(O(n^2 log n))` 降到 `e^(O(n log n))` 或
+`C^n n^p`。
