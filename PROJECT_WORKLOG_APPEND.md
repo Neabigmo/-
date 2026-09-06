@@ -2804,3 +2804,37 @@ computation was used.
   `R83_GREEN_AND_FIXED_GAP_KAPPA_PASSED`,
   `R83_GENERATING_FUNCTION_AND_SUPERPOLY_LOWER_BOUND_PASSED`, and
   `R83_ALL_GAP_AUDIT_COMPLETED`; `py_compile` and `git diff --check` passed.
+
+## R84 — Uniform logarithmic moderate-gap extension (2026-09-07)
+
+- R84 read the R83 local records through the bridge and obtained a uniform
+  moderate-gap route.  The exact Green coefficient has the positive-integral
+  representation with no artificial `3^g` loss.  Angular root-filter and
+  Hermite top-band estimates are proposed uniformly with relative errors
+  `O(r^2/j)` and `O(s^2/ell)` in the logarithmic range.
+- Because the leading source/Green cancellation is ill-conditioned, the safe
+  relative bound is `C(d^2/j)e^(8d)`, not the stronger `exp(O(d^2/j))` without
+  further cancellation.  This yields the formal uniform theorem
+  `K_(j+d,j)=kappa_d j^(-3)[1+O((log j)^2/sqrt(j))]` for
+  `3<=d<=log(j)/16`.
+- Taking `d_n=floor(c log n)+3` and `j=floor(n/2)` gives an actual
+  stretched-superpolynomial lower bound in the original `4sqrt(n)` weighted
+  norm:
+  `exp[c_*(log n)^2-c_*(log n)loglog n-C_*(log n)]`.
+  This is `e^(o(n))`, not an exponential-in-`n` claim.
+- The rescaled coefficient weight `n^(-j)omega_(n,j)` is uniformly tame over
+  the full logarithmic moderate-gap sector because its gap ratio is
+  `4^d exp(O(d^2/j))` and `sum_d4^d|kappa_d|` converges.  Full hybrid Gram /
+  triangular stability and proportional-gap behavior remain open.
+- A parameterization error was caught and corrected: with `delta=j/r`, the
+  saddle parameter must be `rho=r/(j+r)=1/(1+delta)` (or
+  `rho=delta/(1+delta)` if `delta=r/j)`, not `(1+delta)/delta`.  The local
+  record and next prompt use the corrected form.
+- Added `flat_shadow_moderate_gap_r84/README.md` and
+  `flat_shadow_moderate_gap_r84/audit_r84.py`. Exact audit passed:
+  `R84_ANGULAR_FILTER_AND_SADDLE_CORRECTION_PASSED`,
+  `R84_SIGNED_GREEN_INTEGRAL_BOUND_PASSED`,
+  `R84_MODERATE_GAP_ANCHORS_PASSED`,
+  `R84_STRETCHED_EXPONENT_ARITHMETIC_PASSED`, and
+  `R84_MODERATE_GAP_AUDIT_COMPLETED`; `py_compile` and `git diff --check`
+  passed.

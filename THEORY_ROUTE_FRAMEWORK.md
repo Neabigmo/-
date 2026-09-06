@@ -6225,3 +6225,49 @@ point 提取真实 rate function。
 严格边界：R80 safe window 尚未改善；D.1、全局 positivity、positive infinite
 exact backward tower、backward OU divisibility、endpoint `FS_3` 以及
 proportional-gap regime 继续 OPEN。
+
+## 81. R84：uniform logarithmic moderate-gap theorem（2026-09-07）
+
+R84 将 R83 的 fixed-gap 结论推进到真正增长的 gap。网页端本轮已实际读取
+R83 framework、worklog、README 与 audit；它仍把 uniform analytic estimates
+放在 formal same-factor/Jacobi hierarchy 内，本机审计只接受 exact algebraic
+block、有限锚点与算术边界，不把未展开的常数估计冒充完整证明。
+
+角向 root-filter 可写成 central coefficient 的复数 saddle 表示。形式上在
+`r<=log(j)/16` 时得到相对误差 `O(r^2/j)`；Hermite top band 在
+`s=O(log ell)` 时给出相对误差 `O(s^2/ell)`；signed Green 则有 exact
+positive integral
+`G_(ell+g,ell)=(-1)^g/g![1+2g integral_0^1t^ell(2-t)^(g-1)dt]`，
+且 `g<=ell/2` 时无 `3^g` 损失。
+
+单路径的共同主项仍是 `j^(-3)`。但 source 的 `exp(z)` 与 Green 的
+`exp(-z)` cancellation 对误差有 condition number；R84 正确保守为
+`|j^3K_(j+d,j)/kappa_d-1|<=C(d^2/j)e^(8d)`，不能未经额外高阶抵消
+直接写成 `exp(O(d^2/j))`。因此在 `3<=d<=log(j)/16` 内得到形式上的
+uniform theorem
+`K_(j+d,j)=kappa_d j^(-3)[1+O((log j)^2/sqrt(j))]`，其中
+`kappa_d=2(-1)^(d-1)(d-2)(d-1)!/(2d-3)!`。
+
+取 `j=floor(n/2)`、`d_n=floor(c log n)+3`、`0<c<1/16`，原
+`4sqrt(n)` Wiener 权重由单个 actual channel 给出
+`||K_n||>=exp[c_*(log n)^2-c_*(log n)loglog n-C_*log n]`。
+这是真正的 stretched-superpolynomial lower bound，虽仍为 `e^(o(n))`，
+不能宣称 exponential-in-n。与此同时，`tilde omega_(n,j)=n^(-j)omega_(n,j)`
+在整个 logarithmic moderate-gap sector 将权重比降为
+`4^d exp(O(d^2/j))`，结合 `sum_d4^d|kappa_d|<infinity`，该 sector 的
+rescaled coefficient propagation uniformly tame；Gram/triangular stability
+和 proportional-gap 仍未解决。
+
+本轮还发现一个必须修正的简单参数错误。若 `delta=j/r`，比例 saddle 中正确
+参数为 `rho=r/(j+r)=1/(1+delta)`；若 `delta=r/j`，则
+`rho=delta/(1+delta)`。它满足
+`Psi'_rho(x)=0 <=> 1+(1-omega)(2rho-1)x-omega x^2=0`。
+网页输出的 `rho=(1+delta)/delta` 与该方程不一致，本机记录采用修正版。
+角向 saddle 仍只是 proportional-gap exact reduction，尚未与 source/Hermite
+和 Green phase 组合成 full kernel rate function。
+
+本机新增 `flat_shadow_moderate_gap_r84/README.md`、
+`flat_shadow_moderate_gap_r84/audit_r84.py`；审计通过 root-filter、修正版
+saddle、Green integral、fixed-gap anchors、hybrid weight 与 stretched exponent。
+R80 safe window、D.1、global positivity、positive infinite exact backward tower、
+backward OU divisibility、`FS_3` 以及 proportional-gap 继续 OPEN。
