@@ -2110,3 +2110,30 @@ computation was used.
 - R59 does not close D.1, infinite positive viability, eventual skew
   annihilation, Gaussian rigidity, or the `P_3 K` bridge.  The next unique
   lemma is `beta_7` positivity-interval contraction on `0<t<tau_6`.
+
+## R60 — beta7 remains positive on the beta6 window (2026-09-06)
+
+- R60 completed in the same Project conversation.  Its reliable conclusion is
+  alternative (2): `beta_7>0` throughout `0<t<tau_6`; there is no
+  `tau_7<tau_6`.  This is a useful alternating phenomenon: beta6 creates a
+  cutoff, while beta7 preserves the entire reduced interval.
+- Independent local recomputation used `alpha_6=0` and the degree-14
+  same-factor relation.  It verified
+  `m_13=3a(1145t^2-2284t-2280)/(2-t)` and
+  `m_14=(839909t^3-1338415t^2-187437t+270270)/(2-t)`, correcting the
+  browser's different reduced `m_14` polynomial.
+- With `P_7=2150400+19281920t-206264064t^2-424134656t^3+
+  2523473440t^4-4074599496t^5+2790646820t^6-853051174t^7+
+  100963863t^8-2264192t^9`, the corrected factor structure is
+  `h_7=3P_7/[(2-t)^3p_5]` and
+  `beta_7=h_7/h_6=-p_4P_7/[2(2-t)p_5P_6]`.  At `t=0`, this gives
+  `h_6=720,h_7=5040,beta_7=7`.
+- The local audit proves `P_7>0` on `[0,1/10]` by exact positive Bernstein
+  coefficients, and checks the degree-14 relation plus exact rational family
+  points for the high-degree norm factor.  Added
+  `flat_shadow_canonical_beta7_r60/README.md` and
+  `flat_shadow_canonical_beta7_r60/audit_r60.py`; audit, py_compile and
+  `git diff --check` passed.
+- R60 leaves D.1, infinite positive viability, eventual skew annihilation,
+  Gaussian rigidity and the `P_3 K` bridge OPEN.  The next unique target is
+  corrected degree-16 `beta_8` sign/positivity on `0<t<tau_6`.

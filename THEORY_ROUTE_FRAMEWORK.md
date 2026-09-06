@@ -4511,3 +4511,51 @@ remote computation。R59 的最小可报告结果是 canonical nonzero-skew
 positivity window 在第六级收缩为显式唯一根以前的区间。下一唯一 lemma 是
 `beta_7` positivity-interval contraction：在 `0<t<tau_6` 上找
 `tau_7<tau_6` 或证明 `beta_7` 全程正。
+
+## 57. R60：degree-14 不再收缩 canonical window（2026-09-06）
+
+R60 继续唯一的 `beta_7` lemma。网页端的可靠结构结论是第二种情形：第七级
+没有产生 `tau_7<tau_6`，而是在全部 `0<t<tau_6` 保持正。由于网页输出
+再次把高阶 norm 分式和部分多项式写错，本机只采纳其目标与结构，所有具体式子
+均按 degree-14 same-factor relation、`alpha_6=0` 及 monic recurrence 重新核验。
+
+令 `p_4,p_5,P_6` 沿用 R59，并定义校正后的
+
+`P_7(t)=2150400+19281920t-206264064t^2-424134656t^3
+       +2523473440t^4-4074599496t^5+2790646820t^6
+       -853051174t^7+100963863t^8-2264192t^9`。
+
+`alpha_6=0` 给出
+
+`m_13=3a(1145t^2-2284t-2280)/(2-t)`，
+
+degree-14 exact row（结合 R59 的 `m_12`）经本机 degree-14 Fock relation
+核对给出
+
+`m_14=(839909t^3-1338415t^2-187437t+270270)/(2-t)`。
+
+直接按正确方向 `beta_7=h_7/h_6` 的因子结构为
+
+`h_6=-6P_6/[(2-t)^2p_4]`,
+`h_7=3P_7/[(2-t)^3p_5]`,
+
+`beta_7=-p_4P_7/[2(2-t)p_5P_6]`。
+
+在 `0<t<tau_6<1/10` 上，R59 已给 `p_4,p_5,2-t>0,P_6<0`。为避免新的
+大规模扫描，本机把 `P_7(u/10)` 写成 `[0,1]` 上的 degree-9 Bernstein
+形式；十个 Bernstein 系数全部为正，因此 `P_7>0`，从而
+
+`beta_7(t)>0` 对所有 `0<t<tau_6` 成立。
+
+本机新增 `flat_shadow_canonical_beta7_r60/audit_r60.py` 与 README。审计以
+degree-14 relation 的符号核对、exact rational family points 的
+`h_7/h_6` 因子核验，以及 Bernstein 正性证书组成；高阶展开不再强行做耗时的
+全局 factorization。R60 的可靠结论是：前七级均正的非零 skew 开区间存在，
+但尚未说明 `beta_8` 以后，也不能升级为 genuine full-exact counterexample。
+
+全局影响不变但更具体：D.1 若成立，canonical finite exit 首次进一步出现的
+层级只能是 `n>=8`；eventual skew annihilation 不能靠前七级消元；Gaussian
+rigidity 与 `P_3 K` bridge 仍独立 OPEN。下一唯一 lemma 改为 corrected
+degree-16 `beta_8` sign lemma，继续区分 OU law 与 auxiliary Jacobi law，
+禁止 determinant、optimizer、SDP、sweep、relaxed measure-LP 和 remote
+computation。
