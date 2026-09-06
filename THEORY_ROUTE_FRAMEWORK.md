@@ -6108,3 +6108,67 @@ scale `A_(2n)~3(2/3)^n/sqrt(pi n)`。
 weighted fixed-gap 比值、quartic 指数和 MGK column norm。新增记录与审计为
 `flat_shadow_mixed_kernel_r81/README.md`、
 `flat_shadow_mixed_kernel_r81/audit_r81.py`。
+
+## 79. R82：exact degree-local mixed kernel 的 actual obstruction（2026-09-07）
+
+R82 网页端完成了完整 mixed kernel 推导，但最终仍报告桥接账户连接错误，
+没有实际读取 R81 本机文件或独立核验 `1a3839f`；本机按形式
+same-factor/Jacobi hierarchy 记录，并对首个通道做精确有理审计。
+
+令 `c_j=(j!)^2/(2j+1)!`、`o_(2j+1)=c_jZ_j`，且
+`U(z)=sum upsilon_r z^(2r+1)`，其中
+`upsilon_r=(-1)^(r-1)r(r+1)!/[2(2r+1)!]`。若
+`C_(p,q)=average sum_(i<j)r_i^pr_j^q`，则
+`o -> A_e^(-1)Q(U,o)` 的 finite/formal 系数核为
+`M_(m,j)=c_j upsilon_(m-j-1)
+[C_(2m-2j-1,2j+1)+C_(2j+1,2m-2j-1)]/[2A_(2m)]`
+（`m>=j+2`，否则为零）。
+
+Gaussian diagonal 的 tangent derivative 使用
+`q_0=q_1=0`、`q_2=-H_1`、`q_3=-H_0`、
+`q_(ell+1)=xq_ell-ell q_(ell-1)`，并令
+`P_ell=H_(ell+1)q_ell-ell H_ell q_(ell-1)`。若
+`P_ell=sum_(m<ell)p_(ell,m)H_(2m)`，则
+`R_(ell,m)=-2(2m)!p_(ell,m)/(ell!)^2`。结合 corrected signed Green
+`sum_(k>=ell)G_(k,ell)x^k=e^(-x)x^ell
+-2e^(-2x)integral_0^x e^t t^ell dt`，得到完整 kernel
+`K_(k,j)^(n)=sum_(ell=j+3)^kG_(k,ell)
+sum_(m=j+2)^(ell-1)R_(ell,m)M_(m,j)`，`n` 只负责截断。
+
+本机对固定 `j=0,1,2,4` 精确核验了两个首通道。第一，`d=3`：
+`K_(j+3,j)=2(j+6)/[3(j+1)(j+2)(j+3)^2]`
+`=2/(3j^3)+O(j^(-4))`，所以 `n^3K_(j+3,j)` 在 `j/n->theta` 时
+有有限极限 `2/(3theta^3)`，与 weighted criterion 相容。
+
+第二，`d=4` 的两条 direct source path 加上一阶 Green 回传后精确给出
+`K_(j+4,j)=-(3j^3+146j^2+1001j+1560)
+ /[15(j+1)(j+2)(j+3)^2(j+4)^2]`
+`=-1/(5j^3)+O(j^(-4))`。因此在 `j/n->theta>0` 时
+`n^4K_(j+4,j)=-n/(5theta^3)+O(1)`，实际 canonical `d=4` 通道已经
+否定 R81 所需的 `n^dK_(j+d,j)=O(1)`。
+
+对 R81 权重
+`omega_(n,j)=((j!)^2/(2j+1)!) (4sqrt(n))^(2j+1)`，固定 gap 比值为
+`omega_(n,j+d)/omega_(n,j)~(4n)^d`。故 `d=4` 单列贡献为
+`|K_(j+4,j)|omega_(n,j+4)/omega_(n,j)
+~256n/(5theta^3)`；取 `j=floor(n/2)` 得
+`||K_n||_(ell^1(omega_n)) >=(2048/5+o(1))n`。所以
+`MGK(C_K)` 的 n-一致 `O(1)` 版本在 actual canonical kernel 中严格为假，
+不是 arbitrary-matrix no-go。
+
+还有一个更强的单半径不相容性。若 `R_n=cn^alpha`，actual `d=4` 通道
+要求 mixed-kernel uniformity 至少满足 `alpha<=3/8`；但
+`H_4H_n=...+6n(n-1)H_n+...` 使 degree-four Gram compression 需要
+`n^2R_n^(-4)=O(1)`，即 `alpha>=1/2`。因此同一个 power-radius
+coefficient-Wiener norm 不可能同时给出 dimension-free Gram control 与
+actual mixed-kernel uniformity。
+
+这不意味着 R81 路线无效：当前实际 lower bound 只有 `cn`。若能证明完整
+all-gap kernel 仅有 `O(n^p)`，则在 R80 已有指数 shrinking 的窗口中，
+mixed linear loop 仍可能是 tame；若 growing-gap family 产生指数下界，才
+需要切换 hybrid Gram/triangular operator space。下一目标是 R83：保留 gap
+generating function，判定 full all-gap growth，而不再追求已被 d=4 否定的
+uniform `O(1)`。
+
+新增本机记录与审计：`flat_shadow_exact_mixed_kernel_r82/README.md`、
+`flat_shadow_exact_mixed_kernel_r82/audit_r82.py`。

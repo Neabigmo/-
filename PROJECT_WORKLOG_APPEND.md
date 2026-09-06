@@ -2739,3 +2739,31 @@ computation was used.
   `mu downarrow3` base `128e^2 sqrt(e)`; the angular scale remains far away.
 - Added `flat_shadow_mixed_kernel_r81/README.md` and
   `flat_shadow_mixed_kernel_r81/audit_r81.py`.
+
+## R82 — Exact degree-local mixed kernel and actual d=4 obstruction (2026-09-07)
+
+- The webpage completed R82 but again reported that the bridge could not read
+  R81 local records or independently verify HEAD `1a3839f`. The result is
+  recorded conditionally on the formal same-factor/Jacobi hierarchy.
+- It supplied the complete finite/formal kernel for
+  `o_(2j+1) -> A_e^(-1)Q(U,o) -> D_E S -> signed Green`, retaining `j`, `k`,
+  and the gap. The local audit checks the first channels at fixed exact degrees.
+- The first allowed channel is
+  `K_(j+3,j)=2(j+6)/[3(j+1)(j+2)(j+3)^2]~2/(3j^3)`, so the d=3 weighted
+  column remains bounded.
+- The next actual canonical channel is
+  `K_(j+4,j)=-(3j^3+146j^2+1001j+1560)/[15(j+1)(j+2)(j+3)^2(j+4)^2]`
+  `~-1/(5j^3)`. Since the R81 weight ratio is `(4n)^4` at fixed gap, this
+  single channel forces the weighted norm to grow at least linearly in `n`.
+  Thus the uniform `MGK(C_K)` conjecture is strictly false in the actual
+  canonical kernel, rather than merely unsupported by an arbitrary-matrix
+  example.
+- More generally, a single radius `R_n=c n^alpha` would need `alpha<=3/8` for
+  the d=4 mixed channel but `alpha>=1/2` for degree-four dimension-free Gram
+  control. This rules out repairing both sides by changing one power radius.
+- The strongest current alternative is polynomial-growth analysis: if the full
+  all-gap kernel is `O(n^p)`, the already exponentially shrinking R80 window
+  may still absorb the mixed linear loop. Growing-gap exponential lower bounds
+  would force a hybrid Gram/triangular norm.
+- Added `flat_shadow_exact_mixed_kernel_r82/README.md` and
+  `flat_shadow_exact_mixed_kernel_r82/audit_r82.py`.
