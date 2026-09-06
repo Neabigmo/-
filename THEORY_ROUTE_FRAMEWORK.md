@@ -4707,3 +4707,59 @@ rigidity 与 `P_3 K` bridge 仍保持彼此独立的 OPEN 状态；R62 没有把
 Favard 辅助谱测度偷换成原始 OU law。新增本机审计为
 `flat_shadow_canonical_beta9_r62/audit_r62.py`，没有使用 determinant、
 optimizer、SDP、sweep、relaxed measure-LP 或 remote computation。
+
+### 59.5 网页端复核注记
+
+R62 网页端最终正确识别了 `Q_9` 的新零点以及严格关系
+`tau_9<tau_8`，但其显示的 `h_8`、`h_9` 闭式各自取了倒数，因而显示的
+`beta_9` 分式也是项目约定 `h_9/h_8` 的倒数。这与它随后写出的
+`h_8(0)=40320`、`h_9(0)=362880`、`beta_9(0)=9` 彼此矛盾。故本机 exact
+audit 的 norm evaluation、Gaussian sanity 与有理点核验优先；网页端本轮
+只保留其符号结构和 cutoff 结论，不采纳倒置的显示公式。
+
+## 60. R63：degree-20 再次产生严格 cutoff（2026-09-06）
+
+R63 继续同一 canonical family，并把网页端提出的 `beta_10` 目标先在本机
+按 exact recurrence 重建。关键修正是：此前的 `m_20` 只有探索性截断来源，
+不能直接使用；本轮从 degree-20 same-factor cubic row 对 `m_20` 做线性精确
+求解，并在 `a=0,1/10,1/5` 三个有理点通过整行核验。
+
+令 `A_10` 为 `flat_shadow_canonical_beta10_r63/README.md` 中记录的 exact
+degree-20 polynomial，则本机得到
+
+`h_10=A_10/[(t-2)^5P_8]`,
+
+`beta_10=h_10/h_9=A_10P_7/[3(t-2)P_8Q_9]`。
+
+Gaussian sanity 为 `m_20(0)=19!!`、`h_10(0)=10!`、`beta_10(0)=10`，并且
+`beta_10'(0)=-1481/21`。这一次分式方向由 norm evaluation 和 Gaussian
+值共同固定，不采纳网页端的未经核验高阶倒置式。
+
+### 60.1 exact sign certificate
+
+对 `A_10` 的 derivative，在 `[0,1/200]` 上的 Bernstein 系数全正；同时
+`A_10(0)<0<A_10(1/200)`。将 `[1/200,19/500]` 分成五个固定有理子区间，
+每段的 `A_10` Bernstein 系数全正；`(t-2)^5P_8` 在 `[0,19/500]` 的
+Bernstein 系数全负。因此存在唯一
+
+`tau_10 in (0,1/200)`, `A_10(tau_10)=0`。
+
+R62 已给 `tau_9 in (1/100,19/500)` 且 `Q_9>0` 直到 `tau_9`；前轮还给出
+`P_7,P_8>0`。故在整个既有窗口 `0<t<tau_9` 内，
+
+`beta_10>0` 当且仅当 `0<t<tau_10`，
+
+`beta_10<0` 对 `tau_10<t<tau_9` 成立。于是得到目前最强的 canonical
+finite-stage chain：
+
+`tau_6>tau_8>tau_9>tau_10>0`。
+
+### 60.2 全局位置
+
+R63 是一个可明确陈述的 finite-stage exact-positive obstruction：即使连续
+前几级的 cubic/Favard 系数通过，degree 20 仍会把同一 canonical branch 切断。
+它没有完成 D.1，也没有推出所有固定非零 skew 最终退出；Gaussian rigidity 与
+`P_3 K` bridge 仍是独立 OPEN。下一步应从这四次 cutoff 的共同代数结构中抽取
+uniform all-even-stage lemma，而不是继续无结构地堆叠大多项式。
+
+新增本机审计为 `flat_shadow_canonical_beta10_r63/audit_r63.py`。

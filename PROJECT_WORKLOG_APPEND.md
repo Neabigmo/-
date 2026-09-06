@@ -2202,3 +2202,38 @@ computation was used.
   measure-LP, or remote computation was used.  The next unique target is a
   structural all-even-stage contraction lemma, not another unverified large
   formula.
+
+- Webpage R62 review: the qualitative cutoff conclusion agrees with the local
+  audit, including `tau9<tau8`, but the displayed formulas for `h8` and `h9`
+  were each reciprocated.  Consequently its displayed `beta9` fraction was
+  also the reciprocal of the project convention, despite the prose and the
+  Gaussian values claiming `h8=40320`, `h9=362880`, `beta9=9`.  The local
+  formulas in `flat_shadow_canonical_beta9_r62/README.md` remain authoritative;
+  this is a recorded webpage transcription error, not a change to R62.
+
+## R63 — corrected degree-20 beta10 cutoff (2026-09-06)
+
+- The degree-20 same-factor row was solved linearly and exactly for `m20`,
+  correcting the earlier exploratory truncated-series expression.  Together
+  with `alpha9=0`, the exact row checks pass at `a=0,1/10,1/5`.
+- The exact norm has the factorization `h10=A10/[(t-2)^5 P8]`, with the full
+  degree-20 `A10` recorded in `flat_shadow_canonical_beta10_r63/README.md`.
+  Hence `beta10=A10 P7/[3(t-2)P8 Q9]` and the Gaussian check is
+  `(m20,h10,beta10)=(19!!,10!,10)` at `t=0`; the local derivative is
+  `beta10'(0)=-1481/21`.
+- Exact Bernstein certificates prove `A10' > 0` on `[0,1/200]`,
+  `A10(0)<0<A10(1/200)`, `A10>0` on `[1/200,19/500]`, and the norm
+  denominator is negative on `[0,19/500]`.  Therefore a unique
+  `tau10 in (0,1/200)` exists, and because R62 gives
+  `tau9 in (1/100,19/500)`, `beta10>0` on `0<t<tau10` and
+  `beta10<0` on `tau10<t<tau9`.
+- R63 therefore establishes the finite-stage chain
+  `tau6>tau8>tau9>tau10>0`.  It still does not prove D.1, eventual skew
+  annihilation, Gaussian rigidity, or the `P_3 K` bridge.  The next target is
+  structural: explain the decreasing cutoffs without another unverified large
+  expansion.
+- Added `flat_shadow_canonical_beta10_r63/README.md` and
+  `flat_shadow_canonical_beta10_r63/audit_r63.py`.  The full audit passed,
+  including exact row checks, norm factorization, Gaussian orientation, and
+  Bernstein sign certificates; no determinant, optimizer, SDP, sweep,
+  relaxed measure-LP, or remote computation was used.
