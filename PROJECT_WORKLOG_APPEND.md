@@ -2342,3 +2342,26 @@ computation was used.
   `flat_shadow_associated_hermite_r67/audit_r67.py`. The exact audit
   passed; it does not use beta_11/degree22, determinant, optimizer, SDP, sweep,
   relaxed measure-LP, or remote computation.
+
+## R68 — D-part coefficient transfer (2026-09-07)
+
+- The webpage expanded the R66 Laplace representation into an exact parameter
+  rational kernel on the slit domain
+  `C\([1,infinity) union (-infinity,-2])`, together with an exact coefficient
+  formula for `d_n=D_n/n!`.
+- It used the D3 identity `r_0+r_1+r_2=0` to cancel the leading contribution
+  in simple-zero neighborhoods and claimed the sectorial strengthening
+  `B(w)=O(|w|^(-5))`. With the stated complex-sector contour hypotheses, this
+  gives the coefficient-level bounds `d_n=O(n^(-5/2))` and
+  `n(d_n-d_(n-1))=O(n^(-3/2))`.
+- The local record deliberately distinguishes the exact algebra from the
+  analytic hypothesis needed for contour rotation; finite Abel convergence is
+  not used as a substitute for coefficient transfer.
+- Added `flat_shadow_dpart_transfer_r68/README.md` and
+  `flat_shadow_dpart_transfer_r68/audit_r68.py`. The exact audit passed;
+  `py_compile` and `git diff --check` are the next repository checks.
+- R68 removes the D-part as the leading asymptotic obstruction under its
+  transfer hypotheses. The only remaining Gaussian-local target is the
+  associated-Hermite first difference
+  `p_(n-1)-p_n~(33 sqrt(pi)/256)n^(-3/2)`; full `Lambda_n` eventual sign and
+  D.1 remain OPEN.

@@ -5013,3 +5013,52 @@ difference 的 transfer bound。因此 eventual sign、full Lambda_n asymptotic�
 shrinking cutoff、backward divisibility 与 D.1 仍 OPEN。
 
 新增本机审计为 `flat_shadow_associated_hermite_r67/audit_r67.py`。
+
+## 65. R68：D-part 的系数级 transfer（2026-09-07）
+
+R68 在 R64–R67 的 conditional full same-factor hierarchy 下，把 R66 的
+Laplace 表示进一步展开为参数积分的有理核。记
+
+`D(z)=sum d_n z^n`、`d_n=D_n/n!`，并令
+`alpha=s(1-s)r_i^2`、`beta=t(1-t)r_j^2`、`c=alpha+beta`、
+`lambda=1-6c`。由于 `0<=c<=1/4`，有 `-1/2<=lambda<=1`，从而
+
+`D(z)=average sum_(i<j) integral q_s q_t r_i^3 r_j^3`
+`[-432 z^3/(1-lambda z)^4 + 5184 c z^4/(1-lambda z)^5`
+` -77760 alpha beta z^5/(1-lambda z)^6] ds dt`。
+
+这给出 slit domain
+`C\([1,infinity) union (-infinity,-2])` 上的参数解析延拓，并给出
+
+`d_n=average sum_(i<j) integral q_s q_t r_i^3 r_j^3`
+`[-432 binom(n,3)lambda^(n-3) + 5184 c binom(n,4)lambda^(n-4)`
+` -77760 alpha beta binom(n,5)lambda^(n-5)] ds dt`。
+
+网页端进一步利用 `r_0+r_1+r_2=0` 在三个 simple-zero 邻域的 leading
+pair cancellation，把 R66 的 `B(w)=O(w^(-4))` 强化为 sectorial
+`B(w)=O(|w|^(-5))`。若相应的 complex-sector contour rotation 假设成立，
+则 `f(u)=B(sqrt(6u))` 有两个绝对矩，Laplace 余项为
+`O(|1-z|^(3/2))`，Cauchy–Hankel transfer 给出
+
+`d_n=O(n^(-5/2))`，
+`n(d_n-d_(n-1))=O(n^(-3/2))`。
+
+本机 `flat_shadow_dpart_transfer_r68/audit_r68.py` 精确核验了 u 次幂积分的
+1296、15552、233280 常数、z-有理核常数、系数提取、slit 域端点、D3 根的
+抵消几何、两矩余项的 `3/2` 标度以及 transfer 指数。需要保留的边界是：
+有限 Abel 极限本身不能推出系数界；R68 的 full Delta-domain 结论依赖其明确
+写出的复扇区增长与 contour-rotation 条件，若具体 formal model 尚未逐项验证，
+则 `O(n^(-5/2))` 应按该条件性理解。
+
+在这些条件下，R67 的投影平方根律终于得到 coefficient-level 合并：
+
+`kappa_n=d_n-p_n ~ -(33 sqrt(pi)/128)n^(-1/2)`，
+但
+`Lambda_n=n(p_(n-1)-p_n)+O(n^(-3/2))`。
+
+因此 full `Lambda_n` 的 eventual sign 仍 OPEN；唯一剩余目标收缩为证明
+`p_(n-1)-p_n ~ (33 sqrt(pi)/256)n^(-3/2)`。这会关闭 Gaussian-local
+quadratic-response 的符号问题，但仍不会单独证明 D.1；它只会排除由大 n
+Gaussian-local negative slope 驱动 shrinking cutoff 的机制。
+
+新增本机审计为 `flat_shadow_dpart_transfer_r68/audit_r68.py`。
