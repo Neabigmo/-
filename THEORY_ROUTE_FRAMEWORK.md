@@ -4317,3 +4317,74 @@ eventual-diagonal skew annihilation。
 先读取框架、工作日志与 R36–R56 README/audit，直接寻找 all-degree invariant、
 真正 full-exact counterexample，或可由 backward-OU positivity 提供的最弱
 tail-transfer 条件。
+
+## 54. R57：从 factorial escape 转向 canonical viability（2026-09-06）
+
+R57 完成了本段最重要的路线修正。对 positive canonical exact branch，
+moving product Gauss measure 上 `Q_n>=0`，所以
+
+`0<delta_n<=2^n n!`，`delta_n=c_n h_n`、`c_n=3(2/3)^n` 给出
+
+`0<h_n<=3^(n-1)n!`。
+
+因此只要所有前级 `beta_n>0`，factorial-exponential envelope 自动成立，
+甚至不需要 R12。`m_3!=0 => envelope failure` 不可能成为 D.1 的证明。
+真正二分被压缩为
+
+`finite sign exit: delta_n<=0 (equiv. beta_n<=0)`
+
+或
+
+`infinite positive exact viability: delta_n>0 for all n`。
+
+第二项若成立，R53 的 Favard/Hamburger 机制才会产生 genuine full-exact
+positive law；它不是 finite prefix，也仍不自动处理 backward-OU tower。
+
+### 54.1 可审计的 finite-stage skew family
+
+令 `a=m_3`、`t=a^2`，取 canonical `alpha_2=-a`、`alpha_n=0 (n>=3)`。
+网页端给出的前几阶矩为
+
+`m_4=3, m_5=4a, m_6=15+7a^2, m_7=15a,`
+`m_8=105+4a^2,`
+`m_9=a(96-112a^2-49a^4)/(2-a^2),`
+`m_10=945-234a^2`。
+
+monic recurrence 给出
+
+`pi_2=x^2-a x-1, pi_3=x^3-3x-a,`
+`h_2=2-a^2, h_3=6(1+a^2)`。
+
+本机约定 `beta_n=h_n/h_(n-1)`，故
+
+`beta_2=2-a^2, beta_3=6(1+a^2)/(2-a^2)`。
+
+后续 `beta_4=h_4/h_3`、`beta_5=h_5/h_4` 由本机符号审计直接重算，避免
+浏览器纯文本分式倒置。`a=1/10` 时 `beta_2,...,beta_5` 全正，说明
+非零 skew 不会在前五级 exact/canonical rows 自动消失；这仍只是
+finite-stage family，`beta_6,beta_7,...` 与 full-exact infinite viability
+继续 OPEN。
+
+### 54.2 backward-OU positivity 的真实贡献
+
+若 `mu=P_lambda nu`、`0<lambda<1`，对任意 monic degree-`n` polynomial，
+条件 Gaussian Hermite 分解给出
+
+`h_n(mu)>= (1-lambda)^n n!`。
+
+结合 `G_2=0` 的 `h_2=2-m_3^2`，得到严格的
+
+`m_3^2<=2lambda(2-lambda)`。
+
+所以若有 arbitrarily-deep positive OU divisibility `lambda_j->0`，则
+`m_3=0`；固定因子的无限兼容 backward tower 满足此条件。这是一个干净
+的 conditional skew-annihilation lemma，但不等同于 single eventual-zero
+diagonal 的 D.1，也不关闭 Gaussian rigidity 或 `P_3 K` bridge。
+
+本机新增 `flat_shadow_canonical_viability_r57/audit_r57.py` 与 README，审计
+finite-stage moments、Jacobi beta orientation、`a=1/10` 的前五级正性、
+positive-branch upper envelope 与 OU norm bound。R57 明确关闭的是
+factorial-growth 路线，不是 D.1；下一轮唯一主攻应是 surviving
+`0<a^2<32-12sqrt(7)` 中 moving `delta_n(a)` 的有限变号，或证明其存在
+infinite positive exact chain。相关 theorem 仍需与 Gaussian rigidity、
+`P_3 K` bridge 分开。

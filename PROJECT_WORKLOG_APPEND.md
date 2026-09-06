@@ -2021,3 +2021,38 @@ computation was used.
   R36–R56 README/audits.  The next target is one concrete all-degree invariant,
   a genuine full-exact positive counterexample, or a weakest tail-transfer
   condition supplied by backward-OU positivity.
+
+## R57 — canonical viability replaces factorial escape (2026-09-06)
+
+- R57 was sent and completed in the same Project conversation.  It corrected
+  the R56 growth route in a stronger way: on any positive canonical exact
+  prefix, `Q_n>=0` gives `0<delta_n<=2^n*n!`; with
+  `delta_n=3*(2/3)^n*h_n`, this implies
+  `0<h_n<=3^(n-1)*n!`.  Thus all-positive viability automatically satisfies
+  the factorial envelope, so nonzero `m_3` cannot force growth escape.
+- The real global dichotomy is now finite sign exit
+  (`delta_n<=0`, equivalently `beta_n<=0`) versus an infinite positive exact
+  chain.  The latter would be promoted by the R53 Favard/Hamburger mechanism
+  to a genuine full-exact positive law; it is not a finite-prefix artifact.
+- R57 supplied a finite-stage canonical skew family with `a=m_3`,
+  `alpha_2=-a`, `alpha_n=0` for `n>=3`, and
+  `m_4=3`, `m_5=4a`, `m_6=15+7a^2`, `m_7=15a`,
+  `m_8=105+4a^2`,
+  `m_9=a*(96-112a^2-49a^4)/(2-a^2)`,
+  `m_10=945-234a^2`.  Local recurrence recomputation fixes
+  `beta_2=2-a^2`, `beta_3=6*(1+a^2)/(2-a^2)` and verifies all computed
+  `beta_2,...,beta_5` are positive at `a=1/10`; this is finite-stage only.
+- A separate exact conditional result from backward-OU positivity is
+  `h_n(mu)>=(1-lambda)^n*n!` for `mu=P_lambda nu`, hence from `G_2=0`,
+  `m_3^2<=2*lambda*(2-lambda)`.  Arbitrarily deep positive OU divisibility
+  forces `m_3=0`; this remains distinct from the single eventual-zero
+  diagonal problem and from Gaussian rigidity/P3K.
+- Added `flat_shadow_canonical_viability_r57/audit_r57.py` and README.  The
+  local audit is intended to pass the finite moments, beta orientation,
+  finite-stage positivity, positive-branch upper envelope, and OU inequality;
+  it explicitly leaves finite sign exit, infinite positive viability, D.1,
+  eventual skew annihilation, Gaussian rigidity, and P3K OPEN.
+- No determinant, optimizer, SDP, sweep, relaxed measure-LP, or remote
+  computation was used.  Before R58, read the updated framework, worklog, and
+  R36–R57 README/audits.  The next target is the moving-deficit zero-set on
+  the surviving skew interval, not another factorial-growth argument.
