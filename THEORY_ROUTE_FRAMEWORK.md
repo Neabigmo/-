@@ -6991,3 +6991,105 @@ R97 本机记录目录为 `flat_shadow_background_centered_r97/`，审计目标�
 `R97_BACKGROUND_CENTERED_AUDIT_COMPLETED`。background-relative `W_n` norm、
 `g2` 全 gap sum、hybrid `gamma` feedback、global positivity、positive
 backward tower、backward OU divisibility 与 `FS_3` 继续标为 OPEN。
+
+### 9.6 网页端 R97 强化：relative Jacobi norm 与 (g_2) growing-gap theorem
+
+网页端随后给出了比本机初始 R97 摘要更强、也更适合主路线的版本。令
+
+`w_a=1+a g_1+a^2g_2`、`delta_a=|a|M_1+a^2M_2<1`、
+`d mu_a=w_a d gamma`，并对 `G_(0,n)` 做 monic Gram--Schmidt。若 `C_(0,n)`
+为所得 unit-lower factor、`D_(0,n)=diag(d_k)`，则 exact recursion 是
+
+`u_k=-(G_(0)^[k-1])^(-1)b_k`、
+`phi_k=e_k+sum_(j<k)(u_k)_j e_j`、
+`d_k=<phi_k,phi_k>_(mu_a)`、
+`C_(0,n)G_(0,n)C_(0,n)^*=D_(0,n)`。
+
+由 `1-delta_a <= w_a <= 1+delta_a` 得
+
+`1-delta_a <= d_k <= 1+delta_a`，
+`||C_(0,n)||op,||C_(0,n)^(-1)||op <= sqrt((1+delta_a)/(1-delta_a))`。
+
+这一步是 horizon-uniform 的 exact background absorption，但不声称
+`C_(0,n)` 在原始 gap-Wiener 范数中有界。
+
+定义 `S_(0,n)=D_(0,n)^(-1/2)C_(0,n)` 与
+`bar E_n=S_(0,n)Hcal_n(h)S_(0,n)^*`。令
+`h^[2n]=sum_(m<=2n)eta_m e_m`、`r_(a,n)=h^[2n]/w_a`，再令
+`p_(a,n)[h]=Pi_(<=2n)^(mu_a) r_(a,n)`。由于
+`deg(psi_i psi_j)<=2n`，有 exact identity
+
+`(bar E_n)_(ij)=int p_(a,n)[h] psi_i psi_j d mu_a`。
+
+若 `p_(a,n)[h](x)=sum_m b_m x^m`，背景 Jacobi 矩阵 `J_a` 满足
+
+`||J_a^[N]||op <= 2 sqrt(kappa_a) sqrt(N+1)`,
+`kappa_a=(1+delta_a)/(1-delta_a)`，
+`||J_a^[N]||_(W) <= 6 sqrt(kappa_a) sqrt(N+1)`。
+
+于是对 `R_(a,n)=6 sqrt(kappa_a) sqrt(3n+1)` 定义
+
+`P_(a,n)(h)=sum_(m<=2n)|b_m|R_(a,n)^m`，即可得到实际的
+background-centered bound
+
+`||bar E_n||_(W_n) <= P_(a,n)(h)`。
+
+这不是把 `C_(0,n)` 粗暴地当作原始 Wiener multiplier，而是把 residual
+精确改写成背景正交多项式基下的 polynomial multiplier。代入 exact centered
+equation 后，若 `P_(a,n)(h)<=1/64`，R95 的同一标量估计给出
+
+`q_contr<=97/1024<1`、`||tilde L_n||_(W_n)<=2P_(a,n)(h)`，以及
+`||L_n||_(W_n)<=2 sqrt(kappa_a) P_(a,n)(h)`。
+
+因此固定非零 `a` 的 all-degree positivity 有明确的 conditional criterion：
+
+`delta_a<1` 且 `sup_n P_(a,n)(h(a))<=1/64`
+
+推出 `G_n(a)>0` 对所有 `n`。条件性只剩 actual same-factor branch 是否进入
+这个 relative-background ball，Gram/triangular 代数本身已闭合。
+
+对 quadratic background，令 `N e_k=k e_k`。精确交换子恒等式为
+
+`[N,M_g]=M_(Ng)-2M_(g') partial_x`，
+
+`ad_N^2(M_g)=M_(N^2g)-2M_((Ng)')partial_x-2M_(N(g'))partial_x
+ +4M_(g'')partial_x^2+2M_(g')partial_x`。
+
+因此若
+
+`C_2(g)=||N^2g||_infty+2|| (Ng)'||_infty+2||N(g')||_infty
+       +4||g''||_infty+2||g'||_infty`，
+
+则 `||P_n ad_N^2(M_g)P_n||<=C_2(g)(n+1)`，并对 `d!=0` 有
+
+`||Delta_d Hcal_n(g)|| <= C_2(g)(n+1)/d^2`。
+
+R80 四项 Gaussian block 在 `alpha->0` 时仍由同一
+`alpha^(-3)` endpoint majorant 控制，且 signed weight 满足
+`|w|alpha^(-3)=q_s q_u A^(3/2)B^(3/2)/(Aq_s+Bq_u)^3`；故 `C_2(g_2)<infinity`
+是 endpoint-safe 的解析结论（本机审计核对代数与求和，不冒称已独立证明全部
+端点微分常数）。和 R96 的 per-gap `M_2` 合并，得到
+
+`||Delta_d B_n^(2)|| <= min{M_2,C_2(g_2)(n+1)/d^2}`。
+
+从而 proportional-gap tail 对 `D=ceil(delta(n+1))` 满足
+`sum_(|d|>=D)||Delta_d B_n^(2)|| <=4C_2(g_2)/delta`，并且
+
+`||B_n^(2)||_(W_n) <= 3M_2+4 sqrt(M_2 C_2(g_2)(n+1))=O(sqrt n)`。
+
+这是严格优于此前 `O(n)` 的 growing-gap theorem；尚不能推出 `B_2^triangle<infinity`。
+剩余未知窗口已精确压缩到 `1<<d<<n`，交叉尺度为 `d~sqrt n`。要得到绝对 gap
+可和性，仍需 uniform 的 `C/(1+d)^(1+epsilon)` 或可求和的 two-parameter envelope。
+
+最后，对 unit odd mode 定义 `Gamma_(a,n,j)=P_(a,n)(h^(j))`，并取
+`v_(a,n,j)=w_j+Gamma_(a,n,j)`。R92/R93 已证
+`C_w=sup_(n,j)w_j^(-1)sum_k w_k|K_(k,j)^(n)|<infinity`；新的、未证但精确的
+Gram-transfer 条件是
+
+`C_Gamma(a)=sup_(n,j)Gamma_(a,n,j)^(-1)sum_kGamma_(a,n,k)|K_(k,j)^(n)|<infinity`。
+
+若该条件成立，则 hybrid column norm 不超过 `max(C_w,C_Gamma(a))`；否则必须
+从实际 mode 构造 lower obstruction或改用相对背景权重。故当前大路线明确分层：
+relative finite-horizon Gram theorem 与 `g_2` growing-gap bound 为 PROVED；
+actual branch 的 relative hybrid invariance、`C_Gamma`、mesoscopic `g_2` envelope、
+global positivity、positive backward tower、backward OU divisibility 与 `FS_3` 仍 OPEN。

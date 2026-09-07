@@ -3314,3 +3314,42 @@ computation was used.
   施加到完整 branch 为 CONDITIONAL；uniform background-centered `W_n`
   comparison、`g2` gap sum、hybrid feedback、global positivity、positive
   infinite tower、backward OU divisibility、`FS_3` 仍 OPEN。
+
+## R97 网页端强化记录：relative Jacobi geometry 与 quadratic growing-gap（2026-09-07）
+
+网页端在上述本机 R97 摘要基础上补出了主路线所需的更强结构；本机只核验有限
+递归、交换子代数与 min-envelope 求和，不把端点 `C_2(g_2)<infinity` 的全部解析
+常数冒称为独立机器证明。
+
+- 对 `w_a=1+a g_1+a^2g_2`、`delta_a=|a|M_1+a^2M_2<1`，在
+  `d mu_a=w_a d gamma` 下做 exact monic Gram--Schmidt：
+  `u_k=-(G_0^[k-1])^(-1)b_k`、`phi_k=e_k+sum_(j<k)(u_k)_j e_j`、
+  `C_0G_0C_0^*=D_0`，并得到 `1-delta_a<=D_0<=1+delta_a` 与 horizon-uniform
+  operator conditioning。没有使用 determinant。
+- 正确的 centered residual 是
+  `bar E=S_0 Hcal_n(h)S_0^*`，其中 `S_0=D_0^(-1/2)C_0`；在有限 horizon 上，
+  `h/w_a` 可由 `p_(a,n)[h]=Pi_(<=2n)^(mu_a)(h^[2n]/w_a)` 精确替换。若
+  `p_(a,n)[h]=sum b_m x^m`，背景 Jacobi 矩阵给出
+  `P_(a,n)(h)=sum|b_m|[6 sqrt(kappa_a) sqrt(3n+1)]^m` 以及
+  `||bar E_n||_(W_n)<=P_(a,n)(h)`。
+- 因而 `P_(a,n)(h)<=1/64` 时，normalized centered equation 的 contraction 常数
+  仍为 `97/1024<1`，`||tilde L_n||_(W_n)<=2P_(a,n)(h)`；返回原单项式归一化时
+  `||L_n||_(W_n)<=2 sqrt(kappa_a)P_(a,n)(h)`。若 `sup_nP_(a,n)(h(a))<=1/64`，
+  则 fixed nonzero `a` 的 all-degree Gram positivity 成为 conditional theorem。
+- 对 `g_2`，精确二阶 number-operator commutator 给出
+  `||Delta_d B_n^(2)||<=min{M_2,C_2(g_2)(n+1)/d^2}`。R80 端点的
+  `alpha^(-3)` 与 signed weight 的精确抵消被保留，因此 proportional gaps 的尾部
+  uniform bounded；min-envelope 求和进一步给出
+  `||B_n^(2)||_(W_n)<=3M_2+4 sqrt(M_2 C_2(g_2)(n+1))=O(sqrt n)`，严格优于
+  R96 的 `O(n)`，但仍不足以决定 `O(1)`、`Theta(log n)` 或其他次线性增长。
+- hybrid transfer 的正确新增量是
+  `Gamma_(a,n,j)=P_(a,n)(h^(j))`、`v_(a,n,j)=w_j+Gamma_(a,n,j)`，以及
+  `C_Gamma(a)=sup_(n,j)Gamma_(a,n,j)^(-1)sum_kGamma_(a,n,k)|K_(k,j)^(n)|`。
+  R92/R93 的 `C_w` 已证；若 `C_Gamma(a)<infinity`，则 hybrid column norm 不超过
+  `max(C_w,C_Gamma(a))`。`C_Gamma`、relative nonlinear invariance、`g_2`
+  mesoscopic envelope、global positivity、positive backward tower、backward OU
+  divisibility 与 `FS_3` 仍 OPEN。
+
+本段对应网页 R97 的实际强化结论；本机审计目标仍为
+`R97_BACKGROUND_CENTERED_AUDIT_COMPLETED`，并应复跑 R95/R96 审计以确认记录未破坏既有
+精确核验链。
