@@ -7217,5 +7217,72 @@ R71 切向生成函数满足 `U(z)=z^3/6+O(z^5)`。因此 R80 二阶方程
 `||Delta_6 B_n^(2)||>=7sqrt(5)/60`；加上负 gap 后
 `||B_n^(2)||_(W_n)>=7sqrt(5)/30`。
 
+更精确地，最低 degree-six mode 给出完整 boundary corner：当 `i+j=6` 时，
+`(B_n^(2))_(i,6-i)=eta_6 sqrt(binomial(6,i))`。所以 gaps `6,4,2,0` 的
+首个 boundary entries 分别为 `eta_6,sqrt(6)eta_6,sqrt(15)eta_6,
+sqrt(20)eta_6`。这是 finite-degree corner certificate，不是 mesoscopic
+growth conclusion；它只排除 all-even-gap cancellation，仍不决定 `g2` 的
+全 gap 增长。
+
 这是 **PROVED exact lower anchor**，只排除 all-even-gap cancellation，
 不决定 `g2` 的全 gap 增长；`O(1)`、`Theta(log n)` 及其它 mesoscopic 行为仍 **OPEN**。
+
+### 9.11 R99：positive backward-OU Hermite cone
+
+本轮把“positive backward preimage 对高 Hermite coefficients 的约束”写成了
+一个 exact finite-dimensional cone。令 `psi_m=He_m/sqrt(m!)`，
+`a_m(g)=E_g psi_m`，并设 `g=P_t h`，其中 `h d gamma` 是正的 centered
+variance-one probability law。由于 OU multiplier 是 `t^(m/2)`，
+`b_m(h)=t^(-m/2)a_m(g)`。于是每个有限 Gram block 都满足
+
+`M_t(g)=[E_h(psi_i psi_j)]_(0<=i,j<=r) >=0`,
+
+且 product formula 给出
+
+`(M_t(g))_(ij)=sum_(ell=0)^[min(i,j)]
+ ell! binom(i,ell)binom(j,ell)
+ sqrt((i+j-2ell)!/(i!j!))
+ t^(-(i+j-2ell)/2)a_(i+j-2ell)(g)`.
+
+这是真实正 preimage 的 moment cone，而不是 operator-only 反例。若 `h` 是
+`L^2(gamma)` 密度，任意有限 block 实际为正定：非零多项式的零集为
+Lebesgue 零集，不能在正概率密度上使其平方积分为零。
+
+取 principal minor `(0,m)` 得高阶墙
+
+`a_m(g)^2 <= sum_(ell=0)^m c_(m,ell)t^ell a_(2m-2ell)(g)`,
+
+`c_(m,ell)=m!sqrt((2m-2ell)!)/(ell!(m-ell)!^2)`。
+
+在 centered variance-one 情形，`a_1=a_2=0`，低阶两条明确为
+
+`a_4(g)>-t^2/sqrt(6)`,
+
+`a_4(g)>(3t^(-1)a_3(g)^2-t^2)/sqrt(6)`,
+
+以及独立的 `(0,3)` 墙
+
+`a_3(g)^2<2sqrt(5)a_6(g)+3sqrt(6)t a_4(g)+t^3`。
+
+第二条等价于 raw centered moments 的 exact inequality
+
+`m_3(g)^2<t(m_4(g)-3+2t^2)`.
+
+若是深度 `N` 的固定因子塔，`g^(0)=P_(q^N)g^(N)`，只需令 `t=q^N`。
+特别地
+
+`a_4(g^(0))>-q^(2N)/sqrt(6)`,
+
+且若 `a_4(g^(0))<=0`，则
+`|a_3(g^(0))|<q^(3N/2)/sqrt(3)`。
+
+这给出了一个可报告的 local backward-divisibility theorem：深度不能让一个
+固定负的 fourth-Hermite defect 留在底层；若底层 excess kurtosis 非正，
+skewness 甚至按 `q^(3N/2)` 衰减。它尚未连接 `P_3 K`，因为 third Hermite
+moment 与 projected cubic charge 仍是不同对象；也不能把该锥约束冒充完整
+zero-set rigidity。真正的下一步是从 same-factor exact-zero identity 中抽取
+`a_3,a_4,a_6` 的关系，再将其代入这组严格 cone walls。
+
+本节的本机审计为 `positive_backward_hermite_cone_r99/audit_r99.py`，状态为
+`R99_POSITIVE_BACKWARD_HERMITE_CONE_AUDIT_COMPLETED`。Gaussian rigidity、
+`P_3K` bridge、mesoscopic tail 与 fixed nonzero branch 仍 **OPEN**。

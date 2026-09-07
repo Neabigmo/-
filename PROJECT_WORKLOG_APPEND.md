@@ -3427,3 +3427,34 @@ computation was used.
   `eta_6,sqrt(6)eta_6,sqrt(15)eta_6,sqrt(20)eta_6`。这是 finite-degree
   corner certificate，而不是 mesoscopic growth conclusion；审计新增
   `R98_G2_DEGREE6_CORNER_PASSED`。
+
+# 2026-09-07 — R99 positive backward-OU Hermite cone
+
+- 本轮没有把正性停留在抽象口号，而是对 genuine backward pair `g=P_t h`
+  写出 exact finite Gram cone。若 `a_m(g)=E_g[He_m/sqrt(m!)]`，则每个
+  `M_t(g)=[E_h(psi_i psi_j)]` 都是 PSD，其条目由 Hermite product formula
+  精确给出；对 `L^2(gamma)` 正密度实际为正定。该结论直接使用了 positive
+  preimage，不是 operator-only 例子。
+- `(0,m)` principal minor 给出高阶 cone wall
+  `a_m^2 <= sum_ell c_(m,ell)t^ell a_(2m-2ell)`，其中
+  `c_(m,ell)=m!sqrt((2m-2ell)!)/(ell!(m-ell)!^2)`。这是可反复代入
+  same-factor exact-zero 关系的统一接口。
+- centered variance-one 下，`[psi_1,psi_2]` block 给出严格 skew/kurtosis
+  墙 `a_4>(3t^(-1)a_3^2-t^2)/sqrt(6)`，等价于
+  `m_3^2<t(m_4-3+2t^2)`；`[psi_0,psi_3]` block 给出独立 sixth-order
+  墙 `a_3^2<2sqrt(5)a_6+3sqrt(6)t a_4+t^3`。
+- 对 depth-`N` fixed-factor tower 令 `t=q^N`，得到
+  `a_4(g^(0))>-q^(2N)/sqrt(6)`；若 `a_4(g^(0))<=0`，则
+  `|a_3(g^(0))|<q^(3N/2)/sqrt(3)`。这是一个 genuine quantitative local
+  theorem，但 third Hermite moment 与 `P_3K` charge 尚未桥接。
+- 新增 `positive_backward_hermite_cone_r99/README.md` 与 `audit_r99.py`。
+  本机 exact audit 通过 `R99_HERMITE_PRODUCT_FORMULA_PASSED`、
+  `R99_POSITIVE_BACKWARD_GRAM_CONE_PASSED`、
+  `R99_DEGREE34_SKEW_KURTOSIS_WALL_PASSED`、
+  `R99_DEGREE36_SIXTH_ORDER_WALL_PASSED`、
+  `R99_DEPTH_N_SPECIALIZATION_PASSED`、
+  `R99_POSITIVE_BACKWARD_HERMITE_CONE_AUDIT_COMPLETED`。
+- 证据边界：没有推出 Gaussian rigidity、`P_3K` charge-to-cone bridge、
+  mesoscopic tail 或 fixed nonzero branch closure；这些继续 OPEN。下一轮应
+  从 same-factor exact-zero identity 提取 `a_3,a_4,a_6` 关系并代入 R99 cone，
+  而不是继续无结构地增加 radial 系数展开。
