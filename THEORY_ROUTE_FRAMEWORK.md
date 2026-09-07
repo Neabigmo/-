@@ -9744,3 +9744,65 @@ defect propagation、`Gamma_M->0`，以及 positive/backward-OU 条件下由
 `P_3K\ne0` 到 exact-zero-set rigidity 的完整推出。R131 应以这条已复核的
 显式 gap 为输入，先构造 normalized kernel-defect recurrence，再测试其是否
 能给出随阶数增长而不被 `4^M M!` 吞掉的 coercivity。
+
+# 2026-09-08 — R131 normalized Jacobi/Hankel coercivity interface
+
+网页端 R131 在读取 `11ebfac` 后完成了一轮新的理论推进。本机新增
+`r131_normalized_defect_audit/`，并把结论严格分层。
+
+对 genuine density `dmu=g dgamma`，若 `g>=0`、`g in L^2(gamma)`，令
+`epsilon=||g-1||_2`。Gaussian hypercontractivity 的 degree-`m` 形式
+`||p||_4<=3^(m/2)||p||_2` 给出
+
+`(1-epsilon 3^m)||p||_gamma^2 <= ||p||_mu^2
+ <= (1+epsilon 3^m)||p||_gamma^2`。
+
+因此 `epsilon 3^m<1` 时，normalized Hermite Gram 满足
+`||G_m^mu-I||_op<=epsilon 3^m`；若 `h_k^mu` 是 monic orthogonal norm，
+则 `(1-delta_k)k!<=h_k^mu<=(1+delta_k)k!`、`delta_k=epsilon3^k`，并有
+
+`k(1-delta_k)/(1+delta_(k-1)) <= beta_k
+ <= k(1+delta_k)/(1-delta_(k-1))`。
+
+这是 `PROVED`（以标准 Gaussian hypercontractivity 为输入）的 genuine
+`L^2` coercivity 结果；它不是 relaxed finite Hankel ghost 的结论。固定
+shift `j` 后，Gaussian multiplication 给
+`||x^j p||_mu^2 <= 4^j (m+j)!/m! · (1+delta_(m+j))/(1-delta_m)
+·||p||_mu^2`，解释了为什么在 genuine near-Gaussian 窗口内是 polynomial-in-
+`m` 的 fixed-shift growth，而 raw cap `4^m m!` 不足以传播一个小 kernel defect。
+
+网页端还给出并由本机精确审计了三个无扫描的 algebraic interfaces：
+
+1. `R_7` 的 exact row 为 `E Q^7=(128/729)y_14+P_7(y_0,...,y_12)`，
+   `y_13` 完全缺席；一般地，`Q^(m+1)` 的总次数为 `2m+2`，若出现
+   `y_(2m+1)`，其余指数和为 1，因 `y_1=0` 而消失。这是 `PROVED` 的
+   top-odd invisibility。
+2. 对 flat rank-`r` 的 `H_m`，kernel generator `p` 的 shifted compatibility
+   `C_j=sum_i p_i y_(m+1+j+i)=0` 中，`j=0,...,m-r-1` 不含新 top odd
+   `y_(2m+1)`，只有 `j=m-r` 的系数为 monic coefficient `1`。因此有
+   `m-r` 条 frozen equations，至多一条可调 odd equation，之后 exact row
+   固定 `y_(2m+2)`，再检查 generalized Schur defect。这是 `PROVED` 的 flat
+   kernel freedom count；singular non-flat ghost 仍应使用 kernel-compression
+   Schur lemma，不能擅自套用 flat ideal。
+3. normalized Hermite Gram determinant `D_k` 与 Jacobi coefficient 满足
+   `h_k/k!=D_k/D_(k-1)`、`beta_k/k=D_kD_(k-2)/D_(k-1)^2`。故 normalized
+   recurrence defect 等价于 Gram determinant 的离散二阶曲率。
+
+本机 marker：`R131_R7_TOP_ODD_INVISIBILITY_PASSED`、
+`R131_HERMITE_DETERMINANT_JACOBI_DICTIONARY_PASSED`、
+`R131_FLAT_KERNEL_ODD_FREEDOM_COUNT_PASSED`、
+`R131_OU_CUBIC_EIGENSCALING_INTERFACE_PASSED`、
+`R131_NORMALIZED_DEFECT_AUDIT_COMPLETED`。
+
+必须降级的一点是：网页端使用了
+`||P_(rho^N)h_N-1||_2=O(rho^(3N/2))` 的 uniform tower 假设来推出
+`m=theta N` 的 growing Jacobi window。当前本机已有 R57 直接支持的是
+`m_3^2<=2lambda(2-lambda)`，这不足以自动给出整段 `L^2` smoothing。因此
+该 growing-window corollary 标为 `CONDITIONAL`，不能列入无条件主定理。
+
+当前真正的 OPEN 已被压缩为：证明或构造反例说明 uniform `L^2` smoothing，
+并建立一个 same-factor separation：非零 `P_3K` 必在
+`k<=c log(1/||g-1||_2)` 的 normalized Jacobi/Gram 曲率上产生固定缺陷。
+若该桥成立，R131 的 `epsilon3^m` 窗口即可与之矛盾；否则仍不能从
+`m_3=0` 偷换到 `P_3K=0`，也不能完成 positive backward-OU exact-zero-set
+rigidity。

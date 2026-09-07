@@ -4769,3 +4769,40 @@ R129 的 `p,xp` 机制提升为可推广的 kernel-compression Schur proposition
 下一轮 R131：先对 normalized/orthogonal-polynomial kernel defect 建立不受
 `4^M M!` raw cap 淹没的递推，再尝试把有限层显式 gap 连接到
 positive/backward-OU exact-zero-set 主命题。
+
+# 2026-09-08 — R131 normalized defect 推进与条件边界
+
+网页端 R131 已完成一轮实质推导。本机新增
+`r131_normalized_defect_audit/` 并通过 `R131_NORMALIZED_DEFECT_AUDIT_COMPLETED`。
+
+在 genuine `dmu=g dgamma`、`g>=0`、`g in L2(gamma)` 且
+`epsilon=||g-1||_2` 时，Gaussian hypercontractivity 给出 degree-`m` 的
+Hermite Gram coercivity：
+
+`||G_m^mu-I||_op<=epsilon 3^m`。
+
+于是 monic Jacobi norm 和 recurrence coefficient 满足
+`(1-delta_k)k!<=h_k<=(1+delta_k)k!`、`delta_k=epsilon3^k`，以及
+`beta_k/k` 的显式上下界。固定 shift `j` 时，
+`||x^j p||_mu^2` 只带 `4^j(m+j)!/m!` 的 fixed-shift 多项式增长，解释了
+为什么 normalized basis 比 raw `4^m m!` cap 更适合传播 kernel defect。
+
+本机 exact audit 还确认：
+
+- `R7` 的新最高奇矩 `y13` 不出现在 exact row，且 `y14` 系数为 `128/729`；
+- flat rank-`r` 的 `H_m` 延拓有 `m-r` 条 frozen compatibility 方程，只有
+  最后一条能看见 monic 的新 top odd moment；
+- Hermite Gram determinant 与 Jacobi recurrence 的字典精确成立；
+- OU 三阶 Hermite eigen-scaling 接口精确成立。
+
+这些结果的等级是 `PROVED`（超收缩性作为标准分析输入）。但网页端进一步使用的
+uniform 断言 `||P_(rho^N)h_N-1||_2=O(rho^(3N/2))` 当前没有在本机既有记录中
+独立闭合；R57 直接已有的是 `m3^2<=2lambda(2-lambda)`。所以 growing
+Jacobi window 及其对 positive backward-OU 的使用暂记 `CONDITIONAL`，不把
+整段 `L2` 速率伪装成已证。
+
+R131 将剩余主问题精确压缩为一个可发表的桥接目标：证明非零 `P3K` 的 genuine
+same-factor exact solution 必在 `k<=c log(1/||g-1||_2)` 内制造固定的
+normalized Jacobi/Gram recurrence defect；这与
+`||G_m-I||<=epsilon3^m` 将直接矛盾。该 separation、`P3K` 与 `m3` 的零集
+关系、以及 full positive backward-OU rigidity 仍为 `OPEN`。

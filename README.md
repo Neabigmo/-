@@ -12,6 +12,8 @@
 6. `singular_extension_compatibility_r128/README.md`：纠正后的 M=5 singular ghost 延拓。
 7. `r129_m6_exact_extension_audit/README.md`：M=6 exact row、H6 compatibility 和全局严格 relaxed bound。
 8. `r130_m6_gap_audit/README.md`：M=6 的显式有理区间 gap 证书。
+9. `r130_web_gap_audit/README.md`：网页端强 gap 的本机补证与常数审计。
+10. `r131_normalized_defect_audit/README.md`：genuine (L^2) 归一化缺陷接口与 M=7 exact algebra。
 
 ## 分支体系
 
@@ -31,7 +33,8 @@
 - R128：正确归一化下 `\widehat\Gamma_5=\widehat\Gamma_4=c_4` 的 relaxed singular non-flat ghost 已通过本机审计；`\Gamma_5` 是否等于该值仍为 OPEN。
 - R129：R6 原始展开、R2–R5 消元及 H5→H6 kernel compatibility 已通过精确审计；R128 ghost 无 PSD H6 延拓。结合 R125 紧性与 R127 等号分类，已解析推出有限层严格界 `\widehat\Gamma_6<c_4`，并因此有 `\Gamma_6\le\widehat\Gamma_6<c_4`。
 - R130：本机初证先给出 `\widehat\Gamma_6\le1.0535`；随后网页端给出更强的 endpoint-neighborhood 证书，经本机 `r130_web_gap_audit` 补齐常数后解析通过：`c_4-\widehat\Gamma_6>25/28196\approx8.8665\times10^{-4}`，故 `\widehat\Gamma_6<1.052702`。这仍是 relaxed finite-level 上界，不是 `\widehat\Gamma_6` 的精确值，也没有关闭 genuine 或正性/反向 OU 主线。
-- 当前下一步：细分有理盒以锐化 gap，或把已验证的 kernel-compression/recurrence-defect 机制归一化后推广到高阶，再回到全局的 positive/backward-OU 主线。
+- R131：对 genuine `d\mu=g d\gamma`、`g\in L^2(\gamma)`，`\varepsilon=\|g-1\|_2` 时，次数 `m` 的 Hermite Gram 满足 `\|G_m-I\|_{op}\le\varepsilon3^m`（以 Gaussian hypercontractivity 为标准输入），从而得到 normalized Jacobi coercivity；M=7 的最高奇矩不可见和 flat kernel 的 odd-freedom 计数也已精确审计。反向 OU 的整段 `L^2` 速率仍只记为 CONDITIONAL，不能由三阶矩缩放自动推出。
+- 当前下一步：严格补出或否定 uniform backward-OU `L^2` smoothing 假设，寻找 `P_3K\ne0` 强迫 normalized recurrence defect 的 same-factor separation，再把该桥接定理接回 positive/backward-OU 主线。
 
 ## 证据等级
 
