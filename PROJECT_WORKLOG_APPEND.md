@@ -3672,3 +3672,30 @@ computation was used.
   只给出相反的三角不等式方向。`RK=1` 到 genuine full-exact 仍
   **CONDITIONAL**；asymmetric exact-law exclusion、even sector 与最终
   positive backward-tower theorem 仍 **OPEN**。
+
+# 2026-09-07 — R106 Exact-constrained Bochner phase lift
+
+- 网页端先按本机 R105 基线审查了候选反向模长上界。令
+  `F_y=prod_j phi(a_j(theta)y)=r_y exp(iV_y)`、`A=<r_y>`、
+  `g=exp(-y^2/2)`，以 `r_y/A` 加权后得到 exact phase-defect identity
+  `A-g=2A E_pi[sin^2(V_y/2)]>=0`。因此 `A<=g` 在局部等价于 triangle equality
+  与 phase alignment，并结合 R102 analytic charge input 等价于 `P_3K=0`/
+  对称 branch；它不是独立中间桥。
+- 若 hypothetical asymmetric genuine full-exact law 的首个 odd cumulant degree
+  是 `d`，R103 all-charge energy `S_d=sum|q_r|^2>0` 给出
+  `A/g=1+S_d y^(2d)+O(y^(2d+2))`，且 `S_d=1/2<V_d^2>`。故非零 odd charge
+  分支必在小非零轴上产生严格 modulus excess；这是 **CONDITIONAL**，不是已
+  构造的 full-exact law。
+- 新的 genuine Bochner 接口来自三点 covariance inequality
+  `|phi(x+v)-phi(x)phi(v)|^2 <= (1-|phi(x)|^2)(1-|phi(v)|^2)`。代入
+  `x=a_1y,v=a_2y` 并平均，令 `psi=|phi|^2`、`rho=sqrt(2/3)`，得到
+  `3<psi(rho y cos(theta))> <= 1+2exp(-y^2/2)`，以及
+  `0<=A-g<=1/2[1+2A-3<psi(rho y cos(theta))>]`。这是 genuine probability
+  必要条件且完全 phase-free；它与 R105 的 difference-law reconstruction
+  直接相接。
+- 本机新增 `bochner_phase_lift_rigidity_r106/README.md` 与 `audit_r106.py`，
+  记录完整证据边界：有限 algebra 为 **PROVED / LOCAL-AUDITED**，等价链与
+  首项 asymptotic 依赖 R102–R104 analytic input；非零 odd charge 的 Bochner
+  breakdown、asymmetric exact-law exclusion、full phase-lift 与 backward-tower
+  rigidity 仍 **OPEN**。下一轮定为 R107 `Difference–Bochner Breakdown Lemma`，
+  不重开 R99–R106，不做数值、SDP、optimizer 或 remote computation。

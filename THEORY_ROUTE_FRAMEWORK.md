@@ -7679,3 +7679,64 @@ full-exact law 的识别仍 **CONDITIONAL**。
 消失、非对称 exact-law exclusion 与最终 positive backward-tower rigidity
 继续 **OPEN**。禁止将该反向模不等式当作已证结论，也不得以 numerical sweep、
 SDP、optimizer 或 remote computation 代替它。
+
+## 9.18 R106：Exact-constrained Bochner phase lift 与首个 modulus excess
+
+网页端 R106 完成了 R105 指定的 phase-lift 审查。本节将候选反向模长上界的
+逻辑地位和 genuine Bochner 的新接口分开记录；本轮没有把 conditional branch
+升级为主命题的证明。
+
+### 9.18.1 exact phase-defect identity
+
+令 `F_y(theta)=prod_j phi(a_j(theta)y)=r_y(theta)exp(iV_y(theta))`、
+`A(y)=<r_y>`、`g(y)=exp(-y^2/2)`，并以 `r_y/A(y)` 加权得到 `pi_y`。由
+full exactness，`E_(pi_y)exp(iV_y)=g(y)/A(y)`，从而得到
+
+`A(y)-g(y)=2A(y)E_(pi_y)sin^2(V_y/2)>=0`。
+
+所以 R105 的候选 `A<=g` 在局部非零区间内等价于 triangle equality、phase
+alignment；结合 R102 的 analytic charge identification，它与 `P_3K=0`、
+对称性及局部 exact equality 等价。该等价链不是一个独立的 modulus bridge。
+
+### 9.18.2 conditional first excess
+
+若 hypothetical genuine full-exact law 满足 `P_3K!=0`，令首个非零 odd degree
+为 `d`，R103 的 all-charge energy 为
+
+`S_d=sum_(r:3r<=d,r odd)|q_r|^2>0`。
+
+R103/R104 的 exact even-sector cancellation 给出
+`A(y)/exp(-y^2/2)=1+S_d y^(2d)+O(y^(2d+2))`，且
+`S_d=1/2<V_d^2>`。因此非对称 exact branch 会在小非零 `y` 上严格满足
+`A(y)>exp(-y^2/2)`。这是 **CONDITIONAL** genuine obstruction，而不是已构造
+的反例。
+
+### 9.18.3 genuine three-point Bochner interface
+
+任意 characteristic function 满足
+
+`|phi(x+v)-phi(x)phi(v)|^2 <= (1-|phi(x)|^2)(1-|phi(v)|^2)`。
+
+取 `x=a_1y`、`v=a_2y`，利用 `a_1+a_2=-a_3`，得
+`1+2r_1r_2r_3cos(V_y)-(r_1^2+r_2^2+r_3^2)>=0`。
+
+令 `psi=|phi|^2`、`rho=sqrt(2/3)`，平均并使用 exact identity，得到新的
+phase-free necessary condition
+
+`3<psi(rho y cos(theta))>_theta <= 1+2exp(-y^2/2)`.  (20)
+
+同时，`0<=A-g<=1/2[1+2A-3<psi(rho y cos(theta))>]`。这把相位缺陷和
+difference-law 的 Bochner budget 分开，是下一轮比反向模长上界更合适的接口。
+它只涉及 R105 已重构的差分律/自相关数据，但单靠当前三点约束还没有证明
+非零 odd charge 必然造成 breakdown。
+
+### 9.18.4 证据边界与 R107
+
+本机新增 `bochner_phase_lift_rigidity_r106/README.md` 与 `audit_r106.py`；
+有限符号 audit 只核验 phase-defect algebra、三点 Bochner reduction、平均约束
+以及首项系数，不替代 infinite-dimensional phase-lift proof。
+
+R107 最小 OPEN 为 `P_3K!=0` 是否必导致某个有限 `y!=0` 上的严格反向
+`3<psi(sqrt(2/3)y cos(theta))> > 1+2exp(-y^2/2)`。若不能，应进入 higher-point
+Bochner constraints；不得重开 R99–R106，也不得使用 numerical sweep、SDP、
+optimizer 或 remote computation。
