@@ -4703,3 +4703,69 @@ R129 的本机修订已提交并推送到 `temp` 仓库的 `main` 与
 网页端状态仍只记为 `DISPATCHED / IN PROGRESS`，不能把本机结果伪装成网页已完成
 的推导。下一轮网页任务应要求其独立复核这条有理盒证书、尝试细分盒或抽象
 `S_13` 的 kernel-adapted defect，再回接 positive/backward-OU 主线。
+
+# 2026-09-08 — 网页 R130 强 gap 已由本机补证
+
+网页端 R130 已完成并提出更强候选结论
+`c_4-GammaHat_6>25/28196`。本机没有直接采信，而是新增
+`r130_web_gap_audit/README.md` 与 `audit_r130_web.py`，复核 exact identity、
+移动 endpoint 区间和 R6 尾项估计。
+
+复核通过的关键 marker 为：
+
+`R130W_EXACT_F_BOUNDARY_IDENTITY_PASSED`
+
+`R130W_EXACT_9P_FG_FACTORISATION_PASSED`
+
+`R130W_EXACT_RPLUS_DELTA_IDENTITY_PASSED`
+
+`R130W_MOVING_WINDOW_SQRT_BOUNDS_PASSED`
+
+`R130W_C_POLYNOMIAL_TIGHT_BOUND_PASSED`
+
+`R130W_DELTA_LOWER_BOUND_PASSED`
+
+`R130W_F_DERIVATIVE_RANGE_PASSED`
+
+`R130W_H4_LOCAL_MONOTONICITY_AND_LOCKING_CONSTANTS_PASSED`
+
+`R130W_BSTAR_MONOTONE_BOX_PASSED`
+
+`R130W_DSTAR_INTERVAL_PASSED`
+
+`R130W_D_COMPATIBILITY_TAIL_BOUND_PASSED`
+
+`R130W_R1_DERIVATIVE_BOUNDS_PASSED`
+
+`R130W_F_COEFFICIENT_BOUND_PASSED`
+
+`R130W_R1_LOWER_UNDER_SMALL_X_PASSED`
+
+`R130W_Y12_R6_UPPER_BOUND_PASSED`
+
+`R130W_SMALL_U_DIRECT_GAP_PASSED`
+
+`R130W_MEAN_VALUE_CONSTANT_PASSED`
+
+`R130W_EXPLICIT_GAP_CANDIDATE_AUDIT_COMPLETED`
+
+本机复核还定位并修正了网页正文的一处常数跳步：`C(u)<-33` 不能由
+polynomial part `<252` 与第二项 `<-280` 直接推出；把 polynomial part 用
+精确单调性收紧到 `<247` 后，才得到 `C<-33`，进而 `delta(u)>700`。
+
+因此当前主线可以记录为：在已有 R125/R127 接口上，网页 R130 的强 gap 经本机
+补证后为 `ANALYTICALLY PROVED`，即
+`GammaHat_6<c_4-25/28196<1.052702`，并有
+`Gamma_6<=GammaHat_6`。这仍不是 `GammaHat_6` 的精确值，也不是 genuine
+全阶、正性或 backward-OU rigidity 的解决。
+
+网页端同时给出一个值得保留的统一命题：若
+`H_{m+1}=[[H_m,b],[b^T,tau]]>=0`，`G=K^T H_m K`、`d=K^T b`，则
+`d in Ran(G)` 且 `d^T G^+d<=tau`；取 `K` 为旧 kernel 后得到 `d=0`。
+对 `C(p)=sum p_j y_{m+1+j}`，新 top odd moment 的系数为 `p_m`，所以
+低于最高次数的旧 kernel defects 不可能由该一个 odd moment 修复。这已把
+R129 的 `p,xp` 机制提升为可推广的 kernel-compression Schur proposition。
+
+下一轮 R131：先对 normalized/orthogonal-polynomial kernel defect 建立不受
+`4^M M!` raw cap 淹没的递推，再尝试把有限层显式 gap 连接到
+positive/backward-OU exact-zero-set 主命题。

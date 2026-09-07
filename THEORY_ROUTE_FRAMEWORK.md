@@ -9680,3 +9680,67 @@ R130 审计 marker：`R130_C4_ROOT_INTERVAL_PASSED`、
 下一轮 R131：在不把区间证书误称为精确值的前提下，尝试细分有理盒得到更强的
 显式上界，或把 `S_13` 缺陷推广成 kernel-adapted recurrence-defect lemma，
 并检查这条离散 defect 链能否与正的 backward-OU 可除性建立定量接口。
+
+# 2026-09-08 — R130 网页强 gap 的本机复核
+
+网页端 R130 在上述基础上给出了 endpoint 邻域的更强候选估计。本机新增
+`r130_web_gap_audit/`，逐式复核其 exact factorization 和被省略的常数链。
+复核通过后，在 R125 compactness/cap 接口和 R127 equality/root 接口上，结论
+升级为
+
+`boxed{c_4-\widehat\Gamma_6>25/28196}`，
+
+即 `\widehat\Gamma_6<c_4-25/28196<1.052702`，并有
+`\Gamma_6\le\widehat\Gamma_6`。证据等级为
+`ANALYTICALLY PROVED`；这仍是 relaxed finite-level 的显式上界，不是
+`\widehat\Gamma_6` 或 genuine `\Gamma_6` 的精确值。
+
+复核的核心链为：令 `u=c^2`、`w=sqrt(6u(2-u)(1+u))`，在
+`1.1<=u<=1.12` 上，R127 boundary function `F` 满足 `0<F'<266`，且
+`F(u_4)=0`。令 `x=-F(u)`、`h=a_+-a`，H4 Schur 条件和
+`-partial_aN>40` 给 `h<=x/40`，继而
+`A=S_00<=17x/88`、`B=S_11<=25x/22`、
+`|b-b_*(c,a)|<=x/2`。沿 flat boundary 的 R129 residual 与 R128 defect
+满足精确恒等式
+
+`r_+(u)-delta(u)=F(u)[3(23u^2-68u-280)+G(u)]/[18(u-4)(u-2)^2]`,
+
+且 `9P(u)=F(u)G(u)`。本机特别修正了网页原文的一个常数跳步：不能由
+polynomial part `<252` 推出 `C<-33`；精确端点单调估计给出更强的
+`polynomial part<247`，再由第二项 `<-280` 得到 `C<-33`，所以
+`delta(u)>700`。同时本机证明 `|partial_b r_1|<250`、
+`|partial_a r_1(c,a,b_*)|<3000`，从而在 `x<=1/2` 时 `r_1>580`。
+
+H5 的 compatibility value `d_*` 在同一有理盒中满足 `0<d_*<1400`；由
+`(d-d_*)^2<=B y_10` 和 `y_10<=4^5 5!` 得 `|d|<1665`。代入 R129
+精确 R6 row，并利用此处已核验的 `b>0`，得 `y_12<453000`。于是 H6
+Schur 的 2×2 主子式要求
+`r_1^2<=B sigma_6<25·453000/44<257387`，但 `r_1>580` 给
+`r_1^2>336400`，矛盾。故 `x>1/2`，再用 `|F'|<266` 得
+`u_4-u>1/532`，并由 `c+c_4<53/25` 得
+`c_4-c>25/28196`。`u<=1.1` 的部分由
+`c_4>1.05358` 和 `sqrt(1.1)<1.049` 直接覆盖，反射覆盖负侧。
+
+本轮还把网页端的坐标化 proposition 记录为可复用接口：对
+`H_{m+1}=[[H_m,b],[b^T,tau]]>=0` 和任意系数矩阵 `K`，令
+`G=K^T H_m K`、`d=K^T b`，则
+`d in Ran(G)` 且 `d^T G^+ d<=tau`；若 `K` 张成 `ker H_m`，则 `d=0`。
+对 `p(x)=sum p_jx^j`，compatibility defect
+`C(p)=sum p_j y_{m+1+j}` 对新 top odd moment `eta=y_{2m+1}` 满足
+`partial_eta C(p)=p_m`。故 degree `<m` 的旧 kernel 方向完全不能由新 odd
+moment 修复，而 degree `m` 方向至多提供一维可调自由度。这是 R129 的
+`p,xp` old-kernel obstruction 的坐标无关版本。
+
+审计目录 marker 包括：`R130W_EXACT_F_BOUNDARY_IDENTITY_PASSED`、
+`R130W_EXACT_9P_FG_FACTORISATION_PASSED`、
+`R130W_EXACT_RPLUS_DELTA_IDENTITY_PASSED`、
+`R130W_C_POLYNOMIAL_TIGHT_BOUND_PASSED`、
+`R130W_DELTA_LOWER_BOUND_PASSED`、`R130W_DSTAR_INTERVAL_PASSED`、
+`R130W_Y12_R6_UPPER_BOUND_PASSED` 和
+`R130W_EXPLICIT_GAP_CANDIDATE_AUDIT_COMPLETED`。
+
+仍然 `OPEN` 的是 `\widehat\Gamma_6` 精确值、genuine 半径、归一化后的高阶
+defect propagation、`Gamma_M->0`，以及 positive/backward-OU 条件下由
+`P_3K\ne0` 到 exact-zero-set rigidity 的完整推出。R131 应以这条已复核的
+显式 gap 为输入，先构造 normalized kernel-defect recurrence，再测试其是否
+能给出随阶数增长而不被 `4^M M!` 吞掉的 coercivity。
