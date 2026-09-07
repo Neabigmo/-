@@ -4351,3 +4351,72 @@ realizability。
 `R122_RADIAL_FIRST_VARIATION_BLIND_TO_ODD_SCORE_PASSED`
 
 `R122_NORMAL_DERIVATIVE_BOCHNER_TRACE_AUDIT_COMPLETED`
+
+# 2026-09-07 — R123 Global Bochner–Cauchy-Data Rigidity No-Go
+
+网页端 R123 在读取 R122 记录后完成了 full 3D Bochner–Cauchy-data 检验；connector
+仍不可读，本轮依据当前对话自包含结论继续。本机新增
+`global_bochner_cauchy_no_go_r123/README.md` 与 `audit_r123.py`。
+
+- 在 mean–residual 坐标中 `w_j=(1/sqrt(3),v_j)` 是正交标准基，故
+  `tilde Phi(y)=prod_j phi(w_j dot y)` 满足
+  `tilde Phi in PD(R^3) iff phi in PD(R)`：一方向由 product of PD functions，
+  反方向由 factor-axis restriction。这是本轮最重要的全局降维：三维 Bochner
+  没有超出 one-body probability realizability 的新正性。
+- 对 `L=log tilde Phi`、`L_0=L(0,eta)`、`N=partial_xi L(0,eta)`，本机记录
+  even/odd Cauchy hierarchy
+  `partial_xi^(2k)L=2^(-k)Delta^kL_0`、
+  `partial_xi^(2k+1)L=2^(-k)Delta^kN`；以及
+  `J_1=-iFN`、`J_2=-F[1/2 Delta L_0+N^2]`。
+- 矩阵值 conditional moment kernel 的 Schur complement 是
+  `Var(M|R)>=0`。全局 reflection `(M,R)->(-M,-R)` 下 `N/J_1` 翻号而
+  `J_2`、conditional variance、Schur determinant、quadratic energy 不变。
+  因而得到 **Global Quadratic-Bochner Parity Lemma**：所有自然 quadratic
+  Bochner flux 只看到 `N^2` 或 odd-odd pairing，不能给 reflection-stable linear
+  sign；除非 exactness 另行把某个 baseline-zero energy 固定为零。
+- 令 `H(Q)=E[M|Q]`，exact radial branch 给出
+  `E H^2 >= kappa_3^2/3`，说明 nonzero cubic 反而产生 positive explained-mean
+  energy；而 circular nonlinear flux含未知的 `E[M^2J_0]`，不是 rigidity inequality。
+- 构造 Bochner-only genuine obstruction：`R~N(0,I_2)`，
+  `M|Q=q~N(epsilon(e^-q-1/3),1-epsilon^2(e^-q-1/3)^2)`。此 joint law
+  genuine、analytic、full-PD、residual fully Gaussian 且 exact radial，但
+  `E[M Q]=-4epsilon/9!=0`。它不是 same-factor 项目反例，却证明任何有效机制
+  必须使用 one-body factorization，而不能继续换 Bochner flux。
+- R104 formal odd all-degree branch 仍能同时满足 same-factor、log-wave、exact
+  circular identity 并保留 `N_0~c rho^2`；严格标 FORMAL。varying-bottom backward
+  OU 从任何 genuine asymmetric exact single law自动给 tower，因此也不能单独
+  增加 restriction。
+
+R123 判决：PROVED 为 factor-axis Bochner equivalence、Cauchy hierarchy、矩阵值
+conditional moments、explained-mean bound、circular flux identity、residual-
+Gaussian obstruction；ANALYTICALLY PROVED 为 quadratic parity no-go；FORMAL 为
+R104 odd branch；OPEN 仍是 genuine one-body PD 与 all-degree exact odd branch
+是否相交，即 `G_0=O(rho^4)` / `kappa_3=0`。
+
+下一步 R124：**Uniform-Envelope Finite-Row Realizability Dichotomy**。固定
+`c!=0`，考察满足 `kappa_3=c`、前 `M` 个 exact rows 且统一
+`E exp(X^2/8)<=2` 的集合 `C_M(c)`。若所有 `C_M(c)` 非空，用 tightness、uniform
+integrability、moment determinacy 与 diagonal limit 构造 genuine full-exact
+asymmetric law；若主命题为真，则某个有限 `M(c)` 必出现空集。重点检查固定
+primitive cubic gap 的 finite-row realization 是否能保持统一 envelope，以及
+其 global blow-up 的具体位置。
+
+本机审计输出：
+
+`R123_FACTOR_AXIS_BOCHNER_EQUIVALENCE_PASSED`
+
+`R123_LOG_WAVE_EVEN_ODD_CAUCHY_HIERARCHY_PASSED`
+
+`R123_MATRIX_BOCHNER_CONDITIONAL_VARIANCE_PASSED`
+
+`R123_EXPLAINED_MEAN_ENERGY_BOUND_INTERFACE_PASSED`
+
+`R123_CIRCULAR_NONLINEAR_WAVE_FLUX_IDENTITY_PASSED`
+
+`R123_FULL_RESIDUAL_GAUSSIAN_BOCHNER_OBSTRUCTION_PASSED`
+
+`R123_QUADRATIC_BOCHNER_PARITY_NO_GO_PASSED`
+
+`R123_UNIFORM_ENVELOPE_COMPACTNESS_INTERFACE_PASSED`
+
+`R123_GLOBAL_BOCHNER_CAUCHY_NO_GO_AUDIT_COMPLETED`

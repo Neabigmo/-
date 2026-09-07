@@ -9208,3 +9208,100 @@ R123 固定为 **Global Bochner–Cauchy-Data Rigidity Lemma**：在完整三维
 conditional-variance zero identity；若所有 natural flux 都只是 odd normal datum
 的平方，便关闭 Fourier/Herglotz/normal-derivative 主路线并转向 global one-body
 probability realizability。
+
+## 9.35 R123：Global Bochner–Cauchy-Data Rigidity No-Go 与紧性二分
+
+网页端 R123 在读取 R122 记录后完成了 full 3D Bochner–Cauchy-data 检验；本机新增
+`global_bochner_cauchy_no_go_r123/README.md` 与 `audit_r123.py`。本轮得到一个
+重要的全局降维：
+
+`tilde Phi in PD(R^3) iff phi in PD(R)`。
+
+令 `w_j=(1/sqrt(3),v_j)`，这些向量在 mean–residual 坐标中构成正交标准基，故
+`tilde Phi(y)=prod_j phi(w_j dot y)` 的三维 Bochner 正定性由一维因子的正定性
+推出；沿 `y=t w_1` 的 factor-axis 限制又恢复 `phi(t)`。因此三维 Bochner
+positivity 没有超出 one-body probability realizability 的隐藏信息。
+
+### 9.35.1 Cauchy hierarchy 与矩阵值 flux
+
+对 `L=log tilde Phi`、`L_0=L(0,eta)`、`N=partial_xi L(0,eta)`，log-wave equation
+给出
+
+`partial_xi^(2k)L(0,eta)=2^(-k)Delta^k L_0`，
+`partial_xi^(2k+1)L(0,eta)=2^(-k)Delta^k N`。
+
+所以 `L_0` 与 `N` 正好分居 even/odd normal Cauchy hierarchy；PDE 传播 odd
+datum，但不把它消灭。令 `M=(X_1+X_2+X_3)/sqrt(3)`、`R` 为 residual vector，
+并定义 `F=E exp(i eta dot R)`、`J_1=E[M exp(i eta dot R)]`、
+`J_2=E[M^2 exp(i eta dot R)]`，则
+
+`J_1=-iFN`，
+`J_2=-F[1/2 Delta L_0+N^2]`。
+
+条件矩阵 `[[1,E(M|R)],[E(M|R),E(M^2|R)]]` 的 Schur complement 是
+`Var(M|R)>=0`；因此 matrix-valued Bochner、Schur、conditional variance 和
+quadratic wave-flux 都只产生 odd-odd pairing 或偶能量。
+
+### 9.35.2 Global Quadratic-Bochner Parity Lemma
+
+全局 reflection `(M,R)->(-M,-R)` 使 `N`、`J_1` 等 odd datum 翻号，`J_2`、
+conditional variances、Schur determinants 与 quadratic Gram energies 不变。
+故任何由 matrix-valued Bochner positivity 经 quadratic form、Schur complement、
+conditional variance 或 reflection-even radial 加权积分得到的 scalar flux，均对
+`N->-N` 偶。它可以产生 `N^2`、odd-odd pairing 或 magnitude bound，不能给
+universal reflection-stable linear sign。
+
+这不是逻辑上排除“偶能量取零”的宣称；真正需证明的是 exact radialization 是否
+把某个 Gaussian-baseline-zero energy 强制固定为零。R123 的 explained-mean bound
+
+`E H(Q)^2 >= kappa_3^2/3`，其中 `H=E[M|Q]`，
+
+反而表明 nonzero cubic 产生 positive explained-mean energy，而现有 exactness
+没有将其置零。更细的 circular flux
+
+`H_2(rho)-e^(-rho^2/2)=<F[1/2|grad L_0|^2-N^2-rho^2/2]>`
+
+是 exact identity，但其左侧含有未由 Q-marginal 决定的 `E[M^2J_0]`，不是
+rigidity inequality。
+
+### 9.35.3 Bochner-only genuine obstruction 与 formal same-factor obstruction
+
+即使取整个 residual vector `R~N(0,I_2)`，令
+`M|Q=q~N(epsilon(e^(-q)-1/3),1-epsilon^2(e^(-q)-1/3)^2)`，仍有 genuine
+full 3D positive-definite joint law、exact `Q~chi^2_2`、`EM=0`、`EM^2=1`，但
+
+`E[M Q]=-4epsilon/9 !=0`。
+
+该模型不满足 same-factor product representation，所以不是项目反例；它证明
+任何有效 R123 机制必须使用 one-body factorization，而不是继续寻找新的
+Bochner inequality。另一方面 R104 formal all-degree odd branch 同时满足
+same-factor、log-wave、circular exactness，却保留 `N_0~c rho^2`；这仍是 FORMAL，
+缺口正是该 branch 能否由 genuine one-body PD factor 实现。
+
+### 9.35.4 backward-OU 与路线降级
+
+若 genuine asymmetric exact single law 存在，则 varying-bottom backward-OU
+iteration 自动给 positive exact tower。因此 backward divisibility 不能单独
+增加新的 single-law restriction。R123 正式将 Fourier/Herglotz/normal-derivative
+flux 路线降级，主问题变成
+
+`one-body PD ∩ all-degree same-factor exact odd branch`。
+
+### 9.35.5 R124：Uniform-Envelope Finite-Row Realizability Dichotomy
+
+固定 `c!=0`，令 `C_M(c)` 为 centered variance-one genuine laws，满足
+`kappa_3=c`、前 `M` 个 exact rows，并统一满足 `E exp(X^2/8)<=2`。若
+`C_M(c)` 对所有 `M` 非空，则 tightness、uniform integrability、moment
+determinacy 与对角化给出 genuine full-exact asymmetric law；若 asymmetric
+genuine exact law不存在，则某个有限 `M(c)` 必有 `C_M(c)=emptyset`。
+
+该二分把 R115/R120 的 finite-row obstruction 提升到真正可证伪的 global 问题：
+固定 primitive cubic gap 后，finite-row realization 是否能保持统一 envelope？
+若不能，必须定位 positivity、固定 cubic、exact rows 或 uniform subGaussianity
+中至少一项随 `M` 发生 blow-up。R124 由此不再搜索 `N^2` flux，而直接攻击
+global one-body probability realizability。
+
+R123 状态：PROVED 为 factor-axis Bochner equivalence、Cauchy hierarchy、矩阵值
+conditional moments、explained-mean bound、circular flux identity、residual-
+Gaussian obstruction；ANALYTICALLY PROVED 为 quadratic-Bochner parity no-go；
+FORMAL 为 R104 odd branch；OPEN 仍是 `G_0=O(rho^4)` / `kappa_3=0`。
