@@ -9305,3 +9305,103 @@ R123 状态：PROVED 为 factor-axis Bochner equivalence、Cauchy hierarchy、�
 conditional moments、explained-mean bound、circular flux identity、residual-
 Gaussian obstruction；ANALYTICALLY PROVED 为 quadratic-Bochner parity no-go；
 FORMAL 为 R104 odd branch；OPEN 仍是 `G_0=O(rho^4)` / `kappa_3=0`。
+probability realizability。
+
+## 9.36 R124：envelope-free finite-row compactness 与 cubic-radius dichotomy
+
+网页端 R124 对 R123 的 global one-body realizability 路线完成了严格化；本机新增
+`uniform_envelope_finite_row_r124/README.md` 与 `audit_r124.py`。本轮比原先设想更
+强：统一 `E exp(X^2/8)<=2` 不必作为 finite-row 的先验假设，它由 exact rows
+逐阶自动产生。
+
+### 9.36.1 exact rows 的 moment definition
+
+令 `Q=sum_j(X_j-Xbar)^2`，`a_j(theta)=sqrt(2/3)cos(theta+2pi(j-1)/3)`，
+`Y_theta=sum_j a_j(theta)X_j`。有
+
+`(1/(2pi))int Y_theta^(2r)dtheta=binom(2r,r)Q^r/4^r`。
+
+对
+`mathscr F_mu(z)=<prod_j M_mu(z a_j(theta))>-e^(z^2/2)`，
+
+`[z^(2r)]mathscr F_mu=(E Q^r-2^r r!)/(4^r(r!)^2)`。
+
+故第 `r` 个 exact row 无歧义地定义为
+
+`R_r(mu):=E Q^r-2^r r!=0`。
+
+### 9.36.2 R124-B：finite-row moment bootstrap
+
+几何恒等式给
+
+`(X_1-X_2)^2<=2Q`。
+
+若第 `r` 个 row 成立，则
+
+`E|X_1-X_2|^(2r)<=2^r E Q^r=4^r r!`。
+
+对 independent centered copy `X'`，条件 Jensen 给
+
+`E|X|^(2r)<=E|X-X'|^(2r)<=4^r r!`。
+
+因此前 `M` rows 自动给
+
+`E[sum_(r=0)^M(X^2/8)^r/r!]<=sum_(r=0)^M2^(-r)=2-2^(-M)`。
+
+这是一条 ANALYTICALLY PROVED 的逐阶 square-exponential 控制，不依赖 full
+exactness 或先验 envelope。
+
+### 9.36.3 R124-C：Envelope-Free Fixed-c Compactness Theorem
+
+定义 `E_M(c)` 为 genuine centered variance-one laws，满足 `kappa_3=c` 与
+`R_1=...=R_M=0`，不加入尾部假设。若 `E_M(c)` 对所有 `M` 非空，variance one
+给 tightness；对任意固定 moment order `p`，取足够大的 row `r` 用
+`E|X|^(2r)<=4^r r!` 得到 uniform integrability。弱极限因此保留每个固定 moment、
+`kappa_3=c` 和每个 row，并满足所有 even moment caps。
+
+极限满足 `E X^(2r)<=4^r r!`，于是 monotone convergence 给
+`E exp(X^2/8)<=2`。该 bound 导致 MGF entire；所有 rows 变成 entire function
+`mathscr F_mu` 的全部 Taylor coefficients，identity theorem 加 Hankel uniqueness
+给 genuine `Q~chi^2_2`。所以
+
+`forall M E_M(c)!=empty => exists genuine full-exact law with kappa_3=c`。
+
+这是 PROVED / ANALYTICALLY PROVED 的 compactness theorem；其 contrapositive
+“若 cubic exclusion 成立，则某个 finite `M(c)` 失败”仍是 CONDITIONAL 于主命题，
+不能误报为主命题证明。
+
+### 9.36.4 fixed-gap radius 与 finite Hamburger certificate
+
+令
+
+`Gamma_M=sup{|kappa_3(mu)|: mu genuine centered variance-one,
+R_1=...=R_M=0}`。
+
+`Gamma_(M+1)<=Gamma_M`，且
+
+`cubic exclusion iff Gamma_M->0`。
+
+有限 moment 版本 `T_M(c)` 由 `y_0=1,y_1=0,y_2=1,y_3=c`、
+`H_M(y)=[y_(i+j)]>=0`、`R_r(y)=0 (r<=M)` 及
+`0<=y_(2r)<=4^r r!` 组成。若所有 `T_M(c)` 非空，则坐标对角化、Hankel
+positivity、Hamburger theorem 与 Carleman 给 genuine full-exact law。因此若
+固定 `c!=0` 的 genuine full-exact law不存在，必有有限 `M(c)` 使 `T_M(c)` 为空。
+这是真正有限、可检验的联合 obstruction framework；本轮没有声称知道第一个
+失败的 principal minor 或显式 `M(c)`。
+
+### 9.36.5 对 R115/R120 的精确解释与 R125
+
+此前 finite-row perturbative constructions 只证明每个固定 `M` 存在某个
+`c_*(M)>0` 的小 cubic 邻域；它们没有证明 `inf_M c_*(M)>0`。如果 cubic
+exclusion 为真，则固定-gap realizability 必须在有限阶终止，等价地
+`c_*(M)` 沿高阶趋于零或 finite Hamburger cone 发生联合不可行。
+
+R124 的剩余 OPEN 被精确压成
+
+`Gamma_M -> 0?`
+
+即非零 formal odd exact branch 能否无限穿过 genuine Hamburger positivity cone。
+R125 固定为 **Truncated-Hamburger Cubic-Radius Decay**：利用 exact-row 多项式
+与 `H_M>=0` 构造随 `M` 增长的非负 polynomial certificate `P_M(X)^2`，争取给出
+`|kappa_3|<=epsilon_M` 且 `epsilon_M->0`。这比继续寻找新的 Bochner flux 更贴近
+当前主问题的 genuine one-body realizability 核心。

@@ -4420,3 +4420,66 @@ primitive cubic gap 的 finite-row realization 是否能保持统一 envelope，
 `R123_UNIFORM_ENVELOPE_COMPACTNESS_INTERFACE_PASSED`
 
 `R123_GLOBAL_BOCHNER_CAUCHY_NO_GO_AUDIT_COMPLETED`
+
+# 2026-09-07 — R124 Envelope-Free Finite-Row Compactness 与 Cubic-Radius Dichotomy
+
+网页端 R124 在读取 R123 记录后完成了统一包络紧性二分的严格化；connector 仍不可读，
+本轮依据当前对话自包含结论继续。本机新增
+`uniform_envelope_finite_row_r124/README.md` 与 `audit_r124.py`。
+
+- 明确 exact row：令 `Q=Σ(Xj-Xbar)^2`、
+  `Y_theta=Σa_j(theta)Xj`，则
+  `[z^(2r)](<ΠM(z a_j)>-e^(z^2/2))=(EQ^r-2^r r!)/(4^r(r!)^2)`。
+  因此第 `r` 个 row 精确定义为 `R_r=EQ^r-2^r r!=0`，不是形式化的模糊约束。
+- 得到关键 finite-row bootstrap：`(X1-X2)^2<=2Q`；第 `r` 个 row 给
+  `E|X1-X2|^(2r)<=4^r r!`，再对独立 centered copy 用条件 Jensen 得
+  `EX^(2r)<=4^r r!`。所以前 `M` rows 自动给截断包络
+  `EΣ_{r=0}^M(X^2/8)^r/r!<=2-2^(-M)`，无需先验统一尾界。
+- Envelope-Free Fixed-c Compactness Theorem：定义 `E_M(c)` 为 genuine
+  centered、variance-one、`kappa_3=c` 且前 `M` rows 成立的 laws。若
+  `E_M(c)!=empty` 对所有 `M`，variance one 给 tightness；bootstrap 给所有固定
+  moments 的 uniform integrability，弱极限保留 `kappa_3=c` 和所有 rows，并由
+  moment caps 得 `E exp(X^2/8)<=2`。MGF entire、identity theorem 与 Hankel
+  uniqueness 再给 genuine full-exact asymmetric law。
+- 因此若 cubic exclusion 为真，则固定 `c!=0` 后某个有限 `M(c)` 的 genuine
+  finite-row realization 必失败；这比“uniform envelope blow-up”更强。此前 R115/R120
+  只允许每个固定 `M` 的小 cubic `|c|<c_*(M)`，没有证明 `inf_M c_*(M)>0`；若
+  cubic exclusion成立，固定-gap admissible radius 必须沿高阶衰减或 finite
+  Hamburger cone 联合不可行。
+- 定义 genuine finite-row cubic radius
+  `Gamma_M=sup{|kappa_3|:R_1=...=R_M=0}`，核验其单调性并得到
+  `cubic exclusion iff Gamma_M->0`。同时定义有限截断 Hamburger 集合：
+  `y0=1,y1=0,y2=1,y3=c`、`H_M(y)>=0`、`R_r(y)=0`、
+  `0<=y_{2r}<=4^r r!`。若所有阶非空，坐标对角化、Hamburger theorem 和
+  Carleman 给 genuine full-exact law；若主命题成立，必存在有限可检验空集。
+- 本轮没有做 SDP/optimizer，也没有声称找到了第一个失败的 principal minor、
+  显式 `M(c)` 或 `Gamma_M` 的衰减率。
+
+R124 判决：PROVED / ANALYTICALLY PROVED 为 exact-row moment formula、
+finite-row moment bootstrap、envelope-free compactness、all-row-to-global-exact
+升级、moment determinacy、fixed-gap dichotomy 和 truncated-Hamburger interface；
+CONDITIONAL 为把主命题取反后的 finite failure / `Gamma_M->0`；FORMAL 为 R104
+odd branch；OBSTRUCTION 为 row equations alone仍可形式解；OPEN 是
+`Gamma_M->0`，即非零 formal odd branch能否无限穿过 genuine Hamburger cone。
+
+下一步 R125：**Truncated-Hamburger Cubic-Radius Decay**。直接在 finite moment
+hierarchy 中构造非负 polynomial certificate `P_M(X)^2`，争取证明
+`|kappa_3|<=epsilon_M` 且 `epsilon_M->0`。
+
+本机审计输出：
+
+`R124_EXACT_ROW_MOMENT_COEFFICIENT_PASSED`
+
+`R124_PAIR_DIFFERENCE_GEOMETRY_PASSED`
+
+`R124_FINITE_ROW_MOMENT_BOOTSTRAP_PASSED`
+
+`R124_ENVELOPE_FREE_CUBIC_COMPACTNESS_INTERFACE_PASSED`
+
+`R124_HANKEL_CARLEMAN_INTERFACE_PASSED`
+
+`R124_CUBIC_RADIUS_MONOTONICITY_INTERFACE_PASSED`
+
+`R124_TRUNCATED_HAMBURGER_INTERFACE_PASSED`
+
+`R124_UNIFORM_ENVELOPE_FINITE_ROW_AUDIT_COMPLETED`
