@@ -4097,3 +4097,51 @@ PROVED / ANALYTICALLY PROVED / OBSTRUCTION / OPEN。
 `R117_I3_POSITIVE_NONFACTORIZED_OBSTRUCTION_PASSED`
 
 `R117_HEAT_ESCORT_BARYCENTER_AUDIT_COMPLETED`
+
+# 2026-09-07 — R118 Reflection-Gap Skew Energy 与 Mixed-Reflection Moment
+
+网页端 R118 在读取 R117 记录后构造了反射极化的正 global gap；connector 仍不可读，
+本轮依据当前对话自包含结论继续。本机新增
+`reflection_gap_skew_energy_r118/README.md` 与 `audit_r118.py`。
+
+- 令 `u_t=P_t f`、`check u_t(x)=u_t(-x)`、`e_t=(u_t+check u_t)/2`、
+  `o_t=(u_t-check u_t)/2`，则
+  `D(t)=int u_t^3-int u_t^2check u_t=4int e_to_t^2>=0`。
+  本机特意核验了“逐点多出奇项、积分后消失”的细节，避免把积分式误写成点态式。
+  `D=0` 对一个 `t>0` 即推出 symmetry 与 `kappa_3=0`，这是真正的 global
+  equality mechanism。
+- 取 `Y=(X_1,X_2,-X_3)`、`Qsharp=sum(Y_j-Ybar)^2`，Gaussian completion 给
+  `D=(2*pi*t*sqrt(3))^(-1)[t/(1+t)-E exp(-Qsharp/(2t))]`，故有
+  `E exp(-Qsharp/(2t))<=E exp(-Q/(2t))`。这是 same-factor/reflection 的
+  无 phase cancellation 单边 order。
+- 写 `h_t=o_t/e_t`，得到 `B(t)^2<=2(1+t)/(pi*t)D(t)`；所以
+  `D=o(t^(-4))` 是推出 `B=o(t^(-2))` 的充分条件。
+- exact moments 给
+  `EQsharp=2`、`EQsharp^2=8`、`EQsharp^3=48+(224/27)kappa_3^2`。
+  因此 Laplace gap leading term为 `(112/81)kappa_3^2lambda^3`，并核验
+  `D(t)=7/(81*pi*sqrt(3))*kappa_3^2*t^(-4)+O(t^(-5))`。
+  在 `kappa_3!=0` 时 `D/B^2->28*pi/(3sqrt(3))`；正 gap 是 `B^2` 的精确 global
+  surrogate，但自然 decay rate仍容纳 nonzero cubic。
+- reflection mixture `f_lambda=((1+lambda)/2)f+((1-lambda)/2)check f` 满足
+  `int(P_t f_lambda)^3=A_G-3/4(1-lambda^2)D`；zeroth overlap 只表达
+  symmetric deficit 与 odd energy 的补偿，不能独自 annihilate skew。
+- 条件性可发表接口：若另有 `E exp(-Qsharp/(2t))=t/(1+t)-o(t^(-3))`，或
+  `EQsharp^3<=48`，则立即得 `kappa_3=0`。但现有 Hölder/reflection natural
+  direction 是 `EQsharp^3>=48`，方向相反；因此 R118 核心仍 OPEN。
+- R119 最小命题：**Mixed-Reflection Third-Moment Reversal**，寻找其它 global
+  same-factor structure 是否能给 `EQsharp^3<=48` 或 Laplace gap `o(lambda^3)`；
+  若不行，转向 `E[Xbar J_0(rho sqrt(Q))]` 的 conditional-mean diagonal。
+
+本机审计输出：
+
+`R118_REFLECTION_GAP_AND_MIXTURE_POLYNOMIALS_PASSED`
+
+`R118_GAUSSIAN_OVERLAP_AND_BARYCENTER_BOUND_CONSTANT_PASSED`
+
+`R118_MIXED_REFLECTION_SAMPLE_VARIANCE_MOMENTS_PASSED`
+
+`R118_POSITIVE_SKEW_ENERGY_ASYMPTOTIC_AND_RATIO_PASSED`
+
+`R118_CONDITIONAL_THIRD_MOMENT_REVERSAL_INTERFACE_PASSED`
+
+`R118_REFLECTION_GAP_SKEW_ENERGY_AUDIT_COMPLETED`

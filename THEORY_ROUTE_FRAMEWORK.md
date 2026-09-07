@@ -8638,6 +8638,97 @@ convolution 是否必然 annihilate weighted first harmonic。R117 最小命题�
 `int r^3u_1(r)r exp(-r^2/2)dr=0`；优先研究 spherical-harmonic/total-positivity
 或正核 `I_3(zr)`，不回到有限阶数值路线。
 
+## 9.30 R118：reflection gap 是正的 skew-energy，但仍不够 annihilate
+
+网页端 R118 在 R117 heat-flow reduction 上构造了反射极化 gap，并给出
+`reflection_gap_skew_energy_r118/README.md` 与 `audit_r118.py`；本机审计通过。
+令 `u_t=P_t f`、`check u_t(x)=u_t(-x)`、`e_t=(u_t+check u_t)/2`、
+`o_t=(u_t-check u_t)/2`，定义
+
+`C(t)=int u_t^2 check u_t`、`D(t)=int u_t^3-C(t)`。
+
+逐点展开的奇项在全空间积分后消失，得到真正的积分恒等式
+
+`D(t)=4 int e_t o_t^2`
+`=(1/2)int(u_t+check u_t)(u_t-check u_t)^2>=0`。
+
+Hölder 等号当且仅当 `u_t=check u_t`；热核 Fourier multiplier 无零点，因此
+`D(t)=0` 对一个 `t>0` 即推出 `f=check f` 与 `kappa_3(f)=0`。这是一个 genuine
+global equality mechanism，Gaussian/symmetric state 在此 gap 上处于 boundary。
+
+### 9.30.1 mixed-reflection Laplace order
+
+取 `Y=(X_1,X_2,-X_3)`、`Qsharp=sum(Y_j-Ybar)^2`。Gaussian completion 给
+
+`C(t)=(2*pi*t*sqrt(3))^(-1)E exp(-Qsharp/(2t))`。
+
+R117 exact heat curve 因而给
+
+`D(t)=(2*pi*t*sqrt(3))^(-1)`
+`*[t/(1+t)-E exp(-Qsharp/(2t))]>=0`，
+
+即得到无 phase cancellation 的 global order
+
+`E exp(-Qsharp/(2t))<=t/(1+t)=E exp(-Q/(2t))`。
+
+这是 same-factor/reflection 结构的真实单边不等式，但方向不是消灭 cubic charge
+所需的 opposite comparison。
+
+### 9.30.2 barycenter 控制与正能量首项
+
+写 `h_t=o_t/e_t`，则 `|h_t|<1`、
+`B(t)=int x e_t^3(3h_t+h_t^3)`，从而
+
+`B(t)^2<=4D(t)int x^2e_t^3`
+`<=2(1+t)/(pi*t) D(t)`。
+
+所以 `D=o(t^(-4))` 会推出 R117 的 `B=o(t^(-2))` 与 `kappa_3=0`。
+
+但 exact degree-six moments `m_4=3`、`m_6=15+7kappa_3^2` 对 mixed-sign statistic
+给出
+
+`E Qsharp=2`、`E Qsharp^2=8`、
+`E Qsharp^3=48+(224/27)kappa_3^2`。
+
+于是 `lambda=1/(2t)` 时
+
+`E exp(-lambda Q)-E exp(-lambda Qsharp)`
+`=(112/81)kappa_3^2lambda^3+O(lambda^4)`，
+
+并且
+
+`D(t)=7/(81*pi*sqrt(3))*kappa_3^2*t^(-4)+O(t^(-5))`。
+
+因此 `t^4D(t)->7kappa_3^2/(81*pi*sqrt(3))`，也即
+`D=o(t^(-4))<=>kappa_3=0`；若 `kappa_3!=0`，还与 R117 的 barycenter 形成
+`D/B^2->28*pi/(3sqrt(3))` 的精确比值。
+
+### 9.30.3 polarization、障碍与 R119
+
+对 `f_lambda=((1+lambda)/2)f+((1-lambda)/2)check f`，有
+
+`int(P_t f_lambda)^3=A_G(t)-3/4(1-lambda^2)D(t)`。
+
+故 asymmetric endpoints 是该 reflection-mixture path 的 overlap maxima，
+symmetric midpoint 低出 `3D/4`；zeroth overlap 只表达 symmetric deficit 与
+odd positive energy 的补偿，不能单独杀掉 odd component。
+
+现有 strict total positivity / variation-diminishing 只允许自然
+`D(t)~kappa_3^2t^(-4)`，而 Hölder/reflection 给出的 mixed Laplace order 在
+三阶矩上是 `E Qsharp^3>=48`，正好与所需 `<=48` 相反。因而
+
+PROVED / LOCAL-AUDITED：reflection gap、mixed Laplace order、barycenter bound、
+前三阶 mixed-sign moments、positive skew-energy coefficient、`D/B^2` 比值与
+reflection-mixture polarization。CONDITIONAL：若另有
+`E exp(-Qsharp/(2t))=t/(1+t)-o(t^(-3))`，或仅有 `E Qsharp^3<=48`，即可推出
+`kappa_3=0`。FORMAL：nonzero odd all-degree branches保留自然 `t^(-4)` gap。
+
+OPEN 仍为 `B(t)=o(t^(-2))<=>kappa_3=0`。R119 最小命题是 **Mixed-Reflection
+Third-Moment Reversal**：能否从其它 global same-factor structure 得到
+`E Qsharp^3<=48`，或至少使 Laplace gap 为 `o(lambda^3)`；若 standard
+rearrangement/total-positivity 不可能给出 opposite comparison，则转向
+conditional-mean diagonal transform `E[Xbar J_0(rho sqrt(Q))]`。
+
 ## 9.29 R117：Gaussian radial exactness 的 cubic heat-flow 等价
 
 网页端 R117 把二维 angular-mode 目标进一步压到一维热流，并形成
