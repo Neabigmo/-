@@ -59,9 +59,53 @@ def check_r5_row() -> None:
     print("R128_R5_TRIANGULAR_ELIMINATION_PASSED")
 
 
+def check_strict_m5_drop_certificate() -> None:
+    u = sp.symbols("u", real=True)
+    polynomial = sp.Poly(
+        216 * u**5 - 1919 * u**4 + 4072 * u**3 + 4704 * u**2 - 8000 * u + 64,
+        u,
+    )
+    left = sp.Rational(111, 100)
+    right = sp.Rational(28, 25)
+    assert polynomial.count_roots(1, 2) == 1
+    assert polynomial.eval(left) * polynomial.eval(right) < 0
+    print("R128_R127_ROOT_INTERVAL_PASSED")
+
+    c, s = sp.symbols("c s", positive=True)
+    a = 4 * c + s
+    b = (a**2 * c - 8 * a * c**2 - 18 * a + 31 * c**3 + 42 * c) / (c**2 - 2)
+    y10 = sp.factor(51 * a**2 - 840 * a * c + 60 * b * c + 1410 * c**2 - 7495)
+    relation = s**2 - 6 * (2 - c**2) * (1 + c**2)
+    numerator, denominator = sp.fraction(y10)
+    reduced = sp.rem(sp.Poly(sp.expand(numerator), s), sp.Poly(relation, s)).as_expr()
+    expected = -666 * c**6 + 1044 * c**4 - 6307 * c**2 + 13766 - 216 * c * s * (2 * c**2 + 1)
+    assert sp.expand(reduced - expected) == 0
+    assert denominator == c**2 - 2
+    print("R128_M4_EXTREMIZER_R5_REDUCTION_PASSED")
+
+    # Exact rational interval certificate: for u in (111/100, 28/25),
+    # A(u)>7000 and T(u)<2500, so N=A-T>4500.
+    A = -666 * u**3 + 1044 * u**2 - 6307 * u + 13766
+    assert sp.diff(A, u).subs(u, left) < 0
+    assert sp.diff(A, u).subs(u, right) < 0
+    assert A.subs(u, right) > 7000
+    t2_upper = (
+        216**2
+        * right
+        * 6
+        * sp.Rational(89, 100)
+        * sp.Rational(53, 25)
+        * (sp.Rational(81, 25)) ** 2
+    )
+    assert t2_upper < 2500**2
+    print("R128_M5_NEGATIVE_Y10_INTERVAL_CERTIFICATE_PASSED")
+    print("R128_STRICT_RELAXED_RADIUS_DROP_INTERFACE_PASSED")
+
+
 def main() -> None:
     check_singular_extension_lemma()
     check_r5_row()
+    check_strict_m5_drop_certificate()
     print("R128_SINGULAR_EXTENSION_AUDIT_COMPLETED")
 
 
