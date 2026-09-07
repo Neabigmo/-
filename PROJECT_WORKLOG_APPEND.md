@@ -4639,3 +4639,19 @@ recurrence defect）。仍为 `OPEN` 的是 `GammaHat_6` 的显式数值、genui
 `Gamma_6` 的显式值、严格 gap 的定量下界、backward-OU 正性锥和全阶
 `Gamma_M->0`。因此不是把 endpoint 排除直接偷换成全局结论，而是明确使用
 “最大值取得 + M4 等号唯一化 + R129 endpoint no-go”的三步闭合链。
+
+# 2026-09-08 — R130 网页端任务已发送，等待完整推导
+
+R129 的本机修订已提交并推送到 `temp` 仓库的 `main` 与
+`theory/r129-active`，当前 HEAD 为 `2bf1e7c`。由于旧网页会话达到长度
+上限，本轮在“数学定理证明”项目中新建会话并发送 R130；网页端已回显
+其读取了 README、路线框架、工作日志以及 R125--R129 审计记录，并确认了
+`2bf1e7c`，随后开始把 R127 Schur 条目与 R129 compatibility defect 放到
+同一坐标系，目标是量化 endpoint 邻域的 exclusion modulus。
+
+当前只记录为 `DISPATCHED / IN PROGRESS`，不把网页端的中间状态冒充为
+定理。R130 的要求是：核验 `GammaHat_6<c_4` 的全局逻辑，尝试显式 gap
+或 uniform modulus，抽象 kernel-adapted recurrence-defect lemma，并连接
+到 positive backward-OU cone。最终网页正文返回后，再逐式加入本机审计，
+并更新 `main` 与 `theory/r129-active`；在此之前 R130 的新数学结论仍为
+`OPEN / PENDING WEB RESPONSE`。
