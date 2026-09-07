@@ -7819,3 +7819,137 @@ block 是 R106 三点约束，第三行/列首次引入 companion frequency
 解析连续性+尾界证明，记录为 **ANALYTICALLY PROVED**，但不冒充 full-exact
 反例。asymmetric genuine exact-law exclusion、四点 phase rigidity、bare `RK=1`
 识别和最终 positive backward-tower theorem 继续 **OPEN**。
+
+## 9.20 R108：Four-point bispectrum separation 与 shear-cocycle interface
+
+网页端 R108 在 R107 的四点 candidate 上完成了一个重要的结构升级：四点
+multiplicative Bochner 层没有塌回 `psi=|phi|^2`，而是第一次留下真正的
+bispectrum phase / phase-cocycle 信息。但最浅的四点 principal minor 仍只恢复
+旧的 `m_3^2<=2` cone wall，因此不能把四点本身宣布为 rigidity theorem。
+
+### 9.20.1 四点 Gram 与精确 Schur 残差
+
+取
+
+`a_1=sqrt(2/3) cos(theta)`、
+`a_2=sqrt(2/3) cos(theta+2pi/3)`、
+`a_3=sqrt(2/3) cos(theta-2pi/3)`，
+
+令 `x=a_1y`、`z=-a_2y`、`U=exp(ixX)`、`V=exp(izX)`，并写
+`u=phi(x)`、`v=phi(z)`、`w=phi(x+z)`、`c=phi(x-z)`。对
+`U-u,V-v,UV-w` 的 covariance Gram 有
+
+`Gamma_4 = [[1-|u|^2, c-u*conj(v), conj(v)-u*conj(w)],
+            [conj(c)-conj(u)*v, 1-|v|^2, conj(u)-v*conj(w)],
+            [v-conj(u)*w, u-conj(v)*w, 1-|w|^2]] >= 0`。
+
+其左上 `2x2` block `C` 是 R106 三点约束；若 `C>0`，令
+`q=(conj(v)-u*conj(w),conj(u)-v*conj(w))^T`，则新信息是
+
+`1-|w|^2-q^*C^(-1)q>=0`。
+
+清除 `det C` 后，`det Gamma_4` 的 phase terms 为
+
+`4 Re(c*conj(u)*v)+4 Re(u*v*conj(w))`
+`-2 Re(c*conj(u)^2*w)-2 Re(c*v^2*conj(w))`。
+
+其中第一项在 full exact angular average 中被 exact identity 固定，最后两项
+则保留相邻 bispectrum cycles 的相位相容性。
+
+### 9.20.2 椭圆坐标与 bispectrum
+
+令 `s=a_2y`、`t=(a_1-a_2)y`。则
+`a_1y=s+t`、`a_2y=s`、`a_3y=-(2s+t)`，且固定 `y` 的椭圆为
+
+`6s^2+6st+2t^2=y^2`。
+
+定义 `B(s,t)=phi(s)phi(t)conj(phi(s+t))`。full exact identity 正好是
+
+`<B(s,s+t)>_{E_y}=exp(-y^2/2)`。
+
+另一方面，四点 `U,UV` principal minor 给出
+
+`1+2 Re B(s,t)-psi(s)-psi(t)-psi(s+t)>=0`。
+
+角向平均，令 `Q_4=Re<B(s,t)>_{E_y}`、
+`H_c=<psi(cy cos(theta))>`、`rho=sqrt(2/3)`，得到
+
+`1+2Q_4-2H_rho-H_sqrt2>=0`。
+
+这是四点层的第一个 phase-sensitive 必要条件。R107 homometric pair 在同一
+`psi` 下满足 `kappa_3=0` 与 `lambda^(3/2)`，而 `Q_4` 对应系数
+`(-a_1,a_2,a_1-a_2)`，有 `<(sum b_j^3)^2>=5/4`，故
+
+`Q_4,asym-Q_4,sym=-5lambda^3 y^6/288+O(y^8)`。
+
+因此 `Q_4` 不能由 difference law 或 `psi` 重构。这条结论已由本机 exact
+audit 核验，是 R105/R107 autocorrelation ambiguity 到 R108 bispectrum
+coherence 的实质推进。
+
+### 9.20.3 完整四点 phase functional
+
+令 `f_j=phi(a_jy)`、`h=phi((a_1-a_2)y)`，并定义
+
+`T_4=Re<conj(f_3)*conj(f_1)^2*h>`、
+`mathfrak Q_4=Q_4-T_4`。
+
+由 `det Gamma_4` 的 exact 展开、full exact identity 及 reflection symmetry，
+完整 angular-averaged Schur inequality可写为
+
+`P_psi+4exp(-y^2/2)+4mathfrak Q_4>=0`，
+
+其中 `P_psi` 完全由 `psi` 决定。`T_4` 的系数 multiset 是
+`(-a_3,-a_1,-a_1,a_1-a_2)`，并有
+`<(sum b_j^3)^2>=4/3`。同一 homometric pair 给出
+
+`T_4,asym-T_4,sym=-lambda^3 y^6/54+O(y^8)`，
+
+从而
+
+`mathfrak Q_4,asym-mathfrak Q_4,sym=lambda^3 y^6/864+O(y^8)`。
+
+所以四点完整 Schur 残差也不能由 difference law 重构。以局部 phase
+`phi(r)=|phi(r)|exp(i vartheta(r))` 表示时，`T_4` 测量的正是
+
+`delta(s,t)-delta(s,s+t)`，其中
+`delta(s,t)=vartheta(s)+vartheta(t)-vartheta(s+t)`。
+
+这给出了四点层真正的新对象：shear `(s,t)->(s,s+t)` 下相邻 bispectrum
+cocycle 的相容性。
+
+### 9.20.4 可关闭的条件接口与首阶边界
+
+若局部 `B(s,t)>0`，则 `delta(s,t)=0`，连续 Cauchy 方程、centered 条件和
+解析唯一性给出 `P_3K=0`。更贴合完整 Schur 项，若原点邻域内
+
+`delta(s,t)=delta(s,s+t)`，
+
+则 `vartheta(t+2s)-2vartheta(t+s)+vartheta(t)=0`，二次求导得到
+`vartheta''=0`，再由 centered 得 `vartheta=0`，同样推出 `P_3K=0`。
+
+这两个是 **PROVED conditional interfaces**，而不是对 full exact branch 的无条件
+结论。因为在 genuine full-exact branch 中，四点 companion principal minor 的
+首阶仍为
+
+`1+2Q_4-2H_rho-H_sqrt2=5(2-m_3^2)y^6/144+O(y^8)`，
+
+仅恢复旧约束 `m_3^2<=2`。
+
+### 9.20.5 证据边界与 R109
+
+本机新增 `four_point_bispectrum_shear_r108/README.md` 与 `audit_r108.py`，
+核验了：四点 Gram/Schur determinant、椭圆坐标、bispectrum cycle rewrite、
+`Q_4/T_4` 的同模长分离、anisotropic quadratic form 的系数矩、Gaussian
+anchor 及 full-exact 首阶。网页端给出的 phase separation 现标为
+**PROVED / LOCAL-AUDITED**。
+
+pointwise shear alignment 是否可由 `Gamma_4>=0` 加
+`<B(s,s+t)>_{E_y}=exp(-y^2/2)` 推出，仍为 **OPEN**；bare `RK=1` 到 genuine
+full-exact、asymmetric exact-law exclusion 和最终 positive backward-tower
+rigidity 也仍为 **OPEN**。
+
+因此 R109 不应立即升级到五点。当前最小命题是
+**Four-Point Shear–Bispectrum Alignment Lemma**：在 local zero-free
+characteristic neighborhood 内，证明或反驳上述四点条件是否推出
+`delta(s,t)=delta(s,s+t)`。只有找到保留 nonzero shear cocycle 的 genuine
+characteristic phase lift，才进入五点 Gram。

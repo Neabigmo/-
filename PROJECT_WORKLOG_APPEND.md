@@ -3732,3 +3732,37 @@ computation was used.
   全局三点不等式为网页端解析证明；它不是主问题反例。asymmetric exact-law
   exclusion、四点 phase rigidity、`RK=1` 识别与最终 backward-tower theorem
   仍 **OPEN**。
+
+# 2026-09-07 — R108 四点 bispectrum separation 与 shear-cocycle interface
+
+- 网页端 R108 完成了 R107 指定的四点 multiplicative Bochner 审查。结论是四点
+  层没有塌回 `psi=|phi|^2`，而是第一次留下 genuine bispectrum phase；但最浅
+  principal minor 仍只给旧 cone wall `m_3^2<=2`，不能宣布四点已经完成 rigidity。
+- 本轮固定 `x=a_1y`、`z=-a_2y`，对 `U-u,V-v,UV-w` 构造精确 `Gamma_4>=0` 与
+  Schur complement。取 `s=a_2y`、`t=(a_1-a_2)y` 后，exact identity 重写为
+  `<B(s,s+t)>_{E_y}=exp(-y^2/2)`，而 companion principal minor 第一次看到
+  `B(s,t)`。
+- 定义 `Q_4=Re<B(s,t)>`。R107 同 `psi` homometric pair 的 `kappa_3` 差异和
+  `b^(Q)=(-a_1,a_2,a_1-a_2)` 的角向矩给出
+  `Q_4,asym-Q_4,sym=-5lambda^3 y^6/288+O(y^8)`，严格证明 `Q_4` 不能由
+  difference law 重构。
+- 对完整 Schur 残差定义 `T_4=Re<conj(f_3)conj(f_1)^2h>`、
+  `mathfrak Q_4=Q_4-T_4`。`b^(T)=(-a_3,-a_1,-a_1,a_1-a_2)` 给出
+  `T_4,asym-T_4,sym=-lambda^3 y^6/54+O(y^8)`，因而
+  `mathfrak Q_4,asym-mathfrak Q_4,sym=lambda^3 y^6/864+O(y^8)`。这把新信息
+  解释为 shear `(s,t)->(s,s+t)` 下相邻 bispectrum cocycle
+  `delta(s,t)-delta(s,s+t)` 的相容性。
+- 可关闭的条件接口：局部 `B(s,t)>0` 或局部 `delta(s,t)=delta(s,s+t)`，均可由
+  连续 Cauchy/二阶差分论证推出 `vartheta=0`，再得 `P_3K=0`。但 full exact
+  ellipse average 是否足以推出 pointwise shear alignment 仍 **OPEN**。
+- 本机新增 `four_point_bispectrum_shear_r108/README.md` 和 `audit_r108.py`。
+  审计通过：`R108_ELLIPSE_BISPECTRUM_COORDINATES_PASSED`、
+  `R108_FOUR_POINT_GRAM_AND_SCHUR_PASSED`、
+  `R108_BISPECTRUM_CYCLE_REWRITE_PASSED`、
+  `R108_ANGULAR_COEFFICIENT_MOMENTS_PASSED`、
+  `R108_FULL_EXACT_SERIES_AND_COMPANION_BOUND_PASSED`、
+  `R108_HOMOMETRIC_Q4_T4_SEPARATION_PASSED`、
+  `R108_FOUR_POINT_BISPECTRUM_SHEAR_AUDIT_COMPLETED`。
+- 当前下一轮保持四点，不升级五点：**Four-Point Shear–Bispectrum Alignment
+  Lemma**。只有 genuine characteristic phase lift 保留 nonzero shear cocycle
+  时，才进入五点 Gram。
