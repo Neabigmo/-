@@ -78,6 +78,11 @@ V6 = sp.simplify(-(C33 / 36) / A6)
 assert A6 == sp.Rational(5, 18)
 assert V6 == sp.Rational(7, 720)
 assert sp.sqrt(sp.factorial(6)) * V6 == 7 * sp.sqrt(5) / 60
+eta6 = 7 * sp.sqrt(5) / 60
+for i in range(7):
+    assert sp.simplify(eta6 * sp.sqrt(sp.binomial(6, i))
+                       - eta6 * sp.sqrt(sp.factorial(6)
+                                         / (sp.factorial(i) * sp.factorial(6 - i)))) == 0
 
 print("R98_EXACT_GAUSSIAN_MODE_COST_PASSED")
 print("R98_ACTUAL_K51_NONZERO_PASSED")
@@ -85,4 +90,5 @@ print("R98_GROWING_RADIUS_RATIO_PASSED")
 print("R98_RENORMALIZED_ENDPOINT_COLUMN_MAJORANT_PASSED")
 print("R98_FINITE_COMMUTATOR_SQRTN_BARRIER_PASSED")
 print("R98_G2_GAP6_ANCHOR_PASSED")
+print("R98_G2_DEGREE6_CORNER_PASSED")
 print("R98_CGAMMA_ZERO_ENDPOINT_OBSTRUCTION_COMPLETED")

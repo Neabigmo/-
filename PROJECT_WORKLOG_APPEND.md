@@ -3421,3 +3421,9 @@ computation was used.
   了“所有 even gaps 被四项结构消掉”的错误猜想。`O(1)`、`Theta(log n)` 或更大
   的 mesoscopic summability 仍 OPEN。审计新增
   `R98_G2_GAP6_ANCHOR_PASSED`。
+- 更精确地，最低 degree-six Hermite mode 给出完整 boundary corner：当
+  `i+j=6` 时，`(B_n^(2))_(i,6-i)=eta_6 sqrt(binomial(6,i))`。因此 gaps
+  `6,4,2,0` 的首个 boundary entries 分别为
+  `eta_6,sqrt(6)eta_6,sqrt(15)eta_6,sqrt(20)eta_6`。这是 finite-degree
+  corner certificate，而不是 mesoscopic growth conclusion；审计新增
+  `R98_G2_DEGREE6_CORNER_PASSED`。

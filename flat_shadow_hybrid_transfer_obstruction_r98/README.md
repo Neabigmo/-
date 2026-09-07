@@ -207,3 +207,15 @@ Hermitian symmetry supplies the opposite gap, so
 This is a strict lower anchor for the actual R80 multiplier, not a claim of
 growth.  It rules out any proposed argument which annihilates all even gaps;
 the unresolved issue remains the summation over the mesoscopic gaps.
+
+More precisely, the entire degree-six boundary corner is explicit.  For
+`i+j=6` and `0<=i,j<=6`, degree locality and `eta_0=eta_2=eta_4=0` give
+
+`(B_n^(2))_(i,6-i)=eta_6 sqrt(6!/(i!(6-i)!))
+                 =eta_6 sqrt(binomial(6,i))`.
+
+Thus the first boundary entries of gaps `6,4,2,0` have sizes
+`eta_6`, `sqrt(6)eta_6`, `sqrt(15)eta_6`, and `sqrt(20)eta_6`, respectively.
+This is an exact degree-six corner certificate for the actual multiplier;
+it is still only a finite-degree lower bound and leaves the mesoscopic tail
+completely open.
