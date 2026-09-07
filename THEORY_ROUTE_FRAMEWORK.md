@@ -9386,8 +9386,10 @@ R_1=...=R_M=0}`。
 `0<=y_(2r)<=4^r r!` 组成。若所有 `T_M(c)` 非空，则坐标对角化、Hankel
 positivity、Hamburger theorem 与 Carleman 给 genuine full-exact law。因此若
 固定 `c!=0` 的 genuine full-exact law不存在，必有有限 `M(c)` 使 `T_M(c)` 为空。
-这是真正有限、可检验的联合 obstruction framework；本轮没有声称知道第一个
-失败的 principal minor 或显式 `M(c)`。
+这是真正有限、可检验的联合 obstruction framework；但单个 finite `H_M>=0`
+不必有 representing measure，singular non-flat ghost 只在 R125 中被明确区分；
+这里的 Hamburger theorem 只用于所有 `M` 的一致对角极限。本轮没有声称知道
+第一个失败的 principal minor 或显式 `M(c)`。
 
 ### 9.36.5 对 R115/R120 的精确解释与 R125
 
@@ -9405,3 +9407,78 @@ R125 固定为 **Truncated-Hamburger Cubic-Radius Decay**：利用 exact-row 多
 与 `H_M>=0` 构造随 `M` 增长的非负 polynomial certificate `P_M(X)^2`，争取给出
 `|kappa_3|<=epsilon_M` 且 `epsilon_M->0`。这比继续寻找新的 Bochner flux 更贴近
 当前主问题的 genuine one-body realizability 核心。
+
+## 9.37 R125：truncated-Hamburger cubic radius 的渐近 exactness 与 no-go
+
+网页端 R125 在读取 R124 后完成了 finite-row hierarchy 的进一步压缩；本机新增
+`truncated_hamburger_cubic_radius_r125/README.md` 与 `audit_r125.py`。本轮没有
+证明 `Gamma_M->0`，但得到三个实质性小结果，并纠正了 finite Hankel 的 representability
+边界。
+
+### 9.37.1 finite truncation 的 ghost 边界
+
+单个 `H_M(y)>=0` 不保证 finite representing measure。反例
+`(y_0,...,y_4)=(1,0,0,0,1)` 的 `H_2=diag(1,0,1)>=0`，但 `y_2=0` 会迫使任何
+representing law 满足 `X=0` a.s.，从而不可能 `y_4=1`。finite ghost 只能位于
+singular non-flat locus：`H_M>=0`、singular 且
+`rank H_M>rank H_(M-1)`；positive definite 或 singular flat 情况可延拓/表示。
+
+因此 finite genuine radius `Gamma_M` 与 relaxed radius `GammaHat_M` 在有限层
+必须区分；R124 的 Hamburger 步骤只用于所有 `M` 的一致对角极限。
+
+### 9.37.2 radius extremizers 与 asymptotic exactness
+
+exact row 最高 moment 的 triangular coefficient 为
+
+`R_r(y)=(2^r/3^(r-1))y_(2r)+P_r(y_0,...,y_(2r-1))-2^r r!`。
+
+有限 relaxed 集合的 even moment caps 与 Hankel `2x2` minors 给 compactness，
+故 `GammaHat_M` 取得最大值且单调不增。genuine `Gamma_M` 也由 R124 的
+finite-row moment bootstrap 取得最大值，并可用至多 `2M+1` 原子的
+Richter–Tchakaloff cubature 实现。
+
+定义 `Gamma_infty` 为 genuine full-exact class 的最大 cubic skew。对 genuine
+extremizers 使用 R124 compactness，对 relaxed maximizers使用 coordinate diagonal
+extraction、全阶 Hankel PSD、Carleman 与 Hamburger theorem，得到
+
+`boxed{lim_M Gamma_M=lim_M GammaHat_M=Gamma_infty}`。
+
+所以 `GammaHat_M-Gamma_M->0`，但不意味着每个有限 truncation 本身 representable。
+若 fixed `epsilon>0` 能令 `GammaHat_M>=epsilon` 对所有 `M`，则必产生 genuine
+full-exact law with nonzero cubic；固定非零 cubic 不能永远停留在 formal branch
+同时通过全部 finite rows/caps/Hankel constraints。
+
+### 9.37.3 growing Fourier window 与 anti-atomicity
+
+对 genuine `mu in E_M`，前 `M` rows 使 `Y_theta=sum a_jX_j` 的 angular-averaged
+moments 到 degree `2M` 与 Gaussian 一致。Taylor remainder 给
+
+`|E J_0(t sqrt(Q))-e^(-t^2/2)|<=2|t|^(2M)/(2^M M!)`。
+
+因此对 `|t|<=alpha sqrt(M)`、`alpha<sqrt(2/e)`，得到指数级 growing-window
+近似 `<=2(e alpha^2/2)^M`。这仍只是 radial approximation，不含 first-harmonic
+sign information。
+
+令 `n=floor(M/2)`，Laguerre kernel
+`P_n(q)=(n+1)^(-1)sum_(k=0)^nL_k(q/2)` 满足
+`P_n(0)=1`、`E P_n(Q)^2=1/(n+1)`。故
+
+`P(Q=0)<=1/(floor(M/2)+1)`，
+
+在 iid 情形即 `sum_x mu{x}^3` 的 collision bound；有限原子 realizers 的支持数
+至少为 `sqrt(floor(M/2)+1)`。该 anti-atomicity 不控制连续 asymmetric law 的 cubic。
+
+### 9.37.4 判决与 R126
+
+PROVED / ANALYTICALLY PROVED：finite triangular row structure；genuine/relaxed
+extremizer；`lim Gamma_M=lim GammaHat_M=Gamma_infty`；fixed-gap no-purely-
+formal escape；growing Fourier-window bound；Laguerre–Christoffel anti-atomicity。
+CONDITIONAL：若主 cubic exclusion 成立，则 `Gamma_M` 与 `GammaHat_M` 均趋零；
+这只是等价 reformulation。FORMAL：R104 odd branch；OBSTRUCTION：finite
+Hankel ghosts、Fourier approximation、anti-atomicity与固定阶 PSD均不能 annihilate
+cubic。OPEN：`Gamma_M->0`。
+
+R126 固定为 **Singular-Ghost Elimination at the Cubic Extremum**：对 `T_M` 中
+maximizing `y^(M)`，研究能否选取 `H_M` positive definite 或 flat；若不能，构造
+singular non-flat extremizing branch并量化 `GammaHat_M-Gamma_M`，把 finite ghost
+layer 变成下一层可检验 obstruction。

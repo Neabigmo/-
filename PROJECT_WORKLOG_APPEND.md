@@ -4483,3 +4483,69 @@ hierarchy 中构造非负 polynomial certificate `P_M(X)^2`，争取证明
 `R124_TRUNCATED_HAMBURGER_INTERFACE_PASSED`
 
 `R124_UNIFORM_ENVELOPE_FINITE_ROW_AUDIT_COMPLETED`
+
+# 2026-09-07 — R125 Truncated-Hamburger Cubic Radius：渐近 exactness 与 no-go
+
+网页端 R125 在读取 R124 后完成了 finite-row hierarchy 的进一步压缩；connector 仍不可读，
+本轮依据当前对话自包含结论继续。本机新增
+`truncated_hamburger_cubic_radius_r125/README.md` 与 `audit_r125.py`。
+
+- 纠正 finite Hamburger 边界：单个 `H_M(y)>=0` 不保证 representing measure。
+  `(y0,...,y4)=(1,0,0,0,1)` 有 `H2=diag(1,0,1)>=0`，但 `y2=0` 会迫使
+  `X=0` a.s.，不可能 `y4=1`。finite ghost 只能在 singular non-flat locus；
+  所有 `M` 的一致对角极限仍可由 Hamburger theorem 产生 genuine law。
+- exact row 的最高 moment triangular coefficient 为
+  `R_r=(2^r/3^(r-1))y_{2r}+P_r(y0,...,y_{2r-1})-2^r r!`；relaxed finite
+  sets compact，`GammaHat_M` 取得最大值并单调不增；genuine `Gamma_M` 也取得
+  最大值，并可由至多 `2M+1` 原子的 cubature 实现。
+- 主要小定理 **R125-A**：若 `Gamma_infty` 是 genuine full-exact class 的最大
+  cubic skew，则
+  `lim_M Gamma_M=lim_M GammaHat_M=Gamma_infty`，从而
+  `GammaHat_M-Gamma_M->0`。这不意味着单个 finite truncation representable，
+  只说明 ghost gap 在渐近上消失。
+- **R125-B**：固定非零 cubic gap 若能穿过所有 finite row/cap/Hankel constraints，
+  紧性最终会把它升级为 genuine full-exact law；不存在“固定 c 永远只是 formal
+  但通过全部 finite PSD”的第三种情况。已审计的 finite-row perturbations 说明
+  每个固定阶仍有小的 genuine nonzero-cubic 邻域，所以没有固定 finite degree
+  可以直接 annihilate cubic。
+- **R125-C**：前 `M` rows 给 growing Fourier-window bound
+  `|E J0(t sqrt(Q))-e^(-t^2/2)|<=2|t|^(2M)/(2^M M!)`，在
+  `|t|<=alpha sqrt(M)`、`alpha<sqrt(2/e)` 上指数衰减。它只是 radial approximation，
+  不提供 first-harmonic sign。
+- **R125-D**：令 `n=floor(M/2)`，Laguerre–Christoffel kernel 给
+  `P(Q=0)<=1/(n+1)`；iid 时 `sum_x mu{x}^3<=1/(n+1)`，有限原子 law 的支持数
+  至少为 `sqrt(n+1)`。该 anti-atomicity 不控制连续 asymmetric law 的 skew。
+- 因此 `Gamma_M->0` 仍 OPEN，而且由 R125-A 等价于 genuine cubic exclusion，
+  不是一个显然更弱的中间命题。R126 将转向 finite extremizer 的 singular ghost
+  elimination。
+
+R125 判决：PROVED / ANALYTICALLY PROVED 为 finite row triangular structure、
+relaxed/genuine radius 的渐近 exactness、fixed-gap no-purely-formal escape、
+growing Fourier window 与 Laguerre anti-atomicity；CONDITIONAL 为 `Gamma_M->0`
+若 cubic exclusion 成立；FORMAL 为 R104 odd branch；OBSTRUCTION 为 finite
+Hankel ghost、radial approximation、anti-atomicity 和固定阶 PSD 均不能给 cubic
+sign；OPEN 是 `Gamma_M->0`。
+
+下一步 R126：**Singular-Ghost Elimination at the Cubic Extremum**，研究
+`T_M` 的 cubic maximizer 是否可选为 positive-definite/flat；若不能，构造并量化
+singular non-flat extremizing branch。
+
+本机审计输出：
+
+`R125_FINITE_HANKEL_SINGULAR_GHOST_COUNTEREXAMPLE_PASSED`
+
+`R125_EXACT_ROW_TRIANGULAR_COEFFICIENT_PASSED`
+
+`R125_RELAXED_HANKEL_COMPACTNESS_INTERFACE_PASSED`
+
+`R125_ASYMPTOTIC_RADIUS_SQUEEZE_INTERFACE_PASSED`
+
+`R125_GROWING_FOURIER_WINDOW_INTERFACE_PASSED`
+
+`R125_LAGUERRE_CHRISTOFFEL_ANTI_ATOMICITY_PASSED`
+
+`R125_NO_FIXED_DEGREE_CUBIC_ANNIHILATION_PASSED`
+
+`R125_SINGULAR_GHOST_LOCUS_INTERFACE_PASSED`
+
+`R125_TRUNCATED_HAMBURGER_CUBIC_RADIUS_AUDIT_COMPLETED`

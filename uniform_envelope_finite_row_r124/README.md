@@ -140,7 +140,10 @@ R_1=...=R_M=0}`。
 Hamburger moment theorem 给 genuine full-exact law；所以若该 law 不存在，
 必有有限 `M(c)` 使 `T_M(c)=emptyset`。
 
-这是真正有限、可检验的 obstruction framework，但本轮没有做 SDP 或 optimizer，
+这是真正有限、可检验的 obstruction framework，但要严格注意：单个有限
+`H_M>=0` 不必有 representing measure；R125 给出了 singular non-flat ghost
+反例。这里使用 Hamburger theorem 的步骤只发生在所有 `M` 的一致对角极限上，
+而不是把单个 finite truncation 直接当成概率律。本轮没有做 SDP 或 optimizer，
 也没有声称知道第一个失败的 principal minor。
 
 ## 6. R115/R120 finite-row obstruction 的准确解释
