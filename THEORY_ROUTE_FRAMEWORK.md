@@ -8386,3 +8386,93 @@ PROVED / LOCAL-AUDITED；Gaussian-neighborhood full asymptotic expansion 与
 uniform phase estimate 为网页端 ANALYTICALLY PROVED；bare scalar `RK=1`
 到 genuine full-exact identification、primitive annihilation 和最终
 Positive Backward-Tower Exact Zero-Set Rigidity 仍 OPEN。
+
+## 9.26 R114：Primitive cubic shear limit 与四点 local no-go
+
+网页端 R114 沿 R113 的要求完成了真正必要的尺度区分；connector 仍不可读，
+故本节把网页端解析输入与本机可复核代数分开。本机新增
+`primitive_cubic_shear_limit_r114/README.md` 与 `audit_r114.py`。
+
+### 9.26.1 fixed-frequency `tau^3` residual
+
+令 `tau=q^N`、`h_N=g_N^(N)`、`mu_(tau,N)=P_tau h_N`、
+`c_N=kappa_3(h_N)`。OU transport 加 full-exact d=3 fingerprint 给出
+
+`log phi_mu(r)=-r^2/2-i*tau^(3/2)c_Nr^3/6+tau^3c_N^2r^6/240+...`。
+
+在 R109 四点 `x=(0,s,s+t,2s+t)` 上，若 `G` 是 Gaussian four-point Gram，
+Schur residual `S_mu=Delta0Delta1-|N|^2` 与 full determinant 的精确关系为
+
+`S_mu=(1-|phi_mu(s)|^2)det(G4(mu))`。
+
+对 cubic matrix `A` 与 sixth-order real matrix `B` 做 fixed-frequency
+perturbation，网页端得到
+
+`S_mu=S_G+tau^3c_N^2F4(s,t)+O(tau^4)`，
+
+其中
+
+`F4=S_G(tr(G^(-1)B)-1/2tr((G^(-1)A)^2))`
+`   -exp(-s^2)s^6det(G)/120`。
+
+这是物理频率固定的展开，不能把 primitive frequency window 混入其中。
+
+### 9.26.2 Gaussian baseline 严格为正，relative correction 不具正号
+
+设 `Pi=s^6t^2(s+t)^4(2s+t)^2`、
+`y^2=s^2+(s+t)^2+(2s+t)^2`。Vandermonde leading law 给出
+
+`S_mu=det(H3)/144*Pi+O(y^16)`。
+
+对 exact degree-six compatible jet，令 `d_N=kappa_5(h_N)`，则
+
+`m3=tau^(3/2)c_N`、`m4=3`、
+`m5=10tau^(3/2)c_N+tau^(5/2)d_N`、
+`m6=15+7tau^3c_N^2`，并有精确恒等式
+
+`det(H3)=12-30tau^3c_N^2-12tau^4c_Nd_N`
+`        -tau^5d_N^2-6tau^6c_N^4`。
+
+故 Gaussian 邻域的 primitive 首项为
+
+`S_mu-S_G=-(5/24)tau^3c_N^2Pi+...`。
+
+Gaussian `S_G>0`，所以 `S_mu>=0` 不能转化为
+`(S_mu-S_G)/tau^3>=0`；relative correction 的负号不产生 `c_N=0`。
+这严格关掉了“把四点绝对 PSD 当作 Gaussian-relative saturation”的路线。
+
+### 9.26.3 exact angular `tau^3` limit 与 primitive rescaling
+
+对 normalized angular functional `Z_tau`，利用已审计的
+`<p6>=5/18`、`<p3^2>=1/12`，网页端得到
+
+`tau^(-3)(Z_tau(y)-1)=-y^6(kappa_6(h_N)+3c_N^2)/2592`。
+
+full exactness 使该式恒为零，只恢复 `kappa_6=-3c_N^2`。固定 `s,t` 时，
+
+`tau^(-3/2)eta_tau(s,t)->-c_Ns^2(s+t)`；若改取
+`s=tau^(-1/2)sigma`、`t=tau^(-1/2)xi`，Gaussian off-diagonal 进入指数小区间，
+`G4->I`，没有可与 fixed-frequency `tau^3` 系数拼接的 polynomial limit。
+
+网页端还给出 genuine finite-jet bump realization，证明 degree-six exactness
+加四点 Bochner PSD 与 nonzero `c` 相容；由于它没有 all-degree exactness，
+证据等级是 finite-order obstruction，不是主命题 counterexample。
+
+### 9.26.4 结论与 R115
+
+R114 的严格局部结论是：normalized four-point cone 仍只返回既有 primitive
+bound `|c_N|<=sqrt(2)`，不推出 `c_N->0`。当前缺的不是 `tau^4` 或更高的
+有限 determinant 系数，而是 all-degree Gaussian-relative comparison。
+
+下一轮 R115 定为 **Gaussian Four-Point Slack Saturation Lemma**：寻找一个固定
+generic 小 parallelogram，使 positive backward + all-degree exactness 给出
+
+`S_(g_N^(0))(s0,t0)>=S_G(s0,t0)-o(q^(3N))`，
+
+或证明 genuine all-degree obstruction；后一结果将说明必须更换 global functional。
+
+R114 证据边界：moment/cumulant substitution、`H3` determinant、Gaussian 与
+primitive leading coefficients、angular cancellation、scale/shear identities
+为 PROVED / LOCAL-AUDITED；full trace formula 与 finite-jet bump realization
+为网页端 ANALYTICALLY PROVED；bare scalar `RK=1` identification、all-degree
+relative saturation、primitive annihilation 和最终 rigidity 仍 OPEN。

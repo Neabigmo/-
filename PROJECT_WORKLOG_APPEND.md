@@ -3909,3 +3909,38 @@ computation was used.
   `tau^(-3)*(Delta0Delta1-|N|^2-S_G)` 与 exact angular `tau^3` limit，
   判断 normalized four-point cone 是否仍只给 `|c_N|<=sqrt(2)`，或已强制
   `c_N->0`。
+
+# 2026-09-07 — R114 Primitive Cubic Shear Limit 与 four-point no-go
+
+- 网页端 R114 在 connector 不可读时按自包含 R109/R112/R113 数据完成了尺度
+  审计。本机新增 `primitive_cubic_shear_limit_r114/README.md` 与 `audit_r114.py`。
+- 令 `tau=q^N`、`h_N=g_N^(N)`、`c_N=kappa_3(h_N)`，固定物理频率下
+  `mu_(tau,N)=P_tau h_N` 的 exact d=3 展开为
+  `log phi_mu=-r^2/2-i*tau^(3/2)c_Nr^3/6+tau^3c_N^2r^6/240+...`；
+  四点 Schur residual 满足
+  `S_mu=S_G+tau^3c_N^2 F4+O(tau^4)`。
+- 以 `Pi=s^6t^2(s+t)^4(2s+t)^2`、`H3=[m_(i+j)]` 展开，exact degree-six
+  compatible jet 给出
+  `det H3=12-30tau^3c_N^2-12tau^4c_Nd_N-tau^5d_N^2-6tau^6c_N^4`；
+  因而 Gaussian 邻域
+  `S_mu-S_G=-(5/24)tau^3c_N^2Pi+...`。这个修正虽为负，却不能从
+  `S_mu>=0` 推出 `c_N=0`，因为 `S_G>0`，正定作用在绝对残差而非相对差上。
+- 同步的 genuine full-exact angular functional 满足
+  `tau^(-3)(Z_tau-1)=-(y^6/2592)(kappa_6(h_N)+3c_N^2)=0`；它只恢复
+  `kappa_6=-3c_N^2`，不消灭 cubic charge。合法 primitive phase normalization
+  是 `tau^(-3/2)eta -> -c_Ns^2(s+t)`；`r~tau^(-1/2)` 则进入指数小的
+  `G4->I` 区域，不能与 fixed-frequency `tau^3` 系数混用。
+- 网页端进一步给出 genuine probability finite-jet construction：
+  `m1=0,m2=1,m3=c,m4=3,m6=15+7c^2` 对小非零 `c` 可实现，且 Bochner、
+  positive OU、degree-six exact fingerprint 同时成立；它不是 all-degree
+  exact counterexample，却证明任何只用 degree-six 与四点 PSD 的路线都不足。
+- 本机 audit 核验 cumulant/moment substitution、`H3` determinant、Gaussian
+  coefficient `1/12` 与 primitive coefficient `-5/24`、angular `tau^3`
+  cancellation、scale/shear identities，全部通过。完整 trace-resolvent 与
+  bump realization 仍标网页端 ANALYTICALLY PROVED，未过度升级证据。
+- 状态：R114 得到严格 four-point local no-go：normalized cone 仍不超出
+  `|c_N|<=sqrt(2)`，`c_N->0` 继续 OPEN。下一轮改攻 R115
+  **Gaussian Four-Point Slack Saturation Lemma**：寻找 all-degree
+  positive/backward mechanism，使某个 generic parallelogram 的残差相对
+  Gaussian baseline 不低于 `S_G-o(q^(3N))`，或构造 genuine all-degree
+  obstruction；不再继续无目的地计算更高有限阶 determinant。
