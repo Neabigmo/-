@@ -7591,3 +7591,91 @@ R104 的证据边界：
 
 或给出严格反例并精确说明必须补上的 genuine Bochner 正定性。不得把
 `J` 约束、formal branch 或固定 `z` 的 Schur 正性误写成最终 rigidity。
+
+## 9.17 R105：Schur–Abel 实轴 no-go 与 genuine homometric phase obstruction
+
+网页端 R105 完成了 R104 指定的 global real-axis route 审查，并给出一个真实
+概率律层面的 phase-retrieval obstruction。本节只把有限符号与有限支撑计算记为
+本机已核验的内容；无限维 phase rigidity 仍保持 OPEN。
+
+### 9.17.1 已证的实轴 slack
+
+由 R104 的 Abel reconstruction
+
+`K_e(r)=r^2/2-J(r)/3`,
+
+和 `K_e=(K(r)+K(-r))/2`，对任意具有相应实 MGF 的非退化概率律有
+
+`J(r)=3r^2/2-(3/2)log(M(r)M(-r))`.
+
+因此 Cauchy–Schwarz 与 tilted-variance identity 给出（`r>0`）
+
+`J(r)<3r^2/2`, `J'(r)<3r`, `J''(r)<3`,
+
+并且
+
+`3r^2/2-J(r)=(3/2)log(M(r)M(-r))`,
+
+`3-J''(r)=(3/2)(Var_{mu_r}X+Var_{mu_{-r}}X)`。
+
+这里 `mu_{±r}` 是指数倾斜律。故 `P_3K!=0` 导致 real-axis convexity
+breakdown 不是一个有独立增益的中间命题：只要非对称 genuine full-exact law
+存在，它就会满足上述严格 slack，并直接反驳该 breakdown lemma；若不存在
+非对称 exact law，该 lemma 只是最终排除结论的推论。
+
+### 9.17.2 genuine homometric pair
+
+网页端构造并由 `homometric_phase_obstruction_r105/audit_r105.py` 核验了两条
+有限支撑律：
+
+`mu_sym=(-3/2,0,3/2)` 的概率为 `(2/9,5/9,2/9)`；
+
+`mu_asym=(-1,1/2,2)` 的概率为 `(4/9,4/9,1/9)`。
+
+两者都 centered、variance-one，且 `m_4=9/4`；但三阶矩分别为 `0` 与 `1/2`。
+令 `m(s)=2/3+e^s/3`，则
+
+`M_sym(r)=m(3r/2)m(-3r/2)`,
+
+`M_asym(r)=e^{-r}m(3r/2)^2`,
+
+从而
+
+`M_sym(r)M_sym(-r)=M_asym(r)M_asym(-r)`。
+
+因此两律有相同差分律、自相关、`K_e`、`J` 与 `|phi|^2`，但对称性不同。
+这是 genuine probability obstruction，不是形式 jet；它不是原项目的
+counterexample，因为 full-exact 四阶条件为 `kappa_4=0`，即 `m_4=3`，而两律
+均有 `m_4=9/4`。
+
+### 9.17.3 exactness 四阶审计与路线转向
+
+若 `Z(z)=<exp(mathscr K(z,theta))> = 1` 是 genuine full-exact identity，则
+`<p_4>=1/2`，且三阶项平方到六阶才出现，所以四阶系数为 `kappa_4/48`，从而
+`kappa_4=0`、`m_4=3`。这一步已由本机 exact symbolic audit 通过。
+
+R105 的战略结论是：Schur–Abel cascade 已恢复 one-body autocorrelation，剩余
+Gaussian rigidity 是 same-factor cubic constraint 下的 Bochner characteristic
+phase-rigidity，而非实轴 convexity 问题。项目的 bare `RK=1` 到 genuine
+full-exact law 的识别仍 **CONDITIONAL**。
+
+### 9.17.4 R106 最小 OPEN
+
+**Exact-Constrained Bochner Phase-Lift Rigidity — OPEN**：给定 R104/R105
+重构出的 difference law `D` 与 `psi=widehat D`，研究满足
+
+`|phi(y)|^2=psi(y)`, `phi(0)=1`, `EX=0`, `EX^2=1`,
+
+`<prod_j phi(a_j(theta)y)> = e^{-y^2/2}`
+
+的所有 characteristic phase lifts，能否证明 `phi(y)=phi(-y) in R`。
+
+网页端提出的最尖锐子引理是
+
+`<prod_j |phi(a_j y)|> <= e^{-y^2/2}`。
+
+它尚未证明；exact identity 通过三角不等式只给出相反方向
+`e^{-y^2/2} <= <prod_j |phi(a_j y)|>`。因此 phase alignment、odd-cumulant
+消失、非对称 exact-law exclusion 与最终 positive backward-tower rigidity
+继续 **OPEN**。禁止将该反向模不等式当作已证结论，也不得以 numerical sweep、
+SDP、optimizer 或 remote computation 代替它。

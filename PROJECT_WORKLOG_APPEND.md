@@ -3642,3 +3642,33 @@ computation was used.
   可严格审计的 genuine Bochner/positive-definiteness 障碍。不得重开 R99–R103，
   不做更多孤立低阶 `alpha_n` 展开，不做数值 sweep、SDP、optimizer 或 remote
   computation。
+
+# 2026-09-07 — R105 Genuine homometric phase obstruction
+
+- 网页端 R105 已完成 R104 指定的 Schur–Abel global real-axis 审查。由
+  `K_e=r^2/2-J/3` 与 `K_e=(K(r)+K(-r))/2` 得到
+  `J=3r^2/2-(3/2)log(M(r)M(-r))`，并核验
+  `3r^2/2-J=(3/2)log(M(r)M(-r))`、
+  `3-J''=(3/2)(Var_{mu_r}X+Var_{mu_{-r}}X)` 以及 `J'<3r`。因此
+  real-axis convexity-breakdown 不能作为独立中间增益；它与排除非对称
+  genuine exact law 处于同一逻辑层级。
+- 网页端构造的真实 finite-support homometric pair 已本机 exact audit：
+  `mu_sym=(-3/2,0,3/2)` with probabilities `(2/9,5/9,2/9)`，以及
+  `mu_asym=(-1,1/2,2)` with probabilities `(4/9,4/9,1/9)`。二者 centered、
+  variance-one，三阶矩为 `0` 与 `1/2`，四阶矩均为 `9/4`，且
+  `M_sym(r)M_sym(-r)=M_asym(r)M_asym(-r)`。所以 real-axis `J`、difference law
+  与 characteristic modulus 不能识别 phase/symmetry；这是 genuine
+  probability obstruction，不是 full-exact counterexample。
+- 同一审计从 `Z=<exp(mathscr K)>=1` 的四阶系数 `kappa4/48` 核验 full-exact
+  必须满足 `kappa4=0`、`m4=3`，故上述 pair 被 exactness 明确排除。
+- 新增 `homometric_phase_obstruction_r105/README.md` 与 `audit_r105.py`。
+  本机输出：`R105_SCHUR_ABEL_SLACK_IDENTITIES_PASSED`、
+  `R105_HOMOMETRIC_BERNOULLI_PAIR_PASSED`、
+  `R105_FOURTH_ORDER_EXACTNESS_OBSTRUCTION_PASSED`、
+  `R105_HOMOMETRIC_PHASE_OBSTRUCTION_AUDIT_COMPLETED`。
+- 路线状态：`Schur–Abel` 已完成 autocorrelation sector；剩余核心转为
+  **Exact-Constrained Bochner Phase-Lift Rigidity — OPEN**。网页端提出的
+  `<prod_j|phi(a_jy)|> <= exp(-y^2/2)` 只是下一轮子引理，当前 exact identity
+  只给出相反的三角不等式方向。`RK=1` 到 genuine full-exact 仍
+  **CONDITIONAL**；asymmetric exact-law exclusion、even sector 与最终
+  positive backward-tower theorem 仍 **OPEN**。
