@@ -9011,3 +9011,99 @@ R121 最小命题固定为 **Angular-Mixture Coherence Lemma**：只攻
 exactness / R101 Herglotz structure 能否给出其 quadratic-form 表示，或至少给出
 它与 within-angle term 的强制相对符号/抵消关系。若不能，则正式关闭 TP/MLR 主
 路线并转向 conditional-mean diagonal transform。
+
+## 9.33 R121：angular Esscher–Fisher cross term 与正二次型 no-go
+
+网页端 R121 对 R120 的 between-angle coherence 项完成了 global 化，并给出
+`angular_esscher_fisher_r121/README.md` 与 `audit_r121.py`；本机审计通过。
+
+### 9.33.1 Esscher transverse direction
+
+对 `F_theta(q,m)=prod_j f(m+sqrt(q)a_j(theta))` 定义
+
+`A_theta(q,lambda)=int e^(lambda m)F_theta(q,m)dm`、
+`Z(q,lambda)=avg_theta A_theta(q,lambda)`、
+`w_(q,lambda)=A_theta/Z`。
+
+`lambda=3s` 正是 one-body Esscher tilt `f_s proportional e^(sx)f(x)` 在三因子
+乘积中的 common-mean 方向，因此是 genuine same-factor transverse direction。
+其 angular scores 为
+
+`S_lambda=m_theta-h(q)`、
+`S_q=(r_theta+q)/(2q)`。
+
+exact row mass 给 `E_w r_theta=-q`，故
+
+`C_ang(q)=Cov_w(m_theta,r_theta)=2q I_ang_(lambda q)`。
+
+### 9.33.2 Positive Toeplitz/Fisher representation
+
+令 `alpha_k=partial_lambda u_k|_0`、
+`beta_k=partial_q u_k`，其中 `u_k` 是 `w_q` 的 conditional angle harmonics。
+严格正性使 `T_(1/w_q)` 为正 Toeplitz operator，并给出
+
+`C_ang/(2q)=<alpha,T_(1/w_q)beta>`，
+
+`I_(lambda lambda)=<alpha,T_(1/w)alpha> >=0`、
+`I_(q q)=<beta,T_(1/w)beta> >=0`。
+
+所以 Herglotz/Fisher positivity 自动产生的唯一强约束是
+
+`|C_ang|^2<=4q^2 I_(lambda lambda)I_(q q)`。
+
+`C_ang` 是正 metric 中的 off-diagonal bilinear cross term，而不是
+`sum lambda_k|charge_k|^2` 的正 quadratic energy；后者与 reflection parity
+不相容。
+
+### 9.33.3 reflection、Fisher chain rule 与 radial exactness 边界
+
+反射满足
+
+`A_theta^check(q,lambda)=A_(theta+pi)^f(q,-lambda)`，
+`w^check_(q,lambda)(theta)=w^f_(q,-lambda)(theta+pi)`。
+
+因此 `I_(lambda q)^check=-I_(lambda q)^f`，而两个 diagonal Fisher energies
+不变，特别 `C_ang^check=-C_ang^f`。R120 的 within/between 分解正是 Fisher
+chain rule：
+
+`h'=E_w[I_(lambda q)^(m|theta)]+I_ang_(lambda q)`，
+
+或
+
+`2qh'=E_w[Cov(Xbar,Sigma_R|q,theta)]+C_ang`。
+
+两项都是 off-diagonal Fisher 元，正性只给绝对值界，不给 cancellation 或固定符号。
+
+在 polar residual 坐标，exactness 只固定 angular zero mode `u_0(q)=1`；高阶
+`u_k` 与新 Esscher tangent `alpha_k=partial_lambda u_k|_0` 并没有被 static
+R101 Herglotz rows 直接指定。Esscher-tilted law 一般不保持 exactness，故不能
+对 exact identity 直接求 transverse derivative并置零；那会加入额外的一阶稳定性
+假设。
+
+### 9.33.4 精确 obstruction 与 R122
+
+任意有限 exact angular Taylor rows 都可通过小的 bounded analytic Hermite 对偶
+exponential family 实现，同时保持 probability、strict positivity、analyticity、
+strict log-concavity 与 same-factor，并保留非零 cubic charge；这不是 full-exact
+counterexample，只证明必须用无限阶/global coherence。
+
+因此 R121 的 PROVED / LOCAL-AUDITED 内容是 Esscher score、Toeplitz cross
+representation、reflection parity、Fisher chain rule、zero-mode boundary 与
+normal-derivative algebra；ANALYTICALLY PROVED 的 score/conditional 论证和
+finite-row obstruction 不冒充主命题证明。CONDITIONAL 是 Esscher–radial Fisher
+orthogonality 或 reflection-stable fixed-sign cross theorem；OBSTRUCTION 是 static
+Herglotz positivity、finite rows、strict log-concavity与 Fisher square energies
+均不能给 `C_ang` 的反射稳定符号。
+
+OPEN：`C_ang` 是否在 genuine all-degree exact class 中有特殊 cancellation，或
+`h'(q)=0`、`kappa_3=0`。
+
+R122 最小命题固定为 **Same-Factor Normal-Derivative Reconstruction Lemma**：
+对 `Phi(u,v)=phi(u)phi(v)phi(-u-v)` 和 `s=phi'/phi`，核验
+
+`s(x)=-partial_v log Phi(-x,v)|_(v=0)`，
+
+并将 Esscher mean-charge tangent 改写成 residual trace 的非局部 functional，
+判断 Gaussian radialization、positive-definiteness 与 same-factor functional
+equation 是否产生 static Herglotz 看不到的 first-harmonic identity。若仍只有
+reflection-odd bilinear pairing，则正式关闭 R101/Herglotz angular-coherence 主路线。

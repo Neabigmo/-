@@ -4243,3 +4243,51 @@ PROVED / ANALYTICALLY PROVED / OBSTRUCTION / OPEN。
 `R120_CONDITIONAL_COVARIANCE_REFLECTION_SIGN_PASSED`
 
 `R120_ANGULAR_MIXTURE_COHERENCE_AUDIT_COMPLETED`
+
+# 2026-09-07 — R121 Angular Esscher-Fisher Cross 与 Positive-Quadratic No-Go
+
+网页端 R121 在读取 R120 记录后完成了 between-angle coherence 的 Fisher/Herglotz
+表达；connector 仍不可读，本轮依据当前对话自包含结论继续。本机新增
+`angular_esscher_fisher_r121/README.md` 与 `audit_r121.py`。
+
+- 引入 `A_theta(q,lambda)=∫e^(lambda m)F_theta(q,m)dm`、`w_(q,lambda)`；
+  `lambda=3s` 是 one-body Esscher tilt 的 genuine same-factor transverse direction。
+  本机核验 `S_lambda=m_theta-h`、`S_q=(r_theta+q)/(2q)` 的尺度接口。
+- `C_ang=Cov_w(m_theta,r_theta)=2q I_(lambda q)^ang`；严格正性给 positive
+  Toeplitz/Fisher cross representation
+  `C_ang/(2q)=<alpha,T_(1/w)beta>` 与 diagonal energies非负，因此只有
+  `|C_ang|^2<=4q^2 I_ll I_qq`，不能给 sign。此 cross 是 off-diagonal bilinear，
+  不是可写成非负 squares 的 quadratic form。
+- 本机核验 reflection 下 cross term 翻号、diagonal Fisher energies不变，且
+  R120 的 within/between decomposition就是 Fisher chain rule。static radial
+  exactness只固定 `u_0(q)=1`；R101 static Herglotz rows不控制新的 Esscher
+  tangent `alpha_k=∂lambda u_k|0`。直接对 exact identity 求 Esscher 导数会偷加
+  “exact class 对 Esscher 一阶稳定”的强假设。
+- 保留 obstruction：anglewise/static Herglotz positivity、Fisher square energies、
+  finite exact rows、strict log-concavity 与 same-factor 本身都不足以给
+  `C_ang` 的 reflection-stable sign；任意 finite rows 的 analytic strict-
+  log-concave same-factor construction仍可带 nonzero cubic，但不是 full-exact反例。
+- 条件性接口：若有 Esscher-radial Fisher orthogonality，或 genuine exact class
+  上 reflection-stable fixed-sign cross theorem，则可推出 `h'=0`、`kappa_3=0`；
+  但前提本身等价于目标层级，不能升级为 PROVED。
+- R121 判决：核心仍 OPEN。R122 最小命题为 **Same-Factor Normal-Derivative
+  Reconstruction Lemma**：用 `Phi(u,v)=phi(u)phi(v)phi(-u-v)` 核验
+  `s(x)=-∂v log Phi(-x,v)|0`，把 Esscher tangent拉回 residual trace，检查
+  Gaussian radialization + positive-definiteness + same-factor functional equation
+  是否出现 static Herglotz 看不到的新 first-harmonic identity。
+
+本机审计输出：
+
+`R121_ESSCHER_RADIAL_SCORE_CROSS_SCALE_PASSED`
+
+`R121_POSITIVE_TOEPLITZ_CROSS_TERM_INTERFACE_PASSED`
+
+`R121_REFLECTION_CROSS_ODD_DIAGONAL_EVEN_PASSED`
+
+`R121_FISHER_CHAIN_RULE_INTERFACE_PASSED`
+
+`R121_ZERO_MODE_AND_ESSCHER_TANGENT_BOUNDARY_PASSED`
+
+`R121_SAME_FACTOR_NORMAL_DERIVATIVE_RECONSTRUCTION_PASSED`
+
+`R121_ANGULAR_ESSCHER_FISHER_AUDIT_COMPLETED`
