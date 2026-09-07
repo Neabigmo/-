@@ -11,6 +11,7 @@
 5. `m4_cubic_radius_flat_extremum_r127/README.md`：M=4 flat extremizer。
 6. `singular_extension_compatibility_r128/README.md`：纠正后的 M=5 singular ghost 延拓。
 7. `r129_m6_exact_extension_audit/README.md`：M=6 exact row、H6 compatibility 和全局严格 relaxed bound。
+8. `r130_m6_gap_audit/README.md`：M=6 的显式有理区间 gap 证书。
 
 ## 分支体系
 
@@ -29,7 +30,8 @@
 - R127：`\widehat\Gamma_4=\Gamma_4=c_4`，等号点为 flat genuine extremizer。
 - R128：正确归一化下 `\widehat\Gamma_5=\widehat\Gamma_4=c_4` 的 relaxed singular non-flat ghost 已通过本机审计；`\Gamma_5` 是否等于该值仍为 OPEN。
 - R129：R6 原始展开、R2–R5 消元及 H5→H6 kernel compatibility 已通过精确审计；R128 ghost 无 PSD H6 延拓。结合 R125 紧性与 R127 等号分类，已解析推出有限层严格界 `\widehat\Gamma_6<c_4`，并因此有 `\Gamma_6\le\widehat\Gamma_6<c_4`。
-- 当前下一步：量化严格 gap 或建立 endpoint 邻域 uniform gap，继续发展 kernel-adapted recurrence defect，并回到全局的 positive/backward-OU 主线。
+- R130：以全有理数区间和直接符号 Schur 恒等式证明 `\widehat\Gamma_6\le1.0535`；R127 根证书给 `1.05358<c_4<1.05359`，故得到显式 gap `c_4-\widehat\Gamma_6>0.00008`。这仍是 relaxed finite-level 上界，不是 `\widehat\Gamma_6` 的精确值，也没有关闭 genuine 或正性/反向 OU 主线。
+- 当前下一步：在 R130 证书上锐化半代数 gap 或求 `\widehat\Gamma_6` 精确值，抽象 kernel-adapted recurrence defect，再回到全局的 positive/backward-OU 主线。
 
 ## 证据等级
 

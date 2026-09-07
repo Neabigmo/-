@@ -9641,3 +9641,42 @@ no-go，以及结合 R125/R127 接口后的全局严格 relaxed bound）、`OBST
 正性与 backward-OU 的统一衰减以及全阶 `Gamma_M->0`）。R130 应继续量化
 `c_4-GammaHat_6` 或构造 endpoint 邻域的 uniform gap，并研究
 kernel-adapted recurrence basis 如何接到 positive backward-OU cone。
+
+# 2026-09-08 — R130 M=6 explicit rational-box gap certificate
+
+R130 已将 R129 的定性严格下降推进为可复核的显式数值 gap。新增
+`r130_m6_gap_audit/`；脚本只使用精确有理数区间算术、Sturm 根计数和直接符号
+Schur 恒等式，不使用 optimizer、浮点可行性扫描或未审计的数值猜测。
+
+在反射下只需考虑 `c=y_3>=0`。R127 的唯一根证书先给出
+`1.05358<c_4<1.05359`，而 R130 对反证窗口
+`1.0535<=c<=1.05359` 施加 R127 的两个 H4 Schur 不等式。精确导数符号和
+端点符号把 `a=y_5` 压入 `7.5698<a<7.571`，并得到
+`0<=S_00<1/100`、`0<=S_11<1/16`。H4 的非对角项写成
+`S_01=b-b_*(c,a)`，有理区间给 `70.29<b_*<70.4`；PSD 的二阶主子式于是给
+`70.2<b=y_7<70.5`。
+
+对 H6 关于正定 H2 的 Schur 补，R129 的首个未检测兼容性残差就是
+`S_13=r_1`。同一有理盒上的精确区间核验给出 `r_1>800`，而
+`S_11<1/16`。另一方面 `S_33<=y_12`，且 R125 的 T6 矩约束给
+`y_12<=4^6 6!=2,949,120`。因此 H6 PSD 的 2×2 主子式要求
+`r_1^2<=S_11S_33<184,320`，却有 `r_1^2>640,000`，矛盾。故窗口内没有
+H6-feasible point，得到
+
+`boxed{GammaHat_6<=1.0535<c_4}`，
+
+以及显式下界 `c_4-GammaHat_6>0.00008`，从而
+`Gamma_6<=GammaHat_6<=1.0535`。本轮把“严格但未定量”提升为
+`ANALYTICALLY PROVED` 的有限层显式上界；它仍不等于求出了 `GammaHat_6`，
+也不直接给出 genuine `Gamma_6`、全阶衰减或 positive/backward-OU rigidity。
+
+R130 审计 marker：`R130_C4_ROOT_INTERVAL_PASSED`、
+`R130_H4_PARAMETER_BOX_PASSED`、`R130_BSTAR_INTERVAL_CERTIFICATE_PASSED`、
+`R130_R1_LOWER_BOUND_CERTIFICATE_PASSED`、`R130_M6_SCHUR_IDENTITIES_PASSED`、
+`R130_M6_SCHUR_2X2_CONTRADICTION_PASSED`、
+`R130_M6_EXPLICIT_GAP_CERTIFICATE_PASSED`、
+`R130_M6_EXPLICIT_GAP_AUDIT_COMPLETED`。
+
+下一轮 R131：在不把区间证书误称为精确值的前提下，尝试细分有理盒得到更强的
+显式上界，或把 `S_13` 缺陷推广成 kernel-adapted recurrence-defect lemma，
+并检查这条离散 defect 链能否与正的 backward-OU 可除性建立定量接口。

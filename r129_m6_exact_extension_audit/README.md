@@ -196,15 +196,20 @@ compactness interface from R125 rules out a fixed nonzero full-order cubic
 surviving as a merely formal ghost forever, but it does not yet specify a
 finite-level rate or prove `Gamma_M->0`.
 
-## 8. Next task: R130
+## 8. R130 follow-up and next task: R131
 
-1. Record the raw R6 cross-check (`R129_R6_RAW_EXPANSION_PASSED`) alongside the
-   webpage derivation and preserve the exact solved row.
-2. Quantify the strict gap `c_4-GammaHat_6` or obtain a local uniform gap near
-   `c_4`, rather than stopping at the qualitative strict inequality.
-3. Track the compatibility-defect cascade in a basis adapted to the kernel,
-   separating old-kernel defects from the genuinely new `y_11` direction.
-4. Return to the positive/backward-OU cone and test whether an all-order
+R130 has completed item 2 by an independent exact rational-box certificate:
+`GammaHat_6<=1.0535` and `c_4-GammaHat_6>0.00008`; see
+`r130_m6_gap_audit/README.md`.  The exact value of `GammaHat_6` remains open.
+
+R131 should now:
+
+1. Try to sharpen the R130 rational box and the explicit upper bound, without
+   replacing the exact certificate by a numerical optimizer.
+2. Track the compatibility-defect cascade in a basis adapted to the kernel,
+   separating old-kernel defects from the genuinely new `y_11` direction, and
+   formulate a reusable kernel-adapted recurrence-defect lemma.
+3. Return to the positive/backward-OU cone and test whether an all-order
    weighted recurrence estimate can force `c -> 0`.
 
 Audit command:

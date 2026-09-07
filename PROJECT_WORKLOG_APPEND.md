@@ -4655,3 +4655,51 @@ R129 的本机修订已提交并推送到 `temp` 仓库的 `main` 与
 到 positive backward-OU cone。最终网页正文返回后，再逐式加入本机审计，
 并更新 `main` 与 `theory/r129-active`；在此之前 R130 的新数学结论仍为
 `OPEN / PENDING WEB RESPONSE`。
+
+# 2026-09-08 — R130 本机显式 gap 证书完成，网页端仍待回传
+
+网页端 R130 会话在连接器工具层停留于处理中；为避免研究停在桥接层，本机先
+完成了同一目标的独立精确审计，新增 `r130_m6_gap_audit/README.md` 与
+`audit_r130.py`。脚本使用 `Fraction` 有理区间、精确多项式符号和直接 Schur
+恒等式核验，未使用 optimizer 或浮点扫描。
+
+证书链如下：
+
+- R127 根多项式的唯一根区间为 `1.05358<c_4<1.05359`；对排除窗口
+  `1.0535<=c<=1.05359`，R127 的 H4 Schur 条件把 `a=y_5` 压到
+  `7.5698<a<7.571`，并给 `S_00<1/100`、`S_11<1/16`。
+- H4 非对角 Schur 项给出 `70.29<b_*<70.4`，PSD 二阶主子式进一步给出
+  `70.2<b=y_7<70.5`。
+- R129 的 H6 Schur 补残差恒等式经直接符号核验为 `S_13=r_1`；在上述有理盒
+  上精确证明 `r_1>800`。但 H6 PSD 要求
+  `r_1^2<=S_11S_33`，而 `S_33<=y_12<=4^6 6!`，右侧严格小于
+  `(1/16)·2,949,120=184,320`，与 `r_1^2>640,000` 矛盾。
+
+因此本机得到新的有限层结论
+`GammaHat_6<=1.0535`，并由根区间得到
+`c_4-GammaHat_6>0.00008`；相应地
+`Gamma_6<=GammaHat_6<=1.0535`。证据等级为
+`ANALYTICALLY PROVED`（显式 relaxed 上界/gap 证书），不是 `GammaHat_6` 精确值，
+更不是 genuine、全阶或 positive/backward-OU 结论。
+
+本轮 marker：
+
+`R130_C4_ROOT_INTERVAL_PASSED`
+
+`R130_H4_PARAMETER_BOX_PASSED`
+
+`R130_BSTAR_INTERVAL_CERTIFICATE_PASSED`
+
+`R130_R1_LOWER_BOUND_CERTIFICATE_PASSED`
+
+`R130_M6_SCHUR_IDENTITIES_PASSED`
+
+`R130_M6_SCHUR_2X2_CONTRADICTION_PASSED`
+
+`R130_M6_EXPLICIT_GAP_CERTIFICATE_PASSED`
+
+`R130_M6_EXPLICIT_GAP_AUDIT_COMPLETED`
+
+网页端状态仍只记为 `DISPATCHED / IN PROGRESS`，不能把本机结果伪装成网页已完成
+的推导。下一轮网页任务应要求其独立复核这条有理盒证书、尝试细分盒或抽象
+`S_13` 的 kernel-adapted defect，再回接 positive/backward-OU 主线。
