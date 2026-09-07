@@ -4600,3 +4600,30 @@ flat extension 与 singular non-flat ghost 方向。
 non-flat ghost；投影上界与显式构造共同给出
 `boxed{GammaHat_5=GammaHat_4=c_4}`。本轮严格结果是 relaxed M=5 的精确端点及其
 ghost 性质；genuine `Gamma_5` 和全阶衰减仍 OPEN。
+
+# 2026-09-08 — R129 M=6 exact extension audit
+
+本机新增 `r129_m6_exact_extension_audit/README.md` 与 `audit_r129.py`。在项目固定
+归一化 `Q=(1/3)sum_{i<j}(X_i-X_j)^2` 下，对 `Q^6` 做精确符号展开，并顺序代入
+R2--R5，得到
+
+`y_12=-7749c^4-16380c^2+14220ca-2160cb+100cd-1926a^2+252ab+10395`,
+
+其中 `c=y_3,a=y_5,b=y_7,d=y_9`，且 `y_11` 不出现；Gaussian check 给
+`y_12=10395`。脚本通过 `R129_R6_EXACT_ROW_PASSED`。
+
+随后把 R128 endpoint 的 `H_5` 与新列分块。R128 的旧 Schur 补是
+`S_5=diag(0,0,delta_5)`，而 H6 的新 Schur 补为
+`S_6=[[S_5,r],[r^T,sigma_6]]`。前两项 range compatibility 是
+`r_0=r_1=0`，新 odd moment `y_11` 只进入 `r_2`。在 R127 endpoint 的
+`B=0,P(c^2)=0` 下，精确恒等式给出 `r_0=0`、`r_1=delta_5`，而 R128
+区间证书给 `delta_5>0`。因此该具体 R128 rank-4 singular non-flat ghost
+不能延伸到 PSD `H_6`；marker 为
+`R129_M6_R128_GHOST_EXCLUDED_ANALYTICALLY` 与
+`R129_M6_EXACT_EXTENSION_AUDIT_COMPLETED`。
+
+本轮结论等级：`PROVED` 为 R6 消元和 Schur block 线性代数；
+`ANALYTICALLY PROVED` 为该端点 no-go；`OBSTRUCTION` 为 old-kernel 的首个未
+检测 recurrence defect；`OPEN` 仍包括全局 `GammaHat_6`、genuine `Gamma_6`、
+邻域 uniform gap、backward-OU 正性锥和 `Gamma_M->0`。不能把 endpoint 被排除
+夸大成全局严格半径下降。

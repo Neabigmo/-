@@ -9587,3 +9587,45 @@ measure。由于 `M=5` 投影包含于 `M=4` 可行集，同时该端点确实�
 本机新增 `singular_extension_compatibility_r128/` 并通过
 `R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`，包含 Gaussian 归一化、R5 消元和
 ghost Schur 缺陷的区间证书。`Gamma_M->0` 仍 OPEN。
+
+# 2026-09-08 — R129 M=6 exact row 与 R128 ghost 下一层 no-go
+
+在不打断网页端 R129 推导的同时，本机完成了 `Q=(1/3)sum_{i<j}(X_i-X_j)^2`
+归一化下的 `R_6` 精确展开。令 `c=y_3,a=y_5,b=y_7,d=y_9`，在已审计的
+R2--R5 rows 消元后得到
+
+`y_12=-7749c^4-16380c^2+14220ca-2160cb+100cd-1926a^2+252ab+10395`。
+
+该式不含 `y_11`，Gaussian substitution 给 `y_12=10395`，并由 exact row
+得到 `E Q^6=2^6 6!`。本机新增 `r129_m6_exact_extension_audit/`，脚本以精确
+符号代数生成该式，不做扫描或优化。
+
+更强的结果来自 R128 endpoint 的下一层 range compatibility。把 `H_5` 相对于
+`A=H_2` 分块，R128 已给 `S_5=diag(0,0,delta_5)`，其中 `delta_5>0`。H6
+新列相对于同一 `A` 的 Schur 补写成
+
+`S_6=[[S_5,r],[r^T,sigma_6]]`,
+
+`r=(d,y_10,y_11)^T-[u_3,u_4,u_5]^T A^{-1}(y_6,b,y_8)^T`。
+
+由于 `S_5` 的前两个对角元为零，H6 PSD 必须先满足 `r_0=r_1=0`；`y_11` 只
+出现在 `r_2`，因此不能修复前两项。令 R127 endpoint 的边界量满足 `B=0`，并
+使用其根 `P(c^2)=0`，本机精确化简证明
+
+`r_0=-P(c^2)/(2c(c^2-4)(c^2-2)^2)`,
+
+`r_1-delta_5=P(c^2)/(2(c^2-4)(c^2-2)^2)`。
+
+故在 endpoint 上 `r_0=0` 而 `r_1=delta_5>0`。这说明 R128 的具体 rank-4
+singular non-flat ghost 不能延伸为满足 R6 的 PSD `H_6`；这是
+`ANALYTICALLY PROVED` 的 M=6 endpoint no-go，且其数值审计值
+`delta_5=913.705421573084...` 仅作为 exact expression 的核验，不是证明依据。
+
+必须保留边界：该 endpoint no-go 尚不推出全局严格的
+`GammaHat_6<GammaHat_5`，因为 M6 可行序列理论上可能逼近而不取得 M5 endpoint；
+也没有给出 genuine `Gamma_6` 或全阶 `Gamma_M->0`。因此本轮将三者分别标记为：
+`PROVED`（R6 与 Schur 线性代数）、`ANALYTICALLY PROVED`（该 endpoint 被 H6
+排除）、`OBSTRUCTION`（old-kernel defect cascade），以及 `OPEN`（全局 M6
+半径、genuine 半径、正性与 backward-OU 的统一衰减）。R130 应研究 endpoint
+邻域的 uniform gap、kernel-adapted recurrence basis，以及能否把 finite defect
+cascade 接到 positive backward-OU cone。
