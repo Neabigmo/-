@@ -9553,3 +9553,22 @@ R127 本机审计 marker：`R127_M4_ROW_ELIMINATION_PASSED`、
 `R127_M4_SCHUR_COMPLEMENT_PASSED`、`R127_M4_UNIQUE_ROOT_ISOLATION_PASSED`、
 `R127_M4_FLAT_EXTREMIZER_INTERFACE_PASSED`、
 `R127_M4_CUBIC_RADIUS_AUDIT_COMPLETED`。
+
+# 2026-09-07 — R128 Singular extension compatibility and the `R_5` interface
+
+R128 将 R126/R127 的有限层机制抽象为可复用引理。若
+`H_M=(y_{i+j})_{0<=i,j<=M}>=0` 且 `p in ker H_M`，任何 PSD 扩展
+`H_{M+1}=[[H_M,b],[b^T,y_{2M+2}]]` 都必须满足
+`p^T b=0`，即 `b in Ran(H_M)`；其唯一新自由度是广义 Schur 缺陷
+`delta=y_{2M+2}-b^T H_M^+b>=0`。`delta=0` 是 flat，`delta>0` 是
+一步 singular non-flat ghost 的唯一可能方向。这是无条件 PSD 引理。
+
+同时，本机精确展开了下一 exact row：
+`E Q^5=3y_10-360y_3y_5-180y_3y_7+225y_4^2+270y_4y_6-153y_5^2+180y_6+90y_8`，
+因此 `R_5=0` 等价于
+`y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+1280`。
+
+这给出 R128 的严格下一步：先解奇异核兼容性，再用 `R_5` 消去顶阶矩，最后
+判定 flat genuine extremizer 或 singular ghost；不能把 PSD 当作有限截断可表示性。
+本机新增 `singular_extension_compatibility_r128/` 并通过
+`R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`。`Gamma_M->0` 仍 OPEN。

@@ -4579,3 +4579,23 @@ definite，截断 Hamburger theorem 给 genuine representing law。因此
 R126 的 `M=3` ghost 在下一 exact row 被明确消除。全阶 `Gamma_M->0` 仍 OPEN。
 
 本机审计已通过：`R127_M4_CUBIC_RADIUS_AUDIT_COMPLETED`。
+
+# 2026-09-07 — R128 Singular extension compatibility 与 `R_5` exact row
+
+网页端连接仍被另一个工作区占用期间，本机继续推进下一轮接口而未停在局部数值上。
+对任意 PSD moment block `H_M` 的 kernel 向量 `p`，PSD 扩展到 `H_{M+1}` 必须满足
+`p^T(y_{M+1},...,y_{2M+1})=0`；等价地新列属于 `Ran(H_M)`。扩展的广义 Schur
+缺陷 `delta=y_{2M+2}-b^T H_M^+b` 非负，且 `delta=0`/`delta>0` 分别精确区分
+flat extension 与 singular non-flat ghost 方向。
+
+本机进一步展开 `R_5=E Q^5-2^5 5!`，得到
+
+`E Q^5=3y_10-360y_3y_5-180y_3y_7+225y_4^2+270y_4y_6-153y_5^2+180y_6+90y_8`，
+
+以及
+`y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+1280`。
+
+新增 `singular_extension_compatibility_r128/README.md` 与 `audit_r128.py`；审计
+通过 `R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`。本轮严格结论是通用奇异扩展引理
+与 `R_5` 精确接口，不冒充 `Gamma_5` 或全阶衰减定理；下一轮应据此完成 `M=5`
+的 singular/flat split。
