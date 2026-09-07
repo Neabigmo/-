@@ -8165,3 +8165,62 @@ Rigidity 仍 OPEN。
 下一最小命题改为 Uniform q^(3N) Modulus-Defect Theorem：从 positive
 backward-preimage cone、R104 Schur–Abel 约束和 genuine probability realization
 中真实推出（或反驳）统一 C_*,r_*，不得把条件包络当作既有输入。
+
+## 9.23 R111：统一 square-exponential moment 是 uniform modulus 的显式来源
+
+网页端 R111 因 connector 三次账户错误未能新增网页端 LOCAL-AUDITED 结论，但
+它准确指出最小缺口是统一 zero-free disk。本机随后新增
+uniform_modulus_source_r111/README.md 与 audit_r111.py，在显式假设下补齐
+这条 analytic bridge。
+
+### 9.23.1 显式 zero-free disk
+
+若 centered variance-one law 类 C 存在与成员无关的 a>0,B<infinity，满足
+
+sup_(mu in C) E_mu exp(aX^2)<=B，
+
+令
+
+rho=min(sqrt(a)/2,sqrt(a*e/(8B)))。
+
+由中心化 Taylor remainder、Young inequality 和
+X^2 exp(aX^2/2)<=2 exp(aX^2)/(a e) 得
+
+|M_mu(z)-1|<=B|z|^2 exp(|z|^2/(2a))/(a e)<=exp(1/8)/8<1/2
+
+在 |z|<=rho 上成立。因此 MGF 在统一圆盘内 zero-free，K=log M 可取统一
+branch，且 |K(z)|<=log 2。Cauchy 给出
+
+|kappa_n|/n!<=log(2)/rho^n。
+
+### 9.23.2 显式 conditional q^(3N) theorem
+
+若再有 kappa_4=0，则在 r_*=rho/2 上
+
+|L_mu(u)|<=2 log(2)|u|^6/rho^6。
+
+由 R110 exact transport，任意
+g^(0)=P_(q^N)g^(N) 满足
+
+|L_(g^(0))(r)|<=C_*q^(3N)|r|^6，
+C_*=2 log(2)/rho^6，
+
+只要 |r|<=r_*q^(-N/2)。R109 椭圆上相应有
+
+|M_(g^(0))(s,t)|<=C_*q^(3N)y^6
+
+及 Gaussian product modulus 的双边指数夹逼。审计核验了 radius constants、
+几何幂和、OU 六阶缩放与 R103/R104 的 d=3 正号接口。
+
+### 9.23.3 重要边界与下一步
+
+该结果把 R110 的“存在统一解析包络”升级为可引用的显式条件定理，但没有
+证明项目 exact positive backward class 满足 E exp(aX^2)<=B。R12 仍只有
+parity/Fredholm exact defect map，R101 只引用 square-exponential envelope
+作 moment-determinacy 输入；二者都没有给出这里所需的统一 a,B。
+
+更重要的是 absolute bound 不提供 L<=0 的符号；R110 的首个 odd charge
+仍会给出正 defect。因此主问题的关键缺口已从“统一解析性”进一步收缩为：
+能否从 positive backward cone、Schur–Abel 和 exact realization 得到统一
+square-exponential moment，继而再找到 primitive charge annihilation 或带符号
+estimate。该层仍为 CONDITIONAL/OPEN。

@@ -3829,3 +3829,24 @@ computation was used.
   已通过，待提交 Git。状态：有限公式 PROVED / LOCAL-AUDITED；
   首个 odd 反号 ANALYTICALLY PROVED under exactness inputs；统一包络定理
   CONDITIONAL；genuine asymmetric exclusion 与最终 tower rigidity OPEN。
+
+# 2026-09-07 — R111 统一 square-exponential moment 到 uniform modulus 的显式桥
+
+- 网页端 R111 因 connector 三次账户错误未能新增网页端 LOCAL-AUDITED 推导，
+  但准确定位了最小缺口：统一 MGF/characteristic zero-free disk。
+- 本机新增 uniform_modulus_source_r111/README.md 与 audit_r111.py，在明确
+  条件 sup_(mu in C) E exp(aX^2)<=B 下，取
+  rho=min(sqrt(a)/2,sqrt(a*e/(8B)))，用中心化 Taylor remainder 得到
+  |M_mu(z)-1|<1/2 的统一圆盘，继而得到统一 K=log M 与累积量界。
+- 对 kappa_4=0 类，显式得到 r_*=rho/2、C_*=2log(2)/rho^6，从而
+  |L_(g^(0))(r)|<=C_*q^(3N)|r|^6（|r|<=r_*q^(-N/2)）及 R109 椭圆版本。
+- 该桥只给 absolute two-sided control，不给 L<=0 的精确符号；R110 首个
+  odd charge 的正 defect仍然存在。因此主问题进一步收缩为：从 positive cone、
+  Schur–Abel 和 genuine exact realization 推出统一 a,B，或构造 obstruction。
+- 本机 R111 exact audit 已通过：R111_ZERO_FREE_RADIUS_CONSTANTS_PASSED、
+  R111_CUMULANT_TAIL_GEOMETRY_PASSED、R111_OU_AND_ELLIPSE_SCALING_PASSED、
+  R111_D3_SIGN_INTERFACE_PASSED、R111_UNIFORM_MODULUS_SOURCE_AUDIT_COMPLETED。
+- 状态：显式桥 PROVED / LOCAL-AUDITED under stated moment hypothesis；
+  项目类是否满足该假设 CONDITIONAL/OPEN；charge annihilation、genuine
+  asymmetric exclusion 与最终 tower rigidity 继续 OPEN。下一轮要求网页端
+  只攻统一 a,B 的 positive-cone/Schur–Abel 来源，不重述 R99–R111。
