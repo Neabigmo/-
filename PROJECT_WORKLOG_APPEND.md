@@ -3982,5 +3982,62 @@ computation was used.
   进展；OPEN 已压缩为 single-law genuine factorized Gaussian-radial cubic
   exclusion。下一轮定为 R116 **Single-Law Factorized Gaussian-Radial Cubic
   Exclusion**：若三 iid factor 的二维 residual `R` 满足
-  `|R|^2~chi^2_2`，判断其 characteristic factorization 是否强制
-  `kappa_3(X)=0`。
+`|R|^2~chi^2_2`，判断其 characteristic factorization 是否强制
+`kappa_3(X)=0`。
+
+# 2026-09-07 — R116 Single-Law Factorized Gaussian-Radial Cubic Exclusion
+
+网页端 R116 完成了 single-law 全局压缩；connector 仍不可读，因此本轮依据
+当前对话中的自包含 R115 基线继续。本机新增
+`single_law_gaussian_radial_cubic_r116/README.md` 与 `audit_r116.py`，并将
+网页端推导逐项分成 PROVED / ANALYTICALLY PROVED / CONDITIONAL / OPEN。
+
+- 对 `omega=exp(2*pi*i/3)` 与 iid centered variance-one `X_j`，令
+  `Z=sqrt(2/3)(X_1+omega X_2+omega^2X_3)`。本机核验
+  `|Z|^2=sum_j(X_j-Xbar)^2`，并核验长度 `sqrt(2/3)` 的三向 tight frame
+  `sum v_j=0`、`sum v_jv_j^T=I_2`。
+- 在 `|Z|^2~chi^2_2` 下写 `Z=R exp(iTheta)`、
+  `u_1(r)=E[exp(3iTheta)|R=r]`，得到
+  `E Z^3=2sqrt(2/3)kappa_3(X)` 与
+  `kappa_3=sqrt(3/8)int r^3u_1(r)r exp(-r^2/2)dr`。cubic charge因此只需
+  一个 weighted first-harmonic annihilation，而非先证明 `u_1=0`。
+- 给出 characteristic order-3 Hankel bridge
+  `H_1(rho)=int J_3(rho r)u_1(r)r exp(-r^2/2)dr`，以及 MGF modified-Bessel
+  bridge `c_1(z)=exp(-z^2/2)int I_3(zr)u_1(r)r exp(-r^2/2)dr`；本机核验
+  `J_3,I_3` 的 `x^3/48` leading term 和系数
+  `sqrt(2/3)kappa_3/24`。径向 exactness 只固定 zeroth mode `H_0=e^{-rho^2/2}`。
+- 前向 OU 保持 radial exactness 并把 cubic 缩放为 `t^(3/2)`，故若 genuine
+  nonzero-charge law 存在，可无损限到严格正 analytic one-body density。其
+  residual real-space density为 same-factor three-line convolution
+  `p_f(z)=int prod_j f(m/sqrt(3)+v_j dot z)dm`。
+- 构造非因子化 smooth obstruction
+  `dnu_epsilon=[1+2epsilon Re(z^3)e^{-|z|^2}]d gamma_2`：径向 law保持
+  Gaussian 而 cubic moment非零。网页端给出的系数 `16epsilon/9` 经本机
+  exact integral 检查为 `16epsilon/27`；已修正 README 与脚本，非零性结论不变。
+- 保留条件性结果：classical infinitely divisible 加 full exact degree-six
+  fingerprint `kappa_6=-3kappa_3^2`，因 `kappa_6>=0` 迫使 `kappa_3=0`，再由
+  Levy measure 消失得到 Gaussian；positive backward OU 不自动给出 ID。
+- R116 判决：
+  `|Z|^2~chi^2_2` + strict same-factor product `=> kappa_3(X)=0` 仍 OPEN；
+  这已经是 global three-line convolution first-harmonic annihilation，而非
+  finite Gram/minor、tau 高阶或 numerical/SDP 问题。
+- R117 最小命题：对严格正 analytic `f` 的 same-factor three-line convolution，
+  Gaussian circular radialization 是否足以推出
+  `int r^3u_1(r)r exp(-r^2/2)dr=0`。优先走 spherical-harmonic/
+  total-positivity 或 `I_3(zr)` 正核路线。
+
+本机审计输出：
+
+`R116_RESIDUAL_IDENTITY_AND_TIGHT_FRAME_PASSED`
+
+`R116_CUBIC_SKEW_AND_ANGULAR_MOMENT_FACTOR_PASSED`
+
+`R116_HANKEL_AND_MODIFIED_BESSEL_LEADING_TERM_PASSED`
+
+`R116_FORWARD_OU_RADIAL_PRESERVATION_AND_CUBIC_SCALING_PASSED`
+
+`R116_SMOOTH_GAUSSIAN_RADIAL_NONFACTORIZED_OBSTRUCTION_PASSED`
+
+`R116_INFINITE_DIVISIBILITY_CONDITIONAL_GAUSSIAN_STEP_PASSED`
+
+`R116_SINGLE_LAW_GAUSSIAN_RADIAL_CUBIC_AUDIT_COMPLETED`

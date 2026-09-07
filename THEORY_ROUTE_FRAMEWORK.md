@@ -8552,3 +8552,88 @@ Exclusion**：令三个 iid factor 的二维 residual 为 `R`，其 characterist
 function 为严格 same-factor product，且 `|R|^2~chi^2_2`；判断是否必有
 `kappa_3(X)=0`。若该单律命题成立，R115-B 立即关闭所有 varying-bottom
 cubic sequences；若失败，则得到主命题 genuine all-degree obstruction。
+
+## 9.28 R116：single-law factorization 的全局 angular-mode 压缩
+
+网页端 R116 将 R115 的 single-law 目标写成二维复 residual，并给出
+`single_law_gaussian_radial_cubic_r116/README.md` 与 `audit_r116.py`；本机
+审计通过。令 `omega=exp(2*pi*i/3)`、`X_1,X_2,X_3` iid centered variance-one，
+
+`Z=sqrt(2/3)(X_1+omega X_2+omega^2X_3)`。
+
+### 9.28.1 精确 residual 与 cubic 接口
+
+`|Z|^2=sum_j(X_j-Xbar)^2`，所以 full exactness 等价于
+`|Z|^2~chi^2_2`；iid 的循环置换与交换给 residual law 自动的 `D_3` 对称性。
+若 `Z=R exp(i Theta)`、`u_1(r)=E[exp(3iTheta)|R=r]`，则
+
+`E Z^3=2 sqrt(2/3) kappa_3(X)`，
+
+`kappa_3(X)=sqrt(3/8) int r^3 u_1(r) r exp(-r^2/2)dr`。
+
+主目标因此只需要 annihilate 一个 weighted first-harmonic moment；要求整个
+`u_1` 消失是更强的命题。
+
+### 9.28.2 Fourier/Hankel 与 MGF/Bessel 双桥
+
+取长度 `sqrt(2/3)` 的 120-degree tight frame `v_j`，有
+`sum v_j=0`、`sum v_jv_j^T=I_2`，且
+
+`Phi(rho,alpha)=prod_j phi(rho sqrt(2/3) cos(alpha+2*pi*(j-1)/3))`。
+
+其 order-3 harmonic 为
+
+`H_1(rho)=int J_3(rho r)u_1(r)r exp(-r^2/2)dr`，
+
+并且 `J_3(x)=x^3/48+O(x^5)` 给
+`H_1(rho)=sqrt(2/3)kappa_3(X)rho^3/24+O(rho^5)`。径向 exactness 只固定
+`H_0(rho)=exp(-rho^2/2)`，没有自动固定 `H_1`。
+
+用 `M(z)=E exp(zX)` 定义三因子 MGF 后，相同的 angular charge 为
+
+`c_1(z)=exp(-z^2/2) int I_3(zr)u_1(r)r exp(-r^2/2)dr`
+
+`=sqrt(2/3)kappa_3(X)z^3/24+O(z^5)`。故
+`u_1 <-> H_1 <-> c_1` 是同一 cubic sector 的三种全局坐标，不能与
+`P_3K`、Schur scalar 或 zeroth radial mode 混淆。
+
+### 9.28.3 regularity、非因子化 obstruction 与条件性结果
+
+若 genuine full-exact 单律有非零 cubic charge，前向 OU `P_t` 保持 exactness、
+把 cubic 缩放为 `t^(3/2)`，并给出严格正 analytic density；所以 regularity 不是
+缺口。对应的 real-space residual density是
+
+`p_f(z)=int prod_j f(m/sqrt(3)+v_j dot z)dm`，
+
+其 circular radialization 为二维 Gaussian。这一 factorization 才是不可替代的
+结构。
+
+仅有二维 Gaussian radial law 与 positivity 不够：
+`dnu_epsilon=[1+2epsilon Re(z^3)exp(-|z|^2)]d gamma_2`
+在足够小非零 `epsilon` 下严格正、径向 exact、但
+`E Z^3=(16/27)epsilon!=0`。网页端曾给出 `16/9`，本机 exact integral audit
+纠正为 `16/27`；非零性与 obstruction 结论不变，故记录以本机值为准。
+
+另有条件性小定理：若 one-body law classical infinitely divisible 且有需要的
+exponential moments，则 `kappa_6=int x^6 Pi(dx)>=0`；full exact degree-six
+fingerprint `kappa_6=-3kappa_3^2` 立即给 `kappa_3=0`，再得 Levy measure 消失，
+于是 law 为 centered Gaussian。varying-bottom positive OU 不自动提供这一
+classical infinite divisibility，不能偷换假设。
+
+### 9.28.4 判决与下一步
+
+PROVED / LOCAL-AUDITED：复 residual、tight frame、cubic moment 系数、Bessel
+leading term、OU radial preservation、非因子化 smooth obstruction 的积分；
+ANALYTICALLY PROVED：Hankel/Bessel 表示、injectivity、density regularity 与
+real-space factorization。CONDITIONAL PROVED：infinite divisibility 分支。
+
+核心 OPEN 保持为
+
+`|Z|^2~chi^2_2` 且 `Phi(xi)=prod_j phi(v_j dot xi)`
+`=> kappa_3(X)=0`。
+
+这已不再是 finite Gram/minor 或 tau 高阶展开问题，而是 same-factor three-line
+convolution 是否必然 annihilate weighted first harmonic。R117 最小命题固定为：
+对严格正 analytic `f` 的该 convolution，在 Gaussian circular radialization 下证明
+`int r^3u_1(r)r exp(-r^2/2)dr=0`；优先研究 spherical-harmonic/total-positivity
+或正核 `I_3(zr)`，不回到有限阶数值路线。
