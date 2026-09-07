@@ -3798,3 +3798,34 @@ computation was used.
 - 下一轮不升五点，定为 **Elliptic Modulus-Saturation Lemma**：从 difference data、
   cocycle disk 和 positive backward-preimage cone 推进局部 product majorant；
   只有 genuine obstruction 出现才进入五点 Gram。
+
+# 2026-09-07 — R110 Gaussian-relative modulus defect 与 q^(3N) 尺度
+
+- 网页端 R110 因 connector 连续账户错误，未能诚实地重新读取本机 R109 文件；
+  本轮网页推导作为 provisional theory input 记录，通信失败不被当作数学结论。
+- 定义 L_mu(r)=log|phi_mu(r)|+r^2/2，精确得到
+  L_(P_tau nu)(r)=L_nu(sqrt(tau)r)。有限深度
+  g^(0)=P_(q^N)g^(N) 因而把六阶 modulus defect 缩放为 q^(3N)。
+- 仅由 characteristic-function positivity 得到
+  |phi_(g^(0))(r)|<=exp(-(1-q^N)r^2/2)，椭圆 product 版本同样只有 q^N
+  二次误差；不能把 finite-depth positivity 偷换成 Gaussian modulus domination。
+- 在 R103/R104 same-factor exact analytic 输入下，首个 odd cumulant 产生正的
+  Gaussian-relative modulus defect；d=3 精确首项为
+  L_mu(r)=kappa_3^2*r^6/240+O(r^8)，椭圆 product defect 也为正。
+- 用 R107 genuine exact-fourth asymmetric law H 构造
+  g_N^(j)=P_(q^(N-j))H。该 varying-bottom family 满足每个有限 OU 链，却有
+  L_(g_N^(0))(r)=q^(3N)r^6/120+O(q^(4N)r^8)>0；它不是 full-exact counterexample，
+  因为 kappa_6=-6 而 full exact 六阶要求 -3。这钉住了 finite-depth obstruction
+  与 q^(3N) sharp local scale。
+- 提出 clean conditional theorem：若底层类存在统一
+  |L_mu(u)|<=C_*|u|^6、|u|<=r_*，则
+  |L_(g^(0))(r)|<=C_*q^(3N)|r|^6，以及 R109 椭圆上的
+  |M|<=C_*q^(3N)y^6，量词为 |r|<=r_*q^(-N/2)。
+- 重要纠正：本机 parity_fredholm_ou_r12 并没有明确提供 C_*,r_* 的统一
+  modulus envelope；R101 的 square-exponential 表述只支撑 moment-determinacy
+  假设，不能自动替代本条件定理的输入。下一轮专攻从 positive backward cone、
+  Schur–Abel 与 genuine realization 推出或反驳该统一包络。
+- 本机新增 elliptic_modulus_defect_r110/README.md、audit_r110.py，exact audit
+  已通过，待提交 Git。状态：有限公式 PROVED / LOCAL-AUDITED；
+  首个 odd 反号 ANALYTICALLY PROVED under exactness inputs；统一包络定理
+  CONDITIONAL；genuine asymmetric exclusion 与最终 tower rigidity OPEN。

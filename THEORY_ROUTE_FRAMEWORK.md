@@ -8071,3 +8071,97 @@ genuine exact-law exclusion 和最终 positive backward-tower rigidity 继续
 下一轮不升五点，先攻 **Elliptic Modulus-Saturation Lemma**：从 Schur–Abel
 difference data、四点 cocycle disk 与 positive backward-preimage cone 出发，
 证明或反驳局部 product majorant。只有出现 genuine obstruction，才进入五点 Gram。
+
+## 9.22 R110：Gaussian-relative modulus defect 与 q^(3N) 尺度
+
+网页端 R110 在连接器账户错误的情况下仍给出了可独立复核的 provisional
+解析推导；本机新增 elliptic_modulus_defect_r110/README.md 与
+audit_r110.py，并把网页端通信限制与数学证据严格分开。
+
+### 9.22.1 缺陷 transport 与有限深度上界
+
+对原点邻域定义
+
+L_mu(r)=log|phi_mu(r)|+r^2/2。
+
+若 mu=P_tau nu，则 OU characteristic transport 精确给出
+
+L_(P_tau nu)(r)=L_nu(sqrt(tau)r)。
+
+故 g^(0)=P_(q^N)g^(N) 时
+
+L_(g^(0))(r)=L_(g^(N))(q^(N/2)r)。
+
+只用 |phi_(g^(N))|<=1 则有
+
+|phi_(g^(0))(r)|<=exp(-(1-q^N)r^2/2)，
+
+以及 R109 椭圆上的 product bound
+
+|phi(s)phi(s+t)phi(2s+t)|
+<=exp(-(1-q^N)y^2/2)，
+
+其中 y^2=6s^2+6st+2t^2。这是无条件但仅为 q^N 二次尺度的上界，不能
+偷换为 Gaussian modulus domination。
+
+### 9.22.2 首个 odd charge 的严格局部反号
+
+在 R103/R104 的 same-factor exact analytic 输入下，首个非零 odd cumulant kappa_d
+强制一个负的 kappa_(2d)，并使
+
+L_mu(r)=c_d*kappa_d^2*r^(2d)+O(r^(2d+2))，c_d>0。
+
+特别地，R103/R104 的六阶 fingerprint kappa_6=-3*kappa_3^2 给出
+
+L_mu(r)=kappa_3^2*r^6/240+O(r^8)。
+
+因此 hypothetical asymmetric exact branch 在小非零椭圆上严格产生 positive
+product defect M=L(s)+L(s+t)+L(2s+t)>0，正好反向于 R109 的
+elliptic modulus-saturation 目标。这是排除命题的局部符号接口，不是已构造的
+exact-law counterexample。
+
+### 9.22.3 varying-bottom obstruction 与 clean conditional theorem
+
+R107 的 genuine asymmetric exact-fourth law H 满足
+kappa_3=1,kappa_4=0,kappa_6=-6。令
+
+g_N^(j)=P_(q^(N-j))H。
+
+它给出任意有限深度的 positive OU chain，但
+
+L_(g_N^(0))(r)=q^(3N)r^6/120+O(q^(4N)r^8)>0
+
+在小非零频率上成立。它不是 full-exact counterexample，因为 full exactness
+要求的六阶值应为 -3。该例说明 varying-bottom 不能仅靠 finite depth 推出
+L<=0，并且 q^(3N) 是真实可达到的局部尺度。
+
+若另有统一常数 C_*,r_*>0 使整个底层类满足
+
+|L_mu(u)|<=C_*|u|^6（|u|<=r_*），
+
+则严格得到
+
+|L_(g^(0))(r)|<=C_*q^(3N)|r|^6
+
+及椭圆版本
+
+|M_(g^(0))(s,t)|<=C_*q^(3N)y^6，
+
+在 |r|<=r_*q^(-N/2) 的量词下成立。这是可报告的 clean conditional theorem。
+
+### 9.22.4 证据边界与下一轮
+
+本机 audit 已核验 OU defect transport、q^N positivity majorant、椭圆几何、
+d=3 的 1/240 系数、R107 H 的矩/cumulant 与 q^(3N) 展开，以及条件
+定理的幂和代数。R12 本身没有记录 C_*,r_* 的统一 modulus envelope；R101
+关于 square-exponential envelope 的 moment-determinacy 假设也不能自动替代它。
+
+因此当前等级为：上述有限结构 PROVED / LOCAL-AUDITED；首个 odd charge 的
+反号为 ANALYTICALLY PROVED under exactness inputs；统一 q^(3N) theorem
+为 CONDITIONAL；genuine asymmetric exact-law exclusion、varying-bottom
+uniform modulus domination 与最终 Positive Backward-Tower Exact Zero-Set
+Rigidity 仍 OPEN。
+
+下一最小命题改为 Uniform q^(3N) Modulus-Defect Theorem：从 positive
+backward-preimage cone、R104 Schur–Abel 约束和 genuine probability realization
+中真实推出（或反驳）统一 C_*,r_*，不得把条件包络当作既有输入。
