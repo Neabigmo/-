@@ -3505,3 +3505,16 @@ computation was used.
   `R101_CHARGE_MAP_DEGREE_3_5_7_9_PASSED`、
   `R101_FIRST_ODD_MODE_AND_OU_SCALING_PASSED`、
   `R101_ANGULAR_HERGLOTZ_CHARGE_CONE_AUDIT_COMPLETED`。
+
+# 2026-09-07 — R101 connector-history definition audit
+
+- 在发送 R102 前，对当前内置网页端数学对话的已加载历史进行了定义级检索；
+  历史文本明确把 `P_3K` 称为 nonlinear log-density charge，并明确保留它
+  与 `chi_1`、`beta_(m,1)` 的逻辑区分。
+- 在该已加载历史中没有找到可直接核验的 `P_3K` 原始公式、投影定义或
+  reflection/OU transformation law；因此不能把“对称性蕴含 `P_3K=0`”写成
+  已证结论，也不能用网页端的描述替代定义。此条是 connector-history 的
+  前置审计事实，不是对整个项目资料不存在该定义的全局断言。
+- R102 的唯一任务因此保持为：从项目原始定义回溯 `P_3K`，先完成定义和
+  变换律审计，再决定是否存在 `chi_1` zero-set bridge；不得重复 R99/R100
+  的低阶 cone，也不得猜测或偷换符号。
