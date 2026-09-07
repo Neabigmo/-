@@ -9107,3 +9107,104 @@ R122 最小命题固定为 **Same-Factor Normal-Derivative Reconstruction Lemma*
 判断 Gaussian radialization、positive-definiteness 与 same-factor functional
 equation 是否产生 static Herglotz 看不到的 first-harmonic identity。若仍只有
 reflection-odd bilinear pairing，则正式关闭 R101/Herglotz angular-coherence 主路线。
+
+## 9.34 R122：same-factor 法向导数、Bochner trace 与 first-harmonic obstruction
+
+网页端 R122 在读取 R121 记录后完成了 residual trace 的法向数据重构；本机新增
+`normal_derivative_bochen_trace_r122/README.md` 与 `audit_r122.py`。这一轮的核心
+不是再增加一个有限系数展开，而是把 R121 的 Esscher mean-charge tangent 精确
+识别为 same-factor trace 的 first normal Cauchy datum。
+
+### 9.34.1 exact reconstruction 与 interior compatibility
+
+对 `Phi(u,v)=phi(u)phi(v)phi(-u-v)`、`s=(log phi)'`，沿 `u=-x` 有
+
+`partial_v log Phi(-x,v)|_(v=0)=s(0)-s(x)=-s(x)`，
+
+所以 centeredness 给出
+
+`s(x)=-partial_v log Phi(-x,v)|_(v=0)`。
+
+令 `d=-s`，则 full trace 满足
+
+`partial_u log Phi(u,v)=d(-u-v)-d(u)`、
+`partial_v log Phi(u,v)=d(-u-v)-d(v)`。
+
+这确证 normal datum 可由 same-factor trace 的 tangential boundary derivative
+重构，但本质是 factorization 的 compatibility，不是新的 positivity inequality。
+
+### 9.34.2 三维 log-wave extension
+
+取 `v_j=sqrt(2/3)(cos(theta+2*pi*j/3),sin(theta+2*pi*j/3))`，
+`tilde Phi(xi,eta)=prod_j phi(xi/sqrt(3)+v_j dot eta)`。由
+`sum_j v_j v_j^T=I_2` 与 `|v_j|^2=2/3`，得到 exact same-factor PDE
+
+`Delta_eta log tilde Phi=2 partial_xi^2 log tilde Phi`。
+
+其法向 datum 为
+
+`partial_xi log tilde Phi(0,eta)=(1/sqrt(3))sum_j s(v_j dot eta)`，
+
+并且 mean-charge trace 为 `Psi=Phi/(i*sqrt(3))*partial_xi log tilde Phi`。
+因此 `Phi` 是 Dirichlet trace、`Psi` 是 reflection-odd first normal Cauchy
+datum。log-wave equation 与 circular Dirichlet average 都没有自动决定这个 odd
+datum。
+
+### 9.34.3 charge/Hankel transport 与 exact target
+
+R101 的 static charges 是 residual angular Fourier trace；`Psi` 的 charges 则对应
+`g_k(q)=E[Xbar exp(-3ikTheta)|Q=q]`，并通过 Hankel inversion 与 `Phi` 关联。
+零阶 mean-charge mode 满足
+
+`G_0(rho)=E[Xbar J_0(rho sqrt(Q))]`
+
+以及
+
+`G_0(rho)=-kappa_3rho^2/6+O(rho^4)`。
+
+在 log trace 层，first-harmonic lowering operator 满足
+
+`N_0=rho^(-1)M P_1^log`，
+
+`M(rho^(2m+1))=sqrt(2)((m+1)(m+2)/m)rho^(2m+1)`；因此
+`P_1^log=-i kappa_3rho^3/(12sqrt(6))+...` 被 transport 成
+`N_0=-i kappa_3rho^2/(2sqrt(3))+...`，不是被 annihilate。
+
+### 9.34.4 Bochner/Schwarz 的真实边界
+
+exact radial branch 只给 reflection-even Schwarz budget
+
+`|G_0(rho)|^2 <= (1/3)e^(-rho^2)(I_0(rho^2)-1)
+=rho^4/12+O(rho^6)`。
+
+该 budget 不随 reflection 翻号，故不能推出 `G_0=O(rho^4)`。这正式关闭
+“静态 Herglotz + trace reconstruction 自动给 first-harmonic zero”的局部路线：
+法向数据虽被 exact 重构，但现有正性只看到其平方能量。
+
+### 9.34.5 genuine tangent obstruction
+
+取 `psi(x)=sin(ax)-c sin(bx)`、
+`c=a exp(-a^2/2)/(b exp(-b^2/2))`，则高斯基点有
+`E[Xpsi(X)]=0`，但
+`E[H_3(X)psi(X)]=a(b^2-a^2)exp(-a^2/2) !=0`。
+通过 IFT 的 centered/variance-one exponential family 可保持 positive、analytic、
+strict-log-concave、same-factor，同时使 `kappa_3` 一阶变化非零；然而任意
+radial test `F(Q)` 的一阶变化因 global reflection oddness 全部为零。这是真实
+analytic tangent obstruction，说明任何证明必须利用 all-degree/global realizability，
+不能只靠 radial observables 的一阶信息。
+
+### 9.34.6 判决与 R123
+
+PROVED / ANALYTICALLY PROVED：normal reconstruction、trace compatibility、
+log-wave equation、mean-charge/Hankel correspondence、log harmonic lowering、
+exact Schwarz budget 与 analytic tangent obstruction。CONDITIONAL：Esscher 一阶
+稳定性或其它额外正则接口可关闭目标，但它们是强假设。FORMAL：R104 all-degree
+branch 仍不能升级为 genuine probability counterexample。
+
+OPEN：`G_0=O(rho^4)` / `kappa_3=0`。
+
+R123 固定为 **Global Bochner–Cauchy-Data Rigidity Lemma**：在完整三维联合特征
+函数上，寻找超越 `N^2` reflection-even budget 的 nonlinear wave-flux 或
+conditional-variance zero identity；若所有 natural flux 都只是 odd normal datum
+的平方，便关闭 Fourier/Herglotz/normal-derivative 主路线并转向 global one-body
+probability realizability。

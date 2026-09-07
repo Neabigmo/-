@@ -4291,3 +4291,63 @@ PROVED / ANALYTICALLY PROVED / OBSTRUCTION / OPEN。
 `R121_SAME_FACTOR_NORMAL_DERIVATIVE_RECONSTRUCTION_PASSED`
 
 `R121_ANGULAR_ESSCHER_FISHER_AUDIT_COMPLETED`
+
+# 2026-09-07 — R122 Same-Factor Normal Derivative 与 Bochner Cauchy Data
+
+网页端 R122 在读取 R121 的本机框架后完成了 residual trace 法向数据的全局重构；
+connector 仍不可读，本轮依据当前对话自包含结论继续。本机新增
+`normal_derivative_bochen_trace_r122/README.md` 与 `audit_r122.py`。
+
+- 对 `Phi(u,v)=phi(u)phi(v)phi(-u-v)`，核验
+  `s(x)=-partial_v log Phi(-x,v)|0`，并给出 `d=-s` 下的 interior tangential
+  compatibility。这说明 same-factor trace 确实能重构 one-body score，但这是
+  factorization compatibility，不是新的 positivity inequality。
+- 在三维 extension
+  `tilde Phi(xi,eta)=prod_j phi(xi/sqrt(3)+v_j dot eta)` 中，本机核验
+  `Delta_eta log tilde Phi=2 partial_xi^2 log tilde Phi`，以及
+  `Psi=Phi/(i*sqrt(3))*partial_xi log tilde Phi`。mean-charge trace 是
+  reflection-odd first normal Cauchy datum。
+- 整理 `Phi -> Psi -> {u_k,g_k} -> {alpha_k}` 的 Fourier/Hankel interface；
+  零阶目标为 `G_0(rho)=E[Xbar J_0(rho sqrt(Q))]`
+  `=-kappa_3rho^2/6+O(rho^4)`。log first-harmonic lowering 将
+  `P_1^log=-i kappa_3rho^3/(12sqrt(6))+...` transport 为
+  `N_0=-i kappa_3rho^2/(2sqrt(3))+...`，没有 annihilation。
+- 本机核验 exact radial branch 的 Schwarz budget
+  `|G_0|^2 <= (1/3)e^{-rho^2}(I_0(rho^2)-1)=rho^4/12+O(rho^6)`。
+  该量 reflection-even，只是 magnitude budget，不能推出 cubic zero。
+- 本机核验 genuine analytic tangent obstruction：
+  `psi=sin(ax)-c sin(bx)` 可满足一阶 centered constraint，却有非零
+  `H_3` moment；IFT exponential family 可保持 centered/variance-one、positive、
+  analytic、strict-log-concave、same-factor，而所有 radial test 的一阶变化因
+  全局 reflection oddness 为零。该 obstruction 不是 all-degree exact counterexample，
+  但排除了靠 radial 一阶信息闭合的可能。
+
+R122 判决：PROVED / ANALYTICALLY PROVED 为 trace reconstruction、log-wave、
+Hankel/normal-charge interface、Schwarz budget 与 tangent obstruction；CONDITIONAL
+为 Esscher-stability 等强假设；FORMAL 为 R104 all-degree branch；OPEN 仍是
+`G_0=O(rho^4)` / `kappa_3=0`。静态 Herglotz/trace route 正式关闭。
+
+下一步 R123：**Global Bochner–Cauchy-Data Rigidity Lemma**。对完整三维联合特征
+函数，寻找超越 reflection-even `N^2` 能量的 nonlinear wave-flux 或
+conditional-variance zero identity；若找不到，则转向 global one-body probability
+realizability。
+
+本机审计输出：
+
+`R122_SAME_FACTOR_NORMAL_RECONSTRUCTION_PASSED`
+
+`R122_INTERIOR_TRACE_COMPATIBILITY_PASSED`
+
+`R122_LOG_WAVE_EQUATION_COEFFICIENT_PASSED`
+
+`R122_MEAN_TRACE_FACTOR_AND_REFLECTION_PARITY_PASSED`
+
+`R122_HANKEL_LOG_LOWERING_CUBIC_INTERFACE_PASSED`
+
+`R122_EXACT_SCHWARZ_MAGNITUDE_BUDGET_PASSED`
+
+`R122_ANALYTIC_TANGENT_MOMENT_OBSTRUCTION_PASSED`
+
+`R122_RADIAL_FIRST_VARIATION_BLIND_TO_ODD_SCORE_PASSED`
+
+`R122_NORMAL_DERIVATIVE_BOCHNER_TRACE_AUDIT_COMPLETED`
