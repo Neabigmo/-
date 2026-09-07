@@ -7286,3 +7286,36 @@ zero-set rigidity。真正的下一步是从 same-factor exact-zero identity 中
 本节的本机审计为 `positive_backward_hermite_cone_r99/audit_r99.py`，状态为
 `R99_POSITIVE_BACKWARD_HERMITE_CONE_AUDIT_COMPLETED`。Gaussian rigidity、
 `P_3K` bridge、mesoscopic tail 与 fixed nonzero branch 仍 **OPEN**。
+
+### 9.12 R100：finite-depth certificate from the positive cone
+
+R99 的锥约束还能转成深度证书。定义
+
+`F_m(t;g)=sum_(ell=0)^m c_(m,ell)t^ell a_(2m-2ell)(g)-a_m(g)^2`,
+
+其中 `c_(m,ell)=m!sqrt((2m-2ell)!)/(ell!(m-ell)!^2)`。若 `g=P_t h` 且
+`h` 是正的 `L^2(gamma)` density，则对每个 `m` 有严格 `F_m(t;g)>0`；
+所以 `F_m(t;g)<=0` 是 exact finite-dimensional no-preimage certificate。
+对于 depth-`N` fixed-factor tower，把 `t` 直接替换为 `q^N`。
+
+`[psi_1,psi_2]` Schur complement 在 centered variance-one 下等价于
+
+`f_(3,4)(t)=t^3+sqrt(6)a_4(g)t-3a_3(g)^2>0`。
+
+当 `a_3!=0` 时，该三次式恰有一个正根 `tau_(3,4)`：`a_4>=0` 时严格递增；
+`a_4<0` 时先降后升，且起点和极小值均为负。因此任何正 backward preimage
+都必须满足 `t>tau_(3,4)`，而 depth-`N` tower 必须满足
+`q^N>tau_(3,4)`。若 `0<tau_(3,4)<1`，得到
+`N<log(tau_(3,4))/log(q)`；若根不小于 1，则该深度根本不可能。
+当 `a_3=0,a_4<0` 时阈值简化为
+`t>sqrt(-sqrt(6)a_4)`。
+
+这是一个非局部的 finite-depth obstruction，而不只是局部导数估计。它把
+主命题剩余的 charge bridge 精确化：若 same-factor exact-zero identity 能证明
+非零 `P_3K` 必导致某个 `F_m(q^N;g)<=0`，或迫使 `tau_(3,4)` 有统一正下界，
+则任意深 positive tower 即被排除。当前尚未证明该 charge-to-cone implication；
+高阶/角向 charge 仍可能躲过低阶一维 moments。
+
+本节审计为 `positive_backward_hermite_cone_r100/audit_r100.py`，状态为
+`R100_FINITE_DEPTH_CERTIFICATE_AUDIT_COMPLETED`。Gaussian rigidity、`P_3K`
+bridge、mesoscopic tail 和 fixed nonzero branch 继续 **OPEN**。

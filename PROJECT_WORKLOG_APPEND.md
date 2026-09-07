@@ -3458,3 +3458,22 @@ computation was used.
   mesoscopic tail 或 fixed nonzero branch closure；这些继续 OPEN。下一轮应
   从 same-factor exact-zero identity 提取 `a_3,a_4,a_6` 关系并代入 R99 cone，
   而不是继续无结构地增加 radial 系数展开。
+
+# 2026-09-07 — R100 finite-depth certificate from the positive cone
+
+- 将 R99 的 `(0,m)` cone wall 定义为
+  `F_m(t;g)=sum_ell c_(m,ell)t^ell a_(2m-2ell)(g)-a_m(g)^2`。正的
+  backward preimage 必须满足严格 `F_m(t;g)>0`；因此 `F_m(q^N;g^(0))<=0`
+  是排除 depth-`N` positive preimage 的 exact finite certificate。
+- `[psi_1,psi_2]` Schur complement 化为
+  `f_(3,4)(t)=t^3+sqrt(6)a_4t-3a_3^2>0`。当 `a_3!=0` 时它有唯一正根
+  `tau_(3,4)`，故任何 positive preimage 都满足 `t>tau_(3,4)`；固定因子
+  tower 满足 `q^N>tau_(3,4)`，从而得到显式最大深度界。`a_3=0,a_4<0`
+  时阈值是 `sqrt(-sqrt(6)a_4)`。
+- 这把“charge-to-cone”缺口具体化为可证目标：若 exact same-factor zero
+  identity 能迫使 `P_3K` 触发某个 `F_m` 违例或统一正深度阈值，则可关闭
+  相应 tower 子类；目前高阶/角向 charge 与一维 moments 的桥仍 OPEN。
+- 新增 `positive_backward_hermite_cone_r100/README.md` 与 `audit_r100.py`。
+  本机 exact audit 将核验 `R100_SKEW_KURTOSIS_POLYNOMIAL_PASSED`、
+  `R100_SIXTH_ORDER_FEASIBILITY_WALL_PASSED`、`R100_UNIQUE_ROOT_ALGEBRA_PASSED`、
+  `R100_DEPTH_SUBSTITUTION_PASSED`、`R100_FINITE_DEPTH_CERTIFICATE_AUDIT_COMPLETED`。
