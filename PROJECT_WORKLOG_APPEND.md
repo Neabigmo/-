@@ -4566,3 +4566,16 @@ definite，截断 Hamburger theorem 给 genuine representing law。因此
 `Gamma_M->0`，但明确了后续必须研究高阶 singular kernel 如何被下一行打破。
 
 本机审计已通过：`R126_SINGULAR_GHOST_EXTREMUM_AUDIT_COMPLETED`。
+
+# 2026-09-07 — R127 M=4 Cubic Radius Flat Extremum
+
+在 R126 `M=3` singular non-flat ghost 后，本机把第四个 exact row 完整纳入。令
+`c=y_3,a=y_5`，前三行给 `y_4=3,y_6=15+7c^2`，第四行给
+`y_8=105-124c^2+32ca`。对 `H_4` 关于 `H_2` 取 Schur complement 后，PSD 强制
+`D(c,a)>=0` 与 `N(c,a)<=0`；边界消元得到唯一 `u_4 in (1,2)`，其中
+`P(u_4)=0`、`u_4=1.110047790304544...`，从而
+`GammaHat_4=Gamma_4=sqrt(u_4)=1.053588055315997...`。
+极值点满足 `rank H_2=rank H_3=rank H_4=3`，是 flat genuine extremizer；因此
+R126 的 `M=3` ghost 在下一 exact row 被明确消除。全阶 `Gamma_M->0` 仍 OPEN。
+
+本机审计已通过：`R127_M4_CUBIC_RADIUS_AUDIT_COMPLETED`。

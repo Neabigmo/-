@@ -9519,3 +9519,37 @@ circular rows 在 centered variance-one 条件下给出
 `R126_M3_ENDPOINT_NONREPRESENTABLE_PASSED`、
 `R126_M3_GENUINE_SUPREMUM_NOT_ATTAINED` 和
 `R126_SINGULAR_GHOST_EXTREMUM_AUDIT_COMPLETED`。
+
+# 2026-09-07 — R127 M=4 cubic radius 与 flat extremum
+
+在 R126 的 `M=3` ghost 之后，本机继续推进到 `M=4`。前三行消元后，第四行给出
+`y_8=105-124c^2+32ca`（`c=y_3,a=y_5`）。对 `H_4` 关于固定 positive-definite
+`H_2` 取 Schur complement，PSD 的必要条件可写成
+
+`D(c,a)=-a^2+8ac-6c^4-10c^2+12>=0`,
+
+`N(c,a)=2a^2+18ac^3-88ac-75c^4+512c^2-48<=0`。
+
+第一式给 `a<=4c+sqrt(6(2-c^2)(1+c^2))`。在 `1<=c<sqrt(2)` 上 `N` 关于 `a`
+严格递减，故只需考察上边界。令 `u=c^2`，边界值为
+
+`F(u)=-15u^2+204u-24-18(4-u)sqrt(6u(2-u)(1+u))`。
+
+`F(1)<0`、`F(2)>0`；消去根式后得到
+`P(u)=216u^5-1919u^4+4072u^3+4704u^2-8000u+64`，其 Sturm 计数显示
+`(1,2)` 内恰有一个根 `u_4=1.110047790304544...`。因此
+
+`boxed{GammaHat_4=Gamma_4=c_4}`,
+
+`c_4=sqrt(u_4)=1.053588055315997...`。
+
+在 `a=4c_4+sqrt(6(2-c_4^2)(1+c_4^2))`、相应的 `b` 取 Schur 补零化值时，
+`H_4` 为 flat，`rank H_2=rank H_3=rank H_4=3`；一元 flat extension theorem
+给出至多三原子的 genuine representing law。故 R126 的 `M=3` non-flat ghost 在
+下一行被严格消除，且新的 extremum 在 genuine flat locus 上取得。该结果仍不证明
+全阶 `Gamma_M->0`，下一步应研究这种 Schur-defect/下一行兼容性是否可推广。
+
+R127 本机审计 marker：`R127_M4_ROW_ELIMINATION_PASSED`、
+`R127_M4_SCHUR_COMPLEMENT_PASSED`、`R127_M4_UNIQUE_ROOT_ISOLATION_PASSED`、
+`R127_M4_FLAT_EXTREMIZER_INTERFACE_PASSED`、
+`R127_M4_CUBIC_RADIUS_AUDIT_COMPLETED`。
