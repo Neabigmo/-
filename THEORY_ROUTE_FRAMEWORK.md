@@ -7490,3 +7490,104 @@ probability realization` 的无限维兼容性问题；但
 `genuine => P_3K=0`、primitive uniform closure、symmetric even sector 和
 最终 Positive Backward-Tower Exact Zero-Set Rigidity 仍 **OPEN**。下一轮
 不再增加低阶 moment minor，转攻 infinite Schur-cumulant cascade。
+
+### 9.16 R104：Infinite Schur–Cumulant Cascade 与 Schur–Abel realization test
+
+网页端 R104 已完成上一节指定的主攻，并把“全阶角向相容性”改写成一个可审计
+的全局变换。固定 admissible 实 `z`，令
+
+`w_z(theta)=exp(mathscr K(z,theta))`、`phi=3theta`，并以
+`d sigma_z(phi)=w_z(phi/3)dphi/(2pi)` 定义单位圆上的正测度。其 Fourier moments
+`c_r(z)` 组成实 Toeplitz correlation sequence。对单项式
+`1,zeta,zeta^2,...` 做 OPUC/Gram–Schmidt，定义 reflection parameters
+
+`alpha_n(z)=-Phi_(n+1)(0;z)`，
+
+则
+
+`E_(n+1)=E_n(1-alpha_n^2)`、`E_0=1`，
+
+且首两项为
+
+`alpha_0=c_1`、`alpha_1=(c_2-c_1^2)/(1-c_1^2)`，
+
+`E_2=1-c_1^2-(c_2-c_1^2)^2/(1-c_1^2)`。
+
+对严格正连续权，Szegő 预测极限给出
+
+`exp(R(z))=prod_(n>=0)(1-alpha_n(z)^2)`、`R=<mathscr K>`，
+
+或
+
+`S(z):=sum_n -log(1-alpha_n(z)^2)=-R(z)`。
+
+这使 R103 的有限 predictor 不再是孤立不等式，而是一个 exact infinite
+prediction budget。
+
+same-factor D3 几何给出全阶 locality/parity：
+
+`alpha_(r-1)(z)=O(z^(3r))`、`alpha_(r-1)(-z)=(-1)^r alpha_(r-1)(z)`。
+
+若 `d` 是首个非零 odd cumulant，则整个首阶 Schur vector 同时被激活：
+
+`[z^d]alpha_(r-1)=Lambda_(d,r)kappa_d/d!`，
+
+对 odd `r` 且 `3r<=d`。因此 R103 的 all-charge energy identity 正是
+`S=-R` 在首个 `z^(2d)` 系数上的展开：
+
+`-[z^(2d)]R=sum_(r:3r<=d,r odd)(Lambda_(d,r)kappa_d/d!)^2`。
+
+另一方面，令 `A_(2N)=<p_(2N)>=3*binom(2N,N)/6^N`，则所有 forced-even
+cumulants 满足严格 triangular recursion
+
+`kappa_(2N)=-(2N)!/A_(2N) [z^(2N)]S(z)`。
+
+只有 `r<=floor(N/3)` 的 Schur charge 能进入该阶；这为“odd free / even forced”
+提供了 prediction-loss 解释，而非新的独立假设。
+
+R104 的关键全局接口是 Abel 重构。令 `K_e(r)=(K(r)+K(-r))/2`、
+`rho=sqrt(2/3)`，以及
+
+`(A f)(r)=(2/pi)int_0^r f(s)/sqrt(r^2-s^2) ds`。
+
+则
+
+`A K_e(r)=r^2/4-(1/3)S(r/rho)`，
+
+从而
+
+`K_e(r)=r^2/2-(1/3)J(r)`、
+`J(r)=d/dr int_0^r s*S(s/rho)/sqrt(r^2-s^2) ds`。
+
+若 `K=log M` 来自 genuine probability law，则 Cauchy–Schwarz 与 CGF convexity
+强制 `K_e(r)>=0`、`K_e''(r)>=0`，即
+
+`J(r)<=3r^2/2`、`J''(r)<=3`。
+
+这把 one-body realization 具体化为整个 Schur cascade 的两个全局实轴约束。
+它们是 genuine probability constraints，不是 formal Fock 或有限 minor 结论。
+
+本机新增 `infinite_schur_cumulant_r104/README.md` 与 `audit_r104.py`，exact
+symbolic audit 通过：D3 harmonic weights、首两级 Schur 递推、grade-12
+forced-even/Szegő budget、OU grade/first-odd Schur vector，以及 Abel monomial
+multiplier。审计只核验有限 grade；严格正连续权下的无限乘积和 Abel inversion
+属于网页端 analytic theorem，formal infinite Schur completion 仍不能代替
+probability realization。
+
+R104 的证据边界：
+
+- `Infinite Schur–Abel Representation`：**ANALYTICALLY PROVED，LOCAL-AUDITED**；
+- 任意 formal odd cumulant data 的 coefficientwise Schur completion：
+  **FORMAL-PROVED，不是概率律**；
+- `Schur–Abel Convexity Breakdown Lemma`：**OPEN**；
+- asymmetric genuine full-exact law exclusion、symmetric even-sector rigidity、
+  bare `RK=1` 到 genuine full-exact identification、以及最终
+  Positive Backward-Tower Exact Zero-Set Rigidity：继续 **OPEN / CONDITIONAL**。
+
+当前不再计算更多孤立的 `alpha_n` 低阶展开。下一轮网页端必须先阅读本总纲、
+`PROJECT_WORKLOG_APPEND.md`、R103/R104 README 与 audit；主攻
+
+`P_3K!=0 => exists r>0: J(r)>3r^2/2 or J''(r)>3`，
+
+或给出严格反例并精确说明必须补上的 genuine Bochner 正定性。不得把
+`J` 约束、formal branch 或固定 `z` 的 Schur 正性误写成最终 rigidity。

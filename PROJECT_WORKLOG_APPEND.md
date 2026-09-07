@@ -3595,3 +3595,50 @@ computation was used.
 - 证据边界：R103 仍未证明 asymmetric genuine full-exact law 不存在；
   `RK=1` 到 genuine full-exact identification 仍 CONDITIONAL。下一轮目标为
   infinite Schur-cumulant cascade，不再增加孤立低阶 minors。
+
+# 2026-09-07 — R104 Infinite Schur–Cumulant Cascade
+
+- 网页端 R104 完成了此前指定的全阶主线：固定实 `z` 时，把
+  `w_z(theta)=exp(mathscr K(z,theta))` 经 `phi=3theta` 视为单位圆上的严格正
+  权，并以 OPUC/Gram–Schmidt 定义 reflection/Schur 参数 `alpha_n(z)`。首两级
+  精确为 `alpha_0=c_1`、`alpha_1=(c_2-c_1^2)/(1-c_1^2)`，预测误差满足
+  `E_(n+1)=E_n(1-alpha_n^2)`。
+- 严格正连续权下，Szegő 预测极限给出 exact infinite budget
+  `exp(R)=prod_n(1-alpha_n^2)`，即
+  `S=sum_n -log(1-alpha_n^2)=-R`。这把 R103 的有限 predictor 统一成了
+  一个全阶 identity；网页端同时正确区分了 analytic theorem 与 formal
+  coefficientwise completion。
+- 同因子 D3 结构给出 Schur locality/parity：
+  `alpha_(r-1)=O(z^(3r))`、`alpha_(r-1)(-z)=(-1)^r alpha_(r-1)(z)`；首个非零
+  odd cumulant `kappa_d` 会同时激活所有 admissible first Schur charges，
+  `[z^d]alpha_(r-1)=Lambda_(d,r)kappa_d/d!`。R103 的 first-odd all-charge
+  energy identity 正是 `S=-R` 的首个 `z^(2d)` 系数。
+- 令 `A_(2N)=3*binom(2N,N)/6^N`，得到 forced-even 的有限 grade 递归
+  `kappa_(2N)=-(2N)!/A_(2N) [z^(2N)]S`，且该阶只使用
+  `r<=floor(N/3)` 的 Schur charges。它为 even cumulant 的强制性提供了新的
+  prediction-loss 解释，但没有声称单靠形式递归能排除 odd branch。
+- 新的全局接口是 Schur–Abel reconstruction。若 `K_e=(K(r)+K(-r))/2`、
+  `rho=sqrt(2/3)`，则
+  `A K_e(r)=r^2/4-S(r/rho)/3`，并有
+  `K_e(r)=r^2/2-J(r)/3`，其中
+  `J(r)=d/dr int_0^r s*S(s/rho)/sqrt(r^2-s^2) ds`。genuine probability
+  CGF 强制 `J<=3r^2/2` 与 `J''<=3`。这是把 one-body realization 变成两个
+  可检验全局实轴约束的弱定理接口。
+- 本机新增 `infinite_schur_cumulant_r104/README.md`、`audit_r104.py`。最终
+  exact symbolic audit 通过：
+  `R104_D3_GEOMETRY_AND_HARMONIC_WEIGHTS_PASSED`、
+  `R104_FORCED_EVEN_RECURSION_AND_FINITE_SZEGO_BUDGET_PASSED`、
+  `R104_SCHUR_FIRST_STEPS_AND_ABEL_MULTIPLIER_PASSED`、
+  `R104_OU_GRADE_AND_FIRST_ODD_SCHUR_VECTOR_PASSED`、
+  `R104_INFINITE_SCHUR_CUMULANT_AUDIT_COMPLETED`。
+- 证据边界：R104 的严格正连续权 infinite product/Abel reconstruction 为
+  **ANALYTICALLY PROVED，LOCAL-AUDITED**；形式 infinite Schur completion 为
+  **FORMAL-PROVED**，不能冒充 probability realization；
+  `Schur–Abel Convexity Breakdown Lemma`、asymmetric genuine exact-law
+  exclusion、symmetric even sector 与最终 backward-tower rigidity 仍
+  **OPEN**。bare `RK=1` 识别仍 **CONDITIONAL**。
+- 下一轮网页端开始前必须先阅读本机总纲、工作日志、R103/R104 README 与 audit；
+  继续主攻 `P_3K!=0` 是否必导致 `J>3r^2/2` 或 `J''>3`，若不能则必须给出
+  可严格审计的 genuine Bochner/positive-definiteness 障碍。不得重开 R99–R103，
+  不做更多孤立低阶 `alpha_n` 展开，不做数值 sweep、SDP、optimizer 或 remote
+  computation。
