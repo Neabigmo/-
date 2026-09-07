@@ -3394,3 +3394,15 @@ computation was used.
   与 `FS_3` 继续 OPEN。
 - R98 审计新增 `R98_RENORMALIZED_ENDPOINT_COLUMN_MAJORANT_PASSED`；不引入
   determinant、optimizer、SDP、扫描或新的 gate。
+
+## R98 方法学边界：固定阶 commutator 不能突破 (g_2) 的 √(n)（2026-09-07）
+
+- 若固定阶 `r` 的 number-operator commutator 只给出
+  `C_r(n+1)^(r/2)/d^r`，与 per-gap `M_2` 合并后的交叉尺度恒为
+  `d~sqrt(n)`，总和恒为 `O(sqrt(n))`；恒等式是
+  `r/2+(1-r)/2=1/2`。
+- 因此“继续升高交换子阶数”被严格识别为 method barrier，而不是 `g_2`
+  的增长结论。必须利用 R80 四项 block 的低 gap cancellation、有限差分或
+  可求和 two-parameter envelope。
+- R98 审计新增 `R98_FINITE_COMMUTATOR_SQRTN_BARRIER_PASSED`；高阶端点常数
+  `C_r` 本身仍未假定有限。

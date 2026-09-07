@@ -7178,3 +7178,27 @@ background projection 会生成 higher-degree components，故其 renormalized r
 horizon boundary、nonlinear centered invariance 与 positivity 仍 **OPEN**。
 该结果修复的是 mixed coefficient feedback 的尺度，不等于已经证明 Gram
 small-ball 或 positive backward tower。
+
+### 9.9 R98 方法学障碍：固定阶交换子不能单独突破 (g_2) 的 (sqrt n) 窗口
+
+网页下一轮若仅把 R97 的二阶交换子换成任意固定阶 `r`，即使能够证明
+
+`||P_n ad_N^r(M_(g2))P_n||op<=C_r(n+1)^(r/2)`，
+
+也只能得到
+`||Delta_d B_n^(2)||<=min{M_2,C_r(n+1)^(r/2)/|d|^r}`。
+令 `D_*^r` 首次超过 `C_r(n+1)^(r/2)/M_2`，则
+
+`sum_(d>=1)min{M_2,C_r(n+1)^(r/2)/d^r}`
+`<=M_2(D_*+1)+C_r(n+1)^(r/2)D_*^(1-r)/(r-1)`。
+
+两项都具有
+`M_2^(1-1/r)C_r^(1/r)(n+1)^(1/2)` 的尺度，因为
+`r/2+(1-r)/2=1/2`。所以任意固定阶 commutator decay 都只能重现
+`O(sqrt n)`，无法单独决定绝对 gap sum。
+
+这是 **PROVED method barrier**，不是 `g_2` 的 `sqrt n` lower bound。R80 端点下
+高阶 `C_r` 是否有限还需新的 endpoint 审计；真正剩余的理论必须利用固定阶交换子
+看不到的 four-term cancellation、低 gap subtraction 或可求和的 two-parameter
+envelope。因而 R98 后的 (g_2) 研究目标从“继续提高交换子阶数”收紧为“直接
+证明结构性中尺度 cancellation”。

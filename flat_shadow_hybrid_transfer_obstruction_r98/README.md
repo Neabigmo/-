@@ -135,6 +135,37 @@ The renormalized cost is not yet a positivity theorem: it repairs the linear
 mixed feedback scale, while the centered Gram small-ball estimate and the
 positive backward tower still require separate arguments.
 
+## 5. Finite-order commutator barrier for the `g2` mesoscopic gap
+
+There is also a clean limitation on the tempting next step.  Suppose, for a
+fixed integer `r>=2`, one can prove the finite-horizon estimate
+
+`||P_n ad_N^r(M_(g2)) P_n||op <= C_r (n+1)^(r/2)`.
+
+The exact number-operator grading then gives
+
+`||Delta_d B_n^(2)||op <= min{M_2, C_r (n+1)^(r/2)/|d|^r}`.
+
+Let `D_*` be the first integer with
+`D_*^r >= C_r(n+1)^(r/2)/M_2`.  Since
+`sum_(d>D_*)d^(-r)<=D_*^(1-r)/(r-1)`,
+
+`sum_(d>=1) min{M_2,C_r(n+1)^(r/2)/d^r}`
+`<= M_2(D_*+1)+C_r(n+1)^(r/2)D_*^(1-r)/(r-1)`.
+
+The two terms have the same scale
+`M_2^(1-1/r) C_r^(1/r) (n+1)^(1/2)`.  Thus every fixed-order commutator
+route has the same `sqrt(n)` crossover, regardless of `r`.  In particular,
+higher commutator decay alone cannot improve R97's `O(sqrt(n))` theorem.
+
+This is a **method barrier**, not a claim that `g2` itself grows like
+`sqrt(n)`.  For the R80 endpoint geometry, the constants `C_r` for higher
+orders also require fresh endpoint checks and may not be finite.  Either way,
+the missing `g2` lemma must exploit a cancellation which is invisible to any
+fixed-order `d^(-r)` bound—such as a low-gap subtraction, a finite-difference
+identity retaining the four-term block, or a genuinely summable two-parameter
+kernel envelope.
+
 Audit command:
 
 `F:/anaconda3/python.exe flat_shadow_hybrid_transfer_obstruction_r98/audit_r98.py`

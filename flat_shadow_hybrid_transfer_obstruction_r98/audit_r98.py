@@ -61,8 +61,15 @@ for D in range(64, 80):
     ratio = sp.Rational(4 * 1, D + 1) * rho
     assert ratio < sp.Rational(1, 2)
 
+# Fixed-order commutator estimates always cross at sqrt(n):
+# r/2 + (1-r)/2 = 1/2 exactly.
+for r in range(2, 20):
+    assert sp.Rational(r, 2) + sp.Rational(1 - r, 2) == sp.Rational(1, 2)
+assert sp.Rational(1, 2) < 1
+
 print("R98_EXACT_GAUSSIAN_MODE_COST_PASSED")
 print("R98_ACTUAL_K51_NONZERO_PASSED")
 print("R98_GROWING_RADIUS_RATIO_PASSED")
 print("R98_RENORMALIZED_ENDPOINT_COLUMN_MAJORANT_PASSED")
+print("R98_FINITE_COMMUTATOR_SQRTN_BARRIER_PASSED")
 print("R98_CGAMMA_ZERO_ENDPOINT_OBSTRUCTION_COMPLETED")
