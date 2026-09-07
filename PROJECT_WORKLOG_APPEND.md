@@ -3850,3 +3850,28 @@ computation was used.
   项目类是否满足该假设 CONDITIONAL/OPEN；charge annihilation、genuine
   asymmetric exclusion 与最终 tower rigidity 继续 OPEN。下一轮要求网页端
   只攻统一 a,B 的 positive-cone/Schur–Abel 来源，不重述 R99–R111。
+
+# 2026-09-07 — R112 genuine exact class 的统一 square-exponential envelope
+
+- 网页端 R112 在 connector 仍不可读时完成实质理论推进；核心是 R101 genuine
+  angular barycenter + iid same-factor realization 给出
+  Q=sum_j(X_j-X_bar)^2 ~ chi^2_2。
+- 对 D=X_1-X_2，本机精确核验
+  2Q-D^2=(X_1+X_2-2X_3)^2/3>=0；再用 Jensen
+  E exp(aX^2)<=E exp(aD^2)，得到
+  E exp(aX^2)<=1/(1-4a)、0<a<1/4，特别 a=1/8、B=2。
+- 代入 R111 显式桥后，genuine full-exact class 统一拥有
+  rho=sqrt(e/128)、r_*=sqrt(e/512)、C_*=2^22log(2)/e^3，以及
+  |L_(g^(0))(r)|<=C_*q^(3N)|r|^6、|r|<=r_*q^(-N/2)，和 R109 椭圆版本。
+  fixed-base 与 varying-bottom 在 analytic envelope 层不再有差别。
+- 该结论不能由抽象 Herglotz cone alone 得到，也不能自动转移到 bare scalar
+  RK=1；genuine angular realization/identification 是明确前提。
+- 本机新增 uniform_subgaussian_exact_r112/README.md、audit_r112.py，审计
+  通过：R112_PAIR_DIFFERENCE_SQUARE_IDENTITY_PASSED、
+  R112_JENSEN_STRICT_CONVEXITY_PASSED、R112_EXPLICIT_ENVELOPE_CONSTANTS_PASSED、
+  R112_ELLIPSE_AND_Q3N_SCALING_PASSED、
+  R112_UNIFORM_SUBGAUSSIAN_EXACT_AUDIT_COMPLETED。
+- 路线变化：统一解析半径、tail constants、sixth-order remainder 和 q^(3N)
+  modulus scale 已不再是瓶颈；下一轮只攻 R109 sharp disk + R112 modulus
+  budget 是否给出 q^(3N/2)y^3（或 square）shear-cocycle budget。bare RK=1
+  identification、primitive charge annihilation 和最终 tower rigidity 继续 OPEN。

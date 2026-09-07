@@ -8224,3 +8224,85 @@ parity/Fredholm exact defect map，R101 只引用 square-exponential envelope
 能否从 positive backward cone、Schur–Abel 和 exact realization 得到统一
 square-exponential moment，继而再找到 primitive charge annihilation 或带符号
 estimate。该层仍为 CONDITIONAL/OPEN。
+
+## 9.24 R112：genuine exact class 的统一 square-exponential envelope
+
+网页端 R112 在 connector 仍不可读时依据 R111 自包含桥完成了一个重要的
+全局化推导。本机新增 uniform_subgaussian_exact_r112/README.md 与
+audit_r112.py；网页端答复与本机审计都严格把 genuine full-exact angular
+realization 和 bare scalar RK=1 区分开。
+
+### 9.24.1 R101 angular realization 给出的 radial law
+
+对 iid X_1,X_2,X_3，令
+
+Q=sum_j(X_j-X_bar)^2、D=X_1-X_2。
+
+在 genuine full-exact angular barycenter 的 measure realization 下，R101 的
+radial transform 识别
+
+Q~chi^2_2，E exp(tQ)=1/(1-2t)（0<=t<1/2）。
+
+这一步不是抽象 Herglotz Toeplitz cone 的结论；它使用 Gaussian angular
+barycenter 加 iid same-factor realization。因而从 bare RK=1 推到这里仍需
+单独的 identification theorem。
+
+### 9.24.2 一步 deterministic inequality 加 Jensen
+
+本机精确核验了
+
+2Q-D^2=(X_1+X_2-2X_3)^2/3>=0，
+
+故对 0<a<1/4
+
+E exp(aD^2)<=E exp(2aQ)<=1/(1-4a)。
+
+取独立副本 X'，由 E[X-X'|X]=X 与 exp(a x^2) 的严格凸性，
+
+E exp(aX^2)<=E exp(a(X-X')^2)。
+
+于是得到 genuine exact one-body 的统一 envelope
+
+E exp(aX^2)<=1/(1-4a)、0<a<1/4，
+
+特别是 E exp(X^2/8)<=2。该常数与 law、depth、varying-bottom 层号无关。
+
+### 9.24.3 R110/R111 bridge 的 unconditional genuine-class 版本
+
+把 a=1/8,B=2 代入前两轮的 explicit zero-free bridge，可取
+
+rho=sqrt(e/128)、r_*=sqrt(e/512)、
+C_*=2^22 log(2)/e^3。
+
+每个 genuine full-exact layer 因而统一满足
+
+|L_mu(u)|<=C_*|u|^6、|u|<=r_*。
+
+若 g^(0)=P_(q^N)g^(N)，则严格得到
+
+|L_(g^(0))(r)|<=C_*q^(3N)|r|^6、
+|r|<=r_*q^(-N/2)，
+
+以及 R109 椭圆三点的
+
+|log(prod_j|phi(r_j)|/exp(-y^2/2))|<=C_*q^(3N)y^6。
+
+中间层同样有 q^(3(N-j)) 的精确缩放。这一层的 uniform analytic radius、
+sixth-order remainder 和 q^(3N) modulus scale 已从 CONDITIONAL 提升为
+genuine full-exact class 下的 PROVED / ANALYTICALLY PROVED。
+
+### 9.24.4 全局路线的真正变化
+
+R112 排除了 varying-bottom 的 analytic escape：困难不再是 tail constants 漂移、
+MGF zero-free radius 缩小或 sixth-order remainder 爆炸。剩余瓶颈纯化为
+
+O(q^(3N)y^6) modulus budget 如何约束 R109 的 shear phase mismatch，
+
+以及如何由此 annihilate nonzero primitive odd charge。绝对小量控制仍不能给出
+L<=0，因为 R110 的首个 odd charge 局部 defect 正号。
+
+因此下一轮不再研究 tail/envelope，定为 Uniform Shear-Cocycle Budget
+Theorem：从 R109 sharp four-point cocycle disk 和 R112 uniform modulus
+budget 出发，证明一个 q^(3N/2)y^3 或 square 型 phase budget，或构造
+最小 genuine/formal obstruction。bare RK=1 identification 和最终
+Positive Backward-Tower Exact Zero-Set Rigidity 仍为 OPEN。
