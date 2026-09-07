@@ -3875,3 +3875,37 @@ computation was used.
   modulus scale 已不再是瓶颈；下一轮只攻 R109 sharp disk + R112 modulus
   budget 是否给出 q^(3N/2)y^3（或 square）shear-cocycle budget。bare RK=1
   identification、primitive charge annihilation 和最终 tower rigidity 继续 OPEN。
+
+# 2026-09-07 — R113 uniform shear-cocycle budget 与 primitive obstruction
+
+- 网页端 R113 在 connector 仍不可读时依据 R109/R112 自包含输入完成实质推进；
+  本机新增 `uniform_shear_cocycle_budget_r113/README.md` 与 `audit_r113.py`。
+- R109 四点圆盘在 Gaussian 邻域的 provisional expansion 给出：
+  `Delta0=((2-m3^2)/4)V0^2+O(y^8)`、
+  `Delta1=((2-m3^2)/4)V1^2+O(y^8)`、
+  `N=((2-m3^2)/4)V0V1+O(y^7)`；degree-12 slack cancellation 后，
+  Gaussian leading slack 为
+  `det(H3)/144*s^6*t^2*(s+t)^4*(2s+t)^2`，且 `det(H3)=12`。
+  这说明 Gaussian alignment 在 four-point disk 内部，pointwise PSD 没有
+  shear-rigidity 的 equality mechanism。
+- 由 R112 的统一 zero-free analytic log 与精确 OU phase transport，若
+  `tau=q^(N-j)`、`rho=sqrt(e/128)`、`r_*=rho/2`，可取
+  `C_ph=2(3+2sqrt(2))*log(2)/rho^3`，并在
+  `|y|<=r_*tau^(-1/2)` 上得到
+  `|eta_j(s,t)|<=C_ph*tau^(3/2)|y|^3`，以及 square 版
+  `|eta_j|^2<=C_ph^2*tau^3|y|^6`。这是独立的 phase-analytic bound，
+  不是从 modulus budget 取平方根；粗 phase scale 已关闭。
+- R113 同时钉住 sharpness boundary：R107 varying-bottom law 的
+  `kappa6=-6` 不满足 full-exact 的 `kappa6=-3kappa3^2`，但其 shear
+  仍可达到 `q^(3N/2)y^3`；因此剩余的真正任务是 full exactness 对 primitive
+  odd phase 的额外 annihilation，而不是继续改善粗尺度。
+- 本机 audit 已核验 cubic shear identity、ellipse geometry、Gaussian Gram
+  determinant、显式常数、`tau^3` scaling 与 R107 六阶 gap；完整 Gaussian
+  asymptotic remainder 保持网页端 ANALYTICALLY PROVED，未被本机脚本过度宣称。
+- 状态：uniform phase budget 在 genuine full-exact analytic class 下为
+  PROVED / ANALYTICALLY PROVED；bare scalar `RK=1` identification、primitive
+  charge annihilation 与最终 Positive Backward-Tower Exact Zero-Set Rigidity
+  仍 OPEN。下一轮定为 R114 **Primitive Cubic Shear Limit**：计算
+  `tau^(-3)*(Delta0Delta1-|N|^2-S_G)` 与 exact angular `tau^3` limit，
+  判断 normalized four-point cone 是否仍只给 `|c_N|<=sqrt(2)`，或已强制
+  `c_N->0`。

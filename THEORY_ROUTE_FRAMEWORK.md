@@ -8306,3 +8306,83 @@ Theorem：从 R109 sharp four-point cocycle disk 和 R112 uniform modulus
 budget 出发，证明一个 q^(3N/2)y^3 或 square 型 phase budget，或构造
 最小 genuine/formal obstruction。bare RK=1 identification 和最终
 Positive Backward-Tower Exact Zero-Set Rigidity 仍为 OPEN。
+
+## 9.25 R113：Uniform shear-cocycle budget 与 primitive cubic limit
+
+网页端 R113 继续沿 R109/R112 的自包含输入推进；connector 未恢复读取能力，
+故通信状态与数学证据分开记录。本机新增
+`uniform_shear_cocycle_budget_r113/README.md` 与 `audit_r113.py`，只把
+可逐项核验的代数标为 LOCAL-AUDITED。
+
+### 9.25.1 Gaussian 邻域的四点 disk slack
+
+沿 R109 的四频率配置令
+
+`a=phi(s)`、`b=phi(t)`、`c=phi(s+t)`、`d=phi(2s+t)`，
+`V0=s*t*(s+t)`、`V1=s*(s+t)*(2s+t)`，并令
+`y^2=s^2+(s+t)^2+(2s+t)^2`。
+
+网页端给出 centered variance-one 且 `m4=3` 时的邻域展开
+
+`Delta0=((2-m3^2)/4)V0^2+O(y^8)`，
+`Delta1=((2-m3^2)/4)V1^2+O(y^8)`，
+`N=((2-m3^2)/4)V0V1+O(y^7)`。
+
+`Delta0Delta1-|N|^2` 的 degree-12 terms cancel；Gaussian leading slack
+为
+
+`S_G=det(H3)/144*s^6*t^2*(s+t)^4*(2s+t)^2+O(y^16)`。
+
+Gaussian moment Gram `H3` 的 determinant 是 12，因此 generic coefficient 是
+`1/12`，通常严格为正。由此 Gaussian alignment 位于四点 disk 内部；
+R109 pointwise PSD 没有 equality-rigidity，也不能单独提供 q,N 衰减。
+
+### 9.25.2 从 analytic phase transport 得到的粗预算
+
+局部 phase 的 leading term 为
+
+`vartheta(u)=-m3*u^3/6+O(u^5)`，
+`eta=vartheta(t)-2*vartheta(s+t)+vartheta(2s+t)`
+`   =-m3*s^2*(s+t)+O(y^5)`。
+
+但可用的 uniform bound 不是从 modulus slack 开平方，而是来自 R112 的统一
+zero-free analytic logarithm。令 `tau=q^(N-j)`，则 exact OU phase transport
+为 `vartheta_j(r)=vartheta_bottom(sqrt(tau)r)`。取
+
+`rho=sqrt(e/128)`、`r_*=rho/2`、
+`C_ph=2(3+2sqrt(2))*log(2)/rho^3`，
+
+利用 `|s+t|,|2s+t|<=|y|` 与 `|t|<=sqrt(2)|y|`，在
+`|y|<=r_*tau^(-1/2)` 上有
+
+`|eta_j(s,t)|<=C_ph*tau^(3/2)|y|^3`，
+`|eta_j(s,t)|^2<=C_ph^2*tau^3|y|^6`。
+
+所以粗 phase scale `q^(3N/2)y^3` 已在 genuine full-exact analytic class
+下得到；R107 varying-bottom 例的非 full-exact branch 表明该尺度一般不可仅
+靠 probability、positivity 和 finite backward chain 改善。
+
+### 9.25.3 全局判断与 R114
+
+R113 的意义是把“modulus 是否能推出 phase budget”这个中间问题关闭为：
+有 uniform analytic input 时可以得到 phase budget，但四点 disk 本身仍是
+strict interior cone，不能给 primitive phase annihilation。R107 的
+`kappa6=-6` 与 full-exact d=3 fingerprint `kappa6=-3kappa3^2` 的差异
+说明真正缺口是 full exactness 对 primitive odd phase 的额外约束。
+
+因此下一最小命题是 R114 **Primitive Cubic Shear Limit**：令
+`tau=q^N`，精确计算
+
+`tau^(-3)*(Delta0Delta1-|N|^2-S_G)`
+
+并同步计算 exact angular `tau^3` limit。若 normalized four-point limit
+仍只是旧 cone，则得到明确 four-point no-go；若它强制 primitive coefficient
+`c_N` 消失，则 cubic sector 关闭。两种结果都比继续做未定向的 radial Fock
+展开更接近主命题。
+
+R113 证据边界：cubic shear identity、ellipse geometry、Gaussian Gram
+determinant、显式 constants、OU sixth scaling 与 R107 exactness gap 为
+PROVED / LOCAL-AUDITED；Gaussian-neighborhood full asymptotic expansion 与
+uniform phase estimate 为网页端 ANALYTICALLY PROVED；bare scalar `RK=1`
+到 genuine full-exact identification、primitive annihilation 和最终
+Positive Backward-Tower Exact Zero-Set Rigidity 仍 OPEN。
