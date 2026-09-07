@@ -4145,3 +4145,51 @@ PROVED / ANALYTICALLY PROVED / OBSTRUCTION / OPEN。
 `R118_CONDITIONAL_THIRD_MOMENT_REVERSAL_INTERFACE_PASSED`
 
 `R118_REFLECTION_GAP_SKEW_ENERGY_AUDIT_COMPLETED`
+
+# 2026-09-07 — R119 Universal Sign-Flip Identity 与 Conditional Radial-Score Shell
+
+网页端 R119 在读取 R118 记录后完成了 mixed-reflection 路线收束；connector 仍不可读，
+本轮依据当前对话自包含结论继续。本机新增
+`conditional_radial_score_shell_r119/README.md` 与 `audit_r119.py`。
+
+- 令 `Q=Σ(Xj-Xbar)^2`、`Y=(X1,X2,-X3)`、`Qsharp=Σ(Yj-Ybar)^2`。本机核验
+  `Qsharp=Q+(4/3)X3(X1+X2)`，并在任意 centered iid、六阶矩有限条件下核验
+  `EQsharp=EQ`、`EQsharp^2=EQ^2`、
+  `EQsharp^3-EQ^3=(224/27)(EX^3)^2`。故 exact class 的 reverse third-moment
+  comparison 与 `kappa_3=0` 完全等价，不再作为独立中间引理。
+- 同样核验 Laplace gap
+  `L(λ)-Lsharp(λ)=(112/81)kappa_3^2λ^3+O(λ^4)`；`o(λ^3)` saturation
+  也是原 cubic exclusion 的等价重写。mixed-sign characteristic 的 modulus
+  与 ordinary product逐点相同，因此 modulus-only 路线严格盲于 cubic sign。
+- 定义 `h(q)=E[Xbar|Q=q]`、`nu(dq)=1/2e^{-q/2}dq`，核验 centered 只给
+  `∫h dnu=0`，而 `kappa_3=(3/2)∫qh dnu`；profile `h0=q-2` 核验
+  `∫h0dnu=0` 但 `∫qh0dnu=4`，说明单调/一次变号不足。
+- 对 `rho=(log f)'`、`Sigma_0=Σrho(Xj)`、
+  `Sigma_R=Σ(Xj-Xbar)rho(Xj)`，网页端给出并本机核验代数接口
+  `E[Sigma_R|Q=q]=-q`、
+  `E[Xbar Sigma_R|Q=q]=2q h'(q)-qh(q)`，从而
+  `2qh'(q)=Cov(Xbar,Sigma_R|Q=q)`，以及
+  `kappa_3=(3/2)E[Cov(Xbar,Sigma_R|Q)]`。这是新的 same-factor、score-sensitive、
+  conditional、global-in-q 结构。
+- 条件性小定理：若整个 exact class 上 covariance 具有 reflection-stable 固定
+  符号，则应用于 `f` 与 `check f` 迫使 `h'=0`、`h=0`、`kappa_3=0`；但
+  orientation-dependent `sign h'=sign kappa_3` 不够。
+- R119 判决：核心仍 OPEN；真正缺口从神秘 reverse 矩不等式变成
+  **Conditional Radial-Score Sign / Total-Positivity Lemma**。R120 研究能否由
+  same-factor + exact radial + TP/rearrangement/conditional MLR 得到该 covariance
+  的 reflection-stable 固定符号；若不能，构造 genuine same-factor strict
+  log-concave/TP2 finite-exact obstruction。
+
+本机审计输出：
+
+`R119_UNIVERSAL_SIGN_FLIP_MOMENT_IDENTITY_PASSED`
+
+`R119_LAPLACE_SATURATION_EQUIVALENCE_COEFFICIENT_PASSED`
+
+`R119_PROFILE_ONE_SIGN_CHANGE_ORTHOGONALITY_NO_GO_PASSED`
+
+`R119_CONDITIONAL_RADIAL_SCORE_COVARIANCE_INTERFACE_PASSED`
+
+`R119_REFLECTION_STABLE_SIGN_LOGIC_PASSED`
+
+`R119_CONDITIONAL_RADIAL_SCORE_SHELL_AUDIT_COMPLETED`

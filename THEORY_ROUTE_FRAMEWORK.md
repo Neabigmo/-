@@ -8822,3 +8822,98 @@ R118 最小命题固定为 **Heat-Escort Barycenter Annihilation**，优先寻�
 tilt 的 rearrangement、three-line total positivity 或
 `E[Xbar|Q]` 的 sign/variation-diminishing theorem；不回到 finite Gram/minor、
 tau 高阶或数值路线。
+
+## 9.31 R119：universal sign-flip identity 与 conditional radial-score shell
+
+网页端 R119 对 R118 的 mixed-reflection 路线作了最终收束，并给出
+`conditional_radial_score_shell_r119/README.md` 与 `audit_r119.py`；本机审计通过。
+
+### 9.31.1 reverse third-moment 不是独立桥梁
+
+令 `Q=sum(X_j-Xbar)^2`、`Y=(X_1,X_2,-X_3)`、
+`Qsharp=sum(Y_j-Ybar)^2`。直接有
+
+`Qsharp=Q+(4/3)X_3(X_1+X_2)`。
+
+对任意 centered iid law（仅六阶矩有限）纯矩代数给出
+
+`E Qsharp=EQ`、`E Qsharp^2=EQ^2`、
+`E Qsharp^3-EQ^3=(224/27)(EX^3)^2`。
+
+因此在 exact class 中 `E Qsharp^3<=48` 与 `kappa_3=0` 完全等价；同样，
+`L(lambda)-Lsharp(lambda)=(112/81)kappa_3^2lambda^3+O(lambda^4)`，所以
+Laplace `o(lambda^3)` saturation 也与 cubic annihilation 等价。R119 因而
+排除把 reverse third moment 继续当作更弱的中间引理。
+
+modulus-only mixed-sign characteristic 数据逐点满足
+`|phi(ra_1)phi(ra_2)phi(-ra_3)|=|phi(ra_1)phi(ra_2)phi(ra_3)|`，所以任何只依赖
+modulus、difference law、Schur–Abel modulus 或 radial product magnitude 的路线
+都看不到 cubic sign；ordinary same-factor positivity 的 universal 三阶方向严格
+是 `+kappa_3^2`。reverse 若存在，必须在 all-degree exact radial identity 的
+真正 global 位置使用它。
+
+### 9.31.2 conditional mean profile 与新 score-shell 结构
+
+在 full exact 下令 `h(q)=E[Xbar|Q=q]`、
+`nu(dq)=1/2 exp(-q/2)dq`。centeredness 只给
+`int h dnu=0`，而
+
+`kappa_3=(3/2)int qh(q)dnu`。
+
+这说明缺失的是从 `h` 对 `1` 的正交推出其对 `q` 的第二个正交。profile-level
+单调/一次变号不够：`h_0(q)=q-2` 对 `nu` 均值为零，但
+`int qh_0dnu=4`；这不是 genuine exact counterexample，只是精确的 profile
+obstruction。
+
+令 `rho=(log f)'`、
+`Sigma_0=sum_j rho(X_j)`、
+`Sigma_R=sum_j(X_j-Xbar)rho(X_j)`。在
+`M=sqrt(3)Xbar`、`|Z|^2=Q` 的 mean-residual coordinates 中，score integration
+by parts 给
+
+`E[psi(Q)Sigma_0]=0`、`E[Xbar Sigma_0|Q]=-1`，
+
+而 residual radial divergence 加 exact `Q~chi^2_2` 的 Stein identity 给
+
+`E[Sigma_R|Q=q]=-q`。
+
+对 `Xbar psi(Q)` 再作同样分部，得到核心新接口
+
+`E[Xbar Sigma_R|Q=q]=2q h'(q)-qh(q)`，
+
+即
+
+`boxed{2q h'(q)=Cov(Xbar,Sigma_R|Q=q).}`
+
+并且
+
+`kappa_3=(3/2)E[Cov(Xbar,Sigma_R|Q)]`。
+
+这是 genuinely same-factor、score-sensitive、conditional、global-in-q 的
+结构，已把原问题精确转为 conditional radial-score covariance 的符号问题。
+
+### 9.31.3 reflection-stable sign lemma、判决与 R120
+
+若能对整个 exact class 证明
+
+`Cov(Xbar,Sigma_R|Q=q)>=0` a.e. `q`
+
+或 universally `<=0`，则应用于 reflected law `check f(x)=f(-x)`；`Q` 不变、
+`h_check=-h`、`h'_check=-h'`，两侧固定符号迫使 `h'=0`，centered 再给 `h=0`
+与 `kappa_3=0`。这形成精确的 **Reflection-Stable Radial-Score Sign Lemma**。
+
+但若只能得到 `sign h'=sign kappa_3` 这种 orientation-dependent 单调性，reflection
+后完全相容，不能产生矛盾。故
+
+PROVED / LOCAL-AUDITED：universal sign-flip 三阶恒等式、Laplace 系数、profile
+obstruction、score-shell covariance 代数接口与 reflection sign logic。
+ANALYTICALLY PROVED：score integration by parts、conditional disintegration 与
+exact radial Stein step。CONDITIONAL：reflection-stable covariance sign lemma。
+FORMAL：R104 nonzero odd all-degree branch。OPEN：`kappa_3(f)=0`。
+
+R120 最小命题固定为 **Conditional Radial-Score Sign / Total-Positivity Lemma**：
+在 strict positive analytic genuine exact three-line class 中，能否由 same-factor
+product、Gaussian radial marginal 与 TP/rearrangement/conditional MLR 推出
+`Cov(Xbar,Sigma_R|Q=q)` 的 reflection-stable 固定符号？若不能，构造 genuine
+same-factor、最好 strict log-concave/TP2 的有限 exact obstruction，证明标准 TP2
+只能产生 orientation-dependent monotonicity。
