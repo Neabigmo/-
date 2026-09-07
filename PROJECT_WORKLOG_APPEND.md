@@ -3556,3 +3556,42 @@ computation was used.
   genuine full-exact class 在 analytic/MGF 假设下 PROVED；裸 `RK=1` 转移仍
   CONDITIONAL。asymmetric law exclusion、primitive closure、even sector 和
   final positive backward-tower rigidity 继续 OPEN。
+
+# 2026-09-07 — R103 asymmetric genuine exact-law exclusion: all-degree tax and obstruction
+
+- 网页端 R103 沿固定 `z` 的 Herglotz/Toeplitz positivity、
+  `<exp(mathscr K)>=1` 与 iid same-factor cubic factorization 三者共同推进。
+  本机新增 `asymmetric_exact_exclusion_r103/README.md`、`audit_r103.py`。
+- R103-A/B：对 `w_z=exp(mathscr K)`、`c_r=<exp(-3irtheta)w_z>`、
+  `R=<mathscr K>`，exact Jensen/Szegő predictor 给出
+  `exp(R)<=1-c_1^2`，并以 `b=c_2-c_1^2` 给出
+  `exp(R)<=1-c_1^2-b^2`（小实 `z`）。Poisson kernel 取一阶等号，故这些
+  只是 sharp 的 radial compensation bound，不能单独排除 asymmetry。
+- R103-C：若 `d` 是首个非零 odd cumulant，same-factor exactness 清空
+  `4<=m<2d` 的 even cumulants，并强制
+  `kappa_(2d)=-(2d)!/(2(d!)^2)*<p_d^2>/<p_(2d)>*kappa_d^2<0`。
+  对 `q_r=[z^d]Q_r` 有全角向能量恒等式
+  `-[z^(2d)]R=sum_(r:3r<=d,r odd)|q_r|^2`；`T_d>1` 从 `d>=9` 开始。
+- 对 `d=3,5,7`，第二 Herglotz predictor 仍产生
+  `[z^(2d)]Q_2=-eta_d q_1^2`，`eta_d=1/20,5/28,7/24`。这补上了仅用
+  `P_3K` 或 `c_1` 看不到的 higher-charge tax。
+- 明确 non-genuine 障碍：`h_0=sin(x)-(exp(3/2)/2)sin(2x)`、
+  `f_theta=1+2epsilon*h_0*cos(3theta)` 是真实 positive centered
+  variance-one D3/reflection family，具有 Gaussian barycenter、完整
+  Herglotz cone 与 `<exp(mathscr K)>=1`，但 degree-6 的 `Q_2/R` 比为 `1/2`，
+  genuine same-factor fingerprint 必须为 `1/20`，因而六阶精确排除。
+  这是 nonfactorization obstruction，不是 genuine counterexample。
+- formal same-factor jet `kappa_3=epsilon,kappa_6=-3epsilon^2` 在六阶仍可
+  满足 exact barycenter identity，说明有限 cumulant order 与有限 positivity
+  minor 原则上不足以完成 exclusion。真正缺口是 all-degree
+  Schur/Herglotz coherence 与 one-body probability realization。
+- 审计通过：`R103_PREDICTOR_ALGEBRA_PASSED`、
+  `R103_FIRST_ODD_ALL_CHARGE_ENERGY_PASSED`、
+  `R103_HIGHER_CHARGE_TAX_AND_ETA_PASSED`、
+  `R103_EXPLICIT_NONFACTORIZATION_OBSTRUCTION_PASSED`、
+  `R103_FORMAL_SAME_FACTOR_JET_THROUGH_DEGREE6_PASSED`、
+  `R103_ASYMMETRIC_EXCLUSION_AUDIT_COMPLETED`；R101/R102 regression 与
+  `git diff --check` 均通过。
+- 证据边界：R103 仍未证明 asymmetric genuine full-exact law 不存在；
+  `RK=1` 到 genuine full-exact identification 仍 CONDITIONAL。下一轮目标为
+  infinite Schur-cumulant cascade，不再增加孤立低阶 minors。

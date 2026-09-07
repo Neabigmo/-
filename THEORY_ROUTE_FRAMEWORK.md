@@ -7450,3 +7450,43 @@ zero-set bridge 对 genuine full-exact class 为 PROVED under the stated
 analytic/MGF hypotheses，对 bare scalar `RK=1` 仍 CONDITIONAL。asymmetric
 genuine exact law exclusion、primitive uniform closure、symmetric even sector
 和最终 Positive Backward-Tower Exact Zero-Set Rigidity 仍 OPEN。
+
+### 9.15 R103：asymmetric genuine exact-law exclusion 的全阶推进与障碍
+
+R103 沿三条结构同时推进：固定实 `z` 的 Herglotz/Toeplitz positivity、
+`<exp(mathscr K)>=1`、以及 iid same-factor cubic factorization。网页端给出并由
+本机 `asymmetric_exact_exclusion_r103/audit_r103.py` exact audit 的新结果：
+
+- 令 `w_z=exp(mathscr K)`、`c_r(z)=<exp(-3*i*r*theta)w_z>`、
+  `R=<mathscr K>`。一阶 Szegő predictor 给出 sharp bound
+  `exp(R)<=1-c_1(z)^2`；二阶 predictor、令 `b=c_2-c_1^2`，给出
+  `exp(R)<=1-c_1^2-b^2`（充分小的实 `z`）。Poisson kernel 取等，故这些
+  one-sided compensation inequalities 单独不能排除 asymmetry。
+- 若 `d` 是首个非零 odd cumulant，same-factor exactness 强制
+  `kappa_m=0`（`4<=m<2d` 且 `m` even），并强制
+  `kappa_(2d)=-(2d)!/(2(d!)^2)*<p_d^2>/<p_(2d)>*kappa_d^2<0`。
+  若 `q_r=[z^d]Q_r`，则有全角向能量恒等式
+  `-[z^(2d)]R=sum_(r:3r<=d,r odd)|q_r|^2`。其相对 `P_3K` 首模的
+  tax `T_d>=1`，且 `T_d>1` 对所有 `d>=9`。
+- 对危险的 `d=3,5,7`，第二预测器仍被 same-factor 结构强制产生非零
+  channel：`[z^(2d)]Q_2=-eta_d q_1^2`，其中
+  `eta_d=binom(2d,d-3)/binom(2d,d)`，分别为 `1/20,5/28,7/24`。
+
+R103 同时构造了明确的 non-genuine measure-level obstruction：
+`h_0(x)=sin(x)-(exp(3/2)/2)sin(2x)`、
+`f_theta=1+2*epsilon*h_0(x)cos(3theta)`（`epsilon` 足够小）。该族真实、
+positive、centered、variance-one、D3/reflection-covariant，有 Gaussian
+barycenter、完整 pointwise Herglotz cone 和 `<exp(mathscr K)>=1`，但其
+degree-6 log-charge 比为 `1/2`，而 genuine iid same-factor law 必须为
+`Lambda_(6,2)/<p_6>=(1/72)/(5/18)=1/20`，故在六阶被精确排除。它不是
+genuine counterexample，而是说明前两层 probability cone 不能替代
+same-factor all-degree coherence。相反，formal same-factor jet
+`kappa_3=epsilon, kappa_6=-3*epsilon^2` 在六阶仍可满足 barycenter identity，
+所以有限 cumulant/finite-minor 方法原则上不足以关闭问题。
+
+因此当前战略状态进一步清晰：R103 已把“缺口”压缩为
+`same-factor factorization + all-degree Schur/Herglotz coherence + one-body
+probability realization` 的无限维兼容性问题；但
+`genuine => P_3K=0`、primitive uniform closure、symmetric even sector 和
+最终 Positive Backward-Tower Exact Zero-Set Rigidity 仍 **OPEN**。下一轮
+不再增加低阶 moment minor，转攻 infinite Schur-cumulant cascade。
