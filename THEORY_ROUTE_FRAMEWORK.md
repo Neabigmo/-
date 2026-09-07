@@ -8637,3 +8637,97 @@ convolution 是否必然 annihilate weighted first harmonic。R117 最小命题�
 对严格正 analytic `f` 的该 convolution，在 Gaussian circular radialization 下证明
 `int r^3u_1(r)r exp(-r^2/2)dr=0`；优先研究 spherical-harmonic/total-positivity
 或正核 `I_3(zr)`，不回到有限阶数值路线。
+
+## 9.29 R117：Gaussian radial exactness 的 cubic heat-flow 等价
+
+网页端 R117 把二维 angular-mode 目标进一步压到一维热流，并形成
+`heat_escort_barycenter_r117/README.md` 与 `audit_r117.py`；本机审计通过。
+取 centered variance-one density `f`、`u_t=P_t f` 与
+`Q=sum_j(X_j-Xbar)^2`，Gaussian completion 给出
+
+`int (P_t f)^3 dx = (1/(2*pi*t*sqrt(3))) E exp(-Q/(2t))`。
+
+因而
+
+`Q~chi^2_2 <=> ||P_t f||_3^3=1/(2*pi*sqrt(3)*(1+t))` 对所有 `t>0`。
+
+这是 genuine global 的双向 Laplace 等价，不是 finite jet。
+
+### 9.29.1 heat curvature 与 strict-interior 再确认
+
+令 `A=int u_t^3`、`I=int u_t(u_t')^2`、`J=int u_t(u_t'')^2`。热方程与分部
+积分给 `A'=-3I`、`I'=-J`；exact curve `A=C/(1+t)`、
+`C=1/(2*pi*sqrt(3))` 给
+
+`I=C/(3(1+t)^2)`、`J=2C/(3(1+t)^3)`、`A J=6I^2`。
+
+一般正密度仅有 `A J>=4I^2`，故 exact value `6` 仍在基础 positivity cone
+内部；zeroth cubic overlap、Cauchy、Fisher 或简单 rearrangement equality
+不能直接产生 Gaussian rigidity。
+
+### 9.29.2 cubic heat-escort barycenter 提取器
+
+定义 `A_t(lambda)=int exp(lambda y)u_t(y)^3dy`、
+`B(t)=int y(P_t f(y))^3dy`。精确 completion 给
+
+`A_t(lambda)=exp(lambda^2t/6)/(2*pi*t*sqrt(3))`
+` * E[exp(lambda Xbar)exp(-Q/(2t))]`，
+
+从而
+
+`B(t)=1/(2*pi*t*sqrt(3))E[Xbar exp(-Q/(2t))]`。
+
+由于 `E[Xbar Q]=2*kappa_3(f)/3`，
+
+`B(t)=-kappa_3(f)/(6*pi*sqrt(3))*t^(-2)+O(t^(-3))`。
+
+对 cubic escort law `dnu_t=(P_t f)^3dx/int(P_t f)^3dx`，等价地
+
+`E_nu_t[Y]=-kappa_3(f)/(3t)+O(t^(-2))`，
+
+所以
+
+`kappa_3(f)=-3 lim_(t->infty)t E_nu_t[Y]`。
+
+R117 的新小里程碑是：cubic annihilation 等价于证明这个 escort barycenter
+比自然的 `t^(-1)` 尺度多衰减一阶。
+
+### 9.29.3 conditional-characteristic 双表示与精确缺口
+
+令 `M=(X_1+X_2+X_3)/sqrt(3)`、`R=sqrt(Q)`，定义
+
+`G(xi,rho)=avg_theta prod_j phi(xi/sqrt(3)+rho a_j(theta))`
+`=E[exp(i xi M)J_0(rho R)]`。
+
+径向 exactness 只给 `G(0,rho)=exp(-rho^2/2)`；而
+
+`D(rho)=partial_xi G(0,rho)=iE[MJ_0(rho R)]`
+`=-i*kappa_3(f)rho^2/(2sqrt(3))+O(rho^4)`。
+
+定义 signed measure `eta(dq)=E[Xbar;Q in dq]`，则 `B(t)` 是 eta 的 Laplace
+变换，`D(rho)=i*sqrt(3)int J_0(rho sqrt(q))eta(dq)` 是其 Hankel 变换；
+目标只需 `int q eta(dq)=2*kappa_3/3=0`。因此缺口被精确改写为：same-factor
+three-line structure 对 `E[Xbar|Q=q]` 有什么 global coherence？
+
+### 9.29.4 I3 / rearrangement 路线的边界、判决与 R118
+
+非因子化密度
+`p_epsilon=(2*pi)^(-1)e^(-r^2/2)[1+2epsilon r^3e^(-r^2)cos(3theta)]`
+在小 `epsilon` 下严格正、Gaussian radial、且 `u_1=epsilon r^3e^(-r^2)`，
+其 weighted cubic moment 为 `(16/27)epsilon`。所以 `I_3` 正性、total
+positivity、`D_3` 与 radial positivity 单独不足；同因子 three-line structure
+仍必须真正使用。只控制 `int(P_t f)^3` 的 rearrangement 也碰不到
+`int x(P_t f)^3` 的 escort center drift。
+
+PROVED / LOCAL-AUDITED：Gaussian overlap/Laplace equivalence、heat derivatives、
+tilted completion、`E[Xbar Q]` 与 cubic leading coefficients、非因子化
+`I_3` obstruction integral。ANALYTICALLY PROVED：Laplace/Hankel injectivity、
+global regularity 与 conditional representations。OPEN：
+
+`same-factor three-line convolution + Gaussian radialization`
+`=> int x(P_t f)^3dx=o(t^(-2)) <=> kappa_3(f)=0`。
+
+R118 最小命题固定为 **Heat-Escort Barycenter Annihilation**，优先寻找带线性
+tilt 的 rearrangement、three-line total positivity 或
+`E[Xbar|Q]` 的 sign/variation-diminishing theorem；不回到 finite Gram/minor、
+tau 高阶或数值路线。

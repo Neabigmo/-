@@ -4041,3 +4041,59 @@ computation was used.
 `R116_INFINITE_DIVISIBILITY_CONDITIONAL_GAUSSIAN_STEP_PASSED`
 
 `R116_SINGLE_LAW_GAUSSIAN_RADIAL_CUBIC_AUDIT_COMPLETED`
+
+# 2026-09-07 — R117 Cubic Heat-Norm Equivalence 与 Heat-Escort Barycenter
+
+网页端 R117 在读取 R116 最新框架后完成了一维 heat-flow 压缩；connector 仍不可读，
+因此依据当前对话自包含结论继续。本机新增
+`heat_escort_barycenter_r117/README.md` 与 `audit_r117.py`，并严格区分
+PROVED / ANALYTICALLY PROVED / OBSTRUCTION / OPEN。
+
+- 令 `u_t=P_t f`、`Q=sum_j(X_j-Xbar)^2`。Gaussian completion 给出
+  `int(P_t f)^3=(2*pi*t*sqrt(3))^(-1)E exp(-Q/(2t))`，从而
+  `Q~chi^2_2` 当且仅当 `||P_t f||_3^3=1/(2*pi*sqrt(3)*(1+t))` 对所有 `t>0`。
+  这是 genuine global 的双向 Laplace 等价。
+- 令 `A=int u_t^3`、`I=int u_t(u_t')^2`、`J=int u_t(u_t'')^2`，exact branch
+  满足 `A'=-3I`、`I'=-J`、`AJ=6I^2`；一般正密度只给 `AJ>=4I^2`，故 Gaussian
+  exact value 仍在 strict interior，基础 positivity/rearrangement 不能直接
+  提供 equality-case rigidity。
+- 定义 `B(t)=int x(P_t f)^3dx`。tilted cubic completion 给
+  `B(t)=(2*pi*t*sqrt(3))^(-1)E[Xbar exp(-Q/(2t))]`，且
+  `E[Xbar Q]=2*kappa_3/3`，因此
+  `B(t)=-kappa_3/(6*pi*sqrt(3))*t^(-2)+O(t^(-3))`。
+  对 cubic escort law，`E_nu_t[X]=-kappa_3/(3t)+O(t^(-2))`，故
+  `kappa_3=-3 lim_{t->infty}t E_nu_t[X]`。这是本轮最有价值的一维全局提取器。
+- conditional-characteristic 版本令 `M=(sum Xj)/sqrt(3)`、`R=sqrt(Q)`：
+  `G(xi,rho)=avg prod_j phi(xi/sqrt(3)+rho a_j)=E[e^{i xi M}J0(rho R)]`，
+  `D=partial_xi G(0,rho)=-i*kappa_3*rho^2/(2sqrt(3))+O(rho^4)`。
+  `B` 与 `D` 是同一个 signed conditional-mean measure
+  `eta(dq)=E[Xbar;Q in dq]` 的 Laplace/Hankel 两种 transform；目标只需
+  `int q eta(dq)=0`。
+- 再次用精确非因子化 obstruction：
+  `p_epsilon=(2*pi)^(-1)e^(-r^2/2)[1+2epsilon r^3e^(-r^2)cos(3theta)]`，其
+  `u_1=epsilon r^3e^(-r^2)`，weighted moment为 `(16/27)epsilon`，因此
+  `I_3` positivity/total positivity、`D_3` 和 radial positivity 单独不足。
+- R117 判决：核心仍 OPEN，但已从二维 angular phase 进一步压到
+  `int x(P_t f)^3=o(t^(-2))` 的 Heat-Escort Barycenter Annihilation；这与
+  `kappa_3=0` 等价。只优化 zeroth overlap 的 rearrangement 路线无法触及 escort
+  center drift。
+- R118 最小命题：在 same-factor three-line convolution + Gaussian
+  radialization 下，证明或反驳 `int x(P_t f)^3dx=o(t^(-2))`；优先攻带线性
+  tilt 的 rearrangement、three-line total positivity 或 `E[Xbar|Q]` 的
+  sign/variation-diminishing theorem，不回到 finite Gram/minor、tau 高阶或数值。
+
+本机审计输出：
+
+`R117_GAUSSIAN_OVERLAP_AND_LAPLACE_EQUIVALENCE_PASSED`
+
+`R117_HEAT_CURVATURE_AND_STRICT_INTERIOR_PASSED`
+
+`R117_TILTED_COMPLETION_AND_HEAT_ESCORT_EXTRACTOR_PASSED`
+
+`R117_SAMPLE_MEAN_VARIANCE_CUBIC_COEFFICIENTS_PASSED`
+
+`R117_CONDITIONAL_CHARACTERISTIC_LEADING_TERM_PASSED`
+
+`R117_I3_POSITIVE_NONFACTORIZED_OBSTRUCTION_PASSED`
+
+`R117_HEAT_ESCORT_BARYCENTER_AUDIT_COMPLETED`
