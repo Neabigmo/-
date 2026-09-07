@@ -3699,3 +3699,36 @@ computation was used.
   breakdown、asymmetric exact-law exclusion、full phase-lift 与 backward-tower
   rigidity 仍 **OPEN**。下一轮定为 R107 `Difference–Bochner Breakdown Lemma`，
   不重开 R99–R106，不做数值、SDP、optimizer 或 remote computation。
+
+# 2026-09-07 — R107 三点 Bochner genuine obstruction 与四点升级
+
+- 网页端判定 R106 的 `P_3K!=0 =>` 三点 Difference–Bochner breakdown 没有独立
+  增益：在 genuine full-exact 类内，三点条件是所有 genuine law 的必要条件，
+  因而 breakdown 与 asymmetric exact-law exclusion 同层级。
+- 构造 exact-fourth homometric Bernoulli-convolution pair。取 `p(1-p)=1/6`、
+  `a=sqrt(3)`、独立 Bernoulli `B_1,B_2`，令
+  `X_sym=a(B_1-B_2)`、`X_asym=a(B_1+B_2-2p)`。二者 centered、variance-one、
+  `m4=3`，但 `m3=0` 与 `m3=1`，`kappa6=-6`，且
+  `M_sym(r)M_sym(-r)=M_asym(r)M_asym(-r)`。所以相同 `psi=|phi|^2` 与
+  `difference-law` 不能识别 symmetry；它不是 full-exact counterexample，因为
+  exact degree-six fingerprint 要求 `kappa6=-3m3^2`。
+- 有限 OU/Gaussian smoothing `X_lambda=sqrt(lambda)X+sqrt(1-lambda)G` 保持
+  同 `psi`、`m4=3` 与非对称 charge，给出 `m3=lambda^(3/2)`、
+  `kappa6=-6lambda^3`。网页端以 `lambda=0` 的 Bessel/MGF 逐项矩比较、原点
+  `((1-lambda^3)/216)y^6` 正首项、紧区间连续性和高斯尾界解析证明：充分小
+  `lambda>0` 时三点 Difference–Bochner inequality 对所有实 `y` 仍成立。
+- 因此三点 obstruction 已严格钉死；最小自然升级是四点 multiplicative Gram
+  `Gamma_4`，即对 `U-u,V-v,UV-w` 的协方差 PSD，新增 companion frequency
+  `w=phi((a1-a2)y)`，及其 Schur complement `q^*C^(-1)q<=1-|w|^2`。
+  四点足够完成 rigidity 仍 **OPEN**，R108 目标是寻找 angular averaging 后
+  不能塌缩为 `psi` 的 signed phase functional。
+- 本机新增 `bochner_breakdown_obstruction_r107/README.md` 与 `audit_r107.py`。
+  审计通过：`R107_EXACT_FOURTH_HOMOMETRIC_PAIR_PASSED`、
+  `R107_OU_CUMULANT_SCALING_AND_DEGREE6_OBSTRUCTION_PASSED`、
+  `R107_THREE_POINT_TAYLOR_SLACK_PASSED`、
+  `R107_FOUR_POINT_MULTIPLICATIVE_GRAM_SHAPE_PASSED`、
+  `R107_BOCHNER_BREAKDOWN_OBSTRUCTION_AUDIT_COMPLETED`。
+- 证据边界：上述有限结构为 **PROVED / LOCAL-AUDITED**；充分小平滑参数的
+  全局三点不等式为网页端解析证明；它不是主问题反例。asymmetric exact-law
+  exclusion、四点 phase rigidity、`RK=1` 识别与最终 backward-tower theorem
+  仍 **OPEN**。

@@ -7740,3 +7740,82 @@ R107 最小 OPEN 为 `P_3K!=0` 是否必导致某个有限 `y!=0` 上的严格�
 `3<psi(sqrt(2/3)y cos(theta))> > 1+2exp(-y^2/2)`。若不能，应进入 higher-point
 Bochner constraints；不得重开 R99–R106，也不得使用 numerical sweep、SDP、
 optimizer 或 remote computation。
+
+## 9.19 R107：三点 Bochner breakdown 的 genuine obstruction 与四点升级
+
+网页端 R107 对 R106 的 Difference–Bochner Breakdown Lemma 给出否定性的结构
+判决：该 breakdown 在 genuine full-exact 类内与排除 asymmetric exact law 等价，
+不可能从一个本来对所有 genuine law 都成立的必要条件独立推出。更强的是，
+存在一个 genuine、同 difference law、同 `m_4=3`、但含 nonzero odd charge 的
+obstruction，使三点条件本身无法识别 symmetry。
+
+### 9.19.1 exact-fourth homometric Bernoulli-convolution pair
+
+取 `p(1-p)=1/6`、`a=sqrt(3)`，令 `B_1,B_2` 为独立 Bernoulli(p)，定义
+
+`X_sym=a(B_1-B_2)`、`X_asym=a(B_1+B_2-2p)`。
+
+二者均 centered、variance-one、`m_4=3`，但 `m_3` 分别为 `0` 与 `1`，且
+两者的第六累积量都是 `kappa_6=-6`。若 `m(s)=1-p+p exp(s)`，则
+
+`M_sym(r)=m(ar)m(-ar)`、
+`M_asym(r)=exp(-2par)m(ar)^2`，
+
+所以 `M_sym(r)M_sym(-r)=M_asym(r)M_asym(-r)`。这给出完全相同的
+`psi=|phi|^2`/difference-law 数据，但对称性不同。它不是 full-exact counterexample：
+degree-six same-factor fingerprint 要求 `kappa_6=-3m_3^2`，而非对称 law
+给出 `-6`。
+
+对 `X_lambda=sqrt(lambda)X+sqrt(1-lambda)G` 作有限 OU/Gaussian smoothing，
+二者仍同 `psi` 且 `m_4=3`；非对称分支有 `m_3=lambda^(3/2)`、
+`kappa_6=-6lambda^3`，保持 `P_3K!=0`，但仍不满足 degree-six exactness。
+
+### 9.19.2 三点条件对充分强平滑全局成立
+
+令 `B_lambda(y)=1+2exp(-y^2/2)-3<psi_lambda(sqrt(2/3)y cos(theta))>`。
+由 `psi_lambda(t)=psi_0(sqrt(lambda)t)exp(-(1-lambda)t^2)`，在 `lambda=0`
+时令 `x=y^2/3`，有
+
+`B_0(y)=1+2exp(-3x/2)-3exp(-x)I_0(x)`。
+
+等价地比较 `cos(theta)` 与离散律 `V in {1,-1/2}`（概率 `1/3,2/3`）的
+MGF。它们的 0、1、2 阶矩相同；奇数阶 `n>=3` 中 `E V^n>0=E cos(theta)^n`，
+偶数阶 `n>=3` 中 `E V^n>1/3` 而 `E cos(theta)^n<=5/16<1/3`。逐项比较给
+`B_0(y)>0` 对 `y!=0`。原点附近平滑族的首项为
+
+`B_lambda(y)=((1-lambda^3)/216)y^6+O(y^8)`；
+
+结合紧区间连续性和远端高斯尾界，得到某个 `lambda_0>0`，使所有
+`0<lambda<lambda_0` 时 `B_lambda(y)>0` 对所有实 `y!=0` 成立。
+
+因此 genuine nonzero-charge、exact-fourth 的 law 可以全局满足 R106 三点
+Difference–Bochner inequality；三点 difference/autocorrelation 数据不能完成
+phase rigidity。这是对 R107 原命题的 genuine obstruction，而不是主问题反例。
+
+### 9.19.3 最小新的对象是四点 multiplicative Gram
+
+三点层被上述 obstruction 钉死后，取 `x=a_1y`、`z=-a_2y`、
+`U=exp(ixX)`、`V=exp(izX)`，对 `U-u,V-v,UV-w` 的协方差矩阵
+
+`Gamma_4 = [[1-|u|^2, c-u*conj(v), conj(v)-u*conj(w)],
+            [conj(c)-conj(u)*v, 1-|v|^2, conj(u)-v*conj(w)],
+            [v-conj(u)*w, u-conj(v)*w, 1-|w|^2]] >= 0`,
+
+其中 `u=phi(x)`、`v=phi(z)`、`w=phi(x+z)`、`c=phi(x-z)`。其上方 `2x2`
+block 是 R106 三点约束，第三行/列首次引入 companion frequency
+`w=phi((a_1-a_2)y)`。若 `C>0`，等价 Schur complement 为
+`q^*C^(-1)q<=1-|w|^2`，其中
+`q=(conj(v)-u*conj(w),conj(u)-v*conj(w))^T`。
+
+四点足够完成 rigidity 仍 **OPEN**，但它是当前最小合理的 phase-coherence
+对象。R108 必须把该矩阵与 same-factor exact identity 做 angular averaging，
+寻找不能塌缩为 `psi` 的 signed functional；若四点仍完全塌缩，才进入五点层。
+
+### 9.19.4 证据边界
+
+本机新增 `bochner_breakdown_obstruction_r107/README.md` 与 `audit_r107.py`。
+有限概率/矩/同自相关、OU 累积量缩放、三点 `y^6` 系数和四点 Schur 结构均
+**PROVED / LOCAL-AUDITED**。充分小 `lambda` 的全局三点不等式为网页端给出的
+解析连续性+尾界证明，记录为 **ANALYTICALLY PROVED**，但不冒充 full-exact
+反例。asymmetric genuine exact-law exclusion、四点 phase rigidity、bare `RK=1`
+识别和最终 positive backward-tower theorem 继续 **OPEN**。
