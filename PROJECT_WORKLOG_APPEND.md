@@ -4596,9 +4596,9 @@ flat extension 与 singular non-flat ghost 方向。
 `y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+1280`。
 
 新增 `singular_extension_compatibility_r128/README.md` 与 `audit_r128.py`；审计
-通过 `R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`。进一步利用 R127 等号条件的唯一性，
-将其 flat extremizer 代入 `R_5` 后得到 `y_10=N(u_4)/(u_4-2)<0`；Sturm 给出
-`1.11<u_4<1.12`，有理区间估计给 `N(u_4)>4500`，与 `H_5>=0` 的 `y_10>=0`
-矛盾。结合 finite-row caps 的紧性，严格推出
-`boxed{GammaHat_5<GammaHat_4=c_4}`，从而 `Gamma_5<c_4`。这是一条真正的有限层
-半径严格下降定理，不是数值优化结果；尚未给出 `GammaHat_5` 精确值或全阶衰减率。
+通过 `R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`。复核时发现临时展开误用了
+`sum pair differences / 2`，与项目一直使用的 `Q=sum pair differences / 3`
+不一致；因此此前关于 `y_10<0` 和 `GammaHat_5<GammaHat_4` 的结论全部撤回并修正。
+正确的 `R_5` 消元常数为 `9720`，前三行与 R4 下化为
+`y_10=3(17a^2-280ac+20bc+470c^2+315)`。当前保留的严格结果是奇异扩展兼容性
+引理与正确 `R_5` 接口；`GammaHat_5` 和全阶衰减仍 OPEN。

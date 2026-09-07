@@ -9568,19 +9568,14 @@ R128 将 R126/R127 的有限层机制抽象为可复用引理。若
 因此 `R_5=0` 等价于
 `y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+1280`。
 
-进一步，R127 的等号条件唯一确定 `a=a_+(c_4)` 与 Schur 补零化的 `b`。将其
-代入 `R_5` 消元，令 `u=c_4^2`、`s=sqrt(6(2-u)(1+u))`，得到
-`y_10=N(u)/(u-2)`，其中
-`N(u)=-666u^3+1044u^2-6307u+13766-216sqrt(u)s(2u+1)`。
-Sturm 根隔离给 `1.11<u<1.12`；在此区间内第一部分大于 `7000`、根式项小于
-`2500`，所以 `N(u)>0`，而 `u-2<0`，故 `y_10<0`。这与 `H_5>=0` 的对角
-条件矛盾。利用 finite-row moment caps 的紧性，若 `GammaHat_5=GammaHat_4`
-则必有此等号候选，因而得到严格有限层下降
-`boxed{GammaHat_5<GammaHat_4=c_4}`，并且 `Gamma_5<=GammaHat_5<c_4`。
+注意归一化必须与 R124–R127 一致：`Q=(1/3)sum_{i<j}(X_i-X_j)^2`。
+此前曾用 `sum_{i<j}(X_i-X_j)^2/2` 做了临时展开，产生错误的 `R_5` 常数和
+虚假的 `GammaHat_5` 严格下降；该计算已撤回。正确消元为
+`y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+9720`，
+进一步在前三行、R4 下为 `y_10=3(17a^2-280ac+20bc+470c^2+315)`。
 
-这给出 R128 的第一条严格有限层定理，而不是 `Gamma_5` 的精确值：下一步仍需
-先解一般奇异核兼容性，再用 `R_5` 与广义 Schur 缺陷判定 flat genuine extremizer
-或 singular ghost；不能把 PSD 当作有限截断可表示性。
+因此 R128 当前严格结论是通用奇异核兼容性与正确 `R_5` 接口；`GammaHat_5`
+尚未计算，不能从错误归一化推断其与 `GammaHat_4` 的严格关系。下一步应在此
+校正后的接口上完成 `M=5` 的 singular/flat split。
 本机新增 `singular_extension_compatibility_r128/` 并通过
-`R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`，包含 `R127` 根区间和 `y_10<0` 的
-有理区间证书。`Gamma_M->0` 仍 OPEN。
+`R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`。`Gamma_M->0` 仍 OPEN。
