@@ -8917,3 +8917,97 @@ product、Gaussian radial marginal 与 TP/rearrangement/conditional MLR 推出
 `Cov(Xbar,Sigma_R|Q=q)` 的 reflection-stable 固定符号？若不能，构造 genuine
 same-factor、最好 strict log-concave/TP2 的有限 exact obstruction，证明标准 TP2
 只能产生 orientation-dependent monotonicity。
+
+## 9.32 R120：shell TP 取向与 angular-mixture coherence 缺口
+
+网页端 R120 进一步审计了 R119 的 score-shell 目标，并给出
+`angular_mixture_coherence_r120/README.md` 与 `audit_r120.py`；本机审计通过。
+
+### 9.32.1 shell kernel 的 exact MLR 形式
+
+令 `a_j(theta)=sqrt(2/3)cos(theta+2*pi*(j-1)/3)`，则
+`sum a_j=0`、`sum a_j^2=1`。定义
+
+`F_theta(q,m)=prod_j f(m+sqrt(q)a_j(theta))`、
+`K_f(q,m)=avg_theta F_theta(q,m)`。
+
+除固定 polar Jacobian 外，`K_f` 是 `(Q,Xbar)` 联合 shell density。exact radial
+marginal 只固定 `A(q)=int K_f(q,m)dm=C_0e^{-q/2}`。若
+`rho=(log f)'`、`Sigma_R=sum_j(X_j-Xbar)rho(X_j)`，则
+
+`partial_q log F_theta=Sigma_R/(2q)`，
+`partial_q log(K_f/A)=E[Sigma_R|q,m]/(2q)+1/2`，
+
+故
+
+`h'(q)=Cov(Xbar,Sigma_R|Q=q)/(2q)`。
+
+这将固定 covariance sign 精确识别为 shell kernel 的 universal MLR orientation。
+
+### 9.32.2 TP2/RR2 与 reflection
+
+`K_f TP2` 给 `h'>=0`、`Cov>=0`；`K_f RR2` 给相反方向。反射满足
+
+`K_check f(q,m)=K_f(q,-m)`、`h_check=-h_f`、`C_check=-C_f`，并精确交换
+`TP2 <-> RR2`。因此“每个 f 的方向依赖 skew”只能是 orientation detector，
+不可能 annihilate skew。
+
+若额外能证明整个 exact class 的 shell kernel 统一 TP2（或统一 RR2），则对 `f`
+及其反射同时应用，得到 shell kernel 同时 TP2/RR2；严格正性使所有 `2x2`
+minor 为零，因而 `K_f=A(q)B(m)`、`Xbar` 与 `Q` 独立，最终 `kappa_3=0`。
+这是 **Reflection-TP Rigidity**，但目前只有 CONDITIONAL 地位。
+
+### 9.32.3 strict log-concavity 与 anglewise TP 的边界
+
+逐角交叉曲率为
+
+`partial_m partial_q log F_theta`
+`=(1/(2sqrt(q)))sum_j a_j rho'(m+sqrt(q)a_j)`。
+
+strict log-concavity 只给 `rho'<0`，不固定该和的符号；若额外 `rho'` 非减，
+Chebyshev 可给 anglewise TP2，若 `rho'` 非增则给 anglewise RR2，但这些条件
+自身仍会在 reflection 下翻转。
+
+更重要的是，anglewise TP 即便成立，正的 angular mixture 也不自动 TP2。显式
+正 rank-one 矩阵
+
+`A=[[1,10],[10,100]]`、`B=[[10,1000],[1,100]]`
+
+各自 determinant 为零，但 `det(A+B)=-8910`。所以真正缺的是跨角的 joint
+angular coherence/MTP，而非逐角 MLR。
+
+### 9.32.4 within/between 精确分解与新的 obstruction
+
+令 `A_theta=int F_theta dm`、`w_q(theta) proportional A_theta(q)`、
+`m_theta=E[Xbar|q,theta]`、`r_theta=E[Sigma_R|q,theta]`。则
+
+`2q h'(q)=E_w[Cov(Xbar,Sigma_R|q,theta)]`
+`+Cov_w(m_theta,r_theta)`。
+
+第一项是 ordinary anglewise MLR 可触及的 within-angle term；第二项是
+between-angle reweighting/coherence term。exact radial 只给 `E_w r_theta=-q`，
+不控制第二项；这就是 anglewise TP 到 shell TP 所缺的精确位置。
+
+此外，analytic、strict-log-concave、same-factor、degree-six-compatible 的
+小 Hermite 对偶扰动可实现非零 `kappa_3=c`、`kappa_4=0`、
+`kappa_6=-3c^2`，并可与反射配对 `f_{-c}=check f_c`。这不是 full-exact project
+counterexample，却排除了 regularity、log-concavity、same-factor 和有限
+fingerprint 已经足以导出 reflection-stable sign 的可能。
+
+### 9.32.5 判决与 R121
+
+PROVED / LOCAL-AUDITED：shell frame、exact MLR scaling、TP/RR reflection algebra、
+anglewise TP mixture obstruction、within/between coherence decomposition 与
+conditional rank-one logic。ANALYTICALLY PROVED：score integration-by-parts、
+small Hermite perturbation obstruction。CONDITIONAL：reflection-stable fixed
+orientation TP/RR theorem。OBSTRUCTION：strict log-concavity、score monotonicity、
+anglewise TP、ordinary variation-diminishing 与 finite fingerprints 均不足。
+
+OPEN：`Cov(Xbar,Sigma_R|Q=q)` 的 reflection-stable sign 或恒零，进而
+`kappa_3(f)=0`。
+
+R121 最小命题固定为 **Angular-Mixture Coherence Lemma**：只攻
+`C_ang(q)=Cov_w(m_theta(q),r_theta(q))`，判断 genuine all-degree angular
+exactness / R101 Herglotz structure 能否给出其 quadratic-form 表示，或至少给出
+它与 within-angle term 的强制相对符号/抵消关系。若不能，则正式关闭 TP/MLR 主
+路线并转向 conditional-mean diagonal transform。

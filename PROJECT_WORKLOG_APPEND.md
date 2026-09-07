@@ -4193,3 +4193,53 @@ PROVED / ANALYTICALLY PROVED / OBSTRUCTION / OPEN。
 `R119_REFLECTION_STABLE_SIGN_LOGIC_PASSED`
 
 `R119_CONDITIONAL_RADIAL_SCORE_SHELL_AUDIT_COMPLETED`
+
+# 2026-09-07 — R120 Shell TP Orientation 与 Angular-Mixture Coherence
+
+网页端 R120 在读取 R119 记录后完成了 shell MLR/TP 路线的边界分析；connector 仍不可读，
+本轮依据当前对话自包含结论继续。本机新增
+`angular_mixture_coherence_r120/README.md` 与 `audit_r120.py`。
+
+- 定义 `a_j(theta)=sqrt(2/3)cos(theta+2*pi*j/3)`、
+  `F_theta(q,m)=prod f(m+sqrt(q)a_j)`、`K_f=avg_theta F_theta`。本机核验
+  `sum a_j=0`、`sum a_j^2=1`，并确认 exact radial marginal 只固定 row mass
+  `A(q)=int K_f dm=C_0e^{-q/2}`。
+- shell score 微分给 `partial_q log F_theta=Sigma_R/(2q)`，归一化后
+  `h'(q)=Cov(Xbar,Sigma_R|Q=q)/(2q)`。因此 covariance fixed-sign 等价于
+  shell kernel 的 universal MLR orientation。
+- 本机核验 reflection `K_check(q,m)=K_f(q,-m)`、`h_check=-h`、TP2/RR2 取向交换；
+  若 whole exact class 具有 reflection-stable fixed TP/RR orientation，则 shell
+  kernel 同时 TP2/RR2，严格正性使其 rank one，进而 `Xbar` 与 `Q` 独立、`kappa_3=0`。
+  该结论是 CONDITIONAL，不把前提误当 exactness 已推出。
+- 核验 strict log-concavity 的逐角 cross-curvature公式；仅 `rho'<0` 不给固定方向，
+  需要 `rho'` 单调但仍 orientation-dependent。显式正 rank-one 矩阵 A/B 的和
+  determinant `-8910` 核验 anglewise TP 不在 angular mixture 下闭合。
+- 得到精确 within/between 分解：
+  `2q h'=E_w[Cov(Xbar,Sigma_R|q,theta)]+Cov_w(m_theta,r_theta)`。
+  exact radial 只给 `E_w r_theta=-q`，不控制 between-angle coherence 项；这就是
+  ordinary TP/MLR 路线的真正缺口。
+- 保留 analytic strict-log-concave same-factor degree-six-compatible obstruction：
+  小 Hermite 对偶扰动可取 `kappa_3=c`、`kappa_4=0`、`kappa_6=-3c^2`，可与反射
+  `f_-c=check f_c` 配对。它不是 full-exact project counterexample，但排除了
+  regularity/log-concavity/有限 fingerprint 导出 reflection-stable sign 的可能。
+- R120 判决：核心仍 OPEN；R121 最小命题是 **Angular-Mixture Coherence Lemma**，只攻
+  `C_ang(q)=Cov_w(m_theta,r_theta)` 是否有 genuine all-degree quadratic-form 或
+  与 within-angle term 的强制相对符号/抵消关系，若失败则正式关闭 TP/MLR 主路线。
+
+本机审计输出：
+
+`R120_SHELL_FRAME_AND_REFLECTION_COORDINATES_PASSED`
+
+`R120_SHELL_MLR_COVARIANCE_SCALE_PASSED`
+
+`R120_TP2_RR2_REFLECTION_ORIENTATION_PASSED`
+
+`R120_ANGLEWISE_TP_MIXTURE_COUNTEREXAMPLE_PASSED`
+
+`R120_WITHIN_BETWEEN_ANGULAR_COHERENCE_INTERFACE_PASSED`
+
+`R120_ANGLEWISE_CROSS_CURVATURE_SCALE_PASSED`
+
+`R120_CONDITIONAL_COVARIANCE_REFLECTION_SIGN_PASSED`
+
+`R120_ANGULAR_MIXTURE_COHERENCE_AUDIT_COMPLETED`
