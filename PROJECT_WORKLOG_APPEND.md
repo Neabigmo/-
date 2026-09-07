@@ -3944,3 +3944,43 @@ computation was used.
   positive/backward mechanism，使某个 generic parallelogram 的残差相对
   Gaussian baseline 不低于 `S_G-o(q^(3N))`，或构造 genuine all-degree
   obstruction；不再继续无目的地计算更高有限阶 determinant。
+
+# 2026-09-07 — R115 Gaussian-relative slack saturation 等价于 cubic exclusion
+
+- 网页端 R115 完成了对预定 saturation 路线的结构性判决；本机新增
+  `gaussian_four_point_saturation_r115/README.md` 与 `audit_r115.py`。
+- 固定一个足够小 generic `(s0,t0)` 使 `F4(s0,t0)<0`，令
+  `tau_N=q^N`、`h_N=g_N^(N)`、`c_N=kappa_3(h_N)`、
+  `mu_N=P_(tau_N)h_N`。R114 expansion 写成
+  `S_muN=S_G-lambda_4*tau_N^3*c_N^2+R_N`，`|R_N|<=C4*tau_N^4`。
+  因而 `S_muN>=S_G-epsilon_N*tau_N^3`（epsilon_N->0）推出
+  `lambda_4*c_N^2<=epsilon_N+C4*tau_N`，即 `c_N->0`；反向由 `c_N->0`
+  得 saturation。故 Gaussian-relative saturation 与 primitive cubic
+  annihilation 是同一层级的等价命题，不是独立辅助 lemma。
+- 若 `|c_N|` 沿子序列下界为正，则 `S_muN<=S_G-const*q^(3N)`；这与
+  absolute Bochner `S_muN>=0` 完全相容，因为 `S_G>0`。varying-bottom
+  backward OU 只生成 `g_N^(j)=P_(q^(N-j))h_N`，不提供 `h_N` 与
+  `h_(N+1)` 的跨 N coherence，因此不能凭自身令 `c_N` 衰减。
+- R112 的统一 `E exp(X^2/8)<=2` 给出 tightness 与 all-moment uniform
+  integrability。若存在 varying-bottom sequence `limsup|c_N|>0`，取
+  `h_N=>h` 的子序列；矩收敛给 `kappa_3(h)!=0`，exact angular identity
+  由 dominated convergence 传给 h，故 h 是 genuine full-exact 单律。
+  反向用任意这样的 h 作 constant-top tower 即得 sequence。于是
+  `varying-bottom nonvanishing cubic sequence` 与
+  `genuine full-exact single law with kappa_3!=0` 等价。
+- 这轮明确换路线：ordinary positive Gram minor 因 Gaussian 是 strict
+  interior、`F(Gaussian)>0`，无法提供 Gaussian-relative `q^(3N)` 符号。
+  成功的 global functional 至少需 `F(Gaussian)=0`、来自 genuine
+  one-body/global factorization 的 `F(mu)>=0`，并在 primitive branch 上
+  `F(P_tau h)=-C*c^2*tau^3+o(tau^3)`。
+- 本机 audit 核验 `H3` primitive determinant 与 `-5/24`、saturation algebra、
+  angular fingerprint、fixed/primitive rescaling separation、varying-bottom
+  reduction scale 与 centered-functional signature，全部通过。完整 uniform
+  remainder、compactness/dominated-convergence 和有限阶 moment-matching
+  论证保留网页端 ANALYTICALLY PROVED / FINITE-ORDER OBSTRUCTION 等级。
+- 状态：R115 严格排除了“再加强一个 four-point saturation lemma”作为独立
+  进展；OPEN 已压缩为 single-law genuine factorized Gaussian-radial cubic
+  exclusion。下一轮定为 R116 **Single-Law Factorized Gaussian-Radial Cubic
+  Exclusion**：若三 iid factor 的二维 residual `R` 满足
+  `|R|^2~chi^2_2`，判断其 characteristic factorization 是否强制
+  `kappa_3(X)=0`。

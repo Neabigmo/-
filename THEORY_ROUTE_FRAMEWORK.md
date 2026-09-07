@@ -8476,3 +8476,79 @@ primitive leading coefficients、angular cancellation、scale/shear identities
 为 PROVED / LOCAL-AUDITED；full trace formula 与 finite-jet bump realization
 为网页端 ANALYTICALLY PROVED；bare scalar `RK=1` identification、all-degree
 relative saturation、primitive annihilation 和最终 rigidity 仍 OPEN。
+
+## 9.27 R115：Gaussian-relative slack saturation 不是独立引理
+
+网页端 R115 对 R114 预定的 saturation route 做了完整的结构性收束；本机新增
+`gaussian_four_point_saturation_r115/README.md` 与 `audit_r115.py`，并保持
+网页通信失败与数学证据分离。
+
+### 9.27.1 固定 generic parallelogram 上的等价性
+
+取 sufficiently small generic `(s_0,t_0)` 使 R114 的 `F_4<0`，记
+`lambda_4=-F_4>0`、`tau_N=q^N`、`h_N=g_N^(N)`、`c_N=kappa_3(h_N)`、
+`mu_N=P_(tau_N)h_N`。R114 fixed-frequency expansion 在 uniform remainder 下为
+
+`S_(mu_N)(s_0,t_0)=S_G(s_0,t_0)-lambda_4*tau_N^3*c_N^2+R_N`，
+`|R_N|<=C_4*tau_N^4`。
+
+若要求的 Gaussian-relative comparison
+
+`S_(mu_N)(s_0,t_0)>=S_G(s_0,t_0)-epsilon_N*tau_N^3`、
+`epsilon_N->0`
+
+成立，则
+
+`lambda_4*c_N^2<=epsilon_N+C_4*tau_N`，从而 `c_N->0`。反向若 `c_N->0`，
+则 `S_(mu_N)-S_G=o(tau_N^3)`，自动得到同一比较。故
+
+`Gaussian-relative slack saturation <=> kappa_3(h_N)->0`。
+
+若 `|c_N|>=c_*>0` 沿子序列成立，反而得到
+`S_(mu_N)<=S_G-(lambda_4c_*^2/2)q^(3N)`；这不违反 `S_(mu_N)>=0`，因为
+`S_G>0`。所以 obstruction 是 absolute PSD 与 Gaussian-relative sign 的
+结构差异，不是余项精度不足。
+
+### 9.27.2 varying-bottom 复杂度被压缩为 single-law 问题
+
+任意 genuine full-exact top law `h_N` 自动生成
+`g_N^(j)=P_(q^(N-j))h_N`，但 varying-bottom 定义不要求 `h_N` 与 `h_(N+1)`
+有关；positive backward OU 本身不提供跨 N 的 `c_N` coherence。R112 的
+`E exp(X^2/8)<=2` 统一包络给出 tightness 与所有固定矩的 uniform
+integrability。若 `limsup|c_N|>0`，可取 `h_N=>h`、`c_N->c!=0`；矩收敛给
+`kappa_3(h)=c`，且 exact angular identity 对固定频率由 dominated convergence
+传给 h，所以 h 是 genuine full-exact 单律。反向对任意这样的 h 取
+`h_N=h` 即可。于是
+
+`exists varying-bottom nonvanishing cubic sequence`
+`<=> exists genuine full-exact single law with kappa_3!=0`。
+
+这是 R115 的主要小里程碑：tower complexity 从 cubic sector 中 quotient 掉了。
+
+### 9.27.3 有限局部锥不能再推进主命题
+
+R114 的 genuine finite-jet 与 R115 的 formal/all-finite-order obstruction
+说明任意有限 exact rows、有限 Bochner minors、有限 `tau` 系数都能被非零
+odd-charge 的 genuine moment-matching law 穿过。普通 positive Gram minor 还
+有 `F(Gaussian)>0`，不具备 Gaussian-centered extremality。
+
+要直接排除 cubic charge，global functional 至少需要
+
+`F(Gaussian)=0`、`F(mu)>=0`（来自 genuine one-body/global factorization）、
+`F(P_tau h)=-C*c^2*tau^3+o(tau^3)`、`C>0`。
+
+这说明 R115 saturation 目标如果成功，已经与单律 cubic exclusion 同层级；
+不能继续把它当作更弱的中间结论。
+
+### 9.27.4 结论与 R116
+
+R115 的 PROVED / LOCAL-AUDITED 内容是 determinant、scale 与 saturation
+implication 的代数骨架；uniform remainder、tightness/limit passage 与
+有限阶 moment matching 为网页端 ANALYTICALLY PROVED / FINITE-ORDER
+OBSTRUCTION。`RK=1` 到 genuine full-exact identification 仍 CONDITIONAL。
+
+OPEN 已进一步压缩为 R116 **Single-Law Factorized Gaussian-Radial Cubic
+Exclusion**：令三个 iid factor 的二维 residual 为 `R`，其 characteristic
+function 为严格 same-factor product，且 `|R|^2~chi^2_2`；判断是否必有
+`kappa_3(X)=0`。若该单律命题成立，R115-B 立即关闭所有 varying-bottom
+cubic sequences；若失败，则得到主命题 genuine all-degree obstruction。
