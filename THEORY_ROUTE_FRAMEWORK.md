@@ -9806,3 +9806,108 @@ shift `j` 后，Gaussian multiplication 给
 若该桥成立，R131 的 `epsilon3^m` 窗口即可与之矛盾；否则仍不能从
 `m_3=0` 偷换到 `P_3K=0`，也不能完成 positive backward-OU exact-zero-set
 rigidity。
+
+## 62. R132：exact-law OU smoothing 与 log-density 弱桥接（2026-09-08）
+
+网页端 R132 对 R131 暂时条件化的 uniform backward-OU 输入作了独立审计，
+并把 genuine all-row exact class 与 scalar `RK=1` 路线严格分开。本轮本机新增
+`r132_exact_law_smoothing_audit/`，审计脚本核验 Mehler 常数、OU 半群因子、
+log-density 常数以及 fixed-level Jacobi 关系。
+
+### 62.1 all-row exactness 给出统一尾部
+
+设 `mu` 是 centered、variance-one 的真实概率律，`X_1,X_2,X_3` 独立同分布，
+并且实际满足所有
+
+`E Q^r=2^r r!`, `Q=sum_i (X_i-Xbar)^2`。
+
+Carleman 条件成立，因为
+`(2^r r!)^(-1/(2r)) >= (2r)^(-1/2)`，故 `Q` 的矩问题在 `[0,infty)` 上
+determinate；于是 `Q~chi^2_2`，从而对 `0<eta<1/4`
+
+`E exp(eta X^2) <= exp(-eta)/(1-4 eta)`。
+
+这里的 all-row 真实 expectation 是实质条件。有限行、formal row、relaxed
+Hankel ghost，或尚未证明等价的 scalar `RK=1`，均不能直接使用该尾界。
+
+### 62.2 uniform smoothing theorem
+
+若 `h=dmu/dgamma`，且采用项目约定 `P_t psi_n=t^(n/2)psi_n`，则网页端给出
+
+`||P_t h-1||_2 < 8 t^(3/2)`, `0<t<=1/2`。
+
+证明链为：
+
+1. 用 all-row exactness 和 Carleman 得到 `Q~chi^2_2`；
+2. 由 `Q>= (X_1-X_2)^2/2` 与条件 Jensen 得到上述 square-exponential tail；
+3. 用一次 `P_(1/2)` 的 Mehler 预平滑和 tail bound 得
+   `||P_(1/2)h-1||_2<2 sqrt(2)`；
+4. centered/variance-one 消掉 Hermite 0、1、2 阶，再用半群性
+   `P_t h-1=P_(2t)(P_(1/2)h-1)`，得到常数 `8`。
+
+同样由 Gaussian hypercontractivity 外层分解，还得到
+
+`||P_t h-1||_p <= 8(p-1)^(3/2)t^(3/2)`,
+
+对 `p>=2` 且 `t<=1/(2(p-1))`。因此 genuine all-row depth-`N` tower 的
+`g_N=P_(q^N)h_N` 满足
+
+`||g_N-1||_2 <= 8 q^(3N/2)`，
+
+并在 `m_N=floor(theta N)`、
+`theta<3 log(1/q)/(2 log 3)` 时得到 growing normalized Hermite-Gram/Jacobi
+window。该结论现在是 `PROVED`，但只在 genuine all-row exact class 内成立。
+
+### 62.3 Mehler 精确公式的文字纠正
+
+在上述参数约定下，若 `M_s` 是相对于 `gamma` 的 Mehler kernel，则直接配方给出
+
+`int M_s(x,y)^2 dgamma(x)
+ = (1+s)^(-1/2) exp(s y^2/(1+s))`。
+
+网页正文曾把精确前因子写成 `(1-s^2)^(-1/2)`。这不是精确恒等式，但在
+`0<s<1` 时是更松的上界因子，因此不破坏其 `||P_(1/2)h||_2<3` 与最终常数
+`8`；本机 R132 审计固定采用正确的 `(1+s)^(-1/2)`。
+
+### 62.4 从正性到 log-density 的局部结果
+
+令 `g=P_t h` 且 `t<=1/64`。由 `E X^2=1`、Chebyshev 和 Mehler 正性，
+
+`g(x)>=(3/4) exp(-3) exp(-x^2/63)`。
+
+因此 `g^(-1)` 有显式 inverse-
+`L^4` 控制；配合 R132 的 `L^4` smoothing，得到
+
+`||log g||_2 <= C_K t^(3/2)`。
+
+若 `ell_3(g)=<log g,He_3/sqrt(6)>`，则
+
+`ell_3(g)=t^(3/2)m_3(h)/sqrt(6)+O(t^3)`。
+
+这首次把 `P_3 log g` 与 genuine cubic moment 连接起来，但只是弱桥接，不是
+zero-set rigidity。full exact class 中 `y_4=3` 还给出
+
+`1-beta_2(g)/2=m_3(g)^2/2=3 a_3(g)^2`，
+
+说明 fixed Jacobi level 只看见随振幅消失的二次缺陷，不能自行产生 fixed
+positive separation。
+
+### 62.5 明确障碍与当前 OPEN
+
+仅 positivity、mean zero、variance one 和 individual `L^2` 不给 uniform
+fixed-time smoothing：稀有远端 Gaussian mixture 可使平滑后的 likelihood-ratio
+`L^2` 范数发散。故 R132 的统一性来自 all-row exactness 产生的 tail，而非
+普通 OU smoothing。
+
+本轮仍未解决：
+
+- scalar `RK=1` 到 all-row/full-`Q` law 的严格接口；
+- `P_3K != 0` 到 logarithmic-degree normalized Jacobi/Gram fixed defect 的
+  same-factor angular-to-Jacobi amplification；
+- `Gamma_M->0` 与 Positive Backward-Tower Exact Zero-Set Rigidity。
+
+R132 将下一轮唯一目标压缩为：从 exact same-factor identity 直接构造
+`log-density -> normalized Gram determinant curvature` 的 all-degree quantitative
+identity，或给出严格 no-go。证据等级：R132 smoothing、`L^p`、log-density 弱桥接
+和 fixed-level Jacobi/log 关系为 `PROVED`（以标准 Gaussian 分析输入为前提）；
+scalar `RK=1` 应用和最终 separation 仍为 `CONDITIONAL/OPEN`。

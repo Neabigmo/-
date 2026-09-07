@@ -14,6 +14,7 @@
 8. `r130_m6_gap_audit/README.md`：M=6 的显式有理区间 gap 证书。
 9. `r130_web_gap_audit/README.md`：网页端强 gap 的本机补证与常数审计。
 10. `r131_normalized_defect_audit/README.md`：genuine (L^2) 归一化缺陷接口与 M=7 exact algebra。
+11. `r132_exact_law_smoothing_audit/README.md`：all-row exact law 的统一 OU 平滑、log-density 弱桥接与障碍审计。
 
 ## 分支体系
 
@@ -33,8 +34,9 @@
 - R128：正确归一化下 `\widehat\Gamma_5=\widehat\Gamma_4=c_4` 的 relaxed singular non-flat ghost 已通过本机审计；`\Gamma_5` 是否等于该值仍为 OPEN。
 - R129：R6 原始展开、R2–R5 消元及 H5→H6 kernel compatibility 已通过精确审计；R128 ghost 无 PSD H6 延拓。结合 R125 紧性与 R127 等号分类，已解析推出有限层严格界 `\widehat\Gamma_6<c_4`，并因此有 `\Gamma_6\le\widehat\Gamma_6<c_4`。
 - R130：本机初证先给出 `\widehat\Gamma_6\le1.0535`；随后网页端给出更强的 endpoint-neighborhood 证书，经本机 `r130_web_gap_audit` 补齐常数后解析通过：`c_4-\widehat\Gamma_6>25/28196\approx8.8665\times10^{-4}`，故 `\widehat\Gamma_6<1.052702`。这仍是 relaxed finite-level 上界，不是 `\widehat\Gamma_6` 的精确值，也没有关闭 genuine 或正性/反向 OU 主线。
-- R131：对 genuine `d\mu=g d\gamma`、`g\in L^2(\gamma)`，`\varepsilon=\|g-1\|_2` 时，次数 `m` 的 Hermite Gram 满足 `\|G_m-I\|_{op}\le\varepsilon3^m`（以 Gaussian hypercontractivity 为标准输入），从而得到 normalized Jacobi coercivity；M=7 的最高奇矩不可见和 flat kernel 的 odd-freedom 计数也已精确审计。反向 OU 的整段 `L^2` 速率仍只记为 CONDITIONAL，不能由三阶矩缩放自动推出。
-- 当前下一步：严格补出或否定 uniform backward-OU `L^2` smoothing 假设，寻找 `P_3K\ne0` 强迫 normalized recurrence defect 的 same-factor separation，再把该桥接定理接回 positive/backward-OU 主线。
+- R131：对 genuine `d\mu=g d\gamma`、`g\in L^2(\gamma)`，`\varepsilon=\|g-1\|_2` 时，次数 `m` 的 Hermite Gram 满足 `\|G_m-I\|_{op}\le\varepsilon3^m`（以 Gaussian hypercontractivity 为标准输入），从而得到 normalized Jacobi coercivity；M=7 的最高奇矩不可见和 flat kernel 的 odd-freedom 计数也已精确审计。其 fixed-shift 传播必须同时要求 `\varepsilon3^{m+j}<1`。
+- R132：网页端证明：若 genuine centered/variance-one law 实际满足所有 exact rows `E Q^r=2^r r!`，则 Carleman 给出 `Q\sim\chi^2_2`，并有显式 `\|P_t h-1\|_2<8t^{3/2}`（`t\le1/2`）及相应 `L^p` 估计；进一步得到 `\|\log(P_t h)\|_2=O(t^{3/2})` 和 `P_3\log(P_t h)` 的 cubic 级弱桥接。普通 positivity/normalization/individual `L^2` 不足以给 uniform smoothing；只有 scalar `RK=1` 时仍不能自动套用 all-row 结论。
+- 当前下一步：直接攻击 `P_3K\ne0` 强迫 normalized recurrence defect 的 same-factor angular-to-Jacobi amplification；R132 已把 OU smoothing 与 log-density 小量这两侧的 genuine all-row 输入补齐，但 separation 与 exact-zero rigidity 仍 OPEN。
 
 ## 证据等级
 

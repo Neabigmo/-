@@ -23,6 +23,10 @@ Jacobi norms 满足
 PROVED（以标准 Gaussian hypercontractivity 为输入）结果，不能直接套到
 relaxed finite Hankel ghost。
 
+网页端的 fixed-shift 估计还需要同时满足
+`delta_m<1` 和 `delta_(m+j)<1`；只写前一个条件并不足以保证对比估计在
+次数 `m+j` 上可用。
+
 网页端给出的 exact algebra 也已纳入本审计：下一 exact row 的最高奇矩
 `y_(2m+1)` 不出现；flat rank-`r` kernel 向下一层延拓时，有 `m-r` 条
 不含新 top odd moment 的 frozen compatibility 方程，最后一条至多由该

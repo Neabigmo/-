@@ -4806,3 +4806,79 @@ same-factor exact solution 必在 `k<=c log(1/||g-1||_2)` 内制造固定的
 normalized Jacobi/Gram recurrence defect；这与
 `||G_m-I||<=epsilon3^m` 将直接矛盾。该 separation、`P3K` 与 `m3` 的零集
 关系、以及 full positive backward-OU rigidity 仍为 `OPEN`。
+
+# 2026-09-08 — R132 exact-law smoothing 与 log-density 弱桥接
+
+网页端 R132 直接审计了 R131 暂时条件化的 uniform backward-OU 输入。本机新增
+`r132_exact_law_smoothing_audit/`，不把网页正文照单全收：其中 Mehler 平方范数
+的精确前因子已纠正，并以精确符号检查记录。
+
+## 最强新结论
+
+设 `mu` 是 centered、variance-one 的 genuine probability law，且其 iid 三元组
+实际满足所有 exact rows
+
+`E Q^r=2^r r!`, `Q=sum_i (X_i-Xbar)^2`, `r=0,1,2,...`。
+
+由 Stieltjes--Carleman determinacy，`Q~chi^2_2`；再由
+`Q>=(X_1-X_2)^2/2` 和条件 Jensen，得到
+
+`E exp(eta X^2)<=exp(-eta)/(1-4 eta)`, `0<eta<1/4`。
+
+若 `h=dmu/dgamma`，并采用 `P_t psi_n=t^(n/2)psi_n`，一次固定
+`P_(1/2)` Mehler 预平滑、上述尾界和 centered/variance-one 的 Hermite 0--2 阶
+消失给出网页端 Theorem R132-A：
+
+`||P_t h-1||_2<8 t^(3/2)`, `0<t<=1/2`.
+
+外层 Gaussian hypercontractivity 进一步给出
+
+`||P_t h-1||_p<=8(p-1)^(3/2)t^(3/2)`,
+
+`p>=2`、`t<=1/(2(p-1))`。因而 genuine all-row depth-`N` tower 的
+`g_N=P_(q^N)h_N` 满足 `||g_N-1||_2<=8q^(3N/2)`，并给出
+`theta<3log(1/q)/(2log3)` 范围内的 growing normalized Gram/Jacobi window。
+这部分等级为 `PROVED`，但只对 all-row genuine exact class；scalar `RK=1` 尚不能
+自动代入。
+
+## 对网页推导的精确纠正
+
+在项目参数约定下，Mehler kernel `M_s` 的正确平方范数为
+
+`int M_s(x,y)^2 dgamma(x)=(1+s)^(-1/2) exp(s y^2/(1+s))`。
+
+网页正文写成 `(1-s^2)^(-1/2)` 是 exact identity 级别的笔误；它在 `0<s<1`
+上只构成较松的上界因子，所以不改变网页随后使用的 `||P_(1/2)h||_2<3` 和
+常数 `8`。本机审计已固定正确公式并确认最终上界安全。
+
+## 新的 log-density 局部桥
+
+令 `g=P_t h`、`t<=1/64`。Mehler 正性与 Chebyshev 给出
+
+`g(x)>=(3/4)exp(-3)exp(-x^2/63)`，
+
+从而 `g^(-1)` 具有显式 inverse-`L^4` 控制。结合 `L^4` smoothing，得到
+
+`||log g||_2<=C_K t^(3/2)`，
+
+并且
+
+`<log g,He_3/sqrt(6)>=t^(3/2)m_3(h)/sqrt(6)+O(t^3)`。
+
+在 full exact class 中 `y_4=3`，所以
+
+`1-beta_2(g)/2=m_3(g)^2/2=3a_3(g)^2`。
+
+这说明 `P_3 log g` 已经能进入 fixed Jacobi 坐标，但该 fixed-level defect 只
+是随振幅消失的二次量，尚不足以推出 fixed positive separation。
+
+## 障碍与下一步
+
+仅 positivity、mean zero、variance one 和 individual `L^2` 不能给 uniform
+fixed-time smoothing；稀有远端 Gaussian mixture 是 probability-level obstruction。
+R132 的 uniformity 依赖 all-row exactness 产生的 square-exponential tail。
+
+当前唯一值得继续推进的任务是 **Same-Factor Angular-to-Jacobi Amplification**：
+从 exact same-factor identity 直接寻找 `P_3K` 到 normalized Gram determinant
+curvature 的 all-degree quantitative identity，或给出严格 no-go。仍不能把
+`m_3=0` 写成 `P_3K=0`，也不能把 scalar `RK=1` 写成 all-row/full-`Q` law。
