@@ -4588,13 +4588,6 @@ R126 的 `M=3` ghost 在下一 exact row 被明确消除。全阶 `Gamma_M->0` �
 缺陷 `delta=y_{2M+2}-b^T H_M^+b` 非负，且 `delta=0`/`delta>0` 分别精确区分
 flat extension 与 singular non-flat ghost 方向。
 
-本机进一步展开 `R_5=E Q^5-2^5 5!`，得到
-
-`E Q^5=3y_10-360y_3y_5-180y_3y_7+225y_4^2+270y_4y_6-153y_5^2+180y_6+90y_8`，
-
-以及
-`y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+1280`。
-
 新增 `singular_extension_compatibility_r128/README.md` 与 `audit_r128.py`；复核
 发现临时展开误用了 `sum pair differences / 2`，与项目一直使用的
 `Q=sum pair differences / 3` 不一致；此前关于 `y_10<0` 和严格下降的结论已撤回。
