@@ -9621,11 +9621,23 @@ singular non-flat ghost 不能延伸为满足 R6 的 PSD `H_6`；这是
 `ANALYTICALLY PROVED` 的 M=6 endpoint no-go，且其数值审计值
 `delta_5=913.705421573084...` 仅作为 exact expression 的核验，不是证明依据。
 
-必须保留边界：该 endpoint no-go 尚不推出全局严格的
-`GammaHat_6<GammaHat_5`，因为 M6 可行序列理论上可能逼近而不取得 M5 endpoint；
-也没有给出 genuine `Gamma_6` 或全阶 `Gamma_M->0`。因此本轮将三者分别标记为：
-`PROVED`（R6 与 Schur 线性代数）、`ANALYTICALLY PROVED`（该 endpoint 被 H6
-排除）、`OBSTRUCTION`（old-kernel defect cascade），以及 `OPEN`（全局 M6
-半径、genuine 半径、正性与 backward-OU 的统一衰减）。R130 应研究 endpoint
-邻域的 uniform gap、kernel-adapted recurrence basis，以及能否把 finite defect
-cascade 接到 positive backward-OU cone。
+这里需要把 endpoint 结论与全局结论分层写清。R125 的紧性接口保证 M6
+relaxed feasible set 的最大值取得；投影单调性给出
+`GammaHat_6<=GammaHat_4=c_4`。若等号成立，M6 maximizer 的 M4 投影必须是
+R127 的 equality point。R127 的边界不等式、对剩余参数的严格单调性以及
+`D=0`/`N=0` 的联立，已把该 equality point 唯一化为
+`(c_4,a_4,b_4)`（负号情形只由反射得到）；R4/R5 行再强制出 R128 的
+rank-4 singular ghost。R129 已解析地证明该 ghost 无 PSD H6 extension，故
+发生矛盾。因此在已审计的 R125 compactness 与 R127 equality classification
+接口上，得到新的有限层严格结论
+
+`boxed{GammaHat_6<GammaHat_5=GammaHat_4=c_4}`。
+
+这不是 `GammaHat_6` 的显式数值，也不是 genuine `Gamma_6` 的等式；但由
+feasible-set inclusion 立即有 `Gamma_6<=GammaHat_6<c_4`。本轮证据等级应改为：
+`PROVED`（R6 与 Schur 线性代数）、`ANALYTICALLY PROVED`（R128 endpoint
+no-go，以及结合 R125/R127 接口后的全局严格 relaxed bound）、`OBSTRUCTION`
+（old-kernel defect cascade），`OPEN`（严格 gap 的显式下界、genuine 半径、
+正性与 backward-OU 的统一衰减以及全阶 `Gamma_M->0`）。R130 应继续量化
+`c_4-GammaHat_6` 或构造 endpoint 邻域的 uniform gap，并研究
+kernel-adapted recurrence basis 如何接到 positive backward-OU cone。

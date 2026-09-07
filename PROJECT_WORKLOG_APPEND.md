@@ -4622,8 +4622,20 @@ R2--R5，得到
 `R129_M6_R128_GHOST_EXCLUDED_ANALYTICALLY` 与
 `R129_M6_EXACT_EXTENSION_AUDIT_COMPLETED`。
 
-本轮结论等级：`PROVED` 为 R6 消元和 Schur block 线性代数；
-`ANALYTICALLY PROVED` 为该端点 no-go；`OBSTRUCTION` 为 old-kernel 的首个未
-检测 recurrence defect；`OPEN` 仍包括全局 `GammaHat_6`、genuine `Gamma_6`、
-邻域 uniform gap、backward-OU 正性锥和 `Gamma_M->0`。不能把 endpoint 被排除
-夸大成全局严格半径下降。
+本轮结论需要补上一个由既有接口组成的全局推论。R125 的 relaxed Hankel
+compactness 保证 M6 最大值取得，投影单调性给出
+`GammaHat_6<=GammaHat_4=c_4`。若等号成立，M4 投影必须落在 R127 的
+equality locus；R127 的 `D=0`、`N=0` 与对 `a` 的严格单调性把该点唯一化为
+`(c_4,a_4,b_4)`（反射除外），而 R4/R5 行强制出 R128 ghost。R129 的
+`r_1=delta_5>0` 已排除其 PSD H6 extension。因此在 R125 compactness 和
+R127 equality classification 均按既有审计结果采用时，严格推出
+
+`GammaHat_6<GammaHat_5=GammaHat_4=c_4`。
+
+故本轮等级为：`PROVED`（R6 消元、raw expansion 与 Schur block 线性代数）；
+`ANALYTICALLY PROVED`（R128 endpoint no-go，以及结合紧性/等号分类后的
+全局严格 relaxed bound）；`OBSTRUCTION`（old-kernel 的首个未检测
+recurrence defect）。仍为 `OPEN` 的是 `GammaHat_6` 的显式数值、genuine
+`Gamma_6` 的显式值、严格 gap 的定量下界、backward-OU 正性锥和全阶
+`Gamma_M->0`。因此不是把 endpoint 排除直接偷换成全局结论，而是明确使用
+“最大值取得 + M4 等号唯一化 + R129 endpoint no-go”的三步闭合链。

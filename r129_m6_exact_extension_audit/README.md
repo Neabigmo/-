@@ -147,10 +147,21 @@ the M5-to-M6 range conditions and the Schur block are exact linear algebra.
 Hankel level.  The free odd moment `y_11` appears only in `r_2`, after the
 failure has already occurred.
 
-This does **not** yet prove a global strict inequality
-`GammaHat_6<GammaHat_5`: another sequence of M6 feasible points could in
-principle approach the M5 endpoint without attaining it.  Nor does it compute
-the genuine radius `Gamma_6`.
+**ANALYTICALLY PROVED — global strict relaxed bound, using the audited R125
+compactness interface and R127 equality classification.** The relaxed finite
+feasible set at level 6 is compact, so its maximum is attained.  Projection
+to level 4 gives `GammaHat_6<=GammaHat_4=c_4`.  If equality held, the level-4
+projection would be an equality point of R127.  The R127 boundary inequalities
+and the strict monotonicity in the remaining parameter force the unique
+endpoint `(c_4,a_4,b_4)` (up to reflection); the exact R4/R5 rows then force
+the R128 ghost extension.  R129 excludes its PSD H6 extension, a
+contradiction.  Therefore
+
+`GammaHat_6<GammaHat_5=GammaHat_4=c_4`.
+
+This is a strict finite-level upper bound, not an explicit value of
+`GammaHat_6`; the genuine radius `Gamma_6`, backward-OU divisibility, and the
+all-order decay remain `OPEN`.
 
 ## 6. General extension mechanism
 
@@ -175,20 +186,22 @@ universal alternation theorem therefore remains `OPEN`.
 
 ## 7. Relation to the main problem
 
-Relaxed feasible sets project downward, so `GammaHat_M` is non-increasing;
-the equality through R128 is a finite relaxed statement.  Genuine positivity
-is stronger, and backward-OU divisibility is stronger still.  The R129 no-go
-removes one relaxed endpoint but does not by itself supply the uniform
-coercivity needed for `Gamma_M -> 0`.  The all-order compactness argument from
-R125 still says that a fixed nonzero full-order cubic cannot remain merely a
-formal ghost forever, but it does not specify the finite-level rate.
+Relaxed feasible sets project downward, so `GammaHat_M` is non-increasing.  The
+R129 endpoint no-go, combined with R125 attainment and the R127 equality
+classification, upgrades the previous equality chain to the strict finite
+bound `GammaHat_6<c_4`.  Genuine positivity is stronger, hence
+`Gamma_6<=GammaHat_6<c_4`; an explicit value of `Gamma_6` and the all-order
+rate remain open.  Backward-OU divisibility is stronger still.  The all-order
+compactness interface from R125 rules out a fixed nonzero full-order cubic
+surviving as a merely formal ghost forever, but it does not yet specify a
+finite-level rate or prove `Gamma_M->0`.
 
 ## 8. Next task: R130
 
-1. Audit the exact R6 expression against the webpage derivation and add the
-   raw expansion marker if the two forms agree.
-2. Determine whether the R129 endpoint no-go can be upgraded to a local
-   uniform gap near `c_4`, rather than only excluding the endpoint.
+1. Record the raw R6 cross-check (`R129_R6_RAW_EXPANSION_PASSED`) alongside the
+   webpage derivation and preserve the exact solved row.
+2. Quantify the strict gap `c_4-GammaHat_6` or obtain a local uniform gap near
+   `c_4`, rather than stopping at the qualitative strict inequality.
 3. Track the compatibility-defect cascade in a basis adapted to the kernel,
    separating old-kernel defects from the genuinely new `y_11` direction.
 4. Return to the positive/backward-OU cone and test whether an all-order

@@ -10,6 +10,7 @@
 4. `singular_ghost_extremum_r126/README.md`：M=3 singular non-flat ghost。
 5. `m4_cubic_radius_flat_extremum_r127/README.md`：M=4 flat extremizer。
 6. `singular_extension_compatibility_r128/README.md`：纠正后的 M=5 singular ghost 延拓。
+7. `r129_m6_exact_extension_audit/README.md`：M=6 exact row、H6 compatibility 和全局严格 relaxed bound。
 
 ## 分支体系
 
@@ -27,7 +28,8 @@
 - R126：`\widehat\Gamma_3=\Gamma_3=\sqrt 2`，但 relaxed maximizer 是 genuine class 外的 singular ghost，genuine supremum 不取得。
 - R127：`\widehat\Gamma_4=\Gamma_4=c_4`，等号点为 flat genuine extremizer。
 - R128：正确归一化下 `\widehat\Gamma_5=\widehat\Gamma_4=c_4` 的 relaxed singular non-flat ghost 已通过本机审计；`\Gamma_5` 是否等于该值仍为 OPEN。
-- 当前下一步：独立推进 R129 的 M=6 exact row、kernel compatibility、Schur defect 和 recurrence obstruction，并回到全局的 positive/backward-OU 主线。
+- R129：R6 原始展开、R2–R5 消元及 H5→H6 kernel compatibility 已通过精确审计；R128 ghost 无 PSD H6 延拓。结合 R125 紧性与 R127 等号分类，已解析推出有限层严格界 `\widehat\Gamma_6<c_4`，并因此有 `\Gamma_6\le\widehat\Gamma_6<c_4`。
+- 当前下一步：量化严格 gap 或建立 endpoint 邻域 uniform gap，继续发展 kernel-adapted recurrence defect，并回到全局的 positive/backward-OU 主线。
 
 ## 证据等级
 

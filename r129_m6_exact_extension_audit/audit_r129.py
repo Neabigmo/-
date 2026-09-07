@@ -40,6 +40,17 @@ def exact_rows() -> tuple[sp.Expr, sp.Expr, sp.Expr, sp.Expr, sp.Expr]:
 def check_r6_exact_row() -> None:
     r2, r3, r4, r5, r6 = exact_rows()
     y = sp.symbols("y0:13")
+    x1, x2, x3 = sp.symbols("x1 x2 x3")
+    q = sp.expand(((x1 - x2) ** 2 + (x1 - x3) ** 2 + (x2 - x3) ** 2) / 3)
+    raw_r6 = sp.expand(moment_expectation(q**6, (x1, x2, x3), y).subs({y[0]: 1, y[1]: 0, y[2]: 1}))
+    expected_raw_r6 = sp.Rational(64, 243) * (
+        y[12] + 42 * y[10] + 120 * y[3] ** 2 * y[6] - 180 * y[3] * y[4] * y[5]
+        - 360 * y[3] * y[7] - 100 * y[3] * y[9] + 75 * y[4] ** 3
+        + 450 * y[4] * y[6] + 180 * y[4] * y[8] - 216 * y[5] ** 2
+        - 252 * y[5] * y[7] + 141 * y[6] ** 2 + 135 * y[8]
+    )
+    assert sp.expand(raw_r6 - expected_raw_r6) == 0
+    print("R129_R6_RAW_EXPANSION_PASSED")
     assert r2 == 3
     assert r3 == 15 + 7 * y[3] ** 2
     assert r4 == 105 - 124 * y[3] ** 2 + 32 * y[3] * y[5]
