@@ -9484,3 +9484,38 @@ R126 固定为 **Singular-Ghost Elimination at the Cubic Extremum**：对 `T_M` 
 maximizing `y^(M)`，研究能否选取 `H_M` positive definite 或 flat；若不能，构造
 singular non-flat extremizing branch并量化 `GammaHat_M-Gamma_M`，把 finite ghost
 layer 变成下一层可检验 obstruction。
+
+# 2026-09-07 — R126 M=3 Singular Ghost at the Cubic Extremum
+
+本机在等待网页端连接期间先完成了 R126 的精确 `M=3` 层核验，新增
+`singular_ghost_extremum_r126/README.md` 与 `audit_r126.py`。令 `c=y_3`，前三个
+circular rows 在 centered variance-one 条件下给出
+
+`R_2=(4/3)(y_4-3)`,
+
+`R_3=(8/9)(y_6-7c^2+12y_4-51)`，即 `y_4=3`、`y_6=15+7c^2`。取 `y_5=4c` 后，
+`H_2` 的行列式为 `2-c^2`，所以所有 PSD truncation 都满足 `|c|<=sqrt(2)`。
+
+在 `c=sqrt(2)`，截断向量
+`(1,0,1,sqrt(2),3,4sqrt(2),29)` 的 `H_3` 是 singular non-flat：
+`rank(H_2)=2<3=rank(H_3)`。其 `H_2` kernel 给出
+`X^2-sqrt(2)X-1=0`；任何 representing law 因而必须有 `y_6=11`，与 `R_3=0`
+要求的 `y_6=29` 矛盾，所以该 relaxed maximizer 是 genuine ghost。
+
+另一方面，对每个 `|c|<sqrt(2)`，同一族 `y_5=4c` 使 `H_3` positive definite，
+其关键 principal minors 为 `2-c^2`、`6(1+c^2)`、`30+3c^2`、
+`18+14c^2-7c^4` 和 `6(2-c^2)(1+c^2)`。一元 truncated Hamburger theorem
+给出 representing law，因此 genuine laws 的 cubic skew 可任意逼近 `sqrt(2)`。
+最终结论为
+
+`boxed{GammaHat_3=Gamma_3=sqrt(2)}`，但 `GammaHat_3` 的最大值由 ghost 取得，
+`Gamma_3` 只是一个不取得的上确界。
+
+这不是 `Gamma_M->0` 的证明，而是一个严格的有限层修正：finite relaxed extremizer
+不能被自动当作 genuine extremizer；R125 的渐近 squeeze 必须保留 `M->infty`
+极限逻辑。R126 本机审计 marker 为
+`R126_M3_ROW_ELIMINATION_PASSED`、`R126_M3_RELAXED_RADIUS_SQRT2_PASSED`、
+`R126_M3_PD_APPROACHING_FAMILY_PASSED`、`R126_M3_GHOST_NONFLAT_PASSED`、
+`R126_M3_ENDPOINT_NONREPRESENTABLE_PASSED`、
+`R126_M3_GENUINE_SUPREMUM_NOT_ATTAINED` 和
+`R126_SINGULAR_GHOST_EXTREMUM_AUDIT_COMPLETED`。

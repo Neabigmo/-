@@ -4550,3 +4550,19 @@ singular non-flat extremizing branch。
 `R125_SINGULAR_GHOST_LOCUS_INTERFACE_PASSED`
 
 `R125_TRUNCATED_HAMBURGER_CUBIC_RADIUS_AUDIT_COMPLETED`
+
+# 2026-09-07 — R126 M=3 Singular Ghost Extremum
+
+网页端连接仍被另一个工作区占用期间，本机完成了 R126 的 `M=3` 精确小定理，
+新增 `singular_ghost_extremum_r126/`。在 `y_3=c`、`y_5=4c` 下，exact rows 给出
+`y_4=3`、`y_6=15+7c^2`，而 `det H_2=2-c^2` 给出 `|c|<=sqrt(2)`。
+端点向量 `(1,0,1,sqrt(2),3,4sqrt(2),29)` 的 `H_3` 为 singular non-flat，
+`H_2` kernel 强制 `X^2-sqrt(2)X-1=0`，从而 representing law 会有 `y_6=11`，
+与 exact row 要求的 `y_6=29` 矛盾。对 `|c|<sqrt(2)`，同一族的 `H_3` positive
+definite，截断 Hamburger theorem 给 genuine representing law。因此
+
+`GammaHat_3=Gamma_3=sqrt(2)`，但 relaxed 最大值由 ghost 取得，genuine 半径只是
+不取得的 supremum。这是 R125 finite ghost 边界的第一个完全量化实例，不关闭全阶
+`Gamma_M->0`，但明确了后续必须研究高阶 singular kernel 如何被下一行打破。
+
+本机审计已通过：`R126_SINGULAR_GHOST_EXTREMUM_AUDIT_COMPLETED`。
