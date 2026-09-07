@@ -3477,3 +3477,31 @@ computation was used.
   本机 exact audit 将核验 `R100_SKEW_KURTOSIS_POLYNOMIAL_PASSED`、
   `R100_SIXTH_ORDER_FEASIBILITY_WALL_PASSED`、`R100_UNIQUE_ROOT_ALGEBRA_PASSED`、
   `R100_DEPTH_SUBSTITUTION_PASSED`、`R100_FINITE_DEPTH_CERTIFICATE_AUDIT_COMPLETED`。
+
+# 2026-09-07 — R101 Angular Herglotz charge cone
+
+- 网页端本轮沿 `Charge–Cone Shape Rigidity` 完成了真正的非局部推进：对 genuine
+  full-exact three-copy law 的 angular family `mu_theta`，characteristic identity
+  给出 Gaussian barycenter；其 Fourier signed measures `nu_r` 满足
+  `|nu_r|<=gamma`，从而得到 pointwise infinite Toeplitz/Herglotz cone
+  `[chi_(p-q)(x)]>=0`。这里使用真实概率测度正性，没有把 formal Fock 系数当作
+  概率结论。
+- Hermite addition law 给出完整 same-factor cubic charge map `beta_(m,r)`，选择律为
+  `m>=3|r|` 且 `m=r mod 2`。Parseval 得到全阶概率锥
+  `sum t^(-m)|beta_(m,r)(g)|^2<=1`，其中 `g=P_t h` 且 preimage 也属 genuine
+  exact class。`r=1` 的 degree 3/5/7/9 公式已由本机 exact symbolic audit 核验，
+  degree 9 首次显示 nonlinear mixing。
+- 若 law moment-determinate，首个非零 odd Hermite mode `a_d` 给出
+  `beta_(d,1)=Lambda_d a_d`、`Lambda_d>0`，所以 `chi_1=0` 当且仅当 law 对称。
+  结合全阶 backward cone，任何 asymmetric genuine exact fixed base 的正向 OU
+  backward depth 必有限；这不要求 `a_3!=0`，是可独立报告的弱定理。
+- 严格边界：R101 没有把 `P_3K` 识别成 `chi_1`，没有给 varying-bottom sequence
+  的 uniform charge noncollapse，也没有关闭 symmetric even sector。因此
+  `P_3K` bridge 与完整 Positive Backward-Tower Exact Zero-Set Rigidity 仍 OPEN。
+  若 `RK=1` 到 genuine full-exact law 的识别尚未独立完成，则 moment/measure 部分
+  对 bare scalar `RK=1` 只能记为 CONDITIONAL。
+- 新增 `angular_charge_cone_r101/README.md`、`audit_r101.py`。审计通过：
+  `R101_D3_GEOMETRY_AND_SELECTION_RULES_PASSED`、
+  `R101_CHARGE_MAP_DEGREE_3_5_7_9_PASSED`、
+  `R101_FIRST_ODD_MODE_AND_OU_SCALING_PASSED`、
+  `R101_ANGULAR_HERGLOTZ_CHARGE_CONE_AUDIT_COMPLETED`。

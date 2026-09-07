@@ -7319,3 +7319,88 @@ R99 的锥约束还能转成深度证书。定义
 本节审计为 `positive_backward_hermite_cone_r100/audit_r100.py`，状态为
 `R100_FINITE_DEPTH_CERTIFICATE_AUDIT_COMPLETED`。Gaussian rigidity、`P_3K`
 bridge、mesoscopic tail 和 fixed nonzero branch 继续 **OPEN**。
+
+### 9.13 R101：Angular Herglotz Charge Cone
+
+本轮把正性、same-factor cubic map 与 OU backward divisibility 首次放进同一
+个真实概率测度锥。对 genuine full-exact centered variance-one law `mu`，令
+
+`r_j(theta)=sqrt(2/3)cos(theta+2pi(j-1)/3)`，
+`Y_theta=sum_j r_j(theta)X_j`，其中 `X_j` iid `mu`，并记其 law 为 `mu_theta`。
+
+full-exact characteristic identity 与 Fourier uniqueness 给出真实测度恒等式
+
+`(1/(2pi))int_0^(2pi)mu_theta dtheta=gamma`。
+
+定义
+
+`nu_r(B)=(1/(2pi))int exp(-3 i r theta)mu_theta(B)dtheta`。
+
+于是 `nu_0=gamma` 且 `|nu_r|<=gamma`。令 `chi_r=dnu_r/dgamma`，得到
+`|chi_r|<=1`。对任意有限复向量 `c`，
+
+`sigma_c=sum_(p,q)c_p conjugate(c_q)nu_(p-q)>=0`
+
+是正测度，因此有 pointwise infinite Herglotz cone
+
+`[chi_(p-q)(x)]_(p,q=0)^M >=0` `gamma`-a.e.，对每个 `M` 成立。
+
+这是 measure-level positivity，不使用 determinant、SDP 或 optimizer。与其相关
+的 Fourier Gram 形式必须谨慎书写：完整带 charge index 的块是正的；单个复的
+`T_r` 不在没有额外 reality convention 时直接写成 Loewner-Hermitian 顺序。
+
+令 `e_m=He_m/sqrt(m!)`、`a_m=E_mu[e_m]`，则 Hermite addition law 给出完整
+same-factor cubic charge map
+
+`beta_(m,r)=sum_(k1+k2+k3=m)sqrt(m!/(k1!k2!k3!))`
+` A_r(k1,k2,k3)prod_j a_(k_j)`，
+
+其中 `A_r` 是 `prod_j r_j(theta)^(k_j)` 的 `3r` Fourier coefficient。选择律为
+`beta_(m,r)=0`（若 `m<3|r|` 或 `m != r mod 2`）。因为 `|chi_r|<=1`，Parseval
+给出全阶、非线性的概率锥
+
+`sum_(m>=3|r|, m=r mod 2)|beta_(m,r)|^2<=1`。
+
+若 `mu=P_t nu` 且两者均 genuine full-exact，则
+`chi_r(mu)=P_t chi_r(nu)`、`beta_(m,r)(mu)=t^(m/2)beta_(m,r)(nu)`，故任意
+正的 `t`-preimage 满足
+
+`sum_(m>=3|r|, m=r mod 2)t^(-m)|beta_(m,r)(mu)|^2<=1`。
+
+`r=1` 的前四个非零结构经过本机 exact symbolic audit：
+
+`beta_(3,1)=sqrt(6)a_3/12`，
+`beta_(5,1)=5sqrt(6)a_5/72`，
+`beta_(7,1)=7sqrt(6)a_7/144`，
+
+`beta_(9,1)=7sqrt(6)a_9/216-7sqrt(14)a_6a_3/144+sqrt(70)a_3^3/216`。
+
+最后一式是首个 genuine nonlinear charge mixing，不能把 charge 偷换成 `a_3`。
+
+若 law moment-determinate，取首个非零 odd Hermite coefficient `a_d`，则
+`beta_(d,1)=Lambda_d a_d`，其中
+
+`Lambda_d=3(sqrt(2/3)/2)^d binom(d,(d-3)/2)>0`。
+
+所以得到新的 angular asymmetry theorem：
+
+`chi_1=0 <=> mu symmetric`。
+
+定义 `S_3(t;mu)=sum_(m=3,5,...)t^(-m)|beta_(m,1)(mu)|^2` 与
+`tau_ang(mu)=inf{t in (0,1]:S_3(t;mu)<=1}`。任何 asymmetric genuine exact law
+都有 `tau_ang(mu)>0`，任何正的 exact preimage 都满足 `t>=tau_ang(mu)`；因而
+同一个 asymmetric exact base 的 positive backward OU depth 必有限。这是比只看
+`a_3` 更强的可独立报告弱定理，允许 asymmetry 首先出现在任意高 odd Hermite
+degree。
+
+逻辑边界必须保留：本结果对 varying-bottom sequence 不给 uniform `tau_ang` 下界，
+也没有得到 `P_3K != 0 => chi_1 != 0`。因此 `P_3K` 与 angular charge 的
+audited zero-set bridge、symmetric even-sector rigidity、以及完整 Positive
+Backward-Tower Exact Zero-Set Rigidity 仍 **OPEN**。若项目中 `RK=1` 尚未独立
+证明等价于 genuine full-exact law，则上述测度/矩恒等式只对 genuine full-exact
+class **PROVED**，对 bare scalar `RK=1` 为 **CONDITIONAL**。
+
+本节新增 `angular_charge_cone_r101/README.md` 与 `audit_r101.py`，审计状态为
+`R101_ANGULAR_HERGLOTZ_CHARGE_CONE_AUDIT_COMPLETED`。下一步只应核对原始
+`P_3K` 定义与 `chi_1` 的 zero-set 关系，若失败则转向另一个真正的 angular
+Fourier sector；不要再增加没有 charge 接口的低阶 moment minors。
