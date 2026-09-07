@@ -7202,3 +7202,20 @@ small-ball 或 positive backward tower。
 看不到的 four-term cancellation、低 gap subtraction 或可求和的 two-parameter
 envelope。因而 R98 后的 (g_2) 研究目标从“继续提高交换子阶数”收紧为“直接
 证明结构性中尺度 cancellation”。
+
+### 9.10 R98：actual `g2` 的 exact gap-6 lower anchor
+
+R71 切向生成函数满足 `U(z)=z^3/6+O(z^5)`。因此 R80 二阶方程
+`A V=-B` 的最低阶项为 `[z^6]B=C_(3,3)/36`。对
+`r_j=sqrt(2/3)cos(theta+2pi(j-1)/3)`，用
+`sum r_j=0`、`sum r_j^2=1` 及
+`r_1r_2r_3=(2/3)^(3/2)cos(3theta)/4`，精确得到
+`C_(3,3)=-7/72`。又 `A_(6)=5/18`，所以 `[z^6]V=7/720`。
+
+由于 `Tg2=V`，`g2` 的 normalized Hermite moment 是
+`eta_6=sqrt(6!)[z^6]V=7sqrt(5)/60`。于是对 `n>=6`，由 `e_6e_0=e_6`，
+`||Delta_6 B_n^(2)||>=7sqrt(5)/60`；加上负 gap 后
+`||B_n^(2)||_(W_n)>=7sqrt(5)/30`。
+
+这是 **PROVED exact lower anchor**，只排除 all-even-gap cancellation，
+不决定 `g2` 的全 gap 增长；`O(1)`、`Theta(log n)` 及其它 mesoscopic 行为仍 **OPEN**。

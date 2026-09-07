@@ -67,9 +67,22 @@ for r in range(2, 20):
     assert sp.Rational(r, 2) + sp.Rational(1 - r, 2) == sp.Rational(1, 2)
 assert sp.Rational(1, 2) < 1
 
+# Exact first nonzero Hermite mode of the actual R80 quadratic source.
+# With r_j=sqrt(2/3) cos(theta+2*pi*j/3), write p_ij=r_i*r_j.
+# The p_ij have sum -1/2, pairwise sum 0, and product (r1*r2*r3)^2.
+# Averaging (r1*r2*r3)^2 gives 1/108, hence sum p_ij^3=-7/72.
+C33 = -sp.Rational(1, 8) + 3 * sp.Rational(1, 108)
+assert C33 == -sp.Rational(7, 72)
+A6 = sp.Rational(3) * sp.Rational(1, 6) ** 3 * sp.binomial(6, 3)
+V6 = sp.simplify(-(C33 / 36) / A6)
+assert A6 == sp.Rational(5, 18)
+assert V6 == sp.Rational(7, 720)
+assert sp.sqrt(sp.factorial(6)) * V6 == 7 * sp.sqrt(5) / 60
+
 print("R98_EXACT_GAUSSIAN_MODE_COST_PASSED")
 print("R98_ACTUAL_K51_NONZERO_PASSED")
 print("R98_GROWING_RADIUS_RATIO_PASSED")
 print("R98_RENORMALIZED_ENDPOINT_COLUMN_MAJORANT_PASSED")
 print("R98_FINITE_COMMUTATOR_SQRTN_BARRIER_PASSED")
+print("R98_G2_GAP6_ANCHOR_PASSED")
 print("R98_CGAMMA_ZERO_ENDPOINT_OBSTRUCTION_COMPLETED")

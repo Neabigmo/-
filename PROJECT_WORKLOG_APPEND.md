@@ -3406,3 +3406,18 @@ computation was used.
   可求和 two-parameter envelope。
 - R98 审计新增 `R98_FINITE_COMMUTATOR_SQRTN_BARRIER_PASSED`；高阶端点常数
   `C_r` 本身仍未假定有限。
+
+## R98 实际 `g2` 的 exact gap-6 lower anchor（2026-09-07）
+
+- 从 R71 的 `U(z)=z^3/6+O(z^5)` 和 R80 的二阶方程 `A V=-B`，得到
+  `[z^6]B=C_(3,3)/36`。对
+  `r_j=sqrt(2/3)cos(theta+2pi(j-1)/3)`，精确角向恒等式给出
+  `C_(3,3)=-7/72`，而 `A_(6)=5/18`。
+- 因此 `[z^6]V=7/720`，实际 `g2` 的 normalized Hermite moment 为
+  `eta_6=7sqrt(5)/60`。由于 `e_6e_0=e_6`，对 `n>=6` 有
+  `||Delta_6 B_n^(2)||>=7sqrt(5)/60`，并由 Hermitian symmetry 得
+  `||B_n^(2)||_(W_n)>=7sqrt(5)/30`。
+- 这是 actual R80 `g2` 的严格 nonzero gap anchor，不是增长率结论；它排除
+  了“所有 even gaps 被四项结构消掉”的错误猜想。`O(1)`、`Theta(log n)` 或更大
+  的 mesoscopic summability 仍 OPEN。审计新增
+  `R98_G2_GAP6_ANCHOR_PASSED`。

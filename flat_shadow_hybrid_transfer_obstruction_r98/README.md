@@ -169,3 +169,41 @@ kernel envelope.
 Audit command:
 
 `F:/anaconda3/python.exe flat_shadow_hybrid_transfer_obstruction_r98/audit_r98.py`
+
+## 6. An exact nonzero gap-6 anchor for the actual `g2`
+
+The preceding barrier does not determine whether the full `g2` gap-Wiener
+norm is bounded, logarithmic, or larger.  There is nevertheless an exact
+finite-degree anchor which is useful for checking every proposed cancellation.
+From the R71 tangent representation,
+
+`U(z)=z^3 integral_0^1 q_s exp(-q_s z^2)(1-q_s z^2/2) ds`
+`=z^3/6+O(z^5)`.
+
+Hence the quadratic source in the R80 equation `A V=-B`,
+`B=average_theta sum_(i<j)U(r_i z)U(r_j z)`, has
+
+`[z^6]B=C_(3,3)/36`,
+`C_(3,3)=average_theta sum_(i<j)r_i^3r_j^3`.
+
+For `r_j=sqrt(2/3) cos(theta+2 pi(j-1)/3)`, the identities
+`sum_j r_j=0`, `sum_j r_j^2=1`, and
+`r_1r_2r_3=(2/3)^(3/2) cos(3 theta)/4` give
+`C_(3,3)=-7/72`.  Since `A_(6)=5/18`, the first quadratic coefficient is
+
+`[z^6]V=-(C_(3,3)/36)/A_(6)=7/720`.
+
+Because `T g2=V`, its normalized Hermite moment is therefore
+`eta_6=sqrt(6!)[z^6]V=7 sqrt(5)/60`.  The exact product identity
+`e_6 e_0=e_6` then gives, for every `n>=6`,
+
+`(B_n^(2))_(6,0)=eta_6`,
+`||Delta_6 B_n^(2)||op >=7 sqrt(5)/60`.
+
+Hermitian symmetry supplies the opposite gap, so
+
+`||B_n^(2)||_(W_n) >=7 sqrt(5)/30` for `n>=6`.
+
+This is a strict lower anchor for the actual R80 multiplier, not a claim of
+growth.  It rules out any proposed argument which annihilates all even gaps;
+the unresolved issue remains the summation over the mesoscopic gaps.
