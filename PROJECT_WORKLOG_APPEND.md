@@ -4496,8 +4496,9 @@ hierarchy 中构造非负 polynomial certificate `P_M(X)^2`，争取证明
   所有 `M` 的一致对角极限仍可由 Hamburger theorem 产生 genuine law。
 - exact row 的最高 moment triangular coefficient 为
   `R_r=(2^r/3^(r-1))y_{2r}+P_r(y0,...,y_{2r-1})-2^r r!`；relaxed finite
-  sets compact，`GammaHat_M` 取得最大值并单调不增；genuine `Gamma_M` 也取得
-  最大值，并可由至多 `2M+1` 原子的 cubature 实现。
+  sets compact，`GammaHat_M` 取得最大值并单调不增；genuine `Gamma_M` 保证有限，
+  但 finite-level 顶阶矩可能泄漏到无穷，不能一般性声称取得最大值。若某层
+  genuine extremizer 存在，才可由至多 `2M+1` 原子的 cubature 实现。
 - 主要小定理 **R125-A**：若 `Gamma_infty` 是 genuine full-exact class 的最大
   cubic skew，则
   `lim_M Gamma_M=lim_M GammaHat_M=Gamma_infty`，从而

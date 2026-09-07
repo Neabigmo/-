@@ -76,8 +76,11 @@ lower moments 中。
 `|y_(2r+1)|^2<=y_(2r)y_(2r+2)`；因此 `GammaHat_M` 取得最大值并随 M 不增。
 
 对 `M>=2`，R124 bootstrap 给 genuine `E|X|^(2M)<=4^M M!`，所以
-`Gamma_M` 也取得最大值。Richter–Tchakaloff 给一个至多 `2M+1` 原子的 law
-保留 moments `0,...,2M`，因而保留所有前 M rows 和 cubic objective。
+`Gamma_M` 有限；但这个顶阶 bound 本身不足以保证顶阶矩在弱极限下连续，故
+不能一般性宣称 `Gamma_M` 取得最大值。若某一层确有 genuine extremizer，
+Richter–Tchakaloff 才能把它替换为至多 `2M+1` 原子的 law，保留 moments
+`0,...,2M`、所有前 M rows 和 cubic objective。R126 的 `M=3` 例子明确显示
+genuine supremum 可以不取得。
 
 ## 5. R125-A：genuine 与 relaxed 半径的渐近完全相同（PROVED）
 
@@ -156,9 +159,11 @@ radial identity；不能从 approximation 本身推出 cubic zero。
 
 ## 9. 证据等级与 R126
 
-PROVED / ANALYTICALLY PROVED：finite-row triangular moment structure；两类半径
-的 extremizer；relaxed 与 genuine 半径渐近完全相同；固定非零 gap 的 no-purely-
-formal escape；growing Fourier window；Laguerre–Christoffel anti-atomicity。
+PROVED / ANALYTICALLY PROVED：finite-row triangular moment structure；relaxed
+半径的 extremizer、genuine 半径的有限性；relaxed 与 genuine 半径渐近完全相同；
+固定非零 gap 的 no-purely-formal escape；growing Fourier window；Laguerre–
+Christoffel anti-atomicity。genuine 半径的有限层 attainment 不作一般性断言，
+R126 给出 `M=3` 不取得的修正。
 
 CONDITIONAL：若 cubic exclusion 成立，则 `Gamma_M->0` 和 `GammaHat_M->0`；
 这只是等价重写，不是本轮证明。

@@ -9433,9 +9433,11 @@ exact row 最高 moment 的 triangular coefficient 为
 `R_r(y)=(2^r/3^(r-1))y_(2r)+P_r(y_0,...,y_(2r-1))-2^r r!`。
 
 有限 relaxed 集合的 even moment caps 与 Hankel `2x2` minors 给 compactness，
-故 `GammaHat_M` 取得最大值且单调不增。genuine `Gamma_M` 也由 R124 的
-finite-row moment bootstrap 取得最大值，并可用至多 `2M+1` 原子的
-Richter–Tchakaloff cubature 实现。
+故 `GammaHat_M` 取得最大值且单调不增。genuine `Gamma_M` 由 R124 的
+finite-row moment bootstrap 保证有限，但顶阶矩在弱极限下未必连续，不能一般性
+宣称 finite-level genuine supremum 取得；若某层有 genuine extremizer，才可用
+至多 `2M+1` 原子的 Richter–Tchakaloff cubature 实现。R126 的 `M=3` 给出
+不取得的明确修正。
 
 定义 `Gamma_infty` 为 genuine full-exact class 的最大 cubic skew。对 genuine
 extremizers 使用 R124 compactness，对 relaxed maximizers使用 coordinate diagonal
