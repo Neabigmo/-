@@ -3766,3 +3766,35 @@ computation was used.
 - 当前下一轮保持四点，不升级五点：**Four-Point Shear–Bispectrum Alignment
   Lemma**。只有 genuine characteristic phase lift 保留 nonzero shear cocycle
   时，才进入五点 Gram。
+
+# 2026-09-07 — R109 Parallelogram Bochner cocycle disk 与 exactness gap
+
+- 网页端 R109 证明：四点 `Gamma_4>=0` 加 full-exact ellipse average 不能单独
+  推出 pointwise shear alignment。沿 `{0,s}` 公共 edge 的四频率 Gram 精确分解为
+  `1/(1-|phi(s)|^2)*[[Delta_0,N],[conj(N),Delta_1]]`，故得到无松常数的
+  `|N|^2<=Delta_0Delta_1` sharp cocycle disk。
+- 用 `B(s,t)=ab conj(c)`、`B(s,s+t)=ac conj(d)` 的两个 phase 定义
+  `eta=delta_0-delta_1`，可行域是单位圆与闭盘的交集，通常为 arc 而非点。
+  Gaussian 四频率 kernel 严格正定，alignment point 位于 disk 严格内部；这给出
+  四点 pointwise PSD 没有 equality-rigidity 的 no-go。
+- R107 genuine OU-smoothed asymmetric law 确实实现 nonzero shear：
+  `eta=-lambda^(3/2)s^2(s+t)+O(5)`，同时所有四点 Gram 自动 PSD；但其 exactness
+  六阶缺陷为 `[z^6](Z-1)=-lambda^3/864`，沿 `z=iy` 为
+  `Z(iy)=1+lambda^3y^6/864+O(y^8)`。R104 formal exact cascade 可保留 nonzero
+  shear，却没有 probability realization。真正 OPEN 是两者交集。
+- R109 明确了与主命题同层级的逻辑：在 genuine full-exact class 内，shear
+  alignment 与排除 asymmetric exact law 等价，不能冒充独立中间定理。
+- 得到真正缺失的充分输入：exact ellipse 上逐点
+  `|B(s,s+t)|<=exp(-y^2/2)` 的 elliptic modulus saturation。它与 exact average
+  通过三重等号强制 `delta=0`，再由 centered Cauchy 方程推出 `P_3K=0`；更强的
+  `|phi(r)|<=exp(-r^2/2)` 可直接推出该 majorant。varying-bottom tower 能否
+  给出 uniform modulus domination 仍 **OPEN**。
+- 本机新增 `parallelogram_bochner_cocycle_r109/README.md` 与 `audit_r109.py`。
+  审计通过：`R109_PARALLELOGRAM_SCHUR_DECOMPOSITION_PASSED`、
+  `R109_COCYCLE_DISK_FACTORIZATION_PASSED`、
+  `R109_SHEAR_AND_DEGREE6_EXACTNESS_GAP_PASSED`、
+  `R109_ELLIPTIC_PRODUCT_GEOMETRY_PASSED`、
+  `R109_PARALLELOGRAM_BOCHNER_COCYCLE_AUDIT_COMPLETED`。
+- 下一轮不升五点，定为 **Elliptic Modulus-Saturation Lemma**：从 difference data、
+  cocycle disk 和 positive backward-preimage cone 推进局部 product majorant；
+  只有 genuine obstruction 出现才进入五点 Gram。

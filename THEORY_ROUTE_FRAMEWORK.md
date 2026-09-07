@@ -7953,3 +7953,121 @@ rigidity 也仍为 **OPEN**。
 characteristic neighborhood 内，证明或反驳上述四点条件是否推出
 `delta(s,t)=delta(s,s+t)`。只有找到保留 nonzero shear cocycle 的 genuine
 characteristic phase lift，才进入五点 Gram。
+
+## 9.21 R109：Parallelogram Bochner cocycle disk 与 exactness gap
+
+网页端 R109 对 R108 的 Shear–Bispectrum Alignment Lemma 给出了否定性的独立
+判决：四点条件本身不能推出 pointwise shear alignment。它同时给出一个 sharp
+cocycle disk，并把真正缺失的机制压缩为 elliptic modulus saturation；这不是
+退回三点，而是对“exact average 如何变成 pointwise 控制”的精确定位。
+
+### 9.21.1 公共 edge Schur 分解
+
+令 `a=phi(s)`、`b=phi(t)`、`c=phi(s+t)`、`d=phi(2s+t)`。频率集合
+`{0,s,s+t,2s+t}` 的 Gram 为
+
+`G_4=[[1,conj(a),conj(c),conj(d)],
+     [a,1,conj(b),conj(c)],
+     [c,b,1,conj(a)],
+     [d,c,a,1]]>=0`。
+
+沿公共 edge `{0,s}` 做 Schur 消元，令
+
+`Delta_0=1+2Re(a*b*conj(c))-|a|^2-|b|^2-|c|^2`、
+`Delta_1=1+2Re(a*c*conj(d))-|a|^2-|c|^2-|d|^2`，
+
+`N=conj(a)(1-|a|^2+|c|^2)-b*conj(c)-c*conj(d)+a*b*conj(d)`。
+
+则在 `0<|a|<1` 时
+
+`G_4/A_s=(1/(1-|a|^2))*[[Delta_0,N],[conj(N),Delta_1]]`，
+
+从而四点 PSD 的新增条件精确为
+
+`|N|^2<=Delta_0*Delta_1`。
+
+这是 R109-A 的 sharp four-point cocycle inequality；本机
+`parallelogram_bochner_cocycle_r109/audit_r109.py` 已精确核验矩阵分解。
+
+### 9.21.2 shear phase 的圆盘而非等式
+
+若 `r_0=|a|`、`r_1=|b|`、`r_2=|c|`、`r_3=|d|`，
+`delta_0=arg(ab*conj(c))`、`delta_1=arg(ac*conj(d))`、
+`eta=delta_0-delta_1`，则 `N=conj(a)Xi` 且
+
+`Xi=P+exp(-i*eta)Q`，
+
+`P=1-r_0^2+r_2^2-(r_1r_2/r_0)exp(i*delta_0)`、
+`Q=exp(i*delta_0)(-r_2r_3/r_0+r_1r_3exp(i*delta_0))`。
+
+因此 `exp(-i*eta)` 位于单位圆与闭圆盘的交集。一般该可行域是一个 arc，
+而不是单点；四点 pointwise PSD 没有自动强迫 `eta=0` 的 equality mechanism。
+
+Gaussian kernel 在四个频率互异时严格正定，故 `Delta_0>0`、`Delta_1>0`、
+`|N|^2<Delta_0Delta_1`。Gaussian alignment point 在 disk 严格内点，说明
+不存在仅依赖四点 PSD slack 的 pointwise phase-rigidity 证明。
+
+### 9.21.3 genuine 与 formal 的互补 obstruction
+
+R107 的 OU-smoothed asymmetric homometric law 是 genuine probability law，
+故原点邻域 zero-free 且所有 `Gamma_4` 自动 PSD；其
+`kappa_3=lambda^(3/2)` 给出
+
+`eta(s,t)=-lambda^(3/2)s^2(s+t)+O((|s|+|t|)^5)`。
+
+它实现了 `Gamma_4>=0` 但 `delta(s,t)!=delta(s,s+t)`。不过它不是 full-exact
+law。用 R103/R104 的 exactness functional `Z`，其六阶系数为
+
+`[z^6](Z-1)=(kappa_6+3kappa_3^2)/2592=-lambda^3/864`，
+
+沿 `z=iy` 则
+`Z(iy)=1+lambda^3 y^6/864+O(y^8)`。
+
+反过来，R104 的 formal exact Schur cascade 可保留
+`kappa_3!=0`、`kappa_6=-3kappa_3^2` 和 coefficientwise `Z=1`，但没有
+probability realization。因此真正 OPEN 的正是 genuine characteristic
+realization 与 full exactness 的交集。
+
+### 9.21.4 Alignment 与主 asymmetric exclusion 同层级
+
+在 genuine full-exact analytic/MGF class 内，四点 Gram 与 ellipse identity 对
+每个 law 都自动成立；而 R108-E 已证明
+
+`delta(s,t)=delta(s,s+t) locally => P_3K=0`。
+
+结合 R102 的 `P_3K=0` 与 symmetry 接口，得到：在该 class 内，所有 law 都满足
+shear alignment 与排除 asymmetric genuine exact law 是同一个命题，R109 不是
+更弱的独立中间定理。
+
+### 9.21.5 真正缺失输入：elliptic modulus saturation
+
+一个足以关闭非对称 sector 的条件是 exact ellipse 上逐点满足
+
+`|B(s,s+t)|<=exp(-y^2/2)`、`6s^2+6st+2t^2=y^2`。
+
+由于 exactness 给出 `<B(s,s+t)>_{E_y}=exp(-y^2/2)`，有
+
+`exp(-y^2/2)=|<B>|<=<|B|> <= exp(-y^2/2)`。
+
+故所有不等式取等，`B` 逐点正且模长饱和；局部 Cauchy 方程、centered 条件和
+解析唯一性推出 `vartheta=0`、`P_3K=0`。更强但更简单的充分条件是局部
+`|phi(r)|<=exp(-r^2/2)`，它通过
+`s^2+(s+t)^2+(2s+t)^2=y^2` 立即推出 product majorant。
+
+这说明 positive backward divisibility 可能需要贡献的不是更多 pointwise Gram，
+而是一个 uniform modulus domination/saturation mechanism；varying-bottom tower
+能否提供它仍为 **OPEN**。
+
+### 9.21.6 证据边界与 R110
+
+本机新增 `parallelogram_bochner_cocycle_r109/README.md` 与 `audit_r109.py`，
+核验了 parallelogram Gram、公共 edge Schur 分解、cocycle disk factorization、
+shear 三阶展开、六阶 exactness gap 和椭圆 product geometry。R109 的 sharp
+四点 disk 与 genuine/formal obstruction 分别标为 **PROVED / LOCAL-AUDITED**、
+**ANALYTICALLY PROVED** 与 **FORMAL**；elliptic modulus saturation、asymmetric
+genuine exact-law exclusion 和最终 positive backward-tower rigidity 继续
+**OPEN**。
+
+下一轮不升五点，先攻 **Elliptic Modulus-Saturation Lemma**：从 Schur–Abel
+difference data、四点 cocycle disk 与 positive backward-preimage cone 出发，
+证明或反驳局部 product majorant。只有出现 genuine obstruction，才进入五点 Gram。
