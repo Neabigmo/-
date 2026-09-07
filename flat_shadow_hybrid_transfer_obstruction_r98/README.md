@@ -82,7 +82,59 @@ This is a small publishable obstruction: it rules out the most immediate
 relative-hybrid transfer formulation and sharply identifies the required
 renormalization before attempting a nonlinear all-degree closure.
 
+## 4. A positive endpoint theorem after renormalization
+
+At `a=0`, define the renormalized mode cost (for `n>=j+1`)
+
+`GammaHat_(0,n,j)=R_n^(-(2j+1)) Gamma_(0,n,j)`.
+
+The positive-coefficient Hermite recurrence
+
+`A_(m+1)(R)=(R A_m(R)+sqrt(m) A_(m-1)(R))/sqrt(m+1)`
+
+and `A_(m-1)/A_m<=sqrt(m)/R` imply, for `k=j+D`, `n>=k+1`,
+
+`A_(2k+1)(R_n)/A_(2j+1)(R_n)`
+`<=R_n^(2D)(55/54)^(2D)/sqrt((2j+2)_(2D))`.
+
+Indeed every intermediate degree is at most `2n`, while
+`(2n)/R_n^2<1/54`.  Also
+
+`c_(j+D)/c_j=product_(t=1)^D (j+t)^2/[(2j+2t-1)(2j+2t)] <=2^(-D)`.
+
+Consequently, with the explicit constant
+
+`rho_*=(55/54)^2/2=3025/5832<1`,
+
+`GammaHat_(0,n,j+D)/GammaHat_(0,n,j) <=rho_*^D`.
+
+This removes the false `R_n^(2D)` growth from the mode ratio.  Combining it
+with the already proved R91 mesoscopic weighted column estimate and the R92
+factorial all-gap majorant gives the following interior-column theorem:
+
+`sup_(n>=1,j>=1) sum_(k=j+3)^(n-1)
+ |K_(k,j)^(n)| GammaHat_(0,n,k)/GammaHat_(0,n,j) < infinity`.
+
+For `2<=D<=j/8`, use `w_(j+D+1)/w_j>=1` and `rho_*^(D+1)<=1` to dominate by
+the R91 bound.  For `D>=j/8`, use `j<=8D`, the R92 terms with bases `3^D/D!`
+and `4^D/D!`, and multiply by `rho_*^(D+1)`; the resulting polynomial-times-
+factorial series converges by the ratio test.  The first finite head is
+handled by the exact R82 channels.  The statement is deliberately restricted
+to `n>=k+1`, where the odd mode is present in the `2n` moment projection.
+
+Thus the corrected endpoint picture is two-sided:
+
+- the unrenormalized R97 `Gamma` criterion is **PROVED false** at `a=0`;
+- the explicit degree-renormalized `GammaHat` column criterion is **PROVED for
+  the interior Gaussian endpoint**, conditional only on the formal R91/R92
+  kernel identities already audited;
+- transporting this renormalization to fixed nonzero `a`, controlling the
+  residual nonlinear map, and treating the horizon boundary remain **OPEN**.
+
+The renormalized cost is not yet a positivity theorem: it repairs the linear
+mixed feedback scale, while the centered Gram small-ball estimate and the
+positive backward tower still require separate arguments.
+
 Audit command:
 
 `F:/anaconda3/python.exe flat_shadow_hybrid_transfer_obstruction_r98/audit_r98.py`
-

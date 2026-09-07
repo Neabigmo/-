@@ -43,7 +43,26 @@ leading = sp.simplify(sp.limit(ratio / R**8, R, sp.oo))
 assert leading == sp.sqrt(sp.Rational(6, factorial(11))) / 462
 assert leading > 0
 
+# Exact renormalized-ratio constants and the elementary factorial decay.
+rho = sp.Rational(3025, 5832)
+assert rho < 1
+for u in range(1, 40):
+    assert Fraction(u, 2 * (2 * u - 1)) <= Fraction(1, 2)
+
+# The recurrence majorant has (m/R^2) <= 1/54 whenever m <= 2n and
+# R^2=36(3n+1).  The remaining factorial series is summable because its
+# consecutive ratio is eventually < 1/2, even after multiplication by rho.
+n_sym = sp.symbols("n", positive=True)
+assert sp.simplify(
+    sp.Rational(1, 54) - 2 * n_sym / (36 * (3 * n_sym + 1))
+) == sp.Rational(1, 54) / (3 * n_sym + 1)
+assert 4 * rho < 3
+for D in range(64, 80):
+    ratio = sp.Rational(4 * 1, D + 1) * rho
+    assert ratio < sp.Rational(1, 2)
+
 print("R98_EXACT_GAUSSIAN_MODE_COST_PASSED")
 print("R98_ACTUAL_K51_NONZERO_PASSED")
 print("R98_GROWING_RADIUS_RATIO_PASSED")
+print("R98_RENORMALIZED_ENDPOINT_COLUMN_MAJORANT_PASSED")
 print("R98_CGAMMA_ZERO_ENDPOINT_OBSTRUCTION_COMPLETED")

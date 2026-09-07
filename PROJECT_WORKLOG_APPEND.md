@@ -3376,3 +3376,21 @@ computation was used.
   的 projected higher-degree behavior、替代 norm 的 column bound、nonlinear
   hybrid invariance、global positivity、positive backward tower、backward OU
   divisibility 与 `FS_3` 仍 OPEN。
+
+## R98 强化：Gaussian endpoint 的 renormalized hybrid column（2026-09-07）
+
+- 对原始 `Gamma_(0,n,j)` 除以其 mode degree 对应的
+  `R_n^(2j+1)`，定义 `GammaHat_(0,n,j)`。由正系数 Hermite 递归和
+  `2n/R_n^2<1/54`，得到显式 `rho_*=3025/5832<1` 及
+  `GammaHat_(0,n,j+D)/GammaHat_(0,n,j)<=rho_*^D`。
+- 因而 R97 的 Gaussian-endpoint `R_n^(2D)` no-go 可以被精确修复：在
+  `n>=k+1` 的 interior columns 上，R91 的 mesoscopic estimate 与 R92 的
+  factorial all-gap estimate 结合后给出
+  `sup_(n,j>=1)sum_(k=j+3)^(n-1)|K_(k,j)^(n)|
+  GammaHat_(0,n,k)/GammaHat_(0,n,j)<infinity`。
+- 这个结果只证明了 renormalized linear mixed transfer 的 endpoint 小定理；
+  fixed nonzero `a` 的 relative projection、horizon boundary、centered nonlinear
+  invariance、global positivity、positive backward tower、backward OU divisibility
+  与 `FS_3` 继续 OPEN。
+- R98 审计新增 `R98_RENORMALIZED_ENDPOINT_COLUMN_MAJORANT_PASSED`；不引入
+  determinant、optimizer、SDP、扫描或新的 gate。

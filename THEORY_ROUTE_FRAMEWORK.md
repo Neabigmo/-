@@ -7139,3 +7139,42 @@ renormalized column bound 与 nonlinear invariance 仍保持 OPEN。
 本机小定理状态：`C_Gamma(0)=infinity` 为 PROVED；uniform neighborhood transfer
 用原始 `Gamma` 为严格 NO-GO；replacement norm、fixed nonzero `a`、global
 positivity、positive backward tower、backward OU divisibility 与 `FS_3` 仍 OPEN。
+
+### 9.8 R98 强化：Gaussian endpoint 的 degree-renormalized hybrid column theorem
+
+原始 `Gamma` 的失败并不意味着 hybrid transfer 本身失败，而是指出
+`P_(a,n)` 的 growing radius 必须从 mode ratio 中除去。`a=0` 时令
+
+`GammaHat_(0,n,j)=R_n^(-(2j+1))Gamma_(0,n,j)`、`R_n=6sqrt(3n+1)`。
+
+若 `A_m(R)` 是 `e_m` 的绝对 monomial coefficient sum，则正系数 Hermite 递归为
+
+`A_(m+1)=(R A_m+sqrt(m)A_(m-1))/sqrt(m+1)`，
+
+且 `A_(m-1)/A_m<=sqrt(m)/R`。在 `k=j+D`、`n>=k+1` 时，中间次数不超过 `2n`，
+所以 `2n/R_n^2<1/54`，从而
+
+`A_(2k+1)(R_n)/A_(2j+1)(R_n)`
+`<=R_n^(2D)(55/54)^(2D)/sqrt((2j+2)_(2D))`。
+
+另一方面
+`c_(j+D)/c_j=product_(t=1)^D(j+t)^2/[(2j+2t-1)(2j+2t)]<=2^(-D)`。
+定义 `rho_*=((55/54)^2)/2=3025/5832<1`，得到 exact usable ratio bound
+
+`GammaHat_(0,n,j+D)/GammaHat_(0,n,j)<=rho_*^D`。
+
+这消除了原始 `Gamma` 的 `R_n^(2D)` 爆炸。与 R91 的 `D<=j/8` weighted column
+bound 合并，再对 `D>=j/8` 使用 R92 的 `3^D/D!`、`4^D/D!` all-gap majorant，
+乘以 `rho_*^(D+1)` 后得到 polynomial-times-factorial 的收敛级数。因此在
+odd mode 已被 `2n` moment projection 包含的 interior range `n>=k+1` 上，得到
+
+`sup_(n>=1,j>=1)sum_(k=j+3)^(n-1)|K_(k,j)^(n)|
+ GammaHat_(0,n,k)/GammaHat_(0,n,j)<infinity`。
+
+这是一个新的小定理：**PROVED**（在已审计的 formal R91/R92 kernel 身份下）
+Gaussian endpoint 的 renormalized linear hybrid transfer；同时
+`C_Gamma(0)=infinity` 的 unrenormalized no-go 仍成立。fixed nonzero `a` 的
+background projection 会生成 higher-degree components，故其 renormalized ratio、
+horizon boundary、nonlinear centered invariance 与 positivity 仍 **OPEN**。
+该结果修复的是 mixed coefficient feedback 的尺度，不等于已经证明 Gram
+small-ball 或 positive backward tower。
