@@ -3353,3 +3353,26 @@ computation was used.
 本段对应网页 R97 的实际强化结论；本机审计目标仍为
 `R97_BACKGROUND_CENTERED_AUDIT_COMPLETED`，并应复跑 R95/R96 审计以确认记录未破坏既有
 精确核验链。
+
+## R98 本机先行结果：原始 growing-radius Γ hybrid 的严格 endpoint no-go（2026-09-07）
+
+- R97 的候选 `Gamma_(a,n,j)=P_(a,n)(h^(j))` 在 `a=0` 可完全写出：
+  `h^(j)=c_j e_(2j+1)`、`c_j=(j!)^2/(2j+1)!`，
+  `Gamma_(0,n,j)=c_j A_(2j+1)(R_n)`，`R_n=6sqrt(3n+1)`，其中 `A_m` 是
+  Hermite 多项式绝对 monomial coefficient sum。
+- 对固定 `D`，`Gamma_(0,n,j+D)/Gamma_(0,n,j)` 的最高次项给出精确渐近
+  `const_(j,D) R_n^(2D)`。这说明 growing-radius cost 对低阶输入与高阶输出的
+  比值本身携带 horizon 幂次。
+- R82 actual canonical mixed kernel 的 exact gap-four channel 在 `j=1` 为
+  `K_(5,1)=-271/3600`，且 finite section 达到该输出后不再依赖 `n`。因此
+  `C_Gamma(0)>=|K_(5,1)|Gamma_(0,n,5)/Gamma_(0,n,1)~const R_n^8`，从而
+  `C_Gamma(0)=infinity`。
+- 这严格否定“用原始 `Gamma` 在含 Gaussian endpoint 的小 `a` 邻域统一传递”。
+  它不否定 R92/R93 的 `ell^1(w)` closure，因为两者的 norm scaling 不同。
+  后续必须采用 `R_n^(-(2j+1))Gamma_(a,n,j)` 型 renormalization 或 degree-local
+  background/Jacobi cost，再重新检查 mixed feedback 与 centered equation。
+- 新增 `flat_shadow_hybrid_transfer_obstruction_r98/README.md` 与
+  `audit_r98.py`。状态边界：`C_Gamma(0)=infinity` 为 PROVED；fixed nonzero `a`
+  的 projected higher-degree behavior、替代 norm 的 column bound、nonlinear
+  hybrid invariance、global positivity、positive backward tower、backward OU
+  divisibility 与 `FS_3` 仍 OPEN。

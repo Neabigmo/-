@@ -7093,3 +7093,49 @@ Gram-transfer 条件是
 relative finite-horizon Gram theorem 与 `g_2` growing-gap bound 为 PROVED；
 actual branch 的 relative hybrid invariance、`C_Gamma`、mesoscopic `g_2` envelope、
 global positivity、positive backward tower、backward OU divisibility 与 `FS_3` 仍 OPEN。
+
+### 9.7 R98：R97 growing-radius Γ hybrid criterion 的 Gaussian-endpoint no-go
+
+R97 把 unit odd mode 的 Gram cost 定义为
+`Gamma_(a,n,j)=P_(a,n)(h^(j))`，并提出
+`C_Gamma(a)=sup_(n,j)Gamma_(a,n,j)^(-1)sum_kGamma_(a,n,k)|K_(k,j)^(n)|`。
+本轮本机把这个候选条件在最容易被误判的 `a=0` endpoint 精确否证。
+
+按 R92/R93 的实际 mode normalization，`h^(j)=c_j e_(2j+1)`、
+`c_j=(j!)^2/(2j+1)!`。当 `a=0` 时 relative projection 不改变该 mode，且
+R97 的 polynomial cost 精确为
+
+`Gamma_(0,n,j)=c_j A_(2j+1)(R_n)`、`R_n=6sqrt(3n+1)`，
+
+其中 `A_m(R)` 是 `e_m=H_m/sqrt(m!)` 的绝对 monomial coefficient sum。固定
+`j`、`D`，令 `k=j+D`，最高次项立即给出
+
+`Gamma_(0,n,k)/Gamma_(0,n,j)`
+`~(c_k/c_j)sqrt((2j+1)!/(2k+1)!)R_n^(2D)`。
+
+R82 的 actual canonical gap-four channel 为
+
+`K_(j+4,j)=-(3j^3+146j^2+1001j+1560)`
+`/[15(j+1)(j+2)(j+3)^2(j+4)^2]`，
+
+故 `K_(5,1)=-271/3600`。它对所有 `n>=5` 都是同一个非零有限-section
+channel，于是
+
+`C_Gamma(0)>=|K_(5,1)|Gamma_(0,n,5)/Gamma_(0,n,1)`，
+
+而右端按 `R_n^8` 发散。因此
+
+`C_Gamma(0)=infinity`。
+
+这不是 generic matrix obstruction，也不否定 R92/R93：后者使用的是去掉
+`n^j` 的 rescaled `ell^1(w)`，而 R97 的 `P_(a,n)` 把 growing radius 留在每个
+mode cost 中。结论是：R97 的 `C_Gamma` 不能在含 `a=0` 的邻域中原样使用；任何
+“小 a 统一有限”的证明都必须先改变 mode cost。自然替代是
+`GammaHat_(a,n,j)=R_n^(-(2j+1))Gamma_(a,n,j)`（至少在 Gaussian endpoint），
+或直接构造 degree-local background/Jacobi cost，使 fixed canonical channel ratio
+不携带 `R_n^(2D)`。对某个固定非零 `a` 的 projected higher-degree cost、其
+renormalized column bound 与 nonlinear invariance 仍保持 OPEN。
+
+本机小定理状态：`C_Gamma(0)=infinity` 为 PROVED；uniform neighborhood transfer
+用原始 `Gamma` 为严格 NO-GO；replacement norm、fixed nonzero `a`、global
+positivity、positive backward tower、backward OU divisibility 与 `FS_3` 仍 OPEN。
