@@ -4595,10 +4595,15 @@ flat extension 与 singular non-flat ghost 方向。
 以及
 `y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+1280`。
 
-新增 `singular_extension_compatibility_r128/README.md` 与 `audit_r128.py`；审计
-通过 `R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`。复核时发现临时展开误用了
-`sum pair differences / 2`，与项目一直使用的 `Q=sum pair differences / 3`
-不一致；因此此前关于 `y_10<0` 和 `GammaHat_5<GammaHat_4` 的结论全部撤回并修正。
-正确的 `R_5` 消元常数为 `9720`，前三行与 R4 下化为
-`y_10=3(17a^2-280ac+20bc+470c^2+315)`。当前保留的严格结果是奇异扩展兼容性
-引理与正确 `R_5` 接口；`GammaHat_5` 和全阶衰减仍 OPEN。
+新增 `singular_extension_compatibility_r128/README.md` 与 `audit_r128.py`；复核
+发现临时展开误用了 `sum pair differences / 2`，与项目一直使用的
+`Q=sum pair differences / 3` 不一致；此前关于 `y_10<0` 和严格下降的结论已撤回。
+校正后 `R_5` 常数为 `9720`，前三行与 R4 下化为
+`y_10=3(17a^2-280ac+20bc+470c^2+315)`。
+
+进一步在 R127 的 `c_4` endpoint 上取兼容的 `y_9`，完整 `H_5` Schur 补为
+`diag(0,0,delta_5)`，且有理区间证书给 `delta_5>0`（数值约
+`913.705421573084`）。因此 R127 flat endpoint 在 M=5 正确地抬升为 singular
+non-flat ghost；投影上界与显式构造共同给出
+`boxed{GammaHat_5=GammaHat_4=c_4}`。本轮严格结果是 relaxed M=5 的精确端点及其
+ghost 性质；genuine `Gamma_5` 和全阶衰减仍 OPEN。

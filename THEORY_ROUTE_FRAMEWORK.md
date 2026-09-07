@@ -9569,13 +9569,19 @@ R128 将 R126/R127 的有限层机制抽象为可复用引理。若
 `y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+1280`。
 
 注意归一化必须与 R124–R127 一致：`Q=(1/3)sum_{i<j}(X_i-X_j)^2`。
-此前曾用 `sum_{i<j}(X_i-X_j)^2/2` 做了临时展开，产生错误的 `R_5` 常数和
-虚假的 `GammaHat_5` 严格下降；该计算已撤回。正确消元为
+此前曾用 `sum_{i<j}(X_i-X_j)^2/2` 做临时展开，产生错误的 `R_5` 常数和
+虚假的严格下降；该计算已撤回。正确消元为
 `y_10=120y_3y_5+60y_3y_7-75y_4^2-90y_4y_6+51y_5^2-60y_6-30y_8+9720`，
 进一步在前三行、R4 下为 `y_10=3(17a^2-280ac+20bc+470c^2+315)`。
 
-因此 R128 当前严格结论是通用奇异核兼容性与正确 `R_5` 接口；`GammaHat_5`
-尚未计算，不能从错误归一化推断其与 `GammaHat_4` 的严格关系。下一步应在此
-校正后的接口上完成 `M=5` 的 singular/flat split。
+在 R127 的 flat endpoint 上，取 `y_9` 为新列兼容性值；R5 决定的 `H_5` Schur
+补恰为 `diag(0,0,delta_5)`，其中
+`delta_5=-18C(u_4)/(u_4-2)^2>0`。有理区间 `1.11<u_4<1.12` 给出
+`C(u_4)<0`，故这是 rank-4 的 singular non-flat ghost，而不是 representing
+measure。由于 `M=5` 投影包含于 `M=4` 可行集，同时该端点确实可构造，得到
+`boxed{GammaHat_5=GammaHat_4=c_4}`。这是一条新的严格有限层事实：relaxed radius
+在 M=5 不下降，但 extremizer 从 flat genuine 变成 singular ghost；`Gamma_5`
+和全阶 `Gamma_M->0` 仍 OPEN。
 本机新增 `singular_extension_compatibility_r128/` 并通过
-`R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`。`Gamma_M->0` 仍 OPEN。
+`R128_SINGULAR_EXTENSION_AUDIT_COMPLETED`，包含 Gaussian 归一化、R5 消元和
+ghost Schur 缺陷的区间证书。`Gamma_M->0` 仍 OPEN。

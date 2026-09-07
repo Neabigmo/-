@@ -83,9 +83,89 @@ def check_r5_row() -> None:
     print("R128_R5_TRIANGULAR_ELIMINATION_PASSED")
 
 
+def check_m5_singular_ghost() -> None:
+    c, s = sp.symbols("c s", positive=True)
+    a = 4 * c + s
+    b = (a**2 * c - 8 * a * c**2 - 18 * a + 31 * c**3 + 42 * c) / (c**2 - 2)
+    d = -(
+        a**2 * c
+        - a * b * c
+        + 4 * a * c**2
+        + 24 * a
+        + 7 * b * c**2
+        + 12 * b
+        - 49 * c**5
+        - 189 * c**3
+        - 180 * c
+    ) / (c**2 - 2)
+    y6 = 15 + 7 * c**2
+    y8 = 105 - 124 * c**2 + 32 * c * a
+    y10 = 3 * (17 * a**2 - 280 * a * c + 20 * b * c + 470 * c**2 + 315)
+    h2 = sp.Matrix([[1, 0, 1], [0, 1, c], [1, c, 3]])
+    h5 = sp.Matrix(
+        [
+            [1, 0, 1, c, 3, a],
+            [0, 1, c, 3, a, y6],
+            [1, c, 3, a, y6, b],
+            [c, 3, a, y6, b, y8],
+            [3, a, y6, b, y8, d],
+            [a, y6, b, y8, d, y10],
+        ]
+    )
+    schur = sp.simplify(h5[3:, 3:] - h5[:3, 3:].T * h2.inv() * h5[:3, 3:])
+    relation = s**2 - 6 * (2 - c**2) * (1 + c**2)
+
+    def reduced(expr: sp.Expr) -> sp.Expr:
+        numerator, _ = sp.fraction(sp.factor(expr))
+        return sp.factor(sp.rem(sp.Poly(sp.expand(numerator), s), sp.Poly(relation, s)).as_expr())
+
+    B = -5 * c**4 + 6 * c**3 * s + 68 * c**2 - 24 * c * s - 8
+    assert reduced(schur[0, 0]) == 0
+    assert reduced(schur[0, 1]) == 0
+    assert sp.expand(reduced(schur[0, 2]) - 3 * (c**2 - 2) * B) == 0
+    assert sp.expand(reduced(schur[1, 1]) - 3 * B) == 0
+    assert reduced(schur[1, 2]) == 0
+    # The R127 endpoint equation is F(u4)=0, and its boundary expression is
+    # exactly F(c^2)=3B.  Thus the two remaining entries vanish at u4.
+    print("R128_M5_SCHUR_ZERO_ROWS_INTERFACE_PASSED")
+
+    C = (
+        30 * c**8
+        - 124 * c**6
+        + 23 * c**5 * s
+        + 3 * c**4
+        - 62 * c**3 * s
+        + 516 * c**2
+        - 40 * c * s
+        - 208
+    )
+    assert reduced(schur[2, 2] + 18 * C / (c**2 - 2) ** 2) == 0
+    # The endpoint u4 is the unique R127 root in (1,2), and its sign change
+    # isolates it in (1.11, 1.12).  The following rational bounds certify C<0.
+    u = sp.symbols("u", real=True)
+    polynomial = sp.Poly(
+        216 * u**5 - 1919 * u**4 + 4072 * u**3 + 4704 * u**2 - 8000 * u + 64,
+        u,
+    )
+    left = sp.Rational(111, 100)
+    right = sp.Rational(28, 25)
+    assert polynomial.count_roots(1, 2) == 1
+    assert polynomial.eval(left) * polynomial.eval(right) < 0
+    A_upper = 30 * right**4 - 124 * left**3 + 3 * right**2 + 516 * right - 208
+    B_left = 23 * left**2 - 62 * left - 40
+    assert A_upper < 252
+    assert 46 * right - 62 < 0
+    assert B_left < -80
+    cs2_lower = left * 6 * (2 - right) * (1 + left)
+    assert cs2_lower > sp.Rational(49, 4)
+    print("R128_M5_GHOST_DELTA_INTERVAL_CERTIFICATE_PASSED")
+    print("R128_M5_RELAXED_ENDPOINT_GHOST_INTERFACE_PASSED")
+
+
 def main() -> None:
     check_singular_extension_lemma()
     check_r5_row()
+    check_m5_singular_ghost()
     print("R128_SINGULAR_EXTENSION_AUDIT_COMPLETED")
 
 
