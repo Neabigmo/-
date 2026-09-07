@@ -7404,3 +7404,49 @@ class **PROVED**，对 bare scalar `RK=1` 为 **CONDITIONAL**。
 `R101_ANGULAR_HERGLOTZ_CHARGE_CONE_AUDIT_COMPLETED`。下一步只应核对原始
 `P_3K` 定义与 `chi_1` 的 zero-set 关系，若失败则转向另一个真正的 angular
 Fourier sector；不要再增加没有 charge 接口的低阶 moment minors。
+
+### 9.14 R102：log-cumulant charge symmetry theorem
+
+网页端从早期 R4 的 angular MGF 记号恢复了 `P_3K` 的定义级接口。对 centered
+variance-one law `mu`，令 `M_mu(z)=E exp(zX)`、`K_mu=log M_mu`，并取
+`a_j(theta)=sqrt(2/3) cos(theta+2*pi*(j-1)/3)`。定义
+
+`mathscr K_mu(z,theta)=sum_j K_mu(z*a_j(theta))-z^2/2`,
+
+`P_3K(mu;z)=(1/(2*pi))*int exp(-3*i*theta)*mathscr K_mu(z,theta)dtheta`.
+
+由于 `sum a_j=0`、`sum a_j^2=1`，quadratic Gaussian 项完全消去。若
+`K_mu(z)=sum_(m>=1) kappa_m z^m/m!`，则 D3 root filter 给出精确公式
+
+`P_3K(mu;z)=sum_(m>=3, m odd) Lambda_m*kappa_m*z^m/m!`,
+
+`Lambda_m=3*(sqrt(2/3)/2)^m*binomial(m,(m-3)/2)>0`.
+
+本机 R102 exact audit 核验了该公式的 Laurent/Fourier 常数、`P_3K` 的
+累积量投影、反射律 `P_3K(check(mu))=-P_3K(mu)`、OU 协变
+`P_3K(P_t mu)(z)=P_3K(mu)(sqrt(t)*z)`，以及首个非零 odd sector 的
+`[z^d]P_3K=beta_(d,1)/sqrt(d!)`。因此在局部 MGF 存在且 MGF 唯一的范围内，
+
+`P_3K==0  iff  all odd cumulants vanish  iff  mu is symmetric`.
+
+结合 R101 genuine full-exact、moment-determinate class 中的
+`chi_1==0 iff mu symmetric`，得到该 class 内的 qualitative zero-set bridge
+`P_3K==0 iff chi_1==0`。这只是 zero-set 等价，不能把两个 observable
+相互替换；在首个非零 odd degree 才有上述精确线性比较，后续 degrees 有
+exponentiation-induced nonlinear mixing。
+
+这是战略性进展：若存在一个 asymmetric genuine full-exact law `h`，则
+`g_N^(j)=P_(q^(N-j))h` 自动给出任意深、正的 exact tower，且
+`P_3K(g_N^(0))(z)=P_3K(h)(q^(N/2)z)` 对每个有限 `N` 仍非零。故“任意深
+varying-bottom tower 的非零 charge”与“存在 asymmetric genuine exact law”
+在该 class 内等价；depth-independent 的普通 charge 振幅下界不可能成立。
+正确的 primitive target 必须先做 OU-invariant normalization，例如
+`Theta_ang=r(mu)^2*tau_ang(mu)`，而不是要求底层未归一化振幅 uniform noncollapse。
+
+本段的证据边界：R102 的有限公式与变换律已由
+`log_cumulant_charge_r102/audit_r102.py` exact audit；`P_3K` 定义本身的
+历史来源由网页端恢复，需与项目原始 R4 文本继续做 provenance 对照。上述
+zero-set bridge 对 genuine full-exact class 为 PROVED under the stated
+analytic/MGF hypotheses，对 bare scalar `RK=1` 仍 CONDITIONAL。asymmetric
+genuine exact law exclusion、primitive uniform closure、symmetric even sector
+和最终 Positive Backward-Tower Exact Zero-Set Rigidity 仍 OPEN。

@@ -3518,3 +3518,41 @@ computation was used.
 - R102 的唯一任务因此保持为：从项目原始定义回溯 `P_3K`，先完成定义和
   变换律审计，再决定是否存在 `chi_1` zero-set bridge；不得重复 R99/R100
   的低阶 cone，也不得猜测或偷换符号。
+
+# 2026-09-07 — R102 log-cumulant charge symmetry audit
+
+- 网页端从早期 R4 angular MGF 记号恢复了定义级接口：
+  `mathscr K_mu(z,theta)=sum_j K_mu(z*a_j(theta))-z^2/2`，其中
+  `K_mu=log M_mu`、`a_j=sqrt(2/3)cos(theta+2*pi*(j-1)/3)`；complex
+  harmonic-3 projection 定义为
+  `P_3K=(1/(2*pi))*int exp(-3*i*theta)*mathscr K_mu dtheta`。完整 cosine
+  convention 只差一个 factor two。
+- D3 root-filter 的 exact cumulant formula 是
+  `P_3K(mu;z)=sum_(m>=3, odd) Lambda_m*kappa_m*z^m/m!`，
+  `Lambda_m=3*(sqrt(2/3)/2)^m*binomial(m,(m-3)/2)>0`。这说明它检测
+  所有 odd cumulants，而非仅 `a_3`。
+- 本机新增 `log_cumulant_charge_r102/README.md` 与 `audit_r102.py`，并修正
+  一处首次运行时发现的 Laurent coefficient index 错误。最终 exact audit
+  通过：`R102_D3_GEOMETRY_AND_LAMBDA_CONSTANTS_PASSED`、
+  `R102_EXACT_CUMULANT_PROJECTION_PASSED`、
+  `R102_REFLECTION_AND_OU_COVARIANCE_PASSED`、
+  `R102_FIRST_ODD_SECTOR_BETA_COMPARISON_PASSED`、
+  `R102_LOG_CUMULANT_CHARGE_AUDIT_COMPLETED`；R101 回归审计也通过。
+- 定义级结论：反射下 `P_3K(check(mu))=-P_3K(mu)`，OU 下
+  `P_3K(P_t mu)(z)=P_3K(mu)(sqrt(t)z)`。在局部 MGF 唯一性下，
+  `P_3K==0 iff mu symmetric`；在 R101 genuine full-exact,
+  moment-determinate class 内，结合 `chi_1==0 iff mu symmetric`，得到
+  `P_3K==0 iff chi_1==0`。二者仍是不同 observable，只有首个非零 odd sector
+  的系数满足 `[z^d]P_3K=beta_(d,1)/sqrt(d!)`。
+- 重要路线重估：如果任一 asymmetric genuine full-exact law `h` 存在，则
+  `g_N^(j)=P_(q^(N-j))h` 是任意深 positive exact tower，底层趋近 Gaussian，
+  且 `P_3K` 作为 analytic germ 对每个有限 N 保持非零。于是 varying-bottom
+  tower 的 existence 与 asymmetric genuine exact-law existence 等价；不能
+  追求未经 OU 归一化的 depth-independent charge amplitude lower bound。真正
+  的终局变成排除 asymmetric genuine exact law，或证明 primitive OU-invariant
+  shape quantity 的 uniform gap。
+- 证据边界：R102 有限代数与变换律已 PROVED / locally audited；定义的历史
+  provenance 由网页端恢复，尚需与早期 R4 原文逐项对照。zero-set bridge 对
+  genuine full-exact class 在 analytic/MGF 假设下 PROVED；裸 `RK=1` 转移仍
+  CONDITIONAL。asymmetric law exclusion、primitive closure、even sector 和
+  final positive backward-tower rigidity 继续 OPEN。
