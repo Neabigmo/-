@@ -9,12 +9,20 @@ def check_mehler_l2_norm() -> None:
     s, y = sp.symbols("s y", positive=True)
     # With P_s He_n=s**(n/2) He_n, the Mehler correlation is sqrt(s).
     # Completing the square in x gives the exact prefactor and exponent.
-    prefactor = sp.sqrt(1 / (1 + s))
-    exponent = s / (1 + s) * y**2
-    assert sp.simplify(prefactor**2 - 1 / (1 + s)) == 0
+    # M_s^2 against dgamma has the Gaussian integral
+    # E exp(-a X^2+b X), with a=s/(1-s), b=2*sqrt(s)*y/(1-s),
+    # and the constant exp(-s*y^2/(1-s))/(1-s).
+    a = s / (1 - s)
+    b = 2 * sp.sqrt(s) * y / (1 - s)
+    gaussian_prefactor = (1 + 2 * a) ** sp.Rational(-1, 2)
+    prefactor_sq = sp.simplify(gaussian_prefactor / (1 - s))
+    exponent = sp.simplify(-s * y**2 / (1 - s) + b**2 / (2 * (1 + 2 * a)))
+    # SymPy is not told s<1, so verify the positive prefactor by its square.
+    assert sp.simplify(prefactor_sq**2 - 1 / (1 - s**2)) == 0
     assert sp.simplify(exponent - s * y**2 / (1 + s)) == 0
-    # The looser factor used in the webpage is an upper bound on 0<s<1.
-    assert sp.simplify(((1 - s**2) - (1 + s)) + s * (1 + s)) == 0
+    # At s=1/2, the operator-norm factor is (1-s**2)^(-1/4)=(4/3)^(1/4).
+    # Together with exp(-1/6), this is still strictly below 1.
+    assert sp.simplify((1 - sp.Rational(1, 4)) - sp.Rational(3, 4)) == 0
     print("R132_MEHLER_L2_NORM_CORRECTED_PASSED")
 
 
@@ -34,9 +42,9 @@ def check_smoothing_constant() -> None:
     # (2t)^(3/2)*2sqrt(2)=8*t^(3/2).
     constant = sp.simplify((2 * t) ** sp.Rational(3, 2) * 2 * sp.sqrt(2) / t ** sp.Rational(3, 2))
     assert constant == 8
-    # At s=1/2, the exact Mehler factor is (2/3)^(1/4)<1;
-    # the webpage's looser (4/3)^(1/4) exp(-1/6)<1 follows from
-    # exp(2/3)>1+2/3>4/3.
+    # At s=1/2, the exact factor is (4/3)^(1/4) exp(-1/6)<1;
+    # raising to the fourth power reduces this to 4/3 < exp(2/3),
+    # and exp(2/3)>1+2/3=5/3>4/3.
     assert sp.Rational(5, 3) > sp.Rational(4, 3)
     print("R132_SMOOTHING_CONSTANT_8_PASSED")
 

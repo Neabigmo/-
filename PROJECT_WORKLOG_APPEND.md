@@ -4845,11 +4845,13 @@ normalized Jacobi/Gram recurrence defect；这与
 
 在项目参数约定下，Mehler kernel `M_s` 的正确平方范数为
 
-`int M_s(x,y)^2 dgamma(x)=(1+s)^(-1/2) exp(s y^2/(1+s))`。
+`int M_s(x,y)^2 dgamma(x)=(1-s^2)^(-1/2) exp(s y^2/(1+s))`。
 
-网页正文写成 `(1-s^2)^(-1/2)` 是 exact identity 级别的笔误；它在 `0<s<1`
-上只构成较松的上界因子，所以不改变网页随后使用的 `||P_(1/2)h||_2<3` 和
-常数 `8`。本机审计已固定正确公式并确认最终上界安全。
+此前本机记录把 `(1+s)^(-1/2)` 误作精确前因子，实质是配方后漏掉了 `1-s`；
+网页写出的 `(1-s^2)^(-1/2)` 才是 exact identity。此修正不改变网页随后使用
+的 `||P_(1/2)h||_2<3` 和常数 `8`：在 `s=1/2` 时，精确算子因子为
+`(4/3)^(1/4)`，与尾界中的 `exp(-1/6)` 合并仍小于 `1`。本机审计脚本已改为
+直接核验精确前因子。
 
 ## 新的 log-density 局部桥
 
@@ -4882,3 +4884,66 @@ R132 的 uniformity 依赖 all-row exactness 产生的 square-exponential tail�
 从 exact same-factor identity 直接寻找 `P_3K` 到 normalized Gram determinant
 curvature 的 all-degree quantitative identity，或给出严格 no-go。仍不能把
 `m_3=0` 写成 `P_3K=0`，也不能把 scalar `RK=1` 写成 all-row/full-`Q` law。
+
+# 2026-09-08 — R133 首个奇阶 Jacobi 包与有限行盲区
+
+网页端 R133 完成了一个可保留的局部结构，但本机复核补上了两个边界：其一，
+“首个非零奇 Hermite/cumulant 阶数为 `d`”本身不足以推出低阶 moments 是
+Gaussian，必须先从 same-factor angular identity 的偶阶系数递推得到
+`kappa_4=...=kappa_{2d-2}=0`；其二，未平滑的顶层需要 `L^2`/解析性条件，
+否则 first-odd Jacobi theorem 只能用于 genuine smoothed level 或条件化陈述。
+
+在 genuine centered/variance-one analytic density、full same-factor identity
+`<exp(sum_j C_g(z r_j))>_theta=1` 下，若 `d=2s+1` 是首个非零奇阶，则
+
+`1-beta_{s+1}/(s+1)=binom(2s+1,s)a_d^2`,
+
+并且
+
+`D_{s+1}D_{s-1}/D_s^2-1=-binom(2s+1,s)a_d^2`。
+
+这是唯一末端 `2x2` Hermite Gram block 的 exact determinant，加上 Jacobi
+determinant dictionary 得到的 `PROVED` 局部包；对项目原始 scalar `RK=1`
+仍是 `CONDITIONAL`，因为 scalar 等式尚未被证明等价于 full exact law。
+
+若 `P_3K_sp` 按项目 convention 等价于
+`ell_3=<log g,psi_3>`，非零 charge 只保证某个 first odd packet 存在，不能
+保证 fixed positive gap。事实上令 `epsilon=||g-1||_2`，则
+`Delta_k<4^k epsilon^2`，`k=(d+1)/2`；在
+`k<=log_3(1/epsilon)` 时，`Delta_k<=epsilon^(2-log_3 4)->0`。这是一条严格
+`NO-GO`：R131 subcritical window 内首个 packet 不足以关闭 separation。
+
+网页端还给出 genuine finite-row blindness：对固定 `m>=2`，取
+`f∈C_c^infty((2,3))` 消去 `0,...,2m` 次 moments，令 `g=1+lambda f`。小
+`lambda` 时它是正的 centered/variance-one density，前 `m` 个 Jacobi rows
+完全 Gaussian，但
+`<log g,psi_3>=-lambda^2 int f^2 psi_3 dgamma/2+O(lambda^3) !=0`。
+这证明任何固定有限行信息都不够，是 `PROVED OBSTRUCTION`，不是 full
+same-factor exact 命题的反例。
+
+本机新增 `r133_first_odd_jacobi_audit/README.md` 与 `audit_r133.py`，通过：
+
+`R133_ANGULAR_EVEN_POSITIVITY_PASSED`
+
+`R133_FIRST_ODD_COMBINATORIAL_IDENTITY_PASSED`
+
+`R133_JACOBI_DETERMINANT_BLOCK_PASSED`
+
+`R133_4K_SUBCRITICAL_NO_GO_PASSED`
+
+`R133_FINITE_ROW_BLINDNESS_INTERFACE_PASSED`
+
+`R133_AUDIT_COMPLETED`
+
+另外纠正 R132 的 Mehler 平方范数记录：直接积分的 exact identity 是
+
+`int M_s(x,y)^2 dgamma(x)=(1-s^2)^(-1/2) exp(s y^2/(1+s))`，
+
+此前本机记录误写成 `(1+s)^(-1/2)`。在 `s=1/2` 时精确算子因子为
+`(4/3)^(1/4)`，和尾界的 `exp(-1/6)` 合并仍小于 `1`，所以 R132 的常数
+与结论不变；R132 审计脚本及路线框架已同步修正。
+
+下一轮唯一任务更新为 **R134 Critical-Layer Same-Factor Jacobi Cascade**：
+从 angular identity 推导全阶 cumulative normalized curvature 的
+energy/telescoping identity，或者严格证明其 obstruction；不得重复 R133，
+也不得把未经推导的 `9^m` amplification 写成结论。

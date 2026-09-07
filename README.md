@@ -15,6 +15,7 @@
 9. `r130_web_gap_audit/README.md`：网页端强 gap 的本机补证与常数审计。
 10. `r131_normalized_defect_audit/README.md`：genuine (L^2) 归一化缺陷接口与 M=7 exact algebra。
 11. `r132_exact_law_smoothing_audit/README.md`：all-row exact law 的统一 OU 平滑、log-density 弱桥接与障碍审计。
+12. `r133_first_odd_jacobi_audit/README.md`：首个奇 Hermite/Jacobi 精确包、有限行盲区与 R134 全阶 cascade 任务。
 
 ## 分支体系
 
@@ -36,7 +37,8 @@
 - R130：本机初证先给出 `\widehat\Gamma_6\le1.0535`；随后网页端给出更强的 endpoint-neighborhood 证书，经本机 `r130_web_gap_audit` 补齐常数后解析通过：`c_4-\widehat\Gamma_6>25/28196\approx8.8665\times10^{-4}`，故 `\widehat\Gamma_6<1.052702`。这仍是 relaxed finite-level 上界，不是 `\widehat\Gamma_6` 的精确值，也没有关闭 genuine 或正性/反向 OU 主线。
 - R131：对 genuine `d\mu=g d\gamma`、`g\in L^2(\gamma)`，`\varepsilon=\|g-1\|_2` 时，次数 `m` 的 Hermite Gram 满足 `\|G_m-I\|_{op}\le\varepsilon3^m`（以 Gaussian hypercontractivity 为标准输入），从而得到 normalized Jacobi coercivity；M=7 的最高奇矩不可见和 flat kernel 的 odd-freedom 计数也已精确审计。其 fixed-shift 传播必须同时要求 `\varepsilon3^{m+j}<1`。
 - R132：网页端证明：若 genuine centered/variance-one law 实际满足所有 exact rows `E Q^r=2^r r!`，则 Carleman 给出 `Q\sim\chi^2_2`，并有显式 `\|P_t h-1\|_2<8t^{3/2}`（`t\le1/2`）及相应 `L^p` 估计；进一步得到 `\|\log(P_t h)\|_2=O(t^{3/2})` 和 `P_3\log(P_t h)` 的 cubic 级弱桥接。普通 positivity/normalization/individual `L^2` 不足以给 uniform smoothing；只有 scalar `RK=1` 时仍不能自动套用 all-row 结论。
-- 当前下一步：直接攻击 `P_3K\ne0` 强迫 normalized recurrence defect 的 same-factor angular-to-Jacobi amplification；R132 已把 OU smoothing 与 log-density 小量这两侧的 genuine all-row 输入补齐，但 separation 与 exact-zero rigidity 仍 OPEN。
+- R133：在 genuine analytic full same-factor identity 下，若首个非零奇阶为 `d=2s+1`，则强制低于 `2d` 的偶 cumulants 消失，并得到精确 Jacobi 缺陷 `1-\beta_{s+1}/(s+1)=\binom{2s+1}{s}a_d^2`。本机已补上首个奇阶推理所需的假设边界、组合恒等式和 finite-row blindness genuine obstruction；首个 packet 在 R131 subcritical window 内不能产生 fixed gap。
+- 当前下一步：R134 **Critical-Layer Same-Factor Jacobi Cascade**，从 same-factor angular identity 推导全阶 cumulative normalized curvature 的 energy/telescoping 关系，或严格证明其 obstruction；不得把猜测的 `9^m` 放大当作结论。最终 separation 与 exact-zero rigidity 仍 OPEN。
 
 ## 证据等级
 

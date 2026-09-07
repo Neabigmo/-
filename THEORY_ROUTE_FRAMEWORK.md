@@ -9863,11 +9863,12 @@ window。该结论现在是 `PROVED`，但只在 genuine all-row exact class 内
 在上述参数约定下，若 `M_s` 是相对于 `gamma` 的 Mehler kernel，则直接配方给出
 
 `int M_s(x,y)^2 dgamma(x)
- = (1+s)^(-1/2) exp(s y^2/(1+s))`。
+ = (1-s^2)^(-1/2) exp(s y^2/(1+s))`。
 
-网页正文曾把精确前因子写成 `(1-s^2)^(-1/2)`。这不是精确恒等式，但在
-`0<s<1` 时是更松的上界因子，因此不破坏其 `||P_(1/2)h||_2<3` 与最终常数
-`8`；本机 R132 审计固定采用正确的 `(1+s)^(-1/2)`。
+此前记录把精确前因子误写成 `(1+s)^(-1/2)`，原因是配方后漏掉了 `1-s`；
+正确的 `(1-s^2)^(-1/2)` 才是 exact identity。本机 R132 审计现已改为直接
+核验该式。它在 `s=1/2` 时产生算子范数因子 `(4/3)^(1/4)`，与尾界中的
+`exp(-1/6)` 合并仍小于 `1`，故 `||P_(1/2)h||_2<3` 和后续常数 `8` 不变。
 
 ### 62.4 从正性到 log-density 的局部结果
 
@@ -9911,3 +9912,104 @@ R132 将下一轮唯一目标压缩为：从 exact same-factor identity 直接�
 identity，或给出严格 no-go。证据等级：R132 smoothing、`L^p`、log-density 弱桥接
 和 fixed-level Jacobi/log 关系为 `PROVED`（以标准 Gaussian 分析输入为前提）；
 scalar `RK=1` 应用和最终 separation 仍为 `CONDITIONAL/OPEN`。
+
+## 63. R133：首个奇阶 Jacobi 包与有限行盲区
+
+### 63.1 必须先固定的对象层级
+
+网页端本轮把空间 log-density
+`K_sp=log g`、`ell_3=<K_sp,psi_3>` 与 normalized Bargmann log
+`C_g=log B_g` 分开。一般 `C_g=log B(e^{K_sp})`，并不等于 `B(K_sp)`；因此
+只有在项目定义明确把 `P_3K_sp` 表示为 `ell_3` 时，才能把
+`P_3K_sp!=0` 直接代入下面的 charge 结论。
+
+同样，下面的 same-factor identity
+
+`< exp(sum_j C_g(z r_j(theta))) >_theta=1`,
+
+其中 `r_j=sqrt(2/3)cos(theta+2pi(j-1)/3)`，只在 genuine full exact law
+并具备原点解析性时使用。scalar `RK=1`、relaxed Hankel ghost 或未经平滑的
+非 `L^2` 顶层不能自动套用；对 `g=P_t h`、`t>0` 的 genuine smoothed level
+则可在相应解析性条件下应用。
+
+### 63.2 Theorem R133-A（首个奇阶精确包）
+
+设 `d=2s+1>=3` 是第一个非零奇 cumulant 阶数，`k=s+1`，并假设上述
+same-factor identity 成立。角平均的偶阶递推首先给出
+
+`kappa_4=kappa_6=...=kappa_{2d-2}=0`。
+
+这是关键逻辑补全：不能仅凭“首个非零奇阶为 d”就声称低阶 moments 全为
+Gaussian；必须先用 identity 的偶系数方程逐阶消去这些 even cumulants。于是
+到次数 `d+1` 为止，唯一非 Gaussian Hermite coordinate 是
+`a_d=kappa_d/sqrt(d!)`，并且
+
+`alpha_0=...=alpha_{s-1}=0`, `beta_j=j (1<=j<=s)`,
+
+`alpha_s=kappa_d/s!`,
+
+`1-beta_{s+1}/(s+1)
+ = alpha_s^2/(s+1)
+ = binom(2s+1,s)a_{2s+1}^2`.                         (R133-A)
+
+等价的 monic determinant 形式为
+
+`D_{s+1}D_{s-1}/D_s^2-1
+ = -binom(2s+1,s)a_{2s+1}^2`.                         (R133-A')
+
+证明是一个单一的末端 `2x2` Gram block：Hermite product formula 给出唯一
+非单位项 `G_{s,s+1}=sqrt(binomial(d,s))a_d`，其 determinant 为
+`1-binomial(d,s)a_d^2`；Jacobi dictionary
+`beta_j/j=D_jD_{j-2}/D_{j-1}^2` 与
+`d!/(s!^2(s+1))=binomial(d,s)` 完成等式。该条目在 genuine analytic
+full same-factor 假设下为 `PROVED`，对原始 scalar `RK=1` 接口仍是
+`CONDITIONAL`。
+
+若项目 convention 下 `P_3K_sp!=0` 等价于 `ell_3!=0`，则 `g` 非偶，因而
+存在某个首个奇阶 `d`，并得到某个 `k=(d+1)/2` 的严格缺陷。这里“严格”只
+表示对每个固定对象 `Delta_k>0`，不表示有与对象无关的 fixed positive gap，
+因为 `d` 可漂移且 `a_d` 可趋于零。
+
+### 63.3 首个 packet 的严格 no-go
+
+令 `epsilon=||g-1||_2`。Parseval 和 (R133-A) 给出
+
+`Delta_k<4^k epsilon^2`。
+
+若 `k<=log_3(1/epsilon)`，则
+
+`Delta_k<=epsilon^(2-log_3 4)->0`,
+
+因为 `4<3^2`。所以首个 odd packet 不能在 R131 的 subcritical normalized
+Gram window 内产生 fixed separation；剩余问题确实是跨 degree 的 cascade，
+而不是再优化同一首个 odd coefficient。
+
+### 63.4 Proposition R133-B（有限行 genuine blindness）
+
+固定 `m>=2`。可取非零 `f∈C_c^infty((2,3))` 满足
+`int x^r f dgamma=0`、`0<=r<=2m`。令 `g=1+lambda f`，并把 `lambda`
+取得足够小，则 `g` smooth、strictly positive、centered、variance-one，且
+前 `2m` 个 moments 与 Gaussian 完全一致，所以前 `m` 个 Jacobi 系数仍是
+`beta_j=j`。但因为 `psi_3>0` 于 `(2,3)`，
+
+`Q_f=int f^2 psi_3 dgamma>0`,
+
+且
+
+`<log(1+lambda f),psi_3>
+ = -lambda^2 Q_f/2+O(lambda^3)<0`。
+
+故任何固定有限行（即便允许 genuine positive density）都不能单独把 nonzero
+log charge 推成 finite Jacobi defect。这是 `PROVED` obstruction，不是原始
+全阶 same-factor exact 命题的反例；它也排除了把 R132 的 growing window 单独
+当作最终 rigidity 证明的做法。
+
+### 63.5 当前唯一下一步：R134 Critical-Layer Same-Factor Jacobi Cascade
+
+必须从 same-factor angular identity 推导跨所有 degree 的 cumulative normalized
+Jacobi curvature 的 energy/telescoping identity，或者严格给出其 obstruction。
+所需结果应明确输入（genuine positivity、full exact rows、(SF)、OU backward
+divisibility）和输出（可累积的 curvature charge、depth-independent lower
+bound 或相反的构造）。任何 `9^m` amplification 只能在精确 identity 推出后
+写入；不能用猜测替代证明。R133 本机审计目录为
+`r133_first_odd_jacobi_audit/`，marker 与 R132 精确 Mehler 修正均已记录。
