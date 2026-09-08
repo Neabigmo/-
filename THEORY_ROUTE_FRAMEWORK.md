@@ -10960,3 +10960,148 @@ Constant-Regression Rigidity**，研究
 `Lambda(a,z)=E[exp(aC-zR^2)]/E exp(aC)` 的 exact boundary 与 iid positive
 kernel 是否能推出 `-partial_z Lambda(a,0)=2`；若不能，给出 legal
 exponential-family no-go。
+
+## 75. R146：tilted sample-variance Laplace / Laguerre–heat（2026-09-08）
+
+网页端读取了 R145 公开记录并完成了本轮理论推导和全局发表性审计。严格
+判断仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+R146 的准确定位是一个可以进入未来论文的 probability-level lemma package，
+而不是已经独立闭合的投稿定理。记录与有限核验分别位于
+`r146_tilted_laguerre_heat_audit/README.md` 和
+`r146_tilted_laguerre_heat_audit/audit_r146.py`。
+
+### 75.1 tilted Laplace 与 Gaussian heat 表示
+
+令
+
+`C=(X_1+X_2+X_3)/sqrt(3)`、
+`Q=R^2=sum_j X_j^2-(sum_j X_j)^2/3`，并定义
+
+`Lambda(a,z)=E exp(aC-zQ)/E exp(aC)`。
+
+共同指数倾斜 `dmu_t=exp(tX-K(t))dmu`、`t=a/sqrt(3)` 给出 exact iid identity
+
+`Lambda(sqrt(3)t,z)=E_(mu_t tensor 3) exp(-zQ)`。
+
+若 `L(t,z)=E exp(tX-zX^2)`、`F(t,z)=E exp(t sum X_j-zQ)`，则
+
+`F(t,z)=P_(2z/3)[L(.,z)^3](t)`、`Lambda(sqrt(3)t,z)=F(t,z)/M(t)^3`。
+
+这里的 Gaussian heat 表示是 iid 特有的；它带来正源项，但没有给出所需的
+反向 coercivity。
+
+### 75.2 boundary、完全单调性与 cubic endpoint
+
+在 genuine full-SF/all-row 边界 `Q~chi^2_2` 下，
+
+`Lambda(0,z)=1/(1+2z)`，
+
+并且对每个固定 `a` 有
+
+`(-partial_z)^r Lambda(a,z)=E_(mu_t tensor 3)[Q^r exp(-zQ)]>=0`。
+
+边界一阶导数是
+
+`-partial_z Lambda(a,0)=2K''(a/sqrt(3))`。
+
+若有足够正规密度 `p_t`，则
+
+`lim_(z->infinity) 2z Lambda(sqrt(3)t,z)`
+`=2pi sqrt(3) integral p_t^3`。
+
+特别地，`t=0` 时 full-SF 给出 `2pi sqrt(3) integral p^3=1`。这是 cubic
+spatial escort 的 endpoint，但尚未闭合 ordinary-to-spatial `P_3K_sp` 桥。
+
+### 75.3 Laguerre spectrum：constant regression 的第一模
+
+置 `T=Q/2~Exp(1)`，以标准 Laguerre `L_m` 为基，令
+
+`ell_m(a)=E_a[L_m(Q/2)]`、`r=2z/(1+2z)`。
+
+Laguerre generating identity 给出
+
+`(1+2z)Lambda(a,z)=1+sum_(m>=1)ell_m(a)r^m`。
+
+第一模精确为
+
+`ell_1(a)=1-K''(a/sqrt(3))`。
+
+令 `W_a=exp(aC)/E exp(aC)`，则 tilted `Q`-边缘的 RN 导数为
+`E[W_a|Q]`，并在平方可积条件下
+
+`sum_(m>=1)ell_m(a)^2`
+`=chi^2(P_a^Q||chi^2_2)`
+`<=M(2a/sqrt(3))^3/M(a/sqrt(3))^6-1`。
+
+这给出了一个新的正谱接口，但不能排除 higher Laguerre modes 承载 tilted
+distortion，因此仍不能推出 `ell_1=0`。
+
+### 75.4 positive-source PDE 与 closure obstruction
+
+网页端得到
+
+`(partial_z+(2/3)partial_t^2)log F`
+`=6 Var_(nu_(t,z))(partial_y log L(y,z))>=0`。
+
+在 `t=0`，full-SF 边界推出
+
+`partial_t^2 log F(0,z)>=3/(1+2z)`，
+`partial_a^2 log Lambda(0,z)>=-2z/(1+2z)`，
+
+等价于 `Var_(0,z)(C)>=1/(1+2z)`。这是严格 curvature theorem，但 Gaussian
+本身有 slack，且 Gaussian 的正源在 `z>0` 也不为零。因此 heat/TP 不能凭单个
+边界值传播出所有 tilt 的 equality；`log Lambda` 作为 ratio 的二阶导也没有
+固定符号。
+
+一个精确的条件闭合接口是：若小 `a` 上
+`ell_1(a)ell_1(-a)>=0`，则由 full-SF first-row recursion 的首个非高斯累积量
+奇数性得到 Gaussian；同样，单侧局部 `K''<=1` 或 `K''>=1` 也足以闭合。当前
+工具没有产生这些符号。
+
+### 75.5 no-go、OU 与 tower
+
+R145 的 exchangeable witness 继续说明：`3D positivity + exchangeability +`
+exact Gaussian residual vector 不推出 common/residual independence；其不是
+iid scalar counterexample。R146 的 tilted Laguerre 版本把边界失败写成
+
+`-partial_z Lambda_epsilon(a,0)`
+`=2-(4epsilon/(9sigma_epsilon))a+O(a^2)`。
+
+Mehler 变换满足
+
+`Lambda_(P_lambda mu)(a,z)`
+`= [1+2(1-lambda)z]^(-1)`
+`Lambda_mu(sqrt(lambda)a,lambda z/[1+2(1-lambda)z])`。
+
+故 `r'=lambda r`、`ell_m^(P_lambda mu)(a)=lambda^m ell_m^mu(sqrt(lambda)a)`。
+对 `g_N=P_(q^N)h_N`，
+
+`Xi_(g_N)(q^(-N/2)a)=sum_m q^(2mN)ell_m^(h_N)(a)^2`。
+
+若该量在 bounded `a`-windows 上为 `o(q^(2N))`，则 `ell_1^(h_N)(a)->0`；
+但已有 unweighted `L^2` bottom bound 不提供此 tilted estimate。compatible
+single infinite tower 由 R138 解决，moving-top tower 与 spatial bridge 仍 OPEN。
+
+### 75.6 全项目发表性审计
+
+当前最完整的文章化脉络是
+
+`n=3 chi-square sample variance`
+`=> zero-divisor/OU shape`
+`=> coherent cross-coherence`
+`=> iid bispectrum`
+`=> common regression`
+`=> tilted Laguerre spectrum`。
+
+已有内容中，R132、R138、R140–R146 的各自结论在明确假设下有 analytic 或
+probability-level 证明；R133、R136、R141、R142 的部分是 packet/formal/form-level
+结果；若干 scalar、spatial 和 moving-top 连接仍为 conditional/open。最不能
+省略的缺口是
+
+`Q~chi^2_2 + iid scalar factorization =>? ell_1(a)=0`。
+
+因此目前不能诚实地声称已经有独立可审稿的发表结果；准确回答仍是“无”，但
+R146 已把目标压缩成一个精确的 tilted Laguerre 首模闭合问题。

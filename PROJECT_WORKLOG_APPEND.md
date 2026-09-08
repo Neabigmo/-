@@ -5647,3 +5647,46 @@ Rigidity**，研究
 `Lambda(a,z)=E[exp(aC-zR^2)]/E exp(aC)` 的 boundary `Lambda(0,z)=(1+2z)^(-1)`
 是否能通过 iid product/heat-kernel/total-positivity/log-convexity推出
 `-partial_z Lambda(a,0)=2`；否则构造 legal exponential-family no-go。
+
+## R146 — Tilted Sample-Variance Laplace / Laguerre–Heat（2026-09-08）
+
+网页端读取了 R145 的公开记录后完成了本轮推导和全历史发表性审计。严格判断
+仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+这轮不是空转，而是形成了一个边界清晰的 lemma package：
+
+1. 令 `C=(X_1+X_2+X_3)/sqrt(3)`、`Q=R^2`，
+   `Lambda(a,z)=E exp(aC-zQ)/E exp(aC)`。共同指数倾斜给出
+   `Lambda(sqrt(3)t,z)=E_(mu_t tensor 3) exp(-zQ)`；iid 分解进一步给出
+   `F(t,z)=P_(2z/3)[L(.,z)^3](t)`。
+2. full-SF/all-row 的精确边界是 `Lambda(0,z)=1/(1+2z)`，且 `Lambda` 对 `z`
+   完全单调；`-partial_z Lambda(a,0)=2K''(a/sqrt(3))`。在密度正规性下，
+   `z->infinity` 给出 `2pi sqrt(3) integral p_t^3` 的 cubic escort endpoint。
+3. 置 `T=Q/2~Exp(1)`，Laguerre generating function 给出
+   `(1+2z)Lambda=1+sum_(m>=1)ell_m(a)r^m`、`r=2z/(1+2z)`，且
+   `ell_1(a)=1-K''(a/sqrt(3))`。进一步
+   `sum ell_m(a)^2=chi^2(P_a^Q||chi^2_2)`，并受共同 tilt 的 `L^2` 界控制。
+4. 精确的正源 PDE 为
+   `(partial_z+(2/3)partial_t^2)log F=6 Var_(nu)(partial_y log L)>=0`。
+   它在原点只推出 `Var_(0,z)(C)>=1/(1+2z)`，不能把单点 boundary 推成全 tilt
+   equality；Gaussian 自身在 `z>0` 有正源 slack。
+5. 条件闭合：若小 `a` 上 `ell_1(a)ell_1(-a)>=0`，或一侧有
+   `K''<=1`/`K''>=1`，则 Gaussian；但现有 positivity/TP 工具没有给出这些符号。
+   exchangeable witness 给出 relaxed no-go，但不在 iid 标量锥内。
+6. 精确 OU 变换满足 `r'=lambda r`、
+   `ell_m^(P_lambda mu)(a)=lambda^m ell_m^mu(sqrt(lambda)a)`。对 moving-top tower，
+   `Xi_(g_N)(q^(-N/2)a)=sum_m q^(2mN)ell_m^(h_N)(a)^2`；若其为
+   `o(q^(2N))` 才能推出首模消失，已有 unweighted bottom bound 不足以替代它。
+
+本轮的整体判断是：项目已经从单纯低阶展开推进到一条可复用的
+`zero-divisor/OU -> coherent defect -> iid bispectrum -> regression -> tilted
+Laguerre` 技术链，但尚未产生能独立投稿的完整定理。不可省略的主缺口仍是
+
+`Q~chi^2_2 + iid scalar factorization =>? ell_1(a)=0`。
+
+本轮记录在 `r146_tilted_laguerre_heat_audit/README.md`，有限核验在
+`r146_tilted_laguerre_heat_audit/audit_r146.py`。脚本只核验有限代数、有限
+Laguerre 截断、OU Möbius 变换、Gaussian endpoint 和 witness 常数；不声称证明
+全局 law、无限展开、tower uniformity 或发表新颖性。
