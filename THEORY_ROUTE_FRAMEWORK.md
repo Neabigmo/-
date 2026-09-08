@@ -10570,3 +10570,86 @@ MGF/Bargmann 到 spatial `P_3K_sp`；`OBSTRUCTION` 包括壳合并、对称偶 s
 和有限秩失明；`OPEN` 是构造保持 positivity 的 Gaussian-relative positive
 quadratic form，或证明其谱特征值必然消失。下一轮唯一任务：**R142 —
 Gaussian-Relative / Semiclassical Bochner Spectral Amplification**。
+
+## 71. R142：Gaussian-relative / semiclassical Bochner 谱放大（2026-09-08）
+
+网页端基于提交 `ec8ceb40741ad187a87dc4b046bc71a0cecfec7e` 完成 R142，并先复核
+R141 marker 与 R140 denominator 8、odd-step-2 tail。R142 的第一项新结果是
+form-level Gaussian-relative normalization。对 `mu_lambda=P_lambda mu`、
+`x=sqrt(lambda)u`、`y=sqrt(lambda)v`，令
+`K_tilde_(lambda,R)(u,v)=phi_lambda(R(u-v))` 与
+`G_R(u,v)=exp(-R^2(u-v)^2/2)`。Fourier form 给出
+`q_K(f)=int|f_hat(Rx)|^2dmu_lambda(x)`、
+`q_G(f)=int|f_hat(Rx)|^2dgamma(x)`；若 `g_lambda=dmu_lambda/dgamma`，
+则 Gaussian-relative generalized operator 在 form domain 的谱表示中是
+`A_lambda=G_R^(-1/2)K_tilde G_R^(-1/2) ~= M_(g_lambda)`。它不是 entrywise
+Schur quotient；正性来自 `g_lambda>=0`。`G_R^(-1/2)` 可能无界，故应保持
+form-level 量词，不把它无条件写成 bounded operator。
+
+用 `L^2(gamma)` normalized coherent vector
+`k_z(x)=exp(zx-z^2/2-|z|^2/2)`，得到
+`<k_z,A_lambda k_w>=exp(conj(z)w-(|z|^2+|w|^2)/2)B_(mu_lambda)(conj(z)+w)`。
+由于 `B_(mu_lambda)(z)=B_mu(sqrt(lambda)z)`，对实 `y` 有精确恢复式
+`<k_(y/(2sqrt(lambda))),A_lambda k_(y/(2sqrt(lambda)))>=B_mu(y)`。因此
+Gaussian-relative positive Rayleigh quotient 能无损恢复 OU-invariant real
+Bargmann shape；这是 R142 的核心 `PROVED` 小里程碑。
+
+半经典尺度有两层。两节点 `x_0=0、x_1=sqrt(lambda)u` 时，
+`K_lambda(x_0,x_1)=exp(-R^2u^2/2)B_mu(i sqrt(lambda)Ru)`；第一 hidden
+odd Bargmann degree `d` 的 entry phase 是 `O(lambda^(d/2))`，两点 eigenvalue
+和三点 direct phase effect 是 `O(lambda^d)`。这仍不同于第一处 Hankel-leading
+sensitive size `(d+3)/2`。在 bounded `|u_i|<=L` 的 m 点 Gaussian Gram 上，
+`lambda_min(G_m)<=m sum_(k>=m-1)(R^2L^2)^k/k!`，当 `m-1>=2R^2L^2` 时
+`lambda_min(G_m)<=2m(R^2L^2)^(m-1)/(m-1)!`；对应积分算子也有相同尾和控制。
+
+更关键的是 Hermite/confluent block。令 `psi_n=He_n/sqrt(n!)`，
+`H_(lambda,n)^(r)=[E_(mu_lambda)psi_(n+p)psi_(n+q)]`。若
+`n*lambda->tau>0`，则
+`H_(lambda,n)^(r)->T_r(b_tau)`，其中
+`b_tau(theta)=B_mu(2sqrt(tau)cos(theta))`、
+`hat b_tau(k)=(2pi)^(-1)int b_tau(theta)exp(-iktheta)dtheta`。
+固定 odd degree `d=2s+1` 的相应系数满足
+`lambda^(d/2)C_(n,p,q,s)->sqrt(d!)*tau^(d/2)/(s!(k+s)!)`（`k=q-p`），
+故 `n~lambda^(-1)` 把 hidden odd signal 放大回 `O(1)`。
+
+但 `B_mu(x)>0` 对每个 real `x`，所以 `b_tau>0`，并且
+`c*T_r(b_tau)c >= min_theta b_tau(theta)||c||^2`。canonical fixed-energy
+Toeplitz limit 因而只是 positive-symbol cone；谱放大确实恢复 odd shape，
+却没有产生新的 negative mode 或 rigidity gap。full-SF 在这个极限只变成
+`<b_tau(theta)b_tau(theta+2pi/3)b_tau(theta+4pi/3)>=1`，尚不能由此推出
+`b_tau=1`。
+
+R141 的 regular-shell lower gap 可以通过正 coherent observable 精确恢复。令
+`R_lambda(y)=<k_(y/(2sqrt(lambda))),A_lambda k_(y/(2sqrt(lambda)))>`，则
+`R_lambda=B_mu`，其 odd log-ratio 和 angular charge 不依赖 lambda，并保留
+`int_0^(tau*)|V^(-1/2)C_(1,lambda)(s)|^2ds>=c*>0`。这是带 R141 正则壳
+假设的 `PROVED`。但正性本身只说 `B_mu(real)>0`，对任意 genuine law 都自动
+成立。若额外假设 `B_mu(y)B_mu(-y)>=1` 对所有实 `y`，再加 genuine full-SF，
+则 `C_e>=0` 与 `1=<exp(H_e)cosh(H_o)>` 强制 `H_e=H_o=0`，从而 Gaussian；
+该 even-sector closure 是 `CONDITIONAL`，不是自动结论。
+
+真正的 remaining obstruction 是复方向。取
+`z_-=-iy/(2sqrt(lambda))`、`z_+=iy/(2sqrt(lambda))`，则
+`<k_(z_-),A_lambda k_(z_+)> = exp(-y^2/(2lambda))B_mu(iy)`；complex/characteristic
+phase 仍通过指数小 coherent off-diagonal 进入。保持相邻 overlap 有固定下界的
+coherent chain 至少需要 `m_lambda=Omega(lambda^(-1/2))`；典型 coherent level
+则为 `n~lambda^(-1)`。故 coherent-chain rank 与 Hermite-energy rank 是同一
+半经典尺度的两种表现。
+
+对 backward tower `g_N=P_(q^N)h_N`，positive operator `A_N=M_(g_N)` 满足
+`<k_(y/(2q^(N/2))),A_N k_(y/(2q^(N/2)))>=B_(h_N)(y)`。bottom `g_N->1` 不
+消灭 top Bargmann shape，而是把它搬到 `|z|~q^(-N/2)`、`n~q^(-N)` 的高能量。
+当前 exact/Jacobi 控制仅到 `m=O(N)`，与恢复 OU-invariant shape 所需的
+`m~q^(-N)` 存在线性—指数 gap。compatible single infinite tower 仍由 R138
+common zero-free disk 独立闭合；R142 针对 incompatible finite-depth sequence。
+
+本轮分级：`PROVED` 为 form-level positive Gaussian-relative representation、
+coherent Bargmann identity、OU-invariant real-shape recovery、regular-shell
+positive recovery、Gaussian 小谱尾界、Hermite–Toeplitz limit、`n~lambda^(-1)`
+odd amplification 与 coherent-chain rank 下界；`CONDITIONAL` 为 scalar
+`RK=1` 到 full-SF/all-row、Bargmann 到 spatial `P_3K_sp`、以及 full-SF 自动
+给 even-sector domination；`OBSTRUCTION` 为复 coherent overlap 阻尼、canonical
+Toeplitz positivity 的 non-coercivity、symmetric/even sign sector 和 finite-test
+invisibility；`OPEN` 是 coherent tensor positivity 是否能导出超出
+`B(real)>0` 的 even-sector/off-diagonal coercivity。下一轮唯一任务：**R143 —
+Coherent-State Tensor Positivity / Even-Sector Closure**。

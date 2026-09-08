@@ -5259,3 +5259,48 @@ damping、finite-rank erasure 与既有兼容塔结果；`CONDITIONAL` 仍含 sc
 必然衰减。下一轮唯一任务为 **R142 — Gaussian-Relative / Semiclassical
 Bochner Spectral Amplification**，重点研究节点间距 `~sqrt(lambda)`、rank
 增长、confluent/high-order normalization 以及 Gaussian-relative 正二次型。
+
+---
+
+## R142 — Semiclassical Gaussian-relative Bochner amplification（2026-09-08）
+
+网页端已读取并锁定提交 `ec8ceb40741ad187a87dc4b046bc71a0cecfec7e`，并完成
+R141/R140 基线核验。本机审计目录为 `r142_gaussian_relative_spectral_audit/`，
+其中 `README.md` 保存完整推导，`audit_r142.py` 只验证有限 algebraic/scaling
+interfaces，不替代 form-level 或 semiclassical 分析证明。
+
+本轮真正的新结果是：对 `K_tilde_(lambda,R)(u,v)=phi_lambda(R(u-v))` 与
+`G_R(u,v)=exp(-R^2(u-v)^2/2)`，Gaussian-relative generalized form
+`A_lambda=G_R^(-1/2)K_tilde G_R^(-1/2)` 在 Gaussian spectral representation
+中是 multiplication by `g_lambda=dmu_lambda/dgamma`，所以在 form domain 保持
+真正 positivity。normalized coherent vector 给出
+`<k_(y/(2sqrt(lambda))),A_lambda k_(y/(2sqrt(lambda)))>=B_mu(y)`；这意味着
+R141 被 raw characteristic damping 隐藏的 OU-invariant real Bargmann shape
+可以无误差恢复。
+
+同时，`x_j=sqrt(lambda)u_j` 的两节点 odd entry 为 `O(lambda^(d/2))`，raw
+2-point/3-point direct effect 为 `O(lambda^d)`；Gaussian Gram 小特征值按
+阶乘尾和衰减。Hermite/confluent block 在 `n lambda->tau` 时精确趋于
+`T_r(B_mu(2sqrt(tau)cos(theta)))`，固定 hidden degree 需要 `n~lambda^(-1)`
+才能恢复 O(1) signal。谱放大因此真实存在，并且可以保持 positivity。
+
+但 canonical Toeplitz symbol 在实轴严格为正，对任意 genuine probability law
+都自动成立；所以这条正性本身是 non-coercive 的。复 coherent off-diagonal
+仍有 `exp(-y^2/(2lambda))` 阻尼，固定/次临界 rank 不能恢复 characteristic
+phase。一个足够闭合的条件是 `B_mu(y)B_mu(-y)>=1` 全实轴；与 genuine full-SF
+结合可推出 Gaussian，但 full-SF 自动给出该条件仍未证明。
+
+对 tower，`g_N=P_(q^N)h_N` 的 positive coherent quotient 在
+`|z|~q^(-N/2)` 恢复 top shape，Hermite energy 为 `n~q^(-N)`；现有 exact/Jacobi
+控制为 `O(N)`，构成明确的 linear-versus-exponential spectral gap。因而 R142
+排除了“OU smoothing 让 odd shape 消失”的解释，但尚未排除高能 coherent/tensor
+escape。严格状态为：本轮获得一个可独立报告的
+**Semiclassical Gaussian-Relative Bochner Amplification Theorem**，但没有构造
+genuine non-Gaussian full-SF law，也没有闭合 Positive Backward-Tower 总命题。
+
+下一轮唯一任务为 **R143 — Coherent-State Tensor Positivity / Even-Sector
+Closure**：研究 coherent kernel
+`C_mu(z,w)=exp(conj(z)w-(|z|^2+|w|^2)/2)B_mu(conj(z)+w)` 的 tensor/frame
+正性，判断能否得到 `B(y)B(-y)>=1` 或等价 even-sector domination；若不能，
+给出 infinite-rank coherent PSD 层面的严格 cancellation witness。仍保持
+`RK=1` 桥接和 spatial `P_3K_sp` 接口为 `CONDITIONAL/OPEN`。
