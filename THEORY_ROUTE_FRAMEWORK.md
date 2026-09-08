@@ -11591,3 +11591,129 @@ scale、positive iid liftability、`RK=1=>full-SF`、backward tower 和 spatial 
 **R153 — Edge / Growing-Support Semiclassical Hankel Escape**：先验证 Toeplitz bulk
 阻碍，再严格分析 edge 或 growing-support 向量能否产生与 R137 相容的负方向；若不能，
 给出所需 uniform estimate。不得把 bulk 正性误写成原命题已解决。
+
+## R153 — Full-Section Gauss–Hermite Coercivity（2026-09-09）
+
+网页端在读取 R151–R152 后给出了一个重要的条件性推进：把 edge 与 growing-support
+向量同时放回一个完整的 `M` 阶 Hermite section，并用 Gauss–Hermite quadrature 直接
+控制整个二次型。独立本机审计确认其有限归一化与误差包络，但严格发表性判断仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+### 82.1 Exact finite-section representation
+
+令 `E_lambda(y)=sum_(k>=0)e_(k,lambda)y^k`，并考虑核
+
+`K_lambda(u,v)=exp(uv)E_lambda(sqrt(lambda)(u+v))`。
+
+用概率型 Hermite 多项式 `He_k`、`psi_k=He_k/sqrt(k!)`，定义
+
+`g_(lambda,M)(x)=sum_(k=0)^(2M)e_(k,lambda)lambda^(k/2)He_k(x)`。
+
+因为
+`int He_k(x)exp((u+v)x-(u^2+v^2)/2)d gamma(x)=(u+v)^k exp(uv)`，
+而 `m+n<=2M`，故对 `0<=m,n<=M` 有精确恒等式
+
+`Gamma_mn=int g_(lambda,M)(x)psi_m(x)psi_n(x)d gamma(x)`。
+
+取 `N=2M+1` 个标准高斯 Gauss–Hermite 节点 `x_j` 与正权 `w_j`，则
+`g_(lambda,M)p^2` 的次数至多 `4M`，而 quadrature 的精确次数为
+`2N-1=4M+1`。所以对任意 `deg p<=M`，不只是逐项条目而是完整二次型地有
+
+`z^*Gamma_M z=sum_j w_j g_(lambda,M)(x_j)|p(x_j)|^2`，
+`sum_jw_j|p(x_j)|^2=||p||_{L^2(gamma)}^2=||z||_2^2`。
+
+标准 Hermite 节点满足 `|x_j|<2sqrt(N)`。若 `M=floor(tau/lambda)`、`lambda<=1`，
+则所有节点均落在
+
+`|sqrt(lambda)x_j|<=R_tau:=2sqrt(2tau+1)`
+
+的固定紧区间中。这一步确实把 fixed-offset bulk 之外的 whole section 纳入了同一
+个有限二次型恒等式。
+
+### 82.2 Conditional coercivity theorem
+
+写
+
+`H_k^(lambda)(y)=lambda^(k/2)He_k(y/sqrt(lambda))`
+
+并用精确展开
+
+`H_k^(lambda)(y)=sum_(r=0)^(floor(k/2))(-1)^r k!lambda^r
+ /(2^r r!(k-2r)!) y^(k-2r)`。
+
+令 `A=max(1,R_tau)`、`D_tau=A exp(tau/A^2)`。由逐项估计，在
+`|y|<=R_tau` 上有
+
+`|H_k^(lambda)(y)-y^k|
+ <=A^k[exp(lambda k^2/(2A^2))-1]`
+
+以及网页端给出的 Cauchy 加尾项包络：若存在 `S>D_tau` 与 `B` 使
+`sup_lambda sup_|z|=S|E_lambda(z)|<=B`，置 `r=D_tau/S<1`，则
+
+`sup_|y|<=R_tau|sum_(k=0)^(2M)e_(k,lambda)H_k^(lambda)(y)-E_lambda(y)|`
+`<=lambda B/(2A^2) r(1+r)/(1-r)^3
+  +B(A/S)^(2M+1)/(1-A/S)`。
+
+因此，若再有 uniform real compact gap
+
+`inf_lambda inf_|y|<=R_tau E_lambda(y)>=m_tau>0`，
+
+则对充分小的 `lambda`，每个 Gauss–Hermite 节点满足
+`g_(lambda,M)(x_j)>=m_tau/2`，从而
+
+`Gamma_floor(tau/lambda)^(lambda)>=m_tau/2 I`。
+
+这是一个可保留的 **条件性 full-section coercivity theorem**。它排除了在上述
+uniform analytic/real-gap 类内仅靠 edge 或 growing-support 向量制造负方向的可能；
+但它没有证明这些 uniform 假设适用于原始 `RK=1` 分支。
+
+### 82.3 Independent audit and exact boundary
+
+本机目录 `r153_full_section_coercivity_audit/` 的脚本通过：
+
+`R153_EXACT_DENSITY_NORMALISATION_PASSED`
+
+`R153_GAUSS_HERMITE_DEGREE_COUNT_PASSED`
+
+`R153_GAUSS_NODE_ENVELOPE_PASSED`
+
+`R153_GENERALIZED_HERMITE_BOUND_PASSED`
+
+`R153_COMPACT_TRUNCATION_BOUND_PASSED`
+
+`R153_CONDITIONAL_NODE_POSITIVITY_MODEL_PASSED`
+
+`R153_R132_COMPACT_GAP_EXPONENT_PASSED`
+
+`R153_AUDIT_COMPLETED`。
+
+审计验证的是有限系数恒等式、quadrature 归一化、显式 Hermite 误差和一个具体的
+`E(y)=exp(alpha y^5)>0` 模型；它不验证任意完成的 sparse branch 具有共同的复圆界，
+不证明 `RK=1=>full-SF`，也不证明 genuine positive iid liftability。R132 型指数矩
+条件给出的 `|B_h(z)|<=2e^(-1/8)e^(5|z|^2/2)` 与
+`B_h(y)>=e^(-y^2/2)` 的代数接口与该定理相容，但其适用仍依赖此前的 all-row/class
+桥接结果，不能在本轮偷换成主命题证明。
+
+所以 R153 的正确层级是：
+
+`LOCAL-AUDITED`：精确有限表示、全段 quadrature、Hermite 展开与误差包络；
+
+`CONDITIONAL/PROVED UNDER HYPOTHESES`：uniform complex-circle bound 加 uniform
+real compact gap 时的 full-section coercivity；
+
+`OPEN`：原始 full-SF/sparse completion 是否满足这些假设、`RK=1` 桥、moving-degree
+主问题、positive backward tower 与 spatial `P_3K` bridge。
+
+### 82.4 R154 — 唯一下一步
+
+网页端下一轮只能推进真正的 supercritical 区域
+`tau_lambda=lambda M_lambda -> infinity`。目标是把
+
+`negative generalized-Hermite tail depth`
+
+与 degree-`M` polynomial 的 `Christoffel localisation cost` 放到同一个不等式中：
+要么从显式增长包络得到 supercritical coercivity，要么构造具有足够 Christoffel
+质量的 degree-`M` 负方向。单独发现截断函数某处取负，不能替代 negative Gram direction。
+若只能得到条件性估计，必须给出其精确假设；若没有新的可审稿独立结果，发表性回答
+仍必须是“无”。
