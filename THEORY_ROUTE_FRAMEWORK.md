@@ -11717,3 +11717,102 @@ real compact gap 时的 full-section coercivity；
 质量的 degree-`M` 负方向。单独发现截断函数某处取负，不能替代 negative Gram direction。
 若只能得到条件性估计，必须给出其精确假设；若没有新的可审稿独立结果，发表性回答
 仍必须是“无”。
+
+## R154 — Supercritical Escape-Energy / Christoffel Localisation（2026-09-09，部署前本机推进）
+
+在等待网页端进入 R154 前，本机先把“负的 generalized-Hermite tail 能否形成真正
+Gram 负方向”压成一个精确的有限维判据。它是对 R153 的实质推进，但仍不足以给出
+原始 full-SF 分支的 supercritical 负方向；全局发表性判断保持：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+### 83.1 Exact Christoffel concentration criterion
+
+由 R153 的有限表示，对 `deg p<=M` 有
+
+`z^*Gamma_Mz=int g_(lambda,M)(x)|p_z(x)|^2d gamma(x)`，
+`||p_z||_(L^2(gamma))=||z||_2`。
+
+给定可测区间 `I`，定义 degree-`M` concentration matrix
+
+`A_M(I)=[int_Ipsi_m(x)psi_n(x)d gamma(x)]_(m,n=0)^M`
+
+及
+
+`Theta_M(I)=lambda_max A_M(I)`。
+
+若存在 `a,b>0` 使
+
+`g_(lambda,M)<=-a` on `I`，且 `g_(lambda,M)<=b` on `I^c`，
+
+则有精确 Loewner 不等式
+
+`Gamma_M<=bI_(M+1)-(a+b)A_M(I)`，
+
+因此
+
+`lambda_min(Gamma_M)<=b-(a+b)Theta_M(I)`。
+
+所以产生负 Gram 方向的充分必要阈值（相对于该 `a,b` 包络）是
+
+`Theta_M(I)>b/(a+b)`，
+
+等价地，degree-`M` polynomial 在负区间外的 leakage
+`1-Theta_M(I)` 必须小于 `a/(a+b)`。这把 R154 的核心准确写成：负尾深度提供
+`a/(a+b)` 预算，而 Hermite/高斯 Christoffel concentration 提供可达到的局部化质量。
+
+这也严格说明为什么“截断密度在某一点为负”不够：若 `I` 太小，所有 degree-`M`
+多项式都把过多质量留在正补集，Gram 仍可保持正。
+
+### 83.2 本机 finite audit
+
+目录 `r154_escape_energy_audit/` 的 `audit_r154.py` 通过：
+
+`R154_CONCENTRATION_MATRIX_PASSED`
+
+`R154_CHRISTOFFEL_NEGATIVE_DIRECTION_PASSED`
+
+`R154_POINTWISE_NEGATIVITY_NOT_SUFFICIENT_PASSED`
+
+`R154_SCALED_INTERVAL_BOOKKEEPING_PASSED`
+
+`R154_SCOPE_EXPLICIT: exact finite criterion only; supercritical tail and genuine branch remain open`
+
+`R154_AUDIT_COMPLETED`。
+
+其中一个小区间模型明确实现 `g=-1` on `I`、`g=1` outside `I`，但其 degree-`M`
+Gram 仍正；另一个宽区间/深负模型满足阈值并得到负特征值。该审计只核验
+concentration matrix、Loewner 判据和 scaled interval 变量换算，不声称找到了 R137
+completion 的负区间，也不把 piecewise signed density 当作 genuine iid law。
+
+### 83.3 R154 真正剩余的超临界问题
+
+令 `tau_lambda=lambda M_lambda -> infinity`。若能在 scaled coordinate
+`y=sqrt(lambda)x` 找到区间 `J_lambda`，令
+`I_lambda=lambda^(-1/2)J_lambda`，并获得
+
+`g_(lambda,M_lambda)<=-a_lambda` on `I_lambda`，
+`g_(lambda,M_lambda)<=b_lambda` on `I_lambda^c`，
+
+则还必须证明
+
+`Theta_(M_lambda)(I_lambda)>b_lambda/(a_lambda+b_lambda)`。
+
+真正需要量化的是区间的 scaled location/width、截断尾部的 `a_lambda`、补集的
+`b_lambda`，以及高斯 degree-`M_lambda` concentration leakage。单点 asymptotic、
+有限 formal jet、或只显示 `g` 的 pointwise negative 都不能闭合这一步。
+
+证据等级：
+
+`PROVED / LOCAL-AUDITED`：上述 exact finite concentration/Loewner criterion；
+
+`CONDITIONAL`：任何同时提供负尾深度、补集上界和 Christoffel concentration margin
+的 supercritical negative-direction theorem；
+
+`OPEN`：R137 full-SF completed sparse branch 的 supercritical tail、
+`Theta_M(I)` 的 moving scaled-tail sharp asymptotic、genuine positive realization、
+`RK=1=>full-SF`、backward tower 与 spatial `P_3K` bridge。
+
+网页端下一轮应先读取 R153 与本节，再只研究这一个 criterion：要么给出实际的
+supercritical coercivity/no-go，要么构造同时满足 concentration threshold 的负方向，
+并继续保留发表性结论“无”。

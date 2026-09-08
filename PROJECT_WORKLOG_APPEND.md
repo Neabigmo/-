@@ -6081,3 +6081,41 @@ R154 只研究 supercritical 标度
 
 单点负值、有限 formal truncation 或未经验证的 shape closure 都不算 Gram 负方向。
 若没有独立、完整、可审稿的新结果，下一轮仍明确回答“无”。
+
+## R154 — Supercritical Escape-Energy / Christoffel Localisation（2026-09-09，本机部署前推进）
+
+在等待网页端进入 R154 前，本机先完成了一个精确的 finite-dimensional reduction。
+若 R153 密度表示为
+`z^*Gamma_Mz=int g_(lambda,M)|p_z|^2d gamma`，对区间 `I` 定义
+
+`A_M(I)=[int_Ipsi_mpsi_n d gamma]_(m,n=0)^M`，
+`Theta_M(I)=lambda_max A_M(I)`，
+
+并且 `g<=-a` on `I`、`g<=b` on `I^c`，则严格有
+
+`Gamma_M<=bI-(a+b)A_M(I)`，
+`lambda_min(Gamma_M)<=b-(a+b)Theta_M(I)`。
+
+因此只要
+`Theta_M(I)>b/(a+b)`，就得到真正的 Gram negative direction；等价地，
+Christoffel leakage `1-Theta_M(I)` 必须小于 `a/(a+b)`。这就是“负尾深度”与
+“degree-M 多项式局部化代价”的准确连接。单点负值不够。
+
+本机目录 `r154_escape_energy_audit/` 已实际通过：
+
+`R154_CONCENTRATION_MATRIX_PASSED`
+
+`R154_CHRISTOFFEL_NEGATIVE_DIRECTION_PASSED`
+
+`R154_POINTWISE_NEGATIVITY_NOT_SUFFICIENT_PASSED`
+
+`R154_SCALED_INTERVAL_BOOKKEEPING_PASSED`
+
+`R154_SCOPE_EXPLICIT: exact finite criterion only; supercritical tail and genuine branch remain open`
+
+`R154_AUDIT_COMPLETED`。
+
+严格边界：这是 `PROVED/LOCAL-AUDITED` 的 exact finite criterion，不是 R137 completed
+sparse branch 的 negative interval，也不是 genuine iid counterexample。下一轮网页端应
+把 `tau_lambda=lambda M_lambda->infty` 下的 scaled interval、`a_lambda`、`b_lambda`
+与 `Theta_M(I)` 同时量化；如只能得到条件性结果，必须明确假设；发表性判断仍为“无”。
