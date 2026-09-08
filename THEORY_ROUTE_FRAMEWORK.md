@@ -11833,3 +11833,27 @@ completion 的负区间，也不把 piecewise signed density 当作 genuine iid 
 网页端下一轮应先读取 R153 与本节，再只研究这一个 criterion：要么给出实际的
 supercritical coercivity/no-go，要么构造同时满足 concentration threshold 的负方向，
 并继续保留发表性结论“无”。
+
+## 83.4 R155 全历史与发表性审计部署
+
+本轮网页端 R154 消息已成功回显，但随后只出现“已停止思考”且没有可见正文。
+这只是网页执行状态，不是数学上的“无结果”，也不能改变 R154 的证据等级。该状态
+已记录在 `r155_global_publication_audit/`，并要求下一条网页任务先读取公开仓库，
+再做一次整体梳理。
+
+下一轮必须明确回答四件事：
+
+1. 从主问题、compatible tower、R132 到 R154，给出不混淆主线与辅助路线的完整逻辑链；
+2. 逐项列出 `PROVED / LOCAL-AUDITED / CONDITIONAL / FORMAL / FINITE-ONLY /
+   OBSTRUCTION / OPEN`，并指出每一项所依赖的精确假设；
+3. 区分“已具独立技术价值”与“仍不足以投稿”的内容。若没有独立、完整、可审稿的
+   发表性结果，必须原样写出“无（目前没有足够独立、完整、可审稿的发表性结果）”；
+4. 在整体审计后继续 R154，而不是重新展开 R153：只研究
+   `tau_lambda=lambda M_lambda -> infinity`，同时量化负尾深度、补集上界和
+   Hermite/Christoffel leakage，或给出 supercritical coercivity/no-go。
+
+本机当前仍只支持以下边界：R153 是带 uniform analytic bound/real positive gap 假设
+的 coercivity package；R154 是 exact finite concentration/Loewner criterion 的
+LOCAL-AUDITED 结果。`RK=1=>full-SF/all-row`、genuine positive realization、
+moving-top rigidity 与 spatial `P_3K` bridge 仍为 OPEN。不得把网页中止、piecewise
+模型、pointwise sign 或 finite jet 升格为定理。
