@@ -10128,3 +10128,104 @@ R135 之后唯一任务更新为 **R136 — Full-SF Leakage Extension Rigidity**
 判断 R135 的 near-total finite prefix shielding 是否能延拓为 genuine
 all-degree one-body SF law；必须寻找全阶 positive sum rule，或证明该 completion
 仍可存在。不得再重复估计当前行的 `rho`，也不得把 finite prefix 当成原命题反例。
+
+## 65. R136：Full-SF 形式完成与 genuine 全阶边界
+
+### 65.1 路线位置
+
+R136 对 R135 的 finite-prefix shielding 做了最小但关键的升级：不再估计某一行
+Jacobi 残差，而是把 full same-factor identity 的所有系数写成一个角平均的
+形式生成函数。令 `C(z)=sum_(m>=3)c_m z^m`，
+
+`F_C(z)=< exp(sum_(m>=3)c_m p_m(theta)z^m) >_theta`，
+
+其中 `p_m=sum_j r_j^m`、`r_j=sqrt(2/3)cos(theta+2pi(j-1)/3)`。原点恒等式
+要求 `F_C(z)=1`。这一步仍在 full-SF、原点解析性和 genuine 接口成立的条件
+下使用；它不是从 scalar `RK=1` 自动推出的等式。
+
+### 65.2 Theorem R136-A：形式系数代数的精确结论
+
+平移 `theta -> theta+pi` 使 `p_m -> (-1)^m p_m`。因此每个奇总次数的
+角平均恒等式自动为零，奇系数方程本身不提供约束。对偶次数 `2N`，最新偶
+变量 `c_(2N)` 的系数是
+
+`A_(2N)=<p_(2N)>=3 binom(2N,N)/6^N>0`。
+
+故给定任意奇形式序列，偶变量可以逐阶唯一递归补齐；这说明 full-SF 的
+coefficient algebra 本身不能强迫首个 odd charge 消失。证据等级是
+`FORMAL-PROVED`：递推不等于收敛，也不等于存在概率分布。
+
+若 `d` 是首个非零奇次数，则在 `2d<=M<4d` 的 exact future band 中，偶方程
+只有一个线性 pivot 和 odd-pair source：
+
+`A_M c_M + 1/2 sum_(a+b=M, a,b odd>=d) B_(a,b)c_a c_b=0`,
+
+`B_(a,b)=<p_a p_b>`。
+
+特别地，`c_(2d)=-B_(d,d)c_d^2/(2A_(2d))<0`；但下一阶含有
+`-B_(d,d+2)c_d c_(d+2)/A_(2d+2)` 的 mixed term，符号不再固定。若只给
+`c_d` 而令其余 odd 变量为零，形式支撑只落在 `2kd`，仍没有逐系数正性
+矛盾。这是对“SF/Jacobi 代数自动产生正级联”这一想法的严格 `NO-GO`。
+
+本机目录 `r136_full_sf_formal_audit/` 的审计 marker 为：
+
+`R136_PARITY_AND_EVEN_PIVOT_PASSED`
+
+`R136_FIRST_FUTURE_BAND_PASSED`
+
+`R136_EXPLICIT_FUTURE_COEFFICIENTS_PASSED`
+
+`R136_SPARSE_SUPPORT_PASSED`
+
+`R136_BOCHNER_BOUNDARY_RECORDED`
+
+`R136_AUDIT_COMPLETED`
+
+### 65.3 R136-B：有限截断的 genuine realization 不是全阶反例
+
+对任意固定 cutoff `M`，形式解只涉及有限个 cumulant/Hermite 坐标。可以在
+Gaussian 空间中取紧支撑、有界的双函数，消去 `psi_0,psi_1,psi_2` 并匹配
+所需的有限 Hermite jet；充分小的振幅给出 smooth strictly positive、
+centered、variance-one 的 `L^2(gamma)` density，实现同一个有限 jet。因此
+任何固定有限 cutoff 都不能阻止 non-Gaussian positive realization。
+
+但该构造的正性阈值依赖 `M`，函数也随 `M` 改变。它没有给出单个密度实现
+所有次数的形式 completion；更没有证明 `phi(t)=exp(-t^2/2+C(it))` 是
+positive definite。故 R136-B 的等级是 `FINITE-CUTOFF PROVED`，不是原始
+all-degree 命题的 counterexample。
+
+### 65.4 生成函数能量与真正的剩余问题
+
+若 full angular law 能解释为概率密度 `sigma_z`，则相对熵
+
+`S(z)=D(uniform || sigma_z)=-<K_z> >=0`
+
+是 genuine 的全函数非负性，但非负函数的 Taylor 系数不必逐项非负；因此
+熵的正性不能恢复被奇偶对称消掉的 odd equations。任何更强的 Szego/Hankel
+表示都必须先核验适用的测度、正则性和归一化，不能作为未经证明的 sign
+cascade。
+
+于是总路线得到一个明确的小里程碑：
+
+* `PROVED / FORMAL`：all-degree SF/Jacobi coefficient algebra 对任意 odd
+  formal input 存在唯一 even formal completion；
+* `PROVED / FINITE-CUTOFF`：每个固定 cutoff 可由 genuine positive density
+  实现；
+* `NO-GO`：局部 rowwise anti-shielding、finite-prefix curvature、以及
+  coefficientwise SF/Jacobi 正级联均不足以完成 rigidity；
+* `OPEN`：这些形式 completion 是否能统一满足 Bochner positive
+  definiteness、全阶 Hankel/Jacobi 正性、解析增长和单个 all-degree density。
+
+### 65.5 下一步：R137 Uniform Genuine-Realization Breakdown
+
+唯一值得继续的方向是研究 cutoff `M` 增大时 genuine realization 的统一性：
+
+1. 证明任意实现 R136 形式 jet 的 positivity、Bochner 或 Hankel/Jacobi
+   常数必随 `M` 崩溃，从而把有限截断障碍升级为全阶 rigidity；或
+2. 构造 cutoff-uniform 的 positive realization，若能通过 Bochner、解析增长和
+   all-degree SF 检查，则得到 genuine non-Gaussian completion，直接改变总命题
+   的判决。
+
+R137 必须报告量化的 uniform norm/positivity constant、明确的 tightness 或
+   compactness 论证，并把 scalar `RK=1` 到 full-SF 的接口单独标成
+   `CONDITIONAL`。在此之前，不得把形式递推或任意有限 prefix 写成原命题反例。

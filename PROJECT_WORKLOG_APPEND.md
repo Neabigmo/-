@@ -4996,6 +4996,65 @@ survives，所以 SF 只需到 `2n` 阶就精确成立。此时
 * `OPEN`：near-total finite prefix 是否具有 genuine all-degree one-body SF
   completion。
 
+# 2026-09-08 — R136 Full-SF 形式完成与 genuine 全阶边界
+
+网页端 R136 将 R135 的 finite-prefix 问题提升为 full same-factor 形式生成函数
+审计。本机新增 `r136_full_sf_formal_audit/README.md` 与 `audit_r136.py`，命令
+`F:\\anaconda3\\python.exe r136_full_sf_formal_audit\\audit_r136.py` 已通过：
+
+`R136_PARITY_AND_EVEN_PIVOT_PASSED`
+
+`R136_FIRST_FUTURE_BAND_PASSED`
+
+`R136_EXPLICIT_FUTURE_COEFFICIENTS_PASSED`
+
+`R136_SPARSE_SUPPORT_PASSED`
+
+`R136_BOCHNER_BOUNDARY_RECORDED`
+
+`R136_AUDIT_COMPLETED`
+
+可保留的核心结果是。设 `C(z)=sum_(m>=3)c_m z^m`，
+
+`F_C(z)=<exp(sum_m c_m p_m(theta)z^m)>_theta=1`。
+
+由于 `theta -> theta+pi`，奇总次数角平均恒为零；而偶次数最新变量的系数
+
+`A_(2N)=<p_(2N)>=3 binom(2N,N)/6^N`
+
+严格为正。因此任意 odd formal sequence 都有唯一的 even formal completion。
+这是 `FORMAL-PROVED`，但不声称级数收敛或对应 genuine probability law。
+
+若 `d` 是首个非零 odd degree，则 `2d<=M<4d` 内有精确 first-future-band
+
+`A_M c_M + 1/2 sum_(a+b=M, odd a,b>=d) B_(a,b)c_a c_b=0`。
+
+首项 `c_(2d)<0`，但 `2d+2` 起出现 `c_d c_(d+2)` mixed term，符号不再固定；
+只保留 `c_d` 时形式支撑为 `2kd`，没有 coefficientwise sign contradiction。
+因此 full-SF/Jacobi coefficient algebra 不能单独给出 odd-zero rigidity，
+也不能提供此前设想的正级联。
+
+R136 的第二个小里程碑是有限截断 genuine realization：固定 `M` 时，利用消去
+`psi_0,psi_1,psi_2` 的紧支撑有界双函数和小振幅，可以实现任意有限形式 jet
+为 smooth strictly positive centered variance-one `L^2(gamma)` density。阈值
+依赖 `M`，所以这不是单个 all-degree counterexample；Bochner positive
+definiteness、uniform Hankel/Jacobi positivity、解析增长和统一密度仍为 OPEN。
+
+角平均密度的相对熵 `S(z)=D(uniform||sigma_z)>=0` 也不能恢复逐项符号，因非负
+解析函数的 Taylor 系数无需非负。任何更强的 Szego/Hankel 表示必须先核验其
+测度与正则性范围。
+
+本轮判决：local rowwise anti-shielding = `NO-GO`；all-degree coefficientwise
+SF/Jacobi algebra = `NO-GO`；finite-cutoff positive realization = `PROVED`；
+global genuine all-degree completion = `OPEN`；scalar `RK=1` 到 full-SF 接口
+仍是 `CONDITIONAL`。
+
+下一轮发送网页端 **R137 Uniform Genuine-Realization Breakdown**：证明随 cutoff
+增大 positivity/Bochner/Hankel 常数必崩溃，或构造 cutoff-uniform realization
+并完成 Bochner 与 all-degree SF 检查。要求网页端先读取最新 Git 提交和本节，再
+从“R136 方向 A”未完的 Hankel/Jacobi uniform breakdown 分支继续，不重复已经
+判定为 no-go 的局部估计。
+
 R135 将总路线从“控制当前行 `rho`”推进到唯一剩余问题：
 **R136 Full-SF Leakage Extension Rigidity**。下一轮必须研究全阶 positive
 sum rule 或严格的 all-degree completion obstruction；不得把 finite prefix
