@@ -5059,3 +5059,42 @@ R135 将总路线从“控制当前行 `rho`”推进到唯一剩余问题：
 **R136 Full-SF Leakage Extension Rigidity**。下一轮必须研究全阶 positive
 sum rule 或严格的 all-degree completion obstruction；不得把 finite prefix
 称作原命题反例。
+
+# 2026-09-08 — R137 固定 sparse branch 的 Hankel 半径坍缩
+
+网页端 R137 完成了 R136 未展开的方向 A，并先审计了自身量词：square-exponential
+tail 足以使 MGF entire，有限 odd cumulant support 给出 odd polynomial；由
+`M(t)>=1` 与 `M(t)<=2 exp(-1/8)exp(2t^2)` 得
+`|K_o(t)|<=K_e(t)<=2t^2+log 2-1/8`，所以 centered 情形的有限 odd support
+只能全部为零。该 theorem 的证据等级为 `PROVED`；SF 在应用中负责提供 R132
+的全阶 tail，而不是把 scalar `RK=1` 自动升级为 full-SF。
+
+固定 `d=2s+1>=5`、`c_d=a`、其余 odd formal cumulants为零。由
+`kappa_d=d!a` 和首个 Jacobi packet，直接核验
+`det H_(s+1)=(prod_(j=0)^s j!)[1-d!binom(d,s)a^2]`，故
+`|a|<=R_d=[d!binom(d,s)]^(-1/2)`。本机新增
+`r137_uniform_realization_audit/`，脚本命令
+`F:\\anaconda3\\python.exe r137_uniform_realization_audit\\audit_r137.py`。
+
+定义 `I_M^H(d)` 为 formal order-M Hankel PSD 可行集，`I_M^+(d)` 为 genuine
+strictly-positive centered variance-one finite-jet 可行集。`I_(M+1)^H subset
+I_M^H` 且 `I_M^+ subset I_M^H`。若固定 `a!=0` 属于所有 Hankel 前缀，Hamburger
+表示测度加 formal SF coefficient identities 给出 `E Q^r=2^r r!`；R132
+Carleman/差分桥给 square-exponential tail，再与 finite-odd rigidity 矛盾。因此
+`intersection_M I_M^H(d)={0}`。闭嵌套紧性推出
+`rho_M(d)=max{|a|:a in I_M^H(d)} down 0`，以及 genuine 最大可行半径
+`rho_M^+(d)<=rho_M(d)->0`。这是一条 construction-independent 的 fixed-d
+全阶可行性半径结论，但不是 first failing minor 的显式阶。
+
+R137 还明确：若 `sup_M ||g_M||_p<infty`（`p>1`）或有统一
+square-exponential moment，则有限 jets 可抽取 all-moment genuine 极限；要将
+formal SF 解释为 analytic pointwise identity，仍需统一解析尾条件。低阶
+`3x3` Bochner minor 对 hidden `d>=5` 只在约 `a^2t^(2d)` 才敏感，故是
+`OBSTRUCTION` 而非 global no-go。
+
+当前分层：`PROVED` 为 finite odd-support rigidity、fixed-d Hankel radius
+collapse、uniform compactness interface；`CONDITIONAL` 为 scalar `RK=1` 到
+full-SF/all-row；`OPEN` 只剩 infinitely-many-odd-tail 的 genuine Bochner
+realization。固定 n selector、`d_n->infty,a_n->0` 序列、单个 all-degree law
+仍严格分开。下一轮网页任务为 **R138 — Infinite-Odd-Tail Bochner Phase
+Rigidity**。

@@ -10229,3 +10229,93 @@ cascade。
 R137 必须报告量化的 uniform norm/positivity constant、明确的 tightness 或
    compactness 论证，并把 scalar `RK=1` 到 full-SF 的接口单独标成
    `CONDITIONAL`。在此之前，不得把形式递推或任意有限 prefix 写成原命题反例。
+
+## 66. R137：Uniform Genuine-Realization Breakdown / Bochner Tail Rigidity
+
+### 66.1 固定 sparse odd branch 的第一 Hankel cap
+
+本轮先审计 R137 的量词，而不是把网页端推导直接当作仓库事实。固定
+`d=2s+1>=5`，令 `c_d=a` 且其余 odd cumulants 为零；formal even coefficients
+仍由 full-SF 递归决定。由于 `kappa_d=d!a`，其首个 Jacobi packet 满足
+
+`1-beta_(s+1)/(s+1)=d! binom(d,s) a^2`.
+
+直接从 `M(z)=exp(z^2/2+a z^d)` 构造到阶 `2(s+1)` 的 formal moments，可得
+
+`det H_(s+1)(a)=(prod_(j=0)^s j!) [1-d! binom(d,s)a^2]`.
+
+故任何 PSD Hankel jet 都必须满足
+`|a|<=R_d=[d! binom(d,s)]^(-1/2)`。
+
+### 66.2 Theorem R137-A：square-exponential law 的 finite odd-support rigidity
+
+设 centered probability law `mu` 满足 `E_mu exp(eta X^2)<infty` 对某个 `eta>0`。
+则 `M(z)=E exp(zX)` 为 entire，`K=log M` 在实轴上 real analytic。若 odd
+cumulant support有限，则 `K_o(t)=(K(t)-K(-t))/2` 是一个 odd polynomial。
+
+在 R132 的全阶 exact-tail 接口下，取 `eta=1/8` 得
+
+`M(t)<=2 exp(-1/8) exp(2t^2)`, `M(t)>=1`,
+
+因而 `|K_o(t)|<=K_e(t)<=2t^2+L`，其中 `L=log 2-1/8`。非零 odd polynomial
+次数 `>=3` 不满足该二次增长；centered 又消去一次项。因此所有 odd cumulants
+必须为零。证据等级：`PROVED`。特别地，R136 sparse branch 的 `a!=0` 不可能
+来自 square-exponential genuine law；此结论本身不需要 SF，SF 只在应用时提供
+全阶 tail。
+
+### 66.3 Theorem R137-B：fixed-d Hankel feasibility radius collapse
+
+令 `H_M(a)=[m_(i+j)(a)]_(i,j=0)^M`，并定义
+
+`I_M^H(d)={a:H_M(a) >= 0}`，
+
+`I_M^+(d)` 为存在 strictly positive centered variance-one `g dgamma`、匹配
+formal moments 至 `2M` 阶的 genuine 集合。则
+
+`I_(M+1)^H subset I_M^H`，`I_M^+ subset I_M^H`，且 `I_M^H subset [-R_d,R_d]`
+对 `M>=s+1`。若某个 `a!=0` 属于所有 `I_M^H`，全阶 Hamburger 表示测度的
+三变量 zero-sum mixture 具有 Gaussian 的所有 polynomial moments；对
+`Q=sum_i(X_i-Xbar)^2` 得 `E Q^r=2^r r!`。R132 的 Carleman/差分桥随后给
+square-exponential tail，R137-A 与 `kappa_d=d!a!=0` 矛盾。因此
+
+`intersection_(M>=s+1) I_M^H(d)={0}`.
+
+由于这些集合嵌套、闭且被 `[-R_d,R_d]` 统一包含，令
+`rho_M(d)=max{|a|:a in I_M^H(d)}`，则
+
+`rho_M(d) down 0`。
+
+这给出 construction-independent 的 fixed-`d` feasibility-radius collapse，
+并推出每个 fixed `a!=0` 在某个有限 Hankel/Jacobi level失败。证明是定性紧性
+证明；没有得到 first-failure index `m_0(a,d)` 的显式阶，也没有排除
+`d_M->infty, a_M->0` 的移动 selector 序列。
+
+### 66.4 cutoff-uniform compactness 与 Bochner边界
+
+R136 的 finite interpolation 保证每个固定 `M` 有某个 `delta_M>0`，但 R137
+证明其最大可行幅度满足 `0<rho_M^+(d)<=rho_M(d)->0`；因此这不是某个插值构造
+的偶然缺陷。若 finite-jet densities另有 `sup_M ||g_M||_p<infty`（`p>1`）
+或统一 square-exponential moment，弱紧性与一致可积性产生 all-moment genuine
+极限；要得到 pointwise analytic SF，需后一个统一解析尾条件，单独 `L^p` 弱
+收敛只保证 moment realization。
+
+固定点集的低阶 Bochner minor 不能直接提供 rigidity：`0,t,2t` 的 `3x3`
+行列式 Gaussian 主项从 `t^6` 开始，而 hidden odd degree `d>=5` 的相位经二次
+进入通常要到 `a^2 t^(2d)`；这解释了 local test 的失效，但没有否定需要更高阶
+全局测试的可能性。
+
+### 66.5 本轮总判决与下一步
+
+`PROVED`：finite odd support 在 square-exponential tail下只能为零；固定 `d`
+的 Hankel 可行半径 `rho_M(d)->0`；统一 `L^p`/square-tail 是从 finite jets
+到 all-moment law 的充分紧性接口。
+
+`OBSTRUCTION`：R137 未给出 `m_0(a,d)` 的显式增长率；`d_M->infty`、`a_M->0`
+的 incompatible selector sequence 仍未排除；单个低阶 Bochner minor 不够。
+
+`CONDITIONAL`：scalar `RK=1` 到 genuine full-SF/all-row，以及 `K_sp=log g`
+与 `C_g=log B_g` 的识别。
+
+`OPEN`：具有 infinitely many nonzero odd cumulants 的 genuine full-SF law 是否
+存在。路线因此没有升级为 global no-go；但 fixed sparse branch 已被严格排除，
+唯一下一轮任务是 **R138 — Infinite-Odd-Tail Bochner Phase Rigidity**。
