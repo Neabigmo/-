@@ -10426,3 +10426,66 @@ genuine all-degree law 必须分开。
 Bochner majorization**。目标是在已知非配对零点半径和 `Q_r` 总预算的条件下，
 寻找跨所有 Fourier charges 的正定性不等式；若不能闭合，给出明确的
 finite-node cancellation witness 和剩余的最小 global gap。
+
+## 68. R139：zero-divisor phase / cross-charge Bochner audit
+
+### 68.1 零点除子与无限变号
+
+网页端 R139 的长篇推导经本机独立审计后，保留以下 genuine square-exponential
+结论。按 `zeta -> -zeta` 轨道合并零点重数，令
+`delta(zeta)=n(zeta)-n(-zeta)`，则奇数阶满足
+
+`kappa_m/(m-1)!=-sum_R delta(zeta)zeta^(-m)`。
+
+最小非配对壳上的 finite exponential sum 在 Cesaro mean square 意义下严格
+非零，所以 `limsup_(m odd)(|kappa_m|/(m-1)!)^(1/m)=1/R_Delta`，并在无穷
+子序列上有相应 quantitative lower bound。逐阶 lower bound 不成立；共轭壳
+`R exp(+-i pi/6)` 给 `2R^(-m)cos(m pi/6)` 的精确 formal cancellation
+witness。
+
+新的 genuinely analytic partial theorem 是：非对称 square-exponential law 的
+odd cumulants 必有无限多个正值和无限多个负值。证明是 finite odd Taylor
+radius 与实轴 real analyticity 的组合，Pringsheim 只在该有限半径条件下使用，
+不能泛化到可能 entire 的 odd series。
+
+### 68.2 跨 Fourier charge 的正能量与失败机制
+
+把 `H_o` 展开成 `3r`、`r` odd 的 Fourier modes，Fisher identity 和
+`H>=-t^2/2` 给出 `PROVED` 的
+
+`sum_(r odd)(|Q_r'|^2+9r^2|Q_r|^2/t^2)<=exp(t^2/2)`。
+
+任意非负 `t` 权、右端可积时可由 Tonelli 积分。不同 charges 在该能量中不
+能互相抵消；剩余的精确逃逸是同一个 `Q_r` 内不同 degrees/zero shells 的
+相消。有限 odd degree 线性代数给出了 `Q_r(t_0)=Q_r'(t_0)=0` 的 nonzero
+formal witness，因此该上界目前不能反向成为 first-shell coercive lower gap。
+
+### 68.3 Bochner、even cone 与路线边界
+
+hidden degree `d=2s+1` 首次进入 Hankel/Bochner level `s+1`，对应矩阵尺寸
+`(d+3)/2`。任意有限测试族仍能在足够小的 finite-SF prefix 附近由严格正的
+紧支撑光滑扰动精确隐身；这只是 `OBSTRUCTION`，不是 probability counterexample。
+
+可单列为 genuine probability-level lemma：full-SF 且
+`kappa_(2m)>=0`（所有 `m>=2`）则 Gaussian。因为角平均系数
+`A_(2m)=3 binom(2m,m)/6^m>0`，Jensen 强制所有高阶偶累积量为零，继而
+`M(t)M(-t)=exp(t^2)`，Cramer decomposition 闭合。square-exponential
+infinitely divisible full-SF law 是其推论。
+
+### 68.4 R139 判决
+
+* `PROVED`：R138 零点接口的严格量词；非配对壳的 subsequential lower bound；
+  非对称 square-exponential law 的 odd-cumulant 无限变号；angular `H^1`
+  cross-charge upper majorization；有限 Bochner 首敏感阶；even-cumulant
+  cone Gaussian rigidity；uniform compactness interface；compatible genuine
+  backward-tower rigidity。
+* `OBSTRUCTION`：同一 `Q_r` 内跨 degree cancellation；有限 Bochner 测试族
+  的局部隐身；从 real-axis upper energy 推不出 first-shell lower gap。
+* `CONDITIONAL`：scalar `RK=1` 到 genuine full-SF/all-row；由 ordinary MGF/
+  Bargmann 到 spatial `P_3 K_sp`；formal witness 到 genuine law。
+* `OPEN`：无限非配对 MGF zero divisor 的 genuine full-SF law是否存在；以及
+  incompatible moving-top positive backward tower。
+
+下一轮唯一任务：寻找 first-shell mass 到 real-axis angular/Bochner energy 的
+反向 coercive lower bound；若失败，继续精确化 cancellation obstruction，不能
+宣称已构造 non-Gaussian full-SF law。

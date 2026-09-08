@@ -5149,3 +5149,31 @@ definiteness 的 genuine law。下一轮发送网页端 **R139 — infinite zero
 phase rigidity / cross-degree Bochner majorization**，只寻找跨所有 Fourier
 charges 的正定性不等式；若失败，明确写出 cancellation witness 和最小 global
 gap。不得把 R138 的 formal/finite-cutoff 结果写成 genuine non-Gaussian law。
+
+# 2026-09-08 — R139 zero-divisor phase / cross-charge audit
+
+网页端 R139 已完成长篇推导。本机新增
+`r139_zero_phase_cross_charge_audit/`，并将结果分为 genuine、formal 和
+conditional 三层。审计保留的主要 genuine-level 推进是：
+
+1. 按 `zeta -> -zeta` 的 signed divisor 先合并重数后，最小非配对壳的
+   Cesaro mean-square 严格为正，得到 odd-cumulant root-limsup 与
+   `R_Delta` 的精确对应；逐阶下界仍被共轭壳 cancellation witness 否定。
+2. 在 `R_Delta<infty` 下，非对称 square-exponential law 的 odd cumulants
+   必有无限多个正值和无限多个负值。这里 Pringsheim 的使用依赖 odd Taylor
+   半径有限，不能推广到 entire odd series。
+3. full-SF Fisher identity 升级为
+   `sum_r(|Q_r'|^2+9r^2|Q_r|^2/t^2)<=exp(t^2/2)`；不同 angular charges
+   在该能量中正交，唯一已定位的逃逸是同一 `Q_r` 内的跨 degree cancellation。
+4. hidden degree `d=2s+1` 的首敏感 Bochner/Hankel 尺寸为 `(d+3)/2`。
+   任意有限测试族仍能在足够小的 genuine finite-prefix 扰动中完全隐身，
+   这不是 full-SF law 或 relaxed Hankel counterexample。
+5. 得到一个新的 genuine probability-level lemma：full-SF 且所有高阶偶
+   累积量非负时必 Gaussian；故 square-exponential infinitely divisible
+   full-SF law 也必 Gaussian。
+
+R139 没有构造 genuine non-Gaussian full-SF law。`CONDITIONAL` 仍包括 scalar
+`RK=1 -> full-SF/all-row` 以及 ordinary MGF/Bargmann 结论到 spatial
+`P_3 K_sp`。当前 `OPEN` 仍是无限非配对零点除子问题和 incompatible moving-top
+backward towers。下一轮只攻 first-shell 到 real-axis energy 的反向 coercive
+lower bound；若失败，写出更精确的 cancellation obstruction。
