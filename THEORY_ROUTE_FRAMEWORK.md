@@ -11753,6 +11753,21 @@ Gram 负方向”压成一个精确的有限维判据。它是对 R153 的实质
 
 `lambda_min(Gamma_M)<=b-(a+b)Theta_M(I)`。
 
+还可以把 `Theta_M(I)` 进一步下压成 reproducing-kernel 量。令
+`K_M(x,y)=sum_(n=0)^Mpsi_n(x)psi_n(y)`，取
+`p(x)=K_M(x,x_0)/sqrt(K_M(x_0,x_0))`。因为
+`||p'||_2^2<=M` 且
+`|p'(x)|<=sqrt(MK_(M-1)(x,x))`，若 `I=[x_0-h,x_0+h]` 满足
+
+`h sqrt(M sup_IK_(M-1)(x,x))<=sqrt(K_M(x_0,x_0))/2`，
+
+则 `|p(x)|>=sqrt(K_M(x_0,x_0))/2` on `I`，从而得到显式下界
+
+`Theta_M(I)>=K_M(x_0,x_0)gamma(I)/4`。
+
+这不是 edge sharp asymptotic，但把局部化代价明确化为 kernel height、Gaussian
+interval mass 与 admissible width 三个量，正是 supercritical 计算需要的接口。
+
 所以产生负 Gram 方向的充分必要阈值（相对于该 `a,b` 包络）是
 
 `Theta_M(I)>b/(a+b)`，
@@ -11773,6 +11788,8 @@ Gram 负方向”压成一个精确的有限维判据。它是对 R153 的实质
 `R154_CHRISTOFFEL_NEGATIVE_DIRECTION_PASSED`
 
 `R154_POINTWISE_NEGATIVITY_NOT_SUFFICIENT_PASSED`
+
+`R154_REPRODUCING_KERNEL_LOCALISATION_BOUND_PASSED`
 
 `R154_SCALED_INTERVAL_BOOKKEEPING_PASSED`
 

@@ -6101,6 +6101,17 @@ R154 只研究 supercritical 标度
 Christoffel leakage `1-Theta_M(I)` 必须小于 `a/(a+b)`。这就是“负尾深度”与
 “degree-M 多项式局部化代价”的准确连接。单点负值不够。
 
+进一步取 Hermite reproducing kernel
+`K_M(x,y)=sum_(n=0)^Mpsi_n(x)psi_n(y)`，令
+`p(x)=K_M(x,x_0)/sqrt(K_M(x_0,x_0))`。由
+`||p'||_2^2<=M` 和 reproducing bound，若
+`I=[x_0-h,x_0+h]` 满足
+`h sqrt(M sup_IK_(M-1)(x,x))<=sqrt(K_M(x_0,x_0))/2`，则
+
+`Theta_M(I)>=K_M(x_0,x_0)gamma(I)/4`。
+
+这给出了一个虽未必 edge-sharp、但完全可计算的 Christoffel 局部化下界。
+
 本机目录 `r154_escape_energy_audit/` 已实际通过：
 
 `R154_CONCENTRATION_MATRIX_PASSED`
@@ -6108,6 +6119,8 @@ Christoffel leakage `1-Theta_M(I)` 必须小于 `a/(a+b)`。这就是“负尾�
 `R154_CHRISTOFFEL_NEGATIVE_DIRECTION_PASSED`
 
 `R154_POINTWISE_NEGATIVITY_NOT_SUFFICIENT_PASSED`
+
+`R154_REPRODUCING_KERNEL_LOCALISATION_BOUND_PASSED`
 
 `R154_SCALED_INTERVAL_BOOKKEEPING_PASSED`
 

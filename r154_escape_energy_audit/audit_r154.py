@@ -37,6 +37,10 @@ def interval_gram(M: int, left: float, right: float) -> np.ndarray:
     return A
 
 
+def reproducing_kernel(M: int, x: float, y: float) -> float:
+    return sum(psi(n, x) * psi(n, y) for n in range(M + 1))
+
+
 def check_concentration_matrix() -> None:
     M = 10
     A = interval_gram(M, -1.25, 1.25)
@@ -76,6 +80,28 @@ def check_pointwise_negative_is_not_sufficient() -> None:
     print("R154_POINTWISE_NEGATIVITY_NOT_SUFFICIENT_PASSED")
 
 
+def check_reproducing_kernel_localisation_bound() -> None:
+    M = 12
+    x0 = 0.75
+    K0 = reproducing_kernel(M, x0, x0)
+    # A conservative finite estimate of sup_I K_(M-1)(x,x), used only to
+    # check the analytic inequality numerically.
+    h = 0.2
+    for _ in range(20):
+        grid = np.linspace(x0 - h, x0 + h, 401)
+        Kstar = 2.0 * max(reproducing_kernel(M - 1, float(x), float(x)) for x in grid)
+        if h * math.sqrt(M * Kstar) <= 0.5 * math.sqrt(K0):
+            break
+        h *= 0.7
+    assert h * math.sqrt(M * Kstar) <= 0.5 * math.sqrt(K0)
+    left, right = x0 - h, x0 + h
+    gamma_I = quad(gaussian_density, left, right, epsabs=1e-13, epsrel=1e-13)[0]
+    lower = K0 * gamma_I / 4.0
+    theta = float(np.linalg.eigvalsh(interval_gram(M, left, right))[-1])
+    assert theta + 2e-10 >= lower
+    print("R154_REPRODUCING_KERNEL_LOCALISATION_BOUND_PASSED")
+
+
 def check_scaled_interval_bookkeeping() -> None:
     # The scaled interval y in [y0-h,y0+h] becomes this x interval under
     # y=sqrt(lambda)x.  This is the exact conversion needed in supercritical
@@ -93,6 +119,7 @@ def main() -> None:
     check_concentration_matrix()
     check_exact_loewner_criterion()
     check_pointwise_negative_is_not_sufficient()
+    check_reproducing_kernel_localisation_bound()
     check_scaled_interval_bookkeeping()
     print("R154_SCOPE_EXPLICIT: exact finite criterion only; supercritical tail and genuine branch remain open")
     print("R154_AUDIT_COMPLETED")
@@ -100,4 +127,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -35,6 +35,23 @@ Consequently a true negative Gram direction follows if and only if the
 available lower bound on `Theta_M(I)` exceeds `b/(a+b)`.  Equivalently, the
 localisation leakage `1-Theta_M(I)` must be smaller than `a/(a+b)`.
 
+There is also a directly computable kernel lower bound.  Let
+`K_M(x,y)=sum_(n=0)^M psi_n(x)psi_n(y)` and choose
+`p(x)=K_M(x,x_0)/sqrt(K_M(x_0,x_0))`.  Since
+`||p'||_2^2<=M` and
+`|p'(x)|<=sqrt(M K_(M-1)(x,x))`, if on
+`I=[x_0-h,x_0+h]` one has
+
+`h sqrt(M sup_I K_(M-1)(x,x)) <= sqrt(K_M(x_0,x_0))/2`,
+
+then
+
+`Theta_M(I) >= K_M(x_0,x_0) gamma(I)/4`.
+
+This bound is not expected to be sharp at the edge, but it exposes the exact
+quantities that a supercritical asymptotic must control: kernel height,
+Gaussian interval mass, and admissible localisation width.
+
 This is the correct finite statement behind “negative-tail depth versus
 Christoffel localisation cost.”  A pointwise negative value of `g` is
 insufficient: if `I` is too small, every degree-`M` polynomial can leak too much
@@ -43,7 +60,8 @@ mass into the positive complement.
 ## 2. Local audit
 
 `audit_r154.py` computes `A_M(I)` by Gaussian integration and checks the
-criterion in two piecewise-constant signed-density models.  It also checks a
+criterion in two piecewise-constant signed-density models and the reproducing-
+kernel localisation lower bound.  It also checks a
 small negative interval for which `g=-1` on `I` and `g=1` elsewhere but the
 whole Gram matrix remains positive, explicitly falsifying the pointwise-only
 shortcut.
@@ -70,4 +88,3 @@ pointwise sign or a finite formal jet is obtained, the result remains
 The global publication verdict remains:
 
 `无（目前没有足够独立、完整、可审稿的发表性结果）`
-
