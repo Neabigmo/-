@@ -10489,3 +10489,41 @@ infinitely divisible full-SF law 是其推论。
 下一轮唯一任务：寻找 first-shell mass 到 real-axis angular/Bochner energy 的
 反向 coercive lower bound；若失败，继续精确化 cancellation obstruction，不能
 宣称已构造 non-Gaussian full-SF law。
+
+## 69. R140：gap/separation shell-to-energy audit
+
+网页端 R140 已按提交 `5569c32c41e2ff078cb4d7e7d25479e170d7d028` 读取 R139
+基线并完成长篇推导。本机新增 `r140_gap_separation_shell_audit/`；网页端
+“(d+3)/2 首次敏感”经审计改写为“第一处 Hankel-leading coefficient 被 hidden
+degree 改变”，而任意非退化 `3x3` triangle 的 direct odd phase 可在 `h^(2d)`
+阶出现。even-cumulant cone 仍要求 `kappa_(2m)>=0` 对所有 `m>=2`。
+
+在第一非配对壳 reciprocal angular frequencies 有显式分离 `sigma>0`、下一壳
+有 `Gamma>1` 径向间隔、且 outer signed divisor 有
+`B_3=sum|delta|(R/|zeta|)^3` 定量界时，shifted Cesàro block + finite monomial
+Gram 给出一个明确的 shell-to-energy lower bound。利用 odd tail 从 `M+2`
+开始的步长 2，尾项满足
+`||tail||_2<=4B*tau^(M+5/2)/((M+2)*sqrt(2M+5))`（`B=L+B_3`、
+`tau<=1/2`），故网页端的常数 8 可直接核验：
+`tau^2<=a*sqrt(h_M)*(M+2)*sqrt(2M+5)/(8*(L+B_3))`。由此
+`E(T)>=Psi>0`，而 full-SF Fisher 只给 `E(T)<=int_0^T exp(t^2/2)dt`；若
+`Psi` 超过该上界，则该明确 regular-shell geometry 与 genuine full-SF 不相容。
+该结论是 `PROVED under explicit analytic hypotheses`，不是仅依赖
+`(R_Delta,V_Delta)` 的 universal gap。
+
+R140 同时给出两类 genuine probability/Bochner obstruction：Bernoulli 非对称
+MGF 加 Gaussian/rescale 使 angular separation 塌缩但 `R_Delta,V_Delta` 固定；
+以及 `B_p-cB_p'` 加 Gaussian/rescale 使 radial gap `Gamma=1/c` 塌缩但 angular
+separation 固定。两族均不是 full-SF counterexample，却说明两种几何控制都
+不可省。R140 的 full-SF `3x3` triangle majorization
+`3<|phi(rho t cos(theta))|^2><=1+2e^(-t^2/2)` 保留为 `PROVED`，但它只
+控制 modulus/even sector，仍没有 zero-shell phase 的 global lower gap。
+
+因此：`PROVED` 为带 gap/separation/tail 假设的条件性 shell-to-energy theorem、
+full-SF triangle majorization、此前 R139/R138 的严格接口和 compatible tower
+rigidity；`OBSTRUCTION` 为 angular/radial coalescence、同一 `Q_r` 跨 degree
+cancellation 与 finite-test invisibility；`CONDITIONAL` 仍是 scalar `RK=1`
+到 full-SF/all-row 以及 ordinary MGF/Bargmann 到 spatial `P_3 K_sp`；`OPEN`
+仍是 full-SF 是否自动排除 shell coalescence，以及 `R_Delta->infty` characteristic
+scale 上是否存在 uniform phase gap。下一轮唯一任务：**R141 — Renormalized
+Zero-Shell Bochner Phase Compactness**。

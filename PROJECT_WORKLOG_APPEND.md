@@ -5177,3 +5177,52 @@ R139 没有构造 genuine non-Gaussian full-SF law。`CONDITIONAL` 仍包括 sca
 `P_3 K_sp`。当前 `OPEN` 仍是无限非配对零点除子问题和 incompatible moving-top
 backward towers。下一轮只攻 first-shell 到 real-axis energy 的反向 coercive
 lower bound；若失败，写出更精确的 cancellation obstruction。
+
+# 2026-09-08 — R140 gap/separation shell-to-energy audit
+
+网页端 R140 已在同一“数学定理证明 — 理论推进审计”对话完成，并按公开仓库
+提交 `5569c32c41e2ff078cb4d7e7d25479e170d7d028` 读取 R139 基线。本机新增
+`r140_gap_separation_shell_audit/README.md` 与 `audit_r140.py`，记录了：
+
+1. R139 的严格更正：Pringsheim 依赖有限 odd Taylor 半径；`(d+3)/2` 只是
+   首个 Hankel-leading sensitive size，`3x3` direct odd phase 可在 `h^(2d)`
+   进入；even-cumulant cone 的量词是所有 `m>=2`。
+2. 在 first-shell angular separation、outer radial gap 和 weighted tail 有
+   明确界时，shifted Cesàro block + finite Gram 给出 `E(T)>=Psi>0`。本机
+   利用 odd tail 的步长 2 核验了网页回答中的 denominator 8 版本：
+   `||tail||_2<=4B*tau^(M+5/2)/((M+2)*sqrt(2M+5))`，因此
+   `tau^2<=a*sqrt(h_M)*(M+2)*sqrt(2M+5)/(8B)` 足以提供半量余度。与 full-SF upper budget 合并后，
+   `Psi>U(T)` 可排除该 regular-shell geometry class；这是带假设的
+   `PROVED`，不是 universal `(R_Delta,V_Delta)` gap。
+3. Bernoulli+Gaussian 的 angular-coalescence 族和
+   `B_p-cB_p'`+Gaussian 的 radial-coalescence 族说明：即使 genuine Bochner、
+   固定 `R_Delta,V_Delta`，没有 angular/radial uniform gap 时 bounded-window
+   energy 仍可趋零。它们不是 full-SF counterexamples。
+4. full-SF `3x3` triangle 给出
+   `3<|phi(rho t cos(theta))|^2> <= 1+2e^(-t^2/2)` 的 modulus/even
+   majorization；它不能直接提供非配对零点 phase 的反向 gap。
+
+脚本运行：
+
+`F:\\anaconda3\\python.exe r140_gap_separation_shell_audit\\audit_r140.py`
+
+预期 marker：
+
+`R140_SHIFTED_CESARO_BLOCK_PASSED`
+
+`R140_SHELL_NORMALIZATION_PASSED`
+
+`R140_CONSERVATIVE_TAIL_CONSTANT_PASSED`
+
+`R140_BERNOULLI_ZERO_FORMULA_PASSED`
+
+`R140_TRIANGLE_BOCHNER_PASSED`
+
+`R140_EVEN_CONE_AND_ORDER_INTERFACES_PASSED`
+
+`R140_AUDIT_COMPLETED`
+
+当前 `OPEN` 仍是 full-SF + Bochner 是否自动排除 angular/radial shell
+coalescence，以及 `R_Delta->infty` characteristic scale 是否存在 uniform
+positive phase gap。下一轮唯一任务为 **R141 — Renormalized Zero-Shell
+Bochner Phase Compactness**。
