@@ -10653,3 +10653,96 @@ Toeplitz positivity 的 non-coercivity、symmetric/even sign sector 和 finite-t
 invisibility；`OPEN` 是 coherent tensor positivity 是否能导出超出
 `B(real)>0` 的 even-sector/off-diagonal coercivity。下一轮唯一任务：**R143 —
 Coherent-State Tensor Positivity / Even-Sector Closure**。
+
+## 72. R143：coherent-frame tensor positivity 与 even-sector closure（2026-09-08）
+
+网页端基于提交 `e16d79105cf430d9ce9381e85ccbd71cd6479646` 完成 R143，并重新
+收束 R142 的 form-level 证据边界。核心对象为
+
+`C_mu(z,w)=exp(conj(z)w-(|z|^2+|w|^2)/2)B_mu(conj(z)+w)`。
+
+对于 square-exponential genuine probability law，直接有整个复参数域上的 measure
+Gram 表示
+
+`C_mu(z,w)=int overline(k_z(x)) k_w(x) dmu(x)`。
+
+故任意有限点和系数满足
+
+`sum_(i,j) conj(c_i)c_j C_mu(z_i,z_j)`
+`=int |sum_j c_j k_(z_j)(x)|^2 dmu(x)>=0`。
+
+这一步无需 `mu<<gamma`；参数导数的局部 dominated convergence 由
+square-exponential tail 提供。任意 tensor power 仍由 `mu^(tensor m)` 的 Gram
+表示保持 PSD。相反，`C_mu=C_gamma circ D_mu` 不能通过 Schur division 推出
+`D_mu(z,w)=B_mu(conj(z)+w)` PSD。
+
+R143 的核心新定理如下。令
+`r_j(theta)=sqrt(2/3)cos(theta+2pi(j-1)/3)`，并在 `L^2(mu^3)` 中取
+
+`V_t(theta)=tensor_(j=1)^3 k_(t r_j(theta)/2)`，
+`F_t(theta)=||V_t(theta)||^2=prod_j B_mu(t r_j(theta))`。
+
+full-SF 给出 `<F_t>=1`，而角自相关满足
+
+`<V_t(alpha+delta/2),V_t(alpha-delta/2)>`
+`=exp(-t^2(1-cos(delta))/4)F_(t cos(delta/2))(alpha)`。
+
+再次对 `alpha` 平均，角 Fourier mode
+`V_(t,n)=(2pi)^(-1)int V_t(theta)exp(-in theta)dtheta` 满足
+
+`||V_(t,n)||^2=exp(-t^2/4)I_n(t^2/4)`。
+
+循环置换给出不同 `n mod 3` block 的正交性。对
+`S_t=(2pi)^(-1)int |V_t(theta)><V_t(theta)|dtheta`，有
+
+`Tr(S_t^2)-exp(-t^2/2)I_0(t^2/2)`
+`=sum_(n!=m, n=m mod 3)|<V_(t,n),V_(t,m)>|^2>=0`。
+
+若某个 `t>0` 达到 Gaussian purity equality，则方差项消失，实解析性强制
+`F_s(theta)=1` 在一个区间成立，进而 `B_mu=1`、`mu=gamma`。这形成可独立
+报告的 **Coherent-Frame Bessel Spectrum and Purity-Defect Theorem**：full-SF
+精确固定所有 angular mode 的 Gaussian energy，非 Gaussianity只能位于同一
+`mod 3` sector 的 cross-harmonic coherence；这些 cross terms 的总平方正是
+positive frame-purity excess。full-SF 本身只给 `>=0`，不提供 equality。
+
+普通 coherent antipodal `2x2` minor 仅给
+`B_mu(y)B_mu(-y)>=exp(-y^2)`；要闭合 Jensen/cosh 机制，需要 deconvolved
+reflection positivity `[[B(y),1],[1,B(-y)]]>=0`，即
+`B_mu(y)B_mu(-y)>=1`。若额外假设后者，genuine full-SF 立即强制 Gaussian，
+但它不是 coherent PSD 自动推出的。相反，若 hypothetical non-Gaussian genuine
+full-SF law 的第一非零 Bargmann-log degree 为 odd `d`，则 first negative even
+pivot 给出
+
+`log(B(y)B(-y))=-(<p_d^2>/A_(2d))c_d^2 y^(2d)+O(y^(2d+2))<0`。
+
+因此 candidate 局部恰好落在普通 raw threshold 与 deconvolved threshold 之间。
+
+严格 obstruction 分两层记录。Fock-space positive operator
+`T_epsilon=I-epsilon(|e_0><f_6|+|f_6><e_0|)`（`f_6=(e_6+e_-6)/sqrt2`，
+`0<epsilon<1`）保持 `D_3` 对称和 Gaussian radial Q-average，却保留
+`cos(6theta)` anisotropy；这是 operator-level witness，不是 scalar full-SF
+counterexample。二维 genuine residual-vector law with Gaussian radius and
+angular density `(1+epsilon cos(6theta))/(2pi)` 也可保持 `D_3` symmetry 与
+common-rotation identities，同时令其坐标在 `epsilon<0` 时满足
+`B(y)B(-y)<1`；它不是 iid scalar residual law，不能冒充 full-SF counterexample。
+
+对 `g_N=P_(q^N)h_N`，R143 将剩余逃逸从 mode-energy escape 收紧为
+`exponential-energy residual angular cross-coherence escape`：mode energy 已被
+full-SF 固定，top shape 仍位于 `|z|~q^(-N/2)`、`n~q^(-N)`，逃逸只在同一
+`mod 3` sector 的 off-diagonal coherence。若 iid factorization 能强制这些
+cross terms 消失，或给出 frame-purity 反向估计
+`Tr(S_t^2)<=exp(-t^2/2)I_0(t^2/2)`，即可与当前 `>=` 合成 equality，排除
+genuine full-SF class 中的 incompatible towers。compatible single infinite
+tower 仍由 R138 独立解决；spatial `P_3K_sp` 桥仍未闭合。
+
+R143 分级：`PROVED` 为 coherent kernel/tensor PSD、Gaussian Bessel mode
+spectrum、`S_3` blocks、purity defect 与 equality rigidity，以及 local
+even-sector reversal；`CONDITIONAL` 为 scalar `RK=1` 桥接、Bargmann 到
+spatial bridge、deconvolved even domination 和 iid ridge-product closure；
+`OBSTRUCTION` 为 Schur deconvolution 非正、mode energy 不控制 cross-coherence、
+complex overlap damping 与两类 witness；`OPEN` 为 genuine non-Gaussian full-SF
+law 的存在性与 iid ridge-product residual angular rigidity。
+
+下一轮唯一任务：**R144 — IID Ridge-Product Residual Angular Rigidity /
+Bispectrum Coherence**，只研究 residual characteristic 的三 ridge-product
+分解是否能消灭 R143 的 cross-harmonic coherence。

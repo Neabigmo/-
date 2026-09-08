@@ -5304,3 +5304,146 @@ Closure**：研究 coherent kernel
 正性，判断能否得到 `B(y)B(-y)>=1` 或等价 even-sector domination；若不能，
 给出 infinite-rank coherent PSD 层面的严格 cancellation witness。仍保持
 `RK=1` 桥接和 spatial `P_3K_sp` 接口为 `CONDITIONAL/OPEN`。
+
+## R143 — Coherent-frame tensor positivity / even-sector closure（2026-09-08）
+
+网页端在公开提交 `e16d79105cf430d9ce9381e85ccbd71cd6479646` 的 R142 基线上
+完成 R143，并按八段结构收束。R143 没有构造 genuine non-Gaussian full-SF
+probability law，也没有证明其不存在；`RK=1` 到 genuine full-SF/all-row 与
+从 `B_mu/C_g` 到 spatial `P_3K_sp=0` 继续标为 `CONDITIONAL/OPEN`。
+
+### 一、R142 审计收束
+
+R142 的 Fourier forms
+
+`q_K(f)=int |f_hat(Rx)|^2 dmu_lambda(x)`、
+`q_G(f)=int |f_hat(Rx)|^2 dgamma(x)`
+
+在 Schwartz/form domain 上保持正确。`A_lambda` 应理解为 closed quadratic-form
+relative normalization；`G_R^(-1/2)` 与可能的 `M_(g_lambda)` 不能无条件视为
+bounded operators。R142 script markers 只认证有限 algebra/scaling interfaces，
+不替代无限维 domain、局部一致收敛或 Hermite–Toeplitz 分析证明。coherent
+identity 与实轴 Rayleigh recovery 保持：
+
+`<k_z,A_lambda k_w>`
+`=exp(conj(z)w-(|z|^2+|w|^2)/2)B_(mu_lambda)(conj(z)+w)`,
+
+`<k_(y/(2sqrt(lambda))),A_lambda k_(y/(2sqrt(lambda)))>=B_mu(y)`。
+
+### 二、coherent kernel 的精确 PSD 域
+
+R143 直接使用
+
+`C_mu(z,w)=exp(conj(z)w-(|z|^2+|w|^2)/2)B_mu(conj(z)+w)`
+`=int overline(k_z(x))k_w(x)dmu(x)`。
+
+对 square-exponential genuine law，此式在整个 `C x C` 上成立；任意有限二次型
+
+`sum_(i,j)conj(c_i)c_j C_mu(z_i,z_j)`
+`=int |sum_j c_jk_(z_j)(x)|^2dmu(x)>=0`。
+
+因此 `C_mu` 与任意 `C_mu^(tensor m)` 都是 genuine PSD；局部参数导数块在
+Gaussian triangular basis 下回到 Hermite/Hankel blocks。`C_mu=C_gamma circ D_mu`
+不能通过 Schur division 推出 `D_mu=B_mu(conj(z)+w)` PSD。
+
+### 三、full-SF tensor identity 与新小里程碑
+
+取 `r_j(theta)=sqrt(2/3)cos(theta+2pi(j-1)/3)` 与
+`V_t(theta)=tensor_j k_(t r_j(theta)/2)`，则
+
+`F_t(theta)=||V_t(theta)||^2=prod_j B_mu(t r_j(theta))`、`<F_t>=1`。
+
+角自相关的精确式是
+
+`<V_t(alpha+delta/2),V_t(alpha-delta/2)>`
+`=exp(-t^2(1-cos(delta))/4)F_(t cos(delta/2))(alpha)`。
+
+full-SF 平均后，角 Fourier modes
+`V_(t,n)=(2pi)^(-1)int V_t(theta)exp(-in theta)dtheta` 满足
+
+`||V_(t,n)||^2=exp(-t^2/4)I_n(t^2/4)`。
+
+循环置换给出不同 `n mod 3` block 的正交性。对
+`S_t=(2pi)^(-1)int |V_t(theta)><V_t(theta)|dtheta`，有
+
+`Tr(S_t^2)-exp(-t^2/2)I_0(t^2/2)`
+`=sum_(n!=m,n=m mod 3)|<V_(t,n),V_(t,m)>|^2>=0`。
+
+若某个 `t>0` 等号成立，则方差项消失，实解析性给出 `F_s(theta)=1` 于区间
+成立，继而 `B_mu=1`、`mu=gamma`。本轮独立小里程碑命名为
+**Coherent-Frame Bessel Spectrum and Purity-Defect Theorem**：full-SF 固定
+所有 mode energies 为 Gaussian，非 Gaussianity只能位于同一 `mod 3` sector
+的 cross-harmonic coherence，而这些 coherence 的总平方正是 positive
+frame-purity excess。
+
+### 四、even-sector closure
+
+普通 coherent antipodal `2x2` minor 为
+
+`[[B(y),exp(-y^2/2)],[exp(-y^2/2),B(-y)]]>=0`，
+
+只能推出 `B(y)B(-y)>=exp(-y^2)`。需要的闭合条件是
+`[[B(y),1],[1,B(-y)]]>=0`，即 `B(y)B(-y)>=1`。若额外加入该条件，
+`C_e>=0` 与 `1=<exp(H_e)cosh(H_o)>` 立即强制 `B=1`；这是真正的
+conditional closure theorem。
+
+R133/R136 的 first-packet identity 同时给出相反方向的局部审计：若 hypothetical
+non-Gaussian full-SF law 的首个非零 log-degree 为 odd `d`，则
+
+`log(B(y)B(-y))=-(<p_d^2>/A_(2d))c_d^2y^(2d)+O(y^(2d+2))<0`。
+
+所以 `B(y)B(-y)>=1` 不是 ordinary coherent positivity 可自动产生的温和
+结论；它若成立会直接解决大命题。
+
+### 五、严格 obstruction
+
+`C_mu=C_gamma circ D_mu` 的 Schur quotient 不保 PSD。operator-level witness
+`T_epsilon=I-epsilon(|e_0><f_6|+|f_6><e_0|)`（`0<epsilon<1`）严格正、保持
+`D_3` 对称并有 Gaussian radial Q-average，但保留 `cos(6theta)` anisotropy。
+这是严格的 positive coherent cancellation witness，但不是 scalar full-SF law。
+
+probability-level witness 取二维 `Z=R(cos Theta,sin Theta)`，其中
+`R^2~chi^2_2`、`dP_Theta=(1+epsilon cos(6theta))dtheta/(2pi)`。它保持
+Gaussian radial law、协方差 `I_2`、`D_3` 对称和 common-rotation identities，
+但 `epsilon<0` 时坐标有 `B(y)B(-y)<1`。它不是 iid residual scalar law，故不
+冒充 full-SF counterexample；它只证明 radius/symmetry/common-rotation 数据
+不足，真正缺的结构是 iid one-dimensional ridge-product factorization。
+
+### 六、rank / semiclassical 节点族
+
+固定 coherent Gram 只给自动 PSD；imaginary pair 的 off-diagonal 仍为
+`exp(-y^2/(2lambda))B_mu(iy)`；相邻 overlap 有固定下界的 coherent chain 需
+`m_lambda>=|y|/(C sqrt(lambda))`；Hermite/confluent block 需
+`n lambda->tau`，即 `n~lambda^(-1)`，才能把 fixed odd signal 放回 `O(1)`。
+但 canonical Toeplitz limit 仍为自动正的
+`T_r(B_mu(2sqrt(tau)cos theta))`。无限 rank 只保证 identifiability，不保证
+positive coercivity。必须继续区分 direct `3x3` phase `~h^(2d)` 与 first
+Hankel-leading sensitive size `(d+3)/2`。
+
+### 七、Positive Backward Tower
+
+对 `g_N=P_(q^N)h_N`，R142 的 positive form 在
+`|z|~q^(-N/2)` 精确恢复 `B_(h_N)`，对应 Hermite energy `n~q^(-N)`。R143
+进一步说明 mode energy 并非逃逸；真正剩下的是同一 `mod 3` block 的
+off-diagonal coherence，故命名为
+`exponential-energy residual angular cross-coherence escape`。若 iid
+factorization 能让 cross terms 消失，或推出
+`Tr(S_t^2)<=exp(-t^2/2)I_0(t^2/2)`，便与 R143 的 `>=` 合成 purity equality，
+可排除 genuine full-SF class 的 incompatible towers。compatible single
+infinite tower 仍由 R138 独立解决，spatial `P_3K_sp` 桥仍未闭合。
+
+### 八、分级与下一轮
+
+`PROVED`：全复域 coherent measure Gram、tensor PSD、Gaussian Bessel mode
+spectrum、`S_3` blocks、purity defect/equality rigidity、普通 reflection
+minor 的精确阈值、first non-Gaussian local even reversal。
+
+`CONDITIONAL`：scalar `RK=1` 桥接、Bargmann 到 spatial bridge、deconvolved
+even domination、iid ridge-product 消灭 cross-coherence。
+
+`OBSTRUCTION`：Schur deconvolution 非正、full-SF 固定 energy 但不固定
+cross-coherence、complex overlap damping，以及 operator/probability witnesses。
+
+`OPEN`：genuine non-Gaussian full-SF law 的存在性与 iid ridge-product residual
+angular rigidity。下一轮唯一任务为 **R144 — IID Ridge-Product Residual
+Angular Rigidity / Bispectrum Coherence**。
