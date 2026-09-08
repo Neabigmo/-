@@ -5098,3 +5098,54 @@ full-SF/all-row；`OPEN` 只剩 infinitely-many-odd-tail 的 genuine Bochner
 realization。固定 n selector、`d_n->infty,a_n->0` 序列、单个 all-degree law
 仍严格分开。下一轮网页任务为 **R138 — Infinite-Odd-Tail Bochner Phase
 Rigidity**。
+
+# 2026-09-08 — R138 infinite odd tail / Bochner phase audit
+
+网页端 R138 已恢复并完成；本机新增 `r138_infinite_tail_bochner_audit/`，脚本
+`F:\\anaconda3\\python.exe r138_infinite_tail_bochner_audit\\audit_r138.py`
+通过：
+
+`R138_EVEN_PIVOT_PASSED`
+
+`R138_ZERO_DIVISOR_PARITY_PASSED`
+
+`R138_FINITE_ZERO_TOP_TERM_PASSED`
+
+`R138_GAUSSIAN_BOCHNER_MINOR_PASSED`
+
+`R138_ZERO_FREE_DISK_CONSTANT_PASSED`
+
+`R138_COMPACTNESS_PARAMETER_PASSED`
+
+`R138_AUDIT_COMPLETED`
+
+本机审计保留并收紧网页端的主要结论。对 square-exponential genuine law，
+ordinary MGF 是 order 至多二的 entire function，genus-two Hadamard 分解给
+`kappa_m=-(m-1)! sum zeta^(-m)`。按零点重数定义最小非配对半径 `R_Delta`，
+有限 reciprocal-zero exponential sum 的 Cesaro mean square 给出
+`limsup_(m odd)(|kappa_m|/(m-1)!)^(1/m)=1/R_Delta`。故 finite odd support 和
+超指数 normalized odd tail 被排除；普通指数衰减不能仅靠此机制排除。
+
+full-SF 的 Jensen/Fisher 审计给出 `E(x)<=x^2`、安全预算
+`int_0^T|O''|<=8T+(log 2-1/8)/T`，以及 resummed odd-charge bound
+`sum_r|Q_r(t)|^2<=exp(t^2/2)(1-exp(-S(t)))`。后者只控制 Fourier 重求和，
+不提供逐个 cumulant 的正性，因此无限 tail 的 cancellation 仍是精确缺口。
+
+Bochner small-frequency leading term、hidden degree 的首个敏感矩阵和
+cutoff-uniform compactness 均通过独立有限检查；Gaussian `0,t,2t` minor 的
+精确开头为 `2t^6-4t^8+O(t^10)`。有限固定节点测试仍属 `OBSTRUCTION`，不能
+升级为 global no-go。
+
+本轮新的 tower 结论是：在 genuine full-SF/all-row 假设下，R132 的统一
+`|z|<=1/4` zero-free disk 与 OU normalized Bargmann scaling，使 single bottom
+law 的 all-depth genuine backward preimages 必为 Gaussian。这一结论对
+incompatible moving-top towers 不适用；`d_N->infty,a_N->0` 仍是 OPEN。由
+scalar `RK=1` 到 genuine full-SF/all-row，以及回到 spatial `P_3 K_sp` 的接口
+继续标为 `CONDITIONAL`。
+
+当前 OPEN 已压缩为：是否存在具有 infinitely many nonzero odd cumulants、
+无限 asymmetric MGF zero divisor 且满足 full-SF 与 Bochner positive
+definiteness 的 genuine law。下一轮发送网页端 **R139 — infinite zero-divisor
+phase rigidity / cross-degree Bochner majorization**，只寻找跨所有 Fourier
+charges 的正定性不等式；若失败，明确写出 cancellation witness 和最小 global
+gap。不得把 R138 的 formal/finite-cutoff 结果写成 genuine non-Gaussian law。

@@ -10319,3 +10319,110 @@ R136 的 finite interpolation 保证每个固定 `M` 有某个 `delta_M>0`，但
 `OPEN`：具有 infinitely many nonzero odd cumulants 的 genuine full-SF law 是否
 存在。路线因此没有升级为 global no-go；但 fixed sparse branch 已被严格排除，
 唯一下一轮任务是 **R138 — Infinite-Odd-Tail Bochner Phase Rigidity**。
+
+## 67. R138：Infinite-Odd-Tail Bochner Phase Rigidity 审计
+
+### 67.1 零点除子与 odd cumulant tail
+
+若 genuine centered law 满足 `E exp(eta X^2)<infty`，则 ordinary MGF
+`M(z)=E exp(zX)` 是 order 至多二的 entire function。genus-two Hadamard
+分解给出，对 `m>=3`：
+
+`kappa_m=-(m-1)! sum_nu zeta_nu^(-m)`。
+
+按零点重数定义 `R_Delta=min{|zeta|:n(zeta)!=n(-zeta)}`，空集取 `infty`。
+在最小非配对半径上，有限 reciprocal-zero exponential sum 的 Cesaro mean
+square 严格为正，因此
+
+`limsup_(m odd)(|kappa_m|/(m-1)!)^(1/m)=1/R_Delta`。
+
+这是 `PROVED` 的零点/odd-tail 对应。故 finite odd support 和
+`limsup_(m odd)(|kappa_m|/(m-1)!)^(1/m)=0` 的超指数 normalized tail 都会
+强制对称；普通指数衰减不能被此机制排除，因为它正对应有限半径的非配对零点。
+
+若 `C_g=log B_g` 能延拓为 entire function，则 `B_g=e^{C_g}` zero-free；
+有限阶 Hadamard rigidity 与 centered variance-one normalization 给 Gaussian。
+在 full-SF 下，有限总零点也同样给 Gaussian。因此 genuine non-Gaussian
+candidate 必须同时具有 infinitely many complex MGF zeros 和 infinitely many
+nonzero odd cumulants。这一段是 `PROVED`，但不等于 global phase rigidity。
+
+### 67.2 full-SF 实轴预算和 Fisher identity
+
+令 `K=log M=t^2/2+C`，`E=(K(t)+K(-t))/2`，`O=(K(t)-K(-t))/2`，
+`H(t,theta)=sum_j C(t r_j(theta))`。Jensen、centeredness 和 full-SF 给出
+
+`0<=E(t)`，`|O(t)|<=E(t)`，`average E(R cos theta)<=R^2/4`，
+以及更强的 `E(x)<=x^2`。
+
+对 `t!=0`，角向二阶导数与 `r_j''=-r_j`、`(r_j')^2=2/3-r_j^2` 给出
+
+`<e^H(H_t^2+H_theta^2/t^2)>`
+`=(2/3)[3-<e^H sum_j K''(t r_j)>]<=2`。
+
+因此 `int_0^T |O''|<=E'(T)`，并有安全的
+`int_0^T |O''|<=8T+(log 2-1/8)/T`。进一步把 `H` 分成 even/odd angular
+parts，若 `Q_r=<H_o exp(-3ir theta)>`，则
+
+`sum_(r>=1,r odd)|Q_r(t)|^2 <= exp(t^2/2)(1-exp(-S(t)))`
+`<= (t^2/2)exp(t^2/2)`。
+
+这是 `PROVED` 的全阶 resummed odd-charge budget；它控制 Fourier 重求和，
+不控制每个 odd cumulant 的绝对值，因而仍允许跨 degree cancellation。
+
+### 67.3 Bochner、Hankel 与 compactness 边界
+
+固定节点 `x_0,...,x_m` 时，square-exponential tail 下的 small-frequency
+Bochner determinant 满足
+
+`det[phi(h(x_i-x_j))]`
+`=h^(m(m+1)) Vandermonde(x)^2 Delta_m/prod_(k=0)^m(k!)^2`
+`+O(h^(m(m+1)+2))`。
+
+节点 `0,1,...,m` 时 Vandermonde 恰好抵消。hidden degree `d=2s+1` 的第一
+个敏感矩阵是 `(s+2)x(s+2)`，而 `0,t,2t` 的 Gaussian minor 开头为
+`2t^6-4t^8+O(t^10)`；hidden phase 先以 `a^2t^(2d)` 进入。因此有限固定
+Bochner test 是 `OBSTRUCTION`，不是 global no-go。
+
+若同一个 formal full-SF moment sequence 的 finite-jet genuine realizations
+满足 `sup_M E exp(eta X_M^2)<infty`，或满足
+`sup_M ||g_M||_(L^p(gamma))<infty`（`1<p<infty`），则 tightness、uniform
+integrability 和 weak compactness 给出 genuine all-moment limit；square-tail
+还把形式 SF 逐项升级为实际 entire-MGF identity。这是 `PROVED` 的充分接口，
+不是 uniform bound 的来源。对 fixed sparse branch，R137 已证明
+`rho_M(d)->0`；对 `d_M->infty,a_M->0` 的 moving selector 则不能套用 fixed-d
+结论。
+
+### 67.4 两类 positive backward tower
+
+在 genuine full-SF/all-row 假设下，R132 tail 给每个 law 统一的 MGF zero-free
+disk `|z|<=1/4`。若 single bottom law 满足
+`g_0=P_(q^N)h_N` 对所有 `N`，则 normalized Bargmann scaling
+`B_(g_0)(z)=B_(h_N)(q^(N/2)z)`。bottom 的任意零点会被缩到所有顶层共有的
+zero-free disk 内，故 bottom zero-free；finite-order rigidity 立即给
+`g_0=Gaussian`。这是 `PROVED`，但从 bare scalar `RK=1` 到 genuine full-SF
+仍为 `CONDITIONAL`。
+
+对每个 `N` 可更换顶层的 incompatible finite-depth towers，bottom law 也随
+`N` 变化，且 moving degree `d_N->infty`、amplitude `a_N->0` 仍可逃逸；该
+情形是 `OPEN`。固定 finite-SF selector、moving selector sequence 和 single
+genuine all-degree law 必须分开。
+
+### 67.5 R138 判决
+
+* `PROVED`：Hadamard zero-divisor formula；非配对零点半径的 odd-tail root
+  formula；finite-zero/zero-free rigidity；full-SF Fisher 与 resummed odd
+  budget；finite Bochner leading term；cutoff-uniform compactness interface；
+  compatible genuine backward-tower Gaussian rigidity。
+* `OBSTRUCTION`：finite local Bochner tests、coefficientwise positivity、
+  real-axis convexity alone、merely exponential normalized odd-tail bounds，
+  以及 fixed sparse branch 的 first failing Hankel index 尚无显式阶。
+* `CONDITIONAL`：scalar `RK=1` 到 genuine full-SF/all-row，以及从 ordinary
+  MGF/Bargmann 结论回到 spatial `P_3 K_sp`。
+* `OPEN`：具有 infinitely many nonzero odd cumulants 和 asymmetric infinite
+  zero divisor 的 genuine full-SF law是否存在；以及 incompatible moving-top
+  positive backward tower。
+
+下一轮只研究：**R139 — infinite zero-divisor phase rigidity / cross-degree
+Bochner majorization**。目标是在已知非配对零点半径和 `Q_r` 总预算的条件下，
+寻找跨所有 Fourier charges 的正定性不等式；若不能闭合，给出明确的
+finite-node cancellation witness 和剩余的最小 global gap。
