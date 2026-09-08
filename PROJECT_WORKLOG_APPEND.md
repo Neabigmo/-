@@ -5889,3 +5889,70 @@ stability rate。但当 `d->infinity` 时临界指数趋于 1，且 `log B` 的 
 下一轮唯一目标是量化 `eta_d(a)` 在 `d->infinity,a->0` 联合极限的下界；若无法得到统一
 margin，则必须构造经过 Hankel/Bochner、square-exponential 和 zero-free 尺度审计的 diagonal
 escape，不能以 finite/formal jet 代替。
+
+## R151 — Critical Hermite-Gram Shape / Canonical Rescue Modulus（2026-09-08）
+
+网页端本轮按公开仓库完成了 R132–R150 的全脉络与发表性审计，并明确回答：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+这不是“没有进展”，而是已有内容仍是相互衔接的 lemma packages：精确的 zero-divisor/OU
+缩放、posterior/escort 缺陷、iid bispectrum 与 common-mode regression、Laguerre/Bessel
+连续变换、反射二次型、以及 fixed-degree Hankel tail-stability。它们尚未共同闭合
+`RK=1 => full-SF`、全阶正定锥、moving-top backward tower 和 spatial `P_3 K` 桥，因此
+不能包装成独立新颖论文结果。
+
+本轮修正 R150 的一个逻辑问题：原 `eta_*` 是任意充分小的 continuity radius，不能谈其
+本身的渐近。定义 Hermite Gram `Gamma_M(a,b)` 后，置
+
+`M_d^sharp(a)=min{M:Gamma_M(a,0) not PSD}`，
+`delta_d^sharp(a)=-lambda_min Gamma_(M_d^sharp(a))(a,0)`，
+
+以及规范的
+`eta_d^sharp(a)=inf{||b||_infty:Gamma_(M_d^sharp(a))(a,b)>=0}`（空集时为 infinity）。
+若 `L_(d,M)(a,r)=sup_(||b||<=r)sum_j||partial_(b_j)Gamma_M(a,b)||_op`，则
+
+`eta_d^sharp(a)>=sup{r:rL_(d,M_d^sharp(a))(a,r)<delta_d^sharp(a)}`。
+
+这是可计算的 finite-dimensional lower bound，但 R137 没有给出 `M_d^sharp` 或
+`delta_d^sharp` 的速率，所以仍没有 honest power-law rigidity。
+
+网页端新推导的核心精确恒等式是：若 `C(z)=log B_mu(z)=sum c_k z^k`，则
+
+`sum Gamma_mn u^m/sqrt(m!)v^n/sqrt(n!)=exp(uv+C(u+v))`。
+
+在 Gaussian 点，`r=(m+n-k)/2` 时
+
+`partial_(c_k)Gamma_mn|_0=sqrt(m!n!)*binom(k,m-r)/r!`，
+
+否则为零。对 `m=M,n=M+1`、`d=2s+1`，
+
+`L_(d,M)=binom(d,s)sqrt(M+1)(M)_(under s)`，
+
+且
+
+`L_(d+2,M)/L_(d,M)=4(d+2)/(d+3)(M-s)`，
+
+`L_(d+2j,M)/L_(d,M)`
+`=[binom(d+2j,s+j)/binom(d,s)](M-s)_(under j)`。
+
+故临界 `M~tau|a|^(-2/d)` 下，若
+`c_(d+2j)=u_j|a|^(1+2j/d)`，各固定 higher-odd band 都是 `O(1)`；单个 block
+不能给出超临界 coercivity。OU 变换 `c_n(P_lambda mu)=lambda^(n/2)c_n(mu)` 进一步说明
+
+`u_j=c_(d+2j)/|c_d|^(1+2j/d)`
+
+是严格不变的 critical shape 坐标。这把下一步准确压缩成 all-order critical shape cone。
+
+证据分层：`PROVED` 为上述定义、生成恒等式、敏感度、临界幂次和 OU 不变性；
+`CONDITIONAL` 为依赖 scaled negative gap/eta 下界的 rigidity；`FORMAL/FINITE-ONLY`
+为 single-block cancellation 与有限支持 critical vector；`OPEN` 为半经典 Gram limit、
+shape cone、`d->infinity` uniformity、genuine positive lift、backward tower 和 spatial
+bridge。本机目录为 `r151_critical_shape_hankel_audit/`，脚本只核验有限精确系数，不认证
+全阶正定、主问题、counterexample、novelty 或发表准备度。
+
+网页端下一轮唯一任务部署为 **R152 — Semiclassical Sparse Hankel Limit / Critical
+Shape Cone**：在 `c_d=A lambda^(d/2)`、`c_(d+2j)=U_j lambda^((d+2j)/2)`、
+`M=floor(tau/lambda)` 下推进 normalized Hermite/Hankel quadratic-form limit；先做
+finite-support `U`，再讨论 closure，并分别报告 operator-level result 与 genuine
+positive iid liftability，禁止把前者冒充后者。

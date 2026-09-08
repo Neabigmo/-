@@ -11431,3 +11431,82 @@ genuine counterexample、主 characterization、novelty 或 `RK=1`/spatial bridg
 
 网页端工作前必须阅读本 Framework、`PROJECT_WORKLOG_APPEND.md` 与 R148–R150 审计目录；
 下一轮只能继续量化 `eta_d(a)` 的联合渐近，不能退回有限 z 或低阶展开。
+
+## R151 — Critical Hermite-Gram Shape / Canonical Rescue Modulus（2026-09-08）
+
+网页端在本轮先完成了从早期路线到 R150 的整体脉络与发表性审计，再修正 R150 中
+`eta_*` 只是任意充分小连续性半径、因而没有内在渐近的问题。保守发表性判断仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+### 80.1 Canonical finite modulus
+
+令 `Gamma_M(a,b)` 为 Hermite moment Gram 矩阵（与 monomial Hankel `H_M` 合同），定义
+
+`M_d^sharp(a)=min{M:Gamma_M(a,0) not PSD}`，
+
+`delta_d^sharp(a)=-lambda_min Gamma_(M_d^sharp(a))(a,0)>0`，以及
+
+`eta_d^sharp(a)=inf{||b||_infty:Gamma_(M_d^sharp(a))(a,b)>=0}`。
+
+若 `L_(d,M)(a,r)=sup_(||b||_infty<=r) sum_j||partial_(b_j)Gamma_M(a,b)||_op`，则均值
+定理与 Weyl 不等式给出可计算下界
+
+`eta_d^sharp(a)>=sup{r:r L_(d,M_d^sharp(a))(a,r)<delta_d^sharp(a)}`。
+
+这是对 R150 任意 continuity radius 的规范化修正；但因为 R137 没有给出
+`M_d^sharp(a)` 或 `delta_d^sharp(a)` 的渐近率，它还不是 power-law rigidity theorem。
+
+### 80.2 Exact Hermite-Gram identity and critical tail
+
+若 `C(z)=log B_mu(z)=sum_(k>=3)c_k z^k`，则
+
+`sum_(m,n>=0)Gamma_mn u^m/sqrt(m!) v^n/sqrt(n!)`
+`=exp(uv+C(u+v))`。
+
+在 Gaussian 点，令 `r=(m+n-k)/2`，则
+
+`partial_(c_k)Gamma_mn|_0`
+`=sqrt(m!n!)*binom(k,m-r)/r!`
+
+（不满足整数/范围条件时为零）。对相邻项 `m=M,n=M+1`、`d=2s+1`，
+
+`L_(d,M)=binom(d,s)sqrt(M+1)(M)_(under s)`，
+
+并且
+
+`L_(d+2,M)/L_(d,M)=4(d+2)/(d+3)(M-s)`。
+
+更高项满足
+
+`L_(d+2j,M)/L_(d,M)`
+`=[binom(d+2j,s+j)/binom(d,s)](M-s)_(under j)`。
+
+故在 `M~tau|a|^(-2/d)` 时，若
+`c_(d+2j)=u_j|a|^(1+2j/d)`，所有固定 `j` 的 band contribution 都是 `O(1)`。
+这说明 `1+2/d` 是相邻 Hermite band 的内在临界指数，同时也说明单个线性 block
+不能提供超临界 coercivity；必须研究 all-order critical shape。
+
+### 80.3 OU-invariant shape and evidence grading
+
+OU 缩放 `c_n(P_lambda mu)=lambda^(n/2)c_n(mu)` 使
+
+`u_j=c_(d+2j)/|c_d|^(1+2j/d)`
+
+严格不变。因而 moving-top 的真正对象是临界形状向量，而非 raw coefficient norm。
+
+`PROVED`：canonical finite definitions、Hermite-Gram generating identity、相邻与高阶
+敏感度公式、临界幂次、OU 形状不变性。
+`CONDITIONAL`：由 scaled negative Hankel gap 或 `eta_d^sharp` 下界推出的 rigidity。
+`FORMAL/FINITE-ONLY`：单 block 线性 cancellation 与有限支持 critical vector。
+`OPEN`：`M_d^sharp` 的精确率、scaled negative gap、all-order critical shape cone、
+`d->infinity` uniformity、genuine positive backward tower、`RK=1`/spatial `P_3K` bridge。
+
+本机记录在 `r151_critical_shape_hankel_audit/`，脚本仅核验精确有限系数恒等式，不认证
+R152 的半经典极限、全局 characterization、counterexample、novelty 或发表准备度。
+
+网页端下一轮必须先阅读本 Framework、`PROJECT_WORKLOG_APPEND.md` 和 R149–R151 审计目录，
+然后只推进 **R152 — Semiclassical Sparse Hankel Limit / Critical Shape Cone**：研究
+`c_d=A lambda^(d/2)`、`c_(d+2j)=U_j lambda^((d+2j)/2)`、`M=floor(tau/lambda)`
+下的 normalized Gram limit，并明确区分 formal finite-support limit、conditional
+operator theorem 与 genuine positive iid liftability。
