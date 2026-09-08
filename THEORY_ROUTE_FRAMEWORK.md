@@ -10013,3 +10013,118 @@ divisibility）和输出（可累积的 curvature charge、depth-independent low
 bound 或相反的构造）。任何 `9^m` amplification 只能在精确 identity 推出后
 写入；不能用猜测替代证明。R133 本机审计目录为
 `r133_first_odd_jacobi_audit/`，marker 与 R132 精确 Mehler 修正均已记录。
+
+## 64. R135：Critical Tensor-Leakage Anti-Shielding
+
+### 64.1 路线位置与边界
+
+R135 把 R134 剩下的未知量 `rho_(n,theta)` 明确成真实概率空间上的正投影
+二次型。结论必须分层：genuine positive law、有限矩和所需解析性下的
+R135-A 为 `PROVED`；从 scalar `RK=1` 迁移到 full-SF/all-row 仍为
+`CONDITIONAL`；R135-B 只有 finite-SF prefix，不能称为原命题反例；
+all-degree probability completion 仍为 `OPEN`。
+
+### 64.2 Theorem R135-A：精确投影与首层条件方差
+
+令 `X_1,X_2,X_3` 独立同分布于 `mu`，`Y_theta=sum_j r_j(theta)X_j`，
+`Pi_n^theta` 是 `Y_theta` 分布的 monic degree-n OP。以 one-body
+orthonormal Jacobi basis 的 tensor total-degree 分解写
+
+`Pi_n^theta(Y_theta)/sqrt(n!) = F_(n,theta)+R_(n,theta)`，
+
+其中 `F` 属于 total degree `n`，`R` 属于 degrees `<n`，并定义
+`rho_(n,theta)=||R_(n,theta)||^2`。若 `P_<n^theta` 是
+`span{1,Y_theta,...,Y_theta^(n-1)}` 的正交投影，且
+`E_(n,theta)=psi_n(Y_theta)-F_(n,theta)`，则
+
+`R=(I-P_<n^theta)E`，
+`rho=<E,(I-P_<n^theta)E>`。
+
+因此 `rho` 是显式 positive Schur/Christoffel projection，而不是任意残差。
+若 `U_(m,l)=<psi_m,varphi_l>_mu` 是 Hermite-to-Jacobi connection matrix，
+则 `U` 由 one-body Jacobi matrix 的递推完全决定；对每个 tensor index
+`a`，`E` 的系数为
+
+`C_a = sum_{i_1+i_2+i_3=n, i_j>=a_j}
+ sqrt(binomial(n;i_1,i_2,i_3)) prod_j r_j^(i_j) U_(i_j,a_j)`。
+
+若 `B` 是 `P_<n^theta` 在 tensor basis 中的正交列矩阵，则
+`rho=C^*(I-BB^*)C`。
+
+进一步令 one-body Jacobi diagonal cumulative sum
+`S_m=sum_(l=0)^m alpha_l`。在 total degree `n-1` 上，设
+`a_1+a_2+a_3=n-1`、`p_j=r_j^2`、
+`Z_a=n sum_j r_j S_(a_j)/(a_j+1)`，则
+
+`rho^[n-1] = (1/n) sum_|a|=n-1 multinomial(n-1;a) p^a q_a
+ (Z_a-S_(n-1)^theta)^2`.
+
+除以 `T_(n-1,theta)` 后，等价于
+
+`rho^[n-1] = T_(n-1,theta)/n *
+ [ Var_nu(Z) + (E_nu Z-S_(n-1)^theta)^2 ]`.
+
+特别有 `rho >= T_(n-1,theta) Var_nu(Z)/n`。这给出 R135 的首个真正
+`PROVED` coercivity，但它只约束首层 transverse fluctuation，并非对整个
+`rho` 的 uniform anti-shielding。
+
+### 64.3 Theorem R135-B：finite-SF 的近乎完全 shielding
+
+固定 `n>=3`，令 `d=2n-1`。在 `L^1(gamma)` 中对
+`V_n=span{x^r:0<=r<=2n, r!=d}` 做 `x^d` 的最佳逼近 `v_*`，令
+`R=x^d-v_*`、`f_n=sign(R)`。一阶最佳逼近条件给出
+
+`int x^r f_n dgamma=0 (0<=r<=2n, r!=d)`，
+`int x^d f_n dgamma=int |R| dgamma>0`。
+
+于是 `g_epsilon=1+epsilon f_n` 在 `0<epsilon<1` 时是严格正的
+probability density，且 centered、variance-one、`||g_epsilon-1||_2=epsilon`。
+到 degree `2n`，唯一非 Gaussian Hermite coordinate 是 `a_d!=0`；因 `d`
+为奇数且 `2d>2n`，其 same-factor angular identity 逐系数精确到 `z^(2n)`。
+
+令 `Delta_n=binom(2n-1,n-1)a_d^2`，则 angular law 上有精确三分解
+
+`sigma_(n,theta)=Delta_n p_(2n-1)(theta)^2`，
+`rho_(n,theta)=Delta_n[p_(2n)(theta)-p_(2n-1)(theta)^2]`，
+`rho+sigma=Delta_n p_(2n)(theta)`。
+
+由 `|r_j|^2<=2/3` 和 Cauchy-Schwarz，
+`p_(2n-1)^2 <= (2/3)^(n-2) p_(2n)`，从而
+
+`rho/(rho+sigma) >= 1-(2/3)^(n-2)`。
+
+同时所有 angular Hermite charges 到 degree `n` 为零，且原始 normalized
+Jacobi curvatures 对 `j<n` 完全 Gaussian、`beta_n/n=1-Delta_n`。取
+`epsilon_n=3^(-n)`，恰有 `n=log_3(1/epsilon_n)`，并由 `|a_d|<=epsilon_n`
+得 `Delta_n<(4/9)^n ->0`，而 shielding 比例趋于 1。
+
+该构造是 genuine positive `L^2` density 和 finite-SF obstruction，
+但不是 all-degree SF，因此没有构造原始命题的 counterexample。它严格排除
+任何只使用当前有限 charge horizon 的 `rho_n<=eta_n A_(<=n)` 或 universal
+fixed-fraction anti-shielding 证明机制，并显示真实 charge horizon 至少要到
+`2n-1`，存在 degree-doubling barrier。
+
+### 64.4 cubic tangent 与 critical-layer 判决
+
+在 fixed `n` 的 cubic tangent `g_c=1+c psi_3/sqrt(6)+o(c)` 下，本机核验
+
+`<rho_n> = [n(n-1)/4] c^2 <p_4-p_3^2> + o(c^2)`，
+
+而 D3 角平均 `<p_4>=1/2`、`<p_3^2>=1/12`，故
+`<rho_n>=(5/48)n(n-1)c^2+o(c^2)`。因此 cubic Hessian 只有 `O(n^2)`，
+`9^n` 仍只是 generic Gram/residual upper capacity，不是 lower gain。
+在 R135-B 中，`lambda_n^{-1}` 的指数因子被 production 自带的同一个
+`lambda_n` 完全抵消：`lambda_n^(-1)(1-<T_n>)=Delta_n`。
+
+### 64.5 对总命题的含义与下一轮
+
+对彼此不相容的 finite-depth positive backward towers，任意 growing-but-finite
+SF prefix 仍可能把缺陷藏在未来 degree，因此必须使用真正 all-degree
+coherence；projectively compatible infinite tower 仍沿既有 production-decay
+路线处理。当前 Jacobi 路线应精确判定为：`local/rowwise anti-shielding =
+NO-GO`，`global all-degree extension = OPEN`。
+
+R135 之后唯一任务更新为 **R136 — Full-SF Leakage Extension Rigidity**：
+判断 R135 的 near-total finite prefix shielding 是否能延拓为 genuine
+all-degree one-body SF law；必须寻找全阶 positive sum rule，或证明该 completion
+仍可存在。不得再重复估计当前行的 `rho`，也不得把 finite prefix 当成原命题反例。

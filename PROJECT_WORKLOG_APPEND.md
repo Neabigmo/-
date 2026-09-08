@@ -4947,3 +4947,56 @@ same-factor exact 命题的反例。
 从 angular identity 推导全阶 cumulative normalized curvature 的
 energy/telescoping identity，或者严格证明其 obstruction；不得重复 R133，
 也不得把未经推导的 `9^m` amplification 写成结论。
+
+# 2026-09-08 — R135 Critical Tensor-Leakage Anti-Shielding
+
+网页端 R135 完成了当前行 tensor leakage 的精确审计。本轮不把网页内容直接当
+作事实：先读取 `main@1a3f851`，再用本机 `F:\anaconda3\python.exe`
+运行 `r135_tensor_leakage_audit/audit_r135.py` 复核有限公式和常数。
+
+本机 marker：
+
+`R135_HIDDEN_BLOCK_SHIELDING_PASSED`
+
+`R135_FIRST_LOWER_LAYER_NORMALIZATION_PASSED`
+
+`R135_CUBIC_HESSIAN_PASSED`
+
+`R135_CRITICAL_LAYER_SCALE_PASSED`
+
+`R135_AUDIT_COMPLETED`
+
+可保留的严格结果如下。对 genuine probability law，`rho_(n,theta)` 是
+`<E,(I-P_<n)E>` 的正投影二次型；其 total-degree `n-1` 分量是
+`T_(n-1,theta)/n` 乘以一个显式条件方差加均值偏差平方。该结果只需要有限矩，
+并不需要把 scalar `RK=1` 识别为 full-SF。
+
+更强的有限层 obstruction 取 `d=2n-1`。用 `x^d` 对
+`span{x^r:0<=r<=2n,r!=d}` 的 `L^1(gamma)` 最佳逼近的符号函数构造
+`g_epsilon=1+epsilon sign(x^d-v_*)`。它严格正、centered、variance-one，
+且 `||g_epsilon-1||_2=epsilon`；到 `2n` 阶 only hidden odd coordinate
+survives，所以 SF 只需到 `2n` 阶就精确成立。此时
+
+`rho_n=Delta_n(p_(2n)-p_(2n-1)^2)`、
+`sigma_n=Delta_n p_(2n-1)^2`、
+`Delta_n=binom(2n-1,n-1)a_(2n-1)^2`，
+
+并有 `rho/(rho+sigma)>=1-(2/3)^(n-2)`。取 `epsilon=3^(-n)` 后，
+`n=log_3(1/epsilon)`，而 `Delta_n<(4/9)^n`；所以在精确 critical layer，
+当前行可被 tensor leakage 几乎完全 shielding，同时可见 normalized curvatures
+趋于零。这不是原始 all-degree 命题反例，因为缺少未来 degree 的 SF completion。
+
+因此 R135 的判决是：
+
+* `PROVED`：精确投影二次型、首层条件方差、finite-SF near-total shielding、
+  `lambda_n` 指数抵消、fixed-`n` cubic Hessian `5n(n-1)/48`；
+* `CONDITIONAL`：scalar `RK=1` 到 full-SF/all-row 的接口；
+* `OBSTRUCTION`：当前行 `rho` 的 uniform anti-shielding、固定比例 predictor
+  控制、以及 `lambda_n^{-1}` 作为独立 exponential lower gain；
+* `OPEN`：near-total finite prefix 是否具有 genuine all-degree one-body SF
+  completion。
+
+R135 将总路线从“控制当前行 `rho`”推进到唯一剩余问题：
+**R136 Full-SF Leakage Extension Rigidity**。下一轮必须研究全阶 positive
+sum rule 或严格的 all-degree completion obstruction；不得把 finite prefix
+称作原命题反例。
