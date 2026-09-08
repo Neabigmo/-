@@ -5555,3 +5555,95 @@ uniform 化。下一轮为 **R145 — Shifted Bispectrum / Common-Mode–Residua
 Coupling Rigidity**，首次离开 `s=0` residual plane，使用 full 3D positive
 kernel。应同时完成全历史与发表性审计；若没有独立、完整、可审稿的成果，必须
 明确回答“无”，不得把形式计算、条件结论或有限脚本审计包装成发表定理。
+
+## R145 — Shifted Bispectrum / Common–Residual Regression（2026-09-08）
+
+网页端先读取了公开提交 `4e31ab30930609b7ee18e552897d0116312a8e55` 的
+Framework、Worklog、R144 README 与脚本，并完成从早期路线到 R144 的全历史与
+发表性审计。严格结论为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+R145 仍然有真实 probability-level 推进，但目前更准确的定位是主问题中的
+lemma package，而非独立投稿定理。记录在
+`r145_shifted_bispectrum_common_mode_audit/README.md`，有限代数核验在同目录
+`audit_r145.py`。
+
+### 本轮 exact setup
+
+`C=(X_1+X_2+X_3)/sqrt(3)`、`U=(X_1-X_2)/sqrt(2)`、
+`V=(X_1+X_2-2X_3)/sqrt(6)`，
+
+`a_1=u/sqrt(2)+v/sqrt(6)`、`a_2=-u/sqrt(2)+v/sqrt(6)`、
+`a_3=-2v/sqrt(6)`，`Psi(s;u,v)=prod_j phi(s/sqrt(3)+a_j(u,v))`。
+
+沿 `v=0` 的 mixed-cumulant identity 是
+
+`partial_s^(m-2)partial_u^2 log Psi(0)`
+`=3^(-(m-2)/2)i^m kappa_m`，
+
+即 `cum(C,...,C,U,U)=3^(-(m-2)/2)kappa_m`。这确认 common-mode coupling
+精确承载 higher cumulants，但没有自动消失。
+
+### 新的 common-mode/residual inequality
+
+finite 3D Bochner Gram 对 iid characteristic function分解为三个一维 Gram 的
+Hadamard product；四节点 Schur complement 只给 mixed dependence 的平方上界。
+若 genuine full-SF/all-row 已知 `R^2=U^2+V^2~chi^2_2`，令
+
+`A(s,t)=E[exp(i s C)J_0(tR)]`，则严格有
+
+`|A(s,t)-phi(s/sqrt(3))^3 exp(-t^2/2)|^2`
+`<= (1-|phi(s/sqrt(3))|^6) exp(-t^2)(I_0(t^2)-1)`。
+
+`t->0` 给出无除法的约束
+
+`|phi(x)|^2|phi(x)^2+phi(x)phi''(x)-phi'(x)^2|^2<=1-|phi(x)|^6`。
+
+它比 R144 的 residual-only information 更强，但方向仍是上界。
+
+### Appell regression theorem and closure interface
+
+置 `H(C)=E[R^2-2|C]`，并用
+`exp(tC)/E exp(tC)=sum P_n^C(C)t^n/n!` 定义 sample-mean 的
+cumulant-Appell polynomials，则
+
+`E[H(C)P_n^C(C)] = 2 3^(-n/2)kappa_(n+2)`，`n>=1`。
+
+也就是说，全部 higher cumulants 是条件样本方差回归缺陷的 Appell 坐标。
+`E[R^2|C]=2` a.s. 时由共同指数倾斜得到 `K''=1`，进而 Gaussian；这是完整
+conditional closure theorem，但 full-SF 尚未推出该 constant-regression 条件。
+full-SF 给出的只是正缺陷上界/下界，未产生反号。
+
+R145 还构造了严格的 exchangeable joint probability witness：`(U,V)` 为标准
+二维 Gaussian，`h(S)=exp(-S)-1/3`，`C_epsilon` 加入 bounded radial coupling，
+使 residual vector 完全 Gaussian 但 `cum(C_epsilon,U,U)` 非零。它不是 iid
+scalar candidate，故只能作为 `3D positivity + exchangeability` 的 obstruction，
+不能作为研究问题 counterexample。
+
+对 `g_N=P_(q^N)h_N`，ordinary mixed derivatives 按 `q^(Nm/2)` 衰减，而
+Gaussian-renormalized shifted defect按 `(s,t)->(sqrt(lambda)s,sqrt(lambda)t)`
+缩放；common/residual dependence 与 R141–R144 一样只是迁移到
+`q^(-N/2)` 频率，没有被 OU 消灭。compatible single infinite tower 与
+incompatible moving-top tower仍严格分开，spatial `P_3K_sp` bridge仍开放。
+
+### Evidence grading after R145
+
+`PROVED`：orthogonal coordinates、mixed-cumulant identity、finite Gram/Schur
+upper bound、shifted Bessel–Schur inequality、division-free curvature inequality、
+Appell regression identity、constant-regression Gaussian closure。
+
+`CONDITIONAL`：`RK=1` 到 genuine full-SF/all-row、full-SF 到 constant regression、
+ordinary/Bargmann 到 spatial `P_3K_sp`，以及任何 reverse defect。
+
+`OBSTRUCTION`：iid 3D Bochner 是 Hadamard tautology；Hessian、entropy、R143
+purity 与 R144 convolution 都给正缺陷方向；exchangeable witness不在 iid标量锥内。
+
+`OPEN`：genuine iid fixed-sample-size `chi^2` characterization、incompatible
+backward tower uniform closure、ordinary-to-spatial bridge。
+
+唯一下一轮任务：**R146 — Tilted Sample-Variance Laplace / Constant-Regression
+Rigidity**，研究
+`Lambda(a,z)=E[exp(aC-zR^2)]/E exp(aC)` 的 boundary `Lambda(0,z)=(1+2z)^(-1)`
+是否能通过 iid product/heat-kernel/total-positivity/log-convexity推出
+`-partial_z Lambda(a,0)=2`；否则构造 legal exponential-family no-go。

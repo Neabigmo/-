@@ -10840,3 +10840,123 @@ Coupling Rigidity**：研究
 `partial_s^(m-2)partial_u^2 log Psi(0,0,0)=3^(-(m-2)/2)i^m kappa_m`。
 同时，网页端必须先完成全历史脉络与发表性分级：明确哪些是完整定理、哪些仅
 是条件/形式/有限审计，若没有达到独立可审稿标准的结果则明确回答“无”。
+
+## 74. R145：shifted bispectrum / common–residual regression（2026-09-08）
+
+R145 先完成全历史与发表性审计。网页端的严格判断是：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+这不是说本轮没有真实推进，而是说已有结果目前组成一条逼近核心开放
+characterization 问题的技术链，尚未脱离主问题形成一篇独立、完整、可外部
+审稿的结果。R144 的 IID Balanced-Convolution Defect Theorem 仍是可靠的
+probability-level 小里程碑，但其假设已经包含 genuine full-SF，且只给
+错误方向的 `>=1` defect；它不证明 Gaussian，也不构造非 Gaussian full-SF law。
+
+### 74.1 common/residual mixed cumulants
+
+令
+
+`C=(X_1+X_2+X_3)/sqrt(3)`、`U=(X_1-X_2)/sqrt(2)`、
+`V=(X_1+X_2-2X_3)/sqrt(6)`，以及
+
+`a_1=u/sqrt(2)+v/sqrt(6)`、`a_2=-u/sqrt(2)+v/sqrt(6)`、
+`a_3=-2v/sqrt(6)`。完整三维特征函数为
+
+`Psi(s;u,v)=prod_j phi(s/sqrt(3)+a_j(u,v))`。
+
+在 `v=0` 的 zero-free branch 上，
+
+`log Psi(s;u,0)`
+`=k(s/sqrt(3)+u/sqrt(2))+k(s/sqrt(3)-u/sqrt(2))+k(s/sqrt(3))`，
+
+所以
+
+`partial_s^(m-2) partial_u^2 log Psi(0;0,0)`
+`=3^(-(m-2)/2)i^m kappa_m`，
+
+即 `cum(C,...,C,U,U)=3^(-(m-2)/2)kappa_m`。这是 exact analytic identity，
+但不等于 mixed derivatives 必须为零。
+
+### 74.2 三维 Gram / Schur 与 shifted Bessel 上界
+
+任意有限三维 iid Gram 矩阵是三个一维 Bochner Gram 的 Hadamard product，故
+“完整三维正定性”对 genuine iid characteristic function本身是 Schur-product
+tautology，不能单独给高阶 mixed cumulant 的符号。四节点 centered Schur
+complement 只给
+
+`|Psi(s;-w)-A conj(B)|^2 <= (1-|A|^2)(1-|B|^2)`，
+
+其中 `A=phi(s/sqrt(3))^3`、`B=Psi(0;w)`；方向是上界而不是消失结论。
+
+若 genuine full-SF/all-row 已知 `R^2=U^2+V^2~chi^2_2`，令
+
+`A(s,t)=E[exp(i s C)J_0(tR)]`，
+
+则严格有
+
+`|A(s,t)-phi(s/sqrt(3))^3 exp(-t^2/2)|^2`
+`<= (1-|phi(s/sqrt(3))|^6) exp(-t^2)(I_0(t^2)-1)`。
+
+`t->0` 给出无除法的全实轴约束
+
+`|phi(x)|^2|phi(x)^2+phi(x)phi''(x)-phi'(x)^2|^2<=1-|phi(x)|^6`。
+
+它比 R144 的 residual-only information 更强，但方向仍是上界。
+
+### 74.3 条件回归：所有高阶累积量的 Appell 坐标
+
+置 `H(C)=E[R^2-2|C]`。置换对称性条件于 `C` 给出
+
+`E[U|C]=E[V|C]=E[UV|C]=0`、`E[U^2|C]=E[V^2|C]=E[R^2|C]/2`。
+
+对 ordinary MGF `M=E exp(tX)`、`K=log M`，共同指数倾斜给出
+`E_t[R^2]=2K''(t/sqrt(3))`。若
+
+`exp(tC)/E exp(tC)=sum P_n^C(C)t^n/n!`，
+
+则 `n>=1` 时
+
+`E[H(C)P_n^C(C)]=2 3^(-n/2)kappa_(n+2)`。
+
+因此全部 higher cumulants 是条件样本方差回归缺陷的 Appell 坐标。full-SF
+只给正 defect 的上界/下界，未产生反号。严格的 conditional closure 是：若
+`E[R^2|C]=2` a.s.，则 `K''=1` 局部，从而 `mu=N(0,1)`；但 full-SF 尚未推出
+该 constant-regression 条件。
+
+### 74.4 严格 obstruction 与 tower 含义
+
+令 `(U,V)~N(0,I_2)`、`S=U^2+V^2`、`Z~N(0,1)` 独立，取
+`h(S)=exp(-S)-1/3`、`sigma_epsilon^2=1+4epsilon^2/45`、
+`C_epsilon=(Z+epsilon h(S))/sigma_epsilon`。得到 centered、
+variance-normalized、square-exponential 的 genuine exchangeable joint law，
+残差向量仍精确 Gaussian，但
+`cum(C_epsilon,U,U)=-2epsilon/(9sigma_epsilon)`。它不是 iid scalar 候选，
+只能说明 `3D Bochner + exchangeability + exact Gaussian residual vector` 仍
+不足以推出 common/residual independence，不能冒充研究问题的 counterexample。
+
+对 `g_N=P_(q^N)h_N`，`kappa_m(g_N)=q^(Nm/2)kappa_m(h_N)`，而 Gaussian-
+renormalized shifted defect 按 `(s,t)->(sqrt(lambda)s,sqrt(lambda)t)` 缩放；
+common/residual dependence 被搬到 `q^(-N/2)` 频率而非被 OU 消灭。compatible
+single infinite tower 仍由 R138 独立解决；incompatible moving-top tower 与
+spatial `P_3K_sp` bridge 继续 OPEN/CONDITIONAL。
+
+### 74.5 分级与下一轮
+
+`PROVED`：正交坐标、mixed-cumulant identity、有限 Gram Hadamard/Schur 上界、
+shifted Bessel–Schur inequality、division-free curvature inequality、Appell
+regression identity、以及 constant regression `E[R^2|C] => Gaussian`。
+
+`CONDITIONAL`：`RK=1` 到 genuine full-SF/all-row、full-SF 到 constant
+regression、ordinary/Bargmann 到 spatial `P_3K_sp`、以及任何 reverse defect。
+
+`OBSTRUCTION`：三维 Bochner 对 iid 是 Hadamard tautology；Hessian/entropy 与
+R143/R144 都是正缺陷方向；exchangeable witness 不是 iid scalar law。
+
+`OPEN`：genuine iid fixed-sample-size `chi^2` 条件是否强制 Gaussian/constant
+regression，能否沿 incompatible tower uniform 化，以及 ordinary-to-spatial
+bridge 能否闭合。下一轮唯一任务为 **R146 — Tilted Sample-Variance Laplace /
+Constant-Regression Rigidity**，研究
+`Lambda(a,z)=E[exp(aC-zR^2)]/E exp(aC)` 的 exact boundary 与 iid positive
+kernel 是否能推出 `-partial_z Lambda(a,0)=2`；若不能，给出 legal
+exponential-family no-go。
