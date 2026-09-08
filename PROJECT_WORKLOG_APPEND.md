@@ -5226,3 +5226,36 @@ lower bound；若失败，写出更精确的 cancellation obstruction。
 coalescence，以及 `R_Delta->infty` characteristic scale 是否存在 uniform
 positive phase gap。下一轮唯一任务为 **R141 — Renormalized Zero-Shell
 Bochner Phase Compactness**。
+
+---
+
+## R141 — Renormalized zero-shell Bochner phase compactness（2026-09-08）
+
+网页端已读取 R140 提交 `32f86ddb2d7b21b9dfaec7027dd49b987d2d34a0`，并确认 R140
+的 odd-block 步长 2 与 denominator 8 的尾界一致：
+`||tail||_2<=4B*tau^(M+5/2)/((M+2)*sqrt(2M+5))`。本机审计目录为
+`r141_normalized_zero_shell_audit/`，其中 `README.md` 保存完整理论记录，
+`audit_r141.py` 只做有限代数/标度/最大值/塔深度接口检查。
+
+本轮得到的可复用小里程碑是：在 `J<=J0、sigma>=sigma0、Gamma>=Gamma0、
+B3<=b*sqrt(V)` 的显式 regular normalized shell 类中，
+`mathfrak Q_r(s)=-iQ_r(iR_Delta*s/rho)` 的归一化 odd-ratio phase 具有统一的
+非零局部 `L2` 下界，并形成单位圆盘内的 normal family。OU 变换保持归一化零点
+和 phase，却把 raw characteristic 乘以
+`exp(-(1-lambda)R_Delta^2*s^2/(2lambda))`；因此 raw Bochner gap 不能直接
+升级为 scale-free gap。相对 Gaussian 的 `B_mu=exp(-z^2/2)M` 是正确的
+OU-invariant 形状变量，但其 positive-definite 性未解决。
+
+此外，若第一 hidden odd degree 是 `d`，则有限秩 Gram 的 imaginary part 受
+`epsilon_d(lambda)<=2exp(-1/8)*(4lambda/(1-lambda))^(d/2)` 控制；节点分离的
+Gaussian damping 进一步说明固定/次临界 rank 会看不见 O(1) odd phase。对
+backward tower，这一盲区对应 `Gaussian-relative spectral-rank escape`，而非
+对 genuine non-Gaussian full-SF law 的构造。
+
+分级保持严格：`PROVED` 仅含带假设的 normalized L2 gap、OU 标度接口、raw
+damping、finite-rank erasure 与既有兼容塔结果；`CONDITIONAL` 仍含 scalar
+`RK=1` 到 full-SF/all-row 和 ordinary MGF/Bargmann 到 spatial `P_3K_sp`；
+`OPEN` 是 Gaussian-relative positive quadratic form 的构造，或证明其谱特征值
+必然衰减。下一轮唯一任务为 **R142 — Gaussian-Relative / Semiclassical
+Bochner Spectral Amplification**，重点研究节点间距 `~sqrt(lambda)`、rank
+增长、confluent/high-order normalization 以及 Gaussian-relative 正二次型。

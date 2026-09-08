@@ -10527,3 +10527,46 @@ cancellation 与 finite-test invisibility；`CONDITIONAL` 仍是 scalar `RK=1`
 仍是 full-SF 是否自动排除 shell coalescence，以及 `R_Delta->infty` characteristic
 scale 上是否存在 uniform phase gap。下一轮唯一任务：**R141 — Renormalized
 Zero-Shell Bochner Phase Compactness**。
+
+## 70. R141：归一化零壳相位与有限秩 Bochner 盲区（2026-09-08）
+
+网页端基于提交 `32f86ddb2d7b21b9dfaec7027dd49b987d2d34a0` 对 R140 作了完整复核。
+R140 的 odd block 确实以步长 2 取项；当 `M` odd、`tau<=1/2` 时，
+`||tail||_2<=4B*tau^(M+5/2)/((M+2)*sqrt(2M+5))`，故
+`tau^2<=a*sqrt(h_M)*(M+2)*sqrt(2M+5)/(8B)` 中的常数 8 足够。三点
+full-SF 约束仍为 `3<|phi(rho*t*cos(theta))|^2><=1+2exp(-t^2/2)`，
+但其相位松弛只给 `<A*(1-cos(Psi))>=<A>-exp(-t^2/2)>=0`，尚非 zero-shell
+phase 的 universal gap。
+
+R141 的新接口是在公共 `+-` 零因子约去后取
+`F(z)=M(z)/M(-z)`、`Omega(z)=1/2 log F(z)`，并定义
+`mathfrak Q_r(s)=-iQ_r(i*R_Delta*s/rho)`。在明确的 regular normalized
+geometry `J<=J0, sigma>=sigma0>0, Gamma>=Gamma0>1, B3<=b*sqrt(V)` 下，
+取网页端给出的 `N*、m*、M*、ell*、a*、h*、B*、tau*`，可得
+`int_0^tau*|V^(-1/2)mathfrak Q_1(s)|^2 ds>=c*>0`。这证明的是
+scale-free normalized odd-ratio normal-family / nonzero-L2-gap 结论，量词限于
+上述正则类，并非所有 square-exponential laws 的 Bochner positive gap；公共
+symmetric/even zero sector 仍须另行控制。
+
+OU 变换 `M_lambda(z)=exp((1-lambda)z^2/2)M(sqrt(lambda)z)` 满足
+`R_Delta,lambda=R_Delta/sqrt(lambda)`，normalized divisor 与 normalized phase
+不变，但
+`phi_lambda(R_lambda*s)=exp(-(1-lambda)R_Delta^2*s^2/(2lambda))*phi(R_Delta*s)`。
+因此 raw characteristic 的相位/模会被 Gaussian damping；相对 Gaussian 的
+`B_mu(z)=exp(-z^2/2)M(z)` 保留 OU shape，却一般不是 positive-definite。
+
+若第一 hidden odd degree 为 `d>=3`，R141 给出
+`epsilon_d(lambda)<=2exp(-1/8)*(4lambda/(1-lambda))^(d/2)` 以及任意 `n` 点
+normalized Gram 的 `||G_lambda-Re(G_lambda)||_op<=(n-1)epsilon_d(lambda)`。
+结合节点分离时的 Gaussian identity，固定或 subcritical rank 不能保留 O(1)
+odd phase；backward tower 中 `R_Delta(g_N)>=q^(-N/2)/4` 且 raw Gram 在
+`log m_N=o(q^(-N))` 下趋于 identity。当前剩余逃逸明确记为
+`Gaussian-relative spectral-rank escape`。
+
+本轮分级：`PROVED` 为显式 regular-shell 的 normalized L2 gap、OU normalized
+invariance、raw damping、finite-rank erasure 及既有 compatible-tower 结果；
+`CONDITIONAL` 仍包括 scalar `RK=1` 到 full-SF/all-row 与 ordinary
+MGF/Bargmann 到 spatial `P_3K_sp`；`OBSTRUCTION` 包括壳合并、对称偶 sector
+和有限秩失明；`OPEN` 是构造保持 positivity 的 Gaussian-relative positive
+quadratic form，或证明其谱特征值必然消失。下一轮唯一任务：**R142 —
+Gaussian-Relative / Semiclassical Bochner Spectral Amplification**。
