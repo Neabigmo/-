@@ -5734,3 +5734,54 @@ tower uniform closure 和 ordinary-to-spatial `P_3K_sp` bridge 仍 OPEN/CONDITIO
 本轮本机记录：`r147_dual_regression_finite_boundary_audit/README.md`，有限接口核验：
 `r147_dual_regression_finite_boundary_audit/audit_r147.py`。脚本只核验有限代数与缩放，
 不声称证明全局 law、无限级数、函数空间 IFT、tower uniformity 或发表新颖性。
+
+## R148 — Continuum Circular Boundary / Dual Regression / Reflection Deficit（2026-09-08）
+
+网页端完成了 R148，并读取了公开 R147 提交 `153ffabdadd885625d8fedb6999b9b9e1b945da8`。
+严格发表性结论仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+本轮新增内容与本机审计记录：
+
+1. **Bessel–Laguerre dual completeness。** 令 `T=Q/2~Exp(1)`、
+   `a_m=E[C L_m(T)]`。精确积分
+   `int exp(-x)L_m(x)J_0(2 sqrt(xy))dx=exp(-y)y^m/m!`
+   给出
+   `E[C|Q]=0 <=> a_m=0 (all m) <=> E[CJ_0(t sqrt(Q))]=0 (all t)`，
+   并与 `E[Ce^(-zQ)]=0 (all z>0)` 等价。这是连续层面的 exact transform theorem。
+2. **Circular transform 缺口。**
+   `A(s,t)=(1/(2pi))int product_j phi(s/sqrt(3)+tr_j(theta))dtheta`
+   精确等于 `E[e^(isC)J_0(t sqrt(Q))]`；full-SF 只给
+   `A(0,t)=e^(-t^2/2)`，目标是 `partial_sA(0,t)=0`。Fourier 展开只定位 boundary trace
+   与 common normal derivative，未产生新的闭合。
+3. **Gaussian continuum linearization。**
+   `D F_1[f]=3<f,A_z>`，`A_z` 为显示的 Gaussian profile；Hermite 偶模 multiplier
+   `3/(1+2z)*sqrt((2m)!)/m!*(-r/3)^m`，奇模全为零，且 even inverse 指数病态。
+   这严格说明 finite IFT 不能以 uniform right inverse 升级到 continuum，也排除自然范数下
+   的一阶 Lipschitz coercivity；不构成 exact positive full-SF 反例。
+4. **Reflection-Symmetrization Laplace Deficit。**
+   `mu=nu+sigma` 的奇偶展开给
+   `F_z(mu)=F_z(nu)+3Q_z^nu(sigma)`，其中平方和展开证明 `Q_z^nu(sigma)>=0`，
+   `sigma!=0` 时在相应可积性下严格正。因此 exact full-SF 的 asymmetric candidate 必须让
+   对称化 law 严格低于 Gaussian boundary。反向不等式没有由 positivity/backward 自动得到。
+5. **OU/tower normalized shape。** 对 `D_mu(t)=E[CJ_0(t sqrt(Q))]`、
+   `hat(D)=e^(t^2/2)D`，有
+   `hat(D)_(P_lambda mu)(t)=sqrt(lambda)hat(D)_mu(sqrt(lambda)t)`；moving-top 的
+   `q^(-N/2)hat(D)_(g_N)(q^(-N/2)t)=hat(D)_(h_N)(t)`，但底部普通 `L^2` 仍不足以控制该尺度。
+
+R148 之后的总体链为
+
+`chi-square variance -> zero-divisor/OU -> coherent defect -> iid bispectrum`
+`-> common regression -> tilted Laguerre -> continuum dual transform -> reflection deficit`。
+
+当前仍不可省略的 OPEN bridges 是：`RK=1=>full-SF/all-row`、
+`Q~chi^2_2+iid=>E[C|Q]=0`、incompatible tower uniform closure，以及 ordinary-to-spatial
+`P_3K_sp`。所以记录中的发表性回答保持“无”；准确描述是已有可独立整理的连续理论包，
+但尚未形成闭合、经过新颖性核验的独立论文定理。
+
+本轮本机有限审计：`r148_continuum_circular_reflection_audit/audit_r148.py`。它仅核验
+Bessel–Laguerre 积分、有限 generating interface、Hermite multipliers、反射分解和 OU
+归一化接口，不声称证明无限维或 global law 结论。下一轮部署为 **R149 — Nonlinear
+Reflection-Compensation / Odd-to-Even Continuum Coercivity**，只研究
+`F_z(nu)+3Q_z^nu(sigma)=1/(1+2z)` 的 all-order positive-cone 可行性。

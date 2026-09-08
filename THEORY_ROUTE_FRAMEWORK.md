@@ -11206,3 +11206,125 @@ package；R133、R136、R141、R142 的部分仍标为 packet/formal/form-level�
 `A(s,t)=(1/(2pi))int product_j phi(s/sqrt(3)+t r_j(theta))dtheta` 证明
 `A(0,t)=exp(-t^2/2)` 能推出 `partial_sA(0,t)=0`。若不能闭合，必须给出连续变换层面的
 honest no-go，不再重复有限样本的局部构造。
+
+## R148 — Continuum Circular Boundary / Dual Regression / Reflection Deficit（2026-09-08）
+
+网页端在读取公开 R147 提交 `153ffabdadd885625d8fedb6999b9b9e1b945da8` 后完成了本轮
+连续层推导。严格发表性结论仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+R148 的新增内容不是有限采样的重复，而是一个连续参数 lemma package；本机记录与有限核验
+位于 `r148_continuum_circular_reflection_audit/`。脚本只核验特殊函数恒等式、有限级数、
+Gauss–Hermite 接口、有限 signed-measure 分解和 OU 缩放，不声称证明无限维唯一性、完整
+full-SF characterization、非线性正分支、tower uniformity、novelty 或 `RK=1`/`P_3 K_sp`
+桥接。
+
+### 77.1 Bessel–Laguerre dual completeness
+
+令 `T=Q/2~Exp(1)`、`a_m=E[C L_m(T)]`。由 Bessel/Laplace uniqueness、Laguerre 完备性和
+精确积分
+
+`int_0^infty exp(-x)L_m(x)J_0(2 sqrt(xy))dx=exp(-y)y^m/m!`
+
+得到完整等价链：
+
+`E[C|Q]=0`
+`<=> a_m=0 (all m)`
+`<=> E[C J_0(t sqrt(Q))]=0 (all t>=0)`
+`<=> E[C exp(-zQ)]=0 (all z>0)`。
+
+并且
+
+`E[C J_0(t sqrt(Q))]=exp(-t^2/2) sum_(m>=1)a_m(t^2/2)^m/m!`。
+
+这是将 dual regression 变为连续变换零集的精确定理，不是 finite boundary statement。
+
+### 77.2 shifted circular transform 与真实缺口
+
+对残差平面单位向量 `r_j(theta)`，定义
+
+`A(s,t)=(1/(2pi))int product_j phi(s/sqrt(3)+t r_j(theta))dtheta`。
+
+直接由 `sum r_j=0`、`sum r_j^2=1` 和圆周平均得到
+
+`A(s,t)=E[exp(i s C)J_0(t sqrt(Q))]`。
+
+full-SF 只给出 `A(0,t)=exp(-t^2/2)`；缺失项正是
+
+`partial_sA(0,t)=iE[CJ_0(t sqrt(Q))]`。
+
+因此问题被精确定位为 Dirichlet boundary trace 是否能控制 common-direction normal
+derivative。Fourier 展开只表明二者分别是 cubic zero-mode 的值与导数，不能从边界值自动
+制造导数。
+
+### 77.3 Gaussian continuum linearization theorem
+
+对 `g=1+epsilon f`，令 `F_g(z)=E_(g dgamma)^3 exp(-zQ)`。高斯点一阶变分为
+
+`D F_1[f](z)=3<f,A_z>_gamma`，
+
+`A_z(x)=exp(-b_z x^2)/sqrt((1+2z)(1+2z/3))`，`b_z=2z/(3+2z)`。
+
+在 `psi_n=He_n/sqrt(n!)`、`r=2z/(1+2z)` 下，
+
+`D F_1[psi_(2m)] = 3/(1+2z)*sqrt((2m)!)/m!*(-r/3)^m`，
+
+而所有 odd modes 的一阶响应为零。even multiplier 的渐近为
+
+`3^(1-m)sqrt((2m)!)/m! ~ 3(2/3)^m(pi m)^(-1/4)`。
+
+所以完整 continuum boundary 的线性 kernel 恰为 odd tangent space，even inverse 在高阶上
+指数病态；finite IFT surjectivity 不给 uniform continuum right inverse。沿 bounded odd
+positive perturbation，boundary response 可为 `O(epsilon^2)`，common derivative 却为
+`O(epsilon)`，从而排除自然范数下的一阶 Lipschitz coercivity。该结论仍不是 exact
+full-SF counterexample，也不排除非线性 all-order coercivity。
+
+### 77.4 Reflection-Symmetrization Laplace Deficit Theorem
+
+令 `check(mu)` 为反射，`nu=(mu+check(mu))/2`、`sigma=(mu-check(mu))/2`。利用 simultaneous
+reflection parity，
+
+`F_z(mu,mu,mu)=F_z(nu,nu,nu)+3F_z(nu,sigma,sigma)`。
+
+固定第一坐标 `a` 后，核可分解为
+
+`exp(-zQ(a,x,y))=exp(-2za^2/3)f_a(x)f_a(y)exp((2z/3)xy)`。
+
+展开最后指数得平方和，因此 `F_z(nu,sigma,sigma)>=0`；在相应可积性下，若 `sigma!=0`
+则对 `z>0` 严格为正。于是任意 asymmetric exact full-SF candidate 必须满足
+
+`F_z(nu,nu,nu)<1/(1+2z) (all z>0)`。
+
+这是真实概率层面的全连续正缺陷定理。反向不等式并非由 symmetric + positive + one-step
+backward 自动推出；OU-smoothed Rademacher 给出 genuine iid scalar 的相反局部符号，虽非
+full-SF 反例。
+
+### 77.5 OU/tower interface 与全局定位
+
+置 `D_mu(t)=E[CJ_0(t sqrt(Q))]`、`hat(D)=exp(t^2/2)D`，则精确 OU 运输为
+
+`hat(D)_(P_lambda mu)(t)=sqrt(lambda)hat(D)_mu(sqrt(lambda)t)`。
+
+对 `g_N=P_(q^N)h_N`，
+
+`q^(-N/2)hat(D)_(g_N)(q^(-N/2)t)=hat(D)_(h_N)(t)`。
+
+这给出保留全部 dual modes 的 moving-top normalized shape，但 ordinary bottom `L^2` convergence
+仍不足以控制高特征函数尺度。
+
+R132、R138、R140–R148 已形成明确假设下的 analytic/probability theorem 或 lemma packages；
+R133、R136、R141、R142 的部分仍是 packet/formal/form-level。当前不可省略的 OPEN bridges
+仍为：
+
+1. `RK=1 => genuine full-SF/all-row`；
+2. `Q~chi^2_2 + iid => E[C|Q]=0`；
+3. incompatible positive-backward-tower uniform closure；
+4. ordinary/Bargmann rigidity `=> P_3K_sp=0`。
+
+因此整体发表性答案仍是“无”，但项目已从低阶试算推进到可独立整理的连续 dual-transform /
+reflection-deficit 理论包。下一轮唯一目标是 R149：研究 exact nonlinear equation
+
+`F_z(nu)+3Q_z^nu(sigma)=1/(1+2z)`、`|sigma|<=nu` 是否能阻止 odd reflection data 被 even
+positive correction 在 all-order 上补偿；必须使用 genuine scalar positivity/backward cone，
+不得再用 finite witness 代替。
