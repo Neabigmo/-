@@ -5447,3 +5447,111 @@ cross-coherence、complex overlap damping，以及 operator/probability witnesse
 `OPEN`：genuine non-Gaussian full-SF law 的存在性与 iid ridge-product residual
 angular rigidity。下一轮唯一任务为 **R144 — IID Ridge-Product Residual
 Angular Rigidity / Bispectrum Coherence**。
+
+## R144 — IID ridge-product / bispectrum balanced-symmetrization no-go（2026-09-08）
+
+### 一、工作目标与边界
+
+本轮承接 R143 的结论：full-SF 只固定 coherent-frame 的 Gaussian mode
+energy，剩余非 Gaussianity落在同一 `mod 3` sector 的 cross-harmonic
+coherence。R144 不再把任意 `D_3` angular witness 当作 scalar iid 候选，而是
+强制使用一维 characteristic function 的三 ridge-product lift。所有涉及
+`RK=1` 到 genuine full-SF/all-row 的桥接继续标作 conditional；本轮没有
+构造 genuine non-Gaussian full-SF law。
+
+### 二、三 ridge 几何与 exact local PDE
+
+在 `U=(X_1-X_2)/sqrt(2)`、`V=(X_1+X_2-2X_3)/sqrt(6)` 下，
+
+`a=u/sqrt(2)+v/sqrt(6)`、`b=-u/sqrt(2)+v/sqrt(6)`、
+`c=-2v/sqrt(6)`，故 `a+b+c=0`、`a^2+b^2+c^2=u^2+v^2`。对
+`Phi=phi(a)phi(b)phi(c)` 的局部对数 `L`，120-degree ridge directions
+给出
+
+`(partial_u^3-3partial_u partial_v^2)L=0`。
+
+这是真实的 iid-lift PDE，但不提供单独的正定性或全局 rigidity。
+
+### 三、bispectrum mixed derivatives 与 weighted cocycle
+
+令 `k=log phi`、`ell(a,b)=k(a)+k(b)+k(-a-b)`，则
+
+`ell_ab=k''(-a-b)`、`ell_aa-ell_ab=k''(a)`、
+`ell_bb-ell_ab=k''(b)`，并且
+
+`partial_a^p partial_b^q ell(0,0)
+ =(-1)^(p+q)i^(p+q)kappa_(p+q)` (`p,q>=1`)。
+
+另外
+
+`beta(a,b)beta(a+b,c)|phi(b+c)|^2`
+`=beta(a,b+c)beta(b,c)|phi(a+b)|^2`。
+
+该式记录 phase/cocycle compatibility；在非零域仍然缺少把 cocycle 转成
+one-dimensional Bochner coercivity 的机制。
+
+### 四、主定理：IID Balanced-Convolution Defect
+
+令
+
+`Y_m=(sum X_j-sum X'_j)/sqrt(2m)`，
+
+则 `psi_m(s)=|phi(s/sqrt(2m))|^(2m)`。定义
+
+`G_t(theta)=exp(t^2/2)prod_j phi(t r_j(theta))`。
+
+在 genuine full-SF 假设下 `<G_t>=1`，于是
+
+`R_(Y_m)(sqrt(2m)t)=<|G_t|^(2m)>=1` 加上非负 defect。
+
+`L^p` 单调性给出 `||G_t||_(2m)^(1/(2m))` 上升到 `||G_t||_infinity`。
+`m=1` 更精确地满足
+
+`R_(Y_1)(sqrt(2)t)-1=<|G_t-1|^2>`
+`=sum_(ell!=0)|g_(3ell)(t)|^2`。
+
+因此 balanced convolution 的方向是 `>=1`，不是目标的 `<=1`。首个 odd
+packet 给出严格正的 leading coefficient
+`2^(-d)c_d^2<p_d^2>s^(2d)`。这是一项真正的 probability-level no-go：
+它排除了“增加 balanced convolution/tensor power 就自动产生反向 defect”这条
+闭合路线，同时保留了条件式结论——若某个 `Y_m` 另行满足 full-SF，则只能
+在 equality 下 Gaussian。
+
+### 五、与 R143 的精确桥
+
+R143 的
+`F_t(theta)=prod_j B_mu(t r_j(theta))=sum f_k(t)e^(iktheta)` 与 R144 的
+`G_t` 由 `G_t=F_(it)`、`g_k(t)=f_k(it)` 相连。故两轮追踪的是同一
+`3Z` harmonic family 的不同参数轴：R143 是 real-axis Gaussian/Bessel
+transform 后的 coherent purity；R144 是 characteristic-axis 的 Fourier
+energy。两者在 first odd packet 上同样是正能量，不存在可以直接拿来闭合的
+反号。
+
+### 六、tower 与真正剩余缺口
+
+`G_(P_lambda mu,t)=G_(mu,sqrt(lambda)t)`、
+`Delta_m^(P_lambda mu)(t)=Delta_m^mu(sqrt(lambda)t)`，故
+`Delta_m^(g_N)(q^(-N/2)t)=Delta_m^(h_N)(t)`。bottom convergence 只是把
+anisotropy 搬到 `q^(-N/2)` characteristic scale、`q^(-N)` Hermite scale；
+compatible single infinite tower 的 R138 结论不等于 moving-top incompatible
+tower 已解决。最后的 spatial `P_3 K_sp` 桥也仍未闭合。
+
+### 七、分级与下一轮
+
+`PROVED`：三 ridge coordinate/PDE、mixed derivative collapse、weighted
+cocycle、balanced-convolution defect、`m=1` L2 identity、first odd strict
+positivity、R143 harmonic bridge、OU scaling。
+
+`CONDITIONAL`：`RK=1` 的 genuine full-SF 桥、Bargmann/characteristic 到 spatial
+桥、reverse convolution bound、iid liftability closure。
+
+`OBSTRUCTION`：ordinary Bochner 只有 modulus-weighted bound；balanced 路线
+方向相反；analytic continuation 不保正定；一般 angular witness 不
+是 iid scalar law。
+
+`OPEN`：positive-definite one-dimensional `phi` 的 shifted/iid ridge lift 是否
+被 Gaussian circular mean 强制为 Gaussian，以及该结论能否沿 backward tower
+uniform 化。下一轮为 **R145 — Shifted Bispectrum / Common-Mode–Residual
+Coupling Rigidity**，首次离开 `s=0` residual plane，使用 full 3D positive
+kernel。应同时完成全历史与发表性审计；若没有独立、完整、可审稿的成果，必须
+明确回答“无”，不得把形式计算、条件结论或有限脚本审计包装成发表定理。

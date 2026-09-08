@@ -10746,3 +10746,97 @@ law 的存在性与 iid ridge-product residual angular rigidity。
 下一轮唯一任务：**R144 — IID Ridge-Product Residual Angular Rigidity /
 Bispectrum Coherence**，只研究 residual characteristic 的三 ridge-product
 分解是否能消灭 R143 的 cross-harmonic coherence。
+
+## 73. R144：IID ridge-product / bispectrum 与 balanced-symmetrization no-go（2026-09-08）
+
+R144 已完成并记录于 `r144_iid_bispectrum_balanced_symmetrization_audit/`。
+本轮先把 R143 的 residual plane 写成真正的 iid 三 ridge lift。取
+
+`U=(X_1-X_2)/sqrt(2)`、`V=(X_1+X_2-2X_3)/sqrt(6)`，
+
+`a=u/sqrt(2)+v/sqrt(6)`、`b=-u/sqrt(2)+v/sqrt(6)`、
+`c=-2v/sqrt(6)`。则 `a+b+c=0`、`a^2+b^2+c^2=u^2+v^2`，并且
+`Phi(u,v)=phi(a)phi(b)phi(c)`。局部 zero-free branch 的
+`L=log Phi` 满足精确 PDE
+
+`(partial_u^3-3 partial_u partial_v^2)L=0`。
+
+这一步说明 R143 的同一 `mod 3` angular sector 并非任意函数，而是三条
+120-degree iid ridge 的非线性 lift。但它仍只是结构方程，不等同于正定性或
+Gaussian rigidity。
+
+对 `ell(a,b)=k(a)+k(b)+k(-a-b)`，R144 得到 exact mixed collapse
+
+`ell_ab=k''(-a-b)`、`ell_aa-ell_ab=k''(a)`、
+`ell_bb-ell_ab=k''(b)`，且对 `p,q>=1`
+
+`partial_a^p partial_b^q ell(0,0)
+ =(-1)^(p+q)i^(p+q)kappa_(p+q)`。
+
+相应的 weighted cocycle
+
+`beta(a,b)beta(a+b,c)|phi(b+c)|^2`
+`=beta(a,b+c)beta(b,c)|phi(a+b)|^2`
+
+是兼容性恒等式；在非零域的 phase 是 2-cocycle，但 ordinary Bochner
+仍然只给 modulus-weighted inequality。
+
+### R144 的独立小里程碑：IID Balanced-Convolution Defect Theorem
+
+令 `X_j,X'_j` iid，
+
+`Y_m=(sum_(j=1)^m X_j-sum_(j=1)^m X'_j)/sqrt(2m)`，
+
+则 `psi_m(s)=|phi(s/sqrt(2m))|^(2m)`。令
+
+`G_t(theta)=exp(t^2/2)prod_j phi(t r_j(theta))`，其中
+`r_j(theta)=sqrt(2/3)cos(theta+2pi(j-1)/3)`。若原 law 满足 genuine full-SF，
+则 `<G_t>=1`，从而有 exact identity
+
+`R_(Y_m)(sqrt(2m)t)=<|G_t|^(2m)>=1+nonnegative defect`。
+
+并且 `||G_t||_(2m)^(1/(2m))` 随 `m` 单调上升到 `||G_t||_infinity`。特别地，
+
+`R_(Y_1)(sqrt(2)t)-1=<|G_t-1|^2>`
+`=sum_(ell!=0)|g_(3ell)(t)|^2`。
+
+首个非零 odd packet 给出严格正的
+`2^(-d)c_d^2<p_d^2>s^(2d)+O(s^(2d+2))`。
+
+这揭示一个方向性 no-go：balanced convolution/tensorization 只会给
+`R>=1`，不能成为目标 `R<=1` 的闭合机制。若另有某个 balanced `Y_m` 同时
+满足 full-SF，或能独立证明 `R_(Y_m)<=1`，则 `R>=1` 与 equality rigidity
+合成并立即推出 Gaussian；但 ordinary positivity 不提供这条 reverse bound。
+
+R144 还把该 defect 与 R143 精确接上。若
+`F_t(theta)=sum_(k in 3Z)f_k(t)e^(iktheta)`，则 characteristic-side
+`G_t(theta)=F_(it)(theta)`、`g_k(t)=f_k(it)`。因此 R144 的 positive
+Fourier energy 正是 R143 same-`mod 3` cross-coherence 在 imaginary axis
+上的同一 harmonic family，不能把 characteristic defect 错读成 real-axis
+purity 的反号估计。
+
+### R144 之后的总边界
+
+`PROVED`：residual coordinates、cubic ridge PDE、mixed derivative collapse、
+weighted cocycle、iid balanced-convolution defect、`m=1` angular `L^2` identity、
+first odd strict positivity、R143 harmonic bridge、OU/tower scaling。
+
+`CONDITIONAL`：scalar `RK=1` 到 genuine full-SF/all-row；Bargmann/characteristic
+到 spatial `P_3K_sp`；reverse convolution bound；以及 iid liftability 消灭
+same-`mod 3` cross-coherence。
+
+`OBSTRUCTION`：local PDE/cocycle 不足、ordinary Bochner 的 modulus-weighted
+界、balanced direction 错误、analytic continuation 不保正定，以及非 iid 的
+`D_3` witness 不能直接充当 scalar counterexample。
+
+`OPEN`：one-dimensional positive-definite `phi` 的 iid three-ridge lift 若有
+Gaussian circular mean 是否必为 Gaussian；以及它能否 uniform 地闭合
+positive backward tower。没有构造 genuine non-Gaussian full-SF law。
+
+下一轮唯一理论任务是 **R145 — Shifted Bispectrum / Common-Mode–Residual
+Coupling Rigidity**：研究
+`Psi(s;u,v)=prod_j phi(s/sqrt(3)+a_j(u,v))` 的 full 3D positive kernel。
+沿 `v=0`，目标混合导数为
+`partial_s^(m-2)partial_u^2 log Psi(0,0,0)=3^(-(m-2)/2)i^m kappa_m`。
+同时，网页端必须先完成全历史脉络与发表性分级：明确哪些是完整定理、哪些仅
+是条件/形式/有限审计，若没有达到独立可审稿标准的结果则明确回答“无”。
