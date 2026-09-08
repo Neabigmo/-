@@ -5956,3 +5956,53 @@ Shape Cone**：在 `c_d=A lambda^(d/2)`、`c_(d+2j)=U_j lambda^((d+2j)/2)`、
 `M=floor(tau/lambda)` 下推进 normalized Hermite/Hankel quadratic-form limit；先做
 finite-support `U`，再讨论 closure，并分别报告 operator-level result 与 genuine
 positive iid liftability，禁止把前者冒充后者。
+
+## R152 — Semiclassical Hermite-Gram Bulk Limit / Toeplitz Positivity（2026-09-08）
+
+本机独立继续推进网页端部署的 R152，先得到一个必须纳入总审计的方向修正。全局发表性
+判断仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+对有限 support 的实 critical shape
+`C_lambda(z)=sum_(k in K)U_k lambda^(k/2)z^k`，令
+`E(z)=exp(sum_kU_kz^k)`。由于 `exp(C_lambda(z))=E(sqrt(lambda)z)`，Hermite-Gram
+生成核直接给出条目公式：
+
+`Gamma_mn=sum_K e_Klambda^(K/2)sqrt(m!n!)/((m+n-K)/2)!
+             binom(K,(K+m-n)/2)`，
+
+其中 `e_K=[z^K]E`，只对 parity/range admissible 的 `K` 求和。令
+`M=floor(tau/lambda)` 且 `p,q` 固定，则固定偏移条目趋于
+
+`Gamma_(M+p,M+q)->G_(p-q)(tau,U)`，
+
+`G_l=sum_K e_Ktau^(K/2)binom(K,(K+l)/2)`。
+
+用 `sqrt(m!n!)/t!<=max(m,n)^(K/2)`、`binom(K,.)<=2^K` 和 `E` entire 可作级数支配，
+但这只是 local quadratic-form convergence；support 随 `lambda^(-1)` 增长的向量仍不在
+结论内。
+
+`G_l` 是 Laurent symbol
+
+`F_(tau,U)(x)=exp(sum_kU_ktau^(k/2)(x+x^(-1))^k)`
+
+的系数。在 `x=e^(itheta)` 上，实 shape 给 `F>0`。所以极限 Toeplitz 矩阵满足
+
+`sum_(p,q)conjugate(z_p)G_(p-q)z_q`
+`=(1/(2pi))int F(e^(itheta))|sum_pz_pe^(iptheta)|^2dtheta>=0`。
+
+这意味着：R152 原先希望在 `M~tau/lambda` 的 fixed-offset bulk 找 sparse negative
+operator 的目标被严格否定；并非主命题否定。R137 的 eventual finite-rank sparse
+collapse 仍在，因此真正失败若存在，必须是 growing-support、edge/boundary、无
+finite-support shape limit，或 global zero-free/Hankel coherence。
+
+证据层级：`PROVED at formal/operator coefficient level` 为 scaled extraction、
+fixed-offset Toeplitz limit 与 symbol positivity；`NUMERICALLY AUDITED` 为有限高精度
+条目收敛和 Toeplitz eigenvalue；`OPEN` 为 uniform growing-support/edge asymptotics、
+positive iid liftability、`RK=1=>full-SF`、tower 与 spatial bridge。本机目录为
+`r152_semiclassical_toeplitz_audit/`，脚本不认证 genuine law 或主问题。
+
+网页端下一轮唯一目标改为 **R153 — Edge / Growing-Support Semiclassical Hankel
+Escape**：先读取 R151/R152，复核 bulk Toeplitz obstruction，再研究 edge 或
+growing-support 负方向；不得把 bulk 正性包装成全局 rigidity。

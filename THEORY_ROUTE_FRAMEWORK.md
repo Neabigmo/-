@@ -11510,3 +11510,84 @@ R152 的半经典极限、全局 characterization、counterexample、novelty 或
 `c_d=A lambda^(d/2)`、`c_(d+2j)=U_j lambda^((d+2j)/2)`、`M=floor(tau/lambda)`
 下的 normalized Gram limit，并明确区分 formal finite-support limit、conditional
 operator theorem 与 genuine positive iid liftability。
+
+## R152 — Semiclassical Hermite-Gram Bulk Limit / Toeplitz Positivity（2026-09-08）
+
+本机在等待网页端下一轮前独立推进了 R152，并发现必须修正原先的目标：在固定偏移的
+`M~tau/lambda` bulk 窗口中，极限不是预期的负 Hankel operator，而是一个自动正的
+Toeplitz operator。该结果仍不解决主命题；全局发表性判断保持：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+### 81.1 Fixed-offset coefficient limit
+
+取有限 support 的实 critical shape
+
+`C_lambda(z)=sum_(k in K) U_k lambda^(k/2)z^k`，
+
+并令 `E(z)=exp(sum_(k in K)U_k z^k)`，则精确有
+`exp(C_lambda(z))=E(sqrt(lambda)z)`。若 `e_K=[z^K]E(z)`，Hermite-Gram kernel
+
+`sum Gamma_mn u^m/sqrt(m!)v^n/sqrt(n!)=exp(uv+C_lambda(u+v))`
+
+直接给出 admissible `K` 下的条目公式
+
+`Gamma_mn=sum_K e_K lambda^(K/2) sqrt(m!n!)/((m+n-K)/2)!
+             binom(K,(K+m-n)/2)`。
+
+令 `M=floor(tau/lambda)`，固定整数偏移 `p,q`，则
+
+`Gamma_(M+p,M+q) -> G_(p-q)(tau,U)`，
+
+其中
+
+`G_l=sum_K e_K tau^(K/2)binom(K,(K+l)/2)`。
+
+固定偏移下可用 `sqrt(m!n!)/t! <= max(m,n)^(K/2)` 和 entire coefficient bound
+完成级数支配；本结论只覆盖 local quadratic forms，不覆盖 support 随 `lambda^(-1)`
+增长的向量。
+
+### 81.2 Toeplitz symbol and the bulk obstruction
+
+上述 `G_l` 正是 Laurent 系数
+
+`G_l=[x^l]F_(tau,U)(x)`，
+
+`F_(tau,U)(x)=exp(sum_(k in K)U_k tau^(k/2)(x+x^(-1))^k)`。
+
+在 `x=exp(i theta)` 上，实 `U_k` 给出
+
+`F_(tau,U)(exp(i theta))
+ =exp(sum_k U_k tau^(k/2)(2cos(theta))^k)>0`。
+
+因此对任意有限向量 `z`，
+
+`sum_(p,q)conjugate(z_p)G_(p-q)z_q`
+`=(1/(2pi))int F_(tau,U)(exp(i theta))
+  |sum_p z_p exp(i p theta)|^2dtheta >=0`。
+
+所以 finite-support real critical shapes 的 fixed-offset bulk limit 全部落在正
+Toeplitz cone 中；原先“在 `M~tau/lambda` bulk 找到 sparse negative gap”的 R152
+路线在此标度下不能成立。
+
+### 81.3 对全局刚性的准确含义
+
+R137 的 fixed-degree sparse collapse 仍然成立：某个更大的 finite Hankel rank 必会
+失败。R152 只说明该失败不能由固定偏移 bulk operator 单独检测；失败向量至少可能
+属于：
+
+1. support 随 `lambda^(-1)` 增长的 nonlocal regime；
+2. `M` 的 edge/boundary layer；
+3. 没有 finite-support limit 的 critical shapes；或
+4. bulk Toeplitz symbol 看不见的 global zero-free/Hankel constraint。
+
+这是一条 `PROVED at formal/operator coefficient level` 的路线阻碍，不是 genuine
+positive iid counterexample。`NUMERICALLY AUDITED` 仅表示有限系数级数和局部条目收敛；
+`OPEN` 仍包括 growing-support uniform limit、edge asymptotics、first-failing-minor
+scale、positive iid liftability、`RK=1=>full-SF`、backward tower 和 spatial bridge。
+
+本机记录在 `r152_semiclassical_toeplitz_audit/`，脚本只做有限 support 的高精度条目
+核验与 Toeplitz 正性核验。网页端下一轮必须阅读 R151、R152 新记录，并把唯一目标改为
+**R153 — Edge / Growing-Support Semiclassical Hankel Escape**：先验证 Toeplitz bulk
+阻碍，再严格分析 edge 或 growing-support 向量能否产生与 R137 相容的负方向；若不能，
+给出所需 uniform estimate。不得把 bulk 正性误写成原命题已解决。
