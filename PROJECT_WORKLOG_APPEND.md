@@ -5785,3 +5785,57 @@ Bessel–Laguerre 积分、有限 generating interface、Hermite multipliers、�
 归一化接口，不声称证明无限维或 global law 结论。下一轮部署为 **R149 — Nonlinear
 Reflection-Compensation / Odd-to-Even Continuum Coercivity**，只研究
 `F_z(nu)+3Q_z^nu(sigma)=1/(1+2z)` 的 all-order positive-cone 可行性。
+
+## R149 — Nonlinear Reflection Compensation / Odd-to-Even Continuum Coercivity（2026-09-08）
+
+网页端完成 R149 后，本机新增 `r149_nonlinear_reflection_compensation_audit/`。本轮严格
+记录边界为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+本轮新增的可独立复核内容如下：
+
+1. **有限 signed measure 的严格反射二次型。** `0<exp(-zQ)<=1` 使 `Q_z^nu(sigma)` 对有限
+   总变差自动绝对收敛。Gaussian feature identity 给出非负平方和；若 equality，Gaussian-
+   damped transform 是 entire，Fourier uniqueness 强制 `sigma=0`。所以 `sigma!=0` 时
+   `Q_z^nu(sigma)>0` 对每个 `z>0`，不需要原始 bilateral exponential moment。反射包络
+   `|sigma|<=nu` 进一步给出 `0<=Q_z^nu(sigma)<F_z(nu)`，因此 exact full-SF 的非对称候选
+   只能位于 `G(z)/4<F_z(nu)<G(z)`。
+2. **Odd Hermite 的完整二阶 source。** 对 `sigma_d=psi_d gamma`、odd `d>=3`，
+   `r=2z/(1+2z)`，source 为 `G(z)(T_d/3^d)r^d`；本机 Gauss–Hermite quadrature 和中心
+   trinomial recurrence 均通过。R148 continuum inverse 给唯一偶修正
+   `A_d psi_(2d)`，`A_d=d!T_d/sqrt((2d)!)`，其渐近为
+   `(sqrt(3)/2)(3/2)^d(pi d)^(-1/4)`。
+3. **正性结论的准确边界。** 二阶远尾 profile 的判别式在 `d>=5` 失败，例如
+   `4T_5/binom(10,5)=17/21`；但这只是 finite-order truncation no-go，因为相同远尾尺度
+   上三阶及更高阶项也为 `O(1)`。真实 all-order OU 重求和回到自动正的 `B_mu`，所以不能
+   把二阶负尾当作 genuine full-SF 反例。R137 fixed-degree Hankel cap 也不足以给 moving-
+   degree uniform contradiction。
+4. **OU 接口与未解问题。** 反射 source 与 OU 的 Möbius 变量满足 `r'=lambda r`；底部
+   physical Laplace 域不能直接放大 top radial shape，而 high common-tilt / high-spatial
+   尺度保留 all-order information。真正剩下的是 moving-degree 的正定/Hankel coherence，
+   不是再做有限采样或低阶展开。
+
+本机脚本 `r149_nonlinear_reflection_compensation_audit/audit_r149.py` 输出并通过：
+
+`R149_CENTRAL_TRINOMIAL_RECURRENCE_PASSED`
+
+`R149_ODD_HERMITE_SOURCE_PROFILE_PASSED`
+
+`R149_EVEN_INVERSE_AND_TAIL_DISCRIMINANT_PASSED`
+
+`R149_FINITE_SIGNED_MEASURE_SANDWICH_PASSED`
+
+`R149_OU_MOBIUS_INTERFACE_PASSED`
+
+`R149_MOVING_DEGREE_RATIO_DIAGNOSTIC_PASSED`
+
+`R149_AUDIT_SCOPE_EXPLICIT: finite identities, quadrature, and interfaces only`
+
+`R149_AUDIT_COMPLETED`
+
+网页端下一轮总审计/研究任务为 **R150**：先按公开仓库重构 R132–R149 的 PROVED、
+CONDITIONAL、FORMAL/FINITE-ONLY、OBSTRUCTION、OPEN 全脉络并再次判断发表性；随后只推进
+一个精确定理，即 moving-degree 的 tail-stable Hankel/Bochner margin，或证明高阶对角重求和
+能够系统逃逸该 margin。网页端工作前必须阅读本仓库的 Framework、Worklog 与 R148/R149
+审计目录；本轮不把网页推导、有限核验或未检索到文献写成独立新颖定理。

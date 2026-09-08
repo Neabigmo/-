@@ -11328,3 +11328,49 @@ reflection-deficit 理论包。下一轮唯一目标是 R149：研究 exact nonl
 `F_z(nu)+3Q_z^nu(sigma)=1/(1+2z)`、`|sigma|<=nu` 是否能阻止 odd reflection data 被 even
 positive correction 在 all-order 上补偿；必须使用 genuine scalar positivity/backward cone，
 不得再用 finite witness 代替。
+
+## R149 — Nonlinear Reflection Compensation / Odd-to-Even Continuum Coercivity（2026-09-08）
+
+网页端在 R148 的连续层结果上推进了 exact nonlinear compensation，并把本轮区分为已证明的
+measure/有限审计结论、formal quadratic jet 和仍开放的 genuine all-order positive cone。
+严格发表性结论仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+### 78.1 Reflection quadratic form
+
+令 `nu` 为非零有限正测度、`sigma` 为有限 signed measure，`z>0`，并置
+`Q_z^nu(sigma)=int exp(-zQ(a,x,y)) dnu(a) dsigma(x) dsigma(y)`。核有界，有限总变差已经
+保证绝对收敛。固定 `a` 后的 Gaussian feature identity 给出平方和表示；若平方为零，
+Gaussian-damped transform `L_sigma(w)=int exp(-zx^2+wx)dsigma(x)` 在实轴为零，且 Gaussian
+阻尼使其 entire；Fourier uniqueness 随即强制 `sigma=0`。故
+
+`sigma!=0 => Q_z^nu(sigma)>0 (every z>0)`。
+
+反射分解 `mu=nu+sigma`、`nu=check(nu)`、`sigma=-check(sigma)` 还满足 `|sigma|<=nu`，并有
+严格 sandwich `0<=Q_z^nu(sigma)<F_z(nu)`。因此 exact full-SF 的非对称候选必须满足
+`G(z)/4<F_z(nu)<G(z)`，`G(z)=1/(1+2z)`；这是 all-`z` necessary constraint，但不是矛盾。
+
+### 78.2 Odd Hermite source 与 even inverse
+
+对 `psi_n=He_n/sqrt(n!)`、odd `d>=3`、`sigma_d=psi_d gamma`，置 `r=2z/(1+2z)`，
+完整 source profile 为 `Q_z^gamma(sigma_d)=G(z)(T_d/3^d)r^d`，其中
+`T_d=sum_j d!/(j!^2(d-2j)!)`。R148 continuum inverse 给形式二阶方程的唯一偶修正
+`h=A_d psi_(2d)`，`A_d=d!T_d/sqrt((2d)!)`，且
+`A_d~(sqrt(3)/2)(3/2)^d(pi d)^(-1/4)`。一般 odd source 的 `L^2` 修正需要
+`sum_k 9^k(k!)^2/(2k)! |q_k|^2<infinity`，所以 inverse 指数病态。
+
+### 78.3 正性边界与 OU 重求和
+
+二阶远尾 profile 为 `1+y+B_d y^2`，`B_d=T_d/binom(2d,d)`；例如
+`4T_5/binom(10,5)=17/21<1`，并且 odd `d>=5` 时二阶截断远尾变负。这只是否定
+finite-order truncation：同一尺度上的全部高阶项也可为 `O(1)`，真实 all-order 重求和回到
+自动正的 `B_mu(y)`。R137 的 fixed-degree Hankel cap 与 `A_d` 增长相容，不能给 moving-degree
+uniform contradiction；移动 degree、无限 odd tail 与 genuine positive-definite/Hankel
+coherence 仍 OPEN。
+
+本轮本机记录在 `r149_nonlinear_reflection_compensation_audit/`；脚本只核验整数递推、
+Hermite/Gaussian quadrature、二阶系数、有限 signed-measure sandwich、OU Möbius 接口和
+渐近比例，不认证 all-order branch、主命题、novelty 或 `RK=1`/`P_3K_sp` 桥。下一轮唯一
+目标是 R150：moving-degree 的 tail-stable Hankel/Bochner margin，或严格证明 diagonal
+high-degree resummation 能系统逃逸该 margin。
