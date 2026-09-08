@@ -11105,3 +11105,104 @@ probability-level 证明；R133、R136、R141、R142 的部分是 packet/formal/
 
 因此目前不能诚实地声称已经有独立可审稿的发表结果；准确回答仍是“无”，但
 R146 已把目标压缩成一个精确的 tilted Laguerre 首模闭合问题。
+
+## R147 — Dual Laguerre Regression / Positive-Backward Finite-Boundary Blindness（2026-09-08）
+
+网页端在读取 R146 公开提交后，对 R132–R146 做了全局理论与发表性审计。严格结论仍是：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+这不是说项目只有尝试；而是主命题仍未闭合，已有 theorem/lemma package 尚未组合成独立且
+经过新颖性核验的可投稿定理。R147 的新内容如下。
+
+### 76.1 对偶 Laguerre 回归定理
+
+置 `T=Q/2`、`Q~chi^2_2`，以 `L_m` 为 `Exp(1)` 的标准 Laguerre 基，并定义
+
+`ell_m(a)=E[exp(aC)L_m(T)]/E exp(aC)`。
+
+则 `ell_m'(0)=E[C L_m(T)]`，且由条件期望和 Parseval 完整性
+
+`E[E[C|Q]^2]=sum_(m>=1)ell_m'(0)^2`。
+
+若首个非高斯累积量次数为 `d=2s+1`，full-SF 首行递推和 `L_s(Q/2)` 的最高次项给出
+
+`ell_s'(0)=(-1)^s sqrt(3)/(3^s s!) kappa_(2s+1)`，
+
+因而 `E[E[C|Q]^2]>=3^(2-d) kappa_d^2/(s!)^2>0`。在邻域 MGF 与矩确定性假设下，
+
+`E[C|Q]=0 a.s. + Q~chi^2_2 => mu=N(0,1)`。
+
+证明先由 `E[C|Q]=0` 的三角矩递推消灭全部奇矩得到对称性，再用 full-SF 偶递推消灭高阶
+偶累积量。原先的 `E[Q|C]=2` sufficient closure 被对偶化，真正缺口被精确压缩为
+`Q~chi^2_2 =>? E[C|Q]=0`。
+
+### 76.2 反射 Laguerre 交叉谱
+
+令 `W_a=exp(aC)/E exp(aC)`、`r_a(Q)=E[W_a|Q]`，定义
+
+`J(a)=sum_(m>=1)ell_m(a)ell_m(-a)`
+`=E[(r_a(Q)-1)(r_(-a)(Q)-1)]`。
+
+条件 Cauchy 给出
+
+`J(a)>=exp(-3[K(a/sqrt(3))+K(-a/sqrt(3))])-1`，
+
+但右端可以为负。若 `G(Q)=E[C|Q]`，则小 `a` 时 `r_a=1+aG+O_(L^2)(a^2)`，从而
+
+`J(a)=-a^2 E[G^2]+O(a^4)`。
+
+所以假设的非高斯 full-SF law 必须在小非零 `a` 处有 `J(a)<0`；若能由额外结构证明
+`J>=0`，这本身就是 Gaussian rigidity certificate。R147 证明 ordinary conditional
+Cauchy 不足以提供这一符号。
+
+### 76.3 真正 iid 的正 backward 有限边界失明定理
+
+固定 `q in (0,1)`、有限个不同的正数 `z_1,...,z_m` 和 `epsilon_0>0`。存在严格正的、
+中心化方差一密度 `h` 及 `g=P_q h`，满足 `||g-1||_2<epsilon_0`，三变量确实来自同一个
+标量 iid law，且
+
+`E exp(-z_j Q)=1/(1+2z_j)`（所有 `j`），
+
+却仍有 `kappa_3(g)!=0`、`ell_1^g(a)ell_1^g(-a)<0`（小非零 `a`），以及
+`<log g,psi_3>_gamma!=0`。构造使用 `F_z(g)=E_(g dgamma)^3 exp(-zQ)` 的高斯一阶变分、
+`1,x^2,P_qA_(z_j)` 的线性独立性、偶校正 IFT 与奇紧支撑扰动。
+
+该结果不是 full-SF counterexample，因为只匹配有限多个 `z`；它严格说明 continuum/all-row
+信息不能由有限 Taylor/Fock/Laguerre/边界样本替代。
+
+### 76.4 OU/tower 反射滤波器与局部 (33)
+
+OU 的精确输运是 `ell_m^(P_lambda h)(A)=lambda^m ell_m^h(sqrt(lambda)A)`。在
+`A=a/sqrt(lambda)` 处
+
+`lambda^(-2)J_(P_lambda h)(a/sqrt(lambda))`
+`=ell_1^h(a)ell_1^h(-a)+R_lambda(a)`，
+
+且 `|R_lambda|<=lambda^2 sqrt(Xi_h(a)Xi_h(-a))`。moving-top tower 的候选较弱接口为
+`J_(g_N)(q^(-N/2)a)>=-o(q^(2N))`，但 positivity 尚未推出它。对局部 (33)，R147 表明
+positivity、一步 backward 和有限 exact boundary 约束不能推出 reflection sign 或
+`P_3K_sp=0`；未来必须利用 `RK=1` 的连续谱后果、全 `z>=0` Laplace law 或全局正
+backward coherence。
+
+### 76.5 R132–R147 全局定位与下一轮
+
+网页端的压缩链为
+
+`n=3 chi-square sample variance -> zero-divisor/OU shape -> coherent defect`
+`-> iid bispectrum -> common/residual regression -> tilted Laguerre`。
+
+R132、R138、R140–R147 各自已有明确假设下的 analytic/probability theorem 或 lemma
+package；R133、R136、R141、R142 的部分仍标为 packet/formal/form-level；scalar `RK=1`
+到 full-SF、full-SF 到 dual regression、moving-top uniform tower 和 ordinary-to-spatial
+`P_3K_sp` bridge 仍是 `CONDITIONAL/OPEN`。因此诚实的发表性回答仍为“无”，但当前已经
+不只是低阶尝试，而是具有可独立整理价值的结构化理论包。
+
+下一轮唯一目标改为 **R148 — Continuum Circular Boundary => Zero Common-Mode Regression**：
+
+`Q~chi^2_2 + iid scalar factorization =>? E[C|Q]=0`。
+
+等价地，证明对所有 `t>=0` 有 `E[C J_0(t sqrt(Q))]=0`，或对
+`A(s,t)=(1/(2pi))int product_j phi(s/sqrt(3)+t r_j(theta))dtheta` 证明
+`A(0,t)=exp(-t^2/2)` 能推出 `partial_sA(0,t)=0`。若不能闭合，必须给出连续变换层面的
+honest no-go，不再重复有限样本的局部构造。

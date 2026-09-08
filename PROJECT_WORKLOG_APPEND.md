@@ -5690,3 +5690,47 @@ Laguerre` 技术链，但尚未产生能独立投稿的完整定理。不可省�
 `r146_tilted_laguerre_heat_audit/audit_r146.py`。脚本只核验有限代数、有限
 Laguerre 截断、OU Möbius 变换、Gaussian endpoint 和 witness 常数；不声称证明
 全局 law、无限展开、tower uniformity 或发表新颖性。
+
+## R147 — Dual Laguerre Regression / Positive-Backward Finite-Boundary Blindness（2026-09-08）
+
+网页端本轮先读取公开 R146 记录，再对 R132–R146 进行整体审计。严格发表性结论为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+本轮新增的可核验理论内容：
+
+1. **对偶 Laguerre 回归定理。** 在 `Q~chi^2_2`、邻域 MGF 和矩确定性下，置
+   `T=Q/2`、`ell_m'(0)=E[C L_m(T)]`，则
+   `E[E[C|Q]^2]=sum_(m>=1)ell_m'(0)^2`。若首个非高斯累积量为 `d=2s+1`，
+   `ell_s'(0)=(-1)^s sqrt(3)/(3^s s!) kappa_d`，从而
+   `E[E[C|Q]^2]>=3^(2-d)kappa_d^2/(s!)^2`。因此
+   `E[C|Q]=0 + Q~chi^2_2` 闭合为 Gaussian。该定理把原先 `E[Q|C]=2` 的 closure
+   对偶化，并把主缺口压缩成 `Q~chi^2_2 =>? E[C|Q]=0`。
+2. **反射 Laguerre 交叉谱。** `J(a)=sum_m ell_m(a)ell_m(-a)` 满足条件 Cauchy 下界，
+   但该下界可为负；若 `G=E[C|Q]`，则 `J(a)=-a^2 E[G^2]+O(a^4)`。所以非高斯
+   full-SF law 必有小 `a` 负 dip，而反射正性若能证明将直接成为 rigidity certificate。
+3. **真正 iid 的正 backward 有限边界失明定理。** 对任意固定 `q`、有限正边界样本和
+   任意近高斯阈值，存在严格正的 `g=P_qh`，匹配所有这些有限 Laplace 边界值，却有
+   非零三阶累积量、负反射乘积和非零空间三次荷。证明使用高斯一阶变分、有限偶约束的
+   IFT 校正和奇偶性。它不是 full-SF 反例，而是严格证明 continuum/all-row 不能由有限
+   Taylor/Fock/Laguerre/边界审计替代。
+4. **OU/tower 反射滤波器。** `ell_m^(P_lambda h)(A)=lambda^m ell_m^h(sqrt(lambda)A)`，
+   在 `A=a/sqrt(lambda)` 下，`lambda^-2 J` 等于顶层一阶反射乘积加余项，余项受
+   `lambda^2 sqrt(Xi(a)Xi(-a))` 控制。moving-top 候选接口是
+   `J_(g_N)(q^(-N/2)a)>=-o(q^(2N))`，目前仍未由 positivity 推出。
+
+全局定位仍是
+`chi-square sample variance -> zero-divisor/OU -> coherent defect -> iid bispectrum`
+`-> regression -> tilted Laguerre`；R132、R138、R140–R147 已有明确假设下的 theorem/
+lemma packages，但 scalar `RK=1` 到 full-SF、full-SF 到 dual regression、moving-top
+tower uniform closure 和 ordinary-to-spatial `P_3K_sp` bridge 仍 OPEN/CONDITIONAL。
+
+下一轮部署为 **R148 — Continuum Circular Boundary => Zero Common-Mode Regression**，只
+攻击全连续参数的
+`Q~chi^2_2 + iid scalar factorization =>? E[C|Q]=0`，等价研究
+`E[C J_0(t sqrt(Q))]=0` 全 `t>=0` 或 `partial_s A(0,t)=0`。若失败，要求连续变换层面
+的 honest no-go，不再重复有限信息构造。
+
+本轮本机记录：`r147_dual_regression_finite_boundary_audit/README.md`，有限接口核验：
+`r147_dual_regression_finite_boundary_audit/audit_r147.py`。脚本只核验有限代数与缩放，
+不声称证明全局 law、无限级数、函数空间 IFT、tower uniformity 或发表新颖性。
