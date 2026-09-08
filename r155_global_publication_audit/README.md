@@ -34,3 +34,17 @@ criterion 与 reproducing-kernel 局部化下界。它们都没有闭合
 spatial `P_3 K` bridge。
 
 本记录只记录网页部署与证据边界，不制造新的 theorem、baseline 或 gate。
+
+## 网页端中间进度（未完成、未本机核验）
+
+R155 已成功发送并在同一对话中运行。网页端目前报告了两条候选局部化方向：
+
+- 对区间指标函数投影到前 `M` 个 Hermite modes，尝试以 Hermite 尾能量上界
+  `1-Theta_M(I)`；
+- 在内侧区间给出形如 `Theta_M(I) >= 1-C_L x_0^2/M` 的候选估计，并在 turning
+  zone 外侧给出指数小的候选上界。
+
+这些只是网页端生成中的中间文本，尚未经过本机公式核验，也没有替代 R154 的
+`PROVED/LOCAL-AUDITED` 边界。尤其需要检查：区间指标是否属于所用函数空间、尾能量
+不等式的归一化、外侧指数率的适用范围，以及它们是否真的与
+`Theta_M(I)>b_lambda/(a_lambda+b_lambda)` 合并。网页端完整回复出现前，不作最终数学判断。

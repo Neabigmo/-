@@ -6150,3 +6150,14 @@ R154 的网页消息已确认回显，但网页端随后仅显示“已停止思
 `a_lambda`、补集 `b_lambda` 与 Hermite/Christoffel leakage；只能二选一：得到
 supercritical coercivity/no-go，或构造真正满足 concentration threshold 的负方向。
 网页中止、pointwise negativity、piecewise signed model 和 finite jet 均不改变证据等级。
+
+### R155 网页端中间进度（未完成、待核验）
+
+R155 已在同一研究对话成功发送。网页端在全历史审计和 R154 推导过程中暂时报告：
+把归一化区间指标函数投影到前 `M` 个 Hermite modes，试图由 Hermite 尾能量控制
+`1-Theta_M(I)`；并提出内侧区间候选下界
+`Theta_M(I)>=1-C_L x_0^2/M`，以及 turning-zone 外侧的指数小候选上界。
+
+当前只能记为 `WEB-DRAFT / UNVERIFIED`。需待网页端完整回复后，本机重新核验函数空间
+归属、归一化、尾能量不等式、指数率和 `a_lambda/b_lambda` 阈值合并；不能把这段中间
+文本当作已证定理或发表性结果。

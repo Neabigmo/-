@@ -11857,3 +11857,16 @@ supercritical coercivity/no-go，要么构造同时满足 concentration threshol
 LOCAL-AUDITED 结果。`RK=1=>full-SF/all-row`、genuine positive realization、
 moving-top rigidity 与 spatial `P_3K` bridge 仍为 OPEN。不得把网页中止、piecewise
 模型、pointwise sign 或 finite jet 升格为定理。
+
+### 83.5 R155 网页端中间进度（未完成、待本机核验）
+
+R155 已在同一网页对话成功回显并开始执行。网页端当前尝试把归一化区间指标函数
+投影到前 `M` 个 Hermite modes，以 Hermite 尾能量直接控制 `1-Theta_M(I)`；并报告
+了内侧区间的候选形式
+
+`Theta_M(I)>=1-C_L x_0^2/M`
+
+以及 turning-zone 外侧的指数小候选上界。由于网页端仍在生成且浏览器读取接口暂时
+不稳定，这些内容目前只标记为 `WEB-DRAFT / UNVERIFIED`，不进入 PROVED 或
+LOCAL-AUDITED。最终必须核验归一化、区间指标的函数空间、指数率适用条件，以及与
+`Theta_M(I)>b_lambda/(a_lambda+b_lambda)` 的真正合并；全历史发表性审计也尚未完成。
