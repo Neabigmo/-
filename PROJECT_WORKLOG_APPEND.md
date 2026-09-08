@@ -5839,3 +5839,53 @@ CONDITIONAL、FORMAL/FINITE-ONLY、OBSTRUCTION、OPEN 全脉络并再次判断�
 一个精确定理，即 moving-degree 的 tail-stable Hankel/Bochner margin，或证明高阶对角重求和
 能够系统逃逸该 margin。网页端工作前必须阅读本仓库的 Framework、Worklog 与 R148/R149
 审计目录；本轮不把网页推导、有限核验或未检索到文献写成独立新颖定理。
+
+## R150 — Robust Sparse-Branch Hankel Collapse / Moving-Degree Resummation（2026-09-08）
+
+网页端先完成 R132–R149 全局脉络与发表性总审计，再继续本轮唯一数学目标。公开审计时
+`main` 与 `theory/r129-active` 一致指向 R148；R149 已随后本机记录并推送为
+`7f7c037b55ce178d631a1eb88b97fe66c5c8dfb2`。R150 的严格发表性结论仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+本轮新增的小里程碑是一个 robust fixed-degree reduction。固定 `d=2s+1>=5`，若首个 odd
+coefficient `c_d=a`，则 finite full-SF triangular equations 在有限阶把 Hankel 矩阵写成
+`H_M(a,b)` 的有限多项式映射。R137 的 sparse feasibility radius `rho_M(d)->0` 给定
+`0<epsilon<R_d` 后产生有限 cutoff `M_*(d,epsilon)`；紧集
+`K={epsilon<=|a|<=R_d}` 上 sparse slice 的最小特征值有负裕量 `delta_*>0`。矩阵映射
+的统一连续性与 Weyl 不等式于是给出 `eta_*(d,epsilon)>0`：若有限 window 内所有
+higher odd coefficients不超过该模量，则某个 Hankel minor/最小特征值严格为负。
+
+因此 genuine full-SF law 若要保留首个 odd packet，必须在一个由 `d,epsilon` 决定的有限
+degree window 中补入不可忽略的 higher odd coefficient。这不是 finite sparse theorem 的
+重复，而是对 higher-odd tail 的稳定必要条件；但它没有排除无限 tail。
+
+进一步，对固定 genuine law `h` 和 `g_lambda=P_lambda h`，Bargmann 缩放给出
+`c_n(g_lambda)=lambda^(n/2)c_n(h)`。若 `log B_h` 在固定 disk 内无零点，Cauchy 估计与
+robust modulus 合并为
+
+`eta_d(a)<=K_(h,R)a^(1+2/d)`。
+
+所以若能证明某固定 `d` 上 `eta_d(a)/a^(1+2/d)` 在 `a down 0` 无界，就能排除该 degree
+的 genuine non-Gaussian full-SF law。这把一个无限维问题压缩成可量化的有限 Hankel
+stability rate。但当 `d->infinity` 时临界指数趋于 1，且 `log B` 的 zero-free radius
+可能退化；moving-degree 仍 OPEN。
+
+本机新增目录 `r150_robust_hankel_resummation_audit/`，脚本通过：
+
+`R150_INHERITED_SPARSE_HANKEL_CAP_PASSED`
+
+`R150_FINITE_POLYNOMIAL_CONTINUITY_MODEL_PASSED`
+
+`R150_OU_DIAGONAL_RATE_ALGEBRA_PASSED`
+
+`R150_R149_SOURCE_INTERFACE_PASSED`
+
+`R150_SCOPE_EXPLICIT: fixed-degree reduction only; joint moving-degree rate remains open`
+
+`R150_AUDIT_COMPLETED`
+
+本轮不构造 genuine non-Gaussian full-SF law，也不声称主问题解决或已有新颖可投稿成果。
+下一轮唯一目标是量化 `eta_d(a)` 在 `d->infinity,a->0` 联合极限的下界；若无法得到统一
+margin，则必须构造经过 Hankel/Bochner、square-exponential 和 zero-free 尺度审计的 diagonal
+escape，不能以 finite/formal jet 代替。

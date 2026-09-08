@@ -11374,3 +11374,60 @@ Hermite/Gaussian quadrature、二阶系数、有限 signed-measure sandwich、OU
 渐近比例，不认证 all-order branch、主命题、novelty 或 `RK=1`/`P_3K_sp` 桥。下一轮唯一
 目标是 R150：moving-degree 的 tail-stable Hankel/Bochner margin，或严格证明 diagonal
 high-degree resummation 能系统逃逸该 margin。
+
+## R150 — Robust Sparse-Branch Hankel Collapse / Moving-Degree Resummation（2026-09-08）
+
+网页端先按公开仓库完成了 R132–R149 全局审计，再推进 R150。审计时公开分支一致停在
+R148；R149 随后已由本机审计并提交为 `7f7c037b55ce178d631a1eb88b97fe66c5c8dfb2`。
+R150 的保守发表性判断仍为：
+
+`无（目前没有足够独立、完整、可审稿的发表性结果）`。
+
+### 79.1 Robust higher-odd-tail Hankel exclusion
+
+固定 `d=2s+1>=5`，令 normalized Bargmann log 的首个 odd coefficient 为 `c_d=a`，较低
+odd coefficients为零。full-SF 三角方程在任意有限阶把偶系数表示为有限 odd vector
+`(a,c_(d+2),...,c_(2M-1))` 的多项式。令 `H_M(a,b)` 为相应 formal moment Hankel 矩阵。
+
+R137 已证明 sparse slice `b=0` 的 PSD 可行半径 `rho_M(d)` 对固定 `d` 随 `M` 趋于零。
+因此给定 `0<epsilon<R_d`，存在有限
+`M_*(d,epsilon)=min{M>=s+1:rho_M(d)<epsilon}`。在紧集
+`K={a:epsilon<=|a|<=R_d}` 上，sparse Hankel 的最小特征值有严格负裕量
+
+`delta_*=-max_(a in K)lambda_min H_(M_*)(a,0)>0`。
+
+有限维多项式连续性和 Weyl 不等式给出 `eta_*(d,epsilon)>0`，使得
+`max_(d<n<2M_*, n odd)|c_n|<=eta_*` 时
+`lambda_min H_(M_*)(a,b)<=-delta_*/2<0`。故任何 genuine full-SF law 若
+`epsilon<=|c_d|<=R_d`，必须在有限 degree window 中补入至少一个不可忽略的 higher odd
+coefficient。这是 R137 fixed-sparse collapse 的 robust extension；它不排除无限 higher
+tail。
+
+### 79.2 OU diagonal escape rate
+
+对固定 genuine law `h`、首个 odd degree `d` 和 `A=c_d(h)!=0`，令 `g_lambda=P_lambda h`。
+由 `B_(P_lambda h)(z)=B_h(sqrt(lambda)z)`，局部 analytic logarithm 的系数满足
+`c_n(g_lambda)=lambda^(n/2)c_n(h)`。若 `C_h=log B_h` 在 `|z|<R` 无零点并令
+`S_R=max_|z|=R|C_h(z)|`，Cauchy 估计给出 higher tail
+`|c_n(g_lambda)|<=S_R R^(-(d+2))lambda^((d+2)/2)`。代入 robust exclusion 的
+`a_lambda=|A|lambda^(d/2)` 得到必要上界
+
+`eta_d(a)<=K_(h,R)a^(1+2/d)`，`a down 0`。
+
+因此，如果对某固定 odd `d>=5` 能证明
+`limsup_(a down 0)eta_d(a)/a^(1+2/d)=infinity`，就能排除该首个 odd degree的 genuine
+non-Gaussian full-SF law。这是一个实际的 fixed-degree reduction theorem。
+
+### 79.3 moving-degree 尚未闭合
+
+临界指数 `1+2/d` 在 `d->infinity` 时趋于 1；`eta_d(a)>=c a^2` 等普通估计不足以排除
+高阶 moving-degree 补偿。剩余的唯一 R150 缺口是联合量化 `eta_d(a)` 的小振幅/大 degree
+渐近，或构造经过正定与 square-exponential 审计的 diagonal positive-cone escape。R132
+没有自动给出 `log B` 的 uniform zero-free disk，所以也不能直接消灭第二条逃逸渠道。
+
+本机记录在 `r150_robust_hankel_resummation_audit/`；脚本仅核验继承的 sparse Hankel cap、
+有限多项式连续性、OU 系数缩放、临界指数代数和 R149 接口。它不认证 moving-degree rate、
+genuine counterexample、主 characterization、novelty 或 `RK=1`/spatial bridge。
+
+网页端工作前必须阅读本 Framework、`PROJECT_WORKLOG_APPEND.md` 与 R148–R150 审计目录；
+下一轮只能继续量化 `eta_d(a)` 的联合渐近，不能退回有限 z 或低阶展开。
